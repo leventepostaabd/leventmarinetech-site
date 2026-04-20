@@ -10,8 +10,8 @@ const SERVICES = {
     icon: "bolt",
     category: "main",
     size: "card-lg",
-    photo: "assets/services/01-power-systems.jpg",
-    detailPhoto: "assets/services/detail-power.jpg",
+    photo: "assets/works/generator-avr-diode-speedcard.jpg",
+    detailPhoto: "assets/works/generator-avr-diode-speedcard.jpg",
     tr: {
       title: "Güç & Dağıtım Sistemleri",
       lead: "Main switchboard'dan emergency genset'e — gemin elektrik omurgasının tamamı",
@@ -53,8 +53,8 @@ const SERVICES = {
     icon: "cog",
     category: "main",
     size: "card-md",
-    photo: "assets/services/02-propulsion-motors.jpg",
-    detailPhoto: "assets/services/detail-propulsion.jpg",
+    photo: "assets/works/motor-overhaul.jpg",
+    detailPhoto: "assets/works/motor-overhaul.jpg",
     tr: {
       title: "Tahrik & Motor Sistemleri",
       lead: "Ana makine elektriğinden bow thruster ve deck machinery'ye",
@@ -96,8 +96,8 @@ const SERVICES = {
     icon: "radar",
     category: "main",
     size: "card-md",
-    photo: "assets/services/03-navigation-comms.jpg",
-    detailPhoto: "assets/services/detail-navigation.jpg",
+    photo: "assets/works/radar-magnetron-replacement.jpg",
+    detailPhoto: "assets/works/radar-magnetron-replacement.jpg",
     tr: {
       title: "Navigasyon & İletişim (GMDSS)",
       lead: "Köprü ekipmanlarının tamamı — radar, ECDIS, gyro, GMDSS",
@@ -139,8 +139,8 @@ const SERVICES = {
     icon: "cpu",
     category: "main",
     size: "card-md",
-    photo: "assets/services/04-automation-control.jpg",
-    detailPhoto: "assets/services/detail-automation.jpg",
+    photo: "assets/works/ams-system-card-replacement.jpg",
+    detailPhoto: "assets/works/ams-system-card-replacement.jpg",
     tr: {
       title: "Otomasyon & Kontrol Sistemleri",
       lead: "AMS, IAS, PLC, SCADA — geminin sinir sistemi",
@@ -182,8 +182,8 @@ const SERVICES = {
     icon: "shield",
     category: "main",
     size: "card-wide",
-    photo: "assets/services/05-safety-systems.jpg",
-    detailPhoto: "assets/services/detail-safety.jpg",
+    photo: "assets/works/water-mist-system.jpg",
+    detailPhoto: "assets/works/water-mist-system.jpg",
     tr: {
       title: "Güvenlik Sistemleri",
       lead: "Fire detection, CO2, PA/GA, gas detection — SOLAS uyum",
@@ -225,8 +225,8 @@ const SERVICES = {
     icon: "sun",
     category: "main",
     size: "card-third",
-    photo: "assets/services/06-lighting-nav-lights.jpg",
-    detailPhoto: "assets/services/detail-lighting.jpg",
+    photo: "assets/hero/engine-room.jpg",
+    detailPhoto: "assets/hero/engine-room.jpg",
     tr: {
       title: "Aydınlatma & Seyir Fenerleri",
       lead: "Navigation lights + LED retrofit + kargo ambarı aydınlatması",
@@ -264,8 +264,8 @@ const SERVICES = {
     icon: "check",
     category: "main",
     size: "card-half",
-    photo: "assets/services/07-testing-certification.jpg",
-    detailPhoto: "assets/services/detail-testing.jpg",
+    photo: "assets/cert/acb-mccb-test.jpg",
+    detailPhoto: "assets/cert/acb-mccb-test.jpg",
     tr: {
       title: "Test & Sertifikasyon",
       lead: "SVERKER 900 + Megger + OMICRON — class kabul raporlama",
@@ -307,8 +307,8 @@ const SERVICES = {
     icon: "wrench",
     category: "main",
     size: "card-half",
-    photo: "assets/services/08-commissioning-retrofit.jpg",
-    detailPhoto: "assets/services/detail-commissioning.jpg",
+    photo: "assets/cert/busbar-kit-2.jpg",
+    detailPhoto: "assets/cert/busbar-kit-2.jpg",
     tr: {
       title: "Commissioning & Retrofit",
       lead: "Yeni inşa + enerji retrofit + decarbonization uyum",
@@ -350,8 +350,8 @@ const SERVICES = {
     icon: "alert",
     category: "main",
     size: "card-third",
-    photo: "assets/services/09-emergency-response.jpg",
-    detailPhoto: "assets/services/detail-emergency.jpg",
+    photo: "assets/works/shaft-earthing-device.jpg",
+    detailPhoto: "assets/works/shaft-earthing-device.jpg",
     tr: {
       title: "Acil Müdahale & Remote ETO",
       lead: "7/24 onboard + remote destek — off-hire önleme",
@@ -389,8 +389,8 @@ const SERVICES = {
     icon: "award",
     category: "main",
     size: "card-third",
-    photo: "assets/services/10-class-prep.jpg",
-    detailPhoto: "assets/services/detail-class.jpg",
+    photo: "assets/cert/class-reporting.jpg",
+    detailPhoto: "assets/cert/class-reporting.jpg",
     tr: {
       title: "Class & Sertifika Hazırlığı",
       lead: "8 class otoritesi için survey öncesi full hazırlık",
@@ -564,7 +564,35 @@ const I18N = {
     "login.company": "Firma Seç",
     "login.password": "Parola",
     "login.submit": "Giriş Yap",
-    "login.close": "Kapat"
+    "login.close": "Kapat",
+    "form.status.sending": "Gönderiliyor…",
+    "form.status.success": "Talebiniz alındı. 24 saat içinde dönüş yapacağız.",
+    "form.status.fallback": "Sunucuya ulaşılamadı. WhatsApp penceresi açılıyor — mesajı göndererek tamamlayın.",
+    "form.status.invalid": "Lütfen işaretli alanları kontrol edin.",
+    "form.err.required": "Bu alan zorunlu.",
+    "form.err.email": "Geçerli bir e-posta girin.",
+    "profile.back": "Ana Sayfa",
+    "profile.kicker": "Professional Background",
+    "profile.title": "Arkadan 12 yıl saha, önden class kabulü.",
+    "profile.sub": "Türk ve uluslararası armatörlerle çalışılmış 240+ gemi, 6 farklı bayrak altında süren operasyonel deneyim ve STCW III/6 ETO + HV + güvenlik sertifikasyonu.",
+    "profile.bg.title": "Professional Background",
+    "profile.bg.desc": "12+ yıldır bulker, tanker, container ve offshore tipi gemilerde Electro-Technical Officer görevleri ve saha servisi. Tuzla, Yalova ve Aliağa tersane bölgelerinin yanı sıra global limanlarda onboard + remote destek, class denetim hazırlığı ve test-sertifikasyon süreçleri.",
+    "profile.clients.title": "Hizmet Verilen Firmalar",
+    "profile.certs.kicker": "Certifications & Qualifications",
+    "profile.certs.title": "Tüm sertifikalar aktif ve güncel.",
+    "profile.cert.core": "Core Certification",
+    "profile.cert.core.title": "ETO — STCW Reg. III/6",
+    "profile.cert.core.desc": "Electro-Technical Officer — uluslararası geçerli STCW Reg. III/6 sertifikası",
+    "profile.cert.academic": "Academic",
+    "profile.cert.academic.title": "Control Systems Technology",
+    "profile.cert.academic.desc": "Üniversite düzeyinde otomasyon ve kontrol sistemleri eğitimi",
+    "profile.cert.special": "Special Recognition",
+    "profile.cert.special.title": "Blue Homeland Service",
+    "profile.cert.special.desc": "TP Offshore tarafından verilen hizmet sertifikası",
+    "profile.cert.stack": "Technical & Safety",
+    "profile.cert.stack.title": "Full STCW + HV Operations Stack",
+    "profile.cta.title": "Filonuzu bir araya getirelim.",
+    "profile.cta.sub": "İlk 15 dakikalık teknik konsültasyon ücretsiz — mevcut elektrik sorununuzu hızlıca değerlendirelim."
   },
   en: {
     "nav.services": "Services",
@@ -677,41 +705,69 @@ const I18N = {
     "login.company": "Select Company",
     "login.password": "Password",
     "login.submit": "Sign In",
-    "login.close": "Close"
+    "login.close": "Close",
+    "form.status.sending": "Sending…",
+    "form.status.success": "Request received. We will respond within 24 hours.",
+    "form.status.fallback": "Server unreachable. Opening WhatsApp — send the message to complete.",
+    "form.status.invalid": "Please check the highlighted fields.",
+    "form.err.required": "This field is required.",
+    "form.err.email": "Enter a valid email.",
+    "profile.back": "Home",
+    "profile.kicker": "Professional Background",
+    "profile.title": "Twelve years in the field, class acceptance up front.",
+    "profile.sub": "240+ vessels served with Turkish and international owners, operational experience under 6 flag states, and STCW III/6 ETO + HV + safety certification.",
+    "profile.bg.title": "Professional Background",
+    "profile.bg.desc": "12+ years of Electro-Technical Officer duties and field service on bulker, tanker, container and offshore vessels. Onboard + remote support across Tuzla, Yalova and Aliağa yards and global ports — class survey preparation, testing and certification.",
+    "profile.clients.title": "Companies Served",
+    "profile.certs.kicker": "Certifications & Qualifications",
+    "profile.certs.title": "All certifications active and current.",
+    "profile.cert.core": "Core Certification",
+    "profile.cert.core.title": "ETO — STCW Reg. III/6",
+    "profile.cert.core.desc": "Electro-Technical Officer — internationally valid STCW Reg. III/6 certificate",
+    "profile.cert.academic": "Academic",
+    "profile.cert.academic.title": "Control Systems Technology",
+    "profile.cert.academic.desc": "University-level automation and control systems education",
+    "profile.cert.special": "Special Recognition",
+    "profile.cert.special.title": "Blue Homeland Service",
+    "profile.cert.special.desc": "Service certificate awarded by TP Offshore",
+    "profile.cert.stack": "Technical & Safety",
+    "profile.cert.stack.title": "Full STCW + HV Operations Stack",
+    "profile.cta.title": "Let's align your fleet.",
+    "profile.cta.sub": "First 15-minute technical consultation is free — let's assess your current electrical issue quickly."
   }
 };
 
 /* ============== PROJECTS DATA ============== */
 const PROJECTS = [
-  { badge: "BV", type: "Handymax Bulker", loc: "Tuzla · 2025 Q4", img: "assets/projects/proj-01-acb-mccb.jpg",
+  { badge: "BV", type: "Handymax Bulker", loc: "Tuzla · 2025 Q4", img: "assets/cert/acb-mccb-test.jpg",
     tr: { h: "ACB + MCCB Retest & Class Report", p: "Special survey öncesi 14 ACB ve 32 MCCB testi, class kabul gören raporlama ile 48 saatte tamamlandı." },
     en: { h: "ACB + MCCB Retest & Class Report", p: "Before special survey, 14 ACBs and 32 MCCBs tested and reported in class-accepted format within 48 hours." }
   },
-  { badge: "DNV", type: "Supramax Bulker", loc: "Çanakkale · 2025 Q3", img: "assets/projects/proj-02-avr-shaft.jpg",
+  { badge: "DNV", type: "Supramax Bulker", loc: "Çanakkale · 2025 Q3", img: "assets/works/generator-avr-diode-speedcard.jpg",
     tr: { h: "AVR Arıza + Shaft Earthing", p: "Jeneratör AVR arızasının 6 saatte teşhis + müdahalesi, shaft earthing set yenileme." },
     en: { h: "AVR Fault + Shaft Earthing", p: "Generator AVR fault diagnosed and repaired in 6 hours; shaft earthing set renewed." }
   },
-  { badge: "ABS", type: "Container Feeder", loc: "Yalova · 2025 Q3", img: "assets/projects/proj-03-fire-mist.jpg",
+  { badge: "ABS", type: "Container Feeder", loc: "Yalova · 2025 Q3", img: "assets/works/fire-alarm-system.jpg",
     tr: { h: "Fire Alarm + Water Mist Retrofit", p: "Eski fire detection panelinin class-onaylı modern sistemle değişimi ve FAT/SAT süpervizi." },
     en: { h: "Fire Alarm + Water Mist Retrofit", p: "Replacement of old fire detection panel with class-approved modern system and FAT/SAT supervision." }
   },
-  { badge: "LR", type: "Kamsarmax Bulker", loc: "Pendik · 2025 Q2", img: "assets/projects/proj-04-motor-overhaul.jpg",
+  { badge: "LR", type: "Kamsarmax Bulker", loc: "Pendik · 2025 Q2", img: "assets/works/motor-overhaul.jpg",
     tr: { h: "Motor Overhaul & Alignment", p: "Ana jeneratör motoru overhaul, hizalama, yük testi — off-hire 48 saatten 24'e indirildi." },
     en: { h: "Motor Overhaul & Alignment", p: "Main generator motor overhauled, aligned, load tested — off-hire reduced from 48 to 24 hours." }
   },
-  { badge: "TL", type: "Oil/Chem Tanker", loc: "Aliağa · 2025 Q2", img: "assets/projects/proj-05-radar-bridge.jpg",
+  { badge: "TL", type: "Oil/Chem Tanker", loc: "Aliağa · 2025 Q2", img: "assets/works/radar-magnetron-replacement.jpg",
     tr: { h: "Radar Magnetron + Bridge Test", p: "Gyro + radar commissioning, ECDIS interface doğrulama, bridge integration testi." },
     en: { h: "Radar Magnetron + Bridge Test", p: "Gyro + radar commissioning, ECDIS interface verification, bridge integration test." }
   },
-  { badge: "RINA", type: "Panamax Bulker", loc: "Tuzla · 2025 Q1", img: "assets/projects/proj-06-pms-retrofit.jpg",
+  { badge: "RINA", type: "Panamax Bulker", loc: "Tuzla · 2025 Q1", img: "assets/works/ams-system-card-replacement.jpg",
     tr: { h: "PMS Retrofit + Load Sharing", p: "Power Management System yazılım güncelleme, 3 jeneratör load share tuning." },
     en: { h: "PMS Retrofit + Load Sharing", p: "Power Management System software upgrade, 3-generator load share tuning." }
   },
-  { badge: "BV", type: "Handysize Bulker", loc: "Tuzla · 2024 Q4", img: "assets/projects/proj-07-led-conversion.jpg",
-    tr: { h: "Full-Ship LED Conversion", p: "Tüm gemi aydınlatma LED dönüşümü, CII rating E'den C'ye yükseltme." },
-    en: { h: "Full-Ship LED Conversion", p: "Whole-ship LED lighting conversion, CII rating raised from E to C." }
+  { badge: "BV", type: "Handysize Bulker", loc: "Tuzla · 2024 Q4", img: "assets/cert/insulation-testing.jpg",
+    tr: { h: "Insulation Trend & Megger Test", p: "500–5000V Megger ile polarization index, 5 yıllık insulation trend grafiği — class formatında raporlama." },
+    en: { h: "Insulation Trend & Megger Test", p: "500–5000V Megger with polarization index, 5-year insulation trend analysis — class-formatted reporting." }
   },
-  { badge: "DNV", type: "Capesize Bulker", loc: "Istanbul Bosphorus · 2024 Q4", img: "assets/projects/proj-08-crane-panel.jpg",
+  { badge: "DNV", type: "Capesize Bulker", loc: "Istanbul Bosphorus · 2024 Q4", img: "assets/works/crane-panel-speed-control.jpg",
     tr: { h: "Deck Crane Panel + VFD", p: "4 deck crane elektrik pano yenileme, VFD retrofit, overload kalibrasyonu." },
     en: { h: "Deck Crane Panel + VFD", p: "4 deck crane electrical panel renewal, VFD retrofit, overload calibration." }
   }
@@ -764,14 +820,16 @@ const PROJECTS = [
       card.setAttribute('role', 'button');
       card.setAttribute('tabindex', '0');
       const chipsHtml = (data.chips || []).map(c => `<span class="chip">${c}</span>`).join('');
+      const altText = state.lang === 'tr' ? `${data.title} — servis görseli` : `${data.title} — service image`;
       card.innerHTML = `
-        <div class="card-photo" style="background-image:url('${s.photo}')" aria-hidden="true"></div>
+        <div class="card-photo" aria-hidden="true"><img src="${s.photo}" alt="" loading="lazy" decoding="async"></div>
         <span class="card-arrow">${ICONS['arrow-up-right']}</span>
         <div class="card-icon">${ICONS[s.icon] || ICONS.bolt}</div>
         <h3>${data.title}</h3>
         <p>${data.lead}</p>
         <div class="card-chips">${chipsHtml}</div>
       `;
+      card.setAttribute('aria-label', altText);
       card.addEventListener('click', () => openServiceDrawer(key));
       card.addEventListener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openServiceDrawer(key); }
@@ -789,8 +847,10 @@ const PROJECTS = [
       const data = p[state.lang];
       const el = document.createElement('article');
       el.className = 'project has-photo';
+      const projAlt = `${data.h} · ${p.type} · ${p.loc}`;
       el.innerHTML = `
-        <div class="project-img" style="background-image:url('${p.img}')">
+        <div class="project-img">
+          <img src="${p.img}" alt="${projAlt}" loading="lazy" decoding="async">
           <span class="project-badge">${p.badge}</span>
         </div>
         <div class="project-meta"><span>${p.type}</span><span>${p.loc}</span></div>
@@ -813,7 +873,9 @@ const PROJECTS = [
     const content = document.getElementById('drawerContent');
     const kicker = document.getElementById('drawerKicker');
 
-    hero.style.backgroundImage = `url('${s.detailPhoto || s.photo}')`;
+    const heroSrc = s.detailPhoto || s.photo;
+    const heroAlt = state.lang === 'tr' ? `${data.title} — detay görseli` : `${data.title} — detail image`;
+    hero.innerHTML = `<img src="${heroSrc}" alt="${heroAlt}" loading="lazy" decoding="async">`;
     kicker.textContent = data.title;
 
     const chipsHtml = data.chips.map(c => `<span class="chip">${c}</span>`).join('');
@@ -839,8 +901,9 @@ const PROJECTS = [
     });
   }
   function closeDrawer() {
+    if (!drawer) return;
     drawer.classList.remove('is-open');
-    overlay.classList.remove('is-open');
+    if (overlay) overlay.classList.remove('is-open');
     drawer.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     if (location.hash.startsWith('#service/')) history.pushState(null, '', ' ');
@@ -909,37 +972,92 @@ const PROJECTS = [
   function setupForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
+    const status = document.getElementById('formStatus');
+    const requiredIds = ['f-name', 'f-email', 'f-message'];
+
+    function clearErrors() {
+      form.querySelectorAll('.field-error').forEach(n => n.remove());
+      form.querySelectorAll('.is-invalid').forEach(n => n.classList.remove('is-invalid'));
+    }
+    function addError(inputId, key) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      input.classList.add('is-invalid');
+      input.setAttribute('aria-invalid', 'true');
+      const span = document.createElement('span');
+      span.className = 'field-error';
+      span.textContent = t(key);
+      input.parentElement.appendChild(span);
+    }
+    function setStatus(kind, key) {
+      if (!status) return;
+      status.className = 'form-status is-' + kind;
+      status.textContent = t(key);
+    }
+    function validate() {
+      clearErrors();
+      let ok = true;
+      requiredIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el || !el.value.trim()) {
+          addError(id, 'form.err.required');
+          ok = false;
+        }
+      });
+      const email = document.getElementById('f-email');
+      if (email && email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+        addError('f-email', 'form.err.email');
+        ok = false;
+      }
+      return ok;
+    }
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (!validate()) {
+        setStatus('error', 'form.status.invalid');
+        const firstBad = form.querySelector('.is-invalid');
+        if (firstBad) firstBad.focus();
+        return;
+      }
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalLabel = submitBtn.textContent;
-      submitBtn.textContent = state.lang === 'tr' ? 'Gönderiliyor…' : 'Sending…';
+      submitBtn.textContent = t('form.status.sending');
       submitBtn.disabled = true;
+      setStatus('pending', 'form.status.sending');
 
       const data = Object.fromEntries(new FormData(form).entries());
 
-      // API endpoint — backend henüz canlı değilse, WhatsApp'a yönlendir
-      const apiUrl = '/api/contact';
       try {
-        const resp = await fetch(apiUrl, {
+        const resp = await fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
         if (!resp.ok) throw new Error('API not ready');
-        alert(state.lang === 'tr' ? 'Talebiniz alındı. 24 saat içinde dönüş yapacağız.' : 'Request received. We will respond within 24 hours.');
+        setStatus('success', 'form.status.success');
         form.reset();
       } catch (err) {
-        // Fallback: WhatsApp ile gönder
+        setStatus('error', 'form.status.fallback');
         const text = encodeURIComponent(
           `SERVİS TALEBİ\nAd: ${data.name}\nFirma: ${data.company || '-'}\nE-posta: ${data.email}\nTel: ${data.phone || '-'}\nGemi/IMO: ${data.vessel || '-'}\nClass: ${data.class || '-'}\nHizmet: ${data.service || '-'}\nAciliyet: ${data.urgency || '-'}\nMesaj: ${data.message || '-'}`
         );
-        window.open(`https://wa.me/905376507776?text=${text}`, '_blank');
-        alert(state.lang === 'tr' ? 'WhatsApp açılıyor — mesajı gönderin, lütfen.' : 'Opening WhatsApp — please send the message.');
+        window.open(`https://wa.me/905376507776?text=${text}`, '_blank', 'noopener');
       } finally {
         submitBtn.textContent = originalLabel;
         submitBtn.disabled = false;
       }
+    });
+
+    form.querySelectorAll('input, textarea, select').forEach(el => {
+      el.addEventListener('input', () => {
+        if (el.classList.contains('is-invalid')) {
+          el.classList.remove('is-invalid');
+          el.removeAttribute('aria-invalid');
+          const err = el.parentElement.querySelector('.field-error');
+          if (err) err.remove();
+        }
+      });
     });
   }
 
@@ -1010,8 +1128,9 @@ const PROJECTS = [
     });
 
     // Drawer close
-    document.getElementById('drawerClose').addEventListener('click', closeDrawer);
-    overlay.addEventListener('click', closeDrawer);
+    const drawerCloseBtn = document.getElementById('drawerClose');
+    if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', closeDrawer);
+    if (overlay) overlay.addEventListener('click', closeDrawer);
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
     // Hamburger -> mobile nav (simple toggle)

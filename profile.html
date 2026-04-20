@@ -4,8 +4,16 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Professional Background & Qualifications · Levent Marine</title>
-  <meta name="description" content="Professional background, certifications and qualifications — ETO STCW III/6, HV Operations, Safety." />
+  <meta name="description" content="STCW III/6 ETO + HV Operations + full safety stack. 12+ years onboard bulkers, tankers and offshore — 240+ vessels across 6 flag states." />
   <meta name="theme-color" content="#0B1F3A" />
+
+  <meta property="og:type" content="profile" />
+  <meta property="og:url" content="https://leventmarinetech.com/profile.html" />
+  <meta property="og:title" content="Professional Background · Levent Marine" />
+  <meta property="og:description" content="STCW III/6 ETO + HV + safety. 240+ vessels. Class-ready expertise." />
+  <meta property="og:image" content="https://leventmarinetech.com/assets/brand/og-image.jpg" />
+  <link rel="canonical" href="https://leventmarinetech.com/profile.html" />
+
   <link rel="icon" href="assets/logo.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,15 +93,20 @@
         <div class="brand-tag">Electro-Tech Services</div>
       </div>
     </a>
-    <nav class="nav" aria-label="Ana menü">
-      <a href="index.html#services">Hizmetler</a>
-      <a href="index.html#certification">Test & Sertifika</a>
-      <a href="index.html#projects">Projeler</a>
-      <a href="profile.html" class="is-active">Hakkımızda</a>
-      <a href="index.html#contact">İletişim</a>
+    <nav class="nav" aria-label="Main menu">
+      <a href="index.html#services" data-i18n="nav.services">Hizmetler</a>
+      <a href="index.html#certification" data-i18n="nav.certification">Test & Sertifika</a>
+      <a href="index.html#projects" data-i18n="nav.projects">Projeler</a>
+      <a href="profile.html" class="is-active" data-i18n="nav.about">Hakkımızda</a>
+      <a href="index.html#contact" data-i18n="nav.contact">İletişim</a>
     </nav>
     <div class="nav-actions">
-      <a href="index.html#contact" class="btn btn-accent btn-sm">Talep Oluştur</a>
+      <button class="lang-btn" data-lang="tr" aria-label="Türkçe">TR</button>
+      <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+      <button class="icon-btn" id="themeToggle" aria-label="Tema değiştir" title="Tema">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
+      </button>
+      <a href="index.html#contact" class="btn btn-accent btn-sm" data-i18n="btn.request">Talep Oluştur</a>
     </div>
   </div>
 </header>
@@ -102,12 +115,12 @@
   <div class="container">
     <a href="index.html" class="profile-back">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Ana Sayfa
+      <span data-i18n="profile.back">Ana Sayfa</span>
     </a>
     <div class="profile-title">
-      <div class="section-kicker">Professional Background</div>
-      <h1>Arkadan 12 yıl saha, önden class kabulü.</h1>
-      <p>Türk ve uluslararası armatörlerle çalışılmış 240+ gemi, 6 farklı bayrak altında süren operasyonel deneyim ve STCW III/6 ETO + HV + güvenlik sertifikasyonu.</p>
+      <div class="section-kicker" data-i18n="profile.kicker">Professional Background</div>
+      <h1 data-i18n="profile.title">Arkadan 12 yıl saha, önden class kabulü.</h1>
+      <p data-i18n="profile.sub">Türk ve uluslararası armatörlerle çalışılmış 240+ gemi, 6 farklı bayrak altında süren operasyonel deneyim ve STCW III/6 ETO + HV + güvenlik sertifikasyonu.</p>
     </div>
   </div>
 </section>
@@ -117,11 +130,11 @@
 
     <div class="profile-grid">
       <div class="profile-card">
-        <h2>Professional Background</h2>
-        <p>12+ yıldır bulker, tanker, container ve offshore tipi gemilerde Electro-Technical Officer görevleri ve saha servisi. Tuzla, Yalova ve Aliağa tersane bölgelerinin yanı sıra global limanlarda onboard + remote destek, class denetim hazırlığı ve test-sertifikasyon süreçleri.</p>
+        <h2 data-i18n="profile.bg.title">Professional Background</h2>
+        <p data-i18n="profile.bg.desc">12+ yıldır bulker, tanker, container ve offshore tipi gemilerde Electro-Technical Officer görevleri ve saha servisi. Tuzla, Yalova ve Aliağa tersane bölgelerinin yanı sıra global limanlarda onboard + remote destek, class denetim hazırlığı ve test-sertifikasyon süreçleri.</p>
       </div>
       <div class="profile-card">
-        <h2>Hizmet Verilen Firmalar</h2>
+        <h2 data-i18n="profile.clients.title">Hizmet Verilen Firmalar</h2>
         <div class="company-grid">
           <span>TP Offshore</span>
           <span>Polaris Denizcilik</span>
@@ -134,32 +147,32 @@
     </div>
 
     <div class="section-head" style="margin-top: 16px;">
-      <div class="section-kicker">Certifications & Qualifications</div>
-      <h2 style="font-family: var(--f-head); font-weight: 600; font-size: 32px; line-height: 1.1; margin: 14px 0 0;">Tüm sertifikalar aktif ve güncel.</h2>
+      <div class="section-kicker" data-i18n="profile.certs.kicker">Certifications & Qualifications</div>
+      <h2 style="font-family: var(--f-head); font-weight: 600; font-size: 32px; line-height: 1.1; margin: 14px 0 0;" data-i18n="profile.certs.title">Tüm sertifikalar aktif ve güncel.</h2>
     </div>
 
     <div class="cert-grid-3" style="margin-top: 40px;">
       <div class="cert-block">
-        <span class="mono">Core Certification</span>
-        <h3>ETO — STCW Reg. III/6</h3>
-        <p>Electro-Technical Officer — uluslararası geçerli STCW Reg. III/6 sertifikası</p>
+        <span class="mono" data-i18n="profile.cert.core">Core Certification</span>
+        <h3 data-i18n="profile.cert.core.title">ETO — STCW Reg. III/6</h3>
+        <p data-i18n="profile.cert.core.desc">Electro-Technical Officer — uluslararası geçerli STCW Reg. III/6 sertifikası</p>
       </div>
 
       <div class="cert-block">
-        <span class="mono">Academic</span>
-        <h3>Control Systems Technology</h3>
-        <p>Üniversite düzeyinde otomasyon ve kontrol sistemleri eğitimi</p>
+        <span class="mono" data-i18n="profile.cert.academic">Academic</span>
+        <h3 data-i18n="profile.cert.academic.title">Control Systems Technology</h3>
+        <p data-i18n="profile.cert.academic.desc">Üniversite düzeyinde otomasyon ve kontrol sistemleri eğitimi</p>
       </div>
 
       <div class="cert-block">
-        <span class="mono">Special Recognition</span>
-        <h3>Blue Homeland Service</h3>
-        <p>TP Offshore tarafından verilen hizmet sertifikası</p>
+        <span class="mono" data-i18n="profile.cert.special">Special Recognition</span>
+        <h3 data-i18n="profile.cert.special.title">Blue Homeland Service</h3>
+        <p data-i18n="profile.cert.special.desc">TP Offshore tarafından verilen hizmet sertifikası</p>
       </div>
 
       <div class="cert-block" style="grid-column: span 3;">
-        <span class="mono">Technical & Safety</span>
-        <h3>Full STCW + HV Operations Stack</h3>
+        <span class="mono" data-i18n="profile.cert.stack">Technical & Safety</span>
+        <h3 data-i18n="profile.cert.stack.title">Full STCW + HV Operations Stack</h3>
         <ul>
           <li><strong>Advanced Fire Fighting</strong> — STCW Reg. VI/3</li>
           <li><strong>Medical First Aid</strong> — STCW Reg. VI/4-1</li>
@@ -173,11 +186,11 @@
 
     <div class="cta-band" style="margin-top: 48px;">
       <div>
-        <h3>Filonuzu bir araya getirelim.</h3>
-        <p>İlk 15 dakikalık teknik konsültasyon ücretsiz — mevcut elektrik sorununuzu hızlıca değerlendirelim.</p>
+        <h3 data-i18n="profile.cta.title">Filonuzu bir araya getirelim.</h3>
+        <p data-i18n="profile.cta.sub">İlk 15 dakikalık teknik konsültasyon ücretsiz — mevcut elektrik sorununuzu hızlıca değerlendirelim.</p>
       </div>
       <div class="ctas">
-        <a href="index.html#contact" class="btn btn-accent btn-lg">Talep Oluştur</a>
+        <a href="index.html#contact" class="btn btn-accent btn-lg" data-i18n="btn.request">Talep Oluştur</a>
         <a href="https://wa.me/905376507776" target="_blank" rel="noopener" class="btn btn-ghost btn-lg">WhatsApp</a>
       </div>
     </div>
@@ -188,11 +201,13 @@
 <footer class="footer">
   <div class="container">
     <div class="footer-bottom">
-      <span class="mono">© 2026 LEVENT MARINE LLC · TÜM HAKLARI SAKLIDIR</span>
-      <a href="index.html" style="color: var(--c-text-2); text-decoration: none; font-family: var(--f-mono); font-size: 12.5px;">← Ana Sayfa</a>
+      <span class="mono" data-i18n="footer.rights">© 2026 LEVENT MARINE LLC · TÜM HAKLARI SAKLIDIR</span>
+      <a href="index.html" style="color: var(--c-text-2); text-decoration: none; font-family: var(--f-mono); font-size: 12.5px;" data-i18n="profile.back">← Ana Sayfa</a>
     </div>
   </div>
 </footer>
+
+<script src="js/app.js"></script>
 
 </body>
 </html>

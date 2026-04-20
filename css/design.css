@@ -577,11 +577,17 @@ a { color: inherit; }
 .card-photo {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
   opacity: 0;
   z-index: 0;
   transition: opacity var(--t-base) var(--e-out);
+  overflow: hidden;
+}
+.card-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 .card.has-photo::before {
   content: '';
@@ -777,10 +783,15 @@ a { color: inherit; }
   aspect-ratio: 16/10;
   border-radius: var(--r-md);
   background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary-400) 100%);
-  background-size: cover;
-  background-position: center;
   position: relative;
   overflow: hidden;
+}
+.project-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 .project-img::after {
   content: '';
@@ -987,6 +998,48 @@ a { color: inherit; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .form-submit { width: 100%; justify-content: center; margin-top: 8px; }
 
+.form-group input.is-invalid,
+.form-group select.is-invalid,
+.form-group textarea.is-invalid {
+  border-color: var(--c-danger);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+.field-error {
+  display: block;
+  margin-top: 6px;
+  font-size: 12.5px;
+  color: var(--c-danger);
+  font-family: var(--f-mono);
+  letter-spacing: 0.02em;
+}
+.form-status {
+  display: none;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  font-size: 14px;
+  line-height: 1.45;
+  border: 1px solid transparent;
+}
+.form-status.is-pending,
+.form-status.is-success,
+.form-status.is-error { display: block; }
+.form-status.is-pending {
+  background: var(--c-surface-2);
+  color: var(--c-text-2);
+  border-color: var(--c-border);
+}
+.form-status.is-success {
+  background: rgba(22, 163, 74, 0.08);
+  color: var(--c-success);
+  border-color: rgba(22, 163, 74, 0.3);
+}
+.form-status.is-error {
+  background: rgba(220, 38, 38, 0.08);
+  color: var(--c-danger);
+  border-color: rgba(220, 38, 38, 0.3);
+}
+
 .contact-info {
   display: flex;
   flex-direction: column;
@@ -1128,11 +1181,17 @@ a { color: inherit; }
 }
 .drawer-hero {
   aspect-ratio: 16/5;
-  background-size: cover;
-  background-position: center;
   background-color: var(--c-primary);
   background-image: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary-600) 100%);
   position: relative;
+  overflow: hidden;
+}
+.drawer-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 .drawer-hero::after {
   content: '';
