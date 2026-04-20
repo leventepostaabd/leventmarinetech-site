@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Class Survey Electrical Checklist — 25 Points | Levent Marine</title>
+  <style>
+    @page { size: A4; margin: 20mm; }
+    @media print {
+      body { margin: 0; padding: 0; }
+      .no-print { display: none; }
+      a { color: #000; text-decoration: none; }
+      .page-break { page-break-after: always; }
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #0F1729;
+      background: #F8FAFC;
+      padding: 20px;
+    }
+    
+    .container { max-width: 800px; margin: 0 auto; background: white; padding: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      border-bottom: 3px solid #F5A524;
+      padding-bottom: 20px;
+    }
+    
+    .logo { font-weight: bold; font-size: 24px; color: #0B1F3A; margin-bottom: 8px; }
+    .logo-sub { font-size: 13px; color: #5B6B82; letter-spacing: 1px; }
+    
+    h1 { font-size: 28px; font-weight: 700; margin: 16px 0 8px; color: #0B1F3A; line-height: 1.2; }
+    h2 { font-size: 18px; font-weight: 600; margin: 28px 0 12px; color: #0B1F3A; background: #F8FAFC; padding: 8px 12px; border-left: 4px solid #F5A524; }
+    h3 { font-size: 14px; font-weight: 600; margin: 20px 0 8px; color: #0B1F3A; }
+    
+    p { margin: 0 0 12px; font-size: 14px; }
+    
+    .intro { font-size: 15px; color: #5B6B82; margin: 0 0 24px; }
+    
+    .checklist-group { margin: 24px 0; }
+    .checklist-group h3 { background: #F5A524; color: white; padding: 10px 14px; border-radius: 4px; margin: 0 0 12px; font-size: 13px; }
+    
+    .checklist-items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    
+    .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+      padding: 8px;
+      border: 1px solid #E2E8F0;
+      border-radius: 4px;
+      background: #FAFBFC;
+    }
+    
+    .item::before {
+      content: '☐';
+      flex-shrink: 0;
+      font-size: 16px;
+      font-weight: bold;
+      color: #F5A524;
+    }
+    
+    .item-text { line-height: 1.4; }
+    .item-title { font-weight: 600; color: #0B1F3A; }
+    .item-desc { font-size: 11px; color: #5B6B82; margin-top: 2px; }
+    
+    .cta-box {
+      background: #0B1F3A;
+      color: white;
+      padding: 20px;
+      border-radius: 6px;
+      margin: 32px 0;
+      text-align: center;
+    }
+    
+    .cta-box h2 { background: none; border: none; color: white; font-size: 18px; margin: 0 0 8px; }
+    .cta-box p { color: rgba(255,255,255,0.9); margin: 0 0 12px; }
+    
+    .cta-contacts {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 13px;
+      margin-top: 12px;
+    }
+    
+    .cta-item {
+      background: #F5A524;
+      color: #0B1F3A;
+      padding: 8px 14px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    
+    .footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #E2E8F0;
+      text-align: center;
+      font-size: 11px;
+      color: #5B6B82;
+    }
+    
+    .print-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 12px 24px;
+      background: #F5A524;
+      color: #0B1F3A;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    .print-btn:hover { background: #e09410; }
+    
+    .page-break { margin: 40px 0; border-top: 2px dashed #E2E8F0; padding-top: 40px; }
+    
+    @media (max-width: 600px) {
+      .checklist-items { grid-template-columns: 1fr; }
+      .container { padding: 20px; }
+      h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- COVER -->
+    <div class="header">
+      <div class="logo">⚡ LEVENT MARINE</div>
+      <div class="logo-sub">Electro-Technical Services</div>
+      <h1>Class Survey Electrical Checklist</h1>
+      <p style="margin: 12px 0 0; color: #F5A524; font-weight: 600;">25 Points for BV · DNV · ABS · Lloyd's · TL · RINA · ClassNK · IRS</p>
+    </div>
+
+    <p class="intro">
+      <strong>Hazırlık Rehberi:</strong> Bu kontrol listesi, Intermediate, Special ve Annual class survey'lerine karşı geminizin elektrik sistemini hazırlamaya yardımcı olur. Her kontrol maddesi class regülasyonlarına ve best practices'e dayalıdır.
+    </p>
+
+    <div class="cta-box no-print">
+      <h2 style="margin: 0 0 8px;">Basılı PDF'e Dönüştür</h2>
+      <p>Aşağı kaydırıp "Yazdır" tuşuna basın, ardından PDF olarak kaydedin.</p>
+      <button class="print-btn" onclick="window.print()">🖨️ Yazdır / PDF Olarak Kaydet</button>
+    </div>
+
+    <!-- SECTION 1: POWER SYSTEMS -->
+    <div class="checklist-group">
+      <h3>01 — MAIN SWITCHBOARD & BUSBAR</h3>
+      <div class="checklist-items">
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">Busbar İzolasyon Test</div>
+            <div class="item-desc">Megger test edilmiş ve sertifikalı mı? (Min 1 MΩ)</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">ACB (Air Circuit Breaker) Test</div>
+            <div class="item-desc">SVERKER 900 ile mekanik + elektrik fonksiyon testi</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">Busbar Kontakları Temiz</div>
+            <div class="item-desc">Buharlaşma / oksidasyonu kontrol et, torque sıkılı mı?</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">Shore Power MCCB Çalışıyor</div>
+            <div class="item-desc">Shore test yapıldı mı? Voltaj stabil mi?</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">Switchboard Sensörleri Kalibre</div>
+            <div class="item-desc">Temperature, humidity, pressure sensörleri fonksiyon mu?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-group">
+      <h3>02 — GENERATORS & POWER DISTRIBUTION</h3>
+      <div class="checklist-items">
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">Main Generator AVR Test</div>
+            <div class="item-desc">Voltaj regülasyonu stabil mı? ±%5 aralığı?</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">Generator Insulation (Megger)</div>
+            <div class="item-desc">Son 24 ay içinde test sertifikası var mı?</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">Shaft Generator Isolation</div>
+            <div class="item-desc">Transformer ve kontrol devresi işleyen mi?</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">Emergency Genset Load Test</div>
+            <div class="item-desc">Otomatik start + load shedding prosedürü test?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-group">
+      <h3>03 — MAIN & AUXILIARY MOTORS</h3>
+      <div class="checklist-items">
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">Main Motor Winding Insulation</div>
+            <div class="item-desc">Megger test (5000V rekomu), minimum 1 MΩ</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">Motor Thermistor Sensörü</div>
+            <div class="item-desc">Thermal overload kontrol devresi çalışıyor mu?</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">VFD (Soft Starter) Kontrol</div>
+            <div class="item-desc">Elektronik kontrol elemanları test edilmiş mi?</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">Bow Thruster Motor Check</div>
+            <div class="item-desc">Mekanik engel yok mu? Akım seviyesi normal?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- SECTION 2: NAVIGATION & SAFETY -->
+    <div class="checklist-group">
+      <h3>04 — NAVIGATION SYSTEMS</h3>
+      <div class="checklist-items">
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">ECDIS Sistem Güncel</div>
+            <div class="item-desc">Chart update'leri son 30 gün içinde var mı?</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">Radar Backup UPS</div>
+            <div class="item-desc">Radar desteklemek için acil güç var mı?</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">GMDSS License & Certification</div>
+            <div class="item-desc">Current DEC (Digital Selective Calling) valid mi?</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">VDR (Voyage Data Recorder)</div>
+            <div class="item-desc">Recording süresi minimum 12 saat mi?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-group">
+      <h3>05 — SAFETY & FIRE DETECTION</h3>
+      <div class="checklist-items">
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">Fire Detection Panel Test</div>
+            <div class="item-desc">Sensor check + buzzer + light — hepsi çalışıyor mu?</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">CO2 System Ventil & Sensör</div>
+            <div class="item-desc">Release panel ve pilot cylinder test edilmiş?</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">PA/GA (Public Address)</div>
+            <div class="item-desc">Bridge ve engine room'da düzgün duyuluyor mu?</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">Emergency Lighting Batteries</div>
+            <div class="item-desc">Test raporlu ve şarjlı mı? Endurance yeterli?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-group">
+      <h3>06 — POWER BACKUP SYSTEMS</h3>
+      <div class="checklist-items">
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">UPS Battery Health Check</div>
+            <div class="item-desc">Dahili direnç, voltaj, şarj durumu ölçüm?</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">Emergency Power Supply (EPS)</div>
+            <div class="item-desc">Invertör fonksiyonu test edilmiş mi?</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">Battery Compartment Ventilation</div>
+            <div class="item-desc">Hava akışı normal mi? Su sızıntısı yok mu?</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-text">
+            <div class="item-title">Battery Charger Ayarları</div>
+            <div class="item-desc">Voltaj ve akım specification'la uyumlu mu?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINAL CTA -->
+    <div class="cta-box">
+      <h2>Hazırlık için Danışman İstiyorum</h2>
+      <p>Bu kontrol listesini kapsayan class survey hazırlık paketimiz 240+ gemide başarı ile uygulanmıştır.</p>
+      <div class="cta-contacts">
+        <span class="cta-item">📞 +90 537 650 7776</span>
+        <span class="cta-item">📧 info@leventmarinetech.com</span>
+        <span class="cta-item">💬 WhatsApp: wa.me/905376507776</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      © 2026 Levent Marine Electro Technical Services LLC · Pendik (İstanbul) · Sheridan (Wyoming)<br>
+      STCW III/6 ETO — Class Survey Electrical Checklist v1.0 · 25 maddesi DNV/BV/ABS/Lloyd's uyumlu
+    </div>
+  </div>
+
+  <script>
+    // Print-friendly toggle (optional)
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.location.hash === '#print') {
+        document.querySelector('.no-print')?.remove();
+        window.print();
+      }
+    });
+  </script>
+</body>
+</html>
