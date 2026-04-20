@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bulker Gemilerde En Sık Karşılaşılan 10 Elektrik Arızası | Levent Marine</title>
+  <meta name="description" content="Bulker gemilerde MSB trip, AVR arızası, motor thermal, navigation blackout, UPS failure, LED burnout, fire alarm malfunction, insulation break, bilge pump, cargo hold dark." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://leventmarinetech.com/blog/bulker-faults/" />
+  <meta property="og:title" content="Bulker Gemilerde En Sık Karşılaşılan 10 Elektrik Arızası — Teşhis & Çözüm" />
+  <meta property="article:published_time" content="2025-04-08T10:00:00Z" />
+  <link rel="canonical" href="https://leventmarinetech.com/blog/bulker-faults/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Bulker Gemilerde En Sık Karşılaşılan 10 Elektrik Arızası",
+    "datePublished": "2025-04-08T10:00:00Z",
+    "author": {"@type": "Organization", "name": "Levent Marine"}
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --c-primary: #0B1F3A;
+      --c-accent: #F5A524;
+      --c-bg: #F8FAFC;
+      --c-surface: #FFFFFF;
+      --c-text: #0F1729;
+      --c-text-2: #5B6B82;
+      --c-border: #E2E8F0;
+      --f-head: 'Space Grotesk', sans-serif;
+      --f-body: 'Inter', sans-serif;
+    }
+    [data-theme="dark"] {
+      --c-primary: #FFFFFF;
+      --c-bg: #0F1729;
+      --c-surface: #1A2A3A;
+      --c-text: #F0F0F0;
+      --c-text-2: #B0C4DE;
+      --c-border: #2A3A4A;
+    }
+    body { font-family: var(--f-body); background: var(--c-bg); color: var(--c-text); line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    
+    header { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--c-border); margin-bottom: 48px; }
+    header .logo { font-family: var(--f-head); font-weight: 700; color: var(--c-primary); text-decoration: none; font-size: 20px; }
+    header nav { display: flex; gap: 32px; }
+    header a { color: var(--c-text); text-decoration: none; font-size: 14px; }
+    
+    .breadcrumb { display: flex; gap: 8px; font-size: 12px; color: var(--c-text-2); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--c-accent); text-decoration: none; }
+    
+    .post-header h1 { font-family: var(--f-head); font-size: 42px; font-weight: 700; line-height: 1.2; margin: 16px 0; }
+    .post-meta { display: flex; gap: 16px; font-size: 13px; color: var(--c-text-2); margin: 20px 0 24px; }
+    
+    .post-hero { width: 100%; height: 400px; object-fit: cover; border-radius: 8px; margin: 32px 0; background: var(--c-border); }
+    
+    .post-body { font-size: 16px; line-height: 1.8; }
+    .post-body h2 { font-family: var(--f-head); font-size: 28px; font-weight: 700; margin: 40px 0 16px; }
+    .post-body h3 { font-family: var(--f-head); font-size: 20px; font-weight: 600; margin: 28px 0 12px; }
+    .post-body p { margin: 0 0 16px; }
+    .post-body ul { margin: 0 0 16px; padding-left: 24px; }
+    .post-body li { margin: 0 0 8px; }
+    .post-body a { color: var(--c-accent); text-decoration: none; }
+    
+    .fault-box { background: var(--c-surface); border-left: 4px solid var(--c-accent); border-radius: 8px; padding: 20px; margin: 20px 0; }
+    .fault-box strong { color: var(--c-accent); }
+    .fault-box em { color: var(--c-text-2); }
+    
+    .cta-section { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 8px; padding: 24px; margin: 40px 0; text-align: center; }
+    .btn { display: inline-block; padding: 12px 24px; background: var(--c-accent); color: var(--c-primary); border: none; border-radius: 6px; font-weight: 600; text-decoration: none; cursor: pointer; margin: 0 8px; }
+    .btn:hover { opacity: 0.9; }
+    
+    .theme-toggle { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 6px; padding: 8px 12px; cursor: pointer; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <a href="/" class="logo">⚡ Levent Marine</a>
+    <nav>
+      <a href="/">Ana Sayfa</a>
+      <a href="/#services">Hizmetler</a>
+      <a href="/blog/">Blog</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle">🌙</button>
+  </header>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="/">Anasayfa</a> <span>/</span>
+      <a href="/blog/">Blog</a> <span>/</span>
+      <span>Bulker Arızaları</span>
+    </div>
+
+    <article>
+      <div class="post-header">
+        <h1>Bulker Gemilerde En Sık Karşılaşılan 10 Elektrik Arızası — Teşhis & Çözüm</h1>
+        <div class="post-meta">
+          <span>📅 8 Nisan 2025</span>
+          <span>✍️ Levent Marine ETO</span>
+          <span>📖 9 dk okuma</span>
+          <span style="padding: 2px 8px; background: rgba(245, 165, 36, 0.1); border-radius: 4px; color: var(--c-accent);">#troubleshoot</span>
+        </div>
+      </div>
+
+      <img src="../../assets/blog/bulker-fault-hero.jpg" alt="Bulker Elektrik Arızaları" class="post-hero" />
+
+      <div class="post-body">
+        <h2>Neden Bulker'lar Elektrik Arızaları Yaşar?</h2>
+        <p>Bulker (kuru yük) gemileri yoğun iş temposu, maruz kaldığı koşullar (tuz suyu, nem, titreşim) ve yaş teknoloji altyapısı nedeniyle <strong>ortalama her 3-4 ayda bir elektrik arızası</strong> yaşar. Pesca veya ticaret rotalarında (Atlantik, Pasifik), gemi teknisyen'i immediately sorunu çözmek zorundadır.</p>
+        <p>Bu rehberde, <strong>15+ yıl marine elektrik müdahale deneyiminden</strong> en sık 10 arızayı, teşhis prosedürünü ve çözümü özetledik.</p>
+
+        <h2>10 Elektrik Arızası</h2>
+
+        <h3>1️⃣ Main Switchboard Aniden Trip Oluyor (MSB Breaker Nyah)</h3>
+        <div class="fault-box">
+          <p><strong>Semptom:</strong> Tüm geminin elektriği aniden kesiliyor. Generator çalışıyor ama ACB (main switchboard breaker) açık durumda.</p>
+          <p><em>Nedenleri:</em></p>
+          <ul>
+            <li>Short circuit — cable damage, terminal arıza, motor winding insulation failure</li>
+            <li>Overload — simultaneous startup (main engine + cargo pump + bow thruster)</li>
+            <li>Protection relay malfunction — earth leakage relay (ELCB) hata yapıyor</li>
+          </ul>
+          <p><strong>Teşhis:</strong> Megohmmeter ile motor winding insulation kontrol et (Min 1MΩ). ACB soil kontaktlarını temizle, relay coil kontrol et (continuity test).</p>
+          <p><strong>Çözüm:</strong> Motor staggered startup prosedürü uygula (5 min aralıklar). Motor insulation low ise VFD soft starter araya ekle. Relay faulty ise spare relay takla.</p>
+          <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--c-border);"><strong>Müdahale Süresi:</strong> 2-6 saat | <strong>Class Impact:</strong> High (power loss, cargo delay)</p>
+        </div>
+
+        <h3>2️⃣ Main Generator AVR Arızası (Voltaj İstikrarsız)</h3>
+        <div class="fault-box">
+          <p><strong>Semptom:</strong> Voltaj sway yapıyor: 350V → 450V → 350V (normal: 400V ±%5). Panel LED'ler flickering, cihazlar restart ediyor.</p>
+          <p><em>Nedenleri:</em></p>
+          <ul>
+            <li>AVR (Automatic Voltage Regulator) PID loop arızası — voltage setpoint sensor stuck</li>
+            <li>Rectifier diode burnout — AVR power supply failed</li>
+            <li>Brushless generator exciter failure</li>
+          </ul>
+          <p><strong>Teşhis:</strong> Generator AVR terminal'ler arası voltaj ölç (typical 230VAC DC supply). Function test: load change (sudden engine rpm change) uyguladığında voltage response check et.</p>
+          <p><strong>Çözüm:</strong> AVR recalibration manual sağlayıcı (adjustment pot) | Genellikle SPARE AVR değiştir (30-60 min).</p>
+          <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--c-border);"><strong>Müdahale Süresi:</strong> 1-3 saat | <strong>Class Impact:</strong> Medium</p>
+        </div>
+
+        <h3>3️⃣ Bow Thruster Motor Thermistor Trip (Motor Yandı)</h3>
+        <div class="fault-box">
+          <p><strong>Semptom:</strong> Bow thruster manuel start ediyor ama 2-3 dakika sonra motor stops ve "THERMAL OVERLOAD" alarm.</p>
+          <p><em>Nedenleri:</em></p>
+          <ul>
+            <li>Stuck thruster propeller / sediment accumulation — motor overload</li>
+            <li>Motor bearing friction — winding current high</li>
+            <li>Thermistor sensor false reading — control PCB fault</li>
+          </ul>
+          <p><strong>Teşhis:</strong> Motor yaw derece (starting current) ölç (typical 5-10x FLA). Thruster free rotation test (no electrical power, manually spin). Thermistor ohm ölçümü (temperature function).</p>
+          <p><strong>Çözüm:</strong> Thruster pit'i sediment için suyla flush et. Motor cooling fan kontrolü. Thermistor replacement (typically $50-200 spare).</p>
+          <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--c-border);"><strong>Müdahale Süresi:</strong> 2-4 saat | <strong>Class Impact:</strong> Medium (maneuverability risk)</p>
+        </div>
+
+        <h3>4️⃣ Radar / ECDIS Blackout (Navigation Cihazı Yok)</h3>
+        <div class="fault-box">
+          <p><strong>Semptom:</strong> Bridge'de radar ve ECDIS display'ler tamamen kara (dead). UPS bataryası OK, ama cihazlar no power almıyor.</p>
+          <p><em>Nedenleri:</em></p>
+          <ul>
+            <li>24VDC power supply failure — rectifier burnout, fuse blown</li>
+            <li>Bridge UPS dead — battery not charged, inverter circuit failed</li>
+            <li>Loose distribution terminal — poor contact, arc → breaker trip</li>
+          </ul>
+          <p><strong>Teşhis:</strong> 24VDC distribution panel'de voltaj ölç. UPS input/output voltaj kontrol. Circuit breaker reset deneme. Cabling continuity kontrol.</p>
+          <p><strong>Çözüm:</strong> 24VDC power supply reset circuit breaker. UPS battery manual reset. Terminal cleaning & tightening. Spare 24VDC supply (portable) from engine room interim solution.</p>
+          <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--c-border);"><strong>Müdahale Süresi:</strong> 1-2 saat | <strong>Class Impact:</strong> CRITICAL (navigation blind)</p>
+        </div>
+
+        <h3>5️⃣ Engine Room UPS Battery Dead (No Emergency Power)</h3>
+        <div class="fault-box">
+          <p><strong>Semptom:</strong> Main power kesildiğinde, engine room aydınlanması OFF. UPS'in hızlı "beep" sesi var ama LED'ler yok.</p>
+          <p><em>Nedenleri:</em></p>
+          <ul>
+            <li>Battery not charged (charger circuit fault or old battery)</li>
+            <li>Battery internal cell damage — capacity low, self-discharge high</li>
+            <li>UPS inverter malfunction — no AC output</li>
+          </ul>
+          <p><strong>Teşhis:</strong> Battery open circuit voltage ölç (should be 24V, 48V, vs.). Load test gun (cihaz var ise) kullان. Charger input/output voltaj.</p>
+          <p><strong>Çözüm:</strong> Battery fast charge (genellikle 12-24 saat full charge gerekli). UPS inverter kontrol — may need replacement. Interim: manual torch + signage "UPS OUT".</p>
+          <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--c-border);"><strong>Müdahale Süresi:</strong> 24+ saat (battery charge) | <strong>Class Impact:</strong> High (safety risk)</p>
+        </div>
+
+        <h3>6️⃣ Navigation Light Failure (LED Burnout / Bulb Out)</h3>
+        <div class="fault-box">
+          <p><strong>Semptom:</strong> Masthead light yanmıyor veya çok kısık. Class regulation: navigation lights 24/7 çalışmalı (night operation). Port state control (PSC) violation riski.</p>
+          <p><em>Nedenleri:</em></p>
+          <ul>
+            <li>LED burnout — end-of-life, moisture ingress</li>
+            <li>Circuit breaker/fuse tripped — wiring fault</li>
+            <li>Fixture corrosion — salt water ingress → short circuit</li>
+          </ul>
+          <p><strong>Teşhis:</strong> Voltage presence ölç fixture'da. LED/bulb replacement test et. Wiring insulation check (moisture vs. dry).</p>
+          <p><strong>Çözüm:</strong> LED replacement (1-2 min if spare available) OR fixture replacement (15-30 min including mast climb). Silicone sealant apply around fixture entry points.</p>
+          <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--c-border);"><strong>Müdahale Süresi:</strong> 0.5-2 saat | <strong>Class Impact:</strong> High (PSC violation)</p>
+        </div>
+
+        <h3>7️⃣ Fire Alarm Panel Malfunction (Sensor Not Responsive)</h3>
+        <div class="fault-box">
+          <p><strong>Semptom:</strong> Engine room sensörü cevap vermiyor ("open circuit" panel'de gösteriyor). Manual fire alarm test başarısız.</p>
+          <p><em>Nedenleri:</em></p>
+          <ul>
+            <li>Sensor cable break — open wire, loose terminal</li>
+            <li>Sensor device itself failed — thermal element burnout</li>
+            <li>Fire panel PCB address board fault — sensor channel dead</li>
+          </ul>
+          <p><strong>Teşhis:</strong> Cable continuity ölç (resistance <5Ω normal). Sensor replacement test. Fire panel diagnostic mode (manual açıklama).</p>
+          <p><strong>Çözüm:</strong> Sensor wire readdressing (reroute if damaged). Spare sensor fitting (1-2 hours). If panel channel dead, whole PCB may need replace (class surveyor acceptance needed).</p>
+          <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--c-border);"><strong>Müdahale Süresi:</strong> 2-8 saat | <strong>Class Impact:</strong> CRITICAL (fire protection null)</p>
+        </div>
+
+        <h3>8️⃣ Main Propulsion Motor Winding Insulation Failure (Motor Won't Start)</h3>
+        <div class="fault-box">
+          <p><strong>Semptom:</strong> Main engine kontrol paneli "START" komutu veriyor ama motor hızlanmıyor. Current metering high (overcurrent relay trip ediyor).</p>
+          <p><em>Nedenleri:</em></p>
+          <ul>
+            <li>Stator winding phase-to-phase short circuit — insulation breakdown</li>
+            <li>Rotor bar cage fracture — slip high, current high</li>
+            <li>Soft-starter elektronik fault — gate drive not working</li>
+          </ul>
+          <p><strong>Teşhis:</strong> Megohmmeter insulation test (phase-to-earth, phase-to-phase). Motor mechanical lock test (kupleng unlock, manual rotate). Soft-starter PCB visual inspection.</p>
+          <p><strong>Çözüm:</strong> Insulation fault → Motor rewinding needed (cannot repair at sea). Interim: Sail on auxiliary propulsion (genellikle bow thruster + diesel generator for hotel). Liman'da motor shop'a gönder.</p>
+          <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--c-border);"><strong>Müdahale Süresi:</strong> 1-2 saat (diagnosis) + 5-7 gün (repair) | <strong>Class Impact:</strong> CRITICAL</p>
+        </div>
+
+        <h3>9️⃣ Bilge Pump Won't Start (Control Circuit Open)</h3>
+        <div class="fault-box">
+          <p><strong>Semptom:</strong> Bilge pump "START" butonu ama pump motor don't crank. Control panelde no light / alarm gösteriyor.</p>
+          <p><em>Nedenleri:</em></p>
+          <ul>
+            <li>Contactor coil burnout — no magnetic engagement, pump starts but no power</li>
+            <li>Pump motor thermal overload stuck open — past restart needed</li>
+            <li>Control button circuit break — loose wiring or stuck pushbutton</li>
+          </ul>
+          <p><strong>Teşhis:</strong> Pump contactor coil voltage ölç (should be 24VDC or 230VAC). Motor shaft manual rotation (freely?). Button continuity check.</p>
+          <p><strong>Çözüm:</strong> Contactor coil replacement (1-2 hours). Manual pump bypass → temporary backup pump start. Thermal overload manual reset.</p>
+          <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--c-border);"><strong>Müdahale Süresi:</strong> 1-3 saat | <strong>Class Impact:</strong> High (ballast management)</p>
+        </div>
+
+        <h3>🔟 Cargo Hold Lighting Completely Dark (All Fixtures Out)</h3>
+        <div class="fault-box">
+          <p><strong>Semptom:</strong> Cargo hold'un tümü karanlık. Loading operations stop. Foreman tarafından complaint.</p>
+          <p><em>Nedenleri:</em></p>
+          <ul>
+            <li>Main distribution circuit breaker trip — overload or short circuit</li>
+            <li>Wiring short circuit — damage during cargo operations, saltwater ingress</li>
+            <li>All LED fixtures simultaneously burnt — rare, but possible manufacturing batch</li>
+          </ul>
+          <p><strong>Teşhis:</strong> Cargo hold circuit breaker check — position? Manual reset deneme. Wiring insulation spot check (visual). LED fixture inspection.</p>
+          <p><strong>Çözüm:</strong> Circuit breaker reset. Wiring damage ise repair/reroute (1-4 hours). Portable LED work light setup temporary. LED replacement planned for next port.</p>
+          <p style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--c-border);"><strong>Müdahale Süresi:</strong> 0.5-3 saat | <strong>Class Impact:</strong> Medium (operational delay)</p>
+        </div>
+
+        <h2>Genel Müdahale Prosedürü (Emergency Flow)</h2>
+        <ol>
+          <li><strong>Güvenlik ilk:</strong> Uygun PPE giy (glove, safety glass, hard hat). Enerji kaynakları identify et.</li>
+          <li><strong>Tanıla:</strong> Megohmmeter, multimeter, visual inspection ile arıza belirle.</li>
+          <li><strong>Dokümante et:</strong> Fotoğraf + notes → class file'ına ekle.</li>
+          <li><strong>Onarım:</strong> Spare parts yok ise, temporary bypass veya emergency solution uygula.</li>
+          <li><strong>Test et:</strong> Repair sonrası full functional test yapılmalı.</li>
+          <li><strong>Report et:</strong> Class survayer'a ve Head Office'e email gönder (class file update + photos).</li>
+        </ol>
+
+        <div class="cta-section">
+          <h3>24 Saat Acil Elektrik Müdahale</h3>
+          <p>Bulker'ınızda acil arıza mı? Remote ETO destekçi veya on-site müdahale için iletişime geçin.</p>
+          <a href="/#service/emergency-remote" class="btn">Acil Müdahale</a>
+          <a href="https://wa.me/905376507776" class="btn" style="background: #25D366; color: white;">WhatsApp: +90 537 650 7776</a>
+        </div>
+      </div>
+
+      <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--c-border);" />
+
+      <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--c-border);">
+        <h3 style="font-family: var(--f-head); font-size: 16px; margin-bottom: 12px;">Blog Kategorileri</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <a href="/blog/class-survey/" style="padding: 12px; border: 1px solid var(--c-border); border-radius: 6px; text-decoration: none; color: var(--c-text);">
+            <strong>Class Survey Hazırlık</strong>
+            <p style="font-size: 13px; color: var(--c-text-2); margin: 4px 0 0;">25 maddelik checklist</p>
+          </a>
+          <a href="/blog/acb-mccb-errors/" style="padding: 12px; border: 1px solid var(--c-border); border-radius: 6px; text-decoration: none; color: var(--c-text);">
+            <strong>ACB/MCCB Test Hataları</strong>
+            <p style="font-size: 13px; color: var(--c-text-2); margin: 4px 0 0;">Test prosedürü, kalibrasyon</p>
+          </a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    const theme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    toggle.textContent = theme === 'light' ? '🌙' : '☀️';
+    toggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const newTheme = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      toggle.textContent = newTheme === 'light' ? '🌙' : '☀️';
+    });
+  </script>
+</body>
+</html>

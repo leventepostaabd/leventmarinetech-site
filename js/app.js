@@ -455,6 +455,7 @@ const ICONS = {
 const I18N = {
   tr: {
     "nav.services": "Hizmetler",
+    "nav.blog": "Blog",
     "nav.certification": "Test & Sertifika",
     "nav.projects": "Projeler",
     "nav.about": "Hakkımızda",
@@ -567,6 +568,7 @@ const I18N = {
   },
   en: {
     "nav.services": "Services",
+    "nav.blog": "Blog",
     "nav.certification": "Testing & Certification",
     "nav.projects": "Projects",
     "nav.about": "About",

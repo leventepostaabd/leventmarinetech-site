@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ACB ve MCCB Testinde En Sık Yapılan 7 Hata | Levent Marine</title>
+  <meta name="description" content="ACB MCCB test hataları, SVERKER 900 test prosedürü, uyumsuz sonuçlar, kalibre cihaz, test raporları." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://leventmarinetech.com/blog/acb-mccb-errors/" />
+  <meta property="og:title" content="ACB ve MCCB Testinde En Sık Yapılan 7 Hata — Nedenler & Çözümler" />
+  <meta property="article:published_time" content="2025-04-10T10:00:00Z" />
+  <link rel="canonical" href="https://leventmarinetech.com/blog/acb-mccb-errors/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "ACB ve MCCB Testinde En Sık Yapılan 7 Hata",
+    "datePublished": "2025-04-10T10:00:00Z",
+    "author": {"@type": "Organization", "name": "Levent Marine"}
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --c-primary: #0B1F3A;
+      --c-accent: #F5A524;
+      --c-bg: #F8FAFC;
+      --c-surface: #FFFFFF;
+      --c-text: #0F1729;
+      --c-text-2: #5B6B82;
+      --c-border: #E2E8F0;
+      --f-head: 'Space Grotesk', sans-serif;
+      --f-body: 'Inter', sans-serif;
+    }
+    [data-theme="dark"] {
+      --c-primary: #FFFFFF;
+      --c-bg: #0F1729;
+      --c-surface: #1A2A3A;
+      --c-text: #F0F0F0;
+      --c-text-2: #B0C4DE;
+      --c-border: #2A3A4A;
+    }
+    body { font-family: var(--f-body); background: var(--c-bg); color: var(--c-text); line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    
+    header { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--c-border); margin-bottom: 48px; }
+    header .logo { font-family: var(--f-head); font-weight: 700; color: var(--c-primary); text-decoration: none; font-size: 20px; }
+    header nav { display: flex; gap: 32px; }
+    header a { color: var(--c-text); text-decoration: none; font-size: 14px; }
+    header a:hover { color: var(--c-accent); }
+    
+    .breadcrumb { display: flex; gap: 8px; font-size: 12px; color: var(--c-text-2); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--c-accent); text-decoration: none; }
+    
+    .post-header h1 { font-family: var(--f-head); font-size: 42px; font-weight: 700; line-height: 1.2; margin: 16px 0; }
+    .post-meta { display: flex; gap: 16px; font-size: 13px; color: var(--c-text-2); margin: 20px 0 24px; }
+    
+    .post-hero { width: 100%; height: 400px; object-fit: cover; border-radius: 8px; margin: 32px 0; background: var(--c-border); }
+    
+    .post-body { font-size: 16px; line-height: 1.8; }
+    .post-body h2 { font-family: var(--f-head); font-size: 28px; font-weight: 700; margin: 40px 0 16px; }
+    .post-body h3 { font-family: var(--f-head); font-size: 20px; font-weight: 600; margin: 28px 0 12px; }
+    .post-body p { margin: 0 0 16px; }
+    .post-body ul { margin: 0 0 16px; padding-left: 24px; }
+    .post-body li { margin: 0 0 8px; }
+    .post-body a { color: var(--c-accent); text-decoration: none; }
+    
+    .error-box { background: var(--c-surface); border-left: 4px solid #EF4444; border-radius: 8px; padding: 20px; margin: 20px 0; }
+    .error-box strong { color: #EF4444; }
+    
+    .cta-section { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 8px; padding: 24px; margin: 40px 0; text-align: center; }
+    .btn { display: inline-block; padding: 12px 24px; background: var(--c-accent); color: var(--c-primary); border: none; border-radius: 6px; font-weight: 600; text-decoration: none; cursor: pointer; margin: 0 8px; }
+    .btn:hover { opacity: 0.9; }
+    
+    .theme-toggle { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 6px; padding: 8px 12px; cursor: pointer; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <a href="/" class="logo">⚡ Levent Marine</a>
+    <nav>
+      <a href="/">Ana Sayfa</a>
+      <a href="/#services">Hizmetler</a>
+      <a href="/blog/">Blog</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle">🌙</button>
+  </header>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="/">Anasayfa</a> <span>/</span>
+      <a href="/blog/">Blog</a> <span>/</span>
+      <span>ACB/MCCB Test Hataları</span>
+    </div>
+
+    <article>
+      <div class="post-header">
+        <h1>ACB ve MCCB Testinde En Sık Yapılan 7 Hata — Nedenler & Çözümler</h1>
+        <div class="post-meta">
+          <span>📅 10 Nisan 2025</span>
+          <span>✍️ Levent Marine ETO</span>
+          <span>📖 7 dk okuma</span>
+          <span style="padding: 2px 8px; background: rgba(245, 165, 36, 0.1); border-radius: 4px; color: var(--c-accent);">#testing</span>
+        </div>
+      </div>
+
+      <img src="../../assets/blog/acb-test-hero.jpg" alt="ACB MCCB Test" class="post-hero" />
+
+      <div class="post-body">
+        <h2>ACB ve MCCB Nedir?</h2>
+        <p><strong>ACB (Air Circuit Breaker)</strong> — Ana switchboard'larda yüksek akım kaynakları (generator, shore power, main bus) korumak için kullanılır. Tipik aralık: 1000A — 6300A.</p>
+        <p><strong>MCCB (Molded Case Circuit Breaker)</strong> — Sub-distribution board'larda feeder hatlarını korumak için. Tipik aralık: 16A — 630A.</p>
+        <p>Her ikisinin de periyodik <strong>protection relay test</strong> (SVERKER 900, Megger MIT) yapılması gerekir. Ancak uygulamada sık hatalar yapılıyor.</p>
+
+        <h2>7 Sık Hata & Çözümleri</h2>
+
+        <h3>❌ Hata 1: Yanlış Test Metodolojisi</h3>
+        <div class="error-box">
+          <strong>Semptom:</strong> Relay'e test sinyal gönderilirken ACB mekanik kilit (mechanical trip lock) bypass edilmemiş. Test sonuçları "no trip" gösteriyor ama relay doğru çalışıyor.
+          <p style="margin-top: 12px;"><strong>Nedeni:</strong> Kontrol devresinin ACB mekanik kilitleyici ile seri bağlantısı bilinmiyor.</p>
+          <p style="margin-top: 8px;"><strong>Çözüm:</strong> SVERKER test başlamadan önce ACB'nin mekanik kilit levye (mechanical trip lever) reset pozisyonuna alınmalı. SLD diagram'da kontrol devresi yolu açıklıkça gösterilmelidir.</p>
+        </div>
+
+        <h3>❌ Hata 2: Soil Kontaktı Hatalı</h3>
+        <div class="error-box">
+          <strong>Semptom:</strong> Test akımı gönderilmiş ama relay trigger olmamış veya çok geç trigger olmuş. Zaman ayarları specification'dan 50-100ms kaymış.
+          <p style="margin-top: 12px;"><strong>Nedeni:</strong> Relay'in X-Y soil terminal'lerine kötü bağlantı, paslanmış terminal veya loose lug.</p>
+          <p style="margin-top: 8px;"><strong>Çözüm:</strong> Terminal'leri temizle (isopropyl alcohol), torque wrench ile (IEC 60947'ye göre) sıkı ve stabil kontakt sağla. Test kablosu bağlantı point'ini fotoğrafla.</p>
+        </div>
+
+        <h3>❌ Hata 3: Load Kompartmanı Harita Mez</h3>
+        <div class="error-box">
+          <strong>Semptom:</strong> MCCB test ederken, test akımı yüksek olduğunda relay kontrol kaynağı (24VDC) sırıt gerilimi düştü. Relay yanıt vermediği sonuç kaydedildi.
+          <p style="margin-top: 12px;"><strong>Nedeni:</strong> Test cihazı (SVERKER) power beslemesi aynı kaynaktan (panel UPS/battery) alıyor. Yüksek test akımı çekişinde voltage drop oluşuyor.</p>
+          <p style="margin-top: 8px;"><strong>Çözüm:</strong> Test cihazı besleme kaynağını ayrı UPS veya harici power supply'e bağla. Özel test relay'i kullan (Megger Secondary Injection test set).</p>
+        </div>
+
+        <h3>❌ Hata 4: Report'u Eksik Doldurma</h3>
+        <div class="error-box">
+          <strong>Semptom:</strong> Test raporunda "Trip time: 100ms, Status: OK" yazıyor ama specification sınırı veya setpoint bilgisi yok. Class surveyor "bu sınırlar nereden geldi?" soruyor.
+          <p style="margin-top: 12px;"><strong>Nedeni:</strong> Protection relay coordination study (ANSI 26, 51, 50) veya manufacturer data sheet'ini test raporuna ek yapılmamış.</p>
+          <p style="margin-top: 8px;"><strong>Çözüm:</strong> Report'a mutlaka ekle: [1] Relay model + seri no, [2] Trip setpoint (Ampere ve time dial), [3] Specification sınırları (±5% zaman, ±%10 akım), [4] Test sonucu & sapma. PDF belge veya image attachment.</p>
+        </div>
+
+        <h3>❌ Hata 5: Kalibre Sertifikası Geçersiz</h3>
+        <div class="error-box">
+          <strong>Semptom:</strong> Test SVERKER 900 ile yapılmış ama cihazın kalibre sertifikası 2+ yıl eski veya hiç yok. Class surveyor raporları ret etti.
+          <p style="margin-top: 12px;"><strong>Nedeni:</strong> Test cihazlarının yıllık kalibrasyonu (traceable, NIST/PTB reference) yapılmamış.</p>
+          <p style="margin-top: 8px;"><strong>Çözüm:</strong> SVERKER 900, Megger MIT, Fluke 1587 gibi test cihazlarının yıllık kalibrasyonu yapan akredite laboratuvardan sertifika al. Report'a kalibre sertifika numarası ve tarih ekle.</p>
+        </div>
+
+        <h3>❌ Hata 6: Trip Setting'i Kontrol Etmeme</h3>
+        <div class="error-box">
+          <strong>Semptom:</strong> Relay şekil periyod (trip current setting) "123A" yazıyor ama SLD'de "80A" olması gerekiyormuş. Test raporunda bu fark gözden kaçırılmış.
+          <p style="margin-top: 12px;"><strong>Nedeni:</strong> Relay setpoint'i manuel veya elektronik olarak yanlış yapılandırılmış, ama doğrulanmamış.</p>
+          <p style="margin-top: 8px;"><strong>Çözüm:</strong> Test öncesi SLD + Relay coordination study'den specification setpoint'i belirle. Test sırasında relay'in fiziksel ayar (rotation knob, digital display) kontrol et. Report'a "Setpoint: 80A ✓ (specification OK)" yazı.</p>
+        </div>
+
+        <h3>❌ Hata 7: Environmental Condition'u İgnore Etme</h3>
+        <div class="error-box">
+          <strong>Semptom:</strong> Test sonuçları summer'da OK çıktı ama winter'da (daha soğuk) trip time 20% kısaldı. Spec sınırı exceeded. Survey fail.
+          <p style="margin-top: 12px;"><strong>Nedeni:</strong> Elektronik relay'ler sıcaklığa duyarlı. Test sırasında ortam sıcaklığı belirtilmemişse, sonraki season'da tekrar fail olabilir.</p>
+          <p style="margin-top: 8px;"><strong>Çözüm:</strong> Test raporunda ortam sıcaklığı ve nemi (15°C — 35°C, %40 — %80 RH spec) kaydet. Eğer soğuksa, test sonuçlarına referans sıcaklık correction factoru ekle (manufacturer talimatına göre).</p>
+        </div>
+
+        <h2>Best Practice Checklist</h2>
+        <ul>
+          <li>✓ Relay model, seri numarası ve calibration date kaydedilmiş mi?</li>
+          <li>✓ Test cihazı kalibre sertifikası checked mi?</li>
+          <li>✓ Soil kontaktları clean ve tight mi?</li>
+          <li>✓ Test power kaynağı stable (no voltage sag) mi?</li>
+          <li>✓ Trip setpoint specification'la match ediyor mu?</li>
+          <li>✓ Ortam sıcaklığı ve nemi reported mi?</li>
+          <li>✓ Sonuçlar sınırlar içinde, sapma dokümante mi?</li>
+          <li>✓ Report SLD + specification reference ile complete mi?</li>
+        </ul>
+
+        <div class="cta-section">
+          <h3>ACB/MCCB Test ve Sertifikasyon İçin Talep</h3>
+          <p>SVERKER 900 ve Megger MIT ile class-ready test raporları hazırlıyoruz.</p>
+          <a href="/#service/testing-certification" class="btn">Hizmet Detayı</a>
+          <a href="https://wa.me/905376507776" class="btn" style="background: #25D366; color: white;">WhatsApp İletişim</a>
+        </div>
+      </div>
+
+      <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--c-border);" />
+
+      <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--c-border);">
+        <h3 style="font-family: var(--f-head); font-size: 16px; margin-bottom: 12px;">İlgili Yazılar</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <a href="/blog/class-survey/" style="padding: 12px; border: 1px solid var(--c-border); border-radius: 6px; text-decoration: none; color: var(--c-text);">
+            <strong>Class Survey Elektriksel Hazırlık</strong>
+            <p style="font-size: 13px; color: var(--c-text-2); margin: 4px 0 0;">25 maddelik checklist</p>
+          </a>
+          <a href="/blog/bulker-faults/" style="padding: 12px; border: 1px solid var(--c-border); border-radius: 6px; text-decoration: none; color: var(--c-text);">
+            <strong>Bulker Gemilerde 10 Elektrik Arızası</strong>
+            <p style="font-size: 13px; color: var(--c-text-2); margin: 4px 0 0;">Teşhis ve çözümler</p>
+          </a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    const theme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    toggle.textContent = theme === 'light' ? '🌙' : '☀️';
+    toggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const newTheme = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      toggle.textContent = newTheme === 'light' ? '🌙' : '☀️';
+    });
+  </script>
+</body>
+</html>

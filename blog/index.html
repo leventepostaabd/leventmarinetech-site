@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog · Levent Marine — Marine Elektrik Teknoloji Rehberleri</title>
+  <meta name="description" content="Class survey hazırlığı, ACB/MCCB test teknikleri, bulker elektrik arızaları. Teknik, aksiyon odaklı blog yazıları." />
+  <meta property="og:url" content="https://leventmarinetech.com/blog/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Blog · Levent Marine" />
+  <meta property="og:description" content="Marine elektrik servis rehberleri ve teknik makaleler" />
+  <link rel="canonical" href="https://leventmarinetech.com/blog/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --c-primary: #0B1F3A;
+      --c-accent: #F5A524;
+      --c-bg: #F8FAFC;
+      --c-surface: #FFFFFF;
+      --c-text: #0F1729;
+      --c-text-2: #5B6B82;
+      --c-border: #E2E8F0;
+      --f-head: 'Space Grotesk', sans-serif;
+      --f-body: 'Inter', sans-serif;
+      --r-lg: 12px;
+    }
+    [data-theme="dark"] {
+      --c-primary: #FFFFFF;
+      --c-bg: #0F1729;
+      --c-surface: #1A2A3A;
+      --c-text: #F0F0F0;
+      --c-text-2: #B0C4DE;
+      --c-border: #2A3A4A;
+    }
+    body { font-family: var(--f-body); background: var(--c-bg); color: var(--c-text); line-height: 1.6; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    
+    header { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--c-border); margin-bottom: 48px; }
+    header .logo { font-family: var(--f-head); font-weight: 700; color: var(--c-primary); text-decoration: none; font-size: 20px; }
+    header nav { display: flex; gap: 32px; }
+    header a { color: var(--c-text); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    header a:hover { color: var(--c-accent); }
+    
+    .breadcrumb { display: flex; gap: 8px; font-size: 12px; color: var(--c-text-2); margin-bottom: 32px; }
+    .breadcrumb a { color: var(--c-accent); text-decoration: none; }
+    
+    .blog-hero { text-align: center; margin-bottom: 48px; }
+    .blog-hero h1 { font-family: var(--f-head); font-size: 42px; font-weight: 700; margin: 16px 0 8px; line-height: 1.2; }
+    .blog-hero p { font-size: 16px; color: var(--c-text-2); max-width: 600px; margin: 0 auto; }
+    
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; margin-bottom: 64px; }
+    .blog-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-lg); overflow: hidden; text-decoration: none; color: inherit; transition: transform 0.2s, border-color 0.2s; }
+    .blog-card:hover { transform: translateY(-4px); border-color: var(--c-accent); }
+    .blog-card img { width: 100%; height: 200px; object-fit: cover; background: var(--c-border); }
+    .blog-card-content { padding: 24px; }
+    .blog-card-meta { display: flex; gap: 12px; font-size: 12px; color: var(--c-text-2); margin-bottom: 12px; }
+    .blog-card-title { font-family: var(--f-head); font-size: 18px; font-weight: 700; margin: 12px 0; }
+    .blog-card-excerpt { font-size: 14px; color: var(--c-text-2); margin: 0; }
+    
+    .theme-toggle { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 6px; padding: 8px 12px; cursor: pointer; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <a href="/" class="logo">⚡ Levent Marine</a>
+    <nav>
+      <a href="/">Ana Sayfa</a>
+      <a href="/#services">Hizmetler</a>
+      <a href="/profile.html">Hakkımızda</a>
+      <a href="/blog/">Blog</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle">🌙</button>
+  </header>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="/">Anasayfa</a>
+      <span>/</span>
+      <span>Blog</span>
+    </div>
+
+    <div class="blog-hero">
+      <h1>Marine Elektrik Blog</h1>
+      <p>Class survey hazırlığından ACB test tekniklerine, bulker arıza tanılamasından commissioning'e kadar teknik rehberler.</p>
+    </div>
+
+    <div class="blog-grid">
+      <a href="./class-survey/" class="blog-card">
+        <img src="../assets/blog/class-survey-hero.jpg" alt="Class Survey" />
+        <div class="blog-card-content">
+          <div class="blog-card-meta">
+            <span>12 Nisan 2025</span>
+            <span>8 dk</span>
+          </div>
+          <h3 class="blog-card-title">Class Survey Öncesi Elektriksel Hazırlık — 25 Maddelik Checklist</h3>
+          <p class="blog-card-excerpt">BV, DNV, ABS, Lloyd's class survey için elektriksel hazırlık prosedürü ve 25 maddelik teknik kontrol listesi.</p>
+        </div>
+      </a>
+
+      <a href="./acb-mccb-errors/" class="blog-card">
+        <img src="../assets/blog/acb-test-hero.jpg" alt="ACB MCCB Test" />
+        <div class="blog-card-content">
+          <div class="blog-card-meta">
+            <span>10 Nisan 2025</span>
+            <span>7 dk</span>
+          </div>
+          <h3 class="blog-card-title">ACB ve MCCB Testinde En Sık Yapılan 7 Hata — Nedenler & Çözümler</h3>
+          <p class="blog-card-excerpt">SVERKER 900 ve Megger MIT ile test edilirken yapılan yöntemsel hatalar ve uyumlu çözümler.</p>
+        </div>
+      </a>
+
+      <a href="./bulker-faults/" class="blog-card">
+        <img src="../assets/blog/bulker-fault-hero.jpg" alt="Bulker Arızaları" />
+        <div class="blog-card-content">
+          <div class="blog-card-meta">
+            <span>8 Nisan 2025</span>
+            <span>9 dk</span>
+          </div>
+          <h3 class="blog-card-title">Bulker Gemilerde En Sık Karşılaşılan 10 Elektrik Arızası</h3>
+          <p class="blog-card-excerpt">Kargo gemilerde karşılaşılan sistem arızaları, teşhis adımları ve müdahale prosedürleri.</p>
+        </div>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    const theme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    toggle.textContent = theme === 'light' ? '🌙' : '☀️';
+    toggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const newTheme = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      toggle.textContent = newTheme === 'light' ? '🌙' : '☀️';
+    });
+  </script>
+</body>
+</html>

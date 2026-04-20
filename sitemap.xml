@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main pages -->
+  <url>
+    <loc>https://leventmarinetech.com/</loc>
+    <lastmod>2025-04-20</lastmod>
+    <priority>1.0</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://leventmarinetech.com/profile.html</loc>
+    <lastmod>2025-04-20</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  
+  <!-- Blog home -->
+  <url>
+    <loc>https://leventmarinetech.com/blog/</loc>
+    <lastmod>2025-04-20</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  
+  <!-- Blog posts -->
+  <url>
+    <loc>https://leventmarinetech.com/blog/class-survey/</loc>
+    <lastmod>2025-04-12</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://leventmarinetech.com/blog/acb-mccb-errors/</loc>
+    <lastmod>2025-04-10</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://leventmarinetech.com/blog/bulker-faults/</loc>
+    <lastmod>2025-04-08</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+</urlset>

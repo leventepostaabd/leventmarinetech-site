@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /authorized.html
+
+Sitemap: https://leventmarinetech.com/sitemap.xml
