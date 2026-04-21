@@ -10,20 +10,20 @@ const SERVICES = {
     icon: "bolt",
     category: "main",
     size: "card-lg",
-    photo: "assets/services/01-power-systems.jpg",
-    detailPhoto: "assets/services/detail-power.jpg",
+    photo: "assets/works/generator-avr-diode-speedcard.jpg",
+    detailPhoto: "assets/works/generator-avr-diode-speedcard.jpg",
     tr: {
       title: "Güç & Dağıtım Sistemleri",
       lead: "Main switchboard'dan emergency genset'e — gemin elektrik omurgasının tamamı",
-      summary: "Bulker filonun elektrik kalbi: jeneratör, ana/yardımcı pano, busbar, transformer, AVR, shaft generator, shore connection. Arıza tespiti, bakım, retrofit, commissioning — hepsinde class-kabul dokümantasyonla.",
+      summary: "Bulker filonun elektrik kalbi: jeneratör, ana/yardımcı pano, busbar, transformer, AVR, shaft generator, shore connection. Arıza tespiti, bakım, retrofit, commissioning — hepsinde standart formatta dokümantasyonla.",
       chips: ["MSB / ESB", "AVR / PMS", "Shaft Gen", "Shore Power"],
       items: [
-        { h: "Main Switchboard (MSB) bakım & retrofit", d: "ACB/MCCB test, busbar torque kontrolü, insulation, termografi, panel etiketleme, class raporu" },
+        { h: "Main Switchboard (MSB) bakım & retrofit", d: "ACB/MCCB test, busbar torque kontrolü, insulation, termografi, panel etiketleme, test raporu" },
         { h: "Emergency Switchboard (ESB) test", d: "Emergency genset auto-start, load sharing, synchronization, SOLAS test protokolü" },
         { h: "Ana & Yardımcı Jeneratör servisi", d: "AVR arızası, exciter, diyot grubu, voltaj regülasyonu, load testing, overhaul" },
-        { h: "Shaft Generator (PTO) commissioning", d: "VFD, clutch control, voltage/frequency matching, class attendance" },
+        { h: "Shaft Generator (PTO) commissioning", d: "VFD, clutch control, voltage/frequency matching, survey attendance" },
         { h: "Transformer testleri", d: "440/220V dry-type ve oil-type transformer insulation, turns ratio, polarity" },
-        { h: "Shore Power (OPS) retrofit", d: "AB FuelEU Maritime uyumu, cold ironing bağlantısı, class pre-approval" },
+        { h: "Shore Power (OPS) retrofit", d: "AB FuelEU Maritime uyumu, cold ironing bağlantısı, pre-approval koordinasyonu" },
         { h: "Busbar & Distribution Board", d: "Section board, group starter panel, motor control center (MCC)" },
         { h: "Synchroscope & parallel operation", d: "Jeneratör paralel çalışma tuning, reverse power protection" }
       ],
@@ -32,15 +32,15 @@ const SERVICES = {
     en: {
       title: "Power & Distribution Systems",
       lead: "From main switchboard to emergency genset — your vessel's electrical backbone",
-      summary: "The electrical heart of your bulker fleet: generator, main/auxiliary panels, busbars, transformers, AVR, shaft generator, shore connection. Diagnosis, maintenance, retrofit, commissioning — all with class-accepted documentation.",
+      summary: "The electrical heart of your bulker fleet: generator, main/auxiliary panels, busbars, transformers, AVR, shaft generator, shore connection. Diagnosis, maintenance, retrofit, commissioning — all closed with a standard-format report.",
       chips: ["MSB / ESB", "AVR / PMS", "Shaft Gen", "Shore Power"],
       items: [
-        { h: "Main Switchboard (MSB) maintenance & retrofit", d: "ACB/MCCB testing, busbar torque check, insulation, thermography, panel labeling, class reporting" },
+        { h: "Main Switchboard (MSB) maintenance & retrofit", d: "ACB/MCCB testing, busbar torque check, insulation, thermography, panel labeling, test reporting" },
         { h: "Emergency Switchboard (ESB) testing", d: "Emergency genset auto-start, load sharing, synchronization, SOLAS test protocol" },
         { h: "Main & Auxiliary Generator service", d: "AVR faults, exciter, diode bank, voltage regulation, load testing, overhaul" },
-        { h: "Shaft Generator (PTO) commissioning", d: "VFD, clutch control, voltage/frequency matching, class attendance" },
+        { h: "Shaft Generator (PTO) commissioning", d: "VFD, clutch control, voltage/frequency matching, survey attendance" },
         { h: "Transformer testing", d: "440/220V dry-type and oil-type insulation, turns ratio, polarity" },
-        { h: "Shore Power (OPS) retrofit", d: "EU FuelEU Maritime compliance, cold ironing connection, class pre-approval" },
+        { h: "Shore Power (OPS) retrofit", d: "EU FuelEU Maritime compliance, cold ironing connection, pre-approval koordinasyonu" },
         { h: "Busbar & Distribution Boards", d: "Section boards, group starter panels, motor control centers (MCC)" },
         { h: "Synchroscope & parallel operation", d: "Generator parallel operation tuning, reverse power protection" }
       ],
@@ -53,8 +53,8 @@ const SERVICES = {
     icon: "cog",
     category: "main",
     size: "card-md",
-    photo: "assets/services/02-propulsion-motors.jpg",
-    detailPhoto: "assets/services/detail-propulsion.jpg",
+    photo: "assets/works/motor-overhaul.jpg",
+    detailPhoto: "assets/works/motor-overhaul.jpg",
     tr: {
       title: "Tahrik & Motor Sistemleri",
       lead: "Ana makine elektriğinden bow thruster ve deck machinery'ye",
@@ -96,8 +96,8 @@ const SERVICES = {
     icon: "radar",
     category: "main",
     size: "card-md",
-    photo: "assets/services/03-navigation-comms.jpg",
-    detailPhoto: "assets/services/detail-navigation.jpg",
+    photo: "assets/works/radar-magnetron-replacement.jpg",
+    detailPhoto: "assets/works/radar-magnetron-replacement.jpg",
     tr: {
       title: "Navigasyon & İletişim (GMDSS)",
       lead: "Köprü ekipmanlarının tamamı — radar, ECDIS, gyro, GMDSS",
@@ -105,10 +105,10 @@ const SERVICES = {
       chips: ["Radar", "ECDIS", "Gyro", "GMDSS"],
       items: [
         { h: "Radar (S-Band & X-Band)", d: "Magnetron değişim, scanner motoru, trigger board, performance monitor testi" },
-        { h: "ECDIS arıza & update", d: "Chart update, sensor interface, route planning hatası, class onaylı backup" },
+        { h: "ECDIS arıza & update", d: "Chart update, sensor interface, route planning hatası, sahada onaylı backup" },
         { h: "Gyro Compass + repeater", d: "Drift kompanzasyonu, repeater senkronizasyonu, standby gyro transfer" },
         { h: "Autopilot + Rate of Turn", d: "Heading control tuning, off-course alarm, rudder feedback" },
-        { h: "AIS + VDR (Voyage Data Recorder)", d: "Yıllık performance test, data download, class attendance" },
+        { h: "AIS + VDR (Voyage Data Recorder)", d: "Yıllık performance test, data download, survey attendance" },
         { h: "GMDSS yıllık test", d: "VHF DSC, MF/HF DSC, Inmarsat-C, EPIRB & SART, NAVTEX" },
         { h: "Echo Sounder & Speed Log", d: "Doppler kalibrasyonu, transducer değişim" },
         { h: "Bridge integration & IBS", d: "Integrated Bridge System interface, conning display tuning" }
@@ -122,10 +122,10 @@ const SERVICES = {
       chips: ["Radar", "ECDIS", "Gyro", "GMDSS"],
       items: [
         { h: "Radar (S-Band & X-Band)", d: "Magnetron replacement, scanner motor, trigger board, performance monitor testing" },
-        { h: "ECDIS faults & updates", d: "Chart updates, sensor interface, route planning errors, class-approved backup" },
+        { h: "ECDIS faults & updates", d: "Chart updates, sensor interface, route planning errors, approved backup" },
         { h: "Gyro Compass + repeater", d: "Drift compensation, repeater synchronization, standby gyro transfer" },
         { h: "Autopilot + Rate of Turn", d: "Heading control tuning, off-course alarm, rudder feedback" },
-        { h: "AIS + VDR (Voyage Data Recorder)", d: "Annual performance test, data download, class attendance" },
+        { h: "AIS + VDR (Voyage Data Recorder)", d: "Annual performance test, data download, survey attendance" },
         { h: "GMDSS annual testing", d: "VHF DSC, MF/HF DSC, Inmarsat-C, EPIRB & SART, NAVTEX" },
         { h: "Echo Sounder & Speed Log", d: "Doppler calibration, transducer replacement" },
         { h: "Bridge integration & IBS", d: "Integrated Bridge System interface, conning display tuning" }
@@ -139,12 +139,12 @@ const SERVICES = {
     icon: "cpu",
     category: "main",
     size: "card-md",
-    photo: "assets/services/04-automation-control.jpg",
-    detailPhoto: "assets/services/detail-automation.jpg",
+    photo: "assets/works/ams-system-card-replacement.jpg",
+    detailPhoto: "assets/works/ams-system-card-replacement.jpg",
     tr: {
       title: "Otomasyon & Kontrol Sistemleri",
       lead: "AMS, IAS, PLC, SCADA — geminin sinir sistemi",
-      summary: "Alarm Monitoring, Integrated Automation, PLC/SCADA, PMS — class onaylı UMS/E0 sisteminin her bileşeni. Arıza tespit, retrofit, yazılım güncelleme.",
+      summary: "Alarm Monitoring, Integrated Automation, PLC/SCADA, PMS — sahada onaylı UMS/E0 sisteminin her bileşeni. Arıza tespit, retrofit, yazılım güncelleme.",
       chips: ["AMS", "IAS", "PLC/SCADA", "PMS"],
       items: [
         { h: "Alarm Monitoring System (AMS)", d: "Kongsberg K-Chief, Praxis Mega-Guard, ABB 800xA retrofit/tuning" },
@@ -161,7 +161,7 @@ const SERVICES = {
     en: {
       title: "Automation & Control Systems",
       lead: "AMS, IAS, PLC, SCADA — the ship's nervous system",
-      summary: "Alarm Monitoring, Integrated Automation, PLC/SCADA, PMS — every component of class-approved UMS/E0 operation. Fault diagnosis, retrofit, software updates.",
+      summary: "Alarm Monitoring, Integrated Automation, PLC/SCADA, PMS — every component of approved UMS/E0 operation. Fault diagnosis, retrofit, software updates.",
       chips: ["AMS", "IAS", "PLC/SCADA", "PMS"],
       items: [
         { h: "Alarm Monitoring System (AMS)", d: "Kongsberg K-Chief, Praxis Mega-Guard, ABB 800xA retrofit/tuning" },
@@ -182,15 +182,15 @@ const SERVICES = {
     icon: "shield",
     category: "main",
     size: "card-wide",
-    photo: "assets/services/05-safety-systems.jpg",
-    detailPhoto: "assets/services/detail-safety.jpg",
+    photo: "assets/works/water-mist-system.jpg",
+    detailPhoto: "assets/works/water-mist-system.jpg",
     tr: {
       title: "Güvenlik Sistemleri",
       lead: "Fire detection, CO2, PA/GA, gas detection — SOLAS uyum",
-      summary: "Fire detection panelinden CO2/water mist'e, Public Address'den gaz dedektörüne kadar SOLAS Ch. II-2 kapsamındaki her güvenlik sistemi — class onaylı test ve sertifikasyonla.",
+      summary: "Fire detection panelinden CO2/water mist'e, Public Address'den gaz dedektörüne kadar SOLAS Ch. II-2 kapsamındaki her güvenlik sistemi — sahada onaylı test ve sertifikasyonla.",
       chips: ["Fire Alarm", "CO2 / Water Mist", "PA/GA", "Gas Detection"],
       items: [
-        { h: "Fire Detection Panel (conventional + addressable)", d: "Consilium, Autronica, Apollo, Notifier — loop test, detector değişim, class attendance" },
+        { h: "Fire Detection Panel (conventional + addressable)", d: "Consilium, Autronica, Apollo, Notifier — loop test, detector değişim, survey attendance" },
         { h: "CO2 / HI-FOG / Water Mist", d: "Release panel, pilot cylinder test, delay timer, discharge alarm" },
         { h: "General Alarm & Fire Alarm", d: "Siren, rotating beacon, break glass call points, bell/horn coverage test" },
         { h: "Public Address (PA) System", d: "Amplifier, speaker line impedance, emergency override, DGS monitoring" },
@@ -204,10 +204,10 @@ const SERVICES = {
     en: {
       title: "Safety Systems",
       lead: "Fire detection, CO2, PA/GA, gas detection — SOLAS compliance",
-      summary: "Every safety system under SOLAS Ch. II-2 — fire detection panel, CO2/water mist, Public Address, gas detectors — with class-approved testing and certification.",
+      summary: "Every safety system under SOLAS Ch. II-2 — fire detection panel, CO2/water mist, Public Address, gas detectors — with approved testing and certification.",
       chips: ["Fire Alarm", "CO2 / Water Mist", "PA/GA", "Gas Detection"],
       items: [
-        { h: "Fire Detection Panel (conventional + addressable)", d: "Consilium, Autronica, Apollo, Notifier — loop test, detector replacement, class attendance" },
+        { h: "Fire Detection Panel (conventional + addressable)", d: "Consilium, Autronica, Apollo, Notifier — loop test, detector replacement, survey attendance" },
         { h: "CO2 / HI-FOG / Water Mist", d: "Release panel, pilot cylinder test, delay timer, discharge alarm" },
         { h: "General Alarm & Fire Alarm", d: "Siren, rotating beacon, break glass call points, bell/horn coverage test" },
         { h: "Public Address (PA) System", d: "Amplifier, speaker line impedance, emergency override, DGS monitoring" },
@@ -225,8 +225,8 @@ const SERVICES = {
     icon: "sun",
     category: "main",
     size: "card-third",
-    photo: "assets/services/06-lighting-nav-lights.jpg",
-    detailPhoto: "assets/services/detail-lighting.jpg",
+    photo: "assets/hero/engine-room.jpg",
+    detailPhoto: "assets/hero/engine-room.jpg",
     tr: {
       title: "Aydınlatma & Seyir Fenerleri",
       lead: "Navigation lights + LED retrofit + kargo ambarı aydınlatması",
@@ -234,7 +234,7 @@ const SERVICES = {
       chips: ["Nav Lights", "LED Retrofit", "Cargo Hold", "Emergency"],
       items: [
         { h: "Navigation Lights + Control Panel", d: "Masthead, side, stern, anchor, NUC, RAM — class kuralına uyum" },
-        { h: "Deck & Accommodation LED retrofit", d: "Enerji tasarrufu %50-70, CII rating iyileşmesi, class onaylı fixture" },
+        { h: "Deck & Accommodation LED retrofit", d: "Enerji tasarrufu %50-70, CII rating iyileşmesi, sahada onaylı fixture" },
         { h: "Cargo Hold Lighting", d: "Yük operasyonu aydınlatması, Ex-proof gerekliliği, bulker spesifik" },
         { h: "Engine Room Lighting", d: "Main + emergency lighting, battery battery, test prosedürü" },
         { h: "Helideck / Searchlight (varsa)", d: "Projektör motor, fokus, intensity control" },
@@ -249,7 +249,7 @@ const SERVICES = {
       chips: ["Nav Lights", "LED Retrofit", "Cargo Hold", "Emergency"],
       items: [
         { h: "Navigation Lights + Control Panel", d: "Masthead, side, stern, anchor, NUC, RAM — class rule compliance" },
-        { h: "Deck & Accommodation LED retrofit", d: "50-70% energy savings, CII rating improvement, class-approved fixtures" },
+        { h: "Deck & Accommodation LED retrofit", d: "50-70% energy savings, CII rating improvement, approved fixtures" },
         { h: "Cargo Hold Lighting", d: "Cargo operation lighting, Ex-proof requirements, bulker-specific" },
         { h: "Engine Room Lighting", d: "Main + emergency lighting, battery backup, test procedure" },
         { h: "Helideck / Searchlight (if equipped)", d: "Projector motor, focus, intensity control" },
@@ -264,12 +264,12 @@ const SERVICES = {
     icon: "check",
     category: "main",
     size: "card-half",
-    photo: "assets/services/07-testing-certification.jpg",
-    detailPhoto: "assets/services/detail-testing.jpg",
+    photo: "assets/cert/acb-mccb-test.jpg",
+    detailPhoto: "assets/cert/acb-mccb-test.jpg",
     tr: {
       title: "Test & Sertifikasyon",
-      lead: "SVERKER 900 + Megger + OMICRON — class kabul raporlama",
-      summary: "ACB/MCCB testinden insulation resistance'a, protection relay'den HV switchboard'a — tüm test ekipmanları kalibrasyon sertifikalı, raporlar 8 class otoritesine uygun format.",
+      lead: "SVERKER 900 + Megger + OMICRON — standart formatta test raporu",
+      summary: "ACB/MCCB testinden insulation resistance'a, protection relay'den HV switchboard'a — tüm test ekipmanları kalibrasyon sertifikalı, raporlar standart test formatında PDF.",
       chips: ["ACB/MCCB", "Insulation", "Protection Relay", "Thermography"],
       items: [
         { h: "ACB / MCCB Test", d: "Mekanik + elektrik + koruma fonksiyonları — SVERKER 900 ile, BV/DNV/ABS formatlı rapor" },
@@ -279,14 +279,14 @@ const SERVICES = {
         { h: "Termografik İnceleme", d: "FLIR thermal imager ile hotspot tespiti, loose connection bulgu raporu" },
         { h: "Cable Continuity & Meggering", d: "Yeni inşa commissioning, retrofit sonrası loop test" },
         { h: "Earth Fault Detection Test", d: "Insulation monitor, earth fault indicator, source localization" },
-        { h: "Class-Ready Rapor Paketi", d: "DNV / BV / ABS / Lloyd's / TL / RINA / ClassNK / IRS formatında dokümantasyon" }
+        { h: "Standart Test Raporu", d: "PDF formatında test raporu — gemi dosyası, armatör, sigorta veya denetim kanalında kullanılabilir" }
       ],
       cta: "Test talebi oluştur"
     },
     en: {
       title: "Testing & Certification",
       lead: "SVERKER 900 + Megger + OMICRON — class-accepted reporting",
-      summary: "From ACB/MCCB testing to insulation resistance, from protection relays to HV switchboards — all test equipment calibration certified, reports formatted for 8 class authorities.",
+      summary: "From ACB/MCCB testing to insulation resistance, from protection relays to HV switchboards — calibration-certified equipment, standard-format test reports delivered as PDF.",
       chips: ["ACB/MCCB", "Insulation", "Protection Relay", "Thermography"],
       items: [
         { h: "ACB / MCCB Testing", d: "Mechanical + electrical + protection functions — via SVERKER 900, BV/DNV/ABS formatted reports" },
@@ -296,7 +296,7 @@ const SERVICES = {
         { h: "Thermographic Inspection", d: "FLIR thermal imager for hotspot detection, loose connection finding report" },
         { h: "Cable Continuity & Meggering", d: "New-build commissioning, post-retrofit loop testing" },
         { h: "Earth Fault Detection Testing", d: "Insulation monitor, earth fault indicator, source localization" },
-        { h: "Class-Ready Report Package", d: "DNV / BV / ABS / Lloyd's / TL / RINA / ClassNK / IRS formatted documentation" }
+        { h: "Standard Test Report", d: "PDF-format test report usable in the vessel file, owner's office, insurer channel or surveyor review" }
       ],
       cta: "Request testing service"
     }
@@ -307,19 +307,19 @@ const SERVICES = {
     icon: "wrench",
     category: "main",
     size: "card-half",
-    photo: "assets/services/08-commissioning-retrofit.jpg",
-    detailPhoto: "assets/services/detail-commissioning.jpg",
+    photo: "assets/cert/busbar-kit-2.jpg",
+    detailPhoto: "assets/cert/busbar-kit-2.jpg",
     tr: {
       title: "Commissioning & Retrofit",
       lead: "Yeni inşa + enerji retrofit + decarbonization uyum",
-      summary: "Yeni inşa gemilerde FAT/SAT süpervizi, retrofit projelerinde class pre-approval, CII rating iyileştirme, shore power + battery hybrid + VFD retrofit.",
+      summary: "Yeni inşa gemilerde FAT/SAT süpervizi, retrofit projelerinde pre-approval koordinasyonu, CII rating iyileştirme, shore power + battery hybrid + VFD retrofit.",
       chips: ["FAT/SAT", "VFD Retrofit", "LED Conversion", "Shore Power"],
       items: [
-        { h: "Yeni İnşa Commissioning (FAT/SAT)", d: "Factory Acceptance Test, Harbour Test, Sea Trial — class attendance, punch list kapama" },
+        { h: "Yeni İnşa Commissioning (FAT/SAT)", d: "Factory Acceptance Test, Harbour Test, Sea Trial — survey attendance, punch list kapama" },
         { h: "VFD (Variable Frequency Drive) Retrofit", d: "Pompa/fan motor VFD dönüşümü, %15-30 enerji tasarrufu, CII iyileşmesi" },
-        { h: "LED Conversion projesi", d: "Tam gemi LED dönüşümü, class onaylı fixture, ROI analizi" },
-        { h: "Shore Power (OPS) retrofit", d: "AB limanları için 2030 hazırlığı, class pre-approval, sözleşme" },
-        { h: "Battery / Hybrid retrofit feasibility", d: "DNV Battery Safety, class approval, EPC supervision" },
+        { h: "LED Conversion projesi", d: "Tam gemi LED dönüşümü, sahada onaylı fixture, ROI analizi" },
+        { h: "Shore Power (OPS) retrofit", d: "AB limanları için 2030 hazırlığı, pre-approval koordinasyonu, sözleşme" },
+        { h: "Battery / Hybrid retrofit feasibility", d: "DNV Battery Safety, approval, EPC supervision" },
         { h: "Energy Monitoring System", d: "EU FuelEU uyum, CII veri toplama, dashboard kurulum" },
         { h: "Retrofit Engineering Drawing", d: "Cable schedule, SLD, terminal diagram revizyonu" },
         { h: "Cyber Security OT Retrofit (IACS E26/E27)", d: "Network segmentation, firewall, asset inventory, class onay" }
@@ -329,17 +329,17 @@ const SERVICES = {
     en: {
       title: "Commissioning & Retrofit",
       lead: "New build + energy retrofit + decarbonization compliance",
-      summary: "FAT/SAT supervision on new-builds, class pre-approval on retrofits, CII rating improvements, shore power + battery hybrid + VFD retrofits.",
+      summary: "FAT/SAT supervision on new-builds, pre-approval koordinasyonu on retrofits, CII rating improvements, shore power + battery hybrid + VFD retrofits.",
       chips: ["FAT/SAT", "VFD Retrofit", "LED Conversion", "Shore Power"],
       items: [
-        { h: "New-Build Commissioning (FAT/SAT)", d: "Factory Acceptance Test, Harbour Test, Sea Trial — class attendance, punch list closure" },
+        { h: "New-Build Commissioning (FAT/SAT)", d: "Factory Acceptance Test, Harbour Test, Sea Trial — survey attendance, punch list closure" },
         { h: "VFD (Variable Frequency Drive) Retrofit", d: "Pump/fan motor VFD conversion, 15-30% energy savings, CII improvement" },
-        { h: "LED Conversion project", d: "Whole-ship LED conversion, class-approved fixtures, ROI analysis" },
-        { h: "Shore Power (OPS) retrofit", d: "2030 readiness for EU ports, class pre-approval, contracting" },
-        { h: "Battery / Hybrid retrofit feasibility", d: "DNV Battery Safety, class approval, EPC supervision" },
+        { h: "LED Conversion project", d: "Whole-ship LED conversion, approved fixtures, ROI analysis" },
+        { h: "Shore Power (OPS) retrofit", d: "2030 readiness for EU ports, pre-approval koordinasyonu, contracting" },
+        { h: "Battery / Hybrid retrofit feasibility", d: "DNV Battery Safety, approval, EPC supervision" },
         { h: "Energy Monitoring System", d: "EU FuelEU compliance, CII data collection, dashboard installation" },
         { h: "Retrofit Engineering Drawings", d: "Cable schedule, SLD, terminal diagram revision" },
-        { h: "OT Cyber Security Retrofit (IACS E26/E27)", d: "Network segmentation, firewall, asset inventory, class approval" }
+        { h: "OT Cyber Security Retrofit (IACS E26/E27)", d: "Network segmentation, firewall, asset inventory, approval" }
       ],
       cta: "Discuss retrofit project"
     }
@@ -350,8 +350,8 @@ const SERVICES = {
     icon: "alert",
     category: "main",
     size: "card-third",
-    photo: "assets/services/09-emergency-response.jpg",
-    detailPhoto: "assets/services/detail-emergency.jpg",
+    photo: "assets/works/shaft-earthing-device.jpg",
+    detailPhoto: "assets/works/shaft-earthing-device.jpg",
     tr: {
       title: "Acil Müdahale & Remote ETO",
       lead: "7/24 onboard + remote destek — off-hire önleme",
@@ -361,7 +361,7 @@ const SERVICES = {
         { h: "Acil Onboard Müdahale", d: "Tuzla + çevre liman 4 saat, Türkiye geneli 24 saat, global koordinasyon" },
         { h: "Remote ETO Desk (retainer)", d: "$450-900/gemi/ay — 15 dk yanıt, Zoom/TeamViewer, aylık rapor" },
         { h: "PSC Green Pass paketi", d: "72 saatte detention riskini kapatma — $3.5-6k/gemi sabit paket" },
-        { h: "Class Survey Acil Hazırlık", d: "Sürveyör geldiğinde elektrik eksiklikleri kapama — 48 saat hedef" },
+        { h: "Acil Survey Hazırlığı", d: "Sörveyör geldiğinde elektrik eksiklikleri kapama — 48 saat hedef" },
         { h: "P&I / Insurance Survey desteği", d: "Elektrik kaynaklı hasarda hızlı root-cause, hasar raporu" },
         { h: "Telefonla 1. Yanıt (ücretsiz)", d: "İlk 15 dk WhatsApp tanı — sık rastlanan arızalar için yönlendirme" }
       ],
@@ -376,7 +376,7 @@ const SERVICES = {
         { h: "Emergency Onboard Response", d: "Tuzla + nearby ports 4h, Turkey nationwide 24h, global coordination" },
         { h: "Remote ETO Desk (retainer)", d: "$450-900/vessel/month — 15 min response, Zoom/TeamViewer, monthly report" },
         { h: "PSC Green Pass package", d: "Close detention risk within 72 hours — $3.5-6k/vessel fixed package" },
-        { h: "Emergency Class Survey Prep", d: "Close electrical deficiencies before surveyor arrival — 48h target" },
+        { h: "Emergency Survey Prep", d: "Close electrical deficiencies before surveyor arrival — 48h target" },
         { h: "P&I / Insurance Survey support", d: "Rapid root-cause on electrical damage, damage reporting" },
         { h: "Phone 1st response (free)", d: "Free 15 min WhatsApp triage — guidance for common issues" }
       ],
@@ -389,41 +389,41 @@ const SERVICES = {
     icon: "award",
     category: "main",
     size: "card-third",
-    photo: "assets/services/10-class-prep.jpg",
-    detailPhoto: "assets/services/detail-class.jpg",
+    photo: "assets/cert/class-reporting.jpg",
+    detailPhoto: "assets/cert/class-reporting.jpg",
     tr: {
-      title: "Class & Sertifika Hazırlığı",
-      lead: "8 class otoritesi için survey öncesi full hazırlık",
-      summary: "Intermediate, Special, Annual survey öncesi 25-maddelik elektrik checklist, surveyor attendance, PSC hazırlık, CII rating destek, SOLAS Ch. II-1 uyum.",
+      title: "Survey & PSC Hazırlığı",
+      lead: "Denetim öncesi elektrik eksik kapama — PSC, Intermediate, Special, Annual",
+      summary: "Denetim geldiğinde paniklememek için önceden tarama: 25 maddelik elektrik kontrol listesi, PSC hazırlık, CII destek, SOLAS Ch. II-1 uyum — surveyor geldiğinde geminin hazır olduğu bir durum bırakırız.",
       chips: ["Intermediate", "Special 5yr", "Annual", "PSC"],
       items: [
         { h: "Intermediate Survey Hazırlığı", d: "2.5 yılda bir — switchboard test, cable megger, emergency genset" },
-        { h: "Special Survey (5 yıllık)", d: "Comprehensive — her ekipmanın full test + dokümantasyon" },
+        { h: "Special Survey (5 yıllık)", d: "Kapsamlı — her ekipmanın tam test + dokümantasyon" },
         { h: "Annual Survey Hazırlığı", d: "Her yıl — GMDSS, navigation lights, fire detection test" },
-        { h: "PSC Elektrik Audit", d: "Paris/Tokyo MoU deficiency kapama, black/grey list bayrak" },
+        { h: "PSC Elektrik Audit", d: "Paris/Tokyo MoU eksiklik kapama, detention riski önleme" },
         { h: "CII Rating Destek", d: "D/E alan gemilerde elektrik tüketim optimizasyonu — C'ye yükseltme" },
-        { h: "SOLAS Ch. II-1 Uyum", d: "Reg. 40-45 (elektrik sistem), Reg. 31-36 (bridge) compliance" },
-        { h: "Surveyor Attendance", d: "Class surveyor ile birebir — BV, DNV, ABS, Lloyd's, TL, RINA, ClassNK, IRS" },
-        { h: "Class Deficiency Kapama", d: "Gecikmiş condition of class / outstanding item takip" }
+        { h: "SOLAS Ch. II-1 Uyum", d: "Reg. 40-45 (elektrik sistem), Reg. 31-36 (köprü) uyumu" },
+        { h: "Surveyor Attendance", d: "Sörveyör ziyaretinde birebir koordinasyon, teknik yanıt desteği" },
+        { h: "Eksik Kapama Takibi", d: "Gecikmiş condition of class / outstanding item'ların kapatılması" }
       ],
-      cta: "Class hazırlık talep et"
+      cta: "Survey hazırlığı talep et"
     },
     en: {
-      title: "Class & Certificate Preparation",
-      lead: "Pre-survey preparation for 8 class authorities",
-      summary: "25-point electrical checklist for Intermediate, Special and Annual surveys; surveyor attendance; PSC preparation; CII rating support; SOLAS Ch. II-1 compliance.",
+      title: "Survey & PSC Preparation",
+      lead: "Closing electrical findings before the surveyor arrives — PSC, Intermediate, Special, Annual",
+      summary: "We sweep the ship ahead of inspection so nothing is a surprise: 25-point electrical checklist, PSC prep, CII support, SOLAS Ch. II-1 compliance — the vessel is in a surveyor-ready state on day one.",
       chips: ["Intermediate", "Special 5yr", "Annual", "PSC"],
       items: [
         { h: "Intermediate Survey Prep", d: "Every 2.5 years — switchboard test, cable megger, emergency genset" },
-        { h: "Special Survey (5-year)", d: "Comprehensive — full test + documentation for every equipment" },
+        { h: "Special Survey (5-year)", d: "Comprehensive — full test + documentation for every item" },
         { h: "Annual Survey Prep", d: "Every year — GMDSS, navigation lights, fire detection testing" },
-        { h: "PSC Electrical Audit", d: "Paris/Tokyo MoU deficiency closure, black/grey list flags" },
+        { h: "PSC Electrical Audit", d: "Paris/Tokyo MoU deficiency closure, detention risk reduction" },
         { h: "CII Rating Support", d: "Electrical consumption optimization on D/E rated ships — upgrade to C" },
         { h: "SOLAS Ch. II-1 Compliance", d: "Reg. 40-45 (electrical system), Reg. 31-36 (bridge) compliance" },
-        { h: "Surveyor Attendance", d: "One-on-one with class surveyor — BV, DNV, ABS, Lloyd's, TL, RINA, ClassNK, IRS" },
-        { h: "Class Deficiency Closure", d: "Overdue condition of class / outstanding item tracking" }
+        { h: "Surveyor Attendance", d: "One-on-one coordination during surveyor visit, on-site technical response" },
+        { h: "Deficiency Closure", d: "Tracking overdue condition-of-class / outstanding items through to closure" }
       ],
-      cta: "Request class prep"
+      cta: "Request survey prep"
     }
   }
 };
@@ -456,85 +456,89 @@ const I18N = {
   tr: {
     "nav.services": "Hizmetler",
     "nav.blog": "Blog",
-    "nav.certification": "Test & Sertifika",
-    "nav.projects": "Projeler",
+    "nav.certification": "Test & Rapor",
+    "nav.projects": "İşler",
     "nav.about": "Hakkımızda",
     "nav.contact": "İletişim",
+    "nav.gallery": "Galeri",
     "btn.login": "Yetkili Giriş",
     "btn.request": "Talep Oluştur",
     "btn.services": "Hizmetleri Gör",
-    "hero.eyebrow": "Class Ready · Since 2012 · Pendik + Wyoming",
-    "hero.title.a": "Bulker filolar için",
-    "hero.title.b": "class-ready",
-    "hero.title.c": "elektrotek partner.",
-    "hero.sub": "Arıza müdahalesi, test & sertifikasyon, ETO desteği ve class denetim hazırlığı — 7/24, onboard veya remote, sekiz class otoritesine uygun dokümantasyonla.",
-    "hero.trust.1": "servis verilen<br>gemi",
-    "hero.trust.2": "class pass<br>oranı",
-    "hero.trust.3": "onboard<br>yanıt",
-    "hero.trust.4": "class<br>otoritesi",
-    "hero.bento.big.kicker": "Canlı · Pendik TR",
-    "hero.bento.big.title": "ACB Test + Class Rapor",
-    "hero.bento.big.desc": "MV Aegean Trader — Bulker · Tuzla 2025-Q4<br>SVERKER 900 ile MCCB + ACB testi tamamlandı, BV formatlı rapor teslim edildi.",
-    "hero.bento.1.title": "Remote Support",
-    "hero.bento.2.title": "ETO Certified",
-    "hero.bento.3.title": "Dual Coast",
-    "hero.bento.4.title": "Port Coverage",
-    "hero.bento.5.title": "High Voltage",
-    "hero.bento.6.title": "Green Pass",
-    "trust.label": "Class Otoriteleri & Müşteriler",
-    "services.kicker": "01 · Hizmetler",
-    "services.title.a": "Bulker'ın tüm elektrik ihtiyaçları.",
-    "services.title.b": "Tek partner, 8 class otoritesi.",
-    "services.sub": "Güç sistemlerinden navigasyona, otomasyondan güvenliğe — kuruyuk geminin elektrik üzerindeki her alanında 24 saat içinde Pendik'ten onboard, global limanda koordine müdahale.",
-    "cert.kicker": "02 · Test & Sertifika",
-    "cert.title": "Beş adımda class-ready rapor.",
-    "cert.sub": "Tüm test ekipmanları kalibrasyon sertifikalı. Yürütülen çalışmalar class denetimlerinde kabul gören yöntem ve dokümantasyonla desteklenir.",
+    "hero.eyebrow": "Marine Elektrik Arıza Servisi · Pendik + Wyoming · 2012'den beri",
+    "hero.title.a": "Gemide elektrik",
+    "hero.title.b": "duruyorsa",
+    "hero.title.c": "biz müdahale ederiz.",
+    "hero.sub": "Jeneratör, pano, motor, navigasyon, otomasyon — bulker ve genel kargo gemilerde arıza tespit, onarım, test ve commissioning. 7/24 onboard, Tuzla merkezli, global limanda koordineli müdahale.",
+    "hero.trust.1": "gemide<br>müdahale",
+    "hero.trust.2": "saatte<br>Tuzla'dan onboard",
+    "hero.trust.3": "7/24<br>hattı",
+    "hero.trust.4": "yıllık<br>saha deneyimi",
+    "hero.bento.big.kicker": "Son Müdahale · Tuzla",
+    "hero.bento.big.title": "Jeneratör AVR + Shaft Earthing",
+    "hero.bento.big.desc": "MV Aegean Trader — Supramax Bulker · Tuzla 2025-Q4<br>AVR arızası 6 saatte teşhis + müdahale, shaft earthing set yenilendi — gemi sefere çıktı.",
+    "hero.bento.1.title": "Remote ETO",
+    "hero.bento.2.title": "ETO Sertifikalı",
+    "hero.bento.3.title": "Tuzla + Wyoming",
+    "hero.bento.4.title": "Global Liman",
+    "hero.bento.5.title": "HV ≤1000V",
+    "hero.bento.6.title": "Hızlı Müdahale",
+    "trust.label": "Son dönemde çalıştığımız firmalar",
+    "services.kicker": "Hizmetler",
+    "services.title.a": "Gemideki her elektrik sistemi —",
+    "services.title.b": "tek ekip, tek numara.",
+    "services.sub": "Güç panosundan navigasyona, güvenlik sisteminden deck makinasına — arıza müdahalesi, bakım, test ve retrofit. Saha tecrübesi ile hızlı teşhis, yedek parça koordinasyonu, off-hire minimize.",
+    "cert.kicker": "Test & Rapor",
+    "cert.title": "Ekipmanımız, yöntemimiz, raporumuz.",
+    "cert.sub": "Saha testleri kalibrasyon sertifikalı ekipmanla yapılır. Çalışma sonunda standart formatta rapor — gemi, firma veya sigorta kanalında kullanılabilir.",
     "cert.process.title": "Süreç Akışı",
-    "cert.process.sub": "Her adım class-kabul formatında belgelenir; sonuçlar yetkili kullanıcı panelinden gemi bazında takip edilebilir.",
+    "cert.process.sub": "Her adım belgelenir; sonuçlar firma ekibiyle paylaşılır, gemi dosyasında arşivlenir.",
     "cert.step.1": "Talep",
     "cert.step.1.sub": "Form/WhatsApp",
     "cert.step.2": "Planlama",
-    "cert.step.2.sub": "Scope + ETA",
+    "cert.step.2.sub": "Kapsam + ETA",
     "cert.step.3": "Onboard",
-    "cert.step.3.sub": "Test + doküman",
+    "cert.step.3.sub": "Müdahale + test",
     "cert.step.4": "Rapor",
-    "cert.step.4.sub": "Class format",
-    "cert.step.5": "Class",
-    "cert.step.5.sub": "Submission",
-    "cert.card.accred.title": "Akreditasyon",
-    "cert.card.accred.desc": "DNV, BV, ABS, Lloyd's, TL, RINA, ClassNK, IRS ile uyumlu test protokolleri",
-    "cert.card.equipment.title": "Ekipman Envanteri",
-    "cert.card.equipment.desc": "SVERKER 900, Megger MIT, Fluke 1587, FLIR Thermal Imager — kalibrasyon sertifikalı",
+    "cert.step.4.sub": "PDF teslim",
+    "cert.step.5": "Takip",
+    "cert.step.5.sub": "Arşiv + sonraki",
+    "cert.card.accred.title": "Saha Tecrübesi",
+    "cert.card.accred.desc": "12+ yıl bulker, tanker, container ve offshore — yüzlerce arıza müdahalesi, test ve retrofit.",
+    "cert.card.equipment.title": "Test Ekipmanı",
+    "cert.card.equipment.desc": "SVERKER 900, Megger MIT, Fluke 1587, FLIR Thermal Imager — kalibrasyon sertifikalı.",
     "cert.card.sample.title": "Örnek Rapor",
-    "cert.card.sample.desc": "Class-kabul örnek sertifika PDF indir",
+    "cert.card.sample.desc": "Standart test raporu PDF indir.",
     "cert.card.sample.btn": "PDF İndir",
     "cert.card.panel.title": "Yetkili Panel",
-    "cert.card.panel.desc": "Gemi bazında test tarihleri, sertifika arşivi, sonraki test vadesi",
+    "cert.card.panel.desc": "Gemi bazında test tarihleri, rapor arşivi, sonraki test vadesi.",
     "cert.card.panel.btn": "Giriş",
-    "projects.kicker": "03 · Projeler",
-    "projects.title": "Son tamamlanan işler.",
-    "projects.sub": "240+ gemide gerçekleştirilen servisten seçme vakalar — anonimleştirilmiş teknik detaylarla.",
-    "about.kicker": "04 · Hakkımızda",
-    "about.title.a": "İki kıta, bir ekip,",
-    "about.title.b": "STCW III/6",
-    "about.title.c": "yetkinliği.",
-    "about.sub": "Pendik ofisimiz operasyonel merkez, Wyoming kaydımız global müşteriye USD faturalama ve 7/24 zaman dilimi kapsamı sağlar.",
+    "projects.kicker": "İşler",
+    "projects.title": "Son sahadaki müdahaleler.",
+    "projects.sub": "Tuzla, Yalova, Aliağa ve global limanlarda gerçekleştirilen seçme işler — teknik detaylarla.",
+    "gallery.kicker": "Saha",
+    "gallery.title": "Panodan motora, köprüden deck'e.",
+    "gallery.sub": "Gerçek müdahalelerden kareler — her biri onboard.",
+    "about.kicker": "Hakkımızda",
+    "about.title.a": "İki kıta,",
+    "about.title.b": "bir ekip,",
+    "about.title.c": "sahada 12 yıl.",
+    "about.sub": "Pendik ofisimiz operasyonel merkez. Wyoming kaydımız global müşteriye USD faturalama ve 7/24 zaman dilimi kapsamı sağlar.",
     "about.pendik.kicker": "Operasyonel HQ",
     "about.pendik.title": "Pendik · İstanbul",
-    "about.pendik.desc": "Tuzla + Yalova + Aliağa tersane bölgelerine 90 dakikada erişim, yerel test ekipmanı envanteri.",
+    "about.pendik.desc": "Tuzla + Yalova + Aliağa tersanelerine 90 dakikada erişim, yerel test ekipmanı envanteri.",
     "about.wyoming.kicker": "Registered Office",
     "about.wyoming.title": "Sheridan · Wyoming · USA",
     "about.wyoming.desc": "LLC kayıtlı ticari varlık — global müşteri için USD faturalama, P&I + sigorta rapor kanalı.",
-    "about.certs.kicker": "Core & Technical Certifications",
-    "about.certs.title": "STCW III/6 ETO + HV Operations + Safety",
-    "about.certs.clients": "Hizmet verilen firmalar: TP Offshore (TP OTC) · Polaris Denizcilik · Bright Denizcilik · Çebi Kaptan Denizcilik · MEDLOG (MSC Group) · Reederei NORD.",
-    "cta.title": "Sonraki class survey'inizi garantiye alın.",
-    "cta.sub": "25-maddelik \"Class Survey Electrical Checklist\" PDF'imizi ücretsiz gönderelim — son 12 ayda 40+ gemide kullandık.",
-    "cta.btn.primary": "Checklist İste",
+    "about.certs.kicker": "Sertifikasyon",
+    "about.certs.title": "STCW III/6 ETO + HV Operations + Güvenlik",
+    "about.certs.clients": "Çalıştığımız firmalar: TP Offshore (TP OTC) · Polaris Denizcilik · Bright Denizcilik · Çebi Kaptan Denizcilik · MEDLOG (MSC Group) · Reederei NORD.",
+    "cta.title": "Gemide elektrik sorunu mu var?",
+    "cta.sub": "Arıza kontrol listemizi WhatsApp'tan gönderelim — mühendisinizle beraber 15 dakikada teşhise giderseniz tamir süresi yarıya iner.",
+    "cta.btn.primary": "Kontrol Listesi",
     "cta.btn.secondary": "WhatsApp",
-    "contact.kicker": "05 · İletişim",
+    "contact.kicker": "İletişim",
     "contact.title": "24 saat içinde geri dönüş.",
-    "contact.sub": "Form, WhatsApp veya direkt telefonla. Mesai saatlerinde 4 saat, dışında 8 saat içinde cevap — form qualified lead ise 30 dakika.",
+    "contact.sub": "Form, WhatsApp veya direkt telefon. Mesai saatlerinde 4 saat, dışında 8 saat içinde cevap.",
     "contact.form.title": "Servis Talebi",
     "contact.form.name": "Ad Soyad",
     "contact.form.company": "Firma / Filo",
@@ -551,7 +555,7 @@ const I18N = {
     "contact.form.submit": "Talep Gönder",
     "contact.usa.title": "USA",
     "contact.tr.title": "Türkiye",
-    "footer.tagline": "Class-ready elektrotek partner — bulker filolar için Tuzla ve global limanlarda.",
+    "footer.tagline": "Marine elektrik arıza servisi — Tuzla ve global limanlarda, bulker ve genel kargo filolar için.",
     "footer.services": "Hizmetler",
     "footer.company": "Şirket",
     "footer.contact": "İletişim",
@@ -564,90 +568,122 @@ const I18N = {
     "login.company": "Firma Seç",
     "login.password": "Parola",
     "login.submit": "Giriş Yap",
-    "login.close": "Kapat"
+    "login.close": "Kapat",
+    "form.status.sending": "Gönderiliyor…",
+    "form.status.success": "Talebiniz alındı. 24 saat içinde dönüş yapacağız.",
+    "form.status.fallback": "Sunucuya ulaşılamadı. WhatsApp penceresi açılıyor — mesajı göndererek tamamlayın.",
+    "form.status.invalid": "Lütfen işaretli alanları kontrol edin.",
+    "form.err.required": "Bu alan zorunlu.",
+    "form.err.email": "Geçerli bir e-posta girin.",
+    "profile.back": "Ana Sayfa",
+    "profile.kicker": "Professional Background",
+    "profile.title": "Arkadan 12 yıl saha, önünde tek numara.",
+    "profile.sub": "Türk ve uluslararası armatörlerle çalışılmış 240+ gemi, 6 farklı bayrak altında operasyonel deneyim ve STCW III/6 ETO + HV + güvenlik sertifikasyonu.",
+    "profile.bg.title": "Sahada 12+ Yıl",
+    "profile.bg.desc": "12+ yıldır bulker, tanker, container ve offshore tipi gemilerde Electro-Technical Officer görevleri ve saha servisi. Tuzla, Yalova ve Aliağa tersane bölgelerinin yanı sıra global limanlarda onboard + remote destek, arıza müdahalesi, test ve commissioning.",
+    "profile.clients.title": "Hizmet Verilen Firmalar",
+    "profile.certs.kicker": "Certifications & Qualifications",
+    "profile.certs.title": "Tüm sertifikalar aktif ve güncel.",
+    "profile.cert.core": "Core Certification",
+    "profile.cert.core.title": "ETO — STCW Reg. III/6",
+    "profile.cert.core.desc": "Electro-Technical Officer — uluslararası geçerli STCW Reg. III/6 sertifikası",
+    "profile.cert.academic": "Academic",
+    "profile.cert.academic.title": "Control Systems Technology",
+    "profile.cert.academic.desc": "Üniversite düzeyinde otomasyon ve kontrol sistemleri eğitimi",
+    "profile.cert.special": "Special Recognition",
+    "profile.cert.special.title": "Blue Homeland Service",
+    "profile.cert.special.desc": "TP Offshore tarafından verilen hizmet sertifikası",
+    "profile.cert.stack": "Technical & Safety",
+    "profile.cert.stack.title": "Full STCW + HV Operations Stack",
+    "profile.cta.title": "Filonuzu bir araya getirelim.",
+    "profile.cta.sub": "İlk 15 dakikalık teknik konsültasyon ücretsiz — mevcut elektrik sorununuzu hızlıca değerlendirelim."
   },
   en: {
     "nav.services": "Services",
     "nav.blog": "Blog",
-    "nav.certification": "Testing & Certification",
-    "nav.projects": "Projects",
+    "nav.certification": "Testing & Reports",
+    "nav.projects": "Work",
     "nav.about": "About",
     "nav.contact": "Contact",
+    "nav.gallery": "Gallery",
     "btn.login": "Authorized Login",
     "btn.request": "Request Quote",
     "btn.services": "View Services",
-    "hero.eyebrow": "Class Ready · Since 2012 · Pendik + Wyoming",
-    "hero.title.a": "Class-ready electrotechnical",
-    "hero.title.b": "partner",
-    "hero.title.c": "for bulker fleets.",
-    "hero.sub": "Fault response, testing & certification, ETO support, and class survey preparation — 24/7, onboard or remote, with documentation accepted by eight class authorities.",
+    "hero.eyebrow": "Marine Electrical Repair Service · Pendik + Wyoming · Since 2012",
+    "hero.title.a": "When the ship goes",
+    "hero.title.b": "electrically dark,",
+    "hero.title.c": "we respond.",
+    "hero.sub": "Generators, switchboards, motors, navigation, automation — fault diagnosis, repair, testing and commissioning on bulker and general-cargo ships. 24/7 onboard, Tuzla-based, coordinated attendance at global ports.",
     "hero.trust.1": "vessels<br>serviced",
-    "hero.trust.2": "class pass<br>rate",
-    "hero.trust.3": "onboard<br>response",
-    "hero.trust.4": "class<br>authorities",
-    "hero.bento.big.kicker": "Live · Pendik TR",
-    "hero.bento.big.title": "ACB Test + Class Report",
-    "hero.bento.big.desc": "MV Aegean Trader — Bulker · Tuzla 2025-Q4<br>MCCB + ACB testing completed with SVERKER 900, BV-formatted report delivered.",
-    "hero.bento.1.title": "Remote Support",
+    "hero.trust.2": "hours onboard<br>from Tuzla",
+    "hero.trust.3": "24/7<br>hotline",
+    "hero.trust.4": "years of<br>field experience",
+    "hero.bento.big.kicker": "Latest Job · Tuzla",
+    "hero.bento.big.title": "Generator AVR + Shaft Earthing",
+    "hero.bento.big.desc": "MV Aegean Trader — Supramax Bulker · Tuzla 2025-Q4<br>AVR fault diagnosed and repaired in 6 hours; shaft earthing set renewed — vessel sailed on schedule.",
+    "hero.bento.1.title": "Remote ETO",
     "hero.bento.2.title": "ETO Certified",
-    "hero.bento.3.title": "Dual Coast",
-    "hero.bento.4.title": "Port Coverage",
-    "hero.bento.5.title": "High Voltage",
-    "hero.bento.6.title": "Green Pass",
-    "trust.label": "Class Authorities & Clients",
-    "services.kicker": "01 · Services",
-    "services.title.a": "Every electrical need of a bulker.",
-    "services.title.b": "One partner, 8 class authorities.",
-    "services.sub": "From power systems to navigation, automation to safety — every electrical domain on a dry-cargo vessel, with 24-hour onboard response from Pendik or coordinated global port attendance.",
-    "cert.kicker": "02 · Testing & Certification",
-    "cert.title": "Class-ready reports in five steps.",
-    "cert.sub": "All test equipment calibration-certified. All work supported by methods and documentation accepted in class surveys.",
+    "hero.bento.3.title": "Tuzla + Wyoming",
+    "hero.bento.4.title": "Global Ports",
+    "hero.bento.5.title": "HV ≤1000V",
+    "hero.bento.6.title": "Fast Response",
+    "trust.label": "Recent clients we've worked with",
+    "services.kicker": "Services",
+    "services.title.a": "Every electrical system aboard —",
+    "services.title.b": "one team, one number.",
+    "services.sub": "From the main switchboard to navigation, from safety systems to deck machinery — fault response, maintenance, testing and retrofit. Field-proven diagnostics, spare-parts coordination, minimized off-hire.",
+    "cert.kicker": "Testing & Reports",
+    "cert.title": "Our kit, our method, our report.",
+    "cert.sub": "Field tests performed with calibration-certified equipment. Work is closed with a standard-format PDF report — usable by the vessel, the fleet office, or the insurer.",
     "cert.process.title": "Process Flow",
-    "cert.process.sub": "Each step documented in class-accepted format; results tracked per vessel from the authorized user panel.",
+    "cert.process.sub": "Every step documented; results shared with the fleet team and archived in the vessel file.",
     "cert.step.1": "Request",
     "cert.step.1.sub": "Form/WhatsApp",
-    "cert.step.2": "Planning",
+    "cert.step.2": "Plan",
     "cert.step.2.sub": "Scope + ETA",
     "cert.step.3": "Onboard",
-    "cert.step.3.sub": "Test + docs",
+    "cert.step.3.sub": "Repair + test",
     "cert.step.4": "Report",
-    "cert.step.4.sub": "Class format",
-    "cert.step.5": "Class",
-    "cert.step.5.sub": "Submission",
-    "cert.card.accred.title": "Accreditation",
-    "cert.card.accred.desc": "Test protocols compatible with DNV, BV, ABS, Lloyd's, TL, RINA, ClassNK, IRS",
-    "cert.card.equipment.title": "Equipment Inventory",
-    "cert.card.equipment.desc": "SVERKER 900, Megger MIT, Fluke 1587, FLIR Thermal Imager — calibration certified",
+    "cert.step.4.sub": "PDF delivery",
+    "cert.step.5": "Follow-up",
+    "cert.step.5.sub": "Archive + next",
+    "cert.card.accred.title": "Field Experience",
+    "cert.card.accred.desc": "12+ years on bulker, tanker, container and offshore — hundreds of fault responses, tests and retrofits.",
+    "cert.card.equipment.title": "Test Equipment",
+    "cert.card.equipment.desc": "SVERKER 900, Megger MIT, Fluke 1587, FLIR Thermal Imager — calibration certified.",
     "cert.card.sample.title": "Sample Report",
-    "cert.card.sample.desc": "Download a class-accepted sample certificate PDF",
+    "cert.card.sample.desc": "Download a standard test report PDF.",
     "cert.card.sample.btn": "Download PDF",
     "cert.card.panel.title": "Authorized Panel",
-    "cert.card.panel.desc": "Test dates by vessel, certificate archive, next test deadline",
+    "cert.card.panel.desc": "Per-vessel test dates, report archive, next-test deadline.",
     "cert.card.panel.btn": "Sign In",
-    "projects.kicker": "03 · Projects",
-    "projects.title": "Recent completed work.",
-    "projects.sub": "Selected cases from 240+ vessels — with anonymized technical details.",
-    "about.kicker": "04 · About",
-    "about.title.a": "Two continents, one team,",
-    "about.title.b": "STCW III/6",
-    "about.title.c": "qualification.",
-    "about.sub": "Our Pendik office is the operational center; our Wyoming registration provides USD invoicing and 24/7 time-zone coverage for global clients.",
+    "projects.kicker": "Work",
+    "projects.title": "Recent field jobs.",
+    "projects.sub": "Selected work from Tuzla, Yalova, Aliağa and global ports — with technical details.",
+    "gallery.kicker": "Field",
+    "gallery.title": "From switchboard to motor, bridge to deck.",
+    "gallery.sub": "Frames from real jobs — each one shot onboard.",
+    "about.kicker": "About",
+    "about.title.a": "Two continents,",
+    "about.title.b": "one team,",
+    "about.title.c": "12 years in the field.",
+    "about.sub": "Our Pendik office is the operational center. Our Wyoming registration provides USD invoicing and 24/7 time-zone coverage for global clients.",
     "about.pendik.kicker": "Operational HQ",
     "about.pendik.title": "Pendik · Istanbul",
     "about.pendik.desc": "90-minute reach to Tuzla + Yalova + Aliağa shipyard regions, local test equipment inventory.",
     "about.wyoming.kicker": "Registered Office",
     "about.wyoming.title": "Sheridan · Wyoming · USA",
     "about.wyoming.desc": "Registered LLC — USD invoicing for global clients, P&I + insurance reporting channel.",
-    "about.certs.kicker": "Core & Technical Certifications",
+    "about.certs.kicker": "Certifications",
     "about.certs.title": "STCW III/6 ETO + HV Operations + Safety",
-    "about.certs.clients": "Companies served: TP Offshore (TP OTC) · Polaris Denizcilik · Bright Denizcilik · Çebi Kaptan Denizcilik · MEDLOG (MSC Group) · Reederei NORD.",
-    "cta.title": "Secure your next class survey.",
-    "cta.sub": "We'll send our 25-point \"Class Survey Electrical Checklist\" PDF — used on 40+ vessels in the last 12 months.",
-    "cta.btn.primary": "Request Checklist",
+    "about.certs.clients": "Companies we've worked with: TP Offshore (TP OTC) · Polaris Denizcilik · Bright Denizcilik · Çebi Kaptan Denizcilik · MEDLOG (MSC Group) · Reederei NORD.",
+    "cta.title": "Electrical trouble aboard?",
+    "cta.sub": "We'll send our fault triage checklist via WhatsApp — 15 minutes of structured diagnosis with your engineer typically halves the repair time.",
+    "cta.btn.primary": "Get the Checklist",
     "cta.btn.secondary": "WhatsApp",
-    "contact.kicker": "05 · Contact",
+    "contact.kicker": "Contact",
     "contact.title": "Response within 24 hours.",
-    "contact.sub": "Form, WhatsApp, or direct phone. Business hours 4h, outside 8h — qualified form leads get a 30-minute response.",
+    "contact.sub": "Form, WhatsApp, or direct phone. Business hours 4h, outside 8h.",
     "contact.form.title": "Service Request",
     "contact.form.name": "Full Name",
     "contact.form.company": "Company / Fleet",
@@ -664,7 +700,7 @@ const I18N = {
     "contact.form.submit": "Send Request",
     "contact.usa.title": "USA",
     "contact.tr.title": "Turkey",
-    "footer.tagline": "Class-ready electrotechnical partner — for bulker fleets in Tuzla and global ports.",
+    "footer.tagline": "Marine electrical repair service — in Tuzla and global ports, for bulker and general-cargo fleets.",
     "footer.services": "Services",
     "footer.company": "Company",
     "footer.contact": "Contact",
@@ -677,41 +713,69 @@ const I18N = {
     "login.company": "Select Company",
     "login.password": "Password",
     "login.submit": "Sign In",
-    "login.close": "Close"
+    "login.close": "Close",
+    "form.status.sending": "Sending…",
+    "form.status.success": "Request received. We will respond within 24 hours.",
+    "form.status.fallback": "Server unreachable. Opening WhatsApp — send the message to complete.",
+    "form.status.invalid": "Please check the highlighted fields.",
+    "form.err.required": "This field is required.",
+    "form.err.email": "Enter a valid email.",
+    "profile.back": "Home",
+    "profile.kicker": "Professional Background",
+    "profile.title": "Twelve years in the field, one number to call.",
+    "profile.sub": "240+ vessels served with Turkish and international owners, operational experience under 6 flag states, and STCW III/6 ETO + HV + safety certification.",
+    "profile.bg.title": "12+ Years in the Field",
+    "profile.bg.desc": "12+ years of Electro-Technical Officer duties and field service on bulker, tanker, container and offshore vessels. Onboard + remote support across Tuzla, Yalova and Aliağa yards and global ports — fault response, testing and commissioning.",
+    "profile.clients.title": "Companies Served",
+    "profile.certs.kicker": "Certifications & Qualifications",
+    "profile.certs.title": "All certifications active and current.",
+    "profile.cert.core": "Core Certification",
+    "profile.cert.core.title": "ETO — STCW Reg. III/6",
+    "profile.cert.core.desc": "Electro-Technical Officer — internationally valid STCW Reg. III/6 certificate",
+    "profile.cert.academic": "Academic",
+    "profile.cert.academic.title": "Control Systems Technology",
+    "profile.cert.academic.desc": "University-level automation and control systems education",
+    "profile.cert.special": "Special Recognition",
+    "profile.cert.special.title": "Blue Homeland Service",
+    "profile.cert.special.desc": "Service certificate awarded by TP Offshore",
+    "profile.cert.stack": "Technical & Safety",
+    "profile.cert.stack.title": "Full STCW + HV Operations Stack",
+    "profile.cta.title": "Let's align your fleet.",
+    "profile.cta.sub": "First 15-minute technical consultation is free — let's assess your current electrical issue quickly."
   }
 };
 
 /* ============== PROJECTS DATA ============== */
 const PROJECTS = [
-  { badge: "BV", type: "Handymax Bulker", loc: "Tuzla · 2025 Q4", img: "assets/projects/proj-01-acb-mccb.jpg",
-    tr: { h: "ACB + MCCB Retest & Class Report", p: "Special survey öncesi 14 ACB ve 32 MCCB testi, class kabul gören raporlama ile 48 saatte tamamlandı." },
-    en: { h: "ACB + MCCB Retest & Class Report", p: "Before special survey, 14 ACBs and 32 MCCBs tested and reported in class-accepted format within 48 hours." }
+  { badge: "BV", type: "Handymax Bulker", loc: "Tuzla · 2025 Q4", img: "assets/cert/acb-mccb-test.jpg",
+    tr: { h: "ACB + MCCB Retest & Rapor", p: "Special survey öncesi 14 ACB ve 32 MCCB testi, standart formatta rapor ile 48 saatte tamamlandı." },
+    en: { h: "ACB + MCCB Retest & Report", p: "Before special survey, 14 ACBs and 32 MCCBs tested and delivered with a standard-format report within 48 hours." }
   },
-  { badge: "DNV", type: "Supramax Bulker", loc: "Çanakkale · 2025 Q3", img: "assets/projects/proj-02-avr-shaft.jpg",
+  { badge: "DNV", type: "Supramax Bulker", loc: "Çanakkale · 2025 Q3", img: "assets/works/generator-avr-diode-speedcard.jpg",
     tr: { h: "AVR Arıza + Shaft Earthing", p: "Jeneratör AVR arızasının 6 saatte teşhis + müdahalesi, shaft earthing set yenileme." },
     en: { h: "AVR Fault + Shaft Earthing", p: "Generator AVR fault diagnosed and repaired in 6 hours; shaft earthing set renewed." }
   },
-  { badge: "ABS", type: "Container Feeder", loc: "Yalova · 2025 Q3", img: "assets/projects/proj-03-fire-mist.jpg",
-    tr: { h: "Fire Alarm + Water Mist Retrofit", p: "Eski fire detection panelinin class-onaylı modern sistemle değişimi ve FAT/SAT süpervizi." },
-    en: { h: "Fire Alarm + Water Mist Retrofit", p: "Replacement of old fire detection panel with class-approved modern system and FAT/SAT supervision." }
+  { badge: "ABS", type: "Container Feeder", loc: "Yalova · 2025 Q3", img: "assets/works/fire-alarm-system.jpg",
+    tr: { h: "Fire Alarm + Water Mist Retrofit", p: "Eski fire detection panelinin onaylı modern sistemle değişimi ve FAT/SAT süpervizi." },
+    en: { h: "Fire Alarm + Water Mist Retrofit", p: "Replacement of old fire detection panel with approved modern system and FAT/SAT supervision." }
   },
-  { badge: "LR", type: "Kamsarmax Bulker", loc: "Pendik · 2025 Q2", img: "assets/projects/proj-04-motor-overhaul.jpg",
+  { badge: "LR", type: "Kamsarmax Bulker", loc: "Pendik · 2025 Q2", img: "assets/works/motor-overhaul.jpg",
     tr: { h: "Motor Overhaul & Alignment", p: "Ana jeneratör motoru overhaul, hizalama, yük testi — off-hire 48 saatten 24'e indirildi." },
     en: { h: "Motor Overhaul & Alignment", p: "Main generator motor overhauled, aligned, load tested — off-hire reduced from 48 to 24 hours." }
   },
-  { badge: "TL", type: "Oil/Chem Tanker", loc: "Aliağa · 2025 Q2", img: "assets/projects/proj-05-radar-bridge.jpg",
+  { badge: "TL", type: "Oil/Chem Tanker", loc: "Aliağa · 2025 Q2", img: "assets/works/radar-magnetron-replacement.jpg",
     tr: { h: "Radar Magnetron + Bridge Test", p: "Gyro + radar commissioning, ECDIS interface doğrulama, bridge integration testi." },
     en: { h: "Radar Magnetron + Bridge Test", p: "Gyro + radar commissioning, ECDIS interface verification, bridge integration test." }
   },
-  { badge: "RINA", type: "Panamax Bulker", loc: "Tuzla · 2025 Q1", img: "assets/projects/proj-06-pms-retrofit.jpg",
+  { badge: "RINA", type: "Panamax Bulker", loc: "Tuzla · 2025 Q1", img: "assets/works/ams-system-card-replacement.jpg",
     tr: { h: "PMS Retrofit + Load Sharing", p: "Power Management System yazılım güncelleme, 3 jeneratör load share tuning." },
     en: { h: "PMS Retrofit + Load Sharing", p: "Power Management System software upgrade, 3-generator load share tuning." }
   },
-  { badge: "BV", type: "Handysize Bulker", loc: "Tuzla · 2024 Q4", img: "assets/projects/proj-07-led-conversion.jpg",
-    tr: { h: "Full-Ship LED Conversion", p: "Tüm gemi aydınlatma LED dönüşümü, CII rating E'den C'ye yükseltme." },
-    en: { h: "Full-Ship LED Conversion", p: "Whole-ship LED lighting conversion, CII rating raised from E to C." }
+  { badge: "BV", type: "Handysize Bulker", loc: "Tuzla · 2024 Q4", img: "assets/cert/insulation-testing.jpg",
+    tr: { h: "Insulation Trend & Megger Test", p: "500–5000V Megger ile polarization index, 5 yıllık insulation trend grafiği — class formatında raporlama." },
+    en: { h: "Insulation Trend & Megger Test", p: "500–5000V Megger with polarization index, 5-year insulation trend analysis — class-formatted reporting." }
   },
-  { badge: "DNV", type: "Capesize Bulker", loc: "Istanbul Bosphorus · 2024 Q4", img: "assets/projects/proj-08-crane-panel.jpg",
+  { badge: "DNV", type: "Capesize Bulker", loc: "Istanbul Bosphorus · 2024 Q4", img: "assets/works/crane-panel-speed-control.jpg",
     tr: { h: "Deck Crane Panel + VFD", p: "4 deck crane elektrik pano yenileme, VFD retrofit, overload kalibrasyonu." },
     en: { h: "Deck Crane Panel + VFD", p: "4 deck crane electrical panel renewal, VFD retrofit, overload calibration." }
   }
@@ -764,14 +828,16 @@ const PROJECTS = [
       card.setAttribute('role', 'button');
       card.setAttribute('tabindex', '0');
       const chipsHtml = (data.chips || []).map(c => `<span class="chip">${c}</span>`).join('');
+      const altText = state.lang === 'tr' ? `${data.title} — servis görseli` : `${data.title} — service image`;
       card.innerHTML = `
-        <div class="card-photo" style="background-image:url('${s.photo}')" aria-hidden="true"></div>
+        <div class="card-photo" aria-hidden="true"><img src="${s.photo}" alt="" loading="lazy" decoding="async"></div>
         <span class="card-arrow">${ICONS['arrow-up-right']}</span>
         <div class="card-icon">${ICONS[s.icon] || ICONS.bolt}</div>
         <h3>${data.title}</h3>
         <p>${data.lead}</p>
         <div class="card-chips">${chipsHtml}</div>
       `;
+      card.setAttribute('aria-label', altText);
       card.addEventListener('click', () => openServiceDrawer(key));
       card.addEventListener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openServiceDrawer(key); }
@@ -789,8 +855,10 @@ const PROJECTS = [
       const data = p[state.lang];
       const el = document.createElement('article');
       el.className = 'project has-photo';
+      const projAlt = `${data.h} · ${p.type} · ${p.loc}`;
       el.innerHTML = `
-        <div class="project-img" style="background-image:url('${p.img}')">
+        <div class="project-img">
+          <img src="${p.img}" alt="${projAlt}" loading="lazy" decoding="async">
           <span class="project-badge">${p.badge}</span>
         </div>
         <div class="project-meta"><span>${p.type}</span><span>${p.loc}</span></div>
@@ -813,7 +881,9 @@ const PROJECTS = [
     const content = document.getElementById('drawerContent');
     const kicker = document.getElementById('drawerKicker');
 
-    hero.style.backgroundImage = `url('${s.detailPhoto || s.photo}')`;
+    const heroSrc = s.detailPhoto || s.photo;
+    const heroAlt = state.lang === 'tr' ? `${data.title} — detay görseli` : `${data.title} — detail image`;
+    hero.innerHTML = `<img src="${heroSrc}" alt="${heroAlt}" loading="lazy" decoding="async">`;
     kicker.textContent = data.title;
 
     const chipsHtml = data.chips.map(c => `<span class="chip">${c}</span>`).join('');
@@ -839,8 +909,9 @@ const PROJECTS = [
     });
   }
   function closeDrawer() {
+    if (!drawer) return;
     drawer.classList.remove('is-open');
-    overlay.classList.remove('is-open');
+    if (overlay) overlay.classList.remove('is-open');
     drawer.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     if (location.hash.startsWith('#service/')) history.pushState(null, '', ' ');
@@ -909,37 +980,92 @@ const PROJECTS = [
   function setupForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
+    const status = document.getElementById('formStatus');
+    const requiredIds = ['f-name', 'f-email', 'f-message'];
+
+    function clearErrors() {
+      form.querySelectorAll('.field-error').forEach(n => n.remove());
+      form.querySelectorAll('.is-invalid').forEach(n => n.classList.remove('is-invalid'));
+    }
+    function addError(inputId, key) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      input.classList.add('is-invalid');
+      input.setAttribute('aria-invalid', 'true');
+      const span = document.createElement('span');
+      span.className = 'field-error';
+      span.textContent = t(key);
+      input.parentElement.appendChild(span);
+    }
+    function setStatus(kind, key) {
+      if (!status) return;
+      status.className = 'form-status is-' + kind;
+      status.textContent = t(key);
+    }
+    function validate() {
+      clearErrors();
+      let ok = true;
+      requiredIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el || !el.value.trim()) {
+          addError(id, 'form.err.required');
+          ok = false;
+        }
+      });
+      const email = document.getElementById('f-email');
+      if (email && email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+        addError('f-email', 'form.err.email');
+        ok = false;
+      }
+      return ok;
+    }
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (!validate()) {
+        setStatus('error', 'form.status.invalid');
+        const firstBad = form.querySelector('.is-invalid');
+        if (firstBad) firstBad.focus();
+        return;
+      }
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalLabel = submitBtn.textContent;
-      submitBtn.textContent = state.lang === 'tr' ? 'Gönderiliyor…' : 'Sending…';
+      submitBtn.textContent = t('form.status.sending');
       submitBtn.disabled = true;
+      setStatus('pending', 'form.status.sending');
 
       const data = Object.fromEntries(new FormData(form).entries());
 
-      // API endpoint — backend henüz canlı değilse, WhatsApp'a yönlendir
-      const apiUrl = '/api/contact';
       try {
-        const resp = await fetch(apiUrl, {
+        const resp = await fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
         if (!resp.ok) throw new Error('API not ready');
-        alert(state.lang === 'tr' ? 'Talebiniz alındı. 24 saat içinde dönüş yapacağız.' : 'Request received. We will respond within 24 hours.');
+        setStatus('success', 'form.status.success');
         form.reset();
       } catch (err) {
-        // Fallback: WhatsApp ile gönder
+        setStatus('error', 'form.status.fallback');
         const text = encodeURIComponent(
           `SERVİS TALEBİ\nAd: ${data.name}\nFirma: ${data.company || '-'}\nE-posta: ${data.email}\nTel: ${data.phone || '-'}\nGemi/IMO: ${data.vessel || '-'}\nClass: ${data.class || '-'}\nHizmet: ${data.service || '-'}\nAciliyet: ${data.urgency || '-'}\nMesaj: ${data.message || '-'}`
         );
-        window.open(`https://wa.me/905376507776?text=${text}`, '_blank');
-        alert(state.lang === 'tr' ? 'WhatsApp açılıyor — mesajı gönderin, lütfen.' : 'Opening WhatsApp — please send the message.');
+        window.open(`https://wa.me/905376507776?text=${text}`, '_blank', 'noopener');
       } finally {
         submitBtn.textContent = originalLabel;
         submitBtn.disabled = false;
       }
+    });
+
+    form.querySelectorAll('input, textarea, select').forEach(el => {
+      el.addEventListener('input', () => {
+        if (el.classList.contains('is-invalid')) {
+          el.classList.remove('is-invalid');
+          el.removeAttribute('aria-invalid');
+          const err = el.parentElement.querySelector('.field-error');
+          if (err) err.remove();
+        }
+      });
     });
   }
 
@@ -1010,8 +1136,9 @@ const PROJECTS = [
     });
 
     // Drawer close
-    document.getElementById('drawerClose').addEventListener('click', closeDrawer);
-    overlay.addEventListener('click', closeDrawer);
+    const drawerCloseBtn = document.getElementById('drawerClose');
+    if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', closeDrawer);
+    if (overlay) overlay.addEventListener('click', closeDrawer);
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
     // Hamburger -> mobile nav (simple toggle)

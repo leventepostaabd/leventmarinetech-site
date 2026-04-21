@@ -55,6 +55,21 @@
     .blog-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-lg); overflow: hidden; text-decoration: none; color: inherit; transition: transform 0.2s, border-color 0.2s; }
     .blog-card:hover { transform: translateY(-4px); border-color: var(--c-accent); }
     .blog-card img { width: 100%; height: 200px; object-fit: cover; background: var(--c-border); }
+    .blog-card-cover {
+      width: 100%; height: 160px;
+      background: linear-gradient(135deg, var(--c-primary) 0%, #1A3458 50%, var(--c-accent) 140%);
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .blog-card-cover::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 70% 30%, rgba(245,165,36,0.25) 0%, transparent 55%);
+    }
+    .blog-card-cover span {
+      position: relative; z-index: 1;
+      font-family: var(--f-head); font-weight: 700;
+      color: rgba(255,255,255,0.95); font-size: 22px; letter-spacing: 0.02em;
+    }
     .blog-card-content { padding: 24px; }
     .blog-card-meta { display: flex; gap: 12px; font-size: 12px; color: var(--c-text-2); margin-bottom: 12px; }
     .blog-card-title { font-family: var(--f-head); font-size: 18px; font-weight: 700; margin: 12px 0; }
@@ -89,7 +104,7 @@
 
     <div class="blog-grid">
       <a href="./class-survey/" class="blog-card">
-        <img src="../assets/blog/class-survey-hero.jpg" alt="Class Survey" />
+        <div class="blog-card-cover" aria-hidden="true"><span>Class Survey</span></div>
         <div class="blog-card-content">
           <div class="blog-card-meta">
             <span>12 Nisan 2025</span>
@@ -101,7 +116,7 @@
       </a>
 
       <a href="./acb-mccb-errors/" class="blog-card">
-        <img src="../assets/blog/acb-test-hero.jpg" alt="ACB MCCB Test" />
+        <div class="blog-card-cover" aria-hidden="true"><span>ACB · MCCB Test</span></div>
         <div class="blog-card-content">
           <div class="blog-card-meta">
             <span>10 Nisan 2025</span>
@@ -113,7 +128,7 @@
       </a>
 
       <a href="./bulker-faults/" class="blog-card">
-        <img src="../assets/blog/bulker-fault-hero.jpg" alt="Bulker Arızaları" />
+        <div class="blog-card-cover" aria-hidden="true"><span>Bulker Arızaları</span></div>
         <div class="blog-card-content">
           <div class="blog-card-meta">
             <span>8 Nisan 2025</span>
