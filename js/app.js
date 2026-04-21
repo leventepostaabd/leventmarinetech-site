@@ -462,7 +462,7 @@ const I18N = {
     "nav.contact": "İletişim",
     "nav.gallery": "Galeri",
     "nav.dock.cert": "Test",
-    "dock.subtitle": "Marine Elektrik",
+    "dock.subtitle": "Elektroteknik Servis",
     "scroll.hint": "Keşfet",
     "btn.login": "Yetkili Giriş",
     "btn.request": "Talep Oluştur",
@@ -949,7 +949,7 @@ const PROJECTS = [
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.card, .cert-small, .project, .about-card, .hb-card, .dock-link').forEach(el => {
+    document.querySelectorAll('.card, .cert-small, .project, .about-card, .hb-card, .header-nav .nav-link').forEach(el => {
       el.classList.add('reveal');
       io.observe(el);
     });

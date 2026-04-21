@@ -8,7 +8,7 @@
   <meta name="description" content="Marine elektrik arıza servisi — jeneratör, pano, motor, navigasyon, otomasyon. 7/24 Tuzla'dan onboard, global limanda koordineli müdahale. Pendik İstanbul + Wyoming USA." />
   <meta name="keywords" content="marine elektrik servis, gemi elektrik arıza, ETO STCW III/6, jeneratör arıza, AVR tamiri, bow thruster servis, Tuzla marine elektrik, bulker elektrik servis, ship electrical repair, marine electrician Turkey" />
   <meta name="author" content="Levent Marine Electro Technical Services LLC" />
-  <meta name="theme-color" content="#042F4A" />
+  <meta name="theme-color" content="#0f172a" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -38,7 +38,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- Design System -->
   <link rel="stylesheet" href="css/design.css" />
@@ -82,66 +82,44 @@
 
 <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Sayfa ilerlemesi"></div>
 
-<!-- Floating dock: no top header bar — navigation + controls -->
-<aside class="site-dock" id="siteDock" aria-label="Sayfa bölümleri ve ayarlar">
-  <div class="dock-panel">
-    <a class="dock-brand" href="#top" title="Levent Marine">
-      <span class="dock-brand-mark" aria-hidden="true">LM</span>
-      <span class="dock-brand-text">
-        <span class="dock-brand-name">Levent Marine</span>
-        <span class="dock-brand-tag" data-i18n="dock.subtitle">Marine Elektrik</span>
+<header class="site-header" id="siteHeader">
+  <div class="container header-bar">
+    <a class="header-brand" href="#top" title="Levent Marine Electro Technical Services">
+      <span class="header-mark" aria-hidden="true">LM</span>
+      <span class="header-brand-text">
+        <span class="header-name">Levent Marine</span>
+        <span class="header-tagline" data-i18n="dock.subtitle">Elektroteknik Servis</span>
       </span>
     </a>
 
-    <nav class="dock-nav" aria-label="Ana menü">
-      <a href="#services" class="dock-link" data-nav-link data-i18n-attr="title:nav.services">
-        <span class="dock-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
-        <span class="dock-link-label" data-i18n="nav.services">Hizmetler</span>
-      </a>
-      <a href="#gallery" class="dock-link" data-nav-link data-i18n-attr="title:nav.gallery">
-        <span class="dock-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
-        <span class="dock-link-label" data-i18n="nav.gallery">Galeri</span>
-      </a>
-      <a href="/blog/" class="dock-link dock-link--external" data-i18n-attr="title:nav.blog">
-        <span class="dock-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
-        <span class="dock-link-label" data-i18n="nav.blog">Blog</span>
-      </a>
-      <a href="#certification" class="dock-link" data-nav-link data-i18n-attr="title:nav.certification">
-        <span class="dock-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
-        <span class="dock-link-label" data-i18n="nav.dock.cert">Test</span>
-      </a>
-      <a href="#projects" class="dock-link" data-nav-link data-i18n-attr="title:nav.projects">
-        <span class="dock-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>
-        <span class="dock-link-label" data-i18n="nav.projects">Projeler</span>
-      </a>
-      <a href="#about" class="dock-link" data-nav-link data-i18n-attr="title:nav.about">
-        <span class="dock-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span>
-        <span class="dock-link-label" data-i18n="nav.about">Hakkımızda</span>
-      </a>
-      <a href="#contact" class="dock-link" data-nav-link data-i18n-attr="title:nav.contact">
-        <span class="dock-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
-        <span class="dock-link-label" data-i18n="nav.contact">İletişim</span>
-      </a>
+    <nav class="header-nav" aria-label="Ana menü">
+      <a href="#services" class="nav-link" data-nav-link data-i18n="nav.services">Hizmetler</a>
+      <a href="#gallery" class="nav-link" data-nav-link data-i18n="nav.gallery">Galeri</a>
+      <a href="/blog/" class="nav-link nav-link--external" data-i18n="nav.blog">Blog</a>
+      <a href="#certification" class="nav-link" data-nav-link data-i18n="nav.certification">Test &amp; Rapor</a>
+      <a href="#projects" class="nav-link" data-nav-link data-i18n="nav.projects">İşler</a>
+      <a href="#about" class="nav-link" data-nav-link data-i18n="nav.about">Hakkımızda</a>
+      <a href="#contact" class="nav-link" data-nav-link data-i18n="nav.contact">İletişim</a>
     </nav>
 
-    <div class="dock-tools">
-      <div class="dock-lang" role="group" aria-label="Dil">
+    <div class="header-actions">
+      <div class="header-lang" role="group" aria-label="Dil">
         <button type="button" class="lang-btn" data-lang="tr" aria-label="Türkçe">TR</button>
         <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
       </div>
-      <button type="button" class="icon-btn dock-theme" id="themeToggle" aria-label="Tema değiştir" title="Tema">
+      <button type="button" class="icon-btn" id="themeToggle" aria-label="Tema değiştir" title="Tema">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
       </button>
-      <button type="button" class="btn btn-ghost btn-sm dock-login" id="loginBtn" data-i18n="btn.login">Giriş</button>
-      <a href="#contact" class="btn btn-accent btn-sm dock-cta" data-i18n="btn.request">Talep</a>
+      <button type="button" class="btn btn-ghost btn-sm" id="loginBtn" data-i18n="btn.login">Giriş</button>
+      <a href="#contact" class="btn btn-accent btn-sm" data-i18n="btn.request">Talep</a>
     </div>
-  </div>
-</aside>
 
-<button type="button" class="dock-fab" id="hamburger" aria-expanded="false" aria-controls="mobileSheet" aria-label="Menüyü aç">
+    <button type="button" class="header-menu-btn" id="hamburger" aria-expanded="false" aria-controls="mobileSheet" aria-label="Menüyü aç">
   <svg class="ico-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
   <svg class="ico-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-</button>
+    </button>
+  </div>
+</header>
 
 <div class="mobile-sheet" id="mobileSheet" aria-hidden="true">
   <div class="mobile-sheet-inner">
