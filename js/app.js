@@ -460,6 +460,9 @@ const I18N = {
     "nav.projects": "Projeler",
     "nav.about": "Hakkımızda",
     "nav.contact": "İletişim",
+    "nav.dock.cert": "Test",
+    "dock.subtitle": "Marine Elektrik",
+    "scroll.hint": "Keşfet",
     "btn.login": "Yetkili Giriş",
     "btn.request": "Talep Oluştur",
     "btn.services": "Hizmetleri Gör",
@@ -573,6 +576,9 @@ const I18N = {
     "nav.projects": "Projects",
     "nav.about": "About",
     "nav.contact": "Contact",
+    "nav.dock.cert": "Cert",
+    "dock.subtitle": "Marine Electrical",
+    "scroll.hint": "Explore",
     "btn.login": "Authorized Login",
     "btn.request": "Request Quote",
     "btn.services": "View Services",
@@ -872,7 +878,7 @@ const PROJECTS = [
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.card, .cert-small, .project, .about-card, .hb-card').forEach(el => {
+    document.querySelectorAll('.card, .cert-small, .project, .about-card, .hb-card, .dock-link').forEach(el => {
       el.classList.add('reveal');
       io.observe(el);
     });
@@ -1012,28 +1018,83 @@ const PROJECTS = [
     // Drawer close
     document.getElementById('drawerClose').addEventListener('click', closeDrawer);
     overlay.addEventListener('click', closeDrawer);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
-    // Hamburger -> mobile nav (simple toggle)
+    // Mobile slide-in menu (header yok — FAB)
     const hamburger = document.getElementById('hamburger');
-    const mobileBar = document.getElementById('mobileNav');
-    if (hamburger && mobileBar) {
-      hamburger.addEventListener('click', () => mobileBar.classList.toggle('is-open'));
+    const mobileSheet = document.getElementById('mobileSheet');
+    const mobileBackdrop = document.getElementById('mobileSheetBackdrop');
+    function setMobileSheet(open) {
+      if (!mobileSheet || !mobileBackdrop || !hamburger) return;
+      mobileSheet.classList.toggle('is-open', open);
+      mobileBackdrop.classList.toggle('is-open', open);
+      mobileSheet.setAttribute('aria-hidden', open ? 'false' : 'true');
+      mobileBackdrop.setAttribute('aria-hidden', open ? 'false' : 'true');
+      hamburger.classList.toggle('is-open', open);
+      hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    if (hamburger && mobileSheet) {
+      hamburger.addEventListener('click', () => setMobileSheet(!mobileSheet.classList.contains('is-open')));
+    }
+    if (mobileBackdrop) {
+      mobileBackdrop.addEventListener('click', () => setMobileSheet(false));
+    }
+    document.querySelectorAll('.mobile-sheet-nav a').forEach(a => {
+      a.addEventListener('click', () => setMobileSheet(false));
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      closeDrawer();
+      if (mobileSheet && mobileSheet.classList.contains('is-open')) setMobileSheet(false);
+    });
+
+    const themeMobile = document.getElementById('themeToggleMobile');
+    if (themeMobile) themeMobile.addEventListener('click', toggleTheme);
+
+    const loginBtnMobile = document.getElementById('loginBtnMobile');
+    const loginModal = document.getElementById('loginModal');
+    if (loginBtnMobile && loginModal) {
+      loginBtnMobile.addEventListener('click', () => { loginModal.classList.add('is-open'); setMobileSheet(false); });
     }
 
-    // Nav scrollspy
-    const navLinks = document.querySelectorAll('.nav a[href^="#"]');
-    const sections = Array.from(navLinks).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-    const spyIO = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          navLinks.forEach(l => l.classList.remove('is-active'));
-          const match = document.querySelector(`.nav a[href="#${e.target.id}"]`);
-          if (match) match.classList.add('is-active');
+    // Scroll progress (üst çizgi)
+    const scrollProgress = document.getElementById('scrollProgress');
+    function updateScrollProgress() {
+      if (!scrollProgress) return;
+      const el = document.documentElement;
+      const h = el.scrollHeight - el.clientHeight;
+      const p = h > 0 ? el.scrollTop / h : 0;
+      const clamped = Math.min(1, Math.max(0, p));
+      scrollProgress.style.setProperty('--scroll-pct', String(clamped));
+      scrollProgress.setAttribute('aria-valuenow', String(Math.round(clamped * 100)));
+    }
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+    window.addEventListener('resize', updateScrollProgress);
+    updateScrollProgress();
+
+    // Nav active state (dock + mobil liste)
+    const navLinks = document.querySelectorAll('[data-nav-link][href^="#"]');
+    const sectionIds = ['services', 'certification', 'projects', 'about', 'contact'];
+    function updateNavSpy() {
+      const y = window.scrollY + Math.min(160, window.innerHeight * 0.2);
+      let activeId = '';
+      sectionIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY;
+          if (top <= y + 24) activeId = id;
         }
       });
-    }, { threshold: 0.3 });
-    sections.forEach(s => spyIO.observe(s));
+      navLinks.forEach(a => {
+        const href = a.getAttribute('href');
+        const id = href && href.startsWith('#') ? href.slice(1) : '';
+        a.classList.toggle('is-active', id === activeId);
+      });
+    }
+    window.addEventListener('scroll', updateNavSpy, { passive: true });
+    window.addEventListener('resize', updateNavSpy);
+    updateNavSpy();
 
     // Deep link
     if (location.hash.startsWith('#service/')) {
