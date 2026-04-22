@@ -1,0 +1,824 @@
+/* =========================================================
+   LEVENT MARINE — v8 PREMIUM SHELL
+   Sol rail: sıcak taş / derin mürekkep + şampanya altın vurgu
+   Tek sayfa paneller; dikey kaydırma minimum (galeri yatay)
+   ========================================================= */
+
+body.shell.shell-rail {
+  --rail-w: 260px;
+  /* Alt yapışkan bar yok; mobilde yalnızca FAB için alt boşluk medya sorgusunda */
+  --shell-mobile-bar: 0px;
+
+  /* Premium tokenlar — kiremit taşı zemin, mürekkep tipografi, altın aksan */
+  --lm-gold: #b8955c;
+  --lm-gold-deep: #8f7347;
+  --lm-ink: #0a1628;
+  --f-rail-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+
+  --apple-bg: #e0dbd2;
+  --apple-surface: #f7f4ee;
+  --apple-text: var(--lm-ink);
+  --apple-secondary: #5a6374;
+  --apple-tertiary: #7a8494;
+  --apple-blue: #122338;
+  --apple-blue-hover: #1e3552;
+  --apple-separator: rgba(10, 22, 40, 0.09);
+  --apple-fill: rgba(10, 22, 40, 0.05);
+  --apple-active: rgba(184, 149, 92, 0.16);
+
+  --c-primary: var(--apple-text);
+  --c-primary-600: #2a3441;
+  --c-primary-400: var(--apple-secondary);
+  --c-electric: var(--lm-gold);
+  --c-electric-600: var(--lm-gold-deep);
+  --c-electric-soft: var(--apple-active);
+  --c-accent: var(--lm-gold);
+  --c-accent-600: var(--lm-gold-deep);
+  --c-accent-soft: var(--apple-active);
+  --c-bg: #ebe7df;
+  --c-surface: var(--apple-surface);
+  --c-surface-2: #e0dcd4;
+  --c-text: var(--apple-text);
+  --c-text-2: #3d4656;
+  --c-text-3: var(--apple-tertiary);
+  --c-border: #cfc8bc;
+  --c-border-strong: #b8b0a2;
+
+  --f-head: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --f-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --corp-navy: var(--apple-text);
+  --corp-blue: var(--apple-blue);
+
+  display: grid;
+  grid-template-columns: var(--rail-w) minmax(0, 1fr);
+  grid-template-rows: 1fr;
+  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+html:has(body.shell) {
+  overflow: hidden;
+  height: 100%;
+}
+
+/* ——— Sol rail (açık, logolu) ——— */
+.site-rail {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: var(--apple-bg);
+  color: var(--apple-text);
+  border-right: 1px solid var(--apple-separator);
+  padding: 16px 0 12px;
+  z-index: 100;
+}
+
+.rail-top {
+  padding: 0 14px 16px;
+  border-bottom: 1px solid var(--apple-separator);
+}
+
+.rail-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 4px;
+  margin: -4px;
+  transition: background 0.15s ease;
+}
+
+.rail-brand:hover {
+  background: var(--apple-fill);
+}
+
+.rail-brand-mark {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+}
+
+.rail-brand-logo {
+  position: absolute;
+  inset: 0;
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.rail-brand-logo--dark {
+  display: none;
+}
+
+.rail-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  text-align: left;
+}
+
+.rail-brand-name {
+  font-family: var(--f-rail-display);
+  font-weight: 700;
+  font-size: clamp(1.35rem, 2.6vw, 1.65rem);
+  letter-spacing: 0.04em;
+  color: var(--lm-ink);
+  line-height: 1.02;
+  text-transform: uppercase;
+}
+
+.rail-brand-sub {
+  font-family: var(--f-mono, "JetBrains Mono", monospace);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lm-gold-deep);
+  margin-top: 2px;
+}
+
+.rail-nav {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.rail-nav .nav-tab {
+  appearance: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 9px 11px;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--apple-text);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.rail-nav .nav-tab:hover {
+  background: var(--apple-fill);
+}
+
+.rail-nav .nav-tab.is-active {
+  background: var(--apple-active);
+  color: var(--lm-gold-deep);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--lm-gold);
+}
+
+.rail-nav-external {
+  display: block;
+  margin-top: 10px;
+  padding: 9px 11px;
+  border-radius: 8px;
+  color: var(--apple-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px dashed var(--c-border);
+  transition: background 0.15s, color 0.15s;
+}
+
+.rail-nav-external:hover {
+  color: var(--apple-text);
+  background: var(--apple-fill);
+}
+
+.rail-spacer {
+  flex: 0 0 6px;
+}
+
+.rail-footer {
+  padding: 10px 12px 0;
+  border-top: 1px solid var(--apple-separator);
+  flex-shrink: 0;
+}
+
+.rail-lang {
+  margin-bottom: 8px;
+}
+
+.rail-lang .lang-btn {
+  border-color: var(--c-border);
+  color: var(--apple-text);
+  background: var(--apple-surface);
+}
+
+.rail-lang .lang-btn:hover {
+  border-color: var(--c-border-strong);
+}
+
+.rail-lang .lang-btn.is-active {
+  background: var(--apple-text);
+  color: var(--apple-surface);
+  border-color: var(--apple-text);
+}
+
+.rail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.rail-actions .icon-btn {
+  border-color: var(--c-border);
+  color: var(--apple-text);
+  background: var(--apple-surface);
+}
+
+.rail-actions .btn-ghost {
+  color: var(--apple-text);
+  border: 1px solid var(--c-border);
+  background: var(--apple-surface);
+}
+
+.rail-cta {
+  flex: 1;
+  min-width: 88px;
+  justify-content: center;
+}
+
+body.shell-rail .rail-cta.btn-primary,
+body.shell-rail .btn-primary {
+  background: var(--apple-blue);
+  border-color: var(--apple-blue);
+  color: #fff;
+}
+
+body.shell-rail .rail-cta.btn-primary:hover,
+body.shell-rail .btn-primary:hover {
+  background: var(--apple-blue-hover);
+  border-color: var(--apple-blue-hover);
+}
+
+/* Mobil menü — üst header yok: FAB sol altta, tam ekran panel */
+.rail-menu-fab {
+  display: none;
+  position: fixed;
+  top: auto;
+  bottom: max(14px, env(safe-area-inset-bottom, 14px));
+  left: max(14px, env(safe-area-inset-left, 14px));
+  z-index: 260;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid var(--c-border);
+  background: var(--apple-surface);
+  color: var(--apple-text);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  place-items: center;
+  padding: 0;
+  cursor: pointer;
+}
+
+.rail-menu-fab .ico-close {
+  display: none;
+}
+
+.rail-menu-fab.is-open .ico-menu {
+  display: none;
+}
+
+.rail-menu-fab.is-open .ico-close {
+  display: block;
+}
+
+.shell-workspace {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background:
+    radial-gradient(120% 82% at 100% 0%, rgba(184, 149, 92, 0.11) 0%, transparent 54%),
+    radial-gradient(78% 58% at 0% 100%, rgba(10, 22, 40, 0.05) 0%, transparent 46%),
+    var(--c-bg);
+}
+
+.shell-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.shell-stage {
+  flex: 1;
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.shell-panel {
+  position: absolute;
+  inset: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 1;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}
+
+.shell-panel.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.scroll-progress {
+  display: none !important;
+}
+
+/* Hero */
+body.shell-rail .hero.hero--corp {
+  min-height: 0;
+  padding: 16px 0 12px;
+  background: var(--c-bg);
+  position: relative;
+}
+
+body.shell-rail .hero.hero--corp::before,
+body.shell-rail .hero.hero--corp::after {
+  display: none !important;
+}
+
+.hero-corp-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 42%);
+  gap: 28px;
+  align-items: center;
+}
+
+.hero-corp-copy {
+  max-width: 620px;
+}
+
+.hero-kicker {
+  margin: 0 0 8px;
+  font-family: var(--f-mono, "JetBrains Mono", monospace);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--apple-secondary);
+}
+
+body.shell-rail .hero--corp h1 {
+  font-family: var(--f-head);
+  font-weight: 600;
+  font-size: clamp(26px, 2.8vw, 40px);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+  margin: 0 0 12px;
+  color: var(--apple-text);
+}
+
+.hero-title-em {
+  display: inline;
+  color: var(--lm-gold-deep);
+  font-weight: 600;
+}
+
+body.shell-rail .hero--corp h1 .accent {
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  color: var(--lm-gold-deep);
+}
+
+.hero-lead {
+  margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--apple-secondary);
+  max-width: 50ch;
+  letter-spacing: -0.01em;
+}
+
+.hero-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px 12px;
+  margin: 18px 0 0;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--apple-separator);
+}
+
+.hero-kpi dt {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--apple-tertiary);
+  margin-bottom: 2px;
+}
+
+.hero-kpi .hero-trust-num {
+  font-family: var(--f-mono, "JetBrains Mono", monospace);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--apple-text);
+  letter-spacing: -0.03em;
+}
+
+.hero-visual {
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--apple-separator);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  background: var(--apple-surface);
+}
+
+.hero-visual img {
+  width: 100%;
+  height: auto;
+  display: block;
+  vertical-align: middle;
+}
+
+/* Trust — kompakt */
+body.shell-rail .trust-strip {
+  padding: 12px 0;
+  border-top: 1px solid var(--apple-separator);
+  border-bottom: 1px solid var(--apple-separator);
+  background: var(--apple-surface);
+}
+
+body.shell-rail .trust-label {
+  color: var(--apple-secondary);
+}
+
+body.shell-rail .trust-logo {
+  font-family: var(--f-head);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--apple-text);
+  opacity: 0.55;
+}
+
+/* Panel içi — daha az dikey alan */
+body.shell-rail .shell-panel .section {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+body.shell-rail .shell-panel .section:first-child {
+  padding-top: 16px;
+}
+
+body.shell-rail .section-head {
+  margin-bottom: 16px;
+}
+
+body.shell-rail .section-head h2 {
+  font-size: clamp(22px, 2.2vw, 30px);
+  letter-spacing: -0.035em;
+  margin: 6px 0 8px;
+}
+
+body.shell-rail .section-head .section-kicker {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--apple-secondary);
+}
+
+body.shell-rail .section-head p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--apple-secondary);
+  max-width: 62ch;
+}
+
+body.shell-rail .accent {
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  color: var(--apple-blue) !important;
+}
+
+/* Hizmetler — eşit kart ızgarası (mozaik yok), foto üstü metin */
+body.shell-rail .bento--services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 8px !important;
+  align-items: stretch;
+  contain: layout;
+}
+
+@media (max-width: 1100px) {
+  body.shell-rail .bento--services {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  body.shell-rail .bento--services {
+    grid-template-columns: 1fr;
+  }
+}
+
+body.shell-rail .bento--services .card {
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+  padding: 20px 22px;
+  min-height: 300px;
+  height: 100%;
+}
+
+body.shell-rail .bento--services .card:hover {
+  transform: translateY(-2px);
+}
+
+body.shell-rail .bento--services .card.has-photo h3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+body.shell-rail .bento--services .card.has-photo p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  flex: 0 1 auto;
+}
+
+body.shell-rail .bento--services .card.has-photo::before {
+  background: linear-gradient(
+    180deg,
+    rgba(29, 29, 31, 0.15) 0%,
+    rgba(29, 29, 31, 0.55) 45%,
+    rgba(29, 29, 31, 0.88) 100%
+  );
+}
+
+body.shell-rail .bento--services .card.has-photo .chip {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+body.shell-rail .bento--services .card h3 {
+  font-size: clamp(17px, 1.5vw, 20px);
+  letter-spacing: -0.03em;
+}
+
+/* Galeri: yatay şerit — dikey taşmayı keser */
+body.shell-rail #gallery .gallery-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-top: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 10px;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.shell-rail #gallery .gallery-item {
+  flex: 0 0 200px;
+  width: 200px;
+  height: 140px;
+  scroll-snap-align: start;
+}
+
+body.shell-rail #gallery .gallery-item.is-wide,
+body.shell-rail #gallery .gallery-item.is-tall {
+  flex: 0 0 260px;
+  width: 260px;
+  height: 140px;
+  grid-column: unset;
+  grid-row: unset;
+}
+
+body.shell-rail #gallery .gallery-caption {
+  font-size: 12px;
+}
+
+/* Sertifika grid */
+body.shell-rail .cert-grid {
+  gap: 12px !important;
+}
+
+/* Projeler zaten yatay */
+body.shell-rail .projects-scroll {
+  padding-bottom: 12px;
+  gap: 14px;
+}
+
+body.shell-rail .project {
+  flex: 0 0 320px;
+}
+
+/* İletişim — biraz sıkı */
+body.shell-rail .contact-grid {
+  gap: 20px;
+}
+
+body.shell-rail .contact-form {
+  padding: 0;
+}
+
+/* Global footer şeridi kaldırıldı — tam ekran panel; yasal satır İletişim panelinde */
+body.shell-rail .shell-foot {
+  display: none !important;
+}
+
+.shell-foot {
+  flex-shrink: 0;
+  border-top: 1px solid var(--apple-separator);
+  background: var(--apple-surface);
+  padding: 8px var(--container-pad, 22px);
+  font-size: 12px;
+  color: var(--apple-secondary);
+}
+
+.shell-foot-inner {
+  max-width: none;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.shell-foot a {
+  color: var(--apple-blue);
+  font-weight: 500;
+}
+
+.panel-legal-footer {
+  margin: 28px 0 8px;
+  padding-top: 20px;
+  border-top: 1px solid var(--apple-separator);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--apple-secondary);
+}
+
+.panel-legal-links a {
+  color: var(--apple-blue);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.panel-legal-links a:hover {
+  text-decoration: underline;
+}
+
+body.shell .hero-scroll-hint {
+  display: none;
+}
+
+.mobile-sheet-nav .nav-tab {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px 0;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: inherit;
+  cursor: pointer;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.mobile-sheet-nav a.nav-tab--external {
+  display: block;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--c-border);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+@media (max-width: 1100px) {
+  .hero-corp-inner {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .hero-visual {
+    max-width: 520px;
+  }
+
+  .hero-kpis {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  body.shell.shell-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .site-rail {
+    display: none;
+  }
+
+  .rail-menu-fab {
+    display: grid;
+  }
+
+  .shell-workspace {
+    grid-column: 1;
+  }
+
+  /* Menü FAB (48px) + alt boşluk — içerik üst üste binmesin */
+  body.shell.shell-rail .shell-panel {
+    padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Koyu tema — sıcak grafite rail, altın aksan */
+html[data-theme="dark"] body.shell.shell-rail {
+  --lm-gold: #c9ae78;
+  --lm-gold-deep: #e4d4b2;
+  --lm-ink: #f5f1ea;
+  --apple-bg: #1a1d22;
+  --apple-surface: #252a32;
+  --apple-text: #f2efe8;
+  --apple-secondary: #a8b0bd;
+  --apple-tertiary: #8b939e;
+  --apple-separator: rgba(255, 255, 255, 0.1);
+  --apple-fill: rgba(255, 255, 255, 0.06);
+  --apple-active: rgba(201, 174, 120, 0.16);
+  --apple-blue: #c9ae78;
+  --apple-blue-hover: #ddc896;
+  --c-bg: #1e2228;
+  --c-surface: var(--apple-surface);
+  --c-surface-2: #2f3540;
+  --c-text: var(--apple-text);
+  --c-text-2: #d1d6de;
+  --c-text-3: var(--apple-tertiary);
+  --c-border: #3a4049;
+  --c-border-strong: #4c5460;
+  --corp-navy: var(--apple-text);
+  --corp-blue: var(--apple-blue);
+}
+
+html[data-theme="dark"] .rail-brand-logo--light {
+  display: none;
+}
+
+html[data-theme="dark"] .rail-brand-logo--dark {
+  display: block;
+}
+
+html[data-theme="dark"] .rail-brand-name {
+  color: var(--lm-ink);
+}
+
+html[data-theme="dark"] .rail-menu-fab {
+  background: var(--apple-surface);
+  border-color: var(--c-border);
+  color: var(--apple-text);
+}

@@ -1,0 +1,101 @@
+/* =========================================================
+   LEVENT MARINE — motion layer (Apple-tarzı yumuşak geçişler)
+   prefers-reduced-motion: reduce → animasyon yok
+   ========================================================= */
+
+:root {
+  --motion-duration-fast: 0.2s;
+  --motion-duration: 0.32s;
+  --motion-duration-slow: 0.55s;
+  --motion-ease-out: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --motion-ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-fast: 0.01ms;
+    --motion-duration: 0.01ms;
+    --motion-duration-slow: 0.01ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Panel geçişi — sadece opacity (üst üste panellerde transform kayması olmasın) */
+body.shell-rail .shell-panel {
+  transition: opacity var(--motion-duration) var(--motion-ease-out);
+}
+
+/* Hero — ilk yükleme (sadece azaltılmış hareket tercih edilmeyenler) */
+@media (prefers-reduced-motion: no-preference) {
+  body.shell-rail .hero--corp .hero-corp-copy,
+  body.shell-rail .hero--corp .hero-visual {
+    animation: motion-hero-in var(--motion-duration-slow) var(--motion-ease-spring) both;
+  }
+
+  body.shell-rail .hero--corp .hero-visual {
+    animation-delay: 0.07s;
+  }
+
+  @keyframes motion-hero-in {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Trust strip — hafif stagger */
+@media (prefers-reduced-motion: no-preference) {
+  body.shell-rail .trust-logo {
+    opacity: 0;
+    animation: motion-fade-in var(--motion-duration) var(--motion-ease-out) forwards;
+  }
+
+  body.shell-rail .trust-logo:nth-child(1) {
+    animation-delay: 0.04s;
+  }
+  body.shell-rail .trust-logo:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  body.shell-rail .trust-logo:nth-child(3) {
+    animation-delay: 0.16s;
+  }
+  body.shell-rail .trust-logo:nth-child(4) {
+    animation-delay: 0.22s;
+  }
+  body.shell-rail .trust-logo:nth-child(5) {
+    animation-delay: 0.28s;
+  }
+  body.shell-rail .trust-logo:nth-child(6) {
+    animation-delay: 0.34s;
+  }
+
+  @keyframes motion-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 0.55;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Rail — odak halkası (klavye) */
+body.shell-rail .rail-brand:focus-visible,
+body.shell-rail .rail-nav .nav-tab:focus-visible {
+  outline: 2px solid var(--apple-blue, #0071e3);
+  outline-offset: 2px;
+}

@@ -10,8 +10,8 @@ const SERVICES = {
     icon: "bolt",
     category: "main",
     size: "card-lg",
-    photo: "assets/works/generator-avr-diode-speedcard.jpg",
-    detailPhoto: "assets/works/generator-avr-diode-speedcard.jpg",
+    photo: "assets/services/power-distribution.jpg",
+    detailPhoto: "assets/services/power-distribution.jpg",
     tr: {
       title: "Güç & Dağıtım Sistemleri",
       lead: "Main switchboard'dan emergency genset'e — gemin elektrik omurgasının tamamı",
@@ -53,8 +53,8 @@ const SERVICES = {
     icon: "cog",
     category: "main",
     size: "card-md",
-    photo: "assets/works/motor-overhaul.jpg",
-    detailPhoto: "assets/works/motor-overhaul.jpg",
+    photo: "assets/services/propulsion-motors.jpg",
+    detailPhoto: "assets/services/propulsion-motors.jpg",
     tr: {
       title: "Tahrik & Motor Sistemleri",
       lead: "Ana makine elektriğinden bow thruster ve deck machinery'ye",
@@ -96,8 +96,8 @@ const SERVICES = {
     icon: "radar",
     category: "main",
     size: "card-md",
-    photo: "assets/works/radar-magnetron-replacement.jpg",
-    detailPhoto: "assets/works/radar-magnetron-replacement.jpg",
+    photo: "assets/services/navigation-comms.jpg",
+    detailPhoto: "assets/services/navigation-comms.jpg",
     tr: {
       title: "Navigasyon & İletişim (GMDSS)",
       lead: "Köprü ekipmanlarının tamamı — radar, ECDIS, gyro, GMDSS",
@@ -139,8 +139,8 @@ const SERVICES = {
     icon: "cpu",
     category: "main",
     size: "card-md",
-    photo: "assets/works/ams-system-card-replacement.jpg",
-    detailPhoto: "assets/works/ams-system-card-replacement.jpg",
+    photo: "assets/services/automation-control.jpg",
+    detailPhoto: "assets/services/automation-control.jpg",
     tr: {
       title: "Otomasyon & Kontrol Sistemleri",
       lead: "AMS, IAS, PLC, SCADA — geminin sinir sistemi",
@@ -182,8 +182,8 @@ const SERVICES = {
     icon: "shield",
     category: "main",
     size: "card-wide",
-    photo: "assets/works/water-mist-system.jpg",
-    detailPhoto: "assets/works/water-mist-system.jpg",
+    photo: "assets/services/safety-systems.jpg",
+    detailPhoto: "assets/services/safety-systems.jpg",
     tr: {
       title: "Güvenlik Sistemleri",
       lead: "Fire detection, CO2, PA/GA, gas detection — SOLAS uyum",
@@ -225,8 +225,8 @@ const SERVICES = {
     icon: "sun",
     category: "main",
     size: "card-third",
-    photo: "assets/hero/engine-room.jpg",
-    detailPhoto: "assets/hero/engine-room.jpg",
+    photo: "assets/services/lighting-nav-lights.jpg",
+    detailPhoto: "assets/services/lighting-nav-lights.jpg",
     tr: {
       title: "Aydınlatma & Seyir Fenerleri",
       lead: "Navigation lights + LED retrofit + kargo ambarı aydınlatması",
@@ -264,8 +264,8 @@ const SERVICES = {
     icon: "check",
     category: "main",
     size: "card-half",
-    photo: "assets/cert/acb-mccb-test.jpg",
-    detailPhoto: "assets/cert/acb-mccb-test.jpg",
+    photo: "assets/services/testing-certification.jpg",
+    detailPhoto: "assets/services/testing-certification.jpg",
     tr: {
       title: "Test & Sertifikasyon",
       lead: "SVERKER 900 + Megger + OMICRON — standart formatta test raporu",
@@ -307,8 +307,8 @@ const SERVICES = {
     icon: "wrench",
     category: "main",
     size: "card-half",
-    photo: "assets/cert/busbar-kit-2.jpg",
-    detailPhoto: "assets/cert/busbar-kit-2.jpg",
+    photo: "assets/services/commissioning-retrofit.jpg",
+    detailPhoto: "assets/services/commissioning-retrofit.jpg",
     tr: {
       title: "Commissioning & Retrofit",
       lead: "Yeni inşa + enerji retrofit + decarbonization uyum",
@@ -350,8 +350,8 @@ const SERVICES = {
     icon: "alert",
     category: "main",
     size: "card-third",
-    photo: "assets/works/shaft-earthing-device.jpg",
-    detailPhoto: "assets/works/shaft-earthing-device.jpg",
+    photo: "assets/services/emergency-remote.jpg",
+    detailPhoto: "assets/services/emergency-remote.jpg",
     tr: {
       title: "Acil Müdahale & Remote ETO",
       lead: "7/24 onboard + remote destek — off-hire önleme",
@@ -389,8 +389,8 @@ const SERVICES = {
     icon: "award",
     category: "main",
     size: "card-third",
-    photo: "assets/cert/class-reporting.jpg",
-    detailPhoto: "assets/cert/class-reporting.jpg",
+    photo: "assets/services/class-prep.jpg",
+    detailPhoto: "assets/services/class-prep.jpg",
     tr: {
       title: "Survey & PSC Hazırlığı",
       lead: "Denetim öncesi elektrik eksik kapama — PSC, Intermediate, Special, Annual",
@@ -454,24 +454,32 @@ const ICONS = {
 /* ============== I18N ============== */
 const I18N = {
   tr: {
+    "nav.home": "Ana sayfa",
     "nav.services": "Hizmetler",
-    "nav.blog": "Blog",
     "nav.certification": "Test & Rapor",
-    "nav.projects": "İşler",
-    "nav.about": "Hakkımızda",
+    "nav.projects": "Referans işler",
+    "nav.about": "Kurumsal",
     "nav.contact": "İletişim",
     "nav.gallery": "Galeri",
     "nav.dock.cert": "Test",
     "dock.subtitle": "Elektroteknik Servis",
     "scroll.hint": "Keşfet",
-    "btn.login": "Yetkili Giriş",
-    "btn.request": "Talep Oluştur",
-    "btn.services": "Hizmetleri Gör",
-    "hero.eyebrow": "Marine Elektrik Arıza Servisi · Pendik + Wyoming · 2012'den beri",
-    "hero.title.a": "Gemide elektrik",
-    "hero.title.b": "duruyorsa",
-    "hero.title.c": "biz müdahale ederiz.",
-    "hero.sub": "Jeneratör, pano, motor, navigasyon, otomasyon — bulker ve genel kargo gemilerde arıza tespit, onarım, test ve commissioning. 7/24 onboard, Tuzla merkezli, global limanda koordineli müdahale.",
+    "btn.login": "Class / firma girişi",
+    "btn.request": "Servis talebi",
+    "btn.services": "Hizmet kataloğu",
+    "hero.kpi.1.label": "Filo tipi",
+    "hero.kpi.1.value": "Bulker & genel kargo",
+    "hero.kpi.2.label": "Operasyon",
+    "hero.kpi.2.value": "Tuzla · Pendik",
+    "hero.kpi.3.label": "Hat",
+    "hero.kpi.3.value": "7/24",
+    "hero.kpi.4.label": "Saha",
+    "hero.kpi.4.value": "2012'den beri",
+    "hero.eyebrow": "Marine elektrik & otomasyon servisi · Pendik + Wyoming · 2012'den beri",
+    "hero.title.a": "Köprüden makine dairesine:",
+    "hero.title.b": "otomasyon ve elektrik kontrol",
+    "hero.title.c": "arızalarında sahada müdahale.",
+    "hero.sub": "PLC/SCADA, alarm ve entegre otomasyondan güç dağıtımı, jeneratör ve motora kadar — gemide oluşan her türlü kontrol ve elektrik arızasında teşhis, onarım, test ve devreye alma. “Elektrik kesildi” değil; sensör, pano, yazılım ve güç zinciri üzerinde çalışıyoruz. 7/24 onboard; Tuzla merkezli, dünya limanlarında koordineli ekip.",
     "hero.trust.1": "gemide<br>müdahale",
     "hero.trust.2": "saatte<br>Tuzla'dan onboard",
     "hero.trust.3": "7/24<br>hattı",
@@ -487,9 +495,9 @@ const I18N = {
     "hero.bento.6.title": "Hızlı Müdahale",
     "trust.label": "Son dönemde çalıştığımız firmalar",
     "services.kicker": "Hizmetler",
-    "services.title.a": "Gemideki her elektrik sistemi —",
-    "services.title.b": "tek ekip, tek numara.",
-    "services.sub": "Güç panosundan navigasyona, güvenlik sisteminden deck makinasına — arıza müdahalesi, bakım, test ve retrofit. Saha tecrübesi ile hızlı teşhis, yedek parça koordinasyonu, off-hire minimize.",
+    "services.title.a": "Otomasyon, güç, tahrik, navigasyon —",
+    "services.title.b": "10 hizmet, aynı kart düzeni.",
+    "services.sub": "Her kart aynı boyutta; saha fotoğrafı üzerinde başlık ve özet. Tıklayınca kapsam, ekipman ve süreç detayı açılır. Arıza müdahalesi, bakım, test ve retrofit — hızlı teşhis ve yedek parça koordinasyonu.",
     "cert.kicker": "Test & Rapor",
     "cert.title": "Ekipmanımız, yöntemimiz, raporumuz.",
     "cert.sub": "Saha testleri kalibrasyon sertifikalı ekipmanla yapılır. Çalışma sonunda standart formatta rapor — gemi, firma veya sigorta kanalında kullanılabilir.",
@@ -506,7 +514,7 @@ const I18N = {
     "cert.step.5": "Takip",
     "cert.step.5.sub": "Arşiv + sonraki",
     "cert.card.accred.title": "Saha Tecrübesi",
-    "cert.card.accred.desc": "12+ yıl bulker, tanker, container ve offshore — yüzlerce arıza müdahalesi, test ve retrofit.",
+    "cert.card.accred.desc": "12+ yıl bulker, tanker, container ve offshore — saha arıza müdahalesi, test ve retrofit.",
     "cert.card.equipment.title": "Test Ekipmanı",
     "cert.card.equipment.desc": "SVERKER 900, Megger MIT, Fluke 1587, FLIR Thermal Imager — kalibrasyon sertifikalı.",
     "cert.card.sample.title": "Örnek Rapor",
@@ -514,7 +522,7 @@ const I18N = {
     "cert.card.sample.btn": "PDF İndir",
     "cert.card.panel.title": "Yetkili Panel",
     "cert.card.panel.desc": "Gemi bazında test tarihleri, rapor arşivi, sonraki test vadesi.",
-    "cert.card.panel.btn": "Giriş",
+    "cert.card.panel.btn": "Class / firma girişi →",
     "projects.kicker": "İşler",
     "projects.title": "Son sahadaki müdahaleler.",
     "projects.sub": "Tuzla, Yalova, Aliağa ve global limanlarda gerçekleştirilen seçme işler — teknik detaylarla.",
@@ -535,8 +543,8 @@ const I18N = {
     "about.certs.kicker": "Sertifikasyon",
     "about.certs.title": "STCW III/6 ETO + HV Operations + Güvenlik",
     "about.certs.clients": "Çalıştığımız firmalar: TP Offshore (TP OTC) · Polaris Denizcilik · Bright Denizcilik · Çebi Kaptan Denizcilik · MEDLOG (MSC Group) · Reederei NORD.",
-    "cta.title": "Gemide elektrik sorunu mu var?",
-    "cta.sub": "Arıza kontrol listemizi WhatsApp'tan gönderelim — mühendisinizle beraber 15 dakikada teşhise giderseniz tamir süresi yarıya iner.",
+    "cta.title": "Köprü veya makine dairesinde arıza mı?",
+    "cta.sub": "Elektrik ve otomasyon için kontrol listemizi WhatsApp'tan gönderelim — mühendisinizle 15 dakikalık yapılandırılmış teşhis, onarım süresini ciddi ölçüde kısaltır.",
     "cta.btn.primary": "Kontrol Listesi",
     "cta.btn.secondary": "WhatsApp",
     "contact.kicker": "İletişim",
@@ -562,9 +570,9 @@ const I18N = {
     "footer.services": "Hizmetler",
     "footer.company": "Şirket",
     "footer.contact": "İletişim",
-    "footer.blog": "Blog",
     "footer.career": "Kariyer",
     "footer.rights": "© 2026 LEVENT MARINE LLC · TÜM HAKLARI SAKLIDIR",
+    "footer.link.profile": "Profil",
     "login.title": "Yetkili Kullanıcı Girişi",
     "login.type": "Giriş Türü",
     "login.class": "Class Seç",
@@ -581,7 +589,7 @@ const I18N = {
     "profile.back": "Ana Sayfa",
     "profile.kicker": "Professional Background",
     "profile.title": "Arkadan 12 yıl saha, önünde tek numara.",
-    "profile.sub": "Türk ve uluslararası armatörlerle çalışılmış 240+ gemi, 6 farklı bayrak altında operasyonel deneyim ve STCW III/6 ETO + HV + güvenlik sertifikasyonu.",
+    "profile.sub": "Türk ve uluslararası armatörlerle çalışılmış filolar; altı farklı bayrak altında operasyonel deneyim ve STCW III/6 ETO + HV + güvenlik sertifikasyonu.",
     "profile.bg.title": "Sahada 12+ Yıl",
     "profile.bg.desc": "12+ yıldır bulker, tanker, container ve offshore tipi gemilerde Electro-Technical Officer görevleri ve saha servisi. Tuzla, Yalova ve Aliağa tersane bölgelerinin yanı sıra global limanlarda onboard + remote destek, arıza müdahalesi, test ve commissioning.",
     "profile.clients.title": "Hizmet Verilen Firmalar",
@@ -599,27 +607,35 @@ const I18N = {
     "profile.cert.stack": "Technical & Safety",
     "profile.cert.stack.title": "Full STCW + HV Operations Stack",
     "profile.cta.title": "Filonuzu bir araya getirelim.",
-    "profile.cta.sub": "İlk 15 dakikalık teknik konsültasyon ücretsiz — mevcut elektrik sorununuzu hızlıca değerlendirelim."
+    "profile.cta.sub": "İlk 15 dakikalık teknik konsültasyon ücretsiz — mevcut elektrik veya otomasyon arızanızı hızlıca değerlendirelim."
   },
   en: {
+    "nav.home": "Home",
     "nav.services": "Services",
-    "nav.blog": "Blog",
     "nav.certification": "Testing & Reports",
-    "nav.projects": "Work",
-    "nav.about": "About",
+    "nav.projects": "Projects",
+    "nav.about": "Company",
     "nav.contact": "Contact",
     "nav.gallery": "Gallery",
     "nav.dock.cert": "Cert",
     "dock.subtitle": "Marine Electrical",
     "scroll.hint": "Explore",
-    "btn.login": "Authorized Login",
-    "btn.request": "Request Quote",
-    "btn.services": "View Services",
-    "hero.eyebrow": "Marine Electrical Repair Service · Pendik + Wyoming · Since 2012",
-    "hero.title.a": "When the ship goes",
-    "hero.title.b": "electrically dark,",
-    "hero.title.c": "we respond.",
-    "hero.sub": "Generators, switchboards, motors, navigation, automation — fault diagnosis, repair, testing and commissioning on bulker and general-cargo ships. 24/7 onboard, Tuzla-based, coordinated attendance at global ports.",
+    "btn.login": "Class / company login",
+    "btn.request": "Service request",
+    "btn.services": "Service catalog",
+    "hero.kpi.1.label": "Fleet focus",
+    "hero.kpi.1.value": "Bulker & general cargo",
+    "hero.kpi.2.label": "Operations hub",
+    "hero.kpi.2.value": "Tuzla · Pendik",
+    "hero.kpi.3.label": "Hotline",
+    "hero.kpi.3.value": "24/7",
+    "hero.kpi.4.label": "In the field",
+    "hero.kpi.4.value": "Since 2012",
+    "hero.eyebrow": "Marine electrical & automation service · Pendik + Wyoming · Since 2012",
+    "hero.title.a": "Bridge to engine room:",
+    "hero.title.b": "automation & electrical control",
+    "hero.title.c": "faults — fixed in the field.",
+    "hero.sub": "PLC/SCADA, alarm and integrated automation through power distribution, generators and motors — diagnosis, repair, testing and commissioning for every control and electrical fault. We work on sensors, panels, software and the power chain—not just “the lights went out.” 24/7 onboard; Tuzla-based with coordinated attendance worldwide.",
     "hero.trust.1": "vessels<br>serviced",
     "hero.trust.2": "hours onboard<br>from Tuzla",
     "hero.trust.3": "24/7<br>hotline",
@@ -635,9 +651,9 @@ const I18N = {
     "hero.bento.6.title": "Fast Response",
     "trust.label": "Recent clients we've worked with",
     "services.kicker": "Services",
-    "services.title.a": "Every electrical system aboard —",
-    "services.title.b": "one team, one number.",
-    "services.sub": "From the main switchboard to navigation, from safety systems to deck machinery — fault response, maintenance, testing and retrofit. Field-proven diagnostics, spare-parts coordination, minimized off-hire.",
+    "services.title.a": "Automation, power, propulsion, navigation —",
+    "services.title.b": "ten services, one uniform layout.",
+    "services.sub": "Every card is the same size with a field photo, title and summary. Click for scope, equipment and process detail. Fault response, maintenance, testing and retrofit — fast diagnosis and spare-part coordination.",
     "cert.kicker": "Testing & Reports",
     "cert.title": "Our kit, our method, our report.",
     "cert.sub": "Field tests performed with calibration-certified equipment. Work is closed with a standard-format PDF report — usable by the vessel, the fleet office, or the insurer.",
@@ -662,7 +678,7 @@ const I18N = {
     "cert.card.sample.btn": "Download PDF",
     "cert.card.panel.title": "Authorized Panel",
     "cert.card.panel.desc": "Per-vessel test dates, report archive, next-test deadline.",
-    "cert.card.panel.btn": "Sign In",
+    "cert.card.panel.btn": "Class / company login →",
     "projects.kicker": "Work",
     "projects.title": "Recent field jobs.",
     "projects.sub": "Selected work from Tuzla, Yalova, Aliağa and global ports — with technical details.",
@@ -683,8 +699,8 @@ const I18N = {
     "about.certs.kicker": "Certifications",
     "about.certs.title": "STCW III/6 ETO + HV Operations + Safety",
     "about.certs.clients": "Companies we've worked with: TP Offshore (TP OTC) · Polaris Denizcilik · Bright Denizcilik · Çebi Kaptan Denizcilik · MEDLOG (MSC Group) · Reederei NORD.",
-    "cta.title": "Electrical trouble aboard?",
-    "cta.sub": "We'll send our fault triage checklist via WhatsApp — 15 minutes of structured diagnosis with your engineer typically halves the repair time.",
+    "cta.title": "Fault on the bridge or in the engine room?",
+    "cta.sub": "We'll send our electrical and automation triage checklist via WhatsApp — 15 minutes of structured diagnosis with your engineer typically cuts repair time sharply.",
     "cta.btn.primary": "Get the Checklist",
     "cta.btn.secondary": "WhatsApp",
     "contact.kicker": "Contact",
@@ -710,9 +726,9 @@ const I18N = {
     "footer.services": "Services",
     "footer.company": "Company",
     "footer.contact": "Contact",
-    "footer.blog": "Blog",
     "footer.career": "Career",
     "footer.rights": "© 2026 LEVENT MARINE LLC · ALL RIGHTS RESERVED",
+    "footer.link.profile": "Profile",
     "login.title": "Authorized User Login",
     "login.type": "Login Type",
     "login.class": "Select Class",
@@ -729,7 +745,7 @@ const I18N = {
     "profile.back": "Home",
     "profile.kicker": "Professional Background",
     "profile.title": "Twelve years in the field, one number to call.",
-    "profile.sub": "240+ vessels served with Turkish and international owners, operational experience under 6 flag states, and STCW III/6 ETO + HV + safety certification.",
+    "profile.sub": "Fleets with Turkish and international owners; operational experience under six flag states, with STCW III/6 ETO + HV + safety certification.",
     "profile.bg.title": "12+ Years in the Field",
     "profile.bg.desc": "12+ years of Electro-Technical Officer duties and field service on bulker, tanker, container and offshore vessels. Onboard + remote support across Tuzla, Yalova and Aliağa yards and global ports — fault response, testing and commissioning.",
     "profile.clients.title": "Companies Served",
@@ -747,7 +763,7 @@ const I18N = {
     "profile.cert.stack": "Technical & Safety",
     "profile.cert.stack.title": "Full STCW + HV Operations Stack",
     "profile.cta.title": "Let's align your fleet.",
-    "profile.cta.sub": "First 15-minute technical consultation is free — let's assess your current electrical issue quickly."
+    "profile.cta.sub": "First 15-minute technical consultation is free — let's assess your current electrical or automation issue quickly."
   }
 };
 
@@ -825,18 +841,18 @@ const PROJECTS = [
     if (!grid) return;
     grid.innerHTML = '';
     const keys = Object.keys(SERVICES).sort((a, b) => SERVICES[a].order - SERVICES[b].order);
-    keys.forEach(key => {
+    keys.forEach((key) => {
       const s = SERVICES[key];
       const data = s[state.lang];
       const card = document.createElement('article');
-      card.className = `card ${s.size} has-photo`;
+      card.className = 'card has-photo';
       card.dataset.service = key;
       card.setAttribute('role', 'button');
       card.setAttribute('tabindex', '0');
       const chipsHtml = (data.chips || []).map(c => `<span class="chip">${c}</span>`).join('');
       const altText = state.lang === 'tr' ? `${data.title} — servis görseli` : `${data.title} — service image`;
       card.innerHTML = `
-        <div class="card-photo" aria-hidden="true"><img src="${s.photo}" alt="" loading="lazy" decoding="async"></div>
+        <div class="card-photo" aria-hidden="true"><img src="${s.photo}" alt="" width="1200" height="800" loading="lazy" decoding="async"></div>
         <span class="card-arrow">${ICONS['arrow-up-right']}</span>
         <div class="card-icon">${ICONS[s.icon] || ICONS.bolt}</div>
         <h3>${data.title}</h3>
@@ -901,7 +917,7 @@ const PROJECTS = [
       <div class="drawer-chips">${chipsHtml}</div>
       <h3>${state.lang === 'tr' ? 'Kapsam' : 'Scope'}</h3>
       <ul>${itemsHtml}</ul>
-      <a href="#contact" class="btn btn-accent" data-close-drawer>${data.cta} →</a>
+      <button type="button" class="btn btn-primary" data-panel="contact" data-close-drawer>${data.cta} →</button>
     `;
 
     drawer.classList.add('is-open');
@@ -911,7 +927,13 @@ const PROJECTS = [
     history.pushState(null, '', '#service/' + key);
 
     content.querySelectorAll('[data-close-drawer]').forEach(el => {
-      el.addEventListener('click', () => { setTimeout(closeDrawer, 100); });
+      el.addEventListener('click', () => {
+        const panel = el.dataset.panel;
+        setTimeout(() => {
+          closeDrawer();
+          if (panel) showShellPanel(panel);
+        }, 100);
+      });
     });
   }
   function closeDrawer() {
@@ -949,7 +971,7 @@ const PROJECTS = [
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.card, .cert-small, .project, .about-card, .hb-card, .header-nav .nav-link').forEach(el => {
+    document.querySelectorAll('.card, .cert-small, .project, .about-card, .hb-card, .rail-nav .nav-tab').forEach(el => {
       el.classList.add('reveal');
       io.observe(el);
     });
@@ -1130,6 +1152,39 @@ const PROJECTS = [
     });
   }
 
+  const SHELL_PANELS = ['home', 'services', 'certification', 'gallery', 'projects', 'about', 'contact'];
+
+  function showShellPanel(id) {
+    if (!SHELL_PANELS.includes(id)) return;
+    document.querySelectorAll('.shell-panel').forEach(p => {
+      p.classList.toggle('is-active', p.dataset.panel === id);
+    });
+    document.querySelectorAll('[data-panel].nav-tab').forEach(tab => {
+      tab.classList.toggle('is-active', tab.dataset.panel === id);
+    });
+    const stage = document.getElementById('shellStage');
+    if (stage) {
+      const active = stage.querySelector('.shell-panel.is-active');
+      if (active) active.scrollTop = 0;
+    }
+    try {
+      const base = window.location.pathname + window.location.search;
+      if (id === 'home') {
+        history.replaceState(null, '', base);
+      } else {
+        history.replaceState(null, '', base + '#' + id);
+      }
+    } catch (e) { /* ignore */ }
+    document.querySelectorAll('.shell-panel.is-active .reveal').forEach(el => el.classList.add('is-visible'));
+  }
+
+  function parseShellHash() {
+    const h = (location.hash || '').replace(/^#/, '');
+    if (!h || h.startsWith('service/')) return null;
+    if (SHELL_PANELS.includes(h)) return h;
+    return null;
+  }
+
   /* ============== EVENT BINDINGS ============== */
   function bindEvents() {
     // Theme toggle
@@ -1158,7 +1213,8 @@ const PROJECTS = [
       mobileBackdrop.setAttribute('aria-hidden', open ? 'false' : 'true');
       hamburger.classList.toggle('is-open', open);
       hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      document.body.style.overflow = open ? 'hidden' : '';
+      const shell = document.body.classList.contains('shell');
+      document.body.style.overflow = open || shell ? 'hidden' : '';
     }
     if (hamburger && mobileSheet) {
       hamburger.addEventListener('click', () => setMobileSheet(!mobileSheet.classList.contains('is-open')));
@@ -1166,8 +1222,8 @@ const PROJECTS = [
     if (mobileBackdrop) {
       mobileBackdrop.addEventListener('click', () => setMobileSheet(false));
     }
-    document.querySelectorAll('.mobile-sheet-nav a').forEach(a => {
-      a.addEventListener('click', () => setMobileSheet(false));
+    document.querySelectorAll('.mobile-sheet-nav .nav-tab, .mobile-sheet-nav .nav-tab--external').forEach(el => {
+      el.addEventListener('click', () => setMobileSheet(false));
     });
 
     document.addEventListener('keydown', e => {
@@ -1185,45 +1241,48 @@ const PROJECTS = [
       loginBtnMobile.addEventListener('click', () => { loginModal.classList.add('is-open'); setMobileSheet(false); });
     }
 
-    // Scroll progress (üst çizgi)
-    const scrollProgress = document.getElementById('scrollProgress');
-    function updateScrollProgress() {
-      if (!scrollProgress) return;
-      const el = document.documentElement;
-      const h = el.scrollHeight - el.clientHeight;
-      const p = h > 0 ? el.scrollTop / h : 0;
-      const clamped = Math.min(1, Math.max(0, p));
-      scrollProgress.style.setProperty('--scroll-pct', String(clamped));
-      scrollProgress.setAttribute('aria-valuenow', String(Math.round(clamped * 100)));
-    }
-    window.addEventListener('scroll', updateScrollProgress, { passive: true });
-    window.addEventListener('resize', updateScrollProgress);
-    updateScrollProgress();
-
-    // Nav active state (dock + mobil liste)
-    const navLinks = document.querySelectorAll('[data-nav-link][href^="#"]');
-    const sectionIds = ['services', 'gallery', 'certification', 'projects', 'about', 'contact'];
-    function updateNavSpy() {
-      const y = window.scrollY + Math.min(160, window.innerHeight * 0.2);
-      let activeId = '';
-      sectionIds.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-          const top = el.getBoundingClientRect().top + window.scrollY;
-          if (top <= y + 24) activeId = id;
-        }
+    // Tek ekran kabuk: panel tetikleyicileri
+    document.querySelectorAll('[data-panel]:not(.shell-panel)').forEach(el => {
+      if (el.tagName === 'A' && el.getAttribute('href') && !el.getAttribute('href').startsWith('#')) return;
+      el.addEventListener('click', e => {
+        const pid = el.dataset.panel;
+        if (!pid) return;
+        e.preventDefault();
+        showShellPanel(pid);
       });
-      navLinks.forEach(a => {
-        const href = a.getAttribute('href');
-        const id = href && href.startsWith('#') ? href.slice(1) : '';
-        a.classList.toggle('is-active', id === activeId);
-      });
-    }
-    window.addEventListener('scroll', updateNavSpy, { passive: true });
-    window.addEventListener('resize', updateNavSpy);
-    updateNavSpy();
+    });
 
-    // Deep link
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      const href = a.getAttribute('href');
+      if (!href || href.length < 2) return;
+      const raw = href.slice(1);
+      if (raw.startsWith('service/')) return;
+      if (SHELL_PANELS.includes(raw)) {
+        e.preventDefault();
+        showShellPanel(raw);
+      }
+    });
+
+    window.addEventListener('hashchange', () => {
+      if (location.hash.startsWith('#service/')) {
+        const key = location.hash.split('/')[1];
+        openServiceDrawer(key);
+        return;
+      }
+      const fromHash = parseShellHash();
+      if (fromHash) showShellPanel(fromHash);
+    });
+
+    const initialPanel = parseShellHash();
+    if (initialPanel) {
+      showShellPanel(initialPanel);
+    } else {
+      showShellPanel('home');
+    }
+
+    // Deep link: servis çekmecesi
     if (location.hash.startsWith('#service/')) {
       const key = location.hash.split('/')[1];
       setTimeout(() => openServiceDrawer(key), 300);

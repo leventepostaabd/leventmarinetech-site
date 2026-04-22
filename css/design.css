@@ -1772,6 +1772,6 @@ a { color: inherit; }
 
 /* ============== PRINT ============== */
 @media print {
-  .site-header, .scroll-progress, .mobile-sheet, .mobile-sheet-backdrop, .footer, .mobile-nav-btn, .drawer, .overlay, .login-modal { display: none; }
+  .site-header, .site-rail, .rail-menu-fab, .scroll-progress, .mobile-sheet, .mobile-sheet-backdrop, .footer, .shell-foot, .mobile-nav-btn, .drawer, .overlay, .login-modal { display: none; }
   .section { padding: 20px 0; page-break-inside: avoid; }
 }

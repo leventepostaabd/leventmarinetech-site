@@ -1,5 +1,9 @@
 # LEVENT MARINE — Görsel Üretim Rehberi
 
+> **Tek blokta tam prompt + dosya yolu:** `docs/image-prompts-copypaste.md`  
+> **Master plan (boyut, süre, galeri):** `docs/visual-refresh-master-plan.md`  
+> Aşağıdaki `01-power-systems` vb. numaralı isimler **eski taslak**; canlı sitede `assets/services/power-distribution.jpg` gibi **isimler** kullanılır (`js/app.js`).
+
 Bu dosya site'de kullanılan TÜM görsel için üretim prompt'larını, dosya adlarını ve yerleştirileceği tam yolu listeler.
 
 ## Genel Yaklaşım
