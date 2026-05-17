@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="tr" data-theme="light">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -91,25 +91,28 @@
       </div>
     </a>
 
-    <nav class="nav" aria-label="Ana menü">
-      <a href="#services" data-i18n="nav.services">Hizmetler</a>
-      <a href="#gallery" data-i18n="nav.gallery">Galeri</a>
-      <a href="#certification" data-i18n="nav.certification">Test & Rapor</a>
-      <a href="#projects" data-i18n="nav.projects">İşler</a>
-      <a href="#about" data-i18n="nav.about">Hakkımızda</a>
-      <a href="/blog/" data-i18n="nav.blog">Blog</a>
-      <a href="#contact" data-i18n="nav.contact">İletişim</a>
+    <nav class="nav" aria-label="Main menu">
+      <a href="#services" data-i18n="nav.services">Services</a>
+      <a href="#usa-coverage">USA</a>
+      <a href="#materials">Supply</a>
+      <a href="#work" data-i18n="nav.projects">Work</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
     </nav>
 
     <div class="nav-actions">
-      <button class="lang-btn" data-lang="tr" aria-label="Türkçe">TR</button>
+      <a class="header-phone" href="tel:+16193840403" aria-label="24/7 hotline">
+        <span class="dot" aria-hidden="true"></span>
+        <span data-i18n="header.phone.label">24/7 Hotline</span>
+      </a>
       <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
-      <button class="icon-btn" id="themeToggle" aria-label="Tema değiştir" title="Tema">
+      <button class="lang-btn" data-lang="tr" aria-label="Türkçe">TR</button>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Theme">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
       </button>
-      <button class="btn btn-ghost btn-sm" id="loginBtn" data-i18n="btn.login">Yetkili Giriş</button>
-      <a href="#contact" class="btn btn-accent btn-sm" data-i18n="btn.request">Talep Oluştur</a>
-      <button class="icon-btn hamburger" id="hamburger" aria-label="Menü">
+      <button class="btn btn-ghost btn-sm" id="loginBtn" data-i18n="btn.login">Sign in</button>
+      <a href="#contact" class="btn btn-accent btn-sm" data-i18n="btn.request">Request quote</a>
+      <button class="icon-btn hamburger" id="hamburger" aria-label="Menu">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
     </div>
@@ -118,47 +121,83 @@
 
 <!-- HERO -->
 <section class="hero">
+  <svg class="hero-svg-bg" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+    <!-- Subtle grid -->
+    <g class="grid-line-group">
+      <line class="grid-line" x1="0" y1="100" x2="1440" y2="100"/>
+      <line class="grid-line" x1="0" y1="200" x2="1440" y2="200"/>
+      <line class="grid-line" x1="0" y1="300" x2="1440" y2="300"/>
+      <line class="grid-line" x1="0" y1="400" x2="1440" y2="400"/>
+      <line class="grid-line" x1="0" y1="500" x2="1440" y2="500"/>
+      <line class="grid-line" x1="240" y1="0" x2="240" y2="600"/>
+      <line class="grid-line" x1="480" y1="0" x2="480" y2="600"/>
+      <line class="grid-line" x1="720" y1="0" x2="720" y2="600"/>
+      <line class="grid-line" x1="960" y1="0" x2="960" y2="600"/>
+      <line class="grid-line" x1="1200" y1="0" x2="1200" y2="600"/>
+    </g>
+    <!-- Circuit paths -->
+    <path class="circuit-path circuit-path-1" d="M -50 200 Q 200 150 400 280 T 800 200 T 1200 300 L 1500 300"/>
+    <path class="circuit-path circuit-path-2" d="M -50 450 Q 250 400 500 460 T 1000 420 T 1300 480 L 1500 480"/>
+    <path class="circuit-path circuit-path-3" d="M -50 100 Q 300 200 600 120 T 1100 180 T 1350 100 L 1500 100"/>
+    <!-- Static nodes -->
+    <circle class="node-dot" cx="200" cy="180" r="3"/>
+    <circle class="node-dot" cx="400" cy="280" r="3"/>
+    <circle class="node-dot" cx="600" cy="240" r="3"/>
+    <circle class="node-dot" cx="800" cy="200" r="3"/>
+    <circle class="node-dot" cx="1000" cy="280" r="3"/>
+    <circle class="node-dot" cx="1200" cy="300" r="3"/>
+    <circle class="node-dot" cx="350" cy="450" r="3"/>
+    <circle class="node-dot" cx="700" cy="430" r="3"/>
+    <circle class="node-dot" cx="1050" cy="450" r="3"/>
+    <circle class="node-dot" cx="300" cy="160" r="3"/>
+    <circle class="node-dot" cx="950" cy="140" r="3"/>
+    <!-- Traveling pulses -->
+    <circle class="pulse-dot pulse-1" r="5"/>
+    <circle class="pulse-dot pulse-2" r="4"/>
+    <circle class="pulse-dot pulse-3" r="5"/>
+  </svg>
+
   <div class="container">
     <div class="hero-grid">
       <div class="hero-left">
-        <div class="eyebrow"><span data-i18n="hero.eyebrow">Marine Elektrik Arıza Servisi · Pendik + Wyoming · 2012'den beri</span></div>
+        <div class="eyebrow"><span data-i18n="hero.eyebrow">Marine electrical repair service · Tuzla + Wyoming · since 2012</span></div>
         <h1>
-          <span data-i18n="hero.title.a">Gemide elektrik</span>
-          <span class="accent" data-i18n="hero.title.b">duruyorsa</span>
-          <span data-i18n="hero.title.c">biz müdahale ederiz.</span>
+          <span data-i18n="hero.title.a">We fix any electrical fault</span>
+          <span class="accent" data-i18n="hero.title.b">on a dry-cargo ship</span>
+          <span data-i18n="hero.title.c">— any port, any flag.</span>
         </h1>
-        <p class="hero-sub" data-i18n="hero.sub">Jeneratör, pano, motor, navigasyon, otomasyon — bulker ve genel kargo gemilerde arıza tespit, onarım, test ve commissioning. 7/24 onboard, Tuzla merkezli, global limanda koordineli müdahale.</p>
+        <p class="hero-sub" data-i18n="hero.sub">Fault diagnostics, repair, testing, commissioning and materials supply on bulker and general-cargo vessels — engineer on board in hours, parts on the way within a day. Operating base Tuzla, USA-registered for direct USD invoicing and rapid US-port response.</p>
         <div class="hero-ctas">
-          <a href="#contact" class="btn btn-primary btn-lg" data-i18n="btn.request">Talep Oluştur</a>
-          <a href="#services" class="btn btn-ghost btn-lg" data-i18n="btn.services">Hizmetleri Gör</a>
+          <a href="#contact" class="btn btn-primary btn-lg" data-i18n="btn.request">Request quote</a>
+          <a href="#services" class="btn btn-ghost btn-lg" data-i18n="btn.services">View services</a>
         </div>
         <div class="hero-trust">
           <div class="hero-trust-item">
             <span class="hero-trust-num" data-count="240" data-suffix="+">0</span>
-            <span data-i18n="hero.trust.1">gemide<br>müdahale</span>
+            <span data-i18n="hero.trust.1">vessels<br>serviced</span>
           </div>
           <div class="hero-trust-item">
             <span class="hero-trust-num" data-count="4" data-suffix="h">0</span>
-            <span data-i18n="hero.trust.2">saatte<br>Tuzla'dan onboard</span>
+            <span data-i18n="hero.trust.2">engineer<br>onboard from Tuzla</span>
           </div>
           <div class="hero-trust-item">
-            <span class="hero-trust-num">7/24</span>
-            <span data-i18n="hero.trust.3">7/24<br>hattı</span>
+            <span class="hero-trust-num">24/7</span>
+            <span data-i18n="hero.trust.3">global<br>hotline</span>
           </div>
           <div class="hero-trust-item">
             <span class="hero-trust-num" data-count="12" data-suffix="+">0</span>
-            <span data-i18n="hero.trust.4">yıllık<br>saha deneyimi</span>
+            <span data-i18n="hero.trust.4">years field<br>experience</span>
           </div>
         </div>
       </div>
 
       <!-- Hero Mini Bento -->
-      <div class="hero-bento" aria-hidden="false" aria-label="Öne çıkan hizmetler">
+      <div class="hero-bento" aria-hidden="false" aria-label="Featured services">
         <div class="hb-card hb-big">
           <div>
-            <div class="hb-mono" data-i18n="hero.bento.big.kicker">Son Müdahale · Tuzla</div>
-            <h3 data-i18n="hero.bento.big.title">Jeneratör AVR + Shaft Earthing</h3>
-            <p data-i18n="hero.bento.big.desc">MV Aegean Trader — Supramax Bulker · Tuzla 2025-Q4<br>AVR arızası 6 saatte teşhis + müdahale, shaft earthing set yenilendi — gemi sefere çıktı.</p>
+            <div class="hb-mono" data-i18n="hero.bento.big.kicker">Latest job · Tuzla</div>
+            <h3 data-i18n="hero.bento.big.title">Generator AVR + Shaft Earthing</h3>
+            <p data-i18n="hero.bento.big.desc">MV Aegean Trader — Supramax bulker · Tuzla 2025-Q4<br>AVR fault diagnosed and repaired in 6 hours; shaft earthing set renewed — vessel sailed on schedule.</p>
           </div>
           <div class="hb-mono" style="opacity:0.7;">JOB-25-1128</div>
         </div>
@@ -179,7 +218,7 @@
           </div>
           <div>
             <div class="hb-mono">STCW III/6</div>
-            <div class="hb-title" data-i18n="hero.bento.2.title">ETO Sertifikalı</div>
+            <div class="hb-title" data-i18n="hero.bento.2.title">ETO certified</div>
           </div>
         </div>
 
@@ -219,7 +258,7 @@
           </div>
           <div>
             <div class="hb-mono">4h</div>
-            <div class="hb-title" data-i18n="hero.bento.6.title">Hızlı Müdahale</div>
+            <div class="hb-title" data-i18n="hero.bento.6.title">Fast response</div>
           </div>
         </div>
       </div>
@@ -228,9 +267,9 @@
 </section>
 
 <!-- TRUST STRIP -->
-<section class="trust-strip" aria-label="Çalıştığımız firmalar">
+<section class="trust-strip" aria-label="Recent clients">
   <div class="container trust-row">
-    <div class="trust-label" data-i18n="trust.label">Son dönemde çalıştığımız firmalar</div>
+    <div class="trust-label" data-i18n="trust.label">Recent clients we've worked with</div>
     <div class="trust-logos">
       <span class="trust-logo">TP Offshore</span>
       <span class="trust-logo">Polaris Denizcilik</span>
@@ -246,12 +285,12 @@
 <section class="section" id="services">
   <div class="container">
     <header class="section-head">
-      <div class="section-kicker" data-i18n="services.kicker">Hizmetler</div>
+      <div class="section-kicker" data-i18n="services.kicker">Services</div>
       <h2>
-        <span data-i18n="services.title.a">Gemideki her elektrik sistemi —</span><br>
-        <span class="accent" data-i18n="services.title.b">tek ekip, tek numara.</span>
+        <span data-i18n="services.title.a">Every electrical system aboard —</span><br>
+        <span class="accent" data-i18n="services.title.b">one team, one number.</span>
       </h2>
-      <p data-i18n="services.sub">Güç panosundan navigasyona, güvenlik sisteminden deck makinasına — arıza müdahalesi, bakım, test ve retrofit. Saha tecrübesi ile hızlı teşhis, yedek parça koordinasyonu, off-hire minimize.</p>
+      <p data-i18n="services.sub">From main switchboard to navigation, from safety systems to deck machinery — fault response, maintenance, testing and retrofit. Field-proven diagnostics, spare-parts coordination, minimized off-hire.</p>
     </header>
 
     <div class="bento" id="bentoGrid" role="list">
@@ -260,13 +299,132 @@
   </div>
 </section>
 
+<!-- USA COVERAGE -->
+<section class="section usa-section" id="usa-coverage">
+  <div class="container">
+    <header class="section-head">
+      <div class="section-kicker" data-i18n="usa.kicker">USA Coverage</div>
+      <h2 data-i18n="usa.title">Rapid response and parts supply — coast to coast.</h2>
+      <p data-i18n="usa.sub">Wyoming-registered LLC + a global coordination reach. Wherever your bulker calls in the US, we put an electrical engineer on board within hours and the right part on its way within a day.</p>
+    </header>
+
+    <div class="usa-grid">
+      <div class="usa-route">
+        <h3 data-i18n="usa.route.title">Operational route</h3>
+        <div class="route-line" data-i18n="usa.route.line">Tuzla <span class="route-arrow">→</span> Mediterranean <span class="route-arrow">→</span> US East Coast <span class="route-arrow">→</span> Gulf <span class="route-arrow">→</span> West Coast</div>
+        <p data-i18n="usa.route.desc">Our Tuzla operating base is within flight reach of the US. Our Sheridan Wyoming LLC takes care of USD invoicing plus the USCG / CBP legal frame. Engineer on board within 24 hours of any major US port; parts shipped within 48 hours — courier network for AOG-style emergency supply.</p>
+
+        <div style="font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.08em; color: rgba(255,255,255,0.6); margin: 20px 0 6px; text-transform: uppercase;" data-i18n="usa.cities.label">Key US ports</div>
+        <div class="usa-cities">
+          <span>New York / NJ</span>
+          <span>Norfolk</span>
+          <span>Charleston</span>
+          <span>Savannah</span>
+          <span>Houston</span>
+          <span>New Orleans</span>
+          <span>Mobile</span>
+          <span>Long Beach</span>
+          <span>Seattle</span>
+        </div>
+
+        <a href="#contact" class="usa-cta" data-i18n="usa.cta">Ask us about a vessel →</a>
+      </div>
+
+      <div class="usa-stats">
+        <div class="usa-stat">
+          <span class="num">24</span>
+          <span class="label" data-i18n="usa.stat.response">h engineer on board</span>
+        </div>
+        <div class="usa-stat">
+          <span class="num">48</span>
+          <span class="label" data-i18n="usa.stat.parts">h AOG part shipped</span>
+        </div>
+        <div class="usa-stat">
+          <span class="num">USD</span>
+          <span class="label" data-i18n="usa.stat.usd">USD invoicing</span>
+        </div>
+        <div class="usa-stat">
+          <span class="num">∞</span>
+          <span class="label" data-i18n="usa.stat.network">global supply network</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MATERIALS DESK -->
+<section class="section" id="materials">
+  <div class="container">
+    <header class="section-head">
+      <div class="section-kicker" data-i18n="materials.kicker">Materials Desk</div>
+      <h2 data-i18n="materials.title">We find the part the OEM no longer stocks.</h2>
+      <p data-i18n="materials.sub">CN/JP/KR-built older bulker switchgear, PLC cards, AVR modules, sensors — items no longer in the OEM catalog. Through our sourcing network we locate them and ship to the vessel; when they cannot be found, we propose a compatible replacement.</p>
+    </header>
+
+    <div class="materials-grid">
+      <div class="materials-copy">
+        <ul>
+          <li>
+            <strong data-i18n="materials.item.aog.label">AOG / Emergency</strong>
+            <span data-i18n="materials.item.aog.text">Global courier delivery direct to the vessel within 24 hours — for critical trip-out faults.</span>
+          </li>
+          <li>
+            <strong data-i18n="materials.item.obs.label">Obsolete spares</strong>
+            <span data-i18n="materials.item.obs.text">Second-source / refurbished sourcing for legacy Mitsubishi, Hitachi, Hyundai, Stork, Terasaki gear.</span>
+          </li>
+          <li>
+            <strong data-i18n="materials.item.alt.label">Compatible alternative</strong>
+            <span data-i18n="materials.item.alt.text">When the original isn't available, we recommend a technically compatible modern equivalent with an engineering note.</span>
+          </li>
+          <li>
+            <strong data-i18n="materials.item.bulk.label">Bulk materials</strong>
+            <span data-i18n="materials.item.bulk.text">Cable, terminals, fuses, contactors — marine-grade material lists for the ship's project store.</span>
+          </li>
+        </ul>
+      </div>
+
+      <form class="materials-form" id="materialsForm" autocomplete="on">
+        <h4 data-i18n="materials.form.title">Parts request</h4>
+        <p class="lead" data-i18n="materials.form.lead">Brand/OEM, part number and where the vessel is — leave the rest to us.</p>
+
+        <div class="form-group">
+          <label for="m-brand" data-i18n="materials.form.brand">Brand / OEM</label>
+          <input id="m-brand" name="brand" type="text" required />
+        </div>
+        <div class="form-group">
+          <label for="m-part" data-i18n="materials.form.part">Part no / model</label>
+          <input id="m-part" name="part" type="text" required />
+        </div>
+        <div class="form-group">
+          <label for="m-vessel" data-i18n="materials.form.vessel">Vessel name + current port</label>
+          <input id="m-vessel" name="vessel" type="text" />
+        </div>
+        <div class="form-group">
+          <label for="m-urgency" data-i18n="contact.form.urgency">Urgency</label>
+          <select id="m-urgency" name="urgency">
+            <option value="aog" data-i18n="materials.form.urgency.aog">AOG (within 24h)</option>
+            <option value="urgent" data-i18n="materials.form.urgency.urgent">Urgent (3 days)</option>
+            <option value="planned" data-i18n="materials.form.urgency.plan">Planned supply</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="m-contact" data-i18n="materials.form.contact">Contact (email/WhatsApp)</label>
+          <input id="m-contact" name="contact" type="text" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg form-submit" data-i18n="materials.form.submit">Send parts request</button>
+        <div class="form-status" id="materialsStatus" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- CERTIFICATION -->
 <section class="section bg-alt" id="certification">
   <div class="container">
     <header class="section-head">
-      <div class="section-kicker" data-i18n="cert.kicker">Test & Rapor</div>
-      <h2 data-i18n="cert.title">Ekipmanımız, yöntemimiz, raporumuz.</h2>
-      <p data-i18n="cert.sub">Saha testleri kalibrasyon sertifikalı ekipmanla yapılır. Çalışma sonunda standart formatta rapor — gemi, firma veya sigorta kanalında kullanılabilir.</p>
+      <div class="section-kicker" data-i18n="cert.kicker">Testing & Reports</div>
+      <h2 data-i18n="cert.title">Our kit, our method, our report.</h2>
+      <p data-i18n="cert.sub">Field tests performed with calibration-certified equipment. Work is closed with a standard-format PDF report — usable by the vessel, the fleet office, or the insurer.</p>
     </header>
 
     <div class="cert-grid">
@@ -322,23 +480,35 @@
   </div>
 </section>
 
-<!-- GALLERY -->
-<section class="section bg-alt" id="gallery">
+<!-- WORK (merged: projects + gallery) -->
+<section class="section bg-alt" id="work">
   <div class="container">
     <header class="section-head">
-      <div class="section-kicker" data-i18n="gallery.kicker">Saha</div>
-      <h2 data-i18n="gallery.title">Panodan motora, köprüden deck'e.</h2>
-      <p data-i18n="gallery.sub">Gerçek müdahalelerden kareler — her biri onboard.</p>
+      <div class="section-kicker" data-i18n="work.kicker">Work</div>
+      <h2 data-i18n="work.title">Real jobs from the field.</h2>
+      <p data-i18n="work.sub">Selected attendances at ports and yards — photo plus a tight technical note.</p>
     </header>
 
-    <div class="gallery-grid" role="list">
+    <div class="work-tabs" role="tablist">
+      <button class="work-tab is-active" data-tab="recent" role="tab" aria-selected="true" data-i18n="work.tab.recent">Recent jobs</button>
+      <button class="work-tab" data-tab="gallery" role="tab" aria-selected="false" data-i18n="work.tab.gallery">Gallery</button>
+    </div>
+
+    <div class="work-pane is-active" data-pane="recent">
+      <div class="projects-scroll" id="projectsScroll" role="list">
+        <!-- Projects rendered by app.js -->
+      </div>
+    </div>
+
+    <div class="work-pane" data-pane="gallery">
+      <div class="gallery-grid" role="list">
       <a href="assets/cert/acb-mccb-test.jpg" class="gallery-item is-wide is-tall" target="_blank" rel="noopener">
         <img src="assets/cert/acb-mccb-test.jpg" alt="ACB ve MCCB test — SVERKER 900 ile onboard" loading="lazy" decoding="async">
-        <span class="gallery-caption"><span class="mono-tag">ACB / MCCB</span>Test & rapor</span>
+        <span class="gallery-caption"><span class="mono-tag">ACB / MCCB</span>Test & report</span>
       </a>
       <a href="assets/works/generator-avr-diode-speedcard.jpg" class="gallery-item" target="_blank" rel="noopener">
         <img src="assets/works/generator-avr-diode-speedcard.jpg" alt="Jeneratör AVR, diyot ve speed card müdahalesi" loading="lazy" decoding="async">
-        <span class="gallery-caption"><span class="mono-tag">AVR</span>Jeneratör</span>
+        <span class="gallery-caption"><span class="mono-tag">AVR</span>Generator</span>
       </a>
       <a href="assets/works/motor-overhaul.jpg" class="gallery-item" target="_blank" rel="noopener">
         <img src="assets/works/motor-overhaul.jpg" alt="Elektrik motoru overhaul ve hizalama" loading="lazy" decoding="async">
@@ -346,11 +516,11 @@
       </a>
       <a href="assets/works/radar-magnetron-replacement.jpg" class="gallery-item is-wide" target="_blank" rel="noopener">
         <img src="assets/works/radar-magnetron-replacement.jpg" alt="Radar magnetron değişimi — köprüde" loading="lazy" decoding="async">
-        <span class="gallery-caption"><span class="mono-tag">Radar</span>Magnetron değişimi</span>
+        <span class="gallery-caption"><span class="mono-tag">Radar</span>Magnetron replacement</span>
       </a>
       <a href="assets/works/ams-system-card-replacement.jpg" class="gallery-item" target="_blank" rel="noopener">
         <img src="assets/works/ams-system-card-replacement.jpg" alt="AMS (Alarm Monitoring System) kart değişimi" loading="lazy" decoding="async">
-        <span class="gallery-caption"><span class="mono-tag">AMS</span>Kart değişimi</span>
+        <span class="gallery-caption"><span class="mono-tag">AMS</span>Card swap</span>
       </a>
       <a href="assets/works/fire-alarm-system.jpg" class="gallery-item" target="_blank" rel="noopener">
         <img src="assets/works/fire-alarm-system.jpg" alt="Fire alarm sistemi müdahale" loading="lazy" decoding="async">
@@ -370,7 +540,7 @@
       </a>
       <a href="assets/cert/busbar-kit-2.jpg" class="gallery-item" target="_blank" rel="noopener">
         <img src="assets/cert/busbar-kit-2.jpg" alt="Busbar kit — pano torque kontrolü" loading="lazy" decoding="async">
-        <span class="gallery-caption"><span class="mono-tag">Busbar</span>Torque kontrol</span>
+        <span class="gallery-caption"><span class="mono-tag">Busbar</span>Torque check</span>
       </a>
       <a href="assets/cert/insulation-testing.jpg" class="gallery-item" target="_blank" rel="noopener">
         <img src="assets/cert/insulation-testing.jpg" alt="Insulation (Megger) testi" loading="lazy" decoding="async">
@@ -378,27 +548,13 @@
       </a>
       <a href="assets/cert/class-reporting.jpg" class="gallery-item" target="_blank" rel="noopener">
         <img src="assets/cert/class-reporting.jpg" alt="Test raporu hazırlama — onboard" loading="lazy" decoding="async">
-        <span class="gallery-caption"><span class="mono-tag">Report</span>Test raporu</span>
+        <span class="gallery-caption"><span class="mono-tag">Report</span>Test report</span>
       </a>
       <a href="assets/hero/engine-room.jpg" class="gallery-item is-wide" target="_blank" rel="noopener">
-        <img src="assets/hero/engine-room.jpg" alt="Makine dairesi — saha" loading="lazy" decoding="async">
-        <span class="gallery-caption"><span class="mono-tag">Engine Room</span>Saha</span>
+        <img src="assets/hero/engine-room.jpg" alt="Engine room — field" loading="lazy" decoding="async">
+        <span class="gallery-caption"><span class="mono-tag">Engine Room</span>Field</span>
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section class="section" id="projects">
-  <div class="container">
-    <header class="section-head">
-      <div class="section-kicker" data-i18n="projects.kicker">İşler</div>
-      <h2 data-i18n="projects.title">Son sahadaki müdahaleler.</h2>
-      <p data-i18n="projects.sub">Tuzla, Yalova, Aliağa ve global limanlarda gerçekleştirilen seçme işler — teknik detaylarla.</p>
-    </header>
-
-    <div class="projects-scroll" id="projectsScroll" role="list">
-      <!-- Projects dinamik olarak app.js tarafından render edilir -->
+      </div>
     </div>
   </div>
 </section>
@@ -407,41 +563,41 @@
 <section class="section bg-alt" id="about">
   <div class="container">
     <header class="section-head">
-      <div class="section-kicker" data-i18n="about.kicker">Hakkımızda</div>
+      <div class="section-kicker" data-i18n="about.kicker">About</div>
       <h2>
-        <span data-i18n="about.title.a">İki kıta,</span>
-        <span class="accent" data-i18n="about.title.b">bir ekip,</span>
-        <span data-i18n="about.title.c">sahada 12 yıl.</span>
+        <span data-i18n="about.title.a">Two continents,</span>
+        <span class="accent" data-i18n="about.title.b">one team,</span>
+        <span data-i18n="about.title.c">12 years in the field.</span>
       </h2>
-      <p data-i18n="about.sub">Pendik ofisimiz operasyonel merkez. Wyoming kaydımız global müşteriye USD faturalama ve 7/24 zaman dilimi kapsamı sağlar.</p>
+      <p data-i18n="about.sub">Our Tuzla office is the operational center. Our Wyoming registration provides USD invoicing and 24/7 time-zone coverage for global clients.</p>
     </header>
 
     <div class="about-grid">
       <article class="about-card">
-        <span class="mono" data-i18n="about.pendik.kicker">Operasyonel HQ</span>
-        <h3 data-i18n="about.pendik.title">Pendik · İstanbul</h3>
-        <address>
-          Velibaba Mah. No:1<br>
-          Pendik / İstanbul, Türkiye<br>
-          <a href="tel:+905376507776">+90 537 650 77 76</a>
-        </address>
-        <p style="color: var(--c-text-2); font-size: 14px; margin: 12px 0 0;" data-i18n="about.pendik.desc">Tuzla + Yalova + Aliağa tersane bölgelerine 90 dakikada erişim, yerel test ekipmanı envanteri.</p>
-      </article>
-
-      <article class="about-card">
-        <span class="mono" data-i18n="about.wyoming.kicker">Registered Office</span>
+        <span class="mono" data-i18n="about.wyoming.kicker">USA HQ</span>
         <h3 data-i18n="about.wyoming.title">Sheridan · Wyoming · USA</h3>
         <address>
           32 N Gould St<br>
           Sheridan, WY 82801<br>
-          <a href="tel:+16193840403">+1 619 384 04 03</a>
+          <a href="tel:+16193840403">+1 619 384 0403</a>
         </address>
-        <p style="color: var(--c-text-2); font-size: 14px; margin: 12px 0 0;" data-i18n="about.wyoming.desc">LLC kayıtlı ticari varlık — global müşteri için USD faturalama, P&I + sigorta rapor kanalı.</p>
+        <p style="color: var(--c-text-2); font-size: 14px; margin: 12px 0 0;" data-i18n="about.wyoming.desc">Registered LLC — USD invoicing for global clients, P&I + insurance reporting channel, USCG/CBP-aware coordination.</p>
+      </article>
+
+      <article class="about-card">
+        <span class="mono" data-i18n="about.pendik.kicker">Operational base</span>
+        <h3 data-i18n="about.pendik.title">Tuzla · Istanbul</h3>
+        <address>
+          Velibaba Mah. No:1<br>
+          Pendik / Istanbul, Türkiye<br>
+          <a href="tel:+905376507776">+90 537 650 7776</a>
+        </address>
+        <p style="color: var(--c-text-2); font-size: 14px; margin: 12px 0 0;" data-i18n="about.pendik.desc">90-minute reach to Tuzla + Yalova + Aliağa shipyard regions, local test equipment inventory.</p>
       </article>
 
       <article class="about-card" style="grid-column: span 2;">
-        <span class="mono" data-i18n="about.certs.kicker">Sertifikasyon</span>
-        <h3 data-i18n="about.certs.title">STCW III/6 ETO + HV Operations + Güvenlik</h3>
+        <span class="mono" data-i18n="about.certs.kicker">Certifications</span>
+        <h3 data-i18n="about.certs.title">STCW III/6 ETO + HV Operations + Safety</h3>
         <div class="certs-list">
           <div class="cert-pill"><strong>ETO (STCW III/6)</strong>Electro-Technical Officer</div>
           <div class="cert-pill"><strong>HV Operations</strong>Up to 1000V — STCW III/6</div>
@@ -452,19 +608,19 @@
           <div class="cert-pill"><strong>Gas Tanker Familiarization</strong>STCW V/1-2</div>
           <div class="cert-pill"><strong>Oil & Chemical Tanker</strong>STCW V/1-1</div>
         </div>
-        <p style="color: var(--c-text-2); font-size: 14px; margin: 20px 0 0;" data-i18n="about.certs.clients">Çalıştığımız firmalar: TP Offshore (TP OTC) · Polaris Denizcilik · Bright Denizcilik · Çebi Kaptan Denizcilik · MEDLOG (MSC Group) · Reederei NORD.</p>
+        <p style="color: var(--c-text-2); font-size: 14px; margin: 20px 0 0;" data-i18n="about.certs.clients">Companies we've worked with: TP Offshore (TP OTC) · Polaris Denizcilik · Bright Denizcilik · Çebi Kaptan Denizcilik · MEDLOG (MSC Group) · Reederei NORD.</p>
       </article>
     </div>
 
     <!-- CTA BAND -->
     <div class="cta-band">
       <div>
-        <h3 data-i18n="cta.title">Gemide elektrik sorunu mu var?</h3>
-        <p data-i18n="cta.sub">Arıza kontrol listemizi WhatsApp'tan gönderelim — mühendisinizle beraber 15 dakikada teşhise giderseniz tamir süresi yarıya iner.</p>
+        <h3 data-i18n="cta.title">Electrical trouble aboard?</h3>
+        <p data-i18n="cta.sub">We'll send our fault-triage checklist on WhatsApp — 15 minutes of structured diagnosis with your engineer typically halves the repair time.</p>
       </div>
       <div class="ctas">
-        <a href="/assets/leadmagnets/class-survey-checklist.html" target="_blank" class="btn btn-accent btn-lg" data-i18n="cta.btn.primary">Kontrol Listesi</a>
-        <a href="https://wa.me/905376507776" target="_blank" rel="noopener" class="btn btn-ghost btn-lg" data-i18n="cta.btn.secondary">WhatsApp</a>
+        <a href="/assets/leadmagnets/class-survey-checklist.html" target="_blank" class="btn btn-accent btn-lg" data-i18n="cta.btn.primary">Get the checklist</a>
+        <a href="https://wa.me/16193840403" target="_blank" rel="noopener" class="btn btn-ghost btn-lg" data-i18n="cta.btn.secondary">WhatsApp</a>
       </div>
     </div>
   </div>
@@ -474,40 +630,40 @@
 <section class="section" id="contact">
   <div class="container">
     <header class="section-head">
-      <div class="section-kicker" data-i18n="contact.kicker">İletişim</div>
-      <h2 data-i18n="contact.title">24 saat içinde geri dönüş.</h2>
-      <p data-i18n="contact.sub">Form, WhatsApp veya direkt telefon. Mesai saatlerinde 4 saat, dışında 8 saat içinde cevap.</p>
+      <div class="section-kicker" data-i18n="contact.kicker">Contact</div>
+      <h2 data-i18n="contact.title">Response within 24 hours.</h2>
+      <p data-i18n="contact.sub">Form, WhatsApp, or direct phone. Business hours 4h, outside 8h.</p>
     </header>
 
     <div class="contact-grid">
       <form class="contact-form" id="contactForm" autocomplete="on">
-        <h3 style="margin-top:0; font-family: var(--f-head); font-size: 20px;" data-i18n="contact.form.title">Servis Talebi</h3>
+        <h3 style="margin-top:0; font-family: var(--f-head); font-size: 20px;" data-i18n="contact.form.title">Service request</h3>
 
         <div class="form-row">
           <div class="form-group">
-            <label for="f-name" data-i18n="contact.form.name">Ad Soyad</label>
+            <label for="f-name" data-i18n="contact.form.name">Full name</label>
             <input id="f-name" name="name" type="text" required autocomplete="name" />
           </div>
           <div class="form-group">
-            <label for="f-company" data-i18n="contact.form.company">Firma / Filo</label>
+            <label for="f-company" data-i18n="contact.form.company">Company / Fleet</label>
             <input id="f-company" name="company" type="text" autocomplete="organization" />
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label for="f-email" data-i18n="contact.form.email">E-posta</label>
+            <label for="f-email" data-i18n="contact.form.email">Email</label>
             <input id="f-email" name="email" type="email" required autocomplete="email" />
           </div>
           <div class="form-group">
-            <label for="f-phone" data-i18n="contact.form.phone">Telefon</label>
+            <label for="f-phone" data-i18n="contact.form.phone">Phone</label>
             <input id="f-phone" name="phone" type="tel" autocomplete="tel" />
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label for="f-vessel" data-i18n="contact.form.vessel">Gemi adı / IMO</label>
+            <label for="f-vessel" data-i18n="contact.form.vessel">Vessel name / IMO</label>
             <input id="f-vessel" name="vessel" type="text" />
           </div>
           <div class="form-group">
@@ -523,7 +679,7 @@
 
         <div class="form-row">
           <div class="form-group">
-            <label for="f-service" data-i18n="contact.form.service">Hizmet tipi</label>
+            <label for="f-service" data-i18n="contact.form.service">Service type</label>
             <select id="f-service" name="service">
               <option value="">—</option>
               <option>Power & Distribution</option>
@@ -539,44 +695,25 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="f-urgency" data-i18n="contact.form.urgency">Aciliyet</label>
+            <label for="f-urgency" data-i18n="contact.form.urgency">Urgency</label>
             <select id="f-urgency" name="urgency">
-              <option value="high" data-i18n="contact.form.urgency.high">Yüksek (24h)</option>
-              <option value="medium" data-i18n="contact.form.urgency.medium">Orta (7 gün)</option>
-              <option value="low" data-i18n="contact.form.urgency.low">Düşük (planlı)</option>
+              <option value="high" data-i18n="contact.form.urgency.high">High (24h)</option>
+              <option value="medium" data-i18n="contact.form.urgency.medium">Medium (7 days)</option>
+              <option value="low" data-i18n="contact.form.urgency.low">Low (planned)</option>
             </select>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="f-message" data-i18n="contact.form.message">Mesajınız</label>
+          <label for="f-message" data-i18n="contact.form.message">Your message</label>
           <textarea id="f-message" name="message" required></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-lg form-submit" data-i18n="contact.form.submit">Talep Gönder</button>
+        <button type="submit" class="btn btn-primary btn-lg form-submit" data-i18n="contact.form.submit">Send request</button>
         <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
       </form>
 
       <div class="contact-info">
-        <div class="contact-card">
-          <span class="mono" data-i18n="contact.tr.title">Türkiye</span>
-          <h4>Pendik · İstanbul</h4>
-          <address>
-            Velibaba Mah. No:1<br>
-            Pendik / İstanbul
-          </address>
-          <div class="contact-links">
-            <a href="tel:+905376507776">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              +90 537 650 77 76
-            </a>
-            <a href="https://wa.me/905376507776" target="_blank" rel="noopener">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-              WhatsApp
-            </a>
-          </div>
-        </div>
-
         <div class="contact-card">
           <span class="mono" data-i18n="contact.usa.title">USA</span>
           <h4>Sheridan · Wyoming</h4>
@@ -587,9 +724,28 @@
           <div class="contact-links">
             <a href="tel:+16193840403">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              +1 619 384 04 03
+              +1 619 384 0403
             </a>
             <a href="https://wa.me/16193840403" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <span class="mono" data-i18n="contact.tr.title">Türkiye</span>
+          <h4>Tuzla · Istanbul</h4>
+          <address>
+            Velibaba Mah. No:1<br>
+            Pendik / Istanbul
+          </address>
+          <div class="contact-links">
+            <a href="tel:+905376507776">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              +90 537 650 7776
+            </a>
+            <a href="https://wa.me/905376507776" target="_blank" rel="noopener">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
               WhatsApp
             </a>
@@ -602,7 +758,7 @@
           <div class="contact-links">
             <a href="mailto:info@leventmarinetech.com">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              E-posta gönder
+              Send email
             </a>
           </div>
         </div>
@@ -623,62 +779,76 @@
             <div class="brand-tag">Electro-Tech Services</div>
           </div>
         </div>
-        <p style="font-size: 14px; color: var(--c-text-2); margin: 0; max-width: 320px;" data-i18n="footer.tagline">Marine elektrik arıza servisi — Tuzla ve global limanlarda, bulker ve genel kargo filolar için.</p>
+        <p style="font-size: 14px; color: var(--c-text-2); margin: 0; max-width: 320px;" data-i18n="footer.tagline">Marine electrical repair service — in Tuzla and global ports, for bulker and general-cargo fleets.</p>
       </div>
       <div>
-        <h5 data-i18n="footer.services">Hizmetler</h5>
+        <h5 data-i18n="footer.services">Services</h5>
         <ul>
-          <li><a href="#service/power-distribution">Güç & Dağıtım</a></li>
-          <li><a href="#service/propulsion-motors">Tahrik & Motor</a></li>
-          <li><a href="#service/navigation-comms">Navigasyon</a></li>
-          <li><a href="#service/automation-control">Otomasyon</a></li>
-          <li><a href="#service/testing-certification">Test & Sertifika</a></li>
+          <li><a href="#service/power-distribution">Power & Distribution</a></li>
+          <li><a href="#service/propulsion-motors">Propulsion & Motors</a></li>
+          <li><a href="#service/navigation-comms">Navigation</a></li>
+          <li><a href="#service/automation-control">Automation</a></li>
+          <li><a href="#service/insulation-diagnostics">Insulation Diagnostics</a></li>
+          <li><a href="#materials">Materials Desk</a></li>
         </ul>
       </div>
       <div>
-        <h5 data-i18n="footer.company">Şirket</h5>
+        <h5 data-i18n="footer.company">Company</h5>
         <ul>
-          <li><a href="profile.html">Hakkımızda</a></li>
-          <li><a href="#projects">Projeler</a></li>
-          <li><a href="#certification">Sertifikasyon</a></li>
-          <li><a href="#" data-i18n="footer.blog">Blog</a></li>
-          <li><a href="#" data-i18n="footer.career">Kariyer</a></li>
+          <li><a href="profile.html">About</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#usa-coverage">USA coverage</a></li>
+          <li><a href="/blog/" data-i18n="footer.blog">Blog</a></li>
+          <li><a href="#contact" data-i18n="footer.career">Careers</a></li>
         </ul>
       </div>
       <div>
-        <h5 data-i18n="footer.contact">İletişim</h5>
+        <h5 data-i18n="footer.contact">Contact</h5>
         <ul>
-          <li><a href="tel:+905376507776">+90 537 650 77 76</a></li>
-          <li><a href="tel:+16193840403">+1 619 384 04 03</a></li>
+          <li><a href="tel:+16193840403">+1 619 384 0403 (US)</a></li>
+          <li><a href="tel:+905376507776">+90 537 650 7776 (TR)</a></li>
           <li><a href="mailto:info@leventmarinetech.com">info@leventmarinetech.com</a></li>
-          <li><a href="https://wa.me/905376507776" target="_blank" rel="noopener">WhatsApp TR</a></li>
           <li><a href="https://wa.me/16193840403" target="_blank" rel="noopener">WhatsApp US</a></li>
+          <li><a href="https://wa.me/905376507776" target="_blank" rel="noopener">WhatsApp TR</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="mono" data-i18n="footer.rights">© 2026 LEVENT MARINE LLC · TÜM HAKLARI SAKLIDIR</span>
-      <span class="mono">v2.0 · BENTO</span>
+      <span class="mono" data-i18n="footer.rights">© 2026 LEVENT MARINE LLC · ALL RIGHTS RESERVED</span>
+      <span class="mono">v3.0</span>
     </div>
   </div>
 </footer>
 
 <!-- MOBILE STICKY ACTION BAR -->
 <div class="mobile-nav-btn" id="mobileNav">
-  <a href="tel:+905376507776" class="btn btn-ghost btn-sm">
+  <a href="tel:+16193840403" class="btn btn-ghost btn-sm">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-    Ara
+    Call
   </a>
-  <a href="https://wa.me/905376507776" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">WhatsApp</a>
-  <a href="#contact" class="btn btn-accent btn-sm">Talep</a>
+  <a href="https://wa.me/16193840403" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">WhatsApp</a>
+  <a href="#contact" class="btn btn-accent btn-sm">Quote</a>
 </div>
+
+<!-- STICKY DESKTOP CALL RAIL -->
+<aside class="call-rail" aria-label="Quick contact">
+  <a href="tel:+16193840403" class="call" aria-label="Call 24/7">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+  </a>
+  <a href="https://wa.me/16193840403" target="_blank" rel="noopener" class="whatsapp" aria-label="WhatsApp">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  </a>
+  <a href="#top" class="up" aria-label="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </a>
+</aside>
 
 <!-- DRAWER -->
 <div class="overlay" id="overlay"></div>
 <aside class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-labelledby="drawerKicker">
   <div class="drawer-head">
-    <span class="section-kicker" id="drawerKicker">Hizmet</span>
-    <button class="icon-btn" id="drawerClose" aria-label="Kapat">
+    <span class="section-kicker" id="drawerKicker">Service</span>
+    <button class="icon-btn" id="drawerClose" aria-label="Close">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
   </div>

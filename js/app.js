@@ -425,6 +425,45 @@ const SERVICES = {
       ],
       cta: "Request survey prep"
     }
+  },
+
+  "insulation-diagnostics": {
+    order: 11,
+    icon: "search",
+    category: "main",
+    size: "card-wide",
+    photo: "assets/cert/insulation-testing.jpg",
+    detailPhoto: "assets/cert/insulation-testing.jpg",
+    tr: {
+      title: "Insulation & Gizli Arıza Tespiti",
+      lead: "Düşük yalıtım, kaçak akım, intermittent fault — kaynağı buluruz",
+      summary: "Insulation monitor 'ground fault' alarmı veriyor ama nereden geldiği belli değil. Trip atan ama tekrar etmeyen kesici. Sefer ortasında yanan kart. Bunlar bizim alanımız: sistematik tarama, neden-sonuç haritalama, akış kayıt — bulguyu bir sertifikayla kapatma.",
+      chips: ["Low Insulation", "Earth Fault", "Megger Trend", "Root Cause"],
+      items: [
+        { h: "Low Insulation Diyagnostik", d: "Devre devre Megger, sıcaklık-nem korelasyonu, polarization index" },
+        { h: "Earth Fault Source Lokalizasyonu", d: "Insulation monitor analizi, branch-by-branch izolasyon, IR clamp kullanımı" },
+        { h: "Intermittent Fault Tracking", d: "Veri kaydedici kurulumu, 24-72h gözlem, korelasyon raporu" },
+        { h: "Hidden-Damage Audit", d: "Kablo gövdesi termografi, terminal torque kontrolü, sürünme yolu inspeksiyonu" },
+        { h: "Insulation Trend Analizi", d: "5 yıllık MΩ trendi, bozulma hızı, kalan ömür projeksiyonu" },
+        { h: "Symptom → Method → Fix → Cert", d: "Belge ile kapanış: ne aradık, nasıl bulduk, nasıl çözdük" }
+      ],
+      cta: "Gizli arıza için yardım iste"
+    },
+    en: {
+      title: "Insulation & Hidden-Fault Diagnostics",
+      lead: "Low insulation, leakage, intermittent faults — we trace them to root.",
+      summary: "Your insulation monitor is showing an earth fault but no one can find the source. A breaker trips and never trips again. A control card burns out mid-voyage. This is our lane: systematic sweep, cause-and-effect mapping, data logging — finding closed with a written certificate.",
+      chips: ["Low Insulation", "Earth Fault", "Megger Trend", "Root Cause"],
+      items: [
+        { h: "Low-Insulation Diagnostics", d: "Circuit-by-circuit Megger, temperature/humidity correlation, polarization index" },
+        { h: "Earth-Fault Source Localization", d: "Insulation monitor analysis, branch-by-branch isolation, IR clamp method" },
+        { h: "Intermittent-Fault Tracking", d: "Data logger setup, 24–72h observation, correlation report" },
+        { h: "Hidden-Damage Audit", d: "Cable run thermography, terminal torque audit, creepage path inspection" },
+        { h: "Insulation Trend Analysis", d: "5-year MΩ trend, degradation rate, remaining-life projection" },
+        { h: "Symptom → Method → Fix → Cert", d: "Closed with written report: what we looked for, how we found it, how we fixed it" }
+      ],
+      cta: "Get help with a hidden fault"
+    }
   }
 };
 
@@ -440,6 +479,9 @@ const ICONS = {
   wrench: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
   alert: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 22h20L12 2z"/><path d="M12 9v4M12 17h.01"/></svg>',
   award: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.5 12.8L17 22l-5-3-5 3 1.5-9.2"/></svg>',
+  search: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M11 8v3M11 13v.01"/></svg>',
+  box: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27,6.96 12,12.01 20.73,6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>',
+  flag: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>',
   mail: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
   phone: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
   whatsapp: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>',
@@ -489,56 +531,27 @@ const I18N = {
     "services.sub": "Güç panosundan navigasyona, güvenlik sisteminden deck makinasına — arıza müdahalesi, bakım, test ve retrofit. Saha tecrübesi ile hızlı teşhis, yedek parça koordinasyonu, off-hire minimize.",
     "cert.kicker": "Test & Rapor",
     "cert.title": "Ekipmanımız, yöntemimiz, raporumuz.",
-    "cert.sub": "Saha testleri kalibrasyon sertifikalı ekipmanla yapılır. Çalışma sonunda standart formatta rapor — gemi, firma veya sigorta kanalında kullanılabilir.",
-    "cert.process.title": "Süreç Akışı",
-    "cert.process.sub": "Her adım belgelenir; sonuçlar firma ekibiyle paylaşılır, gemi dosyasında arşivlenir.",
     "cert.step.1": "Talep",
-    "cert.step.1.sub": "Form/WhatsApp",
     "cert.step.2": "Planlama",
-    "cert.step.2.sub": "Kapsam + ETA",
     "cert.step.3": "Onboard",
-    "cert.step.3.sub": "Müdahale + test",
     "cert.step.4": "Rapor",
-    "cert.step.4.sub": "PDF teslim",
     "cert.step.5": "Takip",
-    "cert.step.5.sub": "Arşiv + sonraki",
-    "cert.card.accred.title": "Saha Tecrübesi",
-    "cert.card.accred.desc": "12+ yıl bulker, tanker, container ve offshore — yüzlerce arıza müdahalesi, test ve retrofit.",
-    "cert.card.equipment.title": "Test Ekipmanı",
-    "cert.card.equipment.desc": "SVERKER 900, Megger MIT, Fluke 1587, FLIR Thermal Imager — kalibrasyon sertifikalı.",
-    "cert.card.sample.title": "Örnek Rapor",
-    "cert.card.sample.desc": "Standart test raporu PDF indir.",
     "cert.card.sample.btn": "PDF İndir",
-    "cert.card.panel.title": "Yetkili Panel",
-    "cert.card.panel.desc": "Gemi bazında test tarihleri, rapor arşivi, sonraki test vadesi.",
     "cert.card.panel.btn": "Giriş",
     "projects.kicker": "İşler",
     "projects.title": "Son sahadaki müdahaleler.",
-    "projects.sub": "Tuzla, Yalova, Aliağa ve global limanlarda gerçekleştirilen seçme işler — teknik detaylarla.",
-    "gallery.kicker": "Saha",
-    "gallery.title": "Panodan motora, köprüden deck'e.",
-    "gallery.sub": "Gerçek müdahalelerden kareler — her biri onboard.",
     "about.kicker": "Hakkımızda",
     "about.title.a": "İki kıta,",
     "about.title.b": "bir ekip,",
     "about.title.c": "sahada 12 yıl.",
-    "about.sub": "Pendik ofisimiz operasyonel merkez. Wyoming kaydımız global müşteriye USD faturalama ve 7/24 zaman dilimi kapsamı sağlar.",
-    "about.pendik.kicker": "Operasyonel HQ",
-    "about.pendik.title": "Pendik · İstanbul",
-    "about.pendik.desc": "Tuzla + Yalova + Aliağa tersanelerine 90 dakikada erişim, yerel test ekipmanı envanteri.",
-    "about.wyoming.kicker": "Registered Office",
+    "about.pendik.title": "Tuzla · İstanbul",
     "about.wyoming.title": "Sheridan · Wyoming · USA",
-    "about.wyoming.desc": "LLC kayıtlı ticari varlık — global müşteri için USD faturalama, P&I + sigorta rapor kanalı.",
-    "about.certs.kicker": "Sertifikasyon",
     "about.certs.title": "STCW III/6 ETO + HV Operations + Güvenlik",
-    "about.certs.clients": "Çalıştığımız firmalar: TP Offshore (TP OTC) · Polaris Denizcilik · Bright Denizcilik · Çebi Kaptan Denizcilik · MEDLOG (MSC Group) · Reederei NORD.",
     "cta.title": "Gemide elektrik sorunu mu var?",
-    "cta.sub": "Arıza kontrol listemizi WhatsApp'tan gönderelim — mühendisinizle beraber 15 dakikada teşhise giderseniz tamir süresi yarıya iner.",
     "cta.btn.primary": "Kontrol Listesi",
     "cta.btn.secondary": "WhatsApp",
     "contact.kicker": "İletişim",
     "contact.title": "24 saat içinde geri dönüş.",
-    "contact.sub": "Form, WhatsApp veya direkt telefon. Mesai saatlerinde 4 saat, dışında 8 saat içinde cevap.",
     "contact.form.title": "Servis Talebi",
     "contact.form.name": "Ad Soyad",
     "contact.form.company": "Firma / Filo",
@@ -556,6 +569,24 @@ const I18N = {
     "contact.usa.title": "USA",
     "contact.tr.title": "Türkiye",
     "footer.tagline": "Marine elektrik arıza servisi — Tuzla ve global limanlarda, bulker ve genel kargo filolar için.",
+    "header.phone.label": "7/24 Hat",
+    "work.kicker": "İşler",
+    "work.title": "Sahadan gerçek işler.",
+    "work.tab.recent": "Son İşler",
+    "work.tab.gallery": "Galeri",
+    "usa.kicker": "ABD Servisi",
+    "usa.title": "Hızlı müdahale + parça tedariği — kıyıdan kıyıya.",
+    "usa.route.title": "Operasyonel rota",
+    "usa.cities.label": "Önemli limanlar",
+    "usa.cta": "Bir gemi için yardım iste",
+    "materials.kicker": "Malzeme Tedarik",
+    "materials.title": "OEM'in artık stoklamadığı parçayı bulan ekip.",
+    "materials.form.title": "Parça İsteği",
+    "materials.form.brand": "Marka / OEM",
+    "materials.form.part": "Parça no / model",
+    "materials.form.vessel": "Gemi adı + bulunduğu liman",
+    "materials.form.contact": "İletişim (email/WhatsApp)",
+    "materials.form.submit": "Tedarik talebi gönder",
     "footer.services": "Hizmetler",
     "footer.company": "Şirket",
     "footer.contact": "İletişim",
@@ -609,11 +640,11 @@ const I18N = {
     "btn.login": "Authorized Login",
     "btn.request": "Request Quote",
     "btn.services": "View Services",
-    "hero.eyebrow": "Marine Electrical Repair Service · Pendik + Wyoming · Since 2012",
-    "hero.title.a": "When the ship goes",
-    "hero.title.b": "electrically dark,",
-    "hero.title.c": "we respond.",
-    "hero.sub": "Generators, switchboards, motors, navigation, automation — fault diagnosis, repair, testing and commissioning on bulker and general-cargo ships. 24/7 onboard, Tuzla-based, coordinated attendance at global ports.",
+    "hero.eyebrow": "Marine electrical repair service · Tuzla + Wyoming · since 2012",
+    "hero.title.a": "We fix any electrical fault",
+    "hero.title.b": "on a dry-cargo ship",
+    "hero.title.c": "— any port, any flag.",
+    "hero.sub": "Fault diagnostics, repair, testing, commissioning and materials supply on bulker and general-cargo vessels — engineer on board in hours, parts on the way within a day. Operating base Tuzla, USA-registered for direct USD invoicing and rapid US-port response.",
     "hero.trust.1": "vessels<br>serviced",
     "hero.trust.2": "hours onboard<br>from Tuzla",
     "hero.trust.3": "24/7<br>hotline",
@@ -701,6 +732,45 @@ const I18N = {
     "contact.usa.title": "USA",
     "contact.tr.title": "Turkey",
     "footer.tagline": "Marine electrical repair service — in Tuzla and global ports, for bulker and general-cargo fleets.",
+    "header.phone.label": "24/7 Hotline",
+    "work.kicker": "Work",
+    "work.title": "Real jobs from the field.",
+    "work.sub": "Selected attendances at ports and yards — photo plus a tight technical note.",
+    "work.tab.recent": "Recent jobs",
+    "work.tab.gallery": "Gallery",
+    "usa.kicker": "USA Coverage",
+    "usa.title": "Rapid response and parts supply — coast to coast.",
+    "usa.sub": "Wyoming-registered LLC + a global coordination reach. Wherever your bulker calls in the US, we put an electrical engineer on board within hours and the right part on its way within a day.",
+    "usa.route.title": "Operational route",
+    "usa.route.line": "Tuzla → Mediterranean → US East Coast → Gulf → West Coast",
+    "usa.route.desc": "Our Tuzla operating base is within flight reach of the US. Our Sheridan Wyoming LLC takes care of USD invoicing plus the USCG / CBP legal frame. Engineer on board within 24 hours of any major US port; parts shipped within 48 hours — courier network for AOG-style emergency supply.",
+    "usa.cities.label": "Key US ports",
+    "usa.stat.response": "h engineer on board",
+    "usa.stat.parts": "h AOG part shipped",
+    "usa.stat.usd": "USD invoicing",
+    "usa.stat.network": "global supply network",
+    "usa.cta": "Ask us about a vessel",
+    "materials.kicker": "Materials Desk",
+    "materials.title": "We find the part the OEM no longer stocks.",
+    "materials.sub": "CN/JP/KR-built older bulker switchgear, PLC cards, AVR modules, sensors — items no longer in the OEM catalog. Through our sourcing network we locate them and ship to the vessel; when they cannot be found, we propose a compatible replacement.",
+    "materials.item.aog.label": "AOG / Emergency",
+    "materials.item.aog.text": "Global courier delivery direct to the vessel within 24 hours — for critical trip-out faults.",
+    "materials.item.obs.label": "Obsolete Spares",
+    "materials.item.obs.text": "Second-source / refurbished sourcing for legacy Mitsubishi, Hitachi, Hyundai, Stork, Terasaki gear.",
+    "materials.item.alt.label": "Compatible Alternative",
+    "materials.item.alt.text": "When the original isn't available, we recommend a technically compatible modern equivalent with an engineering note.",
+    "materials.item.bulk.label": "Bulk Materials",
+    "materials.item.bulk.text": "Cable, terminals, fuses, contactors — marine-grade material lists for the ship's project store.",
+    "materials.form.title": "Parts Request",
+    "materials.form.lead": "Brand/OEM, part number and where the vessel is — leave the rest to us.",
+    "materials.form.brand": "Brand / OEM",
+    "materials.form.part": "Part no / model",
+    "materials.form.vessel": "Vessel name + current port",
+    "materials.form.contact": "Contact (email/WhatsApp)",
+    "materials.form.urgency.aog": "AOG (within 24h)",
+    "materials.form.urgency.urgent": "Urgent (3 days)",
+    "materials.form.urgency.plan": "Planned supply",
+    "materials.form.submit": "Send parts request",
     "footer.services": "Services",
     "footer.company": "Company",
     "footer.contact": "Contact",
@@ -747,35 +817,35 @@ const I18N = {
 
 /* ============== PROJECTS DATA ============== */
 const PROJECTS = [
-  { badge: "BV", type: "Handymax Bulker", loc: "Tuzla · 2025 Q4", img: "assets/cert/acb-mccb-test.jpg",
+  { badge: "ACB / MCCB", type: "Handymax Bulker", loc: "Tuzla · 2025 Q4", img: "assets/cert/acb-mccb-test.jpg",
     tr: { h: "ACB + MCCB Retest & Rapor", p: "Special survey öncesi 14 ACB ve 32 MCCB testi, standart formatta rapor ile 48 saatte tamamlandı." },
     en: { h: "ACB + MCCB Retest & Report", p: "Before special survey, 14 ACBs and 32 MCCBs tested and delivered with a standard-format report within 48 hours." }
   },
-  { badge: "DNV", type: "Supramax Bulker", loc: "Çanakkale · 2025 Q3", img: "assets/works/generator-avr-diode-speedcard.jpg",
+  { badge: "AVR Fault", type: "Supramax Bulker", loc: "Çanakkale · 2025 Q3", img: "assets/works/generator-avr-diode-speedcard.jpg",
     tr: { h: "AVR Arıza + Shaft Earthing", p: "Jeneratör AVR arızasının 6 saatte teşhis + müdahalesi, shaft earthing set yenileme." },
     en: { h: "AVR Fault + Shaft Earthing", p: "Generator AVR fault diagnosed and repaired in 6 hours; shaft earthing set renewed." }
   },
-  { badge: "ABS", type: "Container Feeder", loc: "Yalova · 2025 Q3", img: "assets/works/fire-alarm-system.jpg",
+  { badge: "Fire / Water Mist", type: "Container Feeder", loc: "Yalova · 2025 Q3", img: "assets/works/fire-alarm-system.jpg",
     tr: { h: "Fire Alarm + Water Mist Retrofit", p: "Eski fire detection panelinin onaylı modern sistemle değişimi ve FAT/SAT süpervizi." },
     en: { h: "Fire Alarm + Water Mist Retrofit", p: "Replacement of old fire detection panel with approved modern system and FAT/SAT supervision." }
   },
-  { badge: "LR", type: "Kamsarmax Bulker", loc: "Pendik · 2025 Q2", img: "assets/works/motor-overhaul.jpg",
+  { badge: "Motor Overhaul", type: "Kamsarmax Bulker", loc: "Pendik · 2025 Q2", img: "assets/works/motor-overhaul.jpg",
     tr: { h: "Motor Overhaul & Alignment", p: "Ana jeneratör motoru overhaul, hizalama, yük testi — off-hire 48 saatten 24'e indirildi." },
     en: { h: "Motor Overhaul & Alignment", p: "Main generator motor overhauled, aligned, load tested — off-hire reduced from 48 to 24 hours." }
   },
-  { badge: "TL", type: "Oil/Chem Tanker", loc: "Aliağa · 2025 Q2", img: "assets/works/radar-magnetron-replacement.jpg",
+  { badge: "Radar / Bridge", type: "Oil/Chem Tanker", loc: "Aliağa · 2025 Q2", img: "assets/works/radar-magnetron-replacement.jpg",
     tr: { h: "Radar Magnetron + Bridge Test", p: "Gyro + radar commissioning, ECDIS interface doğrulama, bridge integration testi." },
     en: { h: "Radar Magnetron + Bridge Test", p: "Gyro + radar commissioning, ECDIS interface verification, bridge integration test." }
   },
-  { badge: "RINA", type: "Panamax Bulker", loc: "Tuzla · 2025 Q1", img: "assets/works/ams-system-card-replacement.jpg",
+  { badge: "PMS Retrofit", type: "Panamax Bulker", loc: "Tuzla · 2025 Q1", img: "assets/works/ams-system-card-replacement.jpg",
     tr: { h: "PMS Retrofit + Load Sharing", p: "Power Management System yazılım güncelleme, 3 jeneratör load share tuning." },
     en: { h: "PMS Retrofit + Load Sharing", p: "Power Management System software upgrade, 3-generator load share tuning." }
   },
-  { badge: "BV", type: "Handysize Bulker", loc: "Tuzla · 2024 Q4", img: "assets/cert/insulation-testing.jpg",
+  { badge: "Insulation", type: "Handysize Bulker", loc: "Tuzla · 2024 Q4", img: "assets/cert/insulation-testing.jpg",
     tr: { h: "Insulation Trend & Megger Test", p: "500–5000V Megger ile polarization index, 5 yıllık insulation trend grafiği — class formatında raporlama." },
     en: { h: "Insulation Trend & Megger Test", p: "500–5000V Megger with polarization index, 5-year insulation trend analysis — class-formatted reporting." }
   },
-  { badge: "DNV", type: "Capesize Bulker", loc: "Istanbul Bosphorus · 2024 Q4", img: "assets/works/crane-panel-speed-control.jpg",
+  { badge: "Deck Crane VFD", type: "Capesize Bulker", loc: "Istanbul Bosphorus · 2024 Q4", img: "assets/works/crane-panel-speed-control.jpg",
     tr: { h: "Deck Crane Panel + VFD", p: "4 deck crane elektrik pano yenileme, VFD retrofit, overload kalibrasyonu." },
     en: { h: "Deck Crane Panel + VFD", p: "4 deck crane electrical panel renewal, VFD retrofit, overload calibration." }
   }
@@ -784,7 +854,7 @@ const PROJECTS = [
 /* ============== APP INIT ============== */
 (function () {
   const state = {
-    lang: localStorage.getItem('levent.lang') || 'tr',
+    lang: localStorage.getItem('levent.lang') || 'en',
     theme: localStorage.getItem('levent.theme') || 'light'
   };
 
@@ -792,7 +862,7 @@ const PROJECTS = [
   document.documentElement.setAttribute('lang', state.lang);
 
   function t(key) {
-    return (I18N[state.lang] && I18N[state.lang][key]) || key;
+    return (I18N[state.lang] && I18N[state.lang][key]) || (I18N.en && I18N.en[key]) || key;
   }
 
   function applyI18n() {
@@ -1169,6 +1239,64 @@ const PROJECTS = [
     }
   }
 
+  /* ============== WORK TABS ============== */
+  function setupWorkTabs() {
+    const tabs = document.querySelectorAll('.work-tab');
+    if (!tabs.length) return;
+    const panes = document.querySelectorAll('.work-pane');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        tabs.forEach(t => {
+          const on = t === tab;
+          t.classList.toggle('is-active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        panes.forEach(p => p.classList.toggle('is-active', p.dataset.pane === target));
+      });
+    });
+  }
+
+  /* ============== MATERIALS DESK FORM ============== */
+  function setupMaterialsForm() {
+    const form = document.getElementById('materialsForm');
+    if (!form) return;
+    const status = document.getElementById('materialsStatus');
+    function setStatus(kind, key) {
+      if (!status) return;
+      status.className = 'form-status is-' + kind;
+      status.textContent = t(key);
+    }
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalLabel = submitBtn.textContent;
+      submitBtn.textContent = t('form.status.sending');
+      submitBtn.disabled = true;
+      setStatus('pending', 'form.status.sending');
+      const data = Object.fromEntries(new FormData(form).entries());
+      try {
+        const resp = await fetch('/api/materials', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (!resp.ok) throw new Error('API not ready');
+        setStatus('success', 'form.status.success');
+        form.reset();
+      } catch (err) {
+        setStatus('error', 'form.status.fallback');
+        const text = encodeURIComponent(
+          `PARTS REQUEST\nBrand/OEM: ${data.brand}\nPart: ${data.part}\nVessel/Port: ${data.vessel || '-'}\nUrgency: ${data.urgency}\nContact: ${data.contact}`
+        );
+        window.open(`https://wa.me/16193840403?text=${text}`, '_blank', 'noopener');
+      } finally {
+        submitBtn.textContent = originalLabel;
+        submitBtn.disabled = false;
+      }
+    });
+  }
+
   /* ============== GO ============== */
   document.addEventListener('DOMContentLoaded', () => {
     // Sync active lang button
@@ -1181,6 +1309,8 @@ const PROJECTS = [
     setupReveal();
     setupCountUp();
     setupForm();
+    setupMaterialsForm();
+    setupWorkTabs();
     setupLogin();
     bindEvents();
   });
