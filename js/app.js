@@ -570,6 +570,18 @@ const I18N = {
     "contact.tr.title": "Türkiye",
     "footer.tagline": "Marine elektrik arıza servisi — Tuzla ve global limanlarda, bulker ve genel kargo filolar için.",
     "header.phone.label": "7/24 Hat",
+    "landing.title.a": "Gemideki her elektrik arızası —",
+    "landing.title.b": "biz çözeriz.",
+    "landing.sub": "Ana panodan deck vincine, jeneratörden navigasyona — arızayı bulup tamir ediyor, gerekirse parçayı temin edip gemiye yetiştiriyoruz. Hangi konuda yardım istersin?",
+    "landing.tile.service.kicker": "01 · Servis",
+    "landing.tile.service.title": "Marine Elektrik Servisi",
+    "landing.tile.service.lead": "11 alan — güç, tahrik, navigasyon, otomasyon, güvenlik, deck makinası, test, retrofit, acil müdahale, survey hazırlığı, gizli arıza teşhisi.",
+    "landing.tile.materials.kicker": "02 · Tedarik",
+    "landing.tile.materials.title": "Malzeme & Parça Tedariği",
+    "landing.tile.materials.lead": "AOG acil tedarik, eski/obsolete parça bulma, uyumlu alternatif mühendisliği, dökme marine-grade malzeme — doğrudan gemiye.",
+    "landing.callus": "7/24 Ara · +90 537 650 7776",
+    "nav.usa": "ABD Servisi",
+    "nav.work": "Son İşler",
     "work.kicker": "İşler",
     "work.title": "Sahadan gerçek işler.",
     "work.tab.recent": "Son İşler",
@@ -733,6 +745,18 @@ const I18N = {
     "contact.tr.title": "Turkey",
     "footer.tagline": "Marine electrical repair service — in Tuzla and global ports, for bulker and general-cargo fleets.",
     "header.phone.label": "24/7 Hotline",
+    "landing.title.a": "We fix any electrical fault",
+    "landing.title.b": "on a dry-cargo ship.",
+    "landing.sub": "From the main switchboard to the deck crane, we diagnose, repair and supply parts — engineer onboard within hours, parts on their way within a day. Pick a lane:",
+    "landing.tile.service.kicker": "01 · Service",
+    "landing.tile.service.title": "Marine Electrical Service",
+    "landing.tile.service.lead": "11 service lanes — power, propulsion, navigation, automation, safety, deck machinery, testing, retrofit, emergency, survey prep, hidden-fault diagnostics.",
+    "landing.tile.materials.kicker": "02 · Supply",
+    "landing.tile.materials.title": "Materials & Parts Supply",
+    "landing.tile.materials.lead": "AOG-style emergency dispatch, obsolete-spares sourcing, compatible-alternative engineering, bulk marine-grade materials — direct to the vessel.",
+    "landing.callus": "Call 24/7 · +1 619 384 0403",
+    "nav.usa": "USA Rapid Response",
+    "nav.work": "Recent Work",
     "work.kicker": "Work",
     "work.title": "Real jobs from the field.",
     "work.sub": "Selected attendances at ports and yards — photo plus a tight technical note.",
@@ -1239,6 +1263,137 @@ const PROJECTS = [
     }
   }
 
+  /* ============== ROUTER (SPA stage) ============== */
+  const Router = {
+    panels: ['home', 'service', 'materials', 'usa', 'tests', 'work', 'about', 'contact'],
+    current: 'home',
+    busy: false,
+    init() {
+      // Initial state from hash
+      const hash = (location.hash || '').replace(/^#/, '').split('/')[0];
+      const target = this.panels.includes(hash) ? hash : 'home';
+      this.setActiveImmediate(target);
+
+      // Intercept clicks on [data-panel-link]
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('[data-panel-link]');
+        if (!link) return;
+        const dest = link.dataset.panelLink;
+        if (!this.panels.includes(dest)) return;
+        e.preventDefault();
+        this.go(dest);
+      });
+
+      // Back/forward navigation
+      window.addEventListener('hashchange', () => {
+        const h = (location.hash || '').replace(/^#/, '').split('/')[0];
+        if (h.startsWith('service/')) return; // drawer deep link, ignored
+        const t = this.panels.includes(h) ? h : 'home';
+        if (t !== this.current && !this.busy) this.go(t, { fromHash: true });
+      });
+
+      // ESC returns to home
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.current !== 'home') {
+          if (drawer && drawer.classList.contains('is-open')) return;
+          this.go('home');
+        }
+      });
+    },
+    setActiveImmediate(target) {
+      document.querySelectorAll('.panel').forEach(p => {
+        const on = p.dataset.panel === target;
+        p.classList.toggle('is-active', on);
+        p.setAttribute('aria-hidden', on ? 'false' : 'true');
+        if (!on) p.style.transform = 'translate3d(100%, 0, 0)';
+        else p.style.transform = 'translate3d(0, 0, 0)';
+        p.style.opacity = on ? '1' : '0';
+      });
+      this.current = target;
+      this.updateNav(target);
+      this.updateHash(target);
+    },
+    updateNav(target) {
+      document.querySelectorAll('[data-panel-link]').forEach(l => {
+        l.classList.toggle('is-active', l.dataset.panelLink === target);
+      });
+    },
+    updateHash(target) {
+      const newHash = target === 'home' ? ' ' : '#' + target;
+      try { history.replaceState(null, '', newHash); } catch (_) {}
+    },
+    panelIndex(name) { return this.panels.indexOf(name); },
+    go(target, opts = {}) {
+      if (this.busy || target === this.current) return;
+      if (!this.panels.includes(target)) return;
+      this.busy = true;
+
+      const fromEl = document.querySelector(`[data-panel="${this.current}"]`);
+      const toEl = document.querySelector(`[data-panel="${target}"]`);
+      if (!fromEl || !toEl) { this.busy = false; return; }
+
+      const fromIdx = this.panelIndex(this.current);
+      const toIdx = this.panelIndex(target);
+      const dir = toIdx > fromIdx ? 1 : -1;
+
+      // Position incoming
+      toEl.style.transform = `translate3d(${dir * 100}%, 0, 0)`;
+      toEl.style.opacity = '0';
+      toEl.classList.add('is-active');
+      toEl.setAttribute('aria-hidden', 'false');
+
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const duration = reduced ? 200 : 620;
+      const easing = reduced ? 'linear' : 'easeInOutQuart';
+
+      if (window.anime && !reduced) {
+        anime({
+          targets: fromEl,
+          translateX: `${dir * -100}%`,
+          opacity: [1, 0.3],
+          duration,
+          easing
+        });
+        anime({
+          targets: toEl,
+          translateX: ['0%'],
+          opacity: [0, 1],
+          duration,
+          easing,
+          complete: () => this._finishGo(fromEl, target, toEl)
+        });
+        // Fade scroll position back to top
+        toEl.scrollTop = 0;
+      } else {
+        // Fallback crossfade
+        fromEl.style.transition = `opacity ${duration}ms linear`;
+        toEl.style.transition = `opacity ${duration}ms linear`;
+        toEl.style.transform = 'translate3d(0,0,0)';
+        requestAnimationFrame(() => {
+          fromEl.style.opacity = '0';
+          toEl.style.opacity = '1';
+          setTimeout(() => this._finishGo(fromEl, target, toEl), duration);
+        });
+      }
+    },
+    _finishGo(fromEl, target, toEl) {
+      fromEl.classList.remove('is-active');
+      fromEl.setAttribute('aria-hidden', 'true');
+      fromEl.style.transition = '';
+      toEl.style.transition = '';
+      this.current = target;
+      this.busy = false;
+      this.updateNav(target);
+      this.updateHash(target);
+      // a11y: focus first heading or back button in the new panel
+      const focusable = toEl.querySelector('h1, h2, .back-btn');
+      if (focusable) {
+        focusable.setAttribute('tabindex', '-1');
+        try { focusable.focus({ preventScroll: true }); } catch (_) {}
+      }
+    }
+  };
+
   /* ============== WORK TABS ============== */
   function setupWorkTabs() {
     const tabs = document.querySelectorAll('.work-tab');
@@ -1313,5 +1468,6 @@ const PROJECTS = [
     setupWorkTabs();
     setupLogin();
     bindEvents();
+    Router.init();
   });
 })();
