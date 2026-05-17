@@ -14,7 +14,8 @@
   <meta property="og:image" content="https://leventmarinetech.com/assets/brand/og-image.jpg" />
   <link rel="canonical" href="https://leventmarinetech.com/profile.html" />
 
-  <link rel="icon" href="assets/logo.png" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -87,11 +88,16 @@
 <header class="header">
   <div class="container header-inner">
     <a class="brand" href="index.html" aria-label="Levent Marine">
-      <div class="brand-mark">L</div>
-      <div class="brand-text">
-        <div class="brand-name">Levent Marine</div>
-        <div class="brand-tag">Electro-Tech Services</div>
-      </div>
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <path fill="currentColor" d="M10 10h10v36H10V10zm16 4h22v8H34v8h14v8H34v16h-8V14z"/>
+          <circle cx="45" cy="15" r="3.25" fill="var(--c-accent)"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <span class="brand-name">Levent Marine</span>
+        <span class="brand-tag">Electro-Tech Services</span>
+      </span>
     </a>
     <nav class="nav" aria-label="Main menu">
       <a href="index.html#services" data-i18n="nav.services">Hizmetler</a>

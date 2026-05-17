@@ -1,43 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Main pages -->
+  <!-- Main SPA panels (hash-routed but indexable as fragments) -->
   <url>
     <loc>https://leventmarinetech.com/</loc>
-    <lastmod>2026-04-20</lastmod>
+    <lastmod>2026-05-17</lastmod>
     <priority>1.0</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://leventmarinetech.com/profile.html</loc>
-    <lastmod>2026-04-20</lastmod>
+    <loc>https://leventmarinetech.com/#service</loc>
+    <lastmod>2026-05-17</lastmod>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://leventmarinetech.com/#materials</loc>
+    <lastmod>2026-05-17</lastmod>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://leventmarinetech.com/#usa</loc>
+    <lastmod>2026-05-17</lastmod>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://leventmarinetech.com/#tests</loc>
+    <lastmod>2026-05-17</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://leventmarinetech.com/#work</loc>
+    <lastmod>2026-05-17</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://leventmarinetech.com/#about</loc>
+    <lastmod>2026-05-17</lastmod>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://leventmarinetech.com/#contact</loc>
+    <lastmod>2026-05-17</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
-  
+
+  <!-- Profile (separate page) -->
+  <url>
+    <loc>https://leventmarinetech.com/profile.html</loc>
+    <lastmod>2026-05-17</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
   <!-- Blog home -->
   <url>
     <loc>https://leventmarinetech.com/blog/</loc>
-    <lastmod>2026-04-20</lastmod>
+    <lastmod>2026-05-17</lastmod>
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
-  
+
   <!-- Blog posts -->
   <url>
     <loc>https://leventmarinetech.com/blog/class-survey/</loc>
-    <lastmod>2025-04-12</lastmod>
+    <lastmod>2026-04-12</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://leventmarinetech.com/blog/acb-mccb-errors/</loc>
-    <lastmod>2025-04-10</lastmod>
+    <lastmod>2026-04-10</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://leventmarinetech.com/blog/bulker-faults/</loc>
-    <lastmod>2025-04-08</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>

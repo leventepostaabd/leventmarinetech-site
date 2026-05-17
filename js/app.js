@@ -24,7 +24,7 @@ const SERVICES = {
   "power-distribution": {
     order: 1,
     icon: "bolt",
-    category: "main",
+    category: "main", cat: "power",
     size: "card-lg",
     photo: "assets/works/generator-avr-diode-speedcard.jpg",
     detailPhoto: "assets/works/generator-avr-diode-speedcard.jpg",
@@ -67,7 +67,7 @@ const SERVICES = {
   "propulsion-motors": {
     order: 2,
     icon: "cog",
-    category: "main",
+    category: "main", cat: "power",
     size: "card-md",
     photo: "assets/works/motor-overhaul.jpg",
     detailPhoto: "assets/works/motor-overhaul.jpg",
@@ -110,7 +110,7 @@ const SERVICES = {
   "navigation-comms": {
     order: 3,
     icon: "radar",
-    category: "main",
+    category: "main", cat: "bridge",
     size: "card-md",
     photo: "assets/works/radar-magnetron-replacement.jpg",
     detailPhoto: "assets/works/radar-magnetron-replacement.jpg",
@@ -153,7 +153,7 @@ const SERVICES = {
   "automation-control": {
     order: 4,
     icon: "cpu",
-    category: "main",
+    category: "main", cat: "bridge",
     size: "card-md",
     photo: "assets/works/ams-system-card-replacement.jpg",
     detailPhoto: "assets/works/ams-system-card-replacement.jpg",
@@ -196,7 +196,7 @@ const SERVICES = {
   "safety-systems": {
     order: 5,
     icon: "shield",
-    category: "main",
+    category: "main", cat: "safety",
     size: "card-wide",
     photo: "assets/works/water-mist-system.jpg",
     detailPhoto: "assets/works/water-mist-system.jpg",
@@ -239,7 +239,7 @@ const SERVICES = {
   "lighting-nav-lights": {
     order: 6,
     icon: "sun",
-    category: "main",
+    category: "main", cat: "safety",
     size: "card-third",
     photo: "assets/hero/engine-room.jpg",
     detailPhoto: "assets/hero/engine-room.jpg",
@@ -278,7 +278,7 @@ const SERVICES = {
   "testing-certification": {
     order: 7,
     icon: "check",
-    category: "main",
+    category: "main", cat: "testing",
     size: "card-half",
     photo: "assets/cert/acb-mccb-test.jpg",
     detailPhoto: "assets/cert/acb-mccb-test.jpg",
@@ -321,7 +321,7 @@ const SERVICES = {
   "commissioning-retrofit": {
     order: 8,
     icon: "wrench",
-    category: "main",
+    category: "main", cat: "testing",
     size: "card-half",
     photo: "assets/cert/busbar-kit-2.jpg",
     detailPhoto: "assets/cert/busbar-kit-2.jpg",
@@ -364,7 +364,7 @@ const SERVICES = {
   "emergency-remote": {
     order: 9,
     icon: "alert",
-    category: "main",
+    category: "main", cat: "service",
     size: "card-third",
     photo: "assets/works/shaft-earthing-device.jpg",
     detailPhoto: "assets/works/shaft-earthing-device.jpg",
@@ -403,7 +403,7 @@ const SERVICES = {
   "class-prep": {
     order: 10,
     icon: "award",
-    category: "main",
+    category: "main", cat: "service",
     size: "card-third",
     photo: "assets/cert/class-reporting.jpg",
     detailPhoto: "assets/cert/class-reporting.jpg",
@@ -446,7 +446,7 @@ const SERVICES = {
   "insulation-diagnostics": {
     order: 11,
     icon: "search",
-    category: "main",
+    category: "main", cat: "testing",
     size: "card-wide",
     photo: "assets/cert/insulation-testing.jpg",
     detailPhoto: "assets/cert/insulation-testing.jpg",
@@ -935,6 +935,7 @@ const PROJECTS = [
       const card = document.createElement('article');
       card.className = `card ${s.size} has-photo`;
       card.dataset.service = key;
+      card.dataset.cat = s.cat || 'service';
       card.setAttribute('role', 'button');
       card.setAttribute('tabindex', '0');
       const chipsHtml = (data.chips || []).map(c => `<span class="chip">${c}</span>`).join('');
@@ -1013,6 +1014,21 @@ const PROJECTS = [
     drawer.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     history.pushState(null, '', '#service/' + key);
+
+    // Animated entry: drawer fades + slight slide; inner items stagger
+    if (window.anime && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const inner = content.querySelectorAll('h2, .lead, .drawer-chips, h3, ul li, a.btn');
+      inner.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(10px)'; });
+      anime({
+        targets: inner,
+        translateY: [10, 0],
+        opacity: [0, 1],
+        delay: anime.stagger(35, { start: 180 }),
+        duration: 420,
+        easing: 'easeOutQuart',
+        complete: () => inner.forEach(el => { el.style.opacity = ''; el.style.transform = ''; })
+      });
+    }
 
     content.querySelectorAll('[data-close-drawer]').forEach(el => {
       el.addEventListener('click', () => { setTimeout(closeDrawer, 100); });
@@ -1253,9 +1269,29 @@ const PROJECTS = [
 
     // Hamburger -> mobile nav (simple toggle)
     const hamburger = document.getElementById('hamburger');
-    const mobileBar = document.getElementById('mobileNav');
-    if (hamburger && mobileBar) {
-      hamburger.addEventListener('click', () => mobileBar.classList.toggle('is-open'));
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+    function openMobileMenu() {
+      if (!mobileMenu) return;
+      mobileMenu.classList.add('is-open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('menu-open');
+    }
+    function closeMobileMenu() {
+      if (!mobileMenu) return;
+      mobileMenu.classList.remove('is-open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('menu-open');
+    }
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', openMobileMenu);
+      if (mobileMenuClose) mobileMenuClose.addEventListener('click', closeMobileMenu);
+      mobileMenu.querySelectorAll('[data-mobile-close], [data-panel-link]').forEach(a => {
+        a.addEventListener('click', () => setTimeout(closeMobileMenu, 50));
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) closeMobileMenu();
+      });
     }
 
     // Nav scrollspy
@@ -1457,6 +1493,41 @@ const PROJECTS = [
     }
   };
 
+  /* ============== SERVICE CATEGORY FILTERS ============== */
+  function setupServiceFilters() {
+    const filters = document.querySelectorAll('.service-filter');
+    if (!filters.length) return;
+    const grid = document.getElementById('bentoGrid');
+    if (!grid) return;
+    filters.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.dataset.catFilter;
+        filters.forEach(b => {
+          const on = b === btn;
+          b.classList.toggle('is-active', on);
+          b.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        const cards = grid.querySelectorAll('.card');
+        cards.forEach(c => {
+          const match = cat === 'all' || c.dataset.cat === cat;
+          c.classList.toggle('is-hidden', !match);
+        });
+        // Subtle reveal of remaining cards
+        if (window.anime && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          const visible = grid.querySelectorAll('.card:not(.is-hidden)');
+          anime({
+            targets: visible,
+            translateY: [8, 0],
+            opacity: [0.4, 1],
+            delay: anime.stagger(30),
+            duration: 320,
+            easing: 'easeOutQuad'
+          });
+        }
+      });
+    });
+  }
+
   /* ============== WORK TABS ============== */
   function setupWorkTabs() {
     const tabs = document.querySelectorAll('.work-tab');
@@ -1528,6 +1599,7 @@ const PROJECTS = [
     setupCountUp();
     setupForm();
     setupMaterialsForm();
+    setupServiceFilters();
     setupWorkTabs();
     setupLogin();
     setupLandingParallax();
