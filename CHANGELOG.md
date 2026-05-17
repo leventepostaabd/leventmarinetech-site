@@ -1,6 +1,40 @@
-# Levent Marine — v2.0 Sürüm Notu
+# Levent Marine — Sürüm Notları
 
-**Tarih:** 20 Nisan 2026
+## v4.1 — Landing polish + parallax + staggered reveal · 17 Mayıs 2026
+
+- **Landing arka plan**: vignette + scan-line texture + `landing-fg-grid` mouse parallax (cursor hareketine göre subtle drift).
+- **Tile illustrations**: Service tile'a animated SVG circuit (pulse dot çizgi üzerinde gezer); Materials tile'a route + paket + gemi motifi (dashed route line akar).
+- **Panel staggered reveal**: anime.js stagger ile her panel girdiğinde içerik elemanları sırayla fade-in/translate-up (40ms aralıklarla).
+- **Form backend stub**: `window.LEVENT_FORMS.contact` ve `.materials` config'i; aynı zamanda Netlify Forms attribute'ları (`data-netlify`, `form-name`, honeypot) eklenmiş — Netlify'a deploy edilirse otomatik backend.
+- A11y düzeltmeleri: brand link + sticky "up" rail SPA hash'ine yönlendirildi.
+
+## v4.0 — SPA Stage · 16 Mayıs 2026
+
+**Tema:** Single-screen state machine. Vertical scroll yok; anime.js v3.2.1 (CDN) ile sağa/sola panel slide.
+
+### Yeni mimari
+- `<main class="stage">` 8 panel: home + service + materials + usa + tests + work + about + contact.
+- Hash router (`#service`, `#materials` vb.) — back/forward + ESC desteği. Drawer deep-link `#service/key` aynen çalışıyor.
+- Landing: full-bleed engine-room photo + Ken Burns + glassmorphism 2 tile CTA (Marine Service / Materials Supply).
+- Her non-home panel'de top-bar: "← Home" back button + breadcrumb.
+- Sticky desktop call-rail; mobile için header phone pill.
+
+### Görsel paketi
+- `assets/GEMINI-PROMPTS.md` — 24 tek-parça kopyala-yapıştır Gemini prompt'u (dosya adı + path + boyut + alt-text). Tier 1 (4 kritik) / Tier 2 (10 servis) / Tier 3 (8 proje + 3 blog + OG).
+
+## v3.0 — Pivot: marine elektrik arıza servisi · 15 Mayıs 2026
+
+- "Class-ready" tagline kaldırıldı; sektörel pozisyon "we fix any electrical fault" oldu.
+- Trust strip'ten 8 class authority logosu silindi, sadece 6 müşteri logosu.
+- Yeni section: **USA Coverage** (route + 9 US limanı + 4 stat card).
+- Yeni section: **Materials Desk** (AOG/obsolete/compatible/bulk + parça formu).
+- Yeni hizmet: **Insulation & Hidden-Fault Diagnostics** (kategori #11).
+- EN-default, TR yarıya indirilmiş sözlük + fallback.
+- Class authority badge'leri projelerden kaldırıldı, job-type badge oldu.
+- Animated SVG hero (v3.0'da; v4.0'da landing photo'ya yerini bıraktı).
+
+## v2.0 — Interactive Bento Grid · 20 Nisan 2026
+
 **Tema:** Interactive Bento Grid (Konsept C) — Deep Harbor paleti
 
 ## Nelerin değiştiği

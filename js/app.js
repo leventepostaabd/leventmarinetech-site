@@ -1,7 +1,23 @@
 /* =========================================================
-   LEVENT MARINE — v2 Application
-   i18n + services data + drawer + theme + reveal + form
+   LEVENT MARINE — Application
+   i18n + services data + drawer + theme + reveal + SPA router + forms
    ========================================================= */
+
+/* ============== FORM ENDPOINT CONFIG ==============
+   To enable real form delivery without a backend:
+   1) Sign up at https://formspree.io (free tier: 50 submissions/mo)
+   2) Create a new form, copy your endpoint URL like:
+      https://formspree.io/f/xxxxxxxx
+   3) Replace the URL below in window.LEVENT_FORMS.contact / materials
+   Until set, forms gracefully fall back to opening WhatsApp with the data.
+   Alternative: Netlify Forms (move the project to Netlify and add netlify
+   attribute to <form> — no JS endpoint change needed).
+*/
+window.LEVENT_FORMS = window.LEVENT_FORMS || {
+  contact:   '/api/contact',   // e.g. 'https://formspree.io/f/XXXXXXXX'
+  materials: '/api/materials'  // e.g. 'https://formspree.io/f/YYYYYYYY'
+};
+
 
 /* ============== SERVICE DATA (bulker odaklı geniş katalog) ============== */
 const SERVICES = {
@@ -1131,9 +1147,9 @@ const PROJECTS = [
       const data = Object.fromEntries(new FormData(form).entries());
 
       try {
-        const resp = await fetch('/api/contact', {
+        const resp = await fetch(window.LEVENT_FORMS.contact, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify(data)
         });
         if (!resp.ok) throw new Error('API not ready');
@@ -1261,6 +1277,51 @@ const PROJECTS = [
       const key = location.hash.split('/')[1];
       setTimeout(() => openServiceDrawer(key), 300);
     }
+  }
+
+  /* ============== LANDING MOUSE PARALLAX ============== */
+  function setupLandingParallax() {
+    const landing = document.querySelector('.landing');
+    if (!landing) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let raf = null;
+    landing.addEventListener('mousemove', (e) => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        const r = landing.getBoundingClientRect();
+        const mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+        const my = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        landing.style.setProperty('--mx', mx.toFixed(3));
+        landing.style.setProperty('--my', my.toFixed(3));
+        raf = null;
+      });
+    });
+    landing.addEventListener('mouseleave', () => {
+      landing.style.setProperty('--mx', 0);
+      landing.style.setProperty('--my', 0);
+    });
+  }
+
+  /* ============== PANEL STAGGERED REVEAL ============== */
+  function revealPanel(panelEl) {
+    if (!panelEl || !window.anime) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const items = panelEl.querySelectorAll(
+      '.panel-topbar, .section-kicker, h1, h2, .hero-sub, .landing-sub, .tile-row, .landing-sub-row, .landing-trust, .bento .card, .usa-stat, .usa-route, .materials-copy li, .materials-form, .cert-grid > *, .projects-scroll .project, .gallery-grid .gallery-item, .about-card, .contact-card, .contact-form, .cta-band'
+    );
+    if (!items.length) return;
+    items.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(14px)'; });
+    anime({
+      targets: items,
+      translateY: [14, 0],
+      opacity: [0, 1],
+      delay: anime.stagger(40, { start: 60 }),
+      duration: 520,
+      easing: 'easeOutQuart',
+      complete: () => {
+        items.forEach(el => { el.style.opacity = ''; el.style.transform = ''; });
+      }
+    });
   }
 
   /* ============== ROUTER (SPA stage) ============== */
@@ -1391,6 +1452,8 @@ const PROJECTS = [
         focusable.setAttribute('tabindex', '-1');
         try { focusable.focus({ preventScroll: true }); } catch (_) {}
       }
+      // Staggered reveal of inner items
+      revealPanel(toEl);
     }
   };
 
@@ -1431,9 +1494,9 @@ const PROJECTS = [
       setStatus('pending', 'form.status.sending');
       const data = Object.fromEntries(new FormData(form).entries());
       try {
-        const resp = await fetch('/api/materials', {
+        const resp = await fetch(window.LEVENT_FORMS.materials, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify(data)
         });
         if (!resp.ok) throw new Error('API not ready');
@@ -1467,7 +1530,13 @@ const PROJECTS = [
     setupMaterialsForm();
     setupWorkTabs();
     setupLogin();
+    setupLandingParallax();
     bindEvents();
     Router.init();
+    // First reveal: animate the landing items in
+    setTimeout(() => {
+      const initialPanel = document.querySelector('.panel.is-active');
+      if (initialPanel) revealPanel(initialPanel);
+    }, 80);
   });
 })();
