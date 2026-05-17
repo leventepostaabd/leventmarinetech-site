@@ -18,6 +18,55 @@ window.LEVENT_FORMS = window.LEVENT_FORMS || {
   materials: '/api/materials'  // e.g. 'https://formspree.io/f/YYYYYYYY'
 };
 
+/* ============== ANALYTICS CONFIG ==============
+   Set the IDs / tokens below to wire up analytics. All optional, all opt-in.
+   - ga4:        Google Analytics 4 measurement ID, e.g. 'G-XXXXXXXXXX'
+   - plausible:  Plausible domain, e.g. 'leventmarinetech.com' (privacy alt)
+   - gsc:        Google Search Console verification token (also add as
+                 <meta name="google-site-verification" content="…"> in head)
+   No tracking runs until at least one is set; nothing is loaded otherwise.
+*/
+window.LEVENT_ANALYTICS = window.LEVENT_ANALYTICS || {
+  ga4: '',
+  plausible: '',
+  gsc: ''
+};
+(function loadAnalytics() {
+  const cfg = window.LEVENT_ANALYTICS || {};
+  // Respect DNT
+  if (navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
+  if (cfg.ga4) {
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(cfg.ga4);
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ window.dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', cfg.ga4, { anonymize_ip: true });
+  }
+  if (cfg.plausible) {
+    const s = document.createElement('script');
+    s.defer = true;
+    s.setAttribute('data-domain', cfg.plausible);
+    s.src = 'https://plausible.io/js/script.js';
+    document.head.appendChild(s);
+  }
+})();
+
+/* ============== SERVICE WORKER ==============
+   Registers /sw.js for offline shell + faster repeat visits.
+   Disable by setting window.LEVENT_NO_SW = true before app.js loads.
+*/
+if ('serviceWorker' in navigator && !window.LEVENT_NO_SW && location.protocol !== 'file:') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {
+      /* silent — non-critical, dev hosts may not allow */
+    });
+  });
+}
+
 
 /* ============== SERVICE DATA (bulker odaklı geniş katalog) ============== */
 const SERVICES = {
@@ -1000,14 +1049,43 @@ const PROJECTS = [
     const chipsHtml = data.chips.map(c => `<span class="chip">${c}</span>`).join('');
     const itemsHtml = data.items.map(i => `<li><strong>${i.h}</strong> — ${i.d}</li>`).join('');
 
+    // Related services: same cat, exclude self, pick up to 3
+    const related = Object.keys(SERVICES)
+      .filter(k => k !== key && SERVICES[k].cat === s.cat)
+      .slice(0, 3);
+    const relatedLabel = state.lang === 'tr' ? 'İlgili hizmetler' : 'Related services';
+    const relatedHtml = related.length
+      ? `<div class="drawer-related">
+           <div class="drawer-related-label">${relatedLabel}</div>
+           <div class="drawer-related-row">
+             ${related.map(k => `
+               <a href="#service/${k}" data-related-service="${k}" class="drawer-related-card">
+                 <span class="drawer-related-title">${SERVICES[k][state.lang].title}</span>
+                 <span class="drawer-related-arrow">→</span>
+               </a>
+             `).join('')}
+           </div>
+         </div>`
+      : '';
+
     content.innerHTML = `
       <h2>${data.title}</h2>
       <p class="lead">${data.summary}</p>
       <div class="drawer-chips">${chipsHtml}</div>
       <h3>${state.lang === 'tr' ? 'Kapsam' : 'Scope'}</h3>
       <ul>${itemsHtml}</ul>
-      <a href="#contact" class="btn btn-accent" data-close-drawer>${data.cta} →</a>
+      <a href="#contact" data-panel-link="contact" class="btn btn-accent" data-close-drawer>${data.cta} →</a>
+      ${relatedHtml}
     `;
+
+    // Wire related cards to swap drawer in-place
+    content.querySelectorAll('[data-related-service]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        const newKey = el.dataset.relatedService;
+        openServiceDrawer(newKey);
+      });
+    });
 
     drawer.classList.add('is-open');
     overlay.classList.add('is-open');
@@ -1103,6 +1181,35 @@ const PROJECTS = [
   }
 
   /* ============== CONTACT FORM ============== */
+  /* ============== ANTI-SPAM ==============
+     Two free protections, always on:
+       1. Honeypot input "bot-field" — invisible in HTML; bots fill it.
+       2. Time-since-load gate — humans take >1.5s to fill a form.
+     Optional Cloudflare Turnstile (config-driven):
+       window.LEVENT_ANTISPAM = { turnstile: 'YOUR_SITE_KEY' };
+  */
+  window.LEVENT_ANTISPAM = window.LEVENT_ANTISPAM || { turnstile: '' };
+  const FORM_LOAD_TIME = Date.now();
+  function checkSpamHeuristics(form) {
+    const hp = form.querySelector('input[name="bot-field"]');
+    if (hp && hp.value.trim() !== '') return 'honeypot';
+    if (Date.now() - FORM_LOAD_TIME < 1500) return 'too-fast';
+    return null;
+  }
+  function mountTurnstile() {
+    const key = (window.LEVENT_ANTISPAM || {}).turnstile;
+    if (!key) return;
+    if (document.querySelector('script[src*="challenges.cloudflare.com"]')) return;
+    const s = document.createElement('script');
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+    s.async = true;
+    s.defer = true;
+    document.head.appendChild(s);
+    document.querySelectorAll('form .cf-turnstile').forEach(el => {
+      el.setAttribute('data-sitekey', key);
+    });
+  }
+
   function setupForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
@@ -1148,6 +1255,13 @@ const PROJECTS = [
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const spam = checkSpamHeuristics(form);
+      if (spam) {
+        // Silently accept to not give bots feedback
+        setStatus('success', 'form.status.success');
+        form.reset();
+        return;
+      }
       if (!validate()) {
         setStatus('error', 'form.status.invalid');
         const firstBad = form.querySelector('.is-invalid');
@@ -1558,6 +1672,12 @@ const PROJECTS = [
     }
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const spam = checkSpamHeuristics(form);
+      if (spam) {
+        setStatus('success', 'form.status.success');
+        form.reset();
+        return;
+      }
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalLabel = submitBtn.textContent;
       submitBtn.textContent = t('form.status.sending');
@@ -1601,6 +1721,7 @@ const PROJECTS = [
     setupMaterialsForm();
     setupServiceFilters();
     setupWorkTabs();
+    mountTurnstile();
     setupLogin();
     setupLandingParallax();
     bindEvents();

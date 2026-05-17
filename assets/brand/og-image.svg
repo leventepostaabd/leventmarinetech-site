@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B1F3A"/>
+      <stop offset="55%" stop-color="#13345F"/>
+      <stop offset="100%" stop-color="#0B1F3A"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="78%" cy="32%" r="55%">
+      <stop offset="0%" stop-color="#F5A524" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#F5A524" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Circuit motif (right half) -->
+  <g stroke="rgba(245,165,36,0.35)" stroke-width="1.5" fill="none" stroke-linecap="round">
+    <path d="M 650 140 L 780 140 L 780 260 L 920 260"/>
+    <path d="M 720 320 L 880 320 L 880 430 L 1050 430"/>
+    <path d="M 820 200 L 820 500 L 1020 500"/>
+    <circle cx="650" cy="140" r="4" fill="rgba(245,165,36,0.7)"/>
+    <circle cx="780" cy="260" r="4" fill="rgba(245,165,36,0.7)"/>
+    <circle cx="920" cy="260" r="4" fill="rgba(245,165,36,0.7)"/>
+    <circle cx="880" cy="430" r="4" fill="rgba(245,165,36,0.7)"/>
+    <circle cx="1050" cy="430" r="4" fill="rgba(245,165,36,0.7)"/>
+    <circle cx="820" cy="200" r="4" fill="rgba(245,165,36,0.7)"/>
+    <circle cx="1020" cy="500" r="4" fill="rgba(245,165,36,0.7)"/>
+    <rect x="775" y="255" width="10" height="10" rx="1" fill="rgba(245,165,36,0.35)"/>
+    <rect x="875" y="425" width="10" height="10" rx="1" fill="rgba(245,165,36,0.35)"/>
+  </g>
+
+  <!-- Brand mark (left) -->
+  <g transform="translate(96, 96)">
+    <svg viewBox="0 0 56 56" width="92" height="92" x="0" y="0">
+      <path fill="#FFFFFF" d="M10 10h10v36H10V10zm16 4h22v8H34v8h14v8H34v16h-8V14z"/>
+      <circle cx="45" cy="15" r="3.25" fill="#F5A524"/>
+    </svg>
+  </g>
+
+  <!-- Mono kicker -->
+  <text x="96" y="280" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="20" letter-spacing="3.2" fill="#F5A524" font-weight="500">MARINE ELECTRICAL · SINCE 2012</text>
+
+  <!-- Headline -->
+  <text x="96" y="356" font-family="'Space Grotesk', 'Helvetica', sans-serif" font-size="64" font-weight="700" fill="#FFFFFF" letter-spacing="-1.5">We fix any electrical fault</text>
+  <text x="96" y="424" font-family="'Space Grotesk', 'Helvetica', sans-serif" font-size="64" font-weight="700" fill="#F5A524" letter-spacing="-1.5">on a dry-cargo ship.</text>
+
+  <!-- Sub -->
+  <text x="96" y="478" font-family="'Inter', 'Helvetica', sans-serif" font-size="22" fill="rgba(255,255,255,0.78)" letter-spacing="-0.2">Engineer onboard in hours. Parts on the way within a day.</text>
+
+  <!-- Footer row -->
+  <line x1="96" y1="530" x2="1104" y2="530" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+  <text x="96" y="568" font-family="'JetBrains Mono', monospace" font-size="14" letter-spacing="2.5" fill="rgba(255,255,255,0.65)">LEVENTMARINETECH.COM</text>
+  <text x="96" y="594" font-family="'JetBrains Mono', monospace" font-size="14" letter-spacing="2.5" fill="rgba(255,255,255,0.45)">TUZLA / ISTANBUL  ·  SHERIDAN / WYOMING</text>
+
+  <!-- Right corner mono tag -->
+  <text x="1104" y="568" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="14" letter-spacing="2.5" fill="rgba(255,255,255,0.65)">24 / 7  HOTLINE</text>
+  <text x="1104" y="594" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="14" letter-spacing="2.5" fill="#F5A524">+1 619 384 0403</text>
+</svg>

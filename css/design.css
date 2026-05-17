@@ -1596,8 +1596,77 @@ a { color: inherit; }
 
 /* ============== PRINT ============== */
 @media print {
-  .header, .footer, .mobile-nav-btn, .drawer, .overlay, .login-modal { display: none; }
+  /* Hide all SPA chrome */
+  .header, .footer, .mobile-nav-btn, .mobile-menu, .login-modal,
+  .call-rail, .header-phone, .panel-topbar, .service-filters,
+  .work-tabs, .nav, .overlay { display: none !important; }
+
+  body, html { background: #fff !important; color: #000 !important; }
+  .stage { height: auto !important; overflow: visible !important; }
+
+  /* Expand every panel — show the whole site for archival print */
+  .panel {
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    page-break-after: always;
+  }
+  .panel[aria-hidden="true"] { display: block !important; }
+  .panel.landing { background: #fff !important; color: #000 !important; padding: 24px 0; }
+  .landing-bg, .landing::before, .landing::after, .landing-fg-grid { display: none !important; }
+  .landing h1, .landing-eyebrow, .landing-sub, .landing-sub-row a, .landing-trust { color: #000 !important; }
+
   .section { padding: 20px 0; page-break-inside: avoid; }
+
+  /* Make USA panel readable on white */
+  .usa-section { background: #fff !important; color: #000 !important; }
+  .usa-section .section-head h2, .usa-section .section-head p, .usa-section .section-kicker,
+  .usa-section .usa-route h3, .usa-section .usa-route p,
+  .usa-section .route-line, .usa-stat .num, .usa-stat .label,
+  .usa-cities span { color: #000 !important; background: transparent !important; }
+  .usa-route, .usa-stat { background: #fff !important; border: 1px solid #ccc !important; }
+  .usa-route .route-arrow { color: #888 !important; }
+  .usa-section .panel-topbar { display: none; }
+
+  /* Drawer (in case the user prints with one open) — print as a card */
+  .drawer {
+    position: static !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc;
+    page-break-before: always;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  /* Surface URLs after links so a printed contact sheet stays useful */
+  a[href^="http"]::after,
+  a[href^="mailto:"]::after,
+  a[href^="tel:"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #666;
+  }
+  /* Skip URL print for SPA hash links — they don't add info */
+  a[href^="#"]::after { content: ""; }
+
+  /* Contact cards as printable business cards */
+  .contact-card {
+    page-break-inside: avoid;
+    border: 1px solid #ccc !important;
+    background: #fff !important;
+  }
+  .contact-card a { color: #000 !important; text-decoration: none !important; }
+
+  /* Print logo — keep it in dark navy ink */
+  .brand-mark { color: #0B1F3A !important; }
+
+  img { max-width: 100% !important; }
+
+  @page { margin: 16mm; }
 }
 
 /* ============== v3 — HEADER PINNED PHONE ============== */
@@ -2412,3 +2481,50 @@ body.menu-open { overflow: hidden; }
   .service-filters { font-size: 10.5px; }
   .service-filter { padding: 8px 12px; font-size: 10.5px; }
 }
+
+/* ============== v4.2 — DRAWER RELATED SERVICES ============== */
+.drawer-related {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--c-border);
+}
+.drawer-related-label {
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--c-text-3);
+  margin-bottom: 12px;
+}
+.drawer-related-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+.drawer-related-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  text-decoration: none;
+  color: var(--c-text);
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: all var(--t-fast) var(--e-out);
+}
+.drawer-related-card:hover {
+  border-color: var(--c-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--sh-md);
+}
+.drawer-related-arrow {
+  font-family: var(--f-mono);
+  color: var(--c-accent);
+  opacity: 0.7;
+  transition: transform var(--t-fast);
+}
+.drawer-related-card:hover .drawer-related-arrow { transform: translateX(4px); opacity: 1; }
