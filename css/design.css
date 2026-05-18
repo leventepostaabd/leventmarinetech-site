@@ -2528,3 +2528,45 @@ body.menu-open { overflow: hidden; }
   transition: transform var(--t-fast);
 }
 .drawer-related-card:hover .drawer-related-arrow { transform: translateX(4px); opacity: 1; }
+
+/* ============== v4.4 — TILE BACKGROUND IMAGES ============== */
+.tile-service::after,
+.tile-materials::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.22;
+  z-index: -1;
+  transition: opacity 500ms var(--e-out), transform 700ms var(--e-out);
+  border-radius: inherit;
+}
+.tile-service::after  { background-image: url('../assets/services/01-power-distribution.jpg'); }
+.tile-materials::after { background-image: url('../assets/services/02-materials-supply.jpg'); }
+.tile-cta:hover.tile-service::after,
+.tile-cta:hover.tile-materials::after {
+  opacity: 0.38;
+  transform: scale(1.04);
+}
+
+/* ============== v4.4 — MATERIALS PANEL HERO ============== */
+#materials .panel-topbar { position: relative; z-index: 2; }
+#materials .section-head {
+  position: relative;
+  padding-top: 48px;
+}
+#materials .section-head::before {
+  content: '';
+  display: block;
+  height: 220px;
+  margin: 0 0 32px;
+  border-radius: var(--r-lg);
+  background-image: linear-gradient(180deg, rgba(11,31,58,0.20), rgba(11,31,58,0.55)), url('../assets/services/02-materials-supply.jpg');
+  background-size: cover;
+  background-position: center;
+  box-shadow: var(--sh-md);
+}
+@media (max-width: 720px) {
+  #materials .section-head::before { height: 160px; }
+}
