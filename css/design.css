@@ -564,17 +564,17 @@ a { color: inherit; }
 .bento {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: minmax(160px, auto);
-  gap: 20px;
+  grid-auto-rows: minmax(140px, auto);
+  gap: 14px;
 }
 .card {
   background: var(--c-surface);
   border: 1px solid var(--c-border);
-  border-radius: var(--r-lg);
-  padding: 28px;
+  border-radius: 10px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   transition: all var(--t-base) var(--e-out);
   cursor: pointer;
   position: relative;
@@ -2718,7 +2718,7 @@ body.menu-open { overflow: hidden; }
 .call-rail a.up { background: rgba(255,255,255,0.92); }
 [data-theme="dark"] .call-rail a.up { background: var(--c-surface); }
 
-/* ============== v4.5 — INITIAL LOADER (until JS boots panels) ============== */
+/* ============== v4.7 — INITIAL LOADER: brand mark with pulse ============== */
 html:not(.app-ready) .stage::before {
   content: '';
   position: absolute;
@@ -2730,21 +2730,26 @@ html:not(.app-ready) .stage::before {
 html:not(.app-ready) .stage::after {
   content: '';
   position: absolute;
-  top: calc(50% - 12px);
-  left: calc(50% - 12px);
-  width: 24px;
-  height: 24px;
-  border: 2px solid var(--c-border);
-  border-top-color: var(--c-accent);
-  border-radius: 50%;
+  top: calc(50% - 28px);
+  left: calc(50% - 28px);
+  width: 56px;
+  height: 56px;
+  background: url('../assets/logo.svg') no-repeat center / contain;
   z-index: 201;
-  animation: spin 800ms linear infinite;
+  animation: brandPulse 1.4s ease-in-out infinite;
+  opacity: 0.6;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
+[data-theme="dark"] html:not(.app-ready) .stage::after {
+  background-image: url('../assets/logo-dark.svg');
+}
+@keyframes brandPulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.08); }
+}
 html.app-ready .stage::before,
 html.app-ready .stage::after { display: none; }
 @media (prefers-reduced-motion: reduce) {
-  html:not(.app-ready) .stage::after { animation: none; border-top-color: var(--c-text-2); }
+  html:not(.app-ready) .stage::after { animation: none; opacity: 0.7; }
 }
 
 /* ============== v4.6 — FOOTER: fixed thin bottom strip, no body scroll ============== */
@@ -2814,3 +2819,33 @@ html.app-ready .stage::after { display: none; }
   html, body { overflow: visible !important; height: auto !important; }
   .footer { position: static !important; }
 }
+
+/* ============== v4.7 — Corporate density polish ============== */
+/* Tighter radius + padding across all card-like blocks */
+.about-card, .contact-card, .cert-small, .cert-big, .materials-form, .usa-route, .usa-stat {
+  border-radius: 10px;
+}
+.about-card { padding: 24px; }
+.contact-card { padding: 20px; }
+
+/* Drawer slightly less rounded — corporate not bubbly */
+.drawer { border-radius: 14px; }
+
+/* Tile-cta: less rounded glassy bubble */
+.tile-cta { border-radius: 12px; }
+
+/* Service filter chips: less pill */
+.service-filters { border-radius: 10px; padding: 4px; }
+.service-filter { border-radius: 6px; }
+
+/* Project cards */
+.project { border-radius: 10px; padding: 12px; }
+.project-img { border-radius: 8px; }
+
+/* Section head h2: tighter line height for industrial weight */
+.section-head h2 { line-height: 1.02; }
+
+/* Card hover: subtler */
+.card { transition: transform var(--t-fast) var(--e-out), border-color var(--t-fast); }
+.card:hover { transform: translateY(-2px); border-color: var(--c-border-strong); }
+.card::after { display: none; }   /* drop the amber inset stroke on hover */
