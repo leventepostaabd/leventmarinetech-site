@@ -51,7 +51,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Design System -->
   <link rel="stylesheet" href="css/design.css" />
@@ -124,14 +124,9 @@
     <div class="nav-actions">
       <a class="header-phone" href="tel:+16193840403" aria-label="24/7 hotline">
         <span class="dot" aria-hidden="true"></span>
-        <span data-i18n="header.phone.label">24/7 Hotline</span>
+        <span class="header-phone-num">+1 619 384 0403</span>
       </a>
-      <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
-      <button class="lang-btn" data-lang="tr" aria-label="Türkçe">TR</button>
-      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Theme">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
-      </button>
-      <button class="btn btn-ghost btn-sm" id="loginBtn" data-i18n="btn.login">Sign in</button>
+      <button class="lang-toggle" id="langToggle" aria-label="Toggle language"><span id="langLabel">EN</span></button>
       <a href="#contact" data-panel-link="contact" class="btn btn-accent btn-sm" data-i18n="btn.request">Request quote</a>
       <button class="icon-btn hamburger" id="hamburger" aria-label="Menu">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -1046,7 +1041,14 @@
     </div>
     <div class="footer-bottom">
       <span class="mono" data-i18n="footer.rights">© 2026 LEVENT MARINE LLC · ALL RIGHTS RESERVED</span>
-      <span class="mono">v3.0</span>
+      <div class="footer-actions">
+        <button class="footer-action-btn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
+          <span class="mono">Theme</span>
+        </button>
+        <button class="footer-action-btn" id="loginBtn" data-i18n="btn.login">Sign in</button>
+        <span class="mono">v4.5</span>
+      </div>
     </div>
   </div>
 </footer>

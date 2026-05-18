@@ -37,14 +37,14 @@
   --sh-xl: 0 20px 60px rgba(11,31,58,.18);
 
   /* Typography */
-  --f-head: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --f-head: "Manrope", system-ui, -apple-system, sans-serif;
   --f-body: "Inter", system-ui, -apple-system, sans-serif;
   --f-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Layout */
   --container-max: 1280px;
   --container-pad: 24px;
-  --section-pad: 96px;
+  --section-pad: 72px;
 
   /* Timing */
   --t-fast: 180ms;
@@ -100,29 +100,25 @@ a { color: inherit; }
 }
 .eyebrow {
   font-family: var(--f-mono);
-  font-size: 12px;
-  letter-spacing: 0.12em;
+  font-size: 11.5px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--c-accent-600);
+  color: var(--c-text-2);
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 6px 14px;
-  border-radius: var(--r-pill);
-  background: rgba(245, 165, 36, 0.1);
-  border: 1px solid rgba(245, 165, 36, 0.22);
+  padding-left: 16px;
+  position: relative;
 }
 .eyebrow::before {
   content: '';
-  width: 6px;
-  height: 6px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 8px;
+  height: 1px;
   background: var(--c-accent);
-  border-radius: 50%;
-  animation: pulse 2.4s infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  transform: translateY(-50%);
 }
 
 /* ============== BUTTONS ============== */
@@ -527,21 +523,35 @@ a { color: inherit; }
 }
 .section-kicker {
   font-family: var(--f-mono);
-  font-size: 12px;
+  font-size: 11.5px;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--c-accent-600);
+  letter-spacing: 0.16em;
+  color: var(--c-text-2);
+  display: inline-flex;
+  align-items: center;
+  padding-left: 16px;
+  position: relative;
+}
+.section-kicker::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 8px;
+  height: 1px;
+  background: var(--c-accent);
+  transform: translateY(-50%);
 }
 .section-head h2 {
   font-family: var(--f-head);
-  font-weight: 600;
-  font-size: clamp(32px, 4.2vw, 48px);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  margin: 14px 0 16px;
+  font-weight: 700;
+  font-size: clamp(34px, 4.2vw, 50px);
+  line-height: 1.05;
+  letter-spacing: -0.022em;
+  margin: 16px 0 16px;
   color: var(--c-text);
 }
-.section-head h2 .accent { color: var(--c-accent-600); }
+.section-head h2 .accent { color: var(--c-primary); border-bottom: 3px solid var(--c-accent); padding-bottom: 2px; }
 .section-head p {
   color: var(--c-text-2);
   font-size: 17px;
@@ -2569,4 +2579,120 @@ body.menu-open { overflow: hidden; }
 }
 @media (max-width: 720px) {
   #materials .section-head::before { height: 160px; }
+}
+
+/* ============== v4.5 — HEADER: tightened nav-actions ============== */
+.header-phone .header-phone-num {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: inherit;
+}
+.lang-toggle {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--c-text-2);
+  background: transparent;
+  border: 1px solid var(--c-border);
+  padding: 7px 12px;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: all var(--t-fast) var(--e-out);
+  text-transform: uppercase;
+}
+.lang-toggle:hover {
+  color: var(--c-text);
+  border-color: var(--c-border-strong);
+  background: var(--c-surface-2);
+}
+
+/* Footer move-to actions (was in header) */
+.footer-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.footer-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  color: var(--c-text-2);
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--t-fast) var(--e-out);
+}
+.footer-action-btn:hover {
+  color: var(--c-text);
+  border-color: var(--c-border-strong);
+  background: var(--c-surface-2);
+}
+[data-theme="dark"] .footer-action-btn { color: var(--c-text-2); }
+
+/* Header tightens earlier — hide nav at 1100px (was 900) so phone+lang+quote stay readable */
+@media (max-width: 1100px) {
+  .nav { display: none; }
+  .hamburger { display: grid; }
+  .header-phone .header-phone-num { display: none; }
+}
+@media (max-width: 720px) {
+  .lang-toggle { display: none; }
+  .header .btn-accent { display: none; }
+  .header-phone { padding: 6px 8px; }
+}
+
+/* ============== v4.5 — TILE ART subtler (less blog-y) ============== */
+.tile-art { opacity: 0.18; }
+.tile-cta:hover .tile-art { opacity: 0.32; }
+
+/* ============== v4.5 — landing tiles tightened ============== */
+.tile-cta h2 {
+  font-family: var(--f-head);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.tile-cta .tile-kicker {
+  color: var(--c-text-2);   /* was amber — now muted grey, more corporate */
+}
+.landing .tile-cta .tile-kicker { color: rgba(255,255,255,0.6); }
+
+/* ============== v4.5 — kicker on dark sections (USA, landing) ============== */
+.landing .section-kicker,
+.landing-eyebrow {
+  color: rgba(255,255,255,0.7);
+}
+.landing .section-kicker::before,
+.landing-eyebrow::before { background: var(--c-accent); }
+
+/* Force usa-section kicker style — override earlier ::before color */
+.usa-section .section-kicker { color: rgba(255,255,255,0.7); }
+.usa-section .section-kicker::before { background: var(--c-accent); }
+
+/* ============== v4.5 — service-filter active uses navy (was amber) ============== */
+.service-filter.is-active {
+  background: var(--c-primary);
+  color: #fff;
+}
+[data-theme="dark"] .service-filter.is-active {
+  background: var(--c-surface);
+  color: var(--c-text);
+  box-shadow: inset 0 0 0 1px var(--c-accent);
+}
+
+/* ============== v4.5 — H1 tightened for corporate weight ============== */
+.hero h1, .landing h1 {
+  font-weight: 700;
+  letter-spacing: -0.028em;
+}
+.landing h1 .accent {
+  color: var(--c-accent);
 }

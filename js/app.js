@@ -1374,6 +1374,19 @@ const PROJECTS = [
     document.querySelectorAll('[data-lang]').forEach(b => {
       b.addEventListener('click', () => setLang(b.dataset.lang));
     });
+    // Single header lang-toggle (flip)
+    const langToggle = document.getElementById('langToggle');
+    const langLabel = document.getElementById('langLabel');
+    function syncLangLabel() {
+      if (langLabel) langLabel.textContent = state.lang === 'en' ? 'TR' : 'EN';
+    }
+    syncLangLabel();
+    if (langToggle) {
+      langToggle.addEventListener('click', () => {
+        setLang(state.lang === 'en' ? 'tr' : 'en');
+        syncLangLabel();
+      });
+    }
 
     // Drawer close
     const drawerCloseBtn = document.getElementById('drawerClose');
