@@ -2696,3 +2696,50 @@ body.menu-open { overflow: hidden; }
 .landing h1 .accent {
   color: var(--c-accent);
 }
+
+/* ============== v4.5 — landing readability over photo ============== */
+.landing h1 {
+  text-shadow: 0 1px 24px rgba(11,15,28,0.4);
+  font-weight: 800;            /* bolder so it survives the photo backdrop */
+}
+.landing-sub {
+  text-shadow: 0 1px 12px rgba(11,15,28,0.35);
+}
+.landing-sub-row a { font-weight: 500; }
+/* Make sure tiles always read on top of photo bg */
+.tile-cta { backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%); }
+
+/* Sticky CTA rail — extra contrast on landing (navy bg) */
+.call-rail a.call { box-shadow: 0 8px 24px rgba(245,165,36,0.25); }
+.call-rail a.whatsapp { box-shadow: 0 8px 24px rgba(37,211,102,0.25); }
+.call-rail a.up { background: rgba(255,255,255,0.92); }
+[data-theme="dark"] .call-rail a.up { background: var(--c-surface); }
+
+/* ============== v4.5 — INITIAL LOADER (until JS boots panels) ============== */
+html:not(.app-ready) .stage::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--c-bg);
+  z-index: 200;
+  pointer-events: none;
+}
+html:not(.app-ready) .stage::after {
+  content: '';
+  position: absolute;
+  top: calc(50% - 12px);
+  left: calc(50% - 12px);
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--c-border);
+  border-top-color: var(--c-accent);
+  border-radius: 50%;
+  z-index: 201;
+  animation: spin 800ms linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+html.app-ready .stage::before,
+html.app-ready .stage::after { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  html:not(.app-ready) .stage::after { animation: none; border-top-color: var(--c-text-2); }
+}

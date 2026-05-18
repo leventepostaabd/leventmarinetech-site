@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>404 — Page Not Found · Levent Marine</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#0B1F3A" />
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml" />
+  <link rel="icon" href="/assets/logo.png" type="image/png" />
+
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem('levent.theme');
+        if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch(_) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/design.css" />
+
+  <style>
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      background: var(--c-bg);
+    }
+    .e404 {
+      max-width: 560px;
+      text-align: center;
+    }
+    .e404-code {
+      font-family: var(--f-mono);
+      font-size: 14px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--c-text-2);
+      display: inline-flex;
+      align-items: center;
+      padding-left: 16px;
+      position: relative;
+    }
+    .e404-code::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      width: 8px; height: 1px;
+      background: var(--c-accent);
+      transform: translateY(-50%);
+    }
+    .e404 h1 {
+      font-family: var(--f-head);
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+      margin: 18px 0 14px;
+      color: var(--c-text);
+    }
+    .e404 p {
+      color: var(--c-text-2);
+      font-size: 17px;
+      line-height: 1.55;
+      margin: 0 0 28px;
+    }
+    .e404-actions {
+      display: inline-flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .e404-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      color: var(--c-text);
+      text-decoration: none;
+    }
+    .e404-brand svg { width: 36px; height: 36px; color: var(--c-primary); }
+    [data-theme="dark"] .e404-brand svg { color: var(--c-text); }
+    .e404-brand-name {
+      font-family: var(--f-head);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+  </style>
+</head>
+<body>
+  <main class="e404" role="main">
+    <a href="/" class="e404-brand" aria-label="Levent Marine — home">
+      <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M10 10h10v36H10V10zm16 4h22v8H34v8h14v8H34v16h-8V14z"/>
+        <circle cx="45" cy="15" r="3.25" fill="#F5A524"/>
+      </svg>
+      <span class="e404-brand-name">Levent Marine</span>
+    </a>
+
+    <div class="e404-code">Error · 404</div>
+    <h1>Off-course.</h1>
+    <p>The page you were looking for is not aboard this vessel. Let's get you back to a known port.</p>
+
+    <div class="e404-actions">
+      <a href="/" class="btn btn-primary btn-lg">Back to home</a>
+      <a href="/#contact" class="btn btn-ghost btn-lg">Contact us</a>
+      <a href="tel:+16193840403" class="btn btn-ghost btn-lg">Call 24/7</a>
+    </div>
+  </main>
+</body>
+</html>

@@ -53,6 +53,20 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- Anti-FOUC: set theme before paint -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem('levent.theme');
+        if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch(_) {}
+    })();
+  </script>
+
+  <!-- Preload hero (above-the-fold) -->
+  <link rel="preload" as="image" href="assets/hero/landing-hero.jpg" fetchpriority="high" />
+
   <!-- Design System -->
   <link rel="stylesheet" href="css/design.css" />
 

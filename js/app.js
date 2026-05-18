@@ -944,7 +944,8 @@ const PROJECTS = [
 (function () {
   const state = {
     lang: localStorage.getItem('levent.lang') || 'en',
-    theme: localStorage.getItem('levent.theme') || 'light'
+    theme: localStorage.getItem('levent.theme')
+      || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
   };
 
   document.documentElement.setAttribute('data-theme', state.theme);
@@ -1739,6 +1740,8 @@ const PROJECTS = [
     setupLandingParallax();
     bindEvents();
     Router.init();
+    // Mark app ready (removes initial loader overlay)
+    document.documentElement.classList.add('app-ready');
     // First reveal: animate the landing items in
     setTimeout(() => {
       const initialPanel = document.querySelector('.panel.is-active');
