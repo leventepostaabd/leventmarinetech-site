@@ -1,35 +1,39 @@
-# Dependencies
+# dependencies
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# OS
+# Next.js
+.next/
+out/
+build/
+next-env.d.ts
+*.tsbuildinfo
+
+# env
+.env
+.env.local
+.env.*.local
+
+# Vercel
+.vercel
+
+# OS / IDE
 .DS_Store
 Thumbs.db
 Desktop.ini
-
-# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# Build
-dist/
-build/
-.cache/
-
-# Env
-.env
-.env.local
-.env.*.local
-
-# Logs
+# logs / temp
 logs/
 *.log
-
-# Temp
 tmp/
 temp/
+.cache/
+
+# legacy/ is intentionally tracked (reference copy of v4.x static site)

@@ -1,0 +1,246 @@
+{
+  "regions": [
+    {
+      "slug": "houston-marine-electrical",
+      "city": "Houston",
+      "state": "TX",
+      "metaTitle": "Houston Marine Electrical Service & Parts | Levent Marine",
+      "metaDescription": "24/7 marine electrical service at Port of Houston — Bayport, Barbours Cut, Turning Basin. AOG generator, AVR, MSB, PLC repairs for tankers, bulkers, boxships.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Houston",
+      "intro": "The Port of Houston is the largest US port by foreign waterborne tonnage and the busiest petrochemical complex in the Western Hemisphere. The 52-mile Houston Ship Channel funnels Aframax and Suezmax tankers, LR1/LR2 product carriers, Panamax and Neo-Panamax container vessels, dry bulkers and chemical parcel tankers between Bolivar Roads and the Turning Basin daily. The channel is being deepened under Project 11, but draft and beam constraints still shape how electrical service is delivered: most attendances happen alongside at private terminals between Morgan's Point and Greens Bayou, or at anchorage in Bolivar Roads waiting on a berth window. Houston is dominated by liquid bulk — over 40% of US Gulf chemical exports load here — so a tanker electrical fault during cargo operations carries immediate demurrage and inerting-system risk. Container traffic at Bayport and Barbours Cut runs tight pilot-to-pilot windows, often under 24 hours. Levent Marine attends these vessels with a Houston-based response posture: an ETO with full tool kit and HV PPE can be alongside within 3-4 hours of confirmation, with class-format documentation (ABS, DNV, Lloyd's, BV) starting the moment we step aboard. Our Wyoming LLC issues USD invoices direct to US operators and to foreign owners' US agents, with W-9 on file and USCG/CBP-aware crew protocols.",
+      "logistics": {
+        "airports": ["IAH — George Bush Intercontinental (primary intl air freight, direct IST via TK33)", "HOU — Hobby (domestic spares)", "EFD — Ellington Field (charter/AOG)"],
+        "freightHubs": ["FedEx Express via IAH (Memphis sort, overnight CONUS)", "UPS via IAH", "DHL Express gateway IAH", "Kuehne+Nagel / Expeditors offices in Pasadena and Deer Park"],
+        "responseNote": "Engineer mobilization to any Houston Ship Channel terminal is typically 3-4 hours from confirmation. Critical spares from our Istanbul stock arrive IAH within 18-24 hours via Turkish Cargo, cleared by our customs broker and trucked to the vessel under bonded courier."
+      },
+      "ports": [
+        {
+          "name": "Bayport Container Terminal",
+          "lat": 29.6228,
+          "lng": -95.0211,
+          "vesselTypes": ["Neo-Panamax container", "Post-Panamax container"],
+          "notes": "Tight 18-24h pilot-to-pilot turnaround; gantry-side electrical work requires terminal safety briefing and TWIC escort."
+        },
+        {
+          "name": "Barbours Cut Terminal",
+          "lat": 29.6856,
+          "lng": -94.9897,
+          "vesselTypes": ["Panamax container", "Feeder container"],
+          "notes": "Oldest Houston container facility; legacy MSB and bow-thruster work common on older tonnage calling here."
+        },
+        {
+          "name": "Turning Basin (Public Wharves 1-32)",
+          "lat": 29.7458,
+          "lng": -95.2756,
+          "vesselTypes": ["Project cargo", "Breakbulk", "Steel/scrap bulker", "RoRo"],
+          "notes": "Furthest upstream berths; deck-crane and hatch-cover electrical issues frequent on aging bulkers."
+        },
+        {
+          "name": "Bayport Liquid / Vopak / Targa Terminals",
+          "lat": 29.6097,
+          "lng": -95.0181,
+          "vesselTypes": ["Chemical parcel tanker", "MR product tanker", "LPG carrier"],
+          "notes": "Strict hot-work permitting; cargo-pump VFD and IG-system faults must be resolved without breaking inert atmosphere."
+        },
+        {
+          "name": "Houston Fuel Oil Terminal (HFOTCO)",
+          "lat": 29.7158,
+          "lng": -95.0739,
+          "vesselTypes": ["Aframax tanker", "Suezmax tanker"],
+          "notes": "Large crude/residual handling; AVR and shaft-generator faults during loading are highest-priority calls."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "AOG no.2 generator AVR failure on an Aframax at HFOTCO mid-discharge",
+          "summary": "Vessel loses redundancy during discharge; charterer threatens off-hire if cargo pauses beyond 6 hours. We mobilize an ETO with a replacement Basler or Caterpillar-pattern AVR from our IAH spares hub, restore parallel operation, megger the exciter stator, and issue a class-format report trending insulation values against last drydock. Discharge resumes within the laytime window."
+        },
+        {
+          "title": "MSB ACB retrofit on a Panamax bulker at Turning Basin during a 5-year special survey",
+          "summary": "Surveyor flags two air circuit breakers with unreliable trip curves. We supply drop-in ACBs (Mitsubishi/Terasaki/ABB Emax-pattern), perform primary injection testing, recalibrate the PMS load-shedding tables, and hand over an ABS- or DNV-ready test certificate package the surveyor signs on the spot."
+        },
+        {
+          "title": "Bow-thruster PLC fault on a Neo-Panamax boxship at Bayport before pilot-on",
+          "summary": "Vessel cannot sail without bow-thruster on Houston Ship Channel under USCG/Pilot rules. Our PLC technician diagnoses a corrupted I/O card on the Siemens S7 or Mitsubishi Q-series rack, sources a replacement from local industrial distribution in 2 hours, restores function and signs off operational test. Vessel makes its pilot window."
+        },
+        {
+          "title": "Cargo-pump VFD trip on a chemical parcel tanker at Vopak Bayport",
+          "summary": "Stainless cargo pump VFD trips on overcurrent during stripping. We thermographically scan the drive cabinet, identify a degraded DC-link capacitor bank, replace with OEM-equivalent ABB/Danfoss components, and verify harmonic distortion against the vessel's network analyzer log. Cargo resumes without breaking inert atmosphere."
+        },
+        {
+          "title": "Fire detection loop fault flagged by USCG PSC at Barbours Cut",
+          "summary": "PSC officer logs a SOLAS Ch.II-2 deficiency on a feeder containership: addressable fire-detection loop reporting intermittent shorts. We isolate the faulted branch, replace water-ingressed detectors in two cargo-hold zones, recommission the panel (Consilium/Autronica/Salwico), and prepare the rectification letter the master needs for PSC clearance before sailing."
+        }
+      ],
+      "usdInvoicing": "Our Wyoming-registered US entity issues USD invoices directly to operators, P&I clubs, and US agents under W-9; we accept ACH, wire, and credit card. Crew, parts, and tooling movements through CBP and USCG Sector Houston-Galveston are handled with TWIC-cleared personnel and pre-cleared spare-parts manifests.",
+      "schemaCity": "Houston",
+      "schemaServiceArea": ["Houston", "Pasadena", "Deer Park", "La Porte", "Baytown", "Texas City", "Galveston", "Freeport"]
+    },
+    {
+      "slug": "new-york-nj-marine-electrical",
+      "city": "Newark",
+      "state": "NJ",
+      "metaTitle": "New York & NJ Marine Electrical Service | Levent Marine",
+      "metaDescription": "Marine electrical service at Port Newark, Elizabeth, Bayonne, Howland Hook. AOG response, USCG Sector NY prep, MSB & automation work for container & LNG ships.",
+      "h1": "Marine Electrical Service & Parts Supply for the Port of New York and New Jersey",
+      "intro": "The Port of New York and New Jersey is the largest container port on the US East Coast and third largest in the country, handling over 9 million TEU annually across Port Newark, Elizabeth Marine Terminal (APM/Maher), GCT Bayonne, GCT New York (Howland Hook) and Red Hook Brooklyn. Since the 2017 Bayonne Bridge air-draft raise to 215 ft, the harbor now receives Ultra Large Container Vessels of 14,000-18,000 TEU on Asia-East Coast and Mediterranean-East Coast strings. The port also serves a heavy bunkering and ship-supply economy in Stapleton Anchorage, plus growing LNG-bunkering activity in Gravesend Bay. Berth windows are tight — Maher and APM operate on hard pilot-to-pilot schedules, often 22-26 hours from first line to last — so an electrical fault that delays sailing risks a missed-tide cascade through the Kill Van Kull. USCG Sector New York runs one of the most active PSC programs in the country; we routinely support owners preparing for Sector NY boarding, addressing addressable fire-detection deficiencies, GMDSS battery and antenna issues, emergency-generator black-start failures, and EEXI/CII-related power-management documentation. Levent Marine maintains a fly-in ETO posture for NY/NJ supported by an East Coast spares cache, with documentation built to ABS, DNV, Lloyd's Register, BV and ClassNK formats — the five classes most active here.",
+      "logistics": {
+        "airports": ["EWR — Newark Liberty (5 min from Port Newark; primary harbor air freight)", "JFK — John F. Kennedy (intl cargo, Turkish Cargo daily widebody from IST)", "LGA — LaGuardia (domestic / crew rotation)", "TEB — Teterboro (charter/AOG)"],
+        "freightHubs": ["FedEx Express EWR gateway", "UPS via EWR", "DHL Express JFK gateway", "Lufthansa and Turkish Cargo JFK freighter capacity ex-EU/Turkey"],
+        "responseNote": "Engineer can be at a berth in Newark, Elizabeth or Bayonne within 60-90 minutes of EWR landing. Critical spares ex-Istanbul clear JFK in 14-18 hours via Turkish Cargo TK1 and are delivered to terminal gate the same day."
+      },
+      "ports": [
+        {
+          "name": "Maher Terminals (Elizabeth)",
+          "lat": 40.6797,
+          "lng": -74.1503,
+          "vesselTypes": ["ULCV", "Neo-Panamax container"],
+          "notes": "Largest single container facility on US East Coast; STS-crane-side access requires ILA coordination and terminal escort."
+        },
+        {
+          "name": "APM Terminals Elizabeth",
+          "lat": 40.6786,
+          "lng": -74.1561,
+          "vesselTypes": ["ULCV", "Post-Panamax container"],
+          "notes": "Maersk/2M alliance home berth; tight 24h pilot-to-pilot turnaround typical."
+        },
+        {
+          "name": "GCT Bayonne",
+          "lat": 40.6661,
+          "lng": -74.0939,
+          "vesselTypes": ["Post-Panamax container"],
+          "notes": "Semi-automated terminal; reefer-monitoring and shore-power-related electrical issues common."
+        },
+        {
+          "name": "GCT New York (Howland Hook)",
+          "lat": 40.6378,
+          "lng": -74.1850,
+          "vesselTypes": ["Panamax container", "Feeder container"],
+          "notes": "Staten Island side; longer crew transit but quieter berths for extended electrical work."
+        },
+        {
+          "name": "Port Newark Container Terminal (PNCT)",
+          "lat": 40.6886,
+          "lng": -74.1392,
+          "vesselTypes": ["Panamax container", "Neo-Panamax container"],
+          "notes": "Multi-line terminal; flexible berth windows useful for longer MSB or PLC commissioning jobs."
+        },
+        {
+          "name": "Stapleton Anchorage / Bayonne Bunker Berths",
+          "lat": 40.6258,
+          "lng": -74.0700,
+          "vesselTypes": ["Bunker tanker", "Bulker at anchor", "Cruise"],
+          "notes": "Anchorage attendance by launch from Caddell or Reinauer base; LNG bunker barge attendance growing."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "Emergency-generator black-start failure flagged by USCG Sector NY on a 14,000 TEU ULCV at Maher",
+          "summary": "Sector NY issues a SOLAS Ch.II-1 Reg.43 deficiency: emergency generator fails 45-second black-start. We attend within 90 minutes from EWR, diagnose a degraded starting-battery bank and faulty governor solenoid, replace both, witness three consecutive successful starts with the USCG officer present, and prepare the rectification letter cleared before tide change."
+        },
+        {
+          "title": "Reefer-monitoring fault on a Neo-Panamax boxship at GCT Bayonne with 800 active reefer plugs",
+          "summary": "Reefer monitoring panel reports false alarms across two bays. We trace the fault to a corroded RS-485 backbone and a failed AC1700-pattern controller, replace the segment, recommission the network (Emerson/Carrier/EMS), and verify against the terminal's reefer-monitoring system. No cargo-condition claim arises."
+        },
+        {
+          "title": "GMDSS A3 station battery and antenna survey on a Panamax at PNCT before North Atlantic sailing",
+          "summary": "Owner requests a pre-departure GMDSS check ahead of class annual. We test MF/HF, VHF DSC, EPIRB, SART, NAVTEX and Inmarsat-C per IMO Res. A.1001(25), replace two degraded reserve batteries, retune the MF/HF antenna and issue a class-ready GMDSS performance test record."
+        },
+        {
+          "title": "MSB ACB retrofit and PMS reconfiguration during a 5-day layover at Howland Hook",
+          "summary": "Owner uses an extended window to retrofit three air circuit breakers and update the PMS load-shedding tables on a 6,800 TEU containership. We supply Terasaki/ABB-pattern ACBs, run primary injection, reprogram the PMS for the new trip curves, and complete FAT-style witness testing for the attending ABS surveyor."
+        },
+        {
+          "title": "Bunker-tanker cargo-pump VFD fault at Stapleton during STS bunkering of a cruise ship",
+          "summary": "VFD on a 600 m3/h cargo pump trips on DC overvoltage. We arrive by launch from Caddell, diagnose a failed braking-resistor circuit, install a replacement resistor pack and dynamic-braking module, verify ramp profile against the bunker schedule, and bunkering completes within the cruise vessel's departure window."
+        }
+      ],
+      "usdInvoicing": "USD invoices issued from our Wyoming LLC directly to US managers, agents and P&I clubs, with W-9 and COI available on request. All field personnel hold TWIC and are familiar with USCG Sector New York access protocols, CBP I-95 crew-movement constraints, and MARSEC level escort requirements at NY/NJ terminals.",
+      "schemaCity": "Newark",
+      "schemaServiceArea": ["Newark", "Elizabeth", "Bayonne", "Jersey City", "Staten Island", "Brooklyn", "Port Newark", "Howland Hook", "Stapleton Anchorage"]
+    },
+    {
+      "slug": "long-beach-marine-electrical",
+      "city": "Long Beach",
+      "state": "CA",
+      "metaTitle": "Long Beach & LA Marine Electrical Service | Levent Marine",
+      "metaDescription": "Marine electrical service at San Pedro Bay — Port of Long Beach & LA. Shore-power retrofit, AOG response, MSB & automation for ULCVs and Capesize bulkers.",
+      "h1": "Marine Electrical Service & Parts Supply at the Ports of Long Beach and Los Angeles",
+      "intro": "The adjacent Ports of Long Beach and Los Angeles form the San Pedro Bay complex — the largest container gateway in the Western Hemisphere and the entry point for roughly 40% of all US containerized imports. The complex routinely handles 18,000-24,000 TEU Ultra Large Container Vessels on Trans-Pacific strings, alongside Capesize and Newcastlemax bulkers at Pier T coal and petcoke berths and Aframax product tankers at the Long Beach oil terminals. The combined ports operate under the strictest air-quality and shore-power regime in the US: CARB's At-Berth Regulation requires container, reefer and cruise vessels to shut down auxiliary engines and connect to High Voltage Shore Connection (HVSC, IEC/IEEE 80005-1) within two hours of berthing for at least 80% of port time, with bulkers and tankers being phased in. This drives constant demand for shore-power retrofit projects, HVSC commissioning, transformer and reactive-compensation work, and ABB/Cavotec/Schneider-pattern shore-connection fault diagnosis. The complex also feeds aggressive TPEB/TPWB turnaround windows where any delay cascades across the chassis pool and inland rail ramps. Levent Marine attends San Pedro Bay with a West Coast ETO posture, ABS- and DNV-format documentation, and parts logistics through LAX — one of the largest international air-cargo gateways in North America.",
+      "logistics": {
+        "airports": ["LAX — Los Angeles Intl (largest West Coast air freight gateway; Turkish, Lufthansa, Korean, China Airlines freighter capacity ex-IST/EU)", "LGB — Long Beach (domestic / FedEx)", "ONT — Ontario (UPS West Coast hub, alt routing)", "SNA — John Wayne (charter/AOG)"],
+        "freightHubs": ["FedEx Express LAX gateway with Memphis sort connection", "UPS via ONT (major US hub)", "DHL Express LAX gateway", "Kuehne+Nagel / DSV / Expeditors marine offices in Carson and Long Beach"],
+        "responseNote": "Engineer to berth at any San Pedro Bay terminal within 60-90 minutes of LAX landing. Critical spares ex-Istanbul clear LAX in 16-20 hours via Turkish Cargo TK9, and we maintain a small consignment stock of common ACBs, AVRs and PLC I/O cards with a Carson-based 3PL."
+      },
+      "ports": [
+        {
+          "name": "Long Beach Container Terminal (Pier E / Middle Harbor)",
+          "lat": 33.7522,
+          "lng": -118.2156,
+          "vesselTypes": ["ULCV", "Neo-Panamax container"],
+          "notes": "Most automated terminal in North America; shore-power connection mandatory; AGV and OCR system interfaces require careful coordination on any onboard work."
+        },
+        {
+          "name": "Pier T (TTI Terminal)",
+          "lat": 33.7400,
+          "lng": -118.2261,
+          "vesselTypes": ["ULCV", "ONE/Hapag/Yang Ming services"],
+          "notes": "Deepest natural draft in the harbor; receives the largest boxships calling North America."
+        },
+        {
+          "name": "Pier 400 (APM Terminals LA)",
+          "lat": 33.7372,
+          "lng": -118.2553,
+          "vesselTypes": ["ULCV", "Maersk strings"],
+          "notes": "Largest proprietary container terminal in the world by area; long quay enables multi-vessel concurrent shore-power demand."
+        },
+        {
+          "name": "Pier G / Pier J (Long Beach bulk and breakbulk)",
+          "lat": 33.7344,
+          "lng": -118.1825,
+          "vesselTypes": ["Capesize bulker", "Newcastlemax bulker", "Panamax bulker"],
+          "notes": "Coal, petcoke and iron-ore handling; deck crane, hatch cover and conveyor electrical issues frequent."
+        },
+        {
+          "name": "Berths 121-131 (Long Beach Oil Terminals)",
+          "lat": 33.7506,
+          "lng": -118.2086,
+          "vesselTypes": ["Aframax tanker", "MR product tanker", "Chemical parcel tanker"],
+          "notes": "Liquid bulk terminals; shore-power phase-in under CARB ATB applies from 2027."
+        },
+        {
+          "name": "Pier 300 (Yusen Terminals / WBCT)",
+          "lat": 33.7383,
+          "lng": -118.2611,
+          "vesselTypes": ["Post-Panamax container", "Neo-Panamax container"],
+          "notes": "Joint NYK / Yang Ming services; common venue for automation and reefer-power retrofits."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "HVSC shore-power fault on a 14,000 TEU boxship at Pier 400 within the CARB 2-hour window",
+          "summary": "Vessel fails to synchronize with the 6.6 kV / 60 Hz shore supply; aux engines must shut down within two hours or the call incurs CARB non-compliance reporting. We diagnose a phase-rotation mismatch and a degraded synchronization relay in the HVSC switchboard (Cavotec/ABB pattern), correct phase, replace the relay, achieve synchronization within the window and document for CARB and ABS."
+        },
+        {
+          "title": "AOG no.1 generator AVR failure on a Capesize bulker discharging coal at Pier G",
+          "summary": "Vessel loses one of three main generators mid-discharge. We mobilize from Long Beach with a Basler DECS- or Caterpillar-pattern AVR from Carson consignment stock, restore parallel operation, megger and polarize the exciter, and clear the vessel for sailing on time. Schedule held; demurrage avoided."
+        },
+        {
+          "title": "Automation IAS workstation failure on an Aframax at Berth 121",
+          "summary": "Cargo control room IAS workstation (Kongsberg K-Chief or Wärtsilä NACOS pattern) crashes during loading. We rebuild from owner's golden image, restore I/O comms to the cargo and ballast PLCs, retune set-points against the last commissioning record, and document for class. Cargo resumes without manual override."
+        },
+        {
+          "title": "Reefer-power harmonic distortion claim on a Neo-Panamax at Pier T",
+          "summary": "Owner reports nuisance tripping of reefer plug breakers and suspects high THD on the 440V reefer feeders. We instrument with a portable power-quality analyzer, identify a failed line-reactor on a reefer bay panel, replace it, and issue an IEEE 519 power-quality report owner uses to close out cargo-condition correspondence."
+        },
+        {
+          "title": "Class special-survey ACB and switchboard recondition during a 4-day West Coast layover",
+          "summary": "Owner uses an extended Long Beach window for a 5-year switchboard recondition: ACB overhaul (Mitsubishi/Terasaki/ABB Emax pattern), busbar torque check and IR-imaging, primary injection on all feeders, AVR re-tuning under load and Megger test of all 440V feeders. ABS surveyor signs off the report on the final day."
+        }
+      ],
+      "usdInvoicing": "Wyoming LLC issues USD invoices directly to US operators, charterers and agents, with W-9 on file and ACH/wire/credit-card payment. All personnel hold TWIC; we operate fluently with USCG Sector Los Angeles-Long Beach access, CBP crew protocols, and CARB At-Berth Regulation documentation requirements.",
+      "schemaCity": "Long Beach",
+      "schemaServiceArea": ["Long Beach", "Los Angeles", "San Pedro", "Wilmington", "Carson", "Terminal Island", "Port of Long Beach", "Port of Los Angeles"]
+    }
+  ]
+}
