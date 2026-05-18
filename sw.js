@@ -5,7 +5,7 @@
    - Network-first for HTML so router/i18n updates show up immediately
    - Bypass /api/* completely
 */
-const CACHE = 'lm-shell-v2';
+const CACHE = 'lm-shell-v3';
 const SHELL = [
   '/',
   '/index.html',
