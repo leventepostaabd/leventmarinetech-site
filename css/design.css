@@ -165,21 +165,22 @@ a { color: inherit; }
 
 /* ============== HEADER ============== */
 .header {
-  position: sticky;
+  position: relative;     /* v4.6: page never scrolls, so sticky is moot */
   top: 0;
   z-index: 50;
-  background: rgba(248, 250, 252, 0.78);
+  height: var(--header-h);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--c-border);
 }
-[data-theme="dark"] .header { background: rgba(11, 18, 32, 0.78); }
+[data-theme="dark"] .header { background: rgba(11, 18, 32, 0.88); }
 
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72px;
+  height: 100%;
   gap: 20px;
 }
 .brand {
@@ -1960,10 +1961,12 @@ a { color: inherit; }
 
 /* ============== v4 — SPA STAGE ============== */
 :root {
-  --header-h: 76px;
-  --stage-h: calc(100dvh - var(--header-h));
+  --header-h: 72px;
+  --footer-h: 38px;
+  --stage-h: calc(100dvh - var(--header-h) - var(--footer-h));
 }
-html, body { overflow-x: hidden; }
+/* v4.6 — fully lock the document; only panels scroll internally */
+html, body { overflow: hidden; height: 100dvh; margin: 0; }
 .stage {
   position: relative;
   width: 100%;
@@ -2742,4 +2745,72 @@ html.app-ready .stage::before,
 html.app-ready .stage::after { display: none; }
 @media (prefers-reduced-motion: reduce) {
   html:not(.app-ready) .stage::after { animation: none; border-top-color: var(--c-text-2); }
+}
+
+/* ============== v4.6 — FOOTER: fixed thin bottom strip, no body scroll ============== */
+.footer {
+  position: fixed !important;
+  left: 0; right: 0; bottom: 0;
+  height: var(--footer-h);
+  z-index: 40;
+  background: var(--c-surface);
+  border-top: 1px solid var(--c-border);
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.footer > .container { width: 100%; }
+.footer-grid { display: none !important; }
+.footer-bottom {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0;
+  border-top: 0;
+}
+.footer-bottom .mono { font-size: 10px; letter-spacing: 0.08em; }
+.footer-action-btn { padding: 4px 8px; font-size: 9.5px; }
+
+/* Stage now sits between header + footer */
+.stage {
+  position: relative;
+  width: 100%;
+  height: var(--stage-h);
+  overflow: hidden;
+}
+
+/* Panel inner: ensure no text touches the header top edge */
+.panel-inner { padding-top: 8px; }
+.panel[data-panel="home"] .panel-inner { padding-top: 0; }
+
+/* Sticky call-rail stays vertically centered within stage area */
+
+@media (max-width: 720px) {
+  :root { --footer-h: 34px; }
+  .footer-bottom .mono { font-size: 9px; }
+  .footer-action-btn { padding: 3px 6px; font-size: 9px; }
+}
+
+/* ============== v4.6 — INTERNAL PANEL SCROLL ============== */
+.panel {
+  scroll-behavior: smooth;
+  scroll-padding-top: 24px;
+}
+/* Thin, branded scrollbar instead of OS default heavy bar */
+.panel::-webkit-scrollbar { width: 6px; }
+.panel::-webkit-scrollbar-track { background: transparent; }
+.panel::-webkit-scrollbar-thumb {
+  background: var(--c-border-strong);
+  border-radius: 3px;
+}
+.panel::-webkit-scrollbar-thumb:hover { background: var(--c-text-3); }
+.panel { scrollbar-width: thin; scrollbar-color: var(--c-border-strong) transparent; }
+
+/* Print: restore overflow */
+@media print {
+  html, body { overflow: visible !important; height: auto !important; }
+  .footer { position: static !important; }
 }

@@ -38,8 +38,8 @@
   <!-- Brand mark (left) -->
   <g transform="translate(96, 96)">
     <svg viewBox="0 0 56 56" width="92" height="92" x="0" y="0">
-      <path fill="#FFFFFF" d="M10 10h10v36H10V10zm16 4h22v8H34v8h14v8H34v16h-8V14z"/>
-      <circle cx="45" cy="15" r="3.25" fill="#F5A524"/>
+      <path fill="#FFFFFF" d="M12 8v34h22v6H6V8z"/>
+      <circle cx="46" cy="14" r="4" fill="#F5A524"/>
     </svg>
   </g>
 

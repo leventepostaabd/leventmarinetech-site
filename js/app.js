@@ -1468,24 +1468,25 @@ const PROJECTS = [
 
   /* ============== PANEL STAGGERED REVEAL ============== */
   function revealPanel(panelEl) {
-    if (!panelEl || !window.anime) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!panelEl) return;
+    if (!window.anime || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const items = panelEl.querySelectorAll(
       '.panel-topbar, .section-kicker, h1, h2, .hero-sub, .landing-sub, .tile-row, .landing-sub-row, .landing-trust, .bento .card, .usa-stat, .usa-route, .materials-copy li, .materials-form, .cert-grid > *, .projects-scroll .project, .gallery-grid .gallery-item, .about-card, .contact-card, .contact-form, .cta-band'
     );
     if (!items.length) return;
-    items.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(14px)'; });
-    anime({
-      targets: items,
-      translateY: [14, 0],
-      opacity: [0, 1],
-      delay: anime.stagger(40, { start: 60 }),
-      duration: 520,
-      easing: 'easeOutQuart',
-      complete: () => {
-        items.forEach(el => { el.style.opacity = ''; el.style.transform = ''; });
-      }
-    });
+    try {
+      anime({
+        targets: items,
+        translateY: [12, 0],
+        opacity: [0.35, 1],
+        delay: anime.stagger(30, { start: 40 }),
+        duration: 460,
+        easing: 'easeOutQuart'
+      });
+    } catch (e) {
+      /* anime failed — make sure content is visible */
+      items.forEach(el => { el.style.opacity = ''; el.style.transform = ''; });
+    }
   }
 
   /* ============== ROUTER (SPA stage) ============== */
