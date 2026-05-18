@@ -2006,7 +2006,7 @@ html, body { overflow-x: hidden; }
 .landing-bg {
   position: absolute;
   inset: 0;
-  background-image: url('../assets/hero/engine-room.jpg');
+  background-image: url('../assets/hero/landing-hero.jpg');
   background-size: cover;
   background-position: center;
   opacity: 0.45;

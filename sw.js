@@ -5,7 +5,7 @@
    - Network-first for HTML so router/i18n updates show up immediately
    - Bypass /api/* completely
 */
-const CACHE = 'lm-shell-v1';
+const CACHE = 'lm-shell-v2';
 const SHELL = [
   '/',
   '/index.html',
@@ -14,7 +14,8 @@ const SHELL = [
   '/assets/logo.svg',
   '/assets/logo-dark.svg',
   '/assets/logo.png',
-  '/assets/hero/engine-room.jpg'
+  '/assets/hero/landing-hero.jpg',
+  '/assets/brand/og-image.jpg'
 ];
 
 self.addEventListener('install', (e) => {
