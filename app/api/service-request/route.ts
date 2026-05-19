@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createServiceSupabase } from '@/lib/supabase/server';
-import { notifyAdmin } from '@/lib/notify';
+import { notifyAdminService, ackCustomerService } from '@/lib/notify';
 
 const Body = z.object({
   vesselType:       z.string().optional(),
@@ -21,7 +21,13 @@ const Body = z.object({
   imo:              z.string().optional(),
   classSociety:     z.string().optional(),
   service:          z.string().optional(),
-  region:           z.string().optional()
+  region:           z.string().optional(),
+  attachments:      z.array(z.object({
+    path:        z.string(),
+    name:        z.string(),
+    size:        z.number().optional(),
+    contentType: z.string().optional()
+  })).optional()
 });
 
 export async function POST(req: Request) {
@@ -53,6 +59,7 @@ export async function POST(req: Request) {
       contact_phone:    data.contactPhone,
       contact_whatsapp: data.contactWhatsapp,
       company:          data.company,
+      attachments:      data.attachments ?? [],
       meta: { service: data.service, region: data.region, nextPort: data.nextPort }
     })
     .select('id')
@@ -63,21 +70,37 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Database error', details: error.message }, { status: 500 });
   }
 
-  await notifyAdmin({
-    subject: `🔧 Service request · ${data.urgency?.toUpperCase() ?? 'PLANNED'} · ${data.port}`,
-    text: [
-      `New service request ${row?.id ?? ''}`,
-      `Urgency: ${data.urgency ?? 'planned'}`,
-      `Vessel: ${data.vesselName ?? '?'} ${data.imo ? `(IMO ${data.imo})` : ''}`,
-      `Port: ${data.port}${data.nextPort ? ` → ${data.nextPort}` : ''}`,
-      `Category: ${data.problemCategory ?? '?'}`,
-      `Symptoms: ${(data.symptoms ?? []).join(', ')}`,
-      `Notes: ${data.notes ?? '—'}`,
-      ``,
-      `Contact: ${data.contactName} <${data.contactEmail}> ${data.contactPhone ?? ''} ${data.contactWhatsapp ?? ''}`,
-      `Company: ${data.company ?? '—'}`
-    ].join('\n')
-  });
+  const refId = String(row?.id ?? '').slice(0, 8).toUpperCase();
+  Promise.all([
+    notifyAdminService({
+      id: String(row?.id ?? ''),
+      urgency: data.urgency ?? 'planned',
+      problemCategory: data.problemCategory,
+      symptoms: data.symptoms,
+      notes: data.notes,
+      vesselName: data.vesselName,
+      imo: data.imo,
+      vesselType: data.vesselType,
+      classSociety: data.classSociety,
+      port: data.port,
+      nextPort: data.nextPort,
+      eta: data.eta,
+      contactName: data.contactName,
+      contactEmail: data.contactEmail,
+      contactPhone: data.contactPhone,
+      contactWhatsapp: data.contactWhatsapp,
+      company: data.company,
+      attachmentsCount: data.attachments?.length ?? 0
+    }),
+    ackCustomerService({
+      to: data.contactEmail,
+      refId,
+      urgency: data.urgency ?? 'planned',
+      vesselName: data.vesselName,
+      port: data.port,
+      problemCategory: data.problemCategory
+    })
+  ]).catch((e) => console.error('[notify] fanout error', e));
 
-  return NextResponse.json({ ok: true, id: row?.id });
+  return NextResponse.json({ ok: true, id: refId });
 }

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createServiceSupabase } from '@/lib/supabase/server';
-import { notifyAdmin } from '@/lib/notify';
+import { notifyAdminRfq, ackCustomerRfq } from '@/lib/notify';
 
 const Body = z.object({
   kind: z.enum(['supply', 'equivalent', 'unlisted']).optional(),  // defaults to supply
@@ -27,6 +27,14 @@ const Body = z.object({
   model:                 z.string().optional(),
   notes:                 z.string().optional(),
   requiredBy:            z.string().optional(),
+
+  // attachments (paths uploaded to Supabase Storage)
+  attachments:           z.array(z.object({
+    path:        z.string(),
+    name:        z.string(),
+    size:        z.number().optional(),
+    contentType: z.string().optional()
+  })).optional(),
 
   // vessel
   vesselName:            z.string().optional(),
@@ -87,6 +95,7 @@ export async function POST(req: Request) {
       contact_whatsapp: d.contactWhatsapp,
       company:         d.company,
       product_id:      d.product || null,
+      attachments:     d.attachments ?? [],
       meta:            { service: d.service, region: d.region }
     })
     .select('id')
@@ -97,25 +106,38 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Database error', details: error.message }, { status: 500 });
   }
 
-  const urgency = (d.urgency ?? 'planned').toUpperCase();
-  const portLine = [d.currentPort ?? d.port, d.nextPort ? `→ ${d.nextPort}` : ''].filter(Boolean).join(' ');
-  await notifyAdmin({
-    subject: `📦 ${kind.toUpperCase()} RFQ · ${urgency} · ${d.brand ?? d.originalBrand ?? '?'} ${d.partNumber ?? d.originalPartNumber ?? ''}`,
-    text: [
-      `New ${kind} RFQ ${row?.id ?? ''}`,
-      `Brand: ${d.brand ?? d.originalBrand ?? '—'}`,
-      `Part:  ${d.partNumber ?? d.originalPartNumber ?? '—'}${d.model ? ` (model ${d.model})` : ''}`,
-      `Qty:   ${d.quantity ?? 1}`,
-      kind === 'equivalent' ? `Equivalent for: ${d.originalPartNumber} · ${d.equipmentType ?? ''}` : '',
-      kind === 'unlisted'   ? `Unlisted: ${d.description ?? ''}` : '',
-      `Vessel: ${d.vesselName ?? '?'} ${d.imo ? `(IMO ${d.imo})` : ''}`,
-      `Port: ${portLine || '—'} ${d.eta ? `ETA ${d.eta}` : ''}`,
-      `Urgency: ${urgency}`,
-      ``,
-      `Contact: ${d.contactName} <${d.contactEmail}> ${d.contactPhone ?? ''} ${d.contactWhatsapp ?? ''}`,
-      `Company: ${d.company ?? '—'}`
-    ].filter(Boolean).join('\n')
-  });
+  // Fire-and-forget notifications (don't block the API response)
+  const refId = String(row?.id ?? '').slice(0, 8).toUpperCase();
+  Promise.all([
+    notifyAdminRfq({
+      id: String(row?.id ?? ''),
+      kind,
+      urgency: d.urgency ?? 'planned',
+      brand: d.brand ?? d.originalBrand,
+      partNumber: d.partNumber ?? d.originalPartNumber,
+      quantity: d.quantity,
+      description: d.description ?? d.failureDescription,
+      vesselName: d.vesselName,
+      imo: d.imo,
+      currentPort: d.currentPort ?? d.port,
+      nextPort: d.nextPort,
+      eta: d.eta,
+      contactName: d.contactName,
+      contactEmail: d.contactEmail,
+      contactPhone: d.contactPhone,
+      contactWhatsapp: d.contactWhatsapp,
+      company: d.company,
+      attachmentsCount: d.attachments?.length ?? 0
+    }),
+    ackCustomerRfq({
+      to: d.contactEmail,
+      refId,
+      urgency: d.urgency ?? 'planned',
+      brand: d.brand ?? d.originalBrand,
+      partNumber: d.partNumber ?? d.originalPartNumber,
+      vesselName: d.vesselName
+    })
+  ]).catch((e) => console.error('[notify] fanout error', e));
 
-  return NextResponse.json({ ok: true, id: row?.id });
+  return NextResponse.json({ ok: true, id: refId });
 }
