@@ -1,6 +1,7 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
 import Wizard, { bind, type WizardStep } from '@/components/Wizard';
+import PhotoUpload, { type UploadedFile } from '@/components/PhotoUpload';
 
 const VESSEL_TYPES = ['Bulker', 'Tanker', 'Container', 'OSV / Offshore', 'Ro-Ro', 'General Cargo', 'Other'];
 const PROBLEM_CATEGORIES = [
@@ -116,6 +117,10 @@ export default function ServiceWizardClient() {
             <div>
               <label className="field-label mt-4">Notes / what the bridge reported</label>
               <textarea className="field-input min-h-[100px]" placeholder="A few sentences from the chief engineer is perfect." {...bind(s, 'notes')} />
+            </div>
+            <div>
+              <label className="field-label mt-4">Photos (alarm screen, switchboard, smoke, etc.)</label>
+              <PhotoUpload prefix="service" onChange={(files: UploadedFile[]) => s._update({ attachments: files })} hint="Phone photo of the offending panel is enough." />
             </div>
           </>
         );

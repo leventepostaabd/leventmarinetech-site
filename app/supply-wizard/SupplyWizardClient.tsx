@@ -1,6 +1,7 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
 import Wizard, { bind, type WizardStep } from '@/components/Wizard';
+import PhotoUpload, { type UploadedFile } from '@/components/PhotoUpload';
 
 const COMMON_BRANDS = [
   'ABB', 'Siemens', 'Schneider', 'Mitsubishi', 'Hitachi', 'Hyundai', 'Terasaki', 'Stork',
@@ -58,7 +59,7 @@ export default function SupplyWizardClient() {
     {
       id: 'part',
       title: 'Part number & quantity',
-      description: 'Even partial part numbers help. Photo of the nameplate also works — upload below.',
+      description: 'Even partial part numbers help. Photo of the nameplate works too — drop one below.',
       fields: (s) => (
         <>
           <div className="grid sm:grid-cols-[2fr_1fr] gap-3">
@@ -73,14 +74,15 @@ export default function SupplyWizardClient() {
           </div>
           <div>
             <label className="field-label">Description / notes</label>
-            <textarea className="field-input min-h-[100px]" placeholder="Anything that helps: voltage, application, photo of label, etc." {...bind(s, 'description')} />
+            <textarea className="field-input min-h-[100px]" placeholder="Voltage, application, anything else useful." {...bind(s, 'description')} />
           </div>
-          <div className="text-[12px] text-ink-subtle">
-            (Photo upload coming — for now, send the photo via WhatsApp +1 619 384 0403 after submission. Reference your request ID.)
+          <div>
+            <label className="field-label">Photos (nameplate, panel, drawing)</label>
+            <PhotoUpload prefix="rfq" onChange={(files: UploadedFile[]) => s._update({ attachments: files })} />
           </div>
         </>
       ),
-      validate: (s) => s.partNumber || s.description ? null : 'Add a part number or describe the part.'
+      validate: (s) => s.partNumber || s.description || (s.attachments && s.attachments.length) ? null : 'Add a part number, photo, or description.'
     },
     {
       id: 'vessel',

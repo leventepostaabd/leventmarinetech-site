@@ -1,0 +1,532 @@
+[
+  {
+    "id": "wiz-service",
+    "type": "page",
+    "title": "Request service",
+    "subtitle": "7-step intake — vessel, port, urgency",
+    "href": "/service-wizard",
+    "keywords": "service request wizard intake form rfq attendance ams pms generator avr breaker tripping insulation",
+    "category": "wizard",
+    "priority": 95
+  },
+  {
+    "id": "wiz-supply",
+    "type": "page",
+    "title": "Request a quote",
+    "subtitle": "Brand + part number + vessel + port",
+    "href": "/supply-wizard",
+    "keywords": "supply quote rfq parts spare buy purchase tedarik teklif",
+    "category": "wizard",
+    "priority": 95
+  },
+  {
+    "id": "wiz-equivalent",
+    "type": "page",
+    "title": "Find equivalent part",
+    "subtitle": "Cross-reference desk",
+    "href": "/supply/equivalent-part-finder",
+    "keywords": "equivalent compatible alternative obsolete replacement substitute cross reference",
+    "category": "wizard",
+    "priority": 90
+  },
+  {
+    "id": "wiz-unlisted",
+    "type": "page",
+    "title": "Unlisted part",
+    "subtitle": "Not in catalog? Send photo",
+    "href": "/supply/unlisted-request",
+    "keywords": "unlisted unknown not in catalog send photo nameplate",
+    "category": "wizard",
+    "priority": 85
+  },
+  {
+    "id": "pg-services",
+    "type": "page",
+    "title": "Services catalog",
+    "subtitle": "11 service lanes",
+    "href": "/services",
+    "keywords": "services catalog all categories",
+    "category": "page",
+    "priority": 80
+  },
+  {
+    "id": "pg-supply",
+    "type": "page",
+    "title": "Supply catalog",
+    "subtitle": "Marine technical parts",
+    "href": "/supply",
+    "keywords": "supply catalog parts spares browse",
+    "category": "page",
+    "priority": 80
+  },
+  {
+    "id": "pg-usa",
+    "type": "page",
+    "title": "USA coverage",
+    "subtitle": "Houston · NY/NJ · Long Beach",
+    "href": "/usa",
+    "keywords": "usa america united states coast guard uscg port",
+    "category": "page",
+    "priority": 78
+  },
+  {
+    "id": "pg-about",
+    "type": "page",
+    "title": "About",
+    "subtitle": "Wyoming LLC + Tuzla base",
+    "href": "/about",
+    "keywords": "about company eto stcw history",
+    "category": "page",
+    "priority": 70
+  },
+  {
+    "id": "pg-contact",
+    "type": "page",
+    "title": "Contact",
+    "subtitle": "Both offices + WhatsApp",
+    "href": "/contact",
+    "keywords": "contact phone email whatsapp address",
+    "category": "page",
+    "priority": 75
+  },
+  {
+    "id": "svc-power-distribution",
+    "type": "service",
+    "title": "Power Distribution & Generation",
+    "subtitle": "Power Systems · AVR hunting +/- 30V at light load on a Stamford HCI544 or similar · Reverse power trip on shaft generator during PTI/PTO transitions · Synchroscope drift, breaker fails to close on dead bus condition",
+    "href": "/services/power-distribution",
+    "keywords": "power distribution generation power systems main and emergency switchboards lose discrimination avrs hunt at light load and shaft generators trip on reverse power without warning we rebuild the discrimination tree retune the avr loop and clear the synchronising fault before your next port call avr hunting - 30v at light load on a stamford hci544 or similar reverse power trip on shaft generator during pti pto transitions synchroscope drift breaker fails to close on dead bus condition bus-tie acb trips on overcurrent during heavy consumer start shore power connection trips immediately at cold ironing berth emergency generator fails to auto-start within 45s solas ii-1 43 transformer hum and oil leak on 440 230v step-down unit insulation alarm on 440v bus ir drops below 0 5 mohm omicron cmc 356 secondary injection set sverker 900 primary injection up to 3000a megger mit525 5kv insulation tester with pi dar fluke 1587 fc insulation multimeter flir t540 thermal camera for busbar thermography hioki pw3198 power quality analyser yokogawa cw240 clamp-on power meter stamford avr mx341 mx321 replacement modules terasaki ar208s ar316s acb trip units schneider masterpact nw closing opening coils woodward 2301d and dpg governor controllers deif agc-4 and selco t2000 paralleling relays",
+    "category": "service",
+    "priority": 70
+  },
+  {
+    "id": "svc-propulsion-motors",
+    "type": "service",
+    "title": "Propulsion, Thrusters & Deck Machinery",
+    "subtitle": "Rotating Plant · Bow thruster CPP feedback drift, pitch indicator stuck mid-range · Deck crane VFD F0007 overvoltage trip during boom lowering · Hatch cover motor single-phasing after rain ingress to JB",
+    "href": "/services/propulsion-motors",
+    "keywords": "propulsion thrusters deck machinery rotating plant bow thruster pitch sticks at 60 percent the no 2 deck crane trips on regen during slewing and the windlass overload relay won t reset after winter lay-up we trace the actual electrical fault path instead of swapping cards on guesswork bow thruster cpp feedback drift pitch indicator stuck mid-range deck crane vfd f0007 overvoltage trip during boom lowering hatch cover motor single-phasing after rain ingress to jb windlass main contactor chatter brake coil burnt on second attempt cargo pump motor ir drops to 0 3 mohm after tank cleaning air compressor auto-start fails pressure switch contact pitted steering gear running motor temperature alarm at 85 deg c provision crane joystick zero-position drift causing slow creep megger mit525 5kv ir tester and baker awa-iv surge comparison skf microvibe vibration meter and shock pulse probe fluke 438-ii motor analyser with current signature module flir t540 thermography for hot bearing and terminal scans druck dpi 620 calibrator for 4-20ma and pt100 laser shaft alignment kit skf tksa 41 abb acs880 acs580 drive spare control boards siemens simatic et200 remote i o for crane plc stahl atex junction boxes and cable glands for tankers pilz pnoz safety relays for hatch cover interlocks heidenhain and lika resolver encoder spares for cpp feedback",
+    "category": "service",
+    "priority": 70
+  },
+  {
+    "id": "svc-navigation-gmdss",
+    "type": "service",
+    "title": "Navigation, Bridge & GMDSS",
+    "subtitle": "Bridge Systems · Furuno FAR-2228 weak echo, magnetron current below 1.5 mA · JRC JAN-9201 ECDIS frozen during ENC update, S-57 import error · Sperry NaviGat 4000 gyro heading offset 3 deg from GPS COG",
+    "href": "/services/navigation-gmdss",
+    "keywords": "navigation bridge gmdss bridge systems ecdis freezes during chart loading the x-band radar shows a 30-degree blind sector and gmdss battery capacity is below 80 percent of nameplate we fix the bridge stack before the surveyor finds it furuno far-2228 weak echo magnetron current below 1 5 ma jrc jan-9201 ecdis frozen during enc update s-57 import error sperry navigat 4000 gyro heading offset 3 deg from gps cog autopilot rudder hunting - 2 deg on calm sea ais class a intermittent target loss vhf antenna swr 2 5 vdr annual performance test failure on bridge audio channel gmdss reserve battery falls below 6 hours discharge capacity echo sounder ghost echoes in shallow water under 20m bird 4304a through-line wattmeter and 50 ohm dummy load anritsu ms2720t spectrum analyser furuno fsv and jrc service terminal megger bite3 battery impedance tester actisense ngt-1 nmea protocol analyser garmin gps19x reference for gyro cross-check furuno magnetron maf1565n and mg5436 jrc ecdis spare lcd panels and processor boards sperry gyro spheres and support unit bearings gmdss sealed lead-acid 12v 100ah batteries jotron tron 60s epirb hydrostatic release units",
+    "category": "service",
+    "priority": 70
+  },
+  {
+    "id": "svc-automation-control",
+    "type": "service",
+    "title": "Automation, AMS, IAS & PMS",
+    "subtitle": "Control Systems · AMS alarm flood, >10 alarms per 10 minutes (EEMUA 191 breach) · PMS fails to start next generator at 85 percent load threshold · Praxis Megachief HMI black screen after random period of hours",
+    "href": "/services/automation-control",
+    "keywords": "automation ams ias pms control systems ams prints 400 nuisance alarms per watch the pms will not auto-start the next priority generator on heavy consumer demand and the engine control plc has a leaking battery on the cpu we rebuild the alarm philosophy and the load-dependent logic so the duty engineer can sleep ams alarm flood 10 alarms per 10 minutes eemua 191 breach pms fails to start next generator at 85 percent load threshold praxis megachief hmi black screen after random period of hours tank level transmitter hawk ksr kuebler reads 0 percent on full tank boiler control 4-20ma loop drift drum level oscillation rotork iq3 actuator fails to report intermediate position engine control plc battery low warning backup memory at risk modbus rtu comms drop between plc and remote i o panel emerson 475 hart field communicator druck dpi 620 and fluke 754 process calibrators b b usb-comi-si rs485 bus analyser wireshark with modbus profibus can dissectors rslogix 5000 siemens tia portal codesys service licenses tek mso44 mixed-signal scope for fieldbus integrity praxis megachief and megaguard i o cards kongsberg k-chief 600 rio modules and hmi panels siemens s7-1500 cpu and et200sp remote i o allen-bradley controllogix 1756 spare cards phoenix contact and weidmuller relay interface modules",
+    "category": "service",
+    "priority": 70
+  },
+  {
+    "id": "svc-safety-systems",
+    "type": "service",
+    "title": "Fire, Gas & Safety Systems",
+    "subtitle": "Safety Plant · Autronica BS-100 zone fault, loop current outside 18-22 mA window · Consilium Salwico CS3000 detector false alarms in galley · PA/GA STI below 0.5 in engine room (IEC 60849 / MSC.808)",
+    "href": "/services/safety-systems",
+    "keywords": "fire gas safety systems safety plant the autronica panel shows 14 zone faults from the cargo hold smoke loop the pa ga fails the speech transmission index in the engine room and the co2 release station has not been function-tested since the last special survey we bring all of it back to solas ch ii-2 condition autronica bs-100 zone fault loop current outside 18-22 ma window consilium salwico cs3000 detector false alarms in galley pa ga sti below 0 5 in engine room iec 60849 msc 808 co2 release pilot solenoid fails 24vdc continuity test gas detector riken keiki gmi zero drift on accommodation ir sensor cctv bosch hernis image black on cargo hold camera 3 emergency lighting battery duration below 60 min solas ii-1 42 fixed water mist hi-fog section valve solenoid 0 ma on test autronica autromaster service laptop and loop analyser consilium sw3000 service tool and aerosol detector tester b k 2270 sound level analyser with sti stipa module cal gas ch4 50 lel h2s 10ppm co 100ppm o2 19 solo 330 functional smoke heat tester pole flir t540 for pa amplifier cabinet thermal scan autronica bh-310 bj-310 detector heads and bases consilium salwico cargo and accommodation detectors riken keiki rx-8500 and sp-220 gas detector spares co2 release pilot solenoids and pressure switches tyco ansul bosch praesideo and dnh pa ga amplifier cards and loudspeakers",
+    "category": "service",
+    "priority": 70
+  },
+  {
+    "id": "svc-lighting-nav-lights",
+    "type": "service",
+    "title": "Lighting & Navigation Lights",
+    "subtitle": "Illumination · Nav light failure alarm with bulb intact, current sensor below threshold · Cargo hold floodlight 1000W MH lamp restrike time over 15 minutes · Engine room emergency LED panel flicker on 24V DC ripple",
+    "href": "/services/lighting-nav-lights",
+    "keywords": "lighting navigation lights illumination the starboard sidelight controller alarms but the lamp is healthy the cargo hold floods drop two breakers when all four are switched and the wheelhouse dimmer flickers on the new led panel lights we finish the job with full colreg type-approval paperwork in the file nav light failure alarm with bulb intact current sensor below threshold cargo hold floodlight 1000w mh lamp restrike time over 15 minutes engine room emergency led panel flicker on 24v dc ripple wheelhouse dimmer buzz on new led fixtures no smooth dim curve navigation light controller switchover relay welded contacts external floodlight ip rating compromised after gland refit anchor light lamp life under 200 hours voltage spike on switching konica minolta t-10a illuminance meter fluke 1735 power logger for harmonic analysis yokogawa cw240 clamp meter with inrush capture dnv and dekra type approval cross-reference database insulation tester for emergency lighting bus integrity glamox mir and svs led type-approved fittings den haan rotterdam nav lights and electronic controllers phoenix products pxlm marine led floodlights aqua signal series 41 55 type-approved nav light spares hella marine led bridge and accommodation luminaires",
+    "category": "service",
+    "priority": 70
+  },
+  {
+    "id": "svc-testing-certification",
+    "type": "service",
+    "title": "Electrical Testing & Certification",
+    "subtitle": "Compliance Testing · ACB long-time pickup outside +/- 10 percent of nameplate (IEC 60947-2) · Motor stator IR below 1 MOhm or PI below 2.0 (IEEE 43) · Differential relay (87) stability fails under through-fault simulation",
+    "href": "/services/testing-certification",
+    "keywords": "electrical testing certification compliance testing class wants a primary-injection certificate on every acb above 800a the insulation log shows three motors below 1 mohm and the protection relay file is missing the last two pickup curves we deliver the test pack the surveyor signs acb long-time pickup outside - 10 percent of nameplate iec 60947-2 motor stator ir below 1 mohm or pi below 2 0 ieee 43 differential relay 87 stability fails under through-fault simulation earth fault 51n 64 timing curve mismatched to coordination study thermal scan shows 25k rise on bus joint vs reference temperature cable continuity fails on spare core after recent yard cabling hv switchboard partial discharge above 100 pc iec 60270 surge arrester leakage current trending up year on year omicron cmc 356 with control and test universe sverker 900 primary injection 0-3000a continuous megger mit525 5kv with pi and step voltage megger mft1741 multifunction installation tester flir t540 thermal camera 464x348 ir resolution doble f6150e for high-end protection relay testing hv pressure test set ac dc up to 15kv portable terasaki abb emax schneider masterpact trip units deif and selco generator protection relay spares siba bussmann marine hrc fuses gg am mersen surge protection devices for 440v and 230v bus class-acceptable test report templates and binder packs",
+    "category": "service",
+    "priority": 70
+  },
+  {
+    "id": "svc-commissioning-retrofit",
+    "type": "service",
+    "title": "Commissioning & Retrofit Engineering",
+    "subtitle": "Project Delivery · VFD fails FAT load test above 80 percent due to DC bus ripple · Shore power earth fault monitor mis-coordinated with shore RCD · Battery hybrid DC bus precharge fails on cold start",
+    "href": "/services/commissioning-retrofit",
+    "keywords": "commissioning retrofit engineering project delivery the yard delivered the vfd package without a load test the shore power retrofit needs a tt-to-it scheme study and the cyber notation requires a baseline before next class we write the fat sat script run it and hand back a signed file the owner can audit vfd fails fat load test above 80 percent due to dc bus ripple shore power earth fault monitor mis-coordinated with shore rcd battery hybrid dc bus precharge fails on cold start yard cabling crosstalk on shielded analog signals to engine room led retrofit dimmer drops out at 20 percent setting cyber notation gap no asset inventory no patch baseline no segmentation hioki pw3198 power quality analyser class a fluke norma 5000 power analyser for vfd efficiency tenable ot or claroty for read-only ot baseline scan wireshark with ics dissectors for network audit test packs aligned to iacs ur e22 e26 e27 cmms export tools star ips amos shipnet for handover abb acs880 and danfoss vlt marine vfd packages cavotec moormaster and shore power plug-and-socket systems corvus and leclanche marine battery rack components nozomi networks guardian sensor for ot monitoring eplan and autocad electrical engineering software",
+    "category": "service",
+    "priority": 70
+  },
+  {
+    "id": "svc-emergency-remote-eto",
+    "type": "service",
+    "title": "Emergency Attendance & Remote ETO",
+    "subtitle": "24h Response · Total or partial blackout, emergency generator running, ETO ashore · PSC officer raises electrical observation, master needs second opinion · P&I survey scheduled within 12 hours after cargo incident",
+    "href": "/services/emergency-remote-eto",
+    "keywords": "emergency attendance remote eto 24h response the duty engineer calls at 0240 local with a blackout in progress the master needs a remote eto opinion before signing a psc observation and the p i surveyor wants an independent electrical expert at the gangway by sunrise we answer the phone and we attend total or partial blackout emergency generator running eto ashore psc officer raises electrical observation master needs second opinion p i survey scheduled within 12 hours after cargo incident equipment failure during voyage manufacturer support outside hours class condition issued owner needs rectification plan within 24 hours owner shore office needs independent technical advice on yard invoice mobile kit insulation tester scope thermal camera calibrator iridium and inmarsat data plans for offshore troubleshooting secure remote access via teamviewer anydesk with vessel firewall incident report template aligned with imo msc 1 circ 1432 local agent network for visa launch and customs clearance emergency kit avr governor module sync check relay fuses common terasaki and schneider acb trip coils in pendik pt100 transmitters 4-20ma isolators 24v power supplies annual retainer plans with priority response sla owner-customised critical spare list maintained on shore",
+    "category": "service",
+    "priority": 70
+  },
+  {
+    "id": "svc-survey-psc-prep",
+    "type": "service",
+    "title": "Class Survey & PSC Preparation",
+    "subtitle": "Compliance Prep · Outstanding class condition on electrical, deadline approaching · Recurring PSC observations on emergency lighting or nav light alarms · CII rating dropping due to auxiliary load profile inefficiency",
+    "href": "/services/survey-psc-prep",
+    "keywords": "class survey psc preparation compliance prep the intermediate is in nine weeks the last psc came back with three electrical observations the office never closed and the cii rating is sliding towards d we do the mock inspection write the rectification plan and close every item on the file outstanding class condition on electrical deadline approaching recurring psc observations on emergency lighting or nav light alarms cii rating dropping due to auxiliary load profile inefficiency owner not ready for special survey scope sent by class solas ch ii-1 electrical drawings out of date vs as-built missing test records for items inspected at last class attendance dnv-cg-0339 abs steel vessel rules bv nr467 reference set paris and tokyo mou psc observation database last 24 months iacs ur e series interpretation library cii calculator aligned to imo mepc 354 78 gopro hero 12 evidence kit with anti-static enclosure class-acceptable test report templates and binder system crew familiarisation video pack in tr en ru ph photo evidence package for closed defects before after psc checklist customised to flag and recent mou campaigns annual retainer with quarterly fleet-wide compliance reviews",
+    "category": "service",
+    "priority": 70
+  },
+  {
+    "id": "svc-insulation-diagnostics",
+    "type": "service",
+    "title": "Insulation Diagnostics & Hidden Earth Faults",
+    "subtitle": "Fault Finding · Insulation alarm on 440V bus, IR fluctuates 0.2 to 0.8 MOhm · Intermittent earth fault on engine room lighting, weather dependent · Motor IR drops below 1 MOhm only after several hours of running",
+    "href": "/services/insulation-diagnostics",
+    "keywords": "insulation diagnostics hidden earth faults fault finding the earth lamp test shows 0 4 mohm on the 440v bus and nobody can find it the bow thruster motor megs 800 kohm cold but 4 mohm warm and the generator trips on earth fault every third start we map the network isolate the path and write the report insulation alarm on 440v bus ir fluctuates 0 2 to 0 8 mohm intermittent earth fault on engine room lighting weather dependent motor ir drops below 1 mohm only after several hours of running generator earth fault relay trips on third or fourth start of the day pi below 1 5 on cargo pump motor after tank cleaning operation cable ir fails after recent yard hot work in adjacent space heater element earth leak in galley equipment rcd nuisance trip megger mit525 5kv with step voltage and dar pi baker awa-iv winding analyser with surge comparison megger cfl535g time-domain reflectometer flir t540 thermal imager for hot-spot diagnostics under load fluke 1587 fc for targeted ir measurements sonel mic-10k1 10kv tester for hv bus and large machines bender irdh575 portable insulation monitor for live networks bender irdh575 and isometer modules for ship it networks vfd output filter capacitors schaffner epcos heat-shrink insulation kits for motor terminal lug repair cable repair kits iec 60092 compliant 3m scotchcast moisture absorber heaters for stored spare motors",
+    "category": "service",
+    "priority": 70
+  },
+  {
+    "id": "region-houston-marine-electrical",
+    "type": "region",
+    "title": "Houston · TX",
+    "subtitle": "The Port of Houston is the largest US port by foreign waterborne tonnage and the busiest petroche...",
+    "href": "/usa/houston-marine-electrical",
+    "keywords": "houston tx usa bayport container terminal barbours cut terminal turning basin public wharves 1-32 bayport liquid vopak targa terminals houston fuel oil terminal hfotco aog no 2 generator avr failure on an aframax at hfotco mid-discharge msb acb retrofit on a panamax bulker at turning basin during a 5-year special survey bow-thruster plc fault on a neo-panamax boxship at bayport before pilot-on",
+    "category": "region",
+    "priority": 65
+  },
+  {
+    "id": "region-new-york-nj-marine-electrical",
+    "type": "region",
+    "title": "Newark · NJ",
+    "subtitle": "The Port of New York and New Jersey is the largest container port on the US East Coast and third ...",
+    "href": "/usa/new-york-nj-marine-electrical",
+    "keywords": "newark nj usa maher terminals elizabeth apm terminals elizabeth gct bayonne gct new york howland hook port newark container terminal pnct emergency-generator black-start failure flagged by uscg sector ny on a 14 000 teu ulcv at maher reefer-monitoring fault on a neo-panamax boxship at gct bayonne with 800 active reefer plugs gmdss a3 station battery and antenna survey on a panamax at pnct before north atlantic sailing",
+    "category": "region",
+    "priority": 65
+  },
+  {
+    "id": "region-long-beach-marine-electrical",
+    "type": "region",
+    "title": "Long Beach · CA",
+    "subtitle": "The adjacent Ports of Long Beach and Los Angeles form the San Pedro Bay complex — the largest con...",
+    "href": "/usa/long-beach-marine-electrical",
+    "keywords": "long beach ca usa long beach container terminal pier e middle harbor pier t tti terminal pier 400 apm terminals la pier g pier j long beach bulk and breakbulk berths 121-131 long beach oil terminals hvsc shore-power fault on a 14 000 teu boxship at pier 400 within the carb 2-hour window aog no 1 generator avr failure on a capesize bulker discharging coal at pier g automation ias workstation failure on an aframax at berth 121",
+    "category": "region",
+    "priority": 65
+  },
+  {
+    "id": "prod-abb-af50-30-11",
+    "type": "product",
+    "title": "ABB AF50-30-11 3-Pole Contactor",
+    "subtitle": "ABB · AF50-30-11",
+    "href": "/supply/product/abb-af50-30-11-contactor",
+    "keywords": "abb af50-30-11 af50-30-11-13 1sbl357001r1311 breakers-contactors contactor abb motor-control switchboard af-series cargo pump motor starters hvac compressor starting hydraulic power pack motors abb af50-30-11 3-pole contactor",
+    "category": "product",
+    "priority": 75
+  },
+  {
+    "id": "prod-schneider-lc1d18bd",
+    "type": "product",
+    "title": "Schneider TeSys D LC1D18BD Contactor",
+    "subtitle": "Schneider Electric · LC1D18BD",
+    "href": "/supply/product/schneider-tesys-lc1d18bd",
+    "keywords": "schneider electric lc1d18bd lc1-d18bd lc1d18b7 breakers-contactors contactor schneider tesys 24vdc motor-control galley equipment starters ovens mixers small fan and pump motor control air handling unit ahu damper actuators schneider tesys d lc1d18bd contactor",
+    "category": "product",
+    "priority": 75
+  },
+  {
+    "id": "prod-siemens-3rt2026-1bb40",
+    "type": "product",
+    "title": "Siemens SIRIUS 3RT2026-1BB40 Power Contactor",
+    "subtitle": "Siemens · 3RT2026-1BB40",
+    "href": "/supply/product/siemens-sirius-3rt2026",
+    "keywords": "siemens 3rt2026-1bb40 3rt2026-1bb40-0cc0 3rt20261bb40 breakers-contactors contactor siemens sirius s0 motor-starter fresh water pump starters lube oil purifier feed pumps engine room ventilation siemens sirius 3rt2026-1bb40 power contactor",
+    "category": "product",
+    "priority": 65
+  },
+  {
+    "id": "prod-mitsubishi-nf250-cv",
+    "type": "product",
+    "title": "Mitsubishi NF250-CV 3P 250A MCCB",
+    "subtitle": "Mitsubishi Electric · NF250-CV-3P-250A",
+    "href": "/supply/product/mitsubishi-nf250-cv-mccb",
+    "keywords": "mitsubishi electric nf250-cv-3p-250a nf250-cv nf250cv3p250a breakers-contactors mccb mitsubishi circuit-breaker nf-series japanese-build msb main outgoing feeders to mcc bow thruster supply branch cargo pump motor feeders mitsubishi nf250-cv 3p 250a mccb",
+    "category": "product",
+    "priority": 65
+  },
+  {
+    "id": "prod-siemens-s7-1500-em",
+    "type": "product",
+    "title": "Siemens SIMATIC S7-1500 Digital Input Module",
+    "subtitle": "Siemens · 6ES7521-1BH00-0AB0",
+    "href": "/supply/product/siemens-s7-1500-input-module",
+    "keywords": "siemens 6es7521-1bh00-0ab0 6es7521-1bh10-0ab0 automation-control plc siemens s7-1500 digital-input automation ams digital signal acquisition tank level switch monitoring limit switch feedback from valves siemens simatic s7-1500 digital input module",
+    "category": "product",
+    "priority": 65
+  },
+  {
+    "id": "prod-ab-5069-l306er",
+    "type": "product",
+    "title": "Allen-Bradley CompactLogix 5069-L306ER Controller",
+    "subtitle": "Rockwell Automation / Allen-Bradley · 5069-L306ER",
+    "href": "/supply/product/allen-bradley-compactlogix-5069",
+    "keywords": "rockwell automation allen-bradley 5069-l306er 5069l306er automation-control plc allen-bradley rockwell compactlogix bwms bwms skid control inert gas generator automation cargo handling automation allen-bradley compactlogix 5069-l306er controller",
+    "category": "product",
+    "priority": 60
+  },
+  {
+    "id": "prod-omron-nx1p2-9024dt",
+    "type": "product",
+    "title": "Omron NX1P2-9024DT Machine Automation Controller",
+    "subtitle": "Omron · NX1P2-9024DT",
+    "href": "/supply/product/omron-nx1p2-9024dt",
+    "keywords": "omron nx1p2-9024dt nx1p29024dt automation-control plc omron nx1p2 ethercat skid-control fresh water generator control oily water separator skid sewage treatment plant omron nx1p2-9024dt machine automation controller",
+    "category": "product",
+    "priority": 65
+  },
+  {
+    "id": "prod-eh-pmc71-aa",
+    "type": "product",
+    "title": "Endress+Hauser Cerabar PMC71 Pressure Transmitter",
+    "subtitle": "Endress+Hauser · PMC71-AAA1P2HAAAA",
+    "href": "/supply/product/endress-hauser-cerabar-pmc71",
+    "keywords": "endress hauser pmc71-aaa1p2haaaa pmc71-aaa1p2haa pmc71 sensors-transmitters pressure-transmitter endress-hauser cerabar hart 4-20ma main engine fuel oil supply pressure lube oil sump and supply pressure boiler feed water pressure endress hauser cerabar pmc71 pressure transmitter",
+    "category": "product",
+    "priority": 65
+  },
+  {
+    "id": "prod-vega-vegapuls-c21",
+    "type": "product",
+    "title": "VEGAPULS C 21 Compact Radar Level Sensor",
+    "subtitle": "VEGA · PSC21.XXAGCATKMAX",
+    "href": "/supply/product/vega-vegapuls-c21-radar",
+    "keywords": "vega psc21 xxagcatkmax vegapuls-c21 psc21 sensors-transmitters radar-level vega vegapuls tank-level ballast ballast water tank level fresh water tank level sludge tank level vegapuls c 21 compact radar level sensor",
+    "category": "product",
+    "priority": 65
+  },
+  {
+    "id": "prod-pt100-rtd-marine",
+    "type": "product",
+    "title": "Pt100 RTD Temperature Probe, Marine Duty",
+    "subtitle": "WIKA · TR10-J",
+    "href": "/supply/product/pt100-rtd-marine-probe",
+    "keywords": "wika tr10-j tr10-j-ma-x3gasn pt100-1 3din-marine sensors-transmitters pt100 rtd temperature wika engine main engine jacket cooling water lube oil temperature exhaust gas before after turbocharger pt100 rtd temperature probe marine duty",
+    "category": "product",
+    "priority": 75
+  },
+  {
+    "id": "prod-hawk-acoustic-wave",
+    "type": "product",
+    "title": "Hawk Acoustic Wave Vibration Sensor",
+    "subtitle": "Hawk Measurement · AW-S-100",
+    "href": "/supply/product/hawk-acoustic-wave-vibration",
+    "keywords": "hawk measurement aw-s-100 aw-s-100-ex acousticwaves-100 sensors-transmitters vibration hawk acoustic-emission condition-monitoring cbm auxiliary engine bearing monitoring main engine turbocharger bearing stern tube intermediate bearing hawk acoustic wave vibration sensor",
+    "category": "product",
+    "priority": 60
+  },
+  {
+    "id": "prod-beijer-ix-t7b",
+    "type": "product",
+    "title": "Beijer iX T7B 7-inch Marine HMI",
+    "subtitle": "Beijer Electronics · IX-T7B",
+    "href": "/supply/product/beijer-ix-t7b-hmi",
+    "keywords": "beijer electronics ix-t7b ix-t7b-630002211 ix t7b plc-hmi hmi beijer ix-panel operator-interface panel-mount engine control room sub-panels bwms operator hmi fresh water generator hmi beijer ix t7b 7-inch marine hmi",
+    "category": "product",
+    "priority": 65
+  },
+  {
+    "id": "prod-weintek-mt8071ie",
+    "type": "product",
+    "title": "Weintek MT8071iE 7-inch HMI",
+    "subtitle": "Weintek · MT8071iE",
+    "href": "/supply/product/weintek-mt8071ie-hmi",
+    "keywords": "weintek mt8071ie mt8071ie2 mt8071ier plc-hmi hmi weintek easybuilder panel oem-skid sewage treatment plant hmi provision refrigeration local panel hydraulic power pack control weintek mt8071ie 7-inch hmi",
+    "category": "product",
+    "priority": 75
+  },
+  {
+    "id": "prod-consilium-salwico-input-card",
+    "type": "product",
+    "title": "Consilium Salwico CS4000 Detector Loop Card",
+    "subtitle": "Consilium · CS4000-DLC-V2",
+    "href": "/supply/product/consilium-salwico-cs4000-card",
+    "keywords": "consilium cs4000-dlc-v2 cs4000-loop-card cs-dlc alarm-monitoring fire-detection consilium salwico addressable loop-card engine room fire detection loop cargo hold smoke sampling extension accommodation deck loops consilium salwico cs4000 detector loop card",
+    "category": "product",
+    "priority": 60
+  },
+  {
+    "id": "prod-praxis-selma-mk2",
+    "type": "product",
+    "title": "Praxis Selma Mk2 Alarm Distribution Unit",
+    "subtitle": "Praxis Automation · SELMA-MK2-ADU",
+    "href": "/supply/product/praxis-selma-mk2-bnwas",
+    "keywords": "praxis automation selma-mk2-adu selma-adu-v2 selma-mk2 alarm-monitoring bnwas praxis alarm-monitoring bridge mega-guard bridge alarm summary panel bnwas interface cargo control room alarm aggregation praxis selma mk2 alarm distribution unit",
+    "category": "product",
+    "priority": 60
+  },
+  {
+    "id": "prod-aqua-signal-s55-led",
+    "type": "product",
+    "title": "Aqua Signal Series 55 LED Masthead Light",
+    "subtitle": "Aqua Signal · 55-200-3000",
+    "href": "/supply/product/aqua-signal-series-55-masthead-led",
+    "keywords": "aqua signal 55-200-3000 s55-mast-led aqs55-mh navigation-lights navigation-light aqua-signal led masthead colreg masthead forward navigation light towing vessel after masthead replacement on legacy bulkers aqua signal series 55 led masthead light",
+    "category": "product",
+    "priority": 75
+  },
+  {
+    "id": "prod-den-haan-dhr70-led",
+    "type": "product",
+    "title": "Den Haan DHR70N LED Port/Starboard Side Lights (Pair)",
+    "subtitle": "Den Haan Rotterdam · DHR70N-LED-PS",
+    "href": "/supply/product/den-haan-dhr70n-portstarboard-led",
+    "keywords": "den haan rotterdam dhr70n-led-ps dhr70-led dhr70n-port dhr70n-star navigation-lights navigation-light den-haan side-light led port-starboard port and starboard navigation lights side light retrofit on dutch-built vessels osv supply vessel modernization den haan dhr70n led port starboard side lights pair",
+    "category": "product",
+    "priority": 65
+  },
+  {
+    "id": "prod-northstar-npx-100agm",
+    "type": "product",
+    "title": "NorthStar NSB100FT Blue+ AGM Battery 12V 100Ah",
+    "subtitle": "NorthStar Battery · NSB100FT",
+    "href": "/supply/product/northstar-npx-100-agm-battery",
+    "keywords": "northstar battery nsb100ft northstar-nsb100 nsb-100ft batteries-ups battery northstar agm emergency gmdss emergency gmdss battery bank emergency lighting battery bnwas backup supply northstar nsb100ft blue agm battery 12v 100ah",
+    "category": "product",
+    "priority": 75
+  },
+  {
+    "id": "prod-effekta-mki10000",
+    "type": "product",
+    "title": "Effekta MKI 10000 Online UPS Module",
+    "subtitle": "Effekta · MKI-10000",
+    "href": "/supply/product/effekta-mki-10000-ups-module",
+    "keywords": "effekta mki-10000 mki10000 mki-10k batteries-ups ups effekta online bridge 10kva bridge electronics ups cargo control room servers ams ias critical supply effekta mki 10000 online ups module",
+    "category": "product",
+    "priority": 60
+  },
+  {
+    "id": "prod-hawke-501-453-rac",
+    "type": "product",
+    "title": "Hawke 501/453 RAC ATEX Cable Gland (Size A)",
+    "subtitle": "Hawke International · 501/453/RAC/A/M20",
+    "href": "/supply/product/hawke-501-453-rac-atex-gland",
+    "keywords": "hawke international 501 453 rac a m20 501-453-rac-a 501 453 univ a cables-glands cable-gland atex hawke ex-d hazardous-area pump room electrical enclosures tanker deck junction boxes chemical carrier deck cabling hawke 501 453 rac atex cable gland size a",
+    "category": "product",
+    "priority": 65
+  },
+  {
+    "id": "prod-olflex-marine-fhf",
+    "type": "product",
+    "title": "Lapp Olflex Marine FHF 4x2.5 mm2 Power Cable",
+    "subtitle": "Lapp / Olflex · OLFLEX-MARINE-FHF-4x2.5",
+    "href": "/supply/product/olflex-marine-fhf-power-cable",
+    "keywords": "lapp olflex olflex-marine-fhf-4x2 5 fhf-4g2 5-marine mfa-fhf-4x2 5 cables-glands cable olflex marine-cable fhf ship-cable sub-distribution feeders motor branch circuits up to 7 5 kw lighting circuit main runs lapp olflex marine fhf 4x2 5 mm2 power cable",
+    "category": "product",
+    "priority": 75
+  },
+  {
+    "id": "prod-abb-m3bp-132smb4",
+    "type": "product",
+    "title": "ABB M3BP 132SMB4 Marine IE3 Motor 7.5 kW",
+    "subtitle": "ABB · M3BP-132SMB4-B3",
+    "href": "/supply/product/abb-m3bp-132smb4-marine-motor",
+    "keywords": "abb m3bp-132smb4-b3 3gbp132216-asb m3bp132smb4 motors-fans motor abb marine-motor ie3 m3bp ballast pump motor sanitary discharge pump engine room ahu fan abb m3bp 132smb4 marine ie3 motor 7 5 kw",
+    "category": "product",
+    "priority": 65
+  },
+  {
+    "id": "prod-ebm-papst-w3g300",
+    "type": "product",
+    "title": "ebm-papst W3G300-EW02-02 Tube-Axial Fan",
+    "subtitle": "ebm-papst · W3G300-EW02-02",
+    "href": "/supply/product/ebm-papst-w3g300-axial-fan",
+    "keywords": "ebm-papst w3g300-ew02-02 w3g300ew0202 ebm-w3g300 motors-fans fan ebm-papst axial-fan ec-motor cabinet-cooling electronics cabinet cooling small ahu section fan engine room emergency vent ebm-papst w3g300-ew02-02 tube-axial fan",
+    "category": "product",
+    "priority": 65
+  },
+  {
+    "id": "prod-asco-8210g094",
+    "type": "product",
+    "title": "ASCO Numatics 8210G094 2-Way Solenoid Valve",
+    "subtitle": "ASCO Numatics (Emerson) · 8210G094",
+    "href": "/supply/product/asco-numatics-8210g094-solenoid",
+    "keywords": "asco numatics emerson 8210g094 8210-g094 asco-8210g094-24dc solenoid-valves solenoid-valve asco numatics 2-way brass hydrophore tank fill line deck wash water isolation sanitary flush line solenoid asco numatics 8210g094 2-way solenoid valve",
+    "category": "product",
+    "priority": 75
+  },
+  {
+    "id": "prod-megger-mit525",
+    "type": "product",
+    "title": "Megger MIT525 5 kV Insulation Resistance Tester",
+    "subtitle": "Megger · MIT525",
+    "href": "/supply/product/megger-mit525-insulation-tester",
+    "keywords": "megger mit525 mit-525 1006-668 test-instruments megger insulation-tester 5kv test-instrument class-survey hv shaft generator insulation test bow thruster motor ir test msb busbar isolation check megger mit525 5 kv insulation resistance tester",
+    "category": "product",
+    "priority": 60
+  },
+  {
+    "id": "prod-fluke-1587-fc",
+    "type": "product",
+    "title": "Fluke 1587 FC Insulation Multimeter",
+    "subtitle": "Fluke · FLUKE-1587 FC",
+    "href": "/supply/product/fluke-1587-fc-insulation-multimeter",
+    "keywords": "fluke fluke-1587 fc 1587fc fluke-1587fc test-instruments fluke multimeter insulation-tester eto-tool fluke-connect lv motor insulation testing cable continuity and ir test junction box troubleshooting fluke 1587 fc insulation multimeter",
+    "category": "product",
+    "priority": 75
+  },
+  {
+    "id": "prod-daniamant-ebl-l160",
+    "type": "product",
+    "title": "Daniamant L160 Lifebuoy Self-Igniting Light",
+    "subtitle": "Daniamant · L160-LED",
+    "href": "/supply/product/daniamant-l160-lifebuoy-light",
+    "keywords": "daniamant l160-led daniamant-l160 l-160 safety-lsa lsa daniamant lifebuoy solas mob bridge wing lifebuoy mob light main deck lifebuoy stations forecastle and poop deck lifebuoys daniamant l160 lifebuoy self-igniting light",
+    "category": "product",
+    "priority": 75
+  },
+  {
+    "id": "prod-jotron-tron-60s",
+    "type": "product",
+    "title": "Jotron Tron 60S Cat.1 EPIRB",
+    "subtitle": "Jotron · Tron 60S",
+    "href": "/supply/product/jotron-tron-60s-epirb",
+    "keywords": "jotron tron 60s tron-60s jotron-tron60s safety-lsa epirb jotron gmdss solas cospas-sarsat primary solas gmdss epirb cargo vessel bridge mount tanker monkey-island mount jotron tron 60s cat 1 epirb",
+    "category": "product",
+    "priority": 60
+  },
+  {
+    "id": "prod-fci-ls8000",
+    "type": "product",
+    "title": "FCI LS8000 Thermal Level Switch",
+    "subtitle": "FCI Fluid Components · LS8000-FCI",
+    "href": "/supply/product/fci-ls8000-level-switch",
+    "keywords": "fci fluid components ls8000-fci ls-8000 fci-ls8000 engine-room-consumables level-switch fci thermal-dispersion bilge fuel-oil fuel oil service tank high low alarm lube oil sump level alarm sludge tank high alarm fci ls8000 thermal level switch",
+    "category": "product",
+    "priority": 65
+  },
+  {
+    "id": "prod-phoenix-utt-25",
+    "type": "product",
+    "title": "Phoenix Contact UTT 2,5 Terminal Block (Pack of 50)",
+    "subtitle": "Phoenix Contact · UT 2,5",
+    "href": "/supply/product/phoenix-contact-utt-25-terminal",
+    "keywords": "phoenix contact ut 2 5 3044090 ut-2 5 electrical-spares terminal-block phoenix-contact din-rail screw-clamp ship-spare junction box terminal strip mcc starter bucket internal wiring sub-distribution panel termination phoenix contact utt 2 5 terminal block pack of 50",
+    "category": "product",
+    "priority": 75
+  }
+]

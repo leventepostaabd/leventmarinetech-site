@@ -29,6 +29,7 @@ export default function Footer() {
             <li><Link href="/services" className="hover:text-amber no-underline">Service catalog</Link></li>
             <li><Link href="/services/insulation-diagnostics" className="hover:text-amber no-underline">Insulation diagnostics</Link></li>
             <li><Link href="/services/emergency-remote-eto" className="hover:text-amber no-underline">Emergency / AOG</Link></li>
+            <li><Link href="/portal" className="hover:text-amber no-underline">Customer portal</Link></li>
           </ul>
         </div>
 

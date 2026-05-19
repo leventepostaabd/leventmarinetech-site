@@ -1,0 +1,35 @@
+{
+  "nav": {
+    "service": "Service",
+    "supply": "Supply",
+    "usa": "USA",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "callHotline": "24/7 Hotline"
+  },
+  "home": {
+    "kicker": "Marine Electrical Service · Since 2012",
+    "h1Pre": "Marine Electrical Service & Parts Supply",
+    "h1Post": "— Wyoming, USA + Tuzla, Türkiye",
+    "sub": "Coast-to-coast US response · 24/7 AOG dispatch · 12 years onboard.\nEngineer on board within hours, the right part on its way within a day.",
+    "tileServiceKicker": "01 · SERVICE",
+    "tileServiceTitle": "Marine Electrical Service",
+    "tileServiceLead": "Generator, MSB, propulsion, navigation, automation, safety, deck machinery, survey prep. We dispatch an engineer to your vessel.",
+    "tileSupplyKicker": "02 · SUPPLY",
+    "tileSupplyTitle": "Technical Parts Supply",
+    "tileSupplyLead": "Obsolete OEM, AOG emergency, compatible alternative, repack and ship. We source, verify, and deliver to vessel / agent / port.",
+    "searchPlaceholder": "Search by part number, maker, vessel system, or upload a photo…"
+  },
+  "wizard": {
+    "step": "Step",
+    "of": "/",
+    "back": "← Back",
+    "continue": "Continue →",
+    "submit": "Submit request",
+    "submitting": "Sending…",
+    "received": "Request received.",
+    "receivedDesc": "Thanks. We'll come back the same business day.",
+    "ref": "Reference:"
+  }
+}

@@ -6,6 +6,8 @@ import Footer from '@/components/Footer';
 import MobileActionBar from '@/components/MobileActionBar';
 import FloatingRail from '@/components/FloatingRail';
 import CookieBanner from '@/components/CookieBanner';
+import Spotlight from '@/components/Spotlight';
+import PageTransition from '@/components/PageTransition';
 import { SITE } from '@/lib/site';
 import { organizationSchema } from '@/lib/schema-org';
 
@@ -46,11 +48,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-amber focus:text-navy-700 focus:px-4 focus:py-2 focus:rounded-md focus:font-semibold">Skip to content</a>
         <Header />
-        <main id="main">{children}</main>
+        <main id="main"><PageTransition>{children}</PageTransition></main>
         <FloatingRail />
         <Footer />
         <MobileActionBar />
         <CookieBanner />
+        <Spotlight />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
