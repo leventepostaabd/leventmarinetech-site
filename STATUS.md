@@ -86,5 +86,5 @@ _henüz yok_
 | A — Positioning | _will be assigned_ | _will be assigned_ | bekliyor |
 | B — Service | _will be assigned_ | _will be assigned_ | bekliyor |
 | C — Supply | _will be assigned_ | _will be assigned_ | bekliyor |
-| D — Trust/SEO | `claude/wave-D-trust-seo-ac766d28` | `.claude/worktrees/agent-ac766d28096d29ed7` | Wave 3 tamamlandı (commit hash push sonrası eklenecek) |
+| D — Trust/SEO | `claude/wave-D-trust-seo-ac766d28` | `.claude/worktrees/agent-ac766d28096d29ed7` | Wave 3 tamamlandı — commit `e250bd3` |
 | E — Hero/Emergency | _will be assigned_ | _will be assigned_ | bekliyor |
