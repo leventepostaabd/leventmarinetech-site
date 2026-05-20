@@ -83,7 +83,7 @@ _henüz yok_
 
 | Agent | Branch | Worktree | Durum |
 |---|---|---|---|
-| A — Positioning | `agent-a/positioning-i18n` | `.claude/worktrees/agent-a3133eede915ccb44` | Wave 0 tamam (commit: PENDING) |
+| A — Positioning | `agent-a/positioning-i18n` | `.claude/worktrees/agent-a3133eede915ccb44` | Wave 0 tamam (commit: df33005) |
 | B — Service | _will be assigned_ | _will be assigned_ | bekliyor |
 | C — Supply | _will be assigned_ | _will be assigned_ | bekliyor |
 | D — Trust/SEO | _will be assigned_ | _will be assigned_ | bekliyor |
