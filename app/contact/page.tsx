@@ -9,13 +9,16 @@ export default function Contact() {
   const locale = getLocale();
   const t = getTranslator(locale);
   return (
-    <div className="container-x py-16">
-      <div className="kicker mb-3">{t('contact.kicker')}</div>
-      <h1 className="mb-3">{t('contact.title')}</h1>
-      <p className="text-ink-muted mb-2 max-w-2xl">{t('contact.lead')}</p>
-      <p className="font-mono text-[12px] uppercase tracking-[0.06em] text-amber-700 mb-12">{t('contact.tagline')}</p>
+    <div className="lm-screen bg-white">
+      <div className="shrink-0 px-6 pt-16 pb-3 md:px-12">
+        <div className="kicker mb-1">{t('contact.kicker')}</div>
+        <h1 className="text-[22px] md:text-[28px] leading-tight font-bold mb-1">{t('contact.title')}</h1>
+        <p className="text-ink-muted text-[13.5px]">{t('contact.lead')}</p>
+        <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-amber-700 mt-1">{t('contact.tagline')}</p>
+      </div>
 
-      <div className="grid gap-6 md:grid-cols-2 max-w-4xl">
+      <div className="lm-screen-body px-6 pb-6 md:px-12">
+        <div className="grid gap-4 md:grid-cols-2 max-w-5xl">
         <div className="card">
           <div className="kicker mb-3">{t('contact.usaHq')}</div>
           <h3 className="mb-2">{t('contact.operationsCity')}</h3>
@@ -84,6 +87,7 @@ export default function Contact() {
             <Link href="/service-wizard" className="btn-accent btn-md">Service wizard</Link>
             <Link href="/supply-wizard" className="btn-primary btn-md">Supply wizard</Link>
           </div>
+        </div>
         </div>
       </div>
     </div>

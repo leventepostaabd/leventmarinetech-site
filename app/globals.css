@@ -66,3 +66,33 @@
 @layer utilities {
   .text-balance { text-wrap: balance; }
 }
+
+/* ---------------------------------------------------------------------------
+   Single-page / no-scroll rule (applied by ScrollLock client component).
+   Body & html get .lm-no-scroll on every route except the supply catalog
+   and admin/portal areas. The class clamps the viewport so any in-page
+   overflow has to be handled by inner scroll containers, not the document.
+   --------------------------------------------------------------------------- */
+html.lm-no-scroll,
+body.lm-no-scroll {
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* A reusable page shell for single-viewport screens: full height, flex column,
+   inner content area scrolls if absolutely necessary, but the page itself
+   never does. */
+.lm-screen {
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.lm-screen-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}

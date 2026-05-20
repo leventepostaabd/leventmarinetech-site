@@ -34,7 +34,7 @@ export default function Hero({
     <section
       aria-label="Levent Marine — main entrance"
       className="relative w-full overflow-hidden bg-navy-900"
-      style={{ height: 'calc(100vh - var(--header-h, 72px))' }}
+      style={{ height: '100vh' }}
     >
       {/* Slogan ribbon */}
       <motion.div
@@ -80,21 +80,20 @@ export default function Hero({
         />
       </div>
 
-      {/* Center divider with pulsing emergency button */}
-      <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
-        {/* Soft seam line between doors */}
-        <div
-          aria-hidden
-          className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-white/15 to-transparent"
-        />
+      {/* Soft seam line between doors (full-height vertical) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 left-1/2 z-10 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-white/15 to-transparent"
+      />
 
+      {/* Compact pulsing emergency button — lower, smaller, less visual weight */}
+      <div className="pointer-events-none absolute inset-x-0 z-20 flex justify-center" style={{ bottom: 'calc(48px + env(safe-area-inset-bottom))' }}>
         <motion.div
-          initial={{ scale: 0.85, opacity: 0 }}
+          initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.55, duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}
+          transition={{ delay: 0.5, duration: 0.45, ease: [0.2, 0.8, 0.2, 1] }}
           className="pointer-events-auto relative"
         >
-          {/* Pulsing rings */}
           <span aria-hidden className="lm-pulse-ring lm-pulse-ring--1" />
           <span aria-hidden className="lm-pulse-ring lm-pulse-ring--2" />
 
@@ -102,27 +101,27 @@ export default function Hero({
             type="button"
             onClick={() => setEmergencyOpen(true)}
             aria-label={locale === 'tr' ? 'Acil — 3 seçenek aç' : 'Emergency — open 3-option modal'}
-            className="relative z-10 flex h-32 w-32 flex-col items-center justify-center rounded-full bg-red-600 text-white shadow-[0_18px_60px_rgba(239,68,68,0.55)] ring-4 ring-white/15 transition-transform duration-150 hover:scale-[1.04] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber md:h-36 md:w-36"
+            className="relative z-10 inline-flex items-center gap-2.5 rounded-full bg-red-600 px-5 py-2.5 text-white shadow-[0_10px_30px_rgba(239,68,68,0.45)] ring-2 ring-white/20 transition-transform duration-150 hover:scale-[1.04] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber"
           >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               <path d="M12 9v4" />
               <path d="M12 17h.01" />
               <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
             </svg>
-            <div className="mt-1 font-head text-base font-extrabold uppercase tracking-wider md:text-lg">
+            <span className="font-head text-[13px] font-extrabold uppercase tracking-[0.16em]">
               {emergencyCta ?? (locale === 'tr' ? 'Acil' : 'Emergency')}
-            </div>
-            <div className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/90">24/7</div>
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/85">24/7</span>
           </button>
         </motion.div>
       </div>
 
-      {/* Footer hint (legibility / proof) */}
+      {/* Footer hint (legibility / proof) — tucked into the very bottom edge */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.7, duration: 0.5 }}
-        className="pointer-events-none absolute bottom-3 left-0 right-0 z-30 flex items-center justify-center gap-6 px-6 font-mono text-[10.5px] uppercase tracking-[0.18em] text-white/65"
+        className="pointer-events-none absolute bottom-2 left-0 right-0 z-30 flex items-center justify-center gap-5 px-6 font-mono text-[9.5px] uppercase tracking-[0.18em] text-white/55"
       >
         <span>STCW III/6 ETO</span>
         <span aria-hidden>·</span>

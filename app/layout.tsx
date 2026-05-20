@@ -1,14 +1,11 @@
 import type { Metadata, Viewport } from 'next';
-import Link from 'next/link';
 import './globals.css';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import MobileActionBar from '@/components/MobileActionBar';
-import FloatingRail from '@/components/FloatingRail';
+import CornerNav from '@/components/CornerNav';
 import CookieBanner from '@/components/CookieBanner';
 import Spotlight from '@/components/Spotlight';
 import PageTransition from '@/components/PageTransition';
 import AboutModal from '@/components/AboutModal';
+import ScrollLock from '@/components/ScrollLock';
 import { SITE } from '@/lib/site';
 import { organizationSchema } from '@/lib/schema-org';
 import { getLocale } from '@/lib/i18n';
@@ -19,7 +16,8 @@ export const metadata: Metadata = {
     default: 'Levent Marine — Marine Electrical Service & Parts Supply — 24/7 Worldwide',
     template: '%s · Levent Marine'
   },
-  description: 'Marine Electrical Service & Parts Supply — 24/7 Worldwide. Florida-based operations, Wyoming LLC. Service available at all US ports.',
+  description:
+    'Marine Electrical Service & Parts Supply — 24/7 Worldwide. Florida-based operations, Wyoming LLC. Service available at all US ports.',
   alternates: {
     canonical: '/',
     languages: { 'en-US': '/', 'tr-TR': '/tr' }
@@ -30,10 +28,7 @@ export const metadata: Metadata = {
     url: SITE.url,
     images: ['/assets/brand/og-image.jpg']
   },
-  twitter: {
-    card: 'summary_large_image',
-    images: ['/assets/brand/og-image.jpg']
-  },
+  twitter: { card: 'summary_large_image', images: ['/assets/brand/og-image.jpg'] },
   icons: { icon: [{ url: '/assets/logo.svg', type: 'image/svg+xml' }, { url: '/assets/logo.png' }] },
   robots: { index: true, follow: true }
 };
@@ -49,15 +44,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang={locale}>
       <body>
-        <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-amber focus:text-navy-700 focus:px-4 focus:py-2 focus:rounded-md focus:font-semibold">Skip to content</a>
-        <Header />
-        <main id="main"><PageTransition>{children}</PageTransition></main>
-        <FloatingRail />
-        <Footer />
-        <MobileActionBar />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-amber focus:text-navy-700 focus:px-4 focus:py-2 focus:rounded-md focus:font-semibold"
+        >
+          Skip to content
+        </a>
+
+        <ScrollLock />
+        <CornerNav locale={locale} />
+
+        <main id="main">
+          <PageTransition>{children}</PageTransition>
+        </main>
+
         <CookieBanner />
         <Spotlight />
         <AboutModal />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
