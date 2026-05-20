@@ -1,0 +1,349 @@
+{
+  "version": "1.0",
+  "generated": "2026-05-20",
+  "posts": [
+    {
+      "slug": "bwts-troubleshooting-10-point-checklist-before-class-survey",
+      "title": "BWTS Troubleshooting: 10-Point Checklist Before Class Survey",
+      "description": "A ten-step BWTS pre-survey checklist used by working ETOs to clear UV, electrochlorination and filter-stage faults before the class surveyor steps onboard.",
+      "kicker": "Field guide",
+      "datePublished": "2026-05-20",
+      "dateModified": "2026-05-20",
+      "readingTimeMin": 12,
+      "wordCount": 1820,
+      "category": "Compliance & Class",
+      "keywords": [
+        "BWTS troubleshooting",
+        "ballast water treatment system",
+        "class survey preparation",
+        "USCG BWTS commissioning",
+        "IMO D-2 compliance",
+        "BWTS UV reactor fault",
+        "electrochlorination TRO sensor"
+      ],
+      "relatedServices": ["safety-systems", "automation-control", "survey-psc-prep"],
+      "relatedSupply": ["sensors-transmitters", "plc-hmi", "alarm-monitoring"],
+      "heroAlt": "ETO inspecting BWTS UV reactor and TRO sensor cabinet on a bulker engine room platform",
+      "sections": [
+        {
+          "h": "Why most BWTS class findings happen before the system even runs",
+          "p": [
+            "Nine out of ten BWTS deficiencies we attend during the run-up to an intermediate or special class survey are not caused by a hardware failure. They are caused by a calibration certificate that has lapsed, a sample-line valve that someone closed during dry-dock paint touch-up, or a UV intensity sensor that drifted because nobody ran the cleaning cycle for three months. By the time the surveyor opens the BWMP and asks for the last commissioning test report, the vessel either has the paper trail or it does not — and there is no shortcut to producing it once they are aboard.",
+            "This checklist is built from the recurring root causes we have logged over multiple Convention compliance dates. It is not a substitute for the maker's manual or the vessel-specific BWMP. It is a pre-survey walk-through that takes roughly four to six hours per ballast pump line, and that consistently clears the most common D-2 findings before they get written up. If you run it the week before the surveyor boards, you do the surveyor's job for them — and they reward that with shorter visits."
+          ]
+        },
+        {
+          "h": "1. Confirm the system type is correctly recorded in the BWMP and IOPP supplement",
+          "p": [
+            "Start in the office, not the engine room. Pull the Ballast Water Management Plan and the IOPP Form B supplement. Match the maker, model and serial number printed inside the BWTS local panel against the documented records. We have seen vessels with an Alfa Laval PureBallast 3.1 listed in the BWMP and a 3.2 retrofitted on board after a yard period — same brand, different software baseline, different UV reactor footprint, different commissioning requirement. A mismatch here is an automatic finding and a costly amendment cycle.",
+            "Also confirm the system is type-approved by the flag administration the vessel currently flies. USCG type approval is not the same as IMO BWMS Code certification; a vessel calling US ports needs both. The certificate package onboard must include the AMS letter (if applicable) or the USCG type approval certificate, plus the IMO BWMS Code certificate, plus the operation, maintenance and safety manual, plus the latest commissioning test (CT) report. Missing any one of those four is a Convention-level non-conformity."
+          ]
+        },
+        {
+          "h": "2. Walk every sample point and prove it can deliver a representative sample",
+          "p": [
+            "The biological sample-point arrangement is the single most overlooked item on board. After the surveyor sees the certificates, the first physical thing they ask to see is the sample line: where it taps, whether the tap is isolated from the pump suction, and whether the operator can actually fill a clean sample bottle from it in under thirty seconds without venting the ballast main.",
+            "Open every sample valve, watch the flow, look for biofouling on the strainer, and confirm the line is not cross-connected to the ballast main vent. If the tap is downstream of the treatment unit, also verify there is no residual chlorine bleed-through that would corrupt a D-2 indicative analysis. Replace any sample bottle that is older than two years — UV-degraded plastic gives false TRO readings on indicative kits."
+          ]
+        },
+        {
+          "h": "3. Verify UV lamp intensity at full power against the maker's minimum threshold",
+          "p": [
+            "On UV-based systems (Alfa Laval, OptiMarin, BIO-UV, Trojan), the single most common in-service failure is UV intensity dropping below the maker-defined minimum because the quartz sleeve has clouded or because the wiper mechanism has jammed in a corner position. Run a treatment cycle in test mode, watch the UV intensity trend on the HMI, and confirm each reactor maintains the threshold for the duration of a worst-case ballasting cycle (typically three hours at full flow).",
+            "If a single lamp is reading low, swap it with a known-good spare and re-run the cycle. If the entire reactor is reading low, schedule a quartz sleeve clean before the survey — not during. Doing it in front of the surveyor turns a routine inspection into a witnessed maintenance event, and that gets recorded in the survey letter."
+          ]
+        },
+        {
+          "h": "4. On electrochlorination systems, check the TRO sensor calibration certificate",
+          "p": [
+            "Electrochlorination systems (Erma First, Techcross, Hyde GUARDIAN-EC) rely on a Total Residual Oxidant sensor to confirm that the disinfectant concentration at the inlet meets the certified treatment dose. That sensor has a calibration interval — usually six months for the analytical electrode and twelve months for the sample-conditioning module. If either certificate has lapsed, the surveyor will flag the system as not in a known-good state regardless of whether it functions.",
+            "Calibration kits are inexpensive and can be carried aboard. The procedure is documented in the maker's manual and takes roughly an hour per sensor. We carry calibration solutions on every BWTS dispatch — do not wait until the night before the survey to discover yours have evaporated below the fill line."
+          ]
+        },
+        {
+          "h": "5. Verify the neutralisation / dechlorination loop on de-ballast",
+          "p": [
+            "Electrochlorination treatment requires neutralisation (sodium bisulphite injection or equivalent) before the ballast water is discharged. The neutralisation pump, the dosing tank level switch, the flow meter and the post-neutralisation TRO sensor all need to be proven on a de-ballast cycle. We have seen vessels pass on a ballasting test but fail on de-ballast because the bisulphite metering pump's check valve was stuck open and the line was siphoning silently.",
+            "Run a controlled de-ballast cycle in test mode. Confirm the bisulphite consumption matches the calculated dose for the volume discharged. Confirm the post-neutralisation TRO reading drops below the discharge limit (typically 0.1 mg/L for USCG, varies by flag). Photograph the HMI trend and store the screenshot in the BWMP folder."
+          ]
+        },
+        {
+          "h": "6. Test the BWTS-to-IAS interface and verify the operator can override only what is permitted",
+          "p": [
+            "BWTS systems are increasingly integrated with the integrated automation system (IAS) so the deck officer can initiate a treated ballasting cycle without leaving the cargo control room. That convenience creates an audit boundary. The surveyor will check that the override permissions match the BWMP — typically the operator can start and stop the cycle from the IAS but cannot bypass any safety interlock or alarm acknowledgement from there.",
+            "Walk through the override matrix in the BWTS operator manual. Try each override from the IAS HMI. Confirm the audit log on the BWTS panel records who initiated which action and when. If the audit log has gaps, the surveyor will request the cause; if you cannot explain the gap, expect a finding."
+          ]
+        },
+        {
+          "h": "7. Exercise every alarm — and acknowledge them from the correct station",
+          "p": [
+            "The BWMP defines which alarms are routed to the engine control room, which to the bridge and which to the cargo control room. We have repeatedly seen vessels where the BWTS critical alarm (UV reactor failure, low TRO, filter differential pressure trip) is routed to a panel that nobody is staffed to watch during a de-ballasting cycle. The surveyor's standard test is to force one of those alarms and check the response time.",
+            "Force each alarm in turn (most BWTS HMIs have an alarm test mode that does not require breaking real signal lines). Confirm the alarm appears at the correct station within the maker's defined response time, and that the alarm acknowledgement is recorded in the audit log with the operator's tag or user ID. If the user ID logs blank, the surveyor will assume the system is not being operated under named accountability."
+          ]
+        },
+        {
+          "h": "8. Review the maintenance log and align it with the spare parts inventory",
+          "p": [
+            "The surveyor will spot-check the maintenance log against the spare parts inventory. If the log says you replaced two UV lamps in the last quarter but the spare parts inventory shows no consumption of UV lamps, that is a finding. The fix is procedural, not technical: align the log entries with the storeroom record before the survey, and have the receipts ready for any spare consumed in the period since the last audit.",
+            "If the system has been operated for the entire reporting period without any maintenance entries logged, the surveyor will assume the system has not been maintained. That is worse than a normal-wear finding. Add at least the routine quarterly inspection entries — backed by real evidence — into the log before the surveyor boards."
+          ]
+        },
+        {
+          "h": "9. Confirm the commissioning test (CT) and challenge-test (CT-DG-2) records are aboard and current",
+          "p": [
+            "Since IMO BWM.2/Circ.70/Rev.1 entered into force, the commissioning test (BWMS Code section 5) is mandatory for new installations and certain post-overhaul events. The challenge-test results, including the indicative analysis at sample points before, during and after treatment, must be available aboard. Vessels that have undergone a yard period since their last CT often miss this.",
+            "If the CT is missing or older than the latest required revision, organise an indicative analysis with a qualified service supplier ahead of the survey. The supplier needs roughly a week to schedule, sample and report — start that conversation as soon as the survey window is confirmed, not after."
+          ]
+        },
+        {
+          "h": "10. Stage the operator demonstration — same operator, same scenario, every time",
+          "p": [
+            "The surveyor will ask the duty operator to demonstrate a full treated ballasting cycle, from line-up to system stop. The operator should be the same person who is named in the BWMP as the responsible officer for that cycle. We have seen vessels where the demonstration was given by a junior engineer who had never executed the actual line-up — the result was a documentation finding because the surveyor concluded the named operator was not trained.",
+            "Rehearse the demonstration with the duty operator the day before. Stage the line-up. Practice the alarm responses. Have the operator narrate the cycle so the surveyor can confirm awareness of treatment parameters and discharge limits. This is the part of the survey that costs nothing to prepare for and that consistently makes the difference between a clean survey and a multi-page deficiency list."
+          ]
+        },
+        {
+          "h": "Closing — when to call an ETO before the surveyor calls one",
+          "p": [
+            "If any of the ten items above cannot be cleared with the ship's electrical and engineering crew during a single watch, the cost-benefit math is straightforward: call a marine ETO with BWTS commissioning experience before the surveyor arrives. A pre-survey attendance, with the calibration kit and the spare lamps and the loop-test gear, takes a day and produces a clean report. A finding written by a class surveyor takes weeks of correspondence to clear, and may include a follow-up attendance at a port where you would rather be sailing.",
+            "We attend BWTS pre-survey work at all major US ports under the standard wizard flow. Use the related links below to request a system-specific dispatch, or to source a calibration spare or a UV lamp replacement before the survey window opens."
+          ]
+        }
+      ],
+      "cta": {
+        "service": {
+          "slug": "safety-systems",
+          "label": "Request BWTS pre-survey attendance"
+        },
+        "supply": {
+          "slug": "sensors-transmitters",
+          "label": "Source BWTS sensors and spares"
+        }
+      },
+      "faq": [
+        {
+          "question": "How long does a full BWTS pre-survey attendance take?",
+          "answer": "Approximately four to six hours per ballast pump line, on a quiet vessel with co-operative crew. Plan a full day for a Panamax bulker with two ballast pumps and a parallel treatment skid."
+        },
+        {
+          "question": "Can a ship's electrician do this without a class-experienced ETO?",
+          "answer": "Items 1, 2, 7 and 10 are within most ship's electrician scopes. Items 3, 4, 5 and 9 typically need either a maker's service agent or an experienced marine ETO with the right calibration kit and a current understanding of the BWMS Code revisions."
+        },
+        {
+          "question": "Which class societies are we set up to write the report for?",
+          "answer": "DNV, BV, ABS, Lloyd's Register, Türk Loydu, RINA, ClassNK and IRS. Each report is formatted to the requesting society's template."
+        }
+      ]
+    },
+    {
+      "slug": "why-your-avr-keeps-failing-diagnostic-walkthrough",
+      "title": "Why Your AVR Keeps Failing — Diagnostic Walkthrough",
+      "description": "A working ETO's diagnostic walkthrough for repeating AVR faults on shipboard diesel generators: hunting at light load, kVAR imbalance, sensing CT errors and PCB capacitor drift.",
+      "kicker": "Diagnostic walkthrough",
+      "datePublished": "2026-05-19",
+      "dateModified": "2026-05-20",
+      "readingTimeMin": 14,
+      "wordCount": 1980,
+      "category": "Power Systems",
+      "keywords": [
+        "AVR troubleshooting",
+        "marine generator AVR",
+        "AVR hunting at light load",
+        "Stamford AVR fault",
+        "Cummins generator AVR",
+        "shaft generator AVR diagnostic",
+        "kVAR sharing imbalance"
+      ],
+      "relatedServices": ["power-distribution", "testing-certification", "commissioning-retrofit"],
+      "relatedSupply": ["electrical-spares", "test-instruments", "breakers-contactors"],
+      "heroAlt": "Engineer testing an AVR PCB on a Stamford alternator excitation cabinet with multimeter probes",
+      "sections": [
+        {
+          "h": "Symptom 1: voltage hunts +/- 20 V at light load, settles under load",
+          "p": [
+            "This is the textbook AVR-stability complaint, and four times out of five the cause is not the AVR itself. It is the sensing input to the AVR — a CT polarity reversal, a sensing PT fuse blown on one phase, or a sensing-loop wire that has been retorqued during a recent service and is now reading the wrong reference. The AVR is doing exactly what it was told to do; it was told the wrong thing.",
+            "Before you replace the AVR, prove the sensing signal. Open the AVR terminal cover, identify the sensing input pair (typically labelled V1, V2 or S1, S2 depending on maker), and measure the AC voltage across them with the generator running at light load. Compare against the maker-defined sensing range. If the value is within range, the AVR is being told the truth and the fault is internal to the AVR or in the field excitation loop. If the value is out of range, fix the sensing first and re-test before you touch anything else."
+          ]
+        },
+        {
+          "h": "Symptom 2: reverse-power trip during paralleling",
+          "p": [
+            "When an incoming alternator trips on reverse power within a few seconds of closing the breaker, the AVR is often blamed first because the operator sees a voltage swing on the synchroscope and concludes the AVR is mistuned. In practice, the more common cause is a governor droop setting that does not match the running set's droop, combined with a load-sensing CT on the wrong phase.",
+            "Confirm both governors are on the same droop setting (typically 3–5 %, fleet-dependent). Confirm the load-sharing CT on the incoming alternator is reading on the correct phase relative to the bus. A reversed CT on one set will cause that set to consume real power immediately on parallel — which trips the reverse-power relay on the other set. We see this most often after a maintenance period when a CT has been removed and reinstalled."
+          ]
+        },
+        {
+          "h": "Symptom 3: kVAR sharing wildly unequal between parallel sets",
+          "p": [
+            "Two diesel-generator sets running in parallel should share reactive power within roughly 10 % of the average kVAR demand, assuming both AVRs are set to the same kVAR-droop slope (typically 4 % at rated PF). If one set is carrying 80 % of the kVAR and the other is carrying 20 %, the fault is in the kVAR droop loop on one of the AVRs — not in the engine and not in the load.",
+            "Diagnose by swapping the AVRs between the two sets (if both are the same maker and model). If the imbalance follows the AVR, you have a drifted droop setting or a failed parallel-CT input on that AVR. If the imbalance stays with the set, the parallel-CT itself or its sensing-loop wiring is at fault. The cost difference between these two outcomes can be a four-figure AVR replacement versus a ten-dollar CT secondary repair."
+          ]
+        },
+        {
+          "h": "Symptom 4: 'AVR keeps blowing' — repeated PCB failures on the same set",
+          "p": [
+            "When a vessel calls and says 'the AVR is gone again', and it is the third unit in twelve months, the AVR is not the root cause. The AVR is a downstream casualty of something else — most commonly a voltage transient from a large consumer (bow thruster, cargo pump, mooring winch) on the same bus, or a poor neutral-earth bonding that lets common-mode noise inject directly into the sensing loop.",
+            "Treat repeated AVR failures as a power-quality complaint. Hook up a power-quality analyser (Hioki PW3198 or equivalent) at the alternator terminals for at least one full operating watch. Look for high THD-V, frequency excursions during heavy-consumer starts, and common-mode voltage between the alternator neutral and the hull. We have repaired this class of failure by installing surge suppression at the AVR sensing input, by re-bonding the alternator neutral to a single hull-ground reference, and by isolating the AVR power supply onto a clean source upstream of the noisy bus."
+          ]
+        },
+        {
+          "h": "Symptom 5: AVR will not 'build up' on initial start",
+          "p": [
+            "The classic 'no build-up' fault on a self-excited alternator (Stamford HCI/HCM, Mecc Alte, Marathon) is a loss of residual magnetism in the rotor. The textbook remedy — 'flash the field' with a 12 V battery — works, but the failure repeats unless you identify why the residual magnetism was lost in the first place.",
+            "Common causes: prolonged storage with the rotor inside an iron stator (e.g. after a long lay-up), repeated motoring of the alternator during paralleling tests, or a previous PCB failure that left a DC offset on the exciter winding. After flashing the field, run the alternator at no-load for thirty minutes and confirm the AVR holds voltage steadily; then load-step in 25 % increments and watch the response. If the build-up degrades again, you have an exciter rotating-diode failure (loose rotating rectifier, cracked diode mount) and the cure is a rotor pull, not another AVR."
+          ]
+        },
+        {
+          "h": "Symptom 6: 'load-step under-shoot' — voltage dips heavily on large-motor start",
+          "p": [
+            "When a bow thruster or a cargo pump starts and the bus voltage dips more than 15 % even though the AVR is reported as healthy, the AVR's transient response is being held back either by an undersized exciter (rare on properly specified vessels) or by an AVR gain that has been tuned down to mask a stability problem from years ago. Voltage dip is a tuning problem; voltage recovery time is an exciter problem.",
+            "Capture the event with a fast-sampling DSO (Yokogawa DLM3000 or equivalent) at the alternator terminals. Measure the depth of the dip (in volts and as a percentage), the recovery time to within 2 % of rated, and the AVR response output simultaneously. If the AVR output saturates immediately but recovery is slow, the exciter is current-limited. If the AVR output does not saturate, there is gain headroom left and the AVR is mistuned — re-tune it per the maker's procedure, in steps, and re-test the dip."
+          ]
+        },
+        {
+          "h": "What an experienced ETO carries to an AVR job",
+          "p": [
+            "A typical AVR-fault attendance is not solved with the AVR alone. The kit list for a single attendance is: a calibrated Fluke 87V multimeter, a four-channel power-quality analyser, a clamp-on AC/DC current probe rated for the exciter current (typically 30 A), a thermal camera for slip rings and rotating diodes, the maker's AVR commissioning manual on paper (yes, paper — battery-flat tablets do not help on the deck), and a known-good identical-spec AVR as a swap-test reference.",
+            "The point of carrying the spare is not to install it. The point is to swap it temporarily during the diagnostic, prove whether the fault follows the AVR or the set, and reinstall the original if the diagnosis says the fault is upstream. We have saved customers the cost of an AVR replacement by doing exactly this and identifying a CT secondary fault or a sensing-loop break that would have re-killed the new AVR within hours."
+          ]
+        },
+        {
+          "h": "When to call for help",
+          "p": [
+            "If the AVR has been replaced once with no improvement, do not replace it again. The probability that the second AVR is also defective is small; the probability that the upstream cause is still in place is large. Pause, capture the power-quality signature, and bring in someone with the right instruments and the right body of evidence.",
+            "We attend AVR diagnostic calls at all US ports under the standard wizard flow. If the vessel is in port and the AVR is intermittent, the right step is a power-quality capture during normal operation — not a replacement before the data is in hand."
+          ]
+        }
+      ],
+      "cta": {
+        "service": {
+          "slug": "power-distribution",
+          "label": "Request an AVR diagnostic attendance"
+        },
+        "supply": {
+          "slug": "electrical-spares",
+          "label": "Source AVR spares and PCBs"
+        }
+      },
+      "faq": [
+        {
+          "question": "Which AVR makers do we work with?",
+          "answer": "Stamford (Cummins), Mecc Alte, Marathon, Leroy-Somer, Basler. Replacements are sourced through approved channels with marine declaration."
+        },
+        {
+          "question": "How long does an AVR attendance typically take?",
+          "answer": "Diagnostic attendance: four to six hours per set. Replacement and commissioning: a further three to four hours including load-step testing and parallel verification."
+        },
+        {
+          "question": "Can we attend during cargo operations?",
+          "answer": "Yes — diagnostics that do not require taking the set offline can be performed during normal operation. Replacement and commissioning typically require a planned shutdown of the affected set."
+        }
+      ]
+    },
+    {
+      "slug": "aog-equivalent-for-vessels-6-hour-service-plan",
+      "title": "AOG (Aircraft on Ground) Equivalent for Vessels: 6-Hour Service Plan",
+      "description": "What 'AOG' looks like at sea: a six-hour service plan for vessels with a broken-down electrical system in port, structured around the four levers — diagnose remotely, ship the part, dispatch the engineer, paper the class.",
+      "kicker": "Service plan",
+      "datePublished": "2026-05-18",
+      "dateModified": "2026-05-20",
+      "readingTimeMin": 11,
+      "wordCount": 1620,
+      "category": "Emergency Response",
+      "keywords": [
+        "AOG equivalent for vessels",
+        "vessel emergency electrical service",
+        "AOG marine",
+        "6 hour service plan",
+        "marine ETO emergency dispatch",
+        "ship in port breakdown",
+        "marine AOG checklist"
+      ],
+      "relatedServices": ["emergency-remote-eto", "power-distribution", "navigation-gmdss"],
+      "relatedSupply": ["electrical-spares", "breakers-contactors", "sensors-transmitters"],
+      "heroAlt": "Marine ETO arriving on a container vessel gangway with test kit and a spare control card during an emergency port attendance",
+      "sections": [
+        {
+          "h": "The aviation comparison — and where it breaks down",
+          "p": [
+            "In aviation, 'Aircraft on Ground' (AOG) means a specific thing: the aircraft cannot return to revenue service because of a single defect, and every hour on the ground costs the airline a measurable amount. The supplier network is structured around that fact. A part is dispatched from a regional hub, an engineer is rostered to receive and install it, and the paperwork to release the aircraft back to service is written in parallel with the work.",
+            "Vessels rarely use the AOG language, but the equivalent state happens regularly. A bulker waiting on a single 24V DC PSU for the cargo control system. A tanker that cannot complete a fuel oil transfer because the IAS lost a PLC analog input card. A container ship that needs an MSB feeder breaker replaced before the next port call. In each case the vessel is not 'down' — it can still float — but it cannot complete its commercial purpose. Every hour at anchor costs the operator. The supply and service chain that handles this state is what AOG-equivalent for vessels looks like."
+          ]
+        },
+        {
+          "h": "The four levers — what gets pulled in parallel",
+          "p": [
+            "An AOG-equivalent response runs four work streams in parallel, not in sequence. Sequencing kills the timeline. The four streams are: (1) remote diagnostic with the ship's electrician or duty engineer, (2) part identification and shipment dispatch, (3) engineer dispatch to the port of attendance, and (4) class and flag-state paperwork preparation. By the time the engineer arrives, the part is at the gate, the diagnostic is confirmed, and the report is half-written.",
+            "If any one of those streams is left until the previous one completes, the response cycle stretches from hours to days. The discipline of an AOG-equivalent service is to start all four within thirty minutes of the call, even when the cause is not yet known. The remote diagnostic is what disambiguates the part requirement; the part dispatch is what releases the freight before the courier cut-off; the engineer dispatch is what books the flight before the airport closes; the paperwork stream is what makes the survey sign-off a formality rather than a negotiation."
+          ]
+        },
+        {
+          "h": "Hour 0 to 1 — intake and remote diagnostic",
+          "p": [
+            "The intake call captures the bare minimum: vessel name, IMO, current port, agent contact, the system that is faulted, and the visible symptom. We do not ask for a part number on the first call. The ship's electrician usually does not have one to give yet, and asking forces them to interrupt the diagnostic to walk to the storeroom.",
+            "Within the first hour we connect to the ship's electrician by phone and walk the diagnostic. Most marine electrical faults can be narrowed down by symptom and a half-dozen targeted measurements. If the chief engineer is willing, we ask for photographs of the failed panel, the LED status pattern on the affected card, the nameplate of the upstream PSU, and any current alarm strings on the IAS. From those four artefacts, the experienced ETO on the diagnostic line can usually identify the part to the SKU level — and the supply line can start the part dispatch stream."
+          ]
+        },
+        {
+          "h": "Hour 1 to 2 — part identification and dispatch",
+          "p": [
+            "Once the SKU is identified, the supply line confirms stock at the nearest distribution hub. We hold a working spares inventory for the most common failure points on the systems we service: PLC analog input and output cards, 24V DC switched-mode PSUs, MCB and MCCB replacements in the most common ratings, contactors in the 18 A to 200 A range, common AVR boards, and common navigation system fans and PSUs.",
+            "If the SKU is in our inventory and the vessel is in a US port, the part can be on a same-day freight courier within sixty minutes. If the part has to come from a maker's distribution hub, we initiate the maker-to-courier handover in parallel with the engineer dispatch. The aim is to land the part at the agent's office or the vessel's gangway no later than the engineer's arrival."
+          ]
+        },
+        {
+          "h": "Hour 2 to 4 — engineer dispatch",
+          "p": [
+            "We hold a rostered duty ETO availability across the US East Coast, US Gulf and US West Coast. The engineer leaves the office or home with a pre-packed go-bag of test equipment and a vessel-specific case file generated from the intake call. By hour four the engineer is typically at the gangway of a vessel in any major US port — closer for the largest hubs (Houston, New York/NJ, Long Beach), further for outliers (Anchorage, Honolulu, Duluth).",
+            "The engineer arrives with the part if the part originated from our inventory, or arrives ahead of the part and stages the system for installation if the part originated from a maker's hub. The point is that the vessel does not wait for the engineer-and-part to arrive in series. By the time both are at the gangway, the diagnostic is confirmed, the install plan is agreed with the chief engineer, and the report template is open."
+          ]
+        },
+        {
+          "h": "Hour 4 to 6 — installation, commissioning, paperwork",
+          "p": [
+            "Installation timing depends on the part and the system. A 24V DC PSU swap is roughly twenty minutes plus a controlled re-energise. A PLC analog input card is forty minutes including the configuration upload from a backed-up project file. An MCB or MCCB replacement is sixty to ninety minutes including primary injection if the rating warrants it. An AVR replacement and commissioning runs three to four hours including load-step verification.",
+            "While the install runs, the report is being written in parallel. By the time the engineer signs off, the report includes the diagnostic chain, the measured values before and after, photographs of the defective and replacement parts, the calibration certificate IDs for any test equipment used, and the recommended forward-action items. The report is formatted to the requesting class society's template. The chief engineer receives the report by email before the engineer leaves the gangway."
+          ]
+        },
+        {
+          "h": "What the vessel needs to do to make this work",
+          "p": [
+            "Three things from the vessel's side compress the timeline more than any other factor. First: a duty engineer or chief electrician who can answer the diagnostic call and execute four to six measurements on instruction. Second: a gangway access pre-cleared with the agent and the terminal — getting an engineer through US port security with no prior coordination can add hours that none of the four work streams can recover. Third: a vessel-specific spares register that is up to date — if the ship's electrician knows that the failed card has a sibling installed in a parallel non-critical location, the diagnostic can validate the failure mode by swap-test before the new card arrives.",
+            "Operators that work with us regularly tend to keep a documented intake protocol on the bridge and in the engine control room: a single phone number, a single email address, and a one-page form that captures the four data points we need on the first call. That preparation reduces the intake-to-engineer-arrival cycle by a measurable amount."
+          ]
+        },
+        {
+          "h": "How to start an AOG-equivalent dispatch",
+          "p": [
+            "There is one entry point: the emergency lane in the service wizard, or the 24/7 number on the floating rail. The intake operator routes to the duty ETO immediately. We do not gate emergency intake behind a customer login or a form completion — that is a deliberate decision documented in the founding decisions log.",
+            "If the vessel is not yet in port but will be within the next 24 hours, the right move is to open the case now and let the diagnostic stream run in advance. The part can be staged at the agent's office before the vessel berths, and the engineer can be on the gangway as the lines are made fast."
+          ]
+        }
+      ],
+      "cta": {
+        "service": {
+          "slug": "emergency-remote-eto",
+          "label": "Open an emergency dispatch"
+        },
+        "supply": {
+          "slug": "electrical-spares",
+          "label": "Pre-stage AOG spares"
+        }
+      },
+      "faq": [
+        {
+          "question": "What is the realistic shortest cycle time from call to engineer at the gangway?",
+          "answer": "Roughly two to four hours at the largest US hubs (Houston, New York/NJ, Long Beach), four to six hours at most other US ports, longer for Alaska and Hawaii. Diagnostic and supply streams begin immediately regardless of the engineer-arrival cycle."
+        },
+        {
+          "question": "Do we charge an emergency premium?",
+          "answer": "Out-of-hours and emergency dispatch is priced on the same RFQ-first basis as planned work. The quote reflects courier and travel cost; there is no public price list."
+        },
+        {
+          "question": "What if the part is not in any US distribution hub?",
+          "answer": "We initiate the maker-to-courier handover in parallel, and stage the engineer for the install ahead of the part arrival. If a maker-direct shipment will not land in the survey window, we propose a documented equivalent and let the superintendent make the final call."
+        }
+      ]
+    }
+  ]
+}
