@@ -29,10 +29,10 @@
 
 - [x] 19 sistemli grid + arama + 6 popüler ikon — *Agent B* — `app/services/page.tsx` + `ServicesBrowser.tsx`
 - [x] 3 adımlı talep akışı (Sistem → Liman → Zaman → İletişim) — *Agent B* — `app/service-wizard/ServiceWizardClient.tsx`
-- [x] "1 saat içinde dönüş" söz ekranı — *Agent B* — wizard success screen
+- [x] "1 saat içinde dönüş" söz ekranı — *Agent B* — wizard success screen (literal S5 text)
 - [x] Email + WhatsApp bildirim entegrasyonu — *Agent B* — `lib/notify.ts` (WhatsApp click-to-chat fallback until API creds)
-- [x] Admin paneline taleplerin düşmesi — *Agent B* — `app/api/service-request/route.ts`
-- [x] 19 sistem için SEO landing sayfaları — *Agent B* — `app/services/[slug]/page.tsx` (20 routes incl. Other)
+- [x] Admin paneline taleplerin düşmesi — *Agent B* — `app/api/service-request/route.ts` (system_slug + when_window in meta)
+- [x] 19 sistem için SEO landing sayfaları — *Agent B* — `app/services/[slug]/page.tsx` (20 prerendered routes incl. Other)
 
 ## Wave 2 — Tedarik Akışı (Hafta 3-4)
 
@@ -79,7 +79,12 @@
 
 ## Aktif Engeller
 
-_henüz yok_
+**Integration notes (2026-05-20):**
+- `lib/site.ts` hala eski 11-slug `SERVICE_SLUGS` listesini içeriyor. `app/sitemap.ts` (Agent D) bu listeyi okuyor; sitemap doğru 20-slug listesini görsün diye `SERVICE_SLUGS`'ı kaldırıp `readServices()`'a geçilmeli veya 19 yeni slug'la güncellenmeli. Wave 1 build'i bloklamadı (`generateStaticParams` artık `readServices()`'tan).
+- WhatsApp Business API gerçek credentials yok; `lib/notify.ts` içindeki `notifyByWhatsApp` token yokken click-to-chat URL'i loglar (N1 söz verildi, kanal hazır — sadece env var beklemede).
+- `app/api/search-index/route.ts` eski `ServiceContent` şeklini okuyor olabilir — Agent D'nin SEO geçişinde yeni shape'e göre regenerate edilmeli.
+- Hero (Agent E) `<USAMap />`, `<LogoStrip />`, `<CertBadges compact />`, `<AboutModal />` componentlerini henüz import etmiyor — final integration commit'inde eklenecek.
+- Agent D'nin knowledge yazıları bazı `/services/{slug}`'lara link veriyor; Agent B'nin 19-slug listesinde olmayan slug'lar (safety-systems, automation-control, survey-psc-prep, navigation-gmdss, vb.) — yazılar düzeltilmeli ya da yeni slug map'i çıkarılmalı.
 
 ## Tamamlanmış Wave'ler
 
