@@ -167,6 +167,7 @@ git push -u origin claude/roadmap-implementation-k5IPG
 - `DECISIONS.md` — karar günlüğü (neden + tarih)
 - `STATUS.md` — ilerleme durumu
 - `AGENT-GUIDE.md` — agent/session devir rehberi
+- `MEDIA-ASSETS.md` — görsel/video/animasyon envanter + Gemini promptları
 
 **Teknik:**
 - `BACKEND-SETUP.md` — Supabase + Resend kurulumu
