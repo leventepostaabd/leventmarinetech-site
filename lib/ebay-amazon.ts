@@ -139,16 +139,82 @@ export async function searchAmazonBusiness(
 }
 
 /**
- * Search eBay (business listings) by a free-form query.
- * Returns local catalog matches today; will hit eBay Browse API in Wave 4.
+ * Search eBay Browse API by a free-form query. Falls back to local
+ * catalog matches when `EBAY_APP_ID` (OAuth app token) is not configured
+ * or when the request errors. Prices are stripped from results to honour
+ * the F3 / T3 "quote-only" decision.
+ *
+ * Required env (set in Vercel Project → Settings → Environment Variables):
+ *   - EBAY_APP_ID            — eBay developer app's OAuth client id
+ *   - EBAY_OAUTH_TOKEN       — long-lived application token (server-only)
+ *   - EBAY_MARKETPLACE_ID    — optional, defaults to EBAY_US
  */
-// TODO: wire real API in Wave 4
 export async function searchEbay(
   query: string,
   opts?: SupplySearchOptions
 ): Promise<SupplySearchResult> {
-  const results = localMatches(query, 'ebay', opts);
-  return { source: 'ebay', query, results, fromLocalFallback: true };
+  const token = process.env.EBAY_OAUTH_TOKEN;
+  const marketplace = process.env.EBAY_MARKETPLACE_ID ?? 'EBAY_US';
+  const local = () => ({
+    source: 'ebay' as const,
+    query,
+    results: localMatches(query, 'ebay', opts),
+    fromLocalFallback: true as const
+  });
+
+  if (!token || !query.trim()) return local();
+
+  try {
+    const limit = Math.min(opts?.limit ?? 12, 50);
+    const url = new URL('https://api.ebay.com/buy/browse/v1/item_summary/search');
+    url.searchParams.set('q', query.slice(0, 100));
+    url.searchParams.set('limit', String(limit));
+    if (opts?.brand) url.searchParams.set('filter', `brand:{${opts.brand}}`);
+
+    const res = await fetch(url.toString(), {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'X-EBAY-C-MARKETPLACE-ID': marketplace,
+        Accept: 'application/json'
+      },
+      // Browse API is read-only — short revalidate so the page stays fast.
+      next: { revalidate: 60 }
+    });
+
+    if (!res.ok) return local();
+    const json = (await res.json()) as {
+      itemSummaries?: Array<{
+        itemId?: string;
+        title?: string;
+        brand?: string;
+        mpn?: string;
+        shortDescription?: string;
+        image?: { imageUrl?: string };
+        itemWebUrl?: string;
+        seller?: { username?: string };
+      }>;
+    };
+
+    const items = Array.isArray(json.itemSummaries) ? json.itemSummaries : [];
+    const results: ExternalProduct[] = items.slice(0, limit).map((it) => ({
+      id: it.itemId ?? '',
+      slug: (it.itemId ?? '').toLowerCase(),
+      source: 'ebay',
+      name: it.title ?? '',
+      brand: it.brand,
+      partNumber: it.mpn,
+      description: it.shortDescription,
+      // Strip eBay's auction/price params from the outbound URL; prices stay off-site
+      url: it.itemWebUrl ? sanitizeExternalUrl(it.itemWebUrl) : undefined,
+      image: it.image?.imageUrl,
+      in_stock: true,
+      availability_label: 'in-stock'
+    }));
+
+    return { source: 'ebay', query, results, fromLocalFallback: false };
+  } catch {
+    return local();
+  }
 }
 
 /**
