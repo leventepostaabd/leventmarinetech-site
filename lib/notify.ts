@@ -66,7 +66,7 @@ function adminFrame(title: string, urgency: string, body: string, ctaUrl?: strin
 <tr><td style="padding:20px 24px">${body}</td></tr>
 ${ctaUrl && ctaLabel ? `<tr><td style="padding:0 24px 24px"><a href="${ctaUrl}" style="display:inline-block;background:#F5A524;color:#0B1F3A;font-weight:700;text-decoration:none;padding:10px 18px;border-radius:6px;font-size:14px">${ctaLabel}</a></td></tr>` : ''}
 <tr><td style="background:#F6F8FB;padding:14px 24px;border-top:1px solid #E6ECF3;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.08em;color:#7A8AA3">
-LEVENT MARINE LLC · Wyoming + Tuzla · Internal alert
+LEVENT MARINE LLC · Wyoming LLC · Florida operations · Internal alert
 </td></tr></table></td></tr></table></body></html>`;
 }
 
@@ -203,8 +203,8 @@ function customerFrame(headline: string, refId: string, body: string) {
 </td></tr>
 <tr><td style="background:#F6F8FB;padding:16px 24px;border-top:1px solid #E6ECF3;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.08em;color:#7A8AA3;line-height:1.6">
 LEVENT MARINE ELECTRO TECHNICAL SERVICES LLC<br>
-32 N Gould St · Sheridan WY 82801 · USA<br>
-Velibaba Mah. No:1 · Pendik / Istanbul · Türkiye<br>
+32 N Gould St · Sheridan WY 82801 · USA (Wyoming LLC · Florida operations)<br>
+Worldwide service — 24/7<br>
 <a href="mailto:info@leventmarinetech.com" style="color:#7A8AA3">info@leventmarinetech.com</a>
 </td></tr></table></td></tr></table></body></html>`;
 }
@@ -273,6 +273,128 @@ export async function ackCustomerService(opts: {
     text: `Thanks for the service request. Reference: ${opts.refId}.\nUrgency: ${opts.urgency.toUpperCase()} — ${u.window}\n\nFor AOG, WhatsApp +1 619 384 0403.\n\nLevent Marine.`,
     html: customerFrame(u.headline, opts.refId, body)
   });
+}
+
+// ============================================================================
+//  WHATSAPP — Admin notification (N1 — Email + WhatsApp on every request)
+// ============================================================================
+
+/**
+ * notifyByWhatsApp — Admin-facing WhatsApp notification.
+ *
+ * Two transport modes:
+ *
+ *  1. WhatsApp Business Cloud API — used when WHATSAPP_TOKEN,
+ *     WHATSAPP_PHONE_NUMBER_ID and WHATSAPP_ADMIN_RECIPIENT are all set.
+ *     Sends a plain text message to the admin number.
+ *
+ *  2. Click-to-chat fallback — when those env vars are missing (dev /
+ *     pre-launch), we just log a `https://wa.me/<admin>?text=…` URL so
+ *     the admin can paste the link or we can wire it into a webhook
+ *     later. This keeps the API path non-blocking and side-effect-safe.
+ *
+ * Errors are swallowed and logged so the customer's submit response is
+ * never blocked by a flaky third-party channel. The Resend email path
+ * is the authoritative "we got your request" record.
+ */
+export type WhatsAppNotice =
+  | {
+      kind: 'service';
+      refId: string;
+      urgency: 'aog' | 'urgent' | 'planned';
+      when: 'now' | '24h' | 'week' | 'planned';
+      port?: string;
+      systemName?: string;
+      contactName?: string;
+      contactPhone?: string;
+      vesselName?: string;
+      imo?: string;
+      notes?: string;
+    }
+  | {
+      kind: 'supply' | 'equivalent' | 'unlisted';
+      refId: string;
+      urgency: 'aog' | 'urgent' | 'planned';
+      brand?: string;
+      partNumber?: string;
+      quantity?: number;
+      contactName?: string;
+      contactPhone?: string;
+      vesselName?: string;
+    };
+
+const WHATSAPP_API = 'https://graph.facebook.com/v19.0';
+
+function buildWhatsAppText(n: WhatsAppNotice): string {
+  const u = URGENCY_BADGE[n.urgency] ?? URGENCY_BADGE.planned;
+  if (n.kind === 'service') {
+    const lines: (string | null)[] = [
+      `${u.emoji} LEVENT MARINE — Service`,
+      `Ref: ${n.refId}`,
+      `Urgency: ${u.label}`,
+      n.when ? `When: ${n.when}` : null,
+      n.systemName ? `System: ${n.systemName}` : null,
+      n.port ? `Port: ${n.port}` : null,
+      n.vesselName ? `Vessel: ${n.vesselName}${n.imo ? ` (IMO ${n.imo})` : ''}` : null,
+      n.contactName ? `Contact: ${n.contactName}${n.contactPhone ? ` · ${n.contactPhone}` : ''}` : null,
+      n.notes ? `Notes: ${n.notes.slice(0, 200)}` : null
+    ];
+    return lines.filter(Boolean).join('\n');
+  }
+  const lines: (string | null)[] = [
+    `${u.emoji} LEVENT MARINE — ${n.kind.toUpperCase()}`,
+    `Ref: ${n.refId}`,
+    `Urgency: ${u.label}`,
+    n.brand ? `Brand: ${n.brand}` : null,
+    n.partNumber ? `Part: ${n.partNumber}${n.quantity ? ` × ${n.quantity}` : ''}` : null,
+    n.vesselName ? `Vessel: ${n.vesselName}` : null,
+    n.contactName ? `Contact: ${n.contactName}${n.contactPhone ? ` · ${n.contactPhone}` : ''}` : null
+  ];
+  return lines.filter(Boolean).join('\n');
+}
+
+export async function notifyByWhatsApp(
+  notice: WhatsAppNotice
+): Promise<{ ok: boolean; via: 'api' | 'link' | 'skipped'; error?: string }> {
+  const text = buildWhatsAppText(notice);
+  const token = process.env.WHATSAPP_TOKEN;
+  const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
+  const recipient = process.env.WHATSAPP_ADMIN_RECIPIENT || process.env.WHATSAPP_TO;
+
+  // ---- Mode 1: WhatsApp Business Cloud API ----
+  if (token && phoneNumberId && recipient) {
+    try {
+      const res = await fetch(`${WHATSAPP_API}/${phoneNumberId}/messages`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          messaging_product: 'whatsapp',
+          to: recipient,
+          type: 'text',
+          text: { preview_url: false, body: text }
+        })
+      });
+      if (!res.ok) {
+        const err = await res.text().catch(() => 'unknown');
+        console.error('[notify] whatsapp business api error', res.status, err);
+        return { ok: false, via: 'api', error: err };
+      }
+      return { ok: true, via: 'api' };
+    } catch (e: any) {
+      console.error('[notify] whatsapp business api throw', e?.message ?? e);
+      // fall through to link mode so the admin still has a path
+    }
+  }
+
+  // ---- Mode 2: click-to-chat fallback (dev / pre-launch) ----
+  const adminFallback =
+    process.env.WHATSAPP_ADMIN_RECIPIENT ?? process.env.WHATSAPP_TO ?? '16193840403';
+  const url = `https://wa.me/${adminFallback.replace(/\D/g, '')}?text=${encodeURIComponent(text)}`;
+  console.log('[notify] whatsapp (no API creds) → admin click-to-chat:', url);
+  return { ok: true, via: 'link' };
 }
 
 // ============================================================================

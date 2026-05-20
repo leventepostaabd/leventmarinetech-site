@@ -1,58 +1,124 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { productsByCategory, readProducts } from '@/lib/content';
+import {
+  readProducts, readCategories, readProductLabels,
+  categoryBySlug, subcategoryBySlug, productsByTopCategory, productsBySubcategory
+} from '@/lib/content';
+import { getLocale } from '@/lib/i18n';
+import CategoryListing from './CategoryListing';
 
 export function generateStaticParams() {
-  const cats = new Set<string>();
-  readProducts().forEach((p) => cats.add(p.category));
-  return Array.from(cats).map((slug) => ({ slug }));
+  const slugs = new Set<string>();
+  readCategories().forEach((c) => {
+    slugs.add(c.slug);
+    c.subcategories.forEach((s) => slugs.add(s.slug));
+  });
+  // Legacy single-category slugs (backward compat)
+  readProducts().forEach((p) => slugs.add(p.category));
+  return Array.from(slugs).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const label = params.slug.replace(/-/g, ' ');
+  const top = categoryBySlug(params.slug);
+  const subHit = subcategoryBySlug(params.slug);
+  const label = top
+    ? top.name_en
+    : subHit?.sub.name_en
+    ?? params.slug.replace(/-/g, ' ');
   return {
-    title: `${label} — marine technical supply`,
-    description: `Marine ${label} for commercial vessels. Request quote, find equivalent, urgent vessel supply.`,
+    title: `${label} — Marine Technical Supply`,
+    description: `Marine ${label} for commercial vessels. Request a quote on any item, search for equivalents, or upload a nameplate photo.`,
     alternates: { canonical: `/supply/category/${params.slug}` }
   };
 }
 
 export default function CategoryPage({ params }: { params: { slug: string } }) {
-  const items = productsByCategory(params.slug);
-  if (!items.length) notFound();
-  const label = params.slug.replace(/-/g, ' ');
+  const locale = getLocale();
+  const labels = readProductLabels(locale);
+
+  const top = categoryBySlug(params.slug);
+  const subHit = subcategoryBySlug(params.slug);
+
+  let items = top
+    ? productsByTopCategory(params.slug)
+    : subHit
+    ? productsBySubcategory(params.slug)
+    : productsBySubcategory(params.slug); // legacy slug
+
+  if (items.length === 0) notFound();
+
+  const labelOf = (en: string, tr?: string) => (locale === 'tr' && tr ? tr : en);
+  const heading = top
+    ? labelOf(top.name_en, top.name_tr)
+    : subHit
+    ? labelOf(subHit.sub.name_en, subHit.sub.name_tr)
+    : params.slug.replace(/-/g, ' ');
+
+  const breadcrumbCategory = top
+    ? null
+    : subHit
+    ? subHit.category
+    : null;
+
+  const brands = Array.from(new Set(items.map((p) => p.brand))).sort((a, b) => a.localeCompare(b));
 
   return (
-    <div className="container-x py-16">
+    <div className="container-x py-12 md:py-16">
       <nav className="text-[12px] font-mono text-ink-subtle mb-6">
         <Link href="/" className="hover:text-amber-600 no-underline">Home</Link>
         <span className="mx-2">/</span>
         <Link href="/supply" className="hover:text-amber-600 no-underline">Supply</Link>
         <span className="mx-2">/</span>
-        <Link href="/supply/categories" className="hover:text-amber-600 no-underline">Catalog</Link>
-        <span className="mx-2">/</span>
-        <span className="capitalize">{label}</span>
-      </nav>
-      <div className="kicker mb-3 capitalize">{label}</div>
-      <h1 className="mb-3 capitalize">{label}</h1>
-      <p className="text-ink-muted mb-12">{items.length} items. Request quote on any.</p>
-
-      <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {items.map((p) => (
-          <li key={p.id}>
-            <Link href={`/supply/product/${p.slug}`} className="block card hover:border-amber group no-underline h-full">
-              <div className="flex justify-between mb-2">
-                <span className="font-mono text-[11px] text-ink-subtle">{p.brand}</span>
-                <span className={`font-mono text-[10.5px] uppercase ${p.availability === 'in-stock' ? 'text-green-700' : p.availability === 'available-supplier' ? 'text-amber-600' : 'text-ink-subtle'}`}>{p.availability.replace(/-/g, ' ')}</span>
-              </div>
-              <h3 className="text-[16px] font-bold mb-1 group-hover:text-amber-600">{p.name}</h3>
-              <div className="font-mono text-[12px] text-ink-subtle mb-2">{p.partNumber}</div>
-              <p className="text-[13.5px] text-ink-muted line-clamp-3">{p.shortDescription}</p>
+        <Link href="/supply/categories" className="hover:text-amber-600 no-underline">{locale === 'tr' ? 'Katalog' : 'Catalog'}</Link>
+        {breadcrumbCategory && (
+          <>
+            <span className="mx-2">/</span>
+            <Link href={`/supply/category/${breadcrumbCategory.slug}`} className="hover:text-amber-600 no-underline">
+              {labelOf(breadcrumbCategory.name_en, breadcrumbCategory.name_tr)}
             </Link>
-          </li>
-        ))}
-      </ul>
+          </>
+        )}
+        <span className="mx-2">/</span>
+        <span className="capitalize">{heading}</span>
+      </nav>
+
+      <div className="kicker mb-3 capitalize">{heading}</div>
+      <h1 className="mb-3 capitalize">{heading}</h1>
+      {top && (
+        <p className="text-ink-muted max-w-3xl mb-4">{locale === 'tr' ? top.summary_tr : top.summary_en}</p>
+      )}
+      <p className="text-ink-subtle text-[12.5px] mb-2">{labels.noPrice}</p>
+      <p className="text-ink-muted mb-8">{items.length} {locale === 'tr' ? 'ürün' : 'items'}.</p>
+
+      {/* If this is a top-level category, surface the sub-category chips. */}
+      {top && (
+        <ul className="flex flex-wrap gap-2 mb-8">
+          {top.subcategories.map((s) => (
+            <li key={s.slug}>
+              <Link
+                href={`/supply/category/${s.slug}`}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-line bg-white text-[12.5px] text-ink hover:border-amber hover:text-amber-600 no-underline"
+              >
+                {labelOf(s.name_en, s.name_tr)}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <CategoryListing
+        products={items}
+        brands={brands}
+        locale={locale}
+        labels={{
+          inStock: labels.inStock,
+          getQuote: labels.getQuote,
+          filterBrand: labels.filterBrand,
+          filterAvailability: labels.filterAvailability,
+          filterAll: labels.filterAll
+        }}
+      />
     </div>
   );
 }

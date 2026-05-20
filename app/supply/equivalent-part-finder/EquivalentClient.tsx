@@ -1,11 +1,21 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+import PhotoUpload, { type UploadedFile } from '@/components/PhotoUpload';
 
 export default function EquivalentClient() {
+  const params = useSearchParams();
   const [s, setS] = useState<Record<string, any>>({});
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState<{ ok: boolean; id?: string; via?: string } | null>(null);
   const [err, setErr] = useState<string | null>(null);
+
+  useEffect(() => {
+    const q = params.get('q');
+    const product = params.get('product');
+    if (q) setS((x) => ({ ...x, originalPartNumber: q }));
+    if (product) setS((x) => ({ ...x, originalPartNumber: product }));
+  }, [params]);
 
   function b(k: string) {
     return { value: s[k] ?? '', onChange: (e: any) => setS((x) => ({ ...x, [k]: e.target.value })) };
@@ -13,7 +23,10 @@ export default function EquivalentClient() {
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!s.originalPartNumber && !s.equipmentType) { setErr('Enter at least the original part number or equipment type.'); return; }
+    if (!s.originalPartNumber && !s.equipmentType && (s.attachments?.length ?? 0) === 0) {
+      setErr('Enter at least the original part number, equipment type, or upload a photo.');
+      return;
+    }
     if (!s.contactEmail) { setErr('Email is required.'); return; }
     setErr(null);
     setSubmitting(true);
@@ -25,8 +38,11 @@ export default function EquivalentClient() {
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
       setDone({ ok: true, id: data?.id });
-    } catch (e: any) {
-      const summary = Object.entries(s).map(([k, v]) => `${k}: ${v}`).join('\n');
+    } catch {
+      const summary = Object.entries(s)
+        .filter(([k]) => k !== 'attachments')
+        .map(([k, v]) => `${k}: ${v}`)
+        .join('\n');
       const text = encodeURIComponent(`LEVENT MARINE — equivalent part finder\n\n${summary}`);
       window.open(`https://wa.me/16193840403?text=${text}`, '_blank', 'noopener');
       setDone({ ok: true, via: 'whatsapp' });
@@ -38,7 +54,9 @@ export default function EquivalentClient() {
   if (done?.ok) return (
     <div className="card border-l-4 border-l-green-600 max-w-2xl">
       <h2 className="mb-2">Cross-reference request received.</h2>
-      <p className="text-ink-muted">We'll come back with one or more compatible candidates plus an engineering note. Same business day.</p>
+      <p className="text-ink-muted">
+        We&apos;ll come back with one or more compatible candidates plus an engineering note. Same business day.
+      </p>
     </div>
   );
 
@@ -65,7 +83,14 @@ export default function EquivalentClient() {
         <label className="field-label">Failure description (helpful for compatibility)</label>
         <textarea className="field-input min-h-[80px]" {...b('failureDescription')} />
       </div>
-      <p className="text-[12px] text-ink-subtle">Photo of the nameplate is gold. Send via WhatsApp +1 619 384 0403 after submitting.</p>
+
+      <div>
+        <label className="field-label">Nameplate photo (gold standard for cross-reference)</label>
+        <PhotoUpload
+          prefix="equivalent"
+          onChange={(files: UploadedFile[]) => setS((x) => ({ ...x, attachments: files }))}
+        />
+      </div>
 
       <div className="border-t border-line pt-4 mt-2 grid sm:grid-cols-3 gap-3">
         <div><label className="field-label">Vessel name</label><input className="field-input" {...b('vesselName')} /></div>
@@ -79,11 +104,13 @@ export default function EquivalentClient() {
 
       <div className="card bg-navy-50 border-l-4 border-l-amber text-[13px] text-ink-muted leading-relaxed">
         <strong className="text-ink block mb-1">Compatibility disclaimer</strong>
-        Every equivalent we propose comes with a note documenting where it matches the original and where it differs. Final acceptance must be confirmed by the vessel's technical team. We don't ship an alternative without an explicit go-ahead.
+        Every equivalent we propose comes with a note documenting where it matches the original and where it differs. Final acceptance must be confirmed by the vessel&apos;s technical team. We don&apos;t ship an alternative without an explicit go-ahead.
       </div>
 
       {err && <div className="text-[13px] font-mono text-red-600">{err}</div>}
-      <button type="submit" disabled={submitting} className="btn-accent btn-lg w-fit disabled:opacity-60">{submitting ? 'Sending…' : 'Find an equivalent'}</button>
+      <button type="submit" disabled={submitting} className="btn-accent btn-lg w-fit disabled:opacity-60">
+        {submitting ? 'Sending…' : 'Find an equivalent'}
+      </button>
     </form>
   );
 }

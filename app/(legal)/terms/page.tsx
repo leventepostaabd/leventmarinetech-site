@@ -23,7 +23,7 @@ export default function Terms() {
       <p>We arrange courier or freight to the vessel, the port agent, a warehouse for consolidation, or a hotel pickup as agreed in the PO. Title passes on delivery to the named consignee. Loss / damage claims must be reported within 48h of receipt.</p>
 
       <h2>6. Payment</h2>
-      <p>Standard terms: 50% on PO, 50% on delivery, USD via Wyoming LLC bank account, or TRY via Tuzla. New customers may be asked for 100% prepayment on the first order. Fleet customers may negotiate net-15 or net-30 once a credit reference is on file.</p>
+      <p>Standard terms: 50% on PO, 50% on delivery, USD via Wyoming LLC bank account. New customers may be asked for 100% prepayment on the first order. Fleet customers may negotiate net-15 or net-30 once a credit reference is on file.</p>
 
       <h2>7. Warranty</h2>
       <p>Parts: pass-through of OEM warranty. Service: workmanship warranted 90 days from completion. Liability is limited to the value of the engagement; no consequential damages.</p>

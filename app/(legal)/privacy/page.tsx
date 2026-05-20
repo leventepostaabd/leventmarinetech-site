@@ -8,7 +8,7 @@ export default function Privacy() {
       <p className="text-ink-subtle"><em>Last updated: {new Date().toISOString().slice(0, 10)}</em></p>
 
       <h2>1. Who we are</h2>
-      <p>Levent Marine Electro Technical Services LLC, registered in Wyoming, USA (operational base also in Tuzla, Türkiye). Contact: info@leventmarinetech.com.</p>
+      <p>Levent Marine Electro Technical Services LLC, registered in Wyoming, USA (Florida operations · worldwide service). Contact: info@leventmarinetech.com.</p>
 
       <h2>2. What we collect</h2>
       <ul>

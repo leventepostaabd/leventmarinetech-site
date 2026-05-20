@@ -1,641 +1,758 @@
 {
+  "version": 2,
+  "popular": [
+    "generator",
+    "bwts",
+    "fire-alarm",
+    "bridge-navigation",
+    "plc-automation",
+    "crane-deck-machinery"
+  ],
+  "wizard": {
+    "step_port": {
+      "en": "Which port?",
+      "tr": "Hangi liman?",
+      "hint_en": "Type a port name. Major US ports auto-complete.",
+      "hint_tr": "Liman adı yazın. Büyük ABD limanları otomatik tamamlanır."
+    },
+    "step_when": {
+      "en": "When do you need us?",
+      "tr": "Ne zaman gerekiyor?",
+      "options": [
+        { "id": "now", "en": "Now — emergency on board", "tr": "Şimdi — gemide acil durum" },
+        { "id": "24h", "en": "Within 24 hours", "tr": "24 saat içinde" },
+        { "id": "week", "en": "Within a week", "tr": "1 hafta içinde" },
+        { "id": "planned", "en": "Planned date", "tr": "Planlı tarih" }
+      ]
+    },
+    "step_contact": {
+      "en": "How do we reach you?",
+      "tr": "Sizinle nasıl iletişim kuralım?",
+      "name_en": "Your name",
+      "name_tr": "Adınız",
+      "email_en": "Email",
+      "email_tr": "E-posta",
+      "phone_en": "Phone (WhatsApp preferred)",
+      "phone_tr": "Telefon (WhatsApp tercih edilir)",
+      "vessel_en": "Vessel name (optional)",
+      "vessel_tr": "Gemi adı (opsiyonel)",
+      "imo_en": "IMO number (optional)",
+      "imo_tr": "IMO numarası (opsiyonel)"
+    },
+    "submit_en": "Submit request",
+    "submit_tr": "Talebi gönder",
+    "promise_en": "Our next available technician will contact you within 1 hour.",
+    "promise_tr": "İlk müsait teknisyenimiz 1 saat içinde sizinle iletişime geçecek.",
+    "received_en": "Your request is in.",
+    "received_tr": "Talebiniz alındı.",
+    "ref_en": "Reference",
+    "ref_tr": "Referans"
+  },
+  "us_ports": [
+    "Houston, TX", "New Orleans, LA", "Mobile, AL", "Tampa, FL", "Jacksonville, FL",
+    "Port Everglades, FL", "Miami, FL", "Savannah, GA", "Charleston, SC",
+    "Norfolk, VA", "Baltimore, MD", "Philadelphia, PA", "New York / New Jersey",
+    "Boston, MA", "Portland, ME",
+    "Los Angeles, CA", "Long Beach, CA", "Oakland, CA", "Seattle, WA", "Tacoma, WA",
+    "Portland, OR", "Anchorage, AK",
+    "Corpus Christi, TX", "Galveston, TX", "Beaumont, TX",
+    "Honolulu, HI", "San Juan, PR"
+  ],
+  "ui": {
+    "search_placeholder_en": "Which system has the problem?",
+    "search_placeholder_tr": "Hangi sistemde sorun var?",
+    "popular_en": "Most requested",
+    "popular_tr": "En çok istenenler",
+    "see_all_en": "See all 19 systems",
+    "see_all_tr": "Tüm 19 sistemi gör",
+    "close_en": "Close",
+    "close_tr": "Kapat",
+    "request_service_en": "Request service",
+    "request_service_tr": "Servis talep et",
+    "no_matches_en": "No system matches that search. Try \"Other / not listed\".",
+    "no_matches_tr": "Bu aramayla eşleşen sistem yok. \"Diğer / Liste dışı\" seçeneğini deneyin."
+  },
   "services": [
     {
-      "slug": "power-distribution",
-      "title": "Power Distribution & Generation",
-      "kicker": "Power Systems",
-      "metaTitle": "Marine MSB/ESB & Generator Service | Levent Marine",
-      "metaDescription": "MSB/ESB faults, AVR hunting, shaft generator commissioning, transformer and shore power surveys. 24h onboard attendance worldwide from Pendik and Wyoming desks.",
-      "intro": "Main and emergency switchboards lose discrimination, AVRs hunt at light load, and shaft generators trip on reverse power without warning. We rebuild the discrimination tree, retune the AVR loop, and clear the synchronising fault before your next port call.",
+      "slug": "generator",
+      "popular": true,
+      "order": 1,
+      "icon": "generator",
+      "name_en": "Generator",
+      "name_tr": "Jeneratör",
+      "kicker_en": "Diesel · Shaft · Emergency · AVR",
+      "kicker_tr": "Dizel · Şaft · Acil · AVR",
+      "summary_en": "Main, auxiliary, shaft and emergency generators — AVR hunting, voltage drift, reverse-power trips, sync failures, parallel load imbalance.",
+      "summary_tr": "Ana, yardımcı, şaft ve acil jeneratörler — AVR salınımı, voltaj sapması, ters güç tripi, senkron arızası, paralel yük dengesizliği.",
+      "metaTitle": "Marine Generator Service — Diesel, Shaft, Emergency, AVR | Levent Marine",
+      "metaDescription": "Marine generator electrical service. Diesel and shaft generators, emergency gensets, AVR retuning, sync panel troubleshooting. 24/7 worldwide, 1-hour technician callback.",
+      "seo_keywords": ["marine generator service", "AVR repair ship", "shaft generator commissioning", "emergency generator SOLAS", "diesel generator sync"],
       "symptoms": [
-        "AVR hunting +/- 30V at light load on a Stamford HCI544 or similar",
-        "Reverse power trip on shaft generator during PTI/PTO transitions",
-        "Synchroscope drift, breaker fails to close on dead bus condition",
-        "Bus-tie ACB trips on overcurrent during heavy consumer start",
-        "Shore power connection trips immediately at cold ironing berth",
-        "Emergency generator fails to auto-start within 45s (SOLAS II-1/43)",
-        "Transformer hum and oil leak on 440/230V step-down unit",
-        "Insulation alarm on 440V bus, IR drops below 0.5 MOhm"
+        "AVR hunting ±30V at light load (Stamford MX341/MX321)",
+        "Reverse power trip during PTI/PTO transition on shaft generator",
+        "Synchroscope drift, breaker fails to close on dead bus",
+        "Light load below 20% causes voltage collapse",
+        "Emergency genset fails to auto-start within 45s (SOLAS II-1/43)",
+        "Load sharing imbalance ±15% kW between parallel D/Gs",
+        "Excitation lost shortly after breaker close",
+        "Governor surge after step load above 60%"
       ],
-      "rootCauses": [
-        "Aged Terasaki AR/AT ACB closing coil or undervoltage release out of tolerance",
-        "AVR PCB capacitor drift, sensing CT polarity reversed after overhaul",
-        "Loose busbar bolt torque, partial discharge on insulator stand-offs",
-        "Governor actuator hysteresis combined with mismatched droop settings",
-        "Loss of phase reference on sync panel, faulty check-sync (25) relay"
-      ],
-      "whatWeCheck": [
-        "ACB primary injection and trip unit test on Terasaki/Mitsubishi/ABB Emax",
-        "AVR build-up curve, droop CT phasing, parallel kVAR sharing under load",
-        "Generator stator IR and PI with Megger MIT525 at 1000V DC",
-        "Differential (87G) stability and REF relay timing on neutral CT",
-        "Sync, check-sync (25), reverse power (32R), loss of field (40) settings",
-        "Feeder and tie breaker discrimination per IEC 60909 short-circuit study",
-        "Transformer winding ratio, vector group, no-load and load loss",
-        "Shore power interlock and ground fault monitoring per IEC/IEEE 80005-1"
+      "common_causes": [
+        "Aged AVR PCB capacitor drift, sensing CT phase reversed after overhaul",
+        "Slip ring carbon dust on exciter brushes",
+        "Loose CT terminations on load-share line",
+        "Governor actuator hysteresis combined with mismatched droop",
+        "Sulphated start battery on emergency genset",
+        "Loss of phase reference on sync panel, failed check-sync (25) relay"
       ],
       "tools": [
-        "OMICRON CMC 356 secondary injection set",
-        "SVERKER 900 primary injection up to 3000A",
-        "Megger MIT525 5kV insulation tester with PI/DAR",
-        "Fluke 1587 FC insulation multimeter",
-        "FLIR T540 thermal camera for busbar thermography",
+        "OMICRON CMC 356 secondary injection",
+        "Megger MIT525 5kV insulation tester (PI/DAR)",
         "Hioki PW3198 power quality analyser",
-        "Yokogawa CW240 clamp-on power meter"
+        "FLIR T540 thermography",
+        "Fluke 438-II motor & generator analyser",
+        "DEIF / Selco / Woodward service tools"
       ],
-      "exampleCase": {
-        "vesselType": "Handymax Bulker, 58000 DWT",
-        "port": "Tuzla Anchorage",
-        "year": "2024-Q3",
-        "headline": "AVR hunting cleared in 6 hours, vessel sailed on schedule",
-        "summary": "Master reported 420-465V swing on No.2 D/G during cargo gear test. Onboard within 4 hours from Pendik. Found AVR sensing CT loose at terminal X7, droop CT phase reversed after last yard period. Reterminated, rephased, retuned PID, load tested 0/50/100/110 percent. Class-acceptable record delivered same evening."
-      },
-      "relatedSupply": [
-        "Stamford AVR MX341/MX321 replacement modules",
-        "Terasaki AR208S/AR316S ACB trip units",
-        "Schneider Masterpact NW closing/opening coils",
-        "Woodward 2301D and DPG governor controllers",
-        "DEIF AGC-4 and Selco T2000 paralleling relays"
-      ],
-      "ctaService": "Request switchboard attendance",
-      "ctaSupply": "Order MSB spares"
+      "related_supply_categories": ["avr-spares", "governor-modules", "sync-relays", "start-batteries"]
     },
     {
-      "slug": "propulsion-motors",
-      "title": "Propulsion, Thrusters & Deck Machinery",
-      "kicker": "Rotating Plant",
-      "metaTitle": "Bow Thruster, Crane & Windlass Electrical Service",
-      "metaDescription": "Bow thruster pitch faults, deck crane VFD trips, hatch cover hydraulics, windlass overcurrent. Electrical fault-finding and motor rewind coordination, onboard or remote.",
-      "intro": "Bow thruster pitch sticks at 60 percent, the No.2 deck crane trips on regen during slewing, and the windlass overload relay won't reset after winter lay-up. We trace the actual electrical fault path instead of swapping cards on guesswork.",
+      "slug": "main-engine-electrical",
+      "popular": false,
+      "order": 2,
+      "icon": "engine",
+      "name_en": "Main Engine — Electric / Control Side",
+      "name_tr": "Ana Makine — Elektrik / Kontrol Tarafı",
+      "kicker_en": "Engine control · Sensors · Safety trips",
+      "kicker_tr": "Motor kontrol · Sensörler · Güvenlik tripleri",
+      "summary_en": "Engine telegraph, fuel rack actuators, RPM pickups, safety trip logic and starting-air valves on MAN, Wärtsilä, Hyundai-MAN B&W slow-speed and medium-speed engines.",
+      "summary_tr": "Telgraf, yakıt aktüatörleri, devir sensörleri, güvenlik trip mantığı ve start hava valfleri — MAN, Wärtsilä, Hyundai-MAN B&W yavaş ve orta devir motorlarda.",
+      "metaTitle": "Main Engine Electrical & Control Service | Levent Marine",
+      "metaDescription": "Marine main engine electrical and control-side service. Telegraph, governor, sensor and safety-trip troubleshooting. MAN, Wärtsilä, Hyundai. 24/7 worldwide.",
+      "seo_keywords": ["main engine electrical service", "MAN ECR", "Wärtsilä governor", "engine safety trips", "fuel rack actuator"],
       "symptoms": [
-        "Bow thruster CPP feedback drift, pitch indicator stuck mid-range",
-        "Deck crane VFD F0007 overvoltage trip during boom lowering",
-        "Hatch cover motor single-phasing after rain ingress to JB",
-        "Windlass main contactor chatter, brake coil burnt on second attempt",
-        "Cargo pump motor IR drops to 0.3 MOhm after tank cleaning",
-        "Air compressor auto-start fails, pressure switch contact pitted",
-        "Steering gear running motor temperature alarm at 85 deg C",
-        "Provision crane joystick zero-position drift causing slow creep"
+        "Telegraph order disagreement between bridge and ECR",
+        "Random shutdown on overspeed trip with no real overspeed event",
+        "Fuel rack actuator stuck or oscillating",
+        "RPM pickup signal noisy, governor hunts",
+        "Pre-lub pump auto-start fails before main engine start",
+        "Cylinder exhaust temperature deviation alarms (FlexView / NORIS)"
       ],
-      "rootCauses": [
-        "Slip ring carbon dust contamination in CPP feedback synchro",
-        "VFD braking resistor open circuit, regen energy with no dump path",
-        "Aged ABB M3BP bearing grease, NDE bearing current pitting",
-        "Salt bridge across terminal block inside motor terminal box",
-        "Aged Bussmann fuses with degraded I2t, nuisance trips on starting surge"
-      ],
-      "whatWeCheck": [
-        "Motor IR and PI per IEEE 43, polarisation index 2.0 minimum",
-        "VFD parameter set on ABB ACS880, Siemens G150, Yaskawa A1000",
-        "Soft starter SCR firing angle and bypass on ABB PSE/PSTX",
-        "Bearing condition via shock pulse (SPM) and motor current signature analysis",
-        "CPP hydraulic-electric interface, OD box feedback transducer linearity",
-        "Crane slew, hoist, luff limit switches and overload load cell calibration",
-        "Windlass brake release sequencing, gypsy clutch limit switch wiring",
-        "Hatch cover sequence interlocks per yard wiring diagram revision"
+      "common_causes": [
+        "Faulty RPM pickup, magnet gap drifted",
+        "Aged shielded cable degraded, EMI on 4–20 mA loops",
+        "Encoder coupling fatigue on Woodward actuator",
+        "Wet engine room JB on safety trip wiring"
       ],
       "tools": [
-        "Megger MIT525 5kV IR tester and Baker AWA-IV surge comparison",
-        "SKF MicroVibe vibration meter and shock pulse probe",
-        "Fluke 438-II motor analyser with current signature module",
-        "FLIR T540 thermography for hot bearing and terminal scans",
-        "Druck DPI 620 calibrator for 4-20mA and PT100",
-        "Laser shaft alignment kit (SKF TKSA 41)"
+        "Druck DPI 620 pressure / loop calibrator",
+        "Tek MSO44 mixed-signal scope",
+        "FLIR T540 thermal imager",
+        "Engine maker service laptop (MAN CoCoS, Wärtsilä Wise)"
       ],
-      "exampleCase": {
-        "vesselType": "Panamax Bulker, 82000 DWT",
-        "port": "Iskenderun",
-        "year": "2024-Q4",
-        "headline": "Bow thruster restored before pilot boarding window",
-        "summary": "Pilot refused unberthing without working bow thruster. CPP pitch frozen at -15 percent. Boarded with launch in 90 minutes. Found OD box synchro brush stuck, drained moisture, lapped slip rings, re-zeroed feedback. Full thrust both directions confirmed quayside, vessel sailed on next tide. Total downtime under 5 hours."
-      },
-      "relatedSupply": [
-        "ABB ACS880/ACS580 drive spare control boards",
-        "Siemens SIMATIC ET200 remote I/O for crane PLC",
-        "Stahl ATEX junction boxes and cable glands for tankers",
-        "Pilz PNOZ safety relays for hatch cover interlocks",
-        "Heidenhain and Lika resolver/encoder spares for CPP feedback"
-      ],
-      "ctaService": "Book thruster fault-finding",
-      "ctaSupply": "Order drive spares"
+      "related_supply_categories": ["engine-sensors", "actuators", "noris-spares"]
     },
     {
-      "slug": "navigation-gmdss",
-      "title": "Navigation, Bridge & GMDSS",
-      "kicker": "Bridge Systems",
-      "metaTitle": "Marine Radar, ECDIS & GMDSS Service | Levent Marine",
-      "metaDescription": "Furuno, JRC and Sperry bridge service. Radar magnetron, ECDIS faults, gyro alignment, GMDSS annual surveys and PSC defect rectification worldwide, class acceptable.",
-      "intro": "ECDIS freezes during chart loading, the X-band radar shows a 30-degree blind sector, and GMDSS battery capacity is below 80 percent of nameplate. We fix the bridge stack before the surveyor finds it.",
+      "slug": "switchboard",
+      "popular": false,
+      "order": 3,
+      "icon": "switchboard",
+      "name_en": "Switchboard (MSB / ESB / PMS)",
+      "name_tr": "Pano (MSB / ESB / PMS)",
+      "kicker_en": "Main · Emergency · Power management",
+      "kicker_tr": "Ana · Acil · Güç yönetimi",
+      "summary_en": "Main switchboard, emergency switchboard, ACB primary injection, PMS load-sharing, blackout recovery, bus-tie discrimination.",
+      "summary_tr": "Ana pano, acil pano, ACB primary injection, PMS yük paylaşımı, blackout kurtarma, bus-tie diskriminasyonu.",
+      "metaTitle": "Marine Switchboard Service — MSB/ESB/PMS | Levent Marine",
+      "metaDescription": "Main and emergency switchboard service, ACB primary injection, PMS load-sharing, blackout recovery. Terasaki, ABB, Mitsubishi, Schneider. 24/7 worldwide.",
+      "seo_keywords": ["MSB service ship", "ACB primary injection", "PMS load sharing", "marine ESB", "Terasaki ACB"],
       "symptoms": [
-        "Furuno FAR-2228 weak echo, magnetron current below 1.5 mA",
-        "JRC JAN-9201 ECDIS frozen during ENC update, S-57 import error",
-        "Sperry NaviGat 4000 gyro heading offset 3 deg from GPS COG",
-        "Autopilot rudder hunting +/- 2 deg on calm sea",
-        "AIS Class A intermittent target loss, VHF antenna SWR > 2.5",
-        "VDR annual performance test failure on bridge audio channel",
-        "GMDSS reserve battery falls below 6 hours discharge capacity",
-        "Echo sounder ghost echoes in shallow water under 20m"
+        "Bus-tie ACB trips on overcurrent during heavy consumer start",
+        "PMS fails to start next priority generator at 85% load",
+        "Shore power connection trips at cold-ironing berth",
+        "Insulation alarm on 440V bus, IR drops below 0.5 MΩ",
+        "ACB long-time pickup outside ±10% of nameplate (IEC 60947-2)",
+        "Blackout recovery sequence does not restart aux machinery"
       ],
-      "rootCauses": [
-        "Magnetron end-of-life after 3000+ hours, cathode emission degraded",
-        "ECDIS HDD bad sectors or RAM ECC errors after years of vibration",
-        "Gyro support gimbal bearing wear, follow-up motor brush worn",
-        "Salt corrosion on AIS antenna N-connector base, shield broken",
-        "Sulphated GMDSS lead-acid bank, individual cell below 2.05V"
-      ],
-      "whatWeCheck": [
-        "Magnetron current, transceiver tune voltage, scanner gearbox noise",
-        "ECDIS performance per IMO MSC.232(82), redundancy switchover test",
-        "Gyro alignment vs known transit bearing and dual GPS heading reference",
-        "Autopilot Mk-7 PID gains and rudder feedback unit linearity",
-        "GMDSS annual radio survey per Reg. IV/15, battery discharge test",
-        "AIS static/dynamic data verification and VDR 12-hour record extraction",
-        "VHF/MF/HF antenna VSWR with Bird 4304A wattmeter and dummy load",
-        "NMEA data flow audit between gyro, GPS, log, ECDIS and ARPA"
+      "common_causes": [
+        "Aged Terasaki AR/AT ACB closing coil or UV release out of tolerance",
+        "Loose busbar bolt torque, partial discharge on insulator stand-offs",
+        "PMS load-share CT phase reversed after maintenance",
+        "Earth-fault path in starboard 220V lighting feeder"
       ],
       "tools": [
-        "Bird 4304A through-line wattmeter and 50 ohm dummy load",
-        "Anritsu MS2720T spectrum analyser",
-        "Furuno FSV and JRC service terminal",
-        "Megger BITE3 battery impedance tester",
-        "Actisense NGT-1 NMEA protocol analyser",
-        "Garmin GPS19x reference for gyro cross-check"
+        "SVERKER 900 primary injection (0–3000 A)",
+        "OMICRON CMC 356 secondary injection",
+        "Megger MIT525 5kV insulation tester",
+        "FLIR T540 thermography",
+        "Doble F6150e protection relay test set"
       ],
-      "exampleCase": {
-        "vesselType": "Container, 4500 TEU",
-        "port": "Ambarli",
-        "year": "2025-Q1",
-        "headline": "GMDSS annual survey cleared in single attendance",
-        "summary": "Owner requested GMDSS annual ahead of voyage to USEC. Found reserve battery cell #6 at 1.92V, MF/HF antenna VSWR 3.1 from corroded base insulator. Replaced cell, cleaned base, retested. Class radio surveyor attended, certificate endorsed same day. No delay to scheduled departure for Norfolk."
-      },
-      "relatedSupply": [
-        "Furuno magnetron MAF1565N and MG5436",
-        "JRC ECDIS spare LCD panels and processor boards",
-        "Sperry gyro spheres and support unit bearings",
-        "GMDSS sealed lead-acid 12V/100Ah batteries",
-        "Jotron Tron 60S EPIRB hydrostatic release units"
-      ],
-      "ctaService": "Schedule bridge survey",
-      "ctaSupply": "Order bridge spares"
+      "related_supply_categories": ["acb-trip-units", "schneider-coils", "deif-relays", "pms-cards"]
     },
     {
-      "slug": "automation-control",
-      "title": "Automation, AMS, IAS & PMS",
-      "kicker": "Control Systems",
-      "metaTitle": "Marine AMS, PMS & PLC Automation Service",
-      "metaDescription": "AMS nuisance alarms, IAS HMI faults, PMS load sharing, PLC and SCADA troubleshooting on Kongsberg, Praxis, ABB, Selco. IACS cyber notation prep and FAT/SAT.",
-      "intro": "AMS prints 400 nuisance alarms per watch, the PMS will not auto-start the next priority generator on heavy consumer demand, and the engine control PLC has a leaking battery on the CPU. We rebuild the alarm philosophy and the load-dependent logic so the duty engineer can sleep.",
+      "slug": "fire-alarm",
+      "popular": true,
+      "order": 4,
+      "icon": "fire",
+      "name_en": "Fire Alarm & Detection",
+      "name_tr": "Yangın Alarm & Algılama",
+      "kicker_en": "Autronica · Consilium · Notifier",
+      "kicker_tr": "Autronica · Consilium · Notifier",
+      "summary_en": "Loop faults, false alarms, detector head sensitivity, CO2/HI-FOG release matrix, PA/GA STI. SOLAS Ch. II-2 ready.",
+      "summary_tr": "Loop arızaları, yanlış alarm, dedektör hassasiyeti, CO2/HI-FOG salım matrisi, PA/GA STI. SOLAS Bölüm II-2 hazır.",
+      "metaTitle": "Marine Fire Alarm Service — Autronica, Consilium | Levent Marine",
+      "metaDescription": "Marine fire detection service. Autronica, Consilium, Notifier panels. Loop faults, false-alarm hunts, CO2 release logic, SOLAS Ch. II-2 prep. 24/7 worldwide.",
+      "seo_keywords": ["marine fire alarm service", "Autronica BS-100", "Consilium Salwico", "SOLAS fire detection", "CO2 release test"],
       "symptoms": [
-        "AMS alarm flood, >10 alarms per 10 minutes (EEMUA 191 breach)",
-        "PMS fails to start next generator at 85 percent load threshold",
-        "Praxis Megachief HMI black screen after random period of hours",
-        "Tank level transmitter (Hawk, KSR Kuebler) reads 0 percent on full tank",
-        "Boiler control 4-20mA loop drift, drum level oscillation",
-        "Rotork IQ3 actuator fails to report intermediate position",
-        "Engine control PLC battery low warning, backup memory at risk",
-        "Modbus RTU comms drop between PLC and remote I/O panel"
+        "Autronica BS-100 zone fault, loop current outside 18–22 mA",
+        "Consilium Salwico CS3000 false alarms in galley",
+        "PA/GA STI below 0.5 in engine room (IEC 60849)",
+        "CO2 release pilot solenoid fails 24VDC continuity",
+        "Detector head sensitivity out of tolerance per maker chart",
+        "Loop short-to-earth after recent welding"
       ],
-      "rootCauses": [
-        "PMS load-share CT phasing error after maintenance, kW sense reversed",
-        "HMI graphics card thermal failure, ventilation filter blocked",
-        "PT100 transmitter calibration drift beyond +/- 0.5 percent of span",
-        "Modbus RS485 termination resistor missing, CRC errors from reflections",
-        "Aged lithium backup (BR2/3A) on PLC CPU below 2.7V"
+      "common_causes": [
+        "Loop shield discontinuity after hot work in cargo hold",
+        "Detector head soot loading beyond chamber threshold",
+        "Loudspeaker line short-to-ground after deck wash ingress",
+        "Pilot CO2 cylinder pressure below 50 bar"
       ],
-      "whatWeCheck": [
-        "PMS load-share, deadband, blackout recovery, heavy consumer sequencing",
-        "AMS alarm rationalisation against EEMUA 191 and ISA 18.2",
-        "PLC scan time, memory utilisation, hot spare CPU sync on redundant racks",
-        "All 4-20mA loops with HART communicator (Emerson 475)",
-        "Valve travel, deadband and stroke time per signed loop sheet",
-        "Cyber baseline per IACS UR E26/E27 and IMO MSC-FAL.1/Circ.3",
-        "HMI graphics vs P&ID, alarm setpoints vs ESD matrix",
-        "Power supply redundancy and 24VDC bus stability under fault"
+      "tools": [
+        "Autronica AutroMaster service laptop & loop analyser",
+        "Consilium SW3000 service tool",
+        "B&K 2270 sound level analyser with STI/STIPA module",
+        "Solo 330 functional smoke/heat tester pole",
+        "Cal gas: CH4 50% LEL, H2S 10 ppm, CO 100 ppm"
+      ],
+      "related_supply_categories": ["fire-detectors", "co2-solenoids", "pa-ga-amps", "loop-cable"]
+    },
+    {
+      "slug": "engine-room-alarm",
+      "popular": false,
+      "order": 5,
+      "icon": "alarm",
+      "name_en": "Engine Room Alarm / Monitoring",
+      "name_tr": "Makine Dairesi Alarm / İzleme",
+      "kicker_en": "AMS · Extension alarm · Dead-man",
+      "kicker_tr": "AMS · Uzatma alarmı · Dead-man",
+      "summary_en": "AMS panels (Praxis, Kongsberg, NORIS), engineer's dead-man, extension alarm, sensor calibration on PT100 / 4–20 mA loops.",
+      "summary_tr": "AMS panelleri (Praxis, Kongsberg, NORIS), mühendis dead-man'i, uzatma alarmı, PT100 / 4–20 mA sensör kalibrasyonu.",
+      "metaTitle": "Engine Room Alarm & Monitoring Service | Levent Marine",
+      "metaDescription": "Marine engine room alarm system service. AMS panels, dead-man, extension alarm, sensor calibration. Praxis, Kongsberg, NORIS. 24/7 worldwide.",
+      "seo_keywords": ["AMS alarm ship", "engine room monitoring", "Praxis Megachief", "Kongsberg K-Chief", "dead-man alarm"],
+      "symptoms": [
+        "Alarm flood >10 alarms per 10 min (EEMUA 191 breach)",
+        "Praxis Megachief HMI black screen after hours",
+        "PT100 transmitter reads 0% on full tank",
+        "Extension alarm to cabin not triggering",
+        "Dead-man bell test fails on bridge"
+      ],
+      "common_causes": [
+        "HMI graphics card thermal failure",
+        "PT100 transmitter calibration drift beyond ±0.5%",
+        "Modbus RS485 termination missing, CRC errors",
+        "Wet JB on extension alarm wiring"
       ],
       "tools": [
         "Emerson 475 HART field communicator",
-        "Druck DPI 620 and Fluke 754 process calibrators",
-        "B&B USB-COMi-SI RS485 bus analyser",
-        "Wireshark with Modbus/Profibus/CAN dissectors",
-        "RSLogix 5000, Siemens TIA Portal, CODESYS service licenses",
-        "Tek MSO44 mixed-signal scope for fieldbus integrity"
+        "Druck DPI 620 calibrator",
+        "Wireshark with Modbus dissectors",
+        "B&B RS485 bus analyser"
       ],
-      "exampleCase": {
-        "vesselType": "VLOC, 320000 DWT",
-        "port": "Port Hedland approach",
-        "year": "2024-Q4",
-        "headline": "PMS blackout recovery logic restored before laden departure",
-        "summary": "Vessel suffered partial blackout during cargo loading, PMS failed to restart No.3 D/G. Mobilised by air via Perth, found load-sharing line CT phase reversal after recent overhaul. Reterminated, simulated heavy consumer step, verified auto-start within 12 seconds. Class witnessed, vessel sailed laden 11 hours after attendance began."
-      },
-      "relatedSupply": [
-        "Praxis Megachief and Megaguard I/O cards",
-        "Kongsberg K-Chief 600 RIO modules and HMI panels",
-        "Siemens S7-1500 CPU and ET200SP remote I/O",
-        "Allen-Bradley ControlLogix 1756 spare cards",
-        "Phoenix Contact and Weidmuller relay interface modules"
-      ],
-      "ctaService": "Request PMS audit",
-      "ctaSupply": "Order I/O spares"
+      "related_supply_categories": ["ams-cards", "pt100-tx", "alarm-bells"]
     },
     {
-      "slug": "safety-systems",
-      "title": "Fire, Gas & Safety Systems",
-      "kicker": "Safety Plant",
-      "metaTitle": "Marine Fire Detection, CO2 & PA/GA Service",
-      "metaDescription": "Autronica, Consilium fire detection faults, CO2 and HI-FOG release logic, PA/GA intelligibility, gas detection and CCTV. SOLAS Ch. II-2 class survey ready.",
-      "intro": "The Autronica panel shows 14 zone faults from the cargo hold smoke loop, the PA/GA fails the speech transmission index in the engine room, and the CO2 release station has not been function-tested since the last special survey. We bring all of it back to SOLAS Ch. II-2 condition.",
+      "slug": "bridge-navigation",
+      "popular": true,
+      "order": 6,
+      "icon": "radar",
+      "name_en": "Bridge Navigation",
+      "name_tr": "Köprü Navigasyon",
+      "kicker_en": "Radar · ECDIS · Gyro · Autopilot",
+      "kicker_tr": "Radar · ECDIS · Cayro · Otopilot",
+      "summary_en": "Furuno, JRC, Sperry, Raytheon Anschütz. Magnetron weak echo, ECDIS freezes, gyro alignment, autopilot rudder hunt.",
+      "summary_tr": "Furuno, JRC, Sperry, Raytheon Anschütz. Zayıf radar yankısı, ECDIS donmaları, cayro hizalama, otopilot dümen salınımı.",
+      "metaTitle": "Marine Bridge Navigation Service — Radar, ECDIS, Gyro | Levent Marine",
+      "metaDescription": "Marine bridge equipment service. Radar magnetron, ECDIS faults, gyro alignment, autopilot tuning. Furuno, JRC, Sperry, Raytheon. 24/7 worldwide.",
+      "seo_keywords": ["marine radar service", "Furuno FAR-2228", "JRC ECDIS", "Sperry gyro alignment", "autopilot rudder hunt"],
       "symptoms": [
-        "Autronica BS-100 zone fault, loop current outside 18-22 mA window",
-        "Consilium Salwico CS3000 detector false alarms in galley",
-        "PA/GA STI below 0.5 in engine room (IEC 60849 / MSC.808)",
-        "CO2 release pilot solenoid fails 24VDC continuity test",
-        "Gas detector (Riken Keiki, GMI) zero drift on accommodation IR sensor",
-        "CCTV (Bosch, Hernis) image black on cargo hold camera 3",
-        "Emergency lighting battery duration below 60 min (SOLAS II-1/42)",
-        "Fixed water mist (HI-FOG) section valve solenoid 0 mA on test"
+        "Furuno FAR-2228 weak echo, magnetron current below 1.5 mA",
+        "JRC JAN-9201 ECDIS frozen during ENC update",
+        "Sperry NaviGat 4000 gyro heading offset 3° from GPS COG",
+        "Autopilot rudder hunting ±2° on calm sea",
+        "AIS Class A intermittent target loss",
+        "Echo sounder ghost echoes under 20 m"
       ],
-      "rootCauses": [
-        "Loop shield discontinuity after recent welding in cargo hold",
-        "Detector head soot loading beyond chamber sensitivity threshold",
-        "Loudspeaker line short-to-ground after deck wash water ingress",
-        "Pilot CO2 cylinder pressure below 50 bar, micro-switch out of position",
-        "IR sensor lens contamination, calibration gas cylinder expired"
-      ],
-      "whatWeCheck": [
-        "Fire loop end-to-end with Autronica/Consilium service tool",
-        "Detector chamber sensitivity per maker procedure and class survey form",
-        "PA/GA STI measurement with B&K 2270 in each zone",
-        "CO2 release matrix: door close, fan stop, alarm horn, time delay",
-        "Gas detector bump and span with traceable cal gas (10% LEL methane)",
-        "Emergency lighting full-discharge test, lux at escape routes",
-        "CCTV signal level, IR illuminator and NVR retention period",
-        "Quick-closing valves and fire dampers, remote release function"
+      "common_causes": [
+        "Magnetron end-of-life after 3000+ hours",
+        "ECDIS HDD bad sectors or RAM ECC errors",
+        "Gyro support gimbal bearing wear",
+        "Salt corrosion on AIS antenna N-connector"
       ],
       "tools": [
-        "Autronica AutroMaster service laptop and loop analyser",
-        "Consilium SW3000 service tool and aerosol detector tester",
-        "B&K 2270 sound level analyser with STI/STIPA module",
-        "Cal gas: CH4 50%LEL, H2S 10ppm, CO 100ppm, O2 19%",
-        "Solo 330 functional smoke/heat tester pole",
-        "FLIR T540 for PA amplifier cabinet thermal scan"
+        "Bird 4304A through-line wattmeter & 50 Ω dummy load",
+        "Anritsu MS2720T spectrum analyser",
+        "Furuno FSV & JRC service terminal",
+        "Actisense NGT-1 NMEA protocol analyser"
       ],
-      "exampleCase": {
-        "vesselType": "Crude Oil Tanker, Aframax",
-        "port": "Aliaga",
-        "year": "2025-Q1",
-        "headline": "Pre-PSC fire system defects cleared in 36 hours",
-        "summary": "Owner expected PSC at next US port. Loop 4 (cargo hold smoke) had three faults, PA/GA STI 0.42 in engine room. Replaced two corroded TSP cables, cleaned 18 detector heads, retuned PA crossover and added two loudspeakers in noisy zones. Final STI 0.61, all zones healthy. Vessel passed PSC at Houston with zero deficiencies."
-      },
-      "relatedSupply": [
-        "Autronica BH-310, BJ-310 detector heads and bases",
-        "Consilium Salwico cargo and accommodation detectors",
-        "Riken Keiki RX-8500 and SP-220 gas detector spares",
-        "CO2 release pilot solenoids and pressure switches (Tyco/Ansul)",
-        "Bosch Praesideo and DNH PA/GA amplifier cards and loudspeakers"
+      "related_supply_categories": ["magnetrons", "ecdis-spares", "gyro-bearings", "ais-antennas"]
+    },
+    {
+      "slug": "gmdss-communication",
+      "popular": false,
+      "order": 7,
+      "icon": "radio",
+      "name_en": "Communication / GMDSS",
+      "name_tr": "Haberleşme / GMDSS",
+      "kicker_en": "VHF · MF/HF · INMARSAT · EPIRB",
+      "kicker_tr": "VHF · MF/HF · INMARSAT · EPIRB",
+      "summary_en": "GMDSS annual radio survey, VHF/MF/HF DSC, INMARSAT-C/FleetBroadband, EPIRB hydrostatic release, reserve battery discharge tests.",
+      "summary_tr": "GMDSS yıllık radyo denetimi, VHF/MF/HF DSC, INMARSAT-C/FleetBroadband, EPIRB hidrostatik bırakma, yedek pil deşarj testleri.",
+      "metaTitle": "GMDSS & Marine Communication Service | Levent Marine",
+      "metaDescription": "GMDSS annual radio survey, VHF/MF/HF DSC, INMARSAT, EPIRB. Class-acceptable certificates DNV, BV, ABS, Lloyd's. 24/7 worldwide.",
+      "seo_keywords": ["GMDSS annual survey", "marine VHF service", "INMARSAT FleetBroadband", "EPIRB battery", "Jotron Tron 60S"],
+      "symptoms": [
+        "GMDSS reserve battery below 6 h discharge",
+        "DSC test call to coast station fails",
+        "INMARSAT-C BAM antenna pointing error",
+        "EPIRB self-test red blink, battery expired",
+        "MF/HF antenna VSWR > 2.5"
       ],
-      "ctaService": "Book fire system survey",
-      "ctaSupply": "Order detection spares"
+      "common_causes": [
+        "Sulphated GMDSS lead-acid bank, cell below 2.05 V",
+        "Salt corrosion on antenna base insulator",
+        "MMSI mismatch after vessel sale",
+        "EPIRB battery >5 years installed"
+      ],
+      "tools": [
+        "Bird 4304A wattmeter",
+        "Megger BITE3 battery impedance tester",
+        "GMDSS test set per ITU-R recommendations",
+        "Anritsu MS2720T spectrum analyser"
+      ],
+      "related_supply_categories": ["gmdss-batteries", "epirb-hru", "antennas"]
+    },
+    {
+      "slug": "bwts",
+      "popular": true,
+      "order": 8,
+      "icon": "bwts",
+      "name_en": "BWTS",
+      "name_tr": "BWTS",
+      "kicker_en": "Ballast water treatment",
+      "kicker_tr": "Balast suyu arıtma",
+      "summary_en": "Alfa Laval PureBallast, Wärtsilä Aquarius, Optimarin, Hyde Guardian. UV lamp faults, sensor calibration, USCG compliance, IMO BWMS Code.",
+      "summary_tr": "Alfa Laval PureBallast, Wärtsilä Aquarius, Optimarin, Hyde Guardian. UV lamp arızaları, sensör kalibrasyonu, USCG uyumu, IMO BWMS Kodu.",
+      "metaTitle": "BWTS Service — PureBallast, Aquarius, Optimarin | Levent Marine",
+      "metaDescription": "Ballast water treatment system electrical and control service. UV lamp faults, sensor calibration, USCG and IMO BWMS Code compliance. 24/7 worldwide.",
+      "seo_keywords": ["BWTS service", "PureBallast 3", "Optimarin BWMS", "USCG BWMS", "ballast UV lamp"],
+      "symptoms": [
+        "UV transmittance below 50% on PureBallast 3 reactor",
+        "Total residual oxidant (TRO) sensor drift on electro-chlorination",
+        "Filter back-flush DP transmitter stuck at zero",
+        "Operation locked due to power module fault on Wärtsilä Aquarius",
+        "USCG sample port flow rate out of spec at deballast",
+        "Self-cleaning filter motor overcurrent trip"
+      ],
+      "common_causes": [
+        "End-of-life UV lamp (10 000+ hours)",
+        "Fouled UVT sensor lens",
+        "TRO probe membrane fouled or expired",
+        "VFD over-temperature due to engine-room ambient",
+        "Air bubble in reactor confusing dose calculation"
+      ],
+      "tools": [
+        "Maker service laptop (PureBallast Service Tool, Aquarius Toolkit)",
+        "Calibrated UVT reference cell",
+        "TRO calibration solution kit",
+        "Druck DPI 620 calibrator for DP transmitters",
+        "FLIR T540 for reactor cabinet thermography"
+      ],
+      "related_supply_categories": ["uv-lamps", "tro-sensors", "uvt-sensors", "bwts-vfds"]
+    },
+    {
+      "slug": "crane-deck-machinery",
+      "popular": true,
+      "order": 9,
+      "icon": "crane",
+      "name_en": "Crane & Deck Machinery",
+      "name_tr": "Vinç & Güverte Makineleri",
+      "kicker_en": "Deck crane · Hatch cover · Windlass · Mooring",
+      "kicker_tr": "Güverte vinci · Ambar kapağı · Irgat · Bağlama",
+      "summary_en": "Deck crane VFD trips, hatch cover sequence faults, windlass overload, mooring winch joystick drift, provision crane limit switches.",
+      "summary_tr": "Güverte vinci VFD tripleri, ambar kapağı sekans arızaları, ırgat aşırı yük, bağlama vinci joystick kayması, kumanya vinci limit anahtarları.",
+      "metaTitle": "Marine Crane & Deck Machinery Electrical Service | Levent Marine",
+      "metaDescription": "Marine deck crane, hatch cover, windlass and mooring winch electrical service. VFD troubleshooting, limit switches, load cells. 24/7 worldwide.",
+      "seo_keywords": ["marine crane VFD", "deck crane service", "hatch cover sequence", "windlass overload", "MacGregor crane"],
+      "symptoms": [
+        "Deck crane VFD F0007 overvoltage trip during boom lowering",
+        "Hatch cover motor single-phasing after rain ingress",
+        "Windlass main contactor chatter, brake coil burnt",
+        "Provision crane joystick zero-position drift",
+        "Slew limit switch chatters, hoist trips on creep",
+        "Mooring winch tension readout stuck at zero"
+      ],
+      "common_causes": [
+        "VFD braking resistor open circuit, regen with no dump path",
+        "Salt bridge across terminal block inside motor JB",
+        "NDE bearing current pitting on ABB M3BP",
+        "Aged Bussmann fuses with degraded I²t"
+      ],
+      "tools": [
+        "Fluke 438-II motor & drive analyser",
+        "Megger MIT525 5kV IR tester",
+        "SKF MicroVibe vibration / shock pulse",
+        "ABB ACS / Siemens / Yaskawa service tools",
+        "Druck DPI 620 for 4–20 mA loops"
+      ],
+      "related_supply_categories": ["vfd-spares", "limit-switches", "load-cells", "motor-spares"]
+    },
+    {
+      "slug": "bilge-level",
+      "popular": false,
+      "order": 10,
+      "icon": "level",
+      "name_en": "Bilge / Level Sensor / Alarm",
+      "name_tr": "Sintine / Seviye Sensörü / Alarm",
+      "kicker_en": "Bilge alarm · Tank gauging · Float switches",
+      "kicker_tr": "Sintine alarmı · Tank ölçümü · Şamandıralı anahtar",
+      "summary_en": "Bilge alarms, high-level cargo hold sensors, tank radar gauging, float switches, oily-water separator OCM 15 ppm.",
+      "summary_tr": "Sintine alarmları, ambar yüksek seviye sensörleri, tank radar ölçümü, şamandıralı anahtarlar, sintine ayrıştırıcı OCM 15 ppm.",
+      "metaTitle": "Marine Bilge & Level Sensor Service | Levent Marine",
+      "metaDescription": "Marine bilge alarms, tank gauging radar, float switches, oily-water separator 15 ppm. Hawk, KSR Kuebler, Emerson Rosemount. 24/7 worldwide.",
+      "seo_keywords": ["bilge alarm ship", "tank radar gauging", "OCM 15ppm", "Hawk radar level", "high level cargo hold"],
+      "symptoms": [
+        "Bilge alarm chatter in heavy weather",
+        "Tank radar reads 0% on full tank (Hawk, Emerson)",
+        "OCM 15 ppm sensor reads high after bunker",
+        "Float switch stuck on after cargo cleaning",
+        "Marpol Annex I overboard valve interlock fails"
+      ],
+      "common_causes": [
+        "Fouled OCM sensor cell",
+        "Radar dome condensation",
+        "Magnet weakening on float switch reed",
+        "PT100 transmitter calibration drift"
+      ],
+      "tools": [
+        "Druck DPI 620 calibrator",
+        "Emerson 475 HART communicator",
+        "OCM calibration test fluid"
+      ],
+      "related_supply_categories": ["level-sensors", "float-switches", "ocm-cells"]
+    },
+    {
+      "slug": "shaft-earthing",
+      "popular": false,
+      "order": 11,
+      "icon": "shaft",
+      "name_en": "Shaft Earthing Device",
+      "name_tr": "Şaft Topraklama Cihazı",
+      "kicker_en": "Brush · Slip ring · Galvanic protection",
+      "kicker_tr": "Fırça · Bilezik · Galvanik koruma",
+      "summary_en": "Shaft earthing brushes, slip rings, hull-to-shaft potential monitoring, anti-stray current protection.",
+      "summary_tr": "Şaft topraklama fırçaları, bilezikler, gövde-şaft potansiyel izleme, kaçak akıma karşı koruma.",
+      "metaTitle": "Shaft Earthing Device Service | Levent Marine",
+      "metaDescription": "Marine shaft earthing device service. Brush and slip ring replacement, hull-to-shaft potential monitoring. Class-acceptable test reports. 24/7 worldwide.",
+      "seo_keywords": ["shaft earthing device", "shaft brush replacement", "marine galvanic protection", "Wärtsilä shaft brush"],
+      "symptoms": [
+        "Shaft-to-hull voltage rising above 50 mV trend",
+        "Worn brush, sparking visible on slip ring",
+        "Mounting bracket vibration loose",
+        "Cable to monitoring panel corroded"
+      ],
+      "common_causes": [
+        "Brush wear beyond minimum length",
+        "Salt deposits on slip ring",
+        "Aged copper braid"
+      ],
+      "tools": [
+        "Fluke 87V multimeter",
+        "Calibrated mV shunt for shaft potential",
+        "Vibration meter for bracket"
+      ],
+      "related_supply_categories": ["shaft-brushes", "slip-rings"]
+    },
+    {
+      "slug": "plc-automation",
+      "popular": true,
+      "order": 12,
+      "icon": "plc",
+      "name_en": "PLC & Automation / IAS",
+      "name_tr": "PLC & Otomasyon / IAS",
+      "kicker_en": "Siemens · Allen-Bradley · Kongsberg",
+      "kicker_tr": "Siemens · Allen-Bradley · Kongsberg",
+      "summary_en": "PLC fault-finding, IAS reprogramming, alarm rationalisation (EEMUA 191), redundant CPU sync, OT cyber baseline.",
+      "summary_tr": "PLC arıza bulma, IAS yeniden programlama, alarm rasyonalizasyonu (EEMUA 191), yedekli CPU senkron, OT siber temel.",
+      "metaTitle": "Marine PLC & Automation Service — IAS, IACS Cyber | Levent Marine",
+      "metaDescription": "Marine PLC, IAS, automation system service. Siemens S7, Allen-Bradley ControlLogix, Kongsberg K-Chief. IACS UR E26/E27 cyber prep. 24/7 worldwide.",
+      "seo_keywords": ["marine PLC service", "Siemens S7-1500 ship", "Kongsberg K-Chief 600", "IAS retrofit", "IACS UR E26"],
+      "symptoms": [
+        "PLC battery low warning, backup memory at risk",
+        "Modbus RTU comms drop between PLC and remote I/O",
+        "Hot-spare CPU fails to sync on redundant rack",
+        "HMI graphics mismatch with P&ID after revision",
+        "Random scan time spikes from 30 ms to 200 ms"
+      ],
+      "common_causes": [
+        "Aged lithium backup (BR2/3A) on PLC CPU below 2.7V",
+        "Missing Modbus RS485 termination resistor",
+        "Firmware version mismatch between primary and standby",
+        "I/O scan logic poorly partitioned"
+      ],
+      "tools": [
+        "RSLogix 5000, Siemens TIA Portal, CODESYS",
+        "Wireshark with Modbus/Profibus dissectors",
+        "B&B USB-COMi RS485 bus analyser",
+        "Tek MSO44 mixed-signal scope"
+      ],
+      "related_supply_categories": ["plc-cpus", "remote-io", "hmi-spares", "industrial-switches"]
     },
     {
       "slug": "lighting-nav-lights",
-      "title": "Lighting & Navigation Lights",
-      "kicker": "Illumination",
-      "metaTitle": "Navigation Light & LED Retrofit | Levent Marine",
-      "metaDescription": "Navigation light controller faults, LED retrofit with COLREG type approval, cargo hold floodlights, engine room and emergency lighting upgrades, class type-approved sets.",
-      "intro": "The starboard sidelight controller alarms but the lamp is healthy, the cargo hold floods drop two breakers when all four are switched, and the wheelhouse dimmer flickers on the new LED panel lights. We finish the job with full COLREG type-approval paperwork in the file.",
+      "popular": false,
+      "order": 13,
+      "icon": "light",
+      "name_en": "Lighting & Nav Lights",
+      "name_tr": "Aydınlatma & Seyir Fenerleri",
+      "kicker_en": "LED retrofit · COLREG · Emergency lighting",
+      "kicker_tr": "LED retrofit · COLREG · Acil aydınlatma",
+      "summary_en": "Nav light controller faults, LED retrofit with COLREG type approval, cargo hold floods, engine room and emergency lighting upgrades.",
+      "summary_tr": "Seyir feneri kontrol arızaları, COLREG tip onaylı LED retrofit, ambar projektörleri, makine dairesi ve acil aydınlatma yenileme.",
+      "metaTitle": "Navigation Light & LED Retrofit Service | Levent Marine",
+      "metaDescription": "Marine navigation light controller, LED retrofit with COLREG type approval, cargo hold floods, emergency lighting. Glamox, Den Haan, Aqua Signal. 24/7 worldwide.",
+      "seo_keywords": ["nav light controller", "COLREG LED retrofit", "marine emergency lighting", "Den Haan Rotterdam", "cargo hold flood"],
       "symptoms": [
-        "Nav light failure alarm with bulb intact, current sensor below threshold",
-        "Cargo hold floodlight 1000W MH lamp restrike time over 15 minutes",
-        "Engine room emergency LED panel flicker on 24V DC ripple",
-        "Wheelhouse dimmer buzz on new LED fixtures, no smooth dim curve",
-        "Navigation light controller switchover relay welded contacts",
-        "External floodlight IP rating compromised after gland refit",
-        "Anchor light lamp life under 200 hours, voltage spike on switching"
+        "Nav light failure alarm with bulb intact",
+        "Cargo hold MH lamp restrike time over 15 min",
+        "Engine room emergency LED flicker on 24 VDC ripple",
+        "Wheelhouse dimmer buzz on new LED fixtures"
       ],
-      "rootCauses": [
-        "LED retrofit current draw below original incandescent failure threshold",
-        "Capacitor degraded on MH ballast, restrike voltage insufficient",
-        "Switch-mode driver in cheap retrofit LED incompatible with leading-edge dimmer",
-        "Salt water ingress to nav light glass-to-base seal after years on bridge wing",
-        "Inrush current of LED bank exceeds breaker B-curve trip threshold"
-      ],
-      "whatWeCheck": [
-        "Nav light type approval certificate vs vessel COLREG arc/range",
-        "Controller current sensing threshold matched to retrofit LED lamp draw",
-        "IP rating and corrosion of nav light housing and lens gasket",
-        "Emergency lighting lux vs IMO Res. A.752(18) at escape routes",
-        "Inrush current of LED panels and floodlight banks with Fluke i400s",
-        "Cargo hold floodlight beam angle and uniformity for cargo work safety",
-        "Dimmer compatibility (trailing edge, 0-10V, DALI) per fitting datasheet"
+      "common_causes": [
+        "LED current draw below original incandescent failure threshold",
+        "Aged MH ballast capacitor",
+        "Switch-mode driver incompatible with leading-edge dimmer"
       ],
       "tools": [
         "Konica Minolta T-10A illuminance meter",
-        "Fluke 1735 power logger for harmonic analysis",
-        "Yokogawa CW240 clamp meter with inrush capture",
-        "DNV and DEKRA type approval cross-reference database",
-        "Insulation tester for emergency lighting bus integrity"
+        "Fluke 1735 power logger",
+        "DNV / DEKRA type approval cross-reference"
       ],
-      "exampleCase": {
-        "vesselType": "Supramax Bulker, 56000 DWT",
-        "port": "Constanta",
-        "year": "2024-Q2",
-        "headline": "Full LED retrofit on five holds with type approval pack",
-        "summary": "Owner targeted 40 percent lighting energy reduction and PSC-proof nav light file. Replaced 24 cargo hold floods with 200W LED type-approved units, upgraded 6 navigation lights to dual-LED COLREG-approved with electronic monitor. Energy log showed 47 percent reduction over voyage. Class-stamped type approval file delivered to office."
-      },
-      "relatedSupply": [
-        "Glamox MIR and SVS LED type-approved fittings",
-        "Den Haan Rotterdam nav lights and electronic controllers",
-        "Phoenix Products PXLM marine LED floodlights",
-        "Aqua Signal Series 41/55 type-approved nav light spares",
-        "Hella marine LED bridge and accommodation luminaires"
-      ],
-      "ctaService": "Request lighting audit",
-      "ctaSupply": "Order LED retrofit kit"
+      "related_supply_categories": ["nav-lights", "led-floods", "marine-led"]
     },
     {
-      "slug": "testing-certification",
-      "title": "Electrical Testing & Certification",
-      "kicker": "Compliance Testing",
-      "metaTitle": "ACB Test, Insulation & Protection Relay Certification",
-      "metaDescription": "Primary and secondary injection of ACB/MCCB, motor insulation testing, protection relay calibration with OMICRON. Class-acceptable reports for DNV, ABS, BV, Lloyd's, TL.",
-      "intro": "Class wants a primary-injection certificate on every ACB above 800A, the insulation log shows three motors below 1 MOhm, and the protection relay file is missing the last two pickup curves. We deliver the test pack the surveyor signs.",
+      "slug": "battery-ups",
+      "popular": false,
+      "order": 14,
+      "icon": "battery",
+      "name_en": "Battery / UPS",
+      "name_tr": "Akü / UPS",
+      "kicker_en": "GMDSS battery · UPS · Start battery",
+      "kicker_tr": "GMDSS aküsü · UPS · Start aküsü",
+      "summary_en": "GMDSS reserve, UPS for navigation, start batteries for emergency genset, lithium hybrid BMS support.",
+      "summary_tr": "GMDSS yedek, navigasyon UPS, acil jeneratör start aküleri, lityum hibrit BMS desteği.",
+      "metaTitle": "Marine Battery & UPS Service | Levent Marine",
+      "metaDescription": "Marine battery and UPS service. GMDSS reserve, navigation UPS, emergency genset start batteries, lithium hybrid BMS. 24/7 worldwide.",
+      "seo_keywords": ["marine battery service", "GMDSS battery test", "UPS marine", "lithium ship battery"],
       "symptoms": [
-        "ACB long-time pickup outside +/- 10 percent of nameplate (IEC 60947-2)",
-        "Motor stator IR below 1 MOhm or PI below 2.0 (IEEE 43)",
-        "Differential relay (87) stability fails under through-fault simulation",
-        "Earth fault (51N/64) timing curve mismatched to coordination study",
-        "Thermal scan shows 25K rise on bus joint vs reference temperature",
-        "Cable continuity fails on spare core after recent yard cabling",
-        "HV switchboard partial discharge above 100 pC (IEC 60270)",
-        "Surge arrester leakage current trending up year on year"
+        "UPS alarms on inverter fault, no transfer",
+        "Start battery cranks below 9 V on emergency genset",
+        "Lithium pack BMS comm error",
+        "GMDSS reserve discharge test fails before 6 h"
       ],
-      "rootCauses": [
-        "Trip unit aging or firmware out of date on Terasaki/ABB/Mitsubishi ACB",
-        "Carbonisation in motor overhang due to repeated load surges",
-        "CT saturation due to mismatched ratio vs short-circuit duty",
-        "Loose joint torque on copper busbar, 60Nm spec but found 18Nm",
-        "Cable insulation degradation in engine room ambient above 55 deg C"
-      ],
-      "whatWeCheck": [
-        "Primary injection of ACB main contacts with calibrated SVERKER 900",
-        "Trip unit timing at 1.5x, 3x, 6x, 10x In on long-time and short-time",
-        "Instantaneous element pickup and contact opening time below 50 ms",
-        "Generator and motor protection (50/51, 27/59, 81, 32, 40, 87)",
-        "Cable continuity, IR and HV pressure test per IEC 60092",
-        "Bus bar joint thermography under load (FLIR T540, emissivity 0.85)",
-        "Earthing system integrity, hull bond resistance below 0.1 ohm",
-        "Test certificates per DNV-CG-0339 and IACS UR M68"
+      "common_causes": [
+        "Aged inverter capacitors",
+        "Sulphation on flooded lead-acid",
+        "CAN bus termination missing on BMS"
       ],
       "tools": [
-        "OMICRON CMC 356 with control and test universe",
-        "SVERKER 900 primary injection 0-3000A continuous",
-        "Megger MIT525 5kV with PI and step voltage",
-        "Megger MFT1741 multifunction installation tester",
-        "FLIR T540 thermal camera 464x348 IR resolution",
-        "Doble F6150e for high-end protection relay testing",
-        "HV pressure test set AC/DC up to 15kV portable"
+        "Megger BITE3 battery impedance tester",
+        "Discharge load bank up to 200 A",
+        "Hioki BT3554 internal resistance meter"
       ],
-      "exampleCase": {
-        "vesselType": "Ro-Ro PCTC, 6500 CEU",
-        "port": "Yenikoy Yard, Yalova",
-        "year": "2024-Q3",
-        "headline": "Special survey electrical test pack delivered in 4 days",
-        "summary": "Yard required full 5-yearly electrical certification pack. Tested 14 ACBs (Terasaki AR series), 4 generator protection relays (DEIF MPR-3), 38 MCCBs, 62 motor IR/PI records. Two ACBs failed long-time timing, recalibrated. One generator differential CT found shorted, replaced. Class-accepted file submitted, no outstanding electrical conditions on certificate."
-      },
-      "relatedSupply": [
-        "Terasaki, ABB Emax, Schneider Masterpact trip units",
-        "DEIF and Selco generator protection relay spares",
-        "SIBA, Bussmann marine HRC fuses (gG, aM)",
-        "Mersen surge protection devices for 440V and 230V bus",
-        "Class-acceptable test report templates and binder packs"
-      ],
-      "ctaService": "Schedule certification test",
-      "ctaSupply": "Order test spares"
+      "related_supply_categories": ["batteries", "ups-modules", "bms-cards"]
     },
     {
-      "slug": "commissioning-retrofit",
-      "title": "Commissioning & Retrofit Engineering",
-      "kicker": "Project Delivery",
-      "metaTitle": "Marine FAT/SAT, VFD & Shore Power Retrofit",
-      "metaDescription": "Newbuild and retrofit electrical commissioning, VFD installation, LED conversion, shore power IEC/IEEE 80005-1, battery hybrid integration and IACS cyber baseline.",
-      "intro": "The yard delivered the VFD package without a load test, the shore power retrofit needs a TT-to-IT scheme study, and the cyber notation requires a baseline before next class. We write the FAT/SAT script, run it, and hand back a signed file the owner can audit.",
+      "slug": "shore-connection",
+      "popular": false,
+      "order": 15,
+      "icon": "shore",
+      "name_en": "Shore Connection",
+      "name_tr": "Sahil Bağlantısı",
+      "kicker_en": "Cold ironing · HV/LV · IEC/IEEE 80005-1",
+      "kicker_tr": "Cold ironing · YG/AG · IEC/IEEE 80005-1",
+      "summary_en": "High and low voltage shore power, isolation transformer schemes, earth-fault monitoring, retrofit packages aligned to IEC/IEEE 80005-1.",
+      "summary_tr": "Yüksek ve alçak gerilim sahil gücü, izolasyon transformatör şemaları, toprak hatası izleme, IEC/IEEE 80005-1 uyumlu retrofit paketleri.",
+      "metaTitle": "Marine Shore Connection / Cold Ironing Service | Levent Marine",
+      "metaDescription": "Marine shore power and cold ironing service. HV and LV, isolation transformer, earth-fault monitoring, IEC/IEEE 80005-1 compliance. 24/7 worldwide.",
+      "seo_keywords": ["shore power service", "cold ironing", "IEC/IEEE 80005-1", "marine shore connection", "Cavotec shore power"],
       "symptoms": [
-        "VFD fails FAT load test above 80 percent due to DC bus ripple",
-        "Shore power earth fault monitor mis-coordinated with shore RCD",
-        "Battery hybrid DC bus precharge fails on cold start",
-        "Yard cabling crosstalk on shielded analog signals to engine room",
-        "LED retrofit dimmer drops out at 20 percent setting",
-        "Cyber notation gap: no asset inventory, no patch baseline, no segmentation"
+        "Shore power connection trips immediately at berth",
+        "Earth-fault monitor disagreement with shore RCD",
+        "Phase rotation alarm on US East Coast 60 Hz shore",
+        "Synchronising fails between shore and ship bus"
       ],
-      "rootCauses": [
-        "VFD DC bus capacitor reforming missed after long storage",
-        "Shore power scheme mismatch ship IT vs shore TN-S without isolation transformer",
-        "BMS CAN bus termination missing, cells offline",
-        "Yard pulled signal and power cables in common tray without segregation",
-        "Cyber notation not scoped in original yard contract scope of supply"
-      ],
-      "whatWeCheck": [
-        "Full FAT script vs spec, witnessed loop-by-loop with sign-off",
-        "VFD harmonic compliance to IEEE 519, ITHD below 5 percent at PCC",
-        "Shore power one-line and protection per IEC/IEEE 80005-1",
-        "Battery hybrid SOC accuracy, cell balancing, BMS communication",
-        "Cyber baseline: asset list, OT/IT segmentation, USB/remote access policy",
-        "Software version control and rollback procedure on PLC/HMI",
-        "Crew familiarisation training plan and signed attendance record",
-        "As-built drawing redline incorporation and final issue to class"
+      "common_causes": [
+        "TT-to-IT scheme mismatch without isolation transformer",
+        "Aged interlock micro-switch on shore plug",
+        "Shore breaker setting mismatched to ship feeder"
       ],
       "tools": [
-        "Hioki PW3198 power quality analyser, class A",
-        "Fluke Norma 5000 power analyser for VFD efficiency",
-        "Tenable.ot or Claroty for read-only OT baseline scan",
-        "Wireshark with ICS dissectors for network audit",
-        "Test packs aligned to IACS UR E22, E26, E27",
-        "CMMS export tools (Star IPS, AMOS, Shipnet) for handover"
+        "Hioki PW3198 power quality analyser class A",
+        "Fluke 1735 power logger",
+        "Megger MFT1741 multifunction installation tester"
       ],
-      "exampleCase": {
-        "vesselType": "Ferry, Ro-Pax",
-        "port": "Tuzla Newbuild Yard",
-        "year": "2024-Q4",
-        "headline": "Shore power and battery hybrid commissioning, IEC compliant",
-        "summary": "Owner contracted us as third-party commissioning agent. Identified shore power neutral grounding mismatch in week 3, redesigned with isolation transformer to satisfy class. Battery hybrid FAT showed BMS comm fault, root-caused to missing CAN termination. Final SAT at sea trial passed all 47 test cases. Vessel signed off for delivery on contractual date."
-      },
-      "relatedSupply": [
-        "ABB ACS880 and Danfoss VLT marine VFD packages",
-        "Cavotec MoorMaster and shore power plug-and-socket systems",
-        "Corvus and Leclanche marine battery rack components",
-        "Nozomi Networks Guardian sensor for OT monitoring",
-        "EPLAN and AutoCAD Electrical engineering software"
-      ],
-      "ctaService": "Request retrofit scope",
-      "ctaSupply": "Order project materials"
+      "related_supply_categories": ["shore-power-cables", "isolation-transformers", "earth-monitors"]
     },
     {
-      "slug": "emergency-remote-eto",
-      "title": "Emergency Attendance & Remote ETO",
-      "kicker": "24h Response",
-      "metaTitle": "24h Marine Electrician & Remote ETO Support",
-      "metaDescription": "24h emergency onboard attendance, retainer remote ETO desk, PSC Green Pass support, P&I and class incident assistance. Pendik and Wyoming dual-shift coverage.",
-      "intro": "The duty engineer calls at 0240 local with a blackout in progress, the master needs a remote ETO opinion before signing a PSC observation, and the P&I surveyor wants an independent electrical expert at the gangway by sunrise. We answer the phone and we attend.",
+      "slug": "transformer",
+      "popular": false,
+      "order": 16,
+      "icon": "transformer",
+      "name_en": "Transformer",
+      "name_tr": "Transformatör",
+      "kicker_en": "440/230V · Lighting · HV step-down",
+      "kicker_tr": "440/230V · Aydınlatma · YG düşürücü",
+      "summary_en": "Step-down transformers, lighting transformers, HV (6.6 kV / 11 kV) units. Winding ratio, vector group, no-load and load loss tests.",
+      "summary_tr": "Düşürücü transformatörler, aydınlatma transformatörleri, YG (6.6 kV / 11 kV) üniteler. Sargı oranı, vektör grubu, yüksüz ve yüklü kayıp testleri.",
+      "metaTitle": "Marine Transformer Service & Testing | Levent Marine",
+      "metaDescription": "Marine transformer service. 440/230V step-down, lighting, HV. Winding ratio, vector group, dielectric, thermography. Class-acceptable reports. 24/7 worldwide.",
+      "seo_keywords": ["marine transformer test", "ship 440 230 transformer", "HV transformer marine", "winding ratio test"],
       "symptoms": [
-        "Total or partial blackout, emergency generator running, ETO ashore",
-        "PSC officer raises electrical observation, master needs second opinion",
-        "P&I survey scheduled within 12 hours after cargo incident",
-        "Equipment failure during voyage, manufacturer support outside hours",
-        "Class condition issued, owner needs rectification plan within 24 hours",
-        "Owner shore office needs independent technical advice on yard invoice"
+        "Transformer hum and oil weep on 440/230V step-down",
+        "Insulation drop on 220V lighting bus",
+        "Hot core, top temperature above 95 °C",
+        "Tap changer stuck after surveyor inspection"
       ],
-      "rootCauses": [
-        "Single point of failure on automation, control transformer or 24V supply",
-        "Drawing inconsistency between as-built and revised wiring after retrofit",
-        "Lack of pre-departure functional test on critical safety systems",
-        "Crew change with insufficient handover on local panel modifications"
-      ],
-      "whatWeCheck": [
-        "Initial remote triage by phone, photo, schematic and live screen-share",
-        "Mobilisation lead time to Turkish ports (Pendik base) within 4 hours",
-        "Worldwide mobilisation via Wyoming desk for Americas and Asia time zones",
-        "On arrival: blackout root cause, restart procedure, documented chronology",
-        "PSC observation wording analysed against class and flag interpretation",
-        "P&I-grade independent technical report with photo and instrument log",
-        "Handover note and follow-up action list for permanent fix"
+      "common_causes": [
+        "Loose terminal lug, partial discharge",
+        "Cooling fan failure on dry-type",
+        "Oil moisture above 50 ppm on liquid-filled"
       ],
       "tools": [
-        "Mobile kit: insulation tester, scope, thermal camera, calibrator",
-        "Iridium and Inmarsat data plans for offshore troubleshooting",
-        "Secure remote access via TeamViewer/AnyDesk with vessel firewall",
-        "Incident report template aligned with IMO MSC.1/Circ.1432",
-        "Local agent network for visa, launch and customs clearance"
+        "Megger DLRO10HD low-resistance ohmmeter",
+        "Megger TTR300 transformer turns ratio tester",
+        "Megger MIT525 5kV insulation tester",
+        "FLIR T540 thermography"
       ],
-      "exampleCase": {
-        "vesselType": "Chemical Tanker, 19000 DWT",
-        "port": "Marmara Anchorage",
-        "year": "2025-Q1",
-        "headline": "Blackout at 0310, vessel on own power by 0540",
-        "summary": "Master called retainer hotline at 0310 with no main bus and emergency generator on. Remote ETO walked duty engineer through manual restart and identified failed AVR sensing fuse remotely. Local team boarded by launch at 0440 with spare AVR module. Bus restored 0540, full root cause report to owner office by 0900 same morning."
-      },
-      "relatedSupply": [
-        "Emergency kit: AVR, governor module, sync check relay, fuses",
-        "Common Terasaki and Schneider ACB trip coils in Pendik",
-        "PT100 transmitters, 4-20mA isolators, 24V power supplies",
-        "Annual retainer plans with priority response SLA",
-        "Owner-customised critical spare list maintained on shore"
-      ],
-      "ctaService": "Activate 24h hotline",
-      "ctaSupply": "Build emergency spare kit"
+      "related_supply_categories": ["transformer-spares", "cooling-fans", "tap-changers"]
     },
     {
-      "slug": "survey-psc-prep",
-      "title": "Class Survey & PSC Preparation",
-      "kicker": "Compliance Prep",
-      "metaTitle": "Class Intermediate, Special Survey & PSC Prep",
-      "metaDescription": "Intermediate, Annual, Special survey electrical prep, PSC mock inspection, CII rating support, SOLAS compliance. DNV, BV, ABS, Lloyd's, TL approved reports.",
-      "intro": "The Intermediate is in nine weeks, the last PSC came back with three electrical observations the office never closed, and the CII rating is sliding towards D. We do the mock inspection, write the rectification plan, and close every item on the file.",
+      "slug": "ac-dc-motor",
+      "popular": false,
+      "order": 17,
+      "icon": "motor",
+      "name_en": "AC/DC Motor",
+      "name_tr": "AC/DC Motor",
+      "kicker_en": "Bow thruster · Fan · Pump motor",
+      "kicker_tr": "Bow thruster · Fan · Pompa motoru",
+      "summary_en": "Bow thruster, engine room fans, cargo pumps, cooling water pumps. Motor IR/PI, bearing condition, VFD parameter set.",
+      "summary_tr": "Bow thruster, makine dairesi fanları, kargo pompaları, soğutma suyu pompaları. Motor IR/PI, yatak durumu, VFD parametre seti.",
+      "metaTitle": "Marine AC/DC Motor Service & Testing | Levent Marine",
+      "metaDescription": "Marine motor service. Bow thruster, fans, pumps. IR/PI testing per IEEE 43, bearing analysis, VFD tuning. ABB, Siemens, Yaskawa drives. 24/7 worldwide.",
+      "seo_keywords": ["marine motor IR PI", "bow thruster motor", "ABB ACS880 marine", "cargo pump motor", "MCSA motor analysis"],
       "symptoms": [
-        "Outstanding class condition on electrical, deadline approaching",
-        "Recurring PSC observations on emergency lighting or nav light alarms",
-        "CII rating dropping due to auxiliary load profile inefficiency",
-        "Owner not ready for Special Survey scope sent by class",
-        "SOLAS Ch. II-1 electrical drawings out of date vs as-built",
-        "Missing test records for items inspected at last class attendance"
+        "Cargo pump motor IR drops to 0.3 MΩ after tank cleaning",
+        "Bow thruster motor temperature alarm at 85 °C",
+        "ER fan VFD F0007 overvoltage trip",
+        "Bearing current pitting on NDE side"
       ],
-      "rootCauses": [
-        "No systematic pre-survey electrical inspection in vessel SMS",
-        "Crew turnover loses institutional knowledge of past defects",
-        "Office and superintendent not aligned on rectification scope",
-        "Lack of an electrical KPI dashboard for fleet-wide trends"
-      ],
-      "whatWeCheck": [
-        "Mock class survey covering electrical scope of intermediate/special",
-        "Test record gap analysis vs last survey close-out report",
-        "Crew drills and familiarisation logs per STCW and ISM",
-        "Class drawing register and as-built consistency check",
-        "PSC concentrated inspection campaign topic review for current year",
-        "CII calculation review per IMO MEPC.354(78), aux engine optimisation",
-        "Owner office briefing pack and superintendent walk-through",
-        "Final defect list with priority, cost estimate and lead time"
+      "common_causes": [
+        "Aged ABB M3BP bearing grease",
+        "VFD braking resistor open circuit",
+        "Salt bridge across motor terminal box",
+        "Moisture absorption in stator overhang insulation"
       ],
       "tools": [
-        "DNV-CG-0339, ABS Steel Vessel Rules, BV NR467 reference set",
-        "Paris and Tokyo MoU PSC observation database last 24 months",
-        "IACS UR E series interpretation library",
-        "CII calculator aligned to IMO MEPC.354(78)",
-        "GoPro Hero 12 evidence kit with anti-static enclosure"
-      ],
-      "exampleCase": {
-        "vesselType": "Kamsarmax Bulker, 82000 DWT",
-        "port": "Aliaga Anchorage",
-        "year": "2024-Q4",
-        "headline": "Special Survey passed with zero electrical conditions",
-        "summary": "Owner requested pre-class attendance 6 weeks before Special Survey window. Mock survey identified 38 items (14 critical), all closed by week 5. Class surveyor (Lloyd's Register) attended, signed without electrical condition. PSC at first US port post-survey resulted in zero observations. Owner extended retainer to sister vessels."
-      },
-      "relatedSupply": [
-        "Class-acceptable test report templates and binder system",
-        "Crew familiarisation video pack in TR/EN/RU/PH",
-        "Photo evidence package for closed defects (before/after)",
-        "PSC checklist customised to flag and recent MoU campaigns",
-        "Annual retainer with quarterly fleet-wide compliance reviews"
-      ],
-      "ctaService": "Book pre-class mock survey",
-      "ctaSupply": "Order documentation pack"
-    },
-    {
-      "slug": "insulation-diagnostics",
-      "title": "Insulation Diagnostics & Hidden Earth Faults",
-      "kicker": "Fault Finding",
-      "metaTitle": "Marine IR Diagnostics & Hidden Earth Fault Finding",
-      "metaDescription": "Low insulation troubleshooting, hidden earth faults on 440V bus, intermittent trips, motor and cable IR/PI testing. Root cause analysis with class-acceptable report.",
-      "intro": "The earth lamp test shows 0.4 MOhm on the 440V bus and nobody can find it, the bow thruster motor megs 800 kOhm cold but 4 MOhm warm, and the generator trips on earth fault every third start. We map the network, isolate the path, and write the report.",
-      "symptoms": [
-        "Insulation alarm on 440V bus, IR fluctuates 0.2 to 0.8 MOhm",
-        "Intermittent earth fault on engine room lighting, weather dependent",
-        "Motor IR drops below 1 MOhm only after several hours of running",
-        "Generator earth fault relay trips on third or fourth start of the day",
-        "PI below 1.5 on cargo pump motor after tank cleaning operation",
-        "Cable IR fails after recent yard hot work in adjacent space",
-        "Heater element earth leak in galley equipment, RCD nuisance trip"
-      ],
-      "rootCauses": [
-        "Moisture absorption in motor stator winding overhang insulation",
-        "Cable insulation damaged by hot work, fault appears under load expansion",
-        "Salt deposits in JB creating low-resistance bridge when humid",
-        "Aged heater element with cracked sheath, fault only when hot",
-        "Multiple parallel small leakages summing to single alarm threshold"
-      ],
-      "whatWeCheck": [
-        "Network segmentation: split bus and test each branch separately",
-        "Motor IR cold vs hot, polarisation index per IEEE 43",
-        "Step voltage test on cables to identify weak insulation level",
-        "Cable thermography under load to find local hot spots",
-        "Capacitor and EMC filter contributions to apparent earth leakage",
-        "Time-domain reflectometer (TDR) on suspect cable runs",
-        "Targeted vs systematic approach based on insulation history log",
-        "Drying of motor winding with controlled current per IEEE 95"
-      ],
-      "tools": [
-        "Megger MIT525 5kV with step voltage and DAR/PI",
+        "Megger MIT525 5 kV with PI/DAR",
         "Baker AWA-IV winding analyser with surge comparison",
-        "Megger CFL535G time-domain reflectometer",
-        "FLIR T540 thermal imager for hot-spot diagnostics under load",
-        "Fluke 1587 FC for targeted IR measurements",
-        "Sonel MIC-10k1 10kV tester for HV bus and large machines",
-        "Bender IRDH575 portable insulation monitor for live networks"
+        "Fluke 438-II motor analyser (current signature)",
+        "SKF TKSA 41 laser shaft alignment"
       ],
-      "exampleCase": {
-        "vesselType": "OSV PSV, DP2",
-        "port": "Mersin",
-        "year": "2024-Q4",
-        "headline": "Hidden earth fault traced in 8 hours after 3 days of crew search",
-        "summary": "Crew searched for an earth fault for 72 hours, lost in capacitor and EMC filter network of 14 VFDs. Boarded with Bender portable monitor, isolated bus by feeder, found fault inside one VFD output filter capacitor leaking to chassis. Replaced filter capacitor, IR restored to 50 MOhm. Full diagnostic report with thermography evidence submitted to owner and class."
-      },
-      "relatedSupply": [
-        "Bender IRDH575 and ISOMETER modules for ship IT networks",
-        "VFD output filter capacitors (Schaffner, EPCOS)",
-        "Heat-shrink insulation kits for motor terminal lug repair",
-        "Cable repair kits IEC 60092 compliant (3M Scotchcast)",
-        "Moisture absorber heaters for stored spare motors"
+      "related_supply_categories": ["motors", "vfd-spares", "bearings"]
+    },
+    {
+      "slug": "hvac-automation",
+      "popular": false,
+      "order": 18,
+      "icon": "hvac",
+      "name_en": "HVAC Automation",
+      "name_tr": "HVAC Otomasyon",
+      "kicker_en": "Accommodation · ER ventilation · Reefer",
+      "kicker_tr": "Yaşam mahalli · MD havalandırma · Reefer",
+      "summary_en": "Accommodation HVAC controllers, engine room ventilation interlocks with CO2 release, reefer container plug-in points.",
+      "summary_tr": "Yaşam mahalli HVAC kontrolörleri, CO2 salımıyla kilitlenmeli MD havalandırma, reefer konteyner soket noktaları.",
+      "metaTitle": "Marine HVAC Automation Service | Levent Marine",
+      "metaDescription": "Marine HVAC automation service. Accommodation, engine room ventilation, reefer plug-in points. Carrier, Daikin marine, JCM. 24/7 worldwide.",
+      "seo_keywords": ["marine HVAC automation", "reefer plug-in point", "engine room ventilation", "accommodation AC ship"],
+      "symptoms": [
+        "Accommodation HVAC zone temperature drift ±5 °C",
+        "ER ventilation damper fails to close on CO2 release",
+        "Reefer plug-in point GFCI nuisance trip",
+        "Chilled water pump VFD overcurrent"
       ],
-      "ctaService": "Book earth fault hunt",
-      "ctaSupply": "Order IR diagnostic kit"
+      "common_causes": [
+        "Aged thermistor sensor",
+        "Stuck damper actuator",
+        "Wet reefer socket terminal"
+      ],
+      "tools": [
+        "Druck DPI 620 calibrator",
+        "Fluke 1587 FC insulation multimeter",
+        "FLIR T540 thermography"
+      ],
+      "related_supply_categories": ["hvac-controllers", "dampers", "reefer-sockets"]
+    },
+    {
+      "slug": "cctv-vdr",
+      "popular": false,
+      "order": 19,
+      "icon": "vdr",
+      "name_en": "CCTV / VDR",
+      "name_tr": "CCTV / VDR",
+      "kicker_en": "Bridge VDR · Engine room CCTV · Cargo cam",
+      "kicker_tr": "Köprü VDR · MD CCTV · Kargo kamerası",
+      "summary_en": "VDR annual performance test, bridge audio channel recording, engine room and cargo hold CCTV, NVR retention period audit.",
+      "summary_tr": "VDR yıllık performans testi, köprü ses kanalı kaydı, makine dairesi ve ambar CCTV, NVR kayıt süresi denetimi.",
+      "metaTitle": "Marine CCTV & VDR Service — Annual Test | Levent Marine",
+      "metaDescription": "VDR annual performance test, CCTV bridge and engine room cameras, NVR retention. Furuno VR-7000, JRC, Danelec. 24/7 worldwide.",
+      "seo_keywords": ["VDR annual test", "Furuno VR-7000", "marine CCTV", "Danelec VDR", "NVR retention ship"],
+      "symptoms": [
+        "VDR annual test fails on bridge audio channel",
+        "Engine room CCTV image black on camera 3",
+        "NVR retention period below 30 days",
+        "VDR battery backup discharge test fails"
+      ],
+      "common_causes": [
+        "Aged bridge microphone",
+        "Salt-corroded camera connector",
+        "NVR HDD nearing end of life",
+        "VDR backup battery beyond service life"
+      ],
+      "tools": [
+        "Furuno / JRC / Danelec service terminals",
+        "B&K 2270 sound level analyser",
+        "Megger BITE3 for VDR backup battery"
+      ],
+      "related_supply_categories": ["vdr-batteries", "cctv-cameras", "nvr-hdds"]
+    },
+    {
+      "slug": "other",
+      "popular": false,
+      "order": 20,
+      "icon": "other",
+      "name_en": "Other / Not listed",
+      "name_tr": "Diğer / Liste dışı",
+      "kicker_en": "Describe your system",
+      "kicker_tr": "Sisteminizi tarif edin",
+      "summary_en": "Have a system that doesn't fit? Tell us what it is — most marine electrical and control problems land in one of the 19 above, but if yours doesn't, write a sentence and we'll route it.",
+      "summary_tr": "Bu listeye uymayan bir sisteminiz mi var? Bize anlatın — marine elektrik ve kontrol problemlerinin çoğu yukarıdaki 19'a giriyor, ama girmiyorsa kısa bir cümle yazın, doğru ekibe yönlendirelim.",
+      "metaTitle": "Custom Marine Electrical Request | Levent Marine",
+      "metaDescription": "Doesn't fit a standard system? Free-text marine electrical request. We route it within the hour. 24/7 worldwide.",
+      "seo_keywords": ["marine electrical custom request", "ETO worldwide", "marine ad-hoc service"],
+      "symptoms": [],
+      "common_causes": [],
+      "tools": [],
+      "related_supply_categories": []
     }
   ]
 }

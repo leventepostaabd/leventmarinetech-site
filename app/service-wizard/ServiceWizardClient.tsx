@@ -1,238 +1,532 @@
 'use client';
+import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import Wizard, { bind, type WizardStep } from '@/components/Wizard';
-import PhotoUpload, { type UploadedFile } from '@/components/PhotoUpload';
+import Link from 'next/link';
+import type { ServiceContent } from '@/lib/content';
 
-const VESSEL_TYPES = ['Bulker', 'Tanker', 'Container', 'OSV / Offshore', 'Ro-Ro', 'General Cargo', 'Other'];
-const PROBLEM_CATEGORIES = [
-  'Power & Distribution', 'Bridge & Automation', 'Safety & Deck', 'Testing',
-  'Insulation / Hidden Fault', 'Survey / PSC Prep', 'Emergency / AOG'
-];
-const SYMPTOMS_BY_CAT: Record<string, string[]> = {
-  'Power & Distribution': ['Generator will not sync', 'AVR fault', 'Breaker tripping', 'Voltage unstable', 'Shore power not engaging', 'Insulation low', 'Reverse power trip'],
-  'Bridge & Automation': ['Radar magnetron weak', 'ECDIS chart update fail', 'Gyro deviation', 'PMS load-share off', 'AMS card fault', 'Alarm panel false alarms', 'PLC offline'],
-  'Safety & Deck': ['Fire panel deficiency', 'Navigation light not working', 'CCTV camera offline', 'Deck crane VFD fault', 'Windlass not running', 'PA/GA inoperative', 'Gas detector trouble'],
-  'Testing': ['ACB/MCCB retest required', 'Megger / insulation trend', 'Protection relay test', 'Thermography survey', 'HV switchboard test'],
-  'Insulation / Hidden Fault': ['Insulation monitor alarm', 'Intermittent breaker trip', 'Unexplained burn smell', 'Earth fault wandering', 'Mid-voyage card failure'],
-  'Survey / PSC Prep': ['Intermediate survey due', 'Special survey due', 'PSC deficiency rectification', 'CII rating support', 'SOLAS Ch. II-1 compliance check'],
-  'Emergency / AOG': ['Engine room alarms blacked out', 'Main switchboard fault', 'Total loss of power', 'Vessel at port — needs immediate ETO', 'Survey blocking departure']
-};
-const URGENCIES = [
-  { id: 'aog',     label: 'AOG (within 24h)',     hint: 'Vessel cannot sail / cargo at risk' },
-  { id: 'urgent',  label: 'Urgent (3 days)',      hint: 'Must close before next port' },
-  { id: 'planned', label: 'Planned',              hint: 'Scheduled retrofit / survey prep' }
-] as const;
-
-export default function ServiceWizardClient() {
-  const params = useSearchParams();
-  const initial = {
-    service: params.get('service') ?? '',
-    region: params.get('region') ?? '',
-    vesselType: '',
-    port: '',
-    nextPort: '',
-    eta: '',
-    problemCategory: '',
-    symptoms: [] as string[],
-    notes: '',
-    urgency: 'planned',
-    contactName: '',
-    contactEmail: '',
-    contactPhone: '',
-    contactWhatsapp: '',
-    company: '',
-    vesselName: '',
-    imo: '',
-    classSociety: ''
+type WizardWindow = { id: string; label_en: string; label_tr: string };
+type WizardCopy = {
+  step_port: { title_en: string; title_tr: string; hint_en: string; hint_tr: string };
+  step_when: { title_en: string; title_tr: string; options: WizardWindow[] };
+  step_contact: {
+    title_en: string; title_tr: string;
+    name_en: string; name_tr: string;
+    email_en: string; email_tr: string;
+    phone_en: string; phone_tr: string;
+    vessel_en: string; vessel_tr: string;
+    imo_en: string; imo_tr: string;
   };
+  submit_en: string; submit_tr: string;
+  promise_en: string; promise_tr: string;
+  received_en: string; received_tr: string;
+  ref_en: string; ref_tr: string;
+};
 
-  const steps: WizardStep[] = [
-    {
-      id: 'vessel',
-      title: 'Vessel type',
-      description: 'Pick the closest match — we can refine later.',
-      fields: (s) => (
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-          {VESSEL_TYPES.map((v) => (
-            <button key={v} type="button" onClick={() => s._update({ vesselType: v })} className={`text-[14px] py-3 px-3 rounded-md border ${s.vesselType === v ? 'bg-navy-700 text-white border-navy-700' : 'border-line bg-white text-ink hover:border-amber'}`}>{v}</button>
-          ))}
+/**
+ * 3-step service request wizard (DECISIONS.md S4, S5).
+ *
+ *   Step 1 — Port (autocomplete US ports + free text)
+ *   Step 2 — When (Now / 24h / Week / Planned date)
+ *   Step 3 — Contact (name, email, phone + optional vessel/IMO)
+ *
+ * On submit → POST /api/service-request → success screen with
+ * the literal S5 promise:
+ *
+ *   "Our next available technician will contact you within 1 hour."
+ *
+ * System is preselected via ?system=<slug>. Customer can still change
+ * it from a small inline selector on every step.
+ */
+export default function ServiceWizardClient({
+  services,
+  defaultSystem,
+  usPorts,
+  copy,
+  locale = 'en'
+}: {
+  services: ServiceContent[];
+  defaultSystem?: string;
+  usPorts: string[];
+  copy: WizardCopy;
+  locale?: 'en' | 'tr';
+}) {
+  const params = useSearchParams();
+  const initialSystem = params.get('system') ?? defaultSystem ?? '';
+
+  const [systemSlug, setSystemSlug] = useState(initialSystem);
+  const [step, setStep] = useState(initialSystem ? 1 : 0);
+
+  // form state
+  const [port, setPort] = useState('');
+  const [portOpen, setPortOpen] = useState(false);
+  const [whenWindow, setWhenWindow] = useState<string>('');
+  const [plannedDate, setPlannedDate] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [vesselName, setVesselName] = useState('');
+  const [imo, setImo] = useState('');
+  const [notes, setNotes] = useState('');
+
+  // submit state
+  const [submitting, setSubmitting] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+  const [done, setDone] = useState<{ ref: string } | null>(null);
+
+  const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);
+
+  const system = useMemo(
+    () => services.find((s) => s.slug === systemSlug),
+    [services, systemSlug]
+  );
+
+  const portMatches = useMemo(() => {
+    const q = port.trim().toLowerCase();
+    if (!q) return usPorts.slice(0, 8);
+    return usPorts.filter((p) => p.toLowerCase().includes(q)).slice(0, 8);
+  }, [port, usPorts]);
+
+  // If the system slug changes via URL during navigation, keep state in sync.
+  useEffect(() => {
+    const fromParam = params.get('system');
+    if (fromParam && fromParam !== systemSlug) {
+      setSystemSlug(fromParam);
+      setStep((s) => (s === 0 ? 1 : s));
+    }
+  }, [params, systemSlug]);
+
+  function canAdvance(): string | null {
+    if (step === 0) return systemSlug ? null : t('Pick a system.', 'Bir sistem seçin.');
+    if (step === 1) return port.trim() ? null : t('Add the port.', 'Limanı ekleyin.');
+    if (step === 2) {
+      if (!whenWindow) return t('Pick a time window.', 'Bir zaman aralığı seçin.');
+      if (whenWindow === 'planned' && !plannedDate) return t('Pick a planned date.', 'Planlı bir tarih seçin.');
+      return null;
+    }
+    if (step === 3) {
+      if (!name.trim()) return t('Your name is required.', 'Adınız gerekli.');
+      if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return t('Valid email required.', 'Geçerli e-posta gerekli.');
+      }
+      return null;
+    }
+    return null;
+  }
+
+  function goNext() {
+    const e = canAdvance();
+    if (e) { setErr(e); return; }
+    setErr(null);
+    setStep((s) => Math.min(s + 1, 3));
+  }
+
+  function goBack() {
+    setErr(null);
+    setStep((s) => Math.max(s - 1, 0));
+  }
+
+  async function submit() {
+    const e = canAdvance();
+    if (e) { setErr(e); return; }
+    setErr(null);
+    setSubmitting(true);
+    try {
+      const res = await fetch('/api/service-request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          system_slug: systemSlug,
+          system_name: locale === 'tr' ? system?.name_tr : system?.name_en,
+          port,
+          when: whenWindow,
+          planned_date: whenWindow === 'planned' ? plannedDate : undefined,
+          contact: {
+            name: name.trim(),
+            email: email.trim(),
+            phone: phone.trim() || undefined,
+            vessel_name: vesselName.trim() || undefined,
+            imo: imo.trim() || undefined
+          },
+          notes: notes.trim() || undefined,
+          locale
+        })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
+      setDone({ ref: data?.id ?? '—' });
+    } catch (e2: any) {
+      setErr(e2?.message ?? t('Submission failed. Please WhatsApp us.', 'Gönderim başarısız. Lütfen WhatsApp ile yazın.'));
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  // ============ SUCCESS SCREEN — the "1 hour" promise (S5) ============
+  if (done) {
+    return (
+      <div className="max-w-2xl mx-auto">
+        <div className="card border-l-4 border-l-green-600">
+          <div className="kicker mb-3 !text-green-700 before:!bg-green-600">
+            {t(copy.received_en, copy.received_tr)}
+          </div>
+          <h2 className="mb-3 text-balance">
+            {t(copy.promise_en, copy.promise_tr)}
+          </h2>
+          <p className="text-ink-muted text-[14.5px] leading-relaxed">
+            {t(copy.ref_en, copy.ref_tr)}:{' '}
+            <span className="font-mono text-ink">{done.ref}</span>
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href="https://wa.me/16193840403"
+              target="_blank"
+              rel="noopener"
+              className="btn-accent btn-md"
+            >
+              WhatsApp US (+1 619 384 0403)
+            </a>
+            <a href="tel:+16193840403" className="btn-ghost btn-md">
+              {t('Call now', 'Şimdi ara')}
+            </a>
+            <Link href="/services" className="btn-ghost btn-md">
+              {t('Back to services', 'Servislere dön')}
+            </Link>
+          </div>
         </div>
-      ),
-      validate: (s) => s.vesselType ? null : 'Pick a vessel type.'
-    },
-    {
-      id: 'port',
-      title: 'Port / location',
-      description: 'Where is the vessel calling? Add ETA if known.',
-      fields: (s) => (
-        <>
-          <div>
-            <label className="field-label">Current port (city + country)</label>
-            <input className="field-input" placeholder="e.g. Houston, TX, USA" {...bind(s, 'port')} />
+      </div>
+    );
+  }
+
+  // ============ WIZARD ============
+  const totalSteps = 4; // System (0), Port (1), When (2), Contact (3)
+  const stepNumber = step + 1;
+  const progress = ((step + 1) / totalSteps) * 100;
+  const stepTitles = [
+    t('System', 'Sistem'),
+    t(copy.step_port.title_en, copy.step_port.title_tr),
+    t(copy.step_when.title_en, copy.step_when.title_tr),
+    t(copy.step_contact.title_en, copy.step_contact.title_tr)
+  ];
+
+  return (
+    <div className="grid gap-8 md:grid-cols-[260px_1fr] max-w-5xl">
+      {/* Progress sidebar */}
+      <aside className="md:sticky md:top-24 md:self-start">
+        <div className="bg-navy-50 rounded-lg p-5 border border-line">
+          <div className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-ink-subtle mb-3">
+            {t('Step', 'Adım')} {stepNumber} / {totalSteps}
           </div>
-          <div>
-            <label className="field-label">Next port (optional)</label>
-            <input className="field-input" placeholder="e.g. New Orleans, LA, USA" {...bind(s, 'nextPort')} />
+          <div className="h-1 bg-line rounded-full overflow-hidden mb-5">
+            <div className="h-full bg-amber transition-all" style={{ width: `${progress}%` }} />
           </div>
-          <div>
-            <label className="field-label">ETA (optional)</label>
-            <input className="field-input" type="datetime-local" {...bind(s, 'eta')} />
-          </div>
-        </>
-      ),
-      validate: (s) => s.port ? null : 'Add the port at minimum.'
-    },
-    {
-      id: 'problem',
-      title: 'Problem category',
-      fields: (s) => (
-        <div className="grid sm:grid-cols-2 gap-2">
-          {PROBLEM_CATEGORIES.map((c) => (
-            <button key={c} type="button" onClick={() => s._update({ problemCategory: c, symptoms: [] })} className={`text-[14px] py-3 px-3 rounded-md border text-left ${s.problemCategory === c ? 'bg-navy-700 text-white border-navy-700' : 'border-line bg-white text-ink hover:border-amber'}`}>{c}</button>
-          ))}
+          <ol className="space-y-2">
+            {stepTitles.map((title, i) => (
+              <li
+                key={i}
+                className={`flex items-start gap-2 text-[13px] ${
+                  i === step
+                    ? 'text-ink font-semibold'
+                    : i < step
+                    ? 'text-ink-muted'
+                    : 'text-ink-subtle'
+                }`}
+              >
+                <span
+                  className={`font-mono text-[11px] w-5 ${
+                    i < step ? 'text-green-700' : i === step ? 'text-amber' : 'text-ink-subtle'
+                  }`}
+                >
+                  {i < step ? '✓' : String(i + 1).padStart(2, '0')}
+                </span>
+                <span>{title}</span>
+              </li>
+            ))}
+          </ol>
+          {system && step > 0 && (
+            <div className="mt-5 pt-4 border-t border-line">
+              <div className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-ink-subtle mb-1.5">
+                {t('System', 'Sistem')}
+              </div>
+              <div className="text-[13.5px] font-semibold text-ink">
+                {locale === 'tr' ? system.name_tr : system.name_en}
+              </div>
+              <button
+                type="button"
+                onClick={() => setStep(0)}
+                className="mt-1 font-mono text-[11px] text-amber-600 hover:underline"
+              >
+                {t('Change', 'Değiştir')}
+              </button>
+            </div>
+          )}
         </div>
-      ),
-      validate: (s) => s.problemCategory ? null : 'Pick a category.'
-    },
-    {
-      id: 'symptoms',
-      title: 'Symptoms',
-      description: 'Tick anything matching. Add free notes below if your symptom is different.',
-      fields: (s) => {
-        const list = SYMPTOMS_BY_CAT[s.problemCategory] ?? [];
-        function toggle(sym: string) {
-          const cur: string[] = s.symptoms ?? [];
-          s._update({ symptoms: cur.includes(sym) ? cur.filter((x) => x !== sym) : [...cur, sym] });
-        }
-        return (
-          <>
-            <div className="flex flex-wrap gap-2">
-              {list.map((sym) => {
-                const on = (s.symptoms ?? []).includes(sym);
+      </aside>
+
+      {/* Step body */}
+      <div className="max-w-xl">
+        {/* STEP 0 — System pick */}
+        {step === 0 && (
+          <div>
+            <div className="kicker mb-3">
+              {t('Step', 'Adım')} 1 — {t('System', 'Sistem')}
+            </div>
+            <h2 className="mb-2 text-[26px]">
+              {t('Which system has the problem?', 'Hangi sistemde sorun var?')}
+            </h2>
+            <p className="text-ink-muted mb-6 text-[14.5px]">
+              {t(
+                'Pick the closest match. You can change it later.',
+                'En yakın seçeneği seçin. Daha sonra değiştirebilirsiniz.'
+              )}
+            </p>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {services.map((s) => (
+                <button
+                  key={s.slug}
+                  type="button"
+                  onClick={() => setSystemSlug(s.slug)}
+                  className={`text-left px-3 py-2.5 rounded-md border transition ${
+                    systemSlug === s.slug
+                      ? 'border-amber bg-amber/10 text-ink'
+                      : 'border-line bg-white text-ink hover:border-amber'
+                  }`}
+                >
+                  <div className="font-semibold text-[13.5px]">
+                    {locale === 'tr' ? s.name_tr : s.name_en}
+                  </div>
+                  <div className="text-[11.5px] text-ink-subtle">
+                    {locale === 'tr' ? s.kicker_tr : s.kicker_en}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* STEP 1 — Port */}
+        {step === 1 && (
+          <div>
+            <div className="kicker mb-3">
+              {t('Step', 'Adım')} 2 — {t('Port', 'Liman')}
+            </div>
+            <h2 className="mb-2 text-[26px]">{t(copy.step_port.title_en, copy.step_port.title_tr)}</h2>
+            <p className="text-ink-muted mb-6 text-[14.5px]">
+              {t(copy.step_port.hint_en, copy.step_port.hint_tr)}
+            </p>
+            <div className="relative">
+              <input
+                type="text"
+                value={port}
+                onFocus={() => setPortOpen(true)}
+                onBlur={() => setTimeout(() => setPortOpen(false), 120)}
+                onChange={(e) => { setPort(e.target.value); setPortOpen(true); }}
+                placeholder={t('e.g. Houston, TX', 'örn. Houston, TX')}
+                className="field-input"
+                autoFocus
+                autoComplete="off"
+              />
+              {portOpen && portMatches.length > 0 && (
+                <ul
+                  role="listbox"
+                  className="absolute z-10 mt-1 max-h-72 w-full overflow-auto rounded-md border border-line bg-white shadow-lg"
+                >
+                  {portMatches.map((p) => (
+                    <li key={p}>
+                      <button
+                        type="button"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => { setPort(p); setPortOpen(false); }}
+                        className="block w-full text-left px-3 py-2 text-[13.5px] hover:bg-amber/10"
+                      >
+                        {p}
+                      </button>
+                    </li>
+                  ))}
+                  <li>
+                    <button
+                      type="button"
+                      onMouseDown={(e) => e.preventDefault()}
+                      onClick={() => setPortOpen(false)}
+                      className="block w-full text-left px-3 py-2 text-[12px] text-ink-subtle border-t border-line italic"
+                    >
+                      {t('Other / not listed — keep typing', 'Diğer / liste dışı — yazmaya devam edin')}
+                    </button>
+                  </li>
+                </ul>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* STEP 2 — When */}
+        {step === 2 && (
+          <div>
+            <div className="kicker mb-3">
+              {t('Step', 'Adım')} 3 — {t('When', 'Zaman')}
+            </div>
+            <h2 className="mb-6 text-[26px]">{t(copy.step_when.title_en, copy.step_when.title_tr)}</h2>
+            <div className="grid gap-2">
+              {copy.step_when.options.map((opt) => {
+                const on = whenWindow === opt.id;
                 return (
-                  <button key={sym} type="button" onClick={() => toggle(sym)} className={`text-[13px] px-3 py-1.5 rounded-md border ${on ? 'bg-amber text-navy-700 border-amber' : 'border-line bg-white text-ink hover:border-amber'}`}>{sym}</button>
+                  <button
+                    key={opt.id}
+                    type="button"
+                    onClick={() => setWhenWindow(opt.id)}
+                    className={`text-left p-4 rounded-md border transition ${
+                      on
+                        ? 'bg-navy-700 text-white border-navy-700'
+                        : 'border-line bg-white text-ink hover:border-amber'
+                    }`}
+                  >
+                    <div className="font-semibold">{t(opt.label_en, opt.label_tr)}</div>
+                  </button>
                 );
               })}
             </div>
-            <div>
-              <label className="field-label mt-4">Notes / what the bridge reported</label>
-              <textarea className="field-input min-h-[100px]" placeholder="A few sentences from the chief engineer is perfect." {...bind(s, 'notes')} />
-            </div>
-            <div>
-              <label className="field-label mt-4">Photos (alarm screen, switchboard, smoke, etc.)</label>
-              <PhotoUpload prefix="service" onChange={(files: UploadedFile[]) => s._update({ attachments: files })} hint="Phone photo of the offending panel is enough." />
-            </div>
-          </>
-        );
-      }
-    },
-    {
-      id: 'urgency',
-      title: 'Urgency',
-      fields: (s) => (
-        <div className="grid gap-2">
-          {URGENCIES.map((u) => (
-            <button key={u.id} type="button" onClick={() => s._update({ urgency: u.id })} className={`text-left p-4 rounded-md border ${s.urgency === u.id ? 'bg-navy-700 text-white border-navy-700' : 'border-line bg-white text-ink hover:border-amber'}`}>
-              <div className="font-bold">{u.label}</div>
-              <div className={`text-[13px] ${s.urgency === u.id ? 'text-white/70' : 'text-ink-muted'}`}>{u.hint}</div>
-            </button>
-          ))}
-        </div>
-      ),
-      validate: (s) => s.urgency ? null : 'Pick urgency.'
-    },
-    {
-      id: 'vessel-details',
-      title: 'Vessel details',
-      description: 'Optional but speeds up handling.',
-      fields: (s) => (
-        <>
-          <div className="grid sm:grid-cols-2 gap-3">
-            <div>
-              <label className="field-label">Vessel name</label>
-              <input className="field-input" placeholder="e.g. MV Aegean Trader" {...bind(s, 'vesselName')} />
-            </div>
-            <div>
-              <label className="field-label">IMO number</label>
-              <input className="field-input" placeholder="7 digits" {...bind(s, 'imo')} />
-            </div>
+            {whenWindow === 'planned' && (
+              <div className="mt-4">
+                <label className="field-label">{t('Planned date', 'Planlı tarih')}</label>
+                <input
+                  type="date"
+                  value={plannedDate}
+                  onChange={(e) => setPlannedDate(e.target.value)}
+                  className="field-input"
+                />
+              </div>
+            )}
           </div>
-          <div>
-            <label className="field-label">Class society</label>
-            <select className="field-input" {...bind(s, 'classSociety')}>
-              <option value="">—</option>
-              <option>DNV</option><option>BV</option><option>ABS</option><option>Lloyd's Register</option>
-              <option>RINA</option><option>ClassNK</option><option>Türk Loydu</option><option>IRS</option><option>Other</option>
-            </select>
-          </div>
-        </>
-      )
-    },
-    {
-      id: 'contact',
-      title: 'Contact',
-      description: 'How should we reach you? WhatsApp works best for AOG.',
-      fields: (s) => (
-        <>
-          <div className="grid sm:grid-cols-2 gap-3">
-            <div>
-              <label className="field-label">Your name *</label>
-              <input className="field-input" {...bind(s, 'contactName')} />
-            </div>
-            <div>
-              <label className="field-label">Company / fleet</label>
-              <input className="field-input" {...bind(s, 'company')} />
-            </div>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-3">
-            <div>
-              <label className="field-label">Email *</label>
-              <input className="field-input" type="email" {...bind(s, 'contactEmail')} />
-            </div>
-            <div>
-              <label className="field-label">Phone</label>
-              <input className="field-input" type="tel" {...bind(s, 'contactPhone')} />
-            </div>
-          </div>
-          <div>
-            <label className="field-label">WhatsApp (best for AOG)</label>
-            <input className="field-input" placeholder="+1 ... or +90 ..." {...bind(s, 'contactWhatsapp')} />
-          </div>
-        </>
-      ),
-      validate: (s) => {
-        if (!s.contactName) return 'Name is required.';
-        if (!s.contactEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.contactEmail)) return 'Valid email required.';
-        return null;
-      }
-    },
-    {
-      id: 'summary',
-      title: 'Review & submit',
-      description: 'Quick check. Anything wrong — back to fix.',
-      fields: (s) => (
-        <dl className="grid gap-2 text-[13.5px]">
-          {[
-            ['Vessel type', s.vesselType],
-            ['Vessel', `${s.vesselName ?? ''} ${s.imo ? `(IMO ${s.imo})` : ''}`.trim() || '—'],
-            ['Class', s.classSociety || '—'],
-            ['Port', s.port],
-            ['Next port', s.nextPort || '—'],
-            ['ETA', s.eta || '—'],
-            ['Category', s.problemCategory],
-            ['Symptoms', (s.symptoms ?? []).join(', ') || '—'],
-            ['Urgency', s.urgency.toUpperCase()],
-            ['Contact', `${s.contactName} · ${s.contactEmail}`]
-          ].map(([k, v]) => (
-            <div key={k as string} className="grid grid-cols-[140px_1fr] gap-3 py-2 border-b border-line">
-              <dt className="font-mono text-[11px] uppercase tracking-[0.06em] text-ink-subtle">{k}</dt>
-              <dd className="text-ink">{v}</dd>
-            </div>
-          ))}
-        </dl>
-      )
-    }
-  ];
+        )}
 
-  return <Wizard steps={steps} initial={initial} endpoint="/api/service-request" whatsappFallback="16193840403" />;
+        {/* STEP 3 — Contact */}
+        {step === 3 && (
+          <div>
+            <div className="kicker mb-3">
+              {t('Step', 'Adım')} 4 — {t('Contact', 'İletişim')}
+            </div>
+            <h2 className="mb-6 text-[26px]">
+              {t(copy.step_contact.title_en, copy.step_contact.title_tr)}
+            </h2>
+
+            <div className="space-y-4">
+              <div className="grid sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="field-label">
+                    {t(copy.step_contact.name_en, copy.step_contact.name_tr)} *
+                  </label>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="field-input"
+                    autoComplete="name"
+                  />
+                </div>
+                <div>
+                  <label className="field-label">
+                    {t(copy.step_contact.phone_en, copy.step_contact.phone_tr)}
+                  </label>
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="field-input"
+                    placeholder="+1 ..."
+                    autoComplete="tel"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="field-label">
+                  {t(copy.step_contact.email_en, copy.step_contact.email_tr)} *
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="field-input"
+                  autoComplete="email"
+                />
+              </div>
+              <div className="grid sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="field-label">
+                    {t(copy.step_contact.vessel_en, copy.step_contact.vessel_tr)}
+                  </label>
+                  <input
+                    type="text"
+                    value={vesselName}
+                    onChange={(e) => setVesselName(e.target.value)}
+                    className="field-input"
+                    placeholder="MV …"
+                  />
+                </div>
+                <div>
+                  <label className="field-label">
+                    {t(copy.step_contact.imo_en, copy.step_contact.imo_tr)}
+                  </label>
+                  <input
+                    type="text"
+                    value={imo}
+                    onChange={(e) => setImo(e.target.value)}
+                    className="field-input"
+                    placeholder="7 digits"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="field-label">
+                  {t('Anything else? (optional)', 'Eklemek istediğiniz? (opsiyonel)')}
+                </label>
+                <textarea
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  className="field-input min-h-[80px]"
+                  placeholder={t(
+                    'Symptoms, error codes, what the bridge reported — anything helps.',
+                    'Belirtiler, hata kodları, köprüden gelen bilgi — ne biliyorsanız.'
+                  )}
+                />
+              </div>
+            </div>
+
+            <p className="mt-5 text-[12px] text-ink-subtle">
+              {t(copy.promise_en, copy.promise_tr)}
+            </p>
+          </div>
+        )}
+
+        {err && (
+          <div role="alert" className="mt-4 text-[13px] font-mono text-red-600">
+            {err}
+          </div>
+        )}
+
+        <div className="mt-8 flex items-center justify-between gap-3">
+          <button
+            type="button"
+            onClick={goBack}
+            disabled={step === 0 || submitting}
+            className="btn-ghost btn-md disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            ← {t('Back', 'Geri')}
+          </button>
+          {step === 3 ? (
+            <button
+              type="button"
+              onClick={submit}
+              disabled={submitting}
+              className="btn-accent btn-lg disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {submitting ? t('Sending…', 'Gönderiliyor…') : t(copy.submit_en, copy.submit_tr)}
+            </button>
+          ) : (
+            <button type="button" onClick={goNext} className="btn-primary btn-md">
+              {t('Continue', 'Devam')} →
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
