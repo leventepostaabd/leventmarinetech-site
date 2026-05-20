@@ -13,8 +13,11 @@ export default function LocaleToggle({ current }: { current: 'en' | 'tr' }) {
       await fetch('/api/locale', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ locale: next })
+        body: JSON.stringify({ locale: next, manual: true })
       });
+      // Mirror the manual-override flag in a client cookie so the middleware
+      // skips geo auto-detection on the next navigation as well.
+      document.cookie = `lm.locale.manual=1; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
       router.refresh();
     } finally {
       setPending(false);

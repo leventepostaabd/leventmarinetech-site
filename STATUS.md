@@ -13,10 +13,10 @@
 **Sorumlu Agent:** A (Positioning) + E (Hero/Emergency)
 **Hedef tamamlanma:** 2026-05-27
 
-- [ ] TR adres/telefon temizliği (tüm sayfalar) — *Agent A*
-- [ ] Florida-based + Wyoming LLC pozisyonlama metinleri — *Agent A*
-- [ ] Slogan güncellemesi (i18n EN/TR) — *Agent A*
-- [ ] Otomatik dil tespiti (lokasyon bazlı) — *Agent A*
+- [x] TR adres/telefon temizliği (tüm sayfalar) — *Agent A*
+- [x] Florida-based + Wyoming LLC pozisyonlama metinleri — *Agent A*
+- [x] Slogan güncellemesi (i18n EN/TR) — *Agent A*
+- [x] Otomatik dil tespiti (lokasyon bazlı) — *Agent A*
 - [ ] 3-buton hero (Servis / Tedarik / Acil) — *Agent E*
 - [ ] Bölünmüş ekran layout (statik fotoğraf başlangıç) — *Agent E*
 - [ ] Acil 3-buton modal (Ara / WhatsApp / 10sn Form) — *Agent E*
@@ -83,7 +83,7 @@ _henüz yok_
 
 | Agent | Branch | Worktree | Durum |
 |---|---|---|---|
-| A — Positioning | _will be assigned_ | _will be assigned_ | bekliyor |
+| A — Positioning | `agent-a/positioning-i18n` | `.claude/worktrees/agent-a3133eede915ccb44` | Wave 0 tamam (commit: PENDING) |
 | B — Service | _will be assigned_ | _will be assigned_ | bekliyor |
 | C — Supply | _will be assigned_ | _will be assigned_ | bekliyor |
 | D — Trust/SEO | _will be assigned_ | _will be assigned_ | bekliyor |

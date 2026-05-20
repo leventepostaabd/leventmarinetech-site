@@ -3,24 +3,27 @@ export const SITE = {
   name: 'Levent Marine',
   legalName: 'Levent Marine Electro Technical Services LLC',
   tagline: 'Marine Electrical Service & Parts Supply',
+  slogan: 'Marine Electrical Service & Parts Supply — 24/7 Worldwide',
+  position: 'Florida-based operations · Wyoming LLC',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://leventmarinetech.com',
   email: 'info@leventmarinetech.com',
-  phoneUS: '+1 619 384 0403',
-  phoneTR: '+90 537 650 7776',
+  phone: '+1 619 384 04 03',
+  phoneUS: '+1 619 384 04 03',
+  whatsapp: 'https://wa.me/16193840403',
   whatsappUS: 'https://wa.me/16193840403',
-  whatsappTR: 'https://wa.me/905376507776',
-  addressUS: {
+  address: {
     street: '32 N Gould St',
     city: 'Sheridan',
     state: 'WY',
     zip: '82801',
     country: 'US'
   },
-  addressTR: {
-    street: 'Velibaba Mah. No:1',
-    city: 'Pendik',
-    region: 'Istanbul',
-    country: 'TR'
+  addressUS: {
+    street: '32 N Gould St',
+    city: 'Sheridan',
+    state: 'WY',
+    zip: '82801',
+    country: 'US'
   },
   trust: {
     vessels: '247+',
@@ -33,7 +36,6 @@ export const SITE = {
 export const NAV = [
   { label: 'Service',     href: '/service-wizard',    primary: true  },
   { label: 'Supply',      href: '/supply',            primary: true  },
-  { label: 'USA',         href: '/usa',               primary: false },
   { label: 'Services',    href: '/services',          primary: false },
   { label: 'About',       href: '/about',             primary: false },
   { label: 'Contact',     href: '/contact',           primary: false }

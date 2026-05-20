@@ -2,17 +2,19 @@
   "nav": {
     "service": "Service",
     "supply": "Supply",
-    "usa": "USA",
     "services": "Services",
     "about": "About",
     "contact": "Contact",
-    "callHotline": "24/7 Hotline"
+    "callHotline": "24/7 Hotline",
+    "emergency": "Emergency"
   },
   "home": {
-    "kicker": "Marine Electrical Service · Since 2012",
+    "kicker": "Florida-based operations · Wyoming LLC",
     "h1Pre": "Marine Electrical Service & Parts Supply",
-    "h1Post": "— Wyoming, USA + Tuzla, Türkiye",
-    "sub": "Coast-to-coast US response · 24/7 AOG dispatch · 12 years onboard.\nEngineer on board within hours, the right part on its way within a day.",
+    "h1Post": "— 24/7 Worldwide",
+    "slogan": "Marine Electrical Service & Parts Supply — 24/7 Worldwide",
+    "position": "Florida-based operations · Wyoming LLC",
+    "sub": "Service available at all US ports — 24/7 worldwide coverage.\nAn engineer on board within hours, the right part on its way within a day.",
     "tileServiceKicker": "01 · SERVICE",
     "tileServiceTitle": "Marine Electrical Service",
     "tileServiceLead": "Generator, MSB, propulsion, navigation, automation, safety, deck machinery, survey prep. We dispatch an engineer to your vessel.",
@@ -31,5 +33,49 @@
     "received": "Request received.",
     "receivedDesc": "Thanks. We'll come back the same business day.",
     "ref": "Reference:"
+  },
+  "contact": {
+    "kicker": "Contact",
+    "title": "Reach us.",
+    "lead": "For an AOG case, WhatsApp is fastest. For RFQs, the supply wizard captures everything we need. For everything else, email works.",
+    "usaHq": "USA",
+    "operations": "Operations",
+    "operationsCity": "Florida operations",
+    "registeredHq": "Wyoming LLC · Registered HQ",
+    "email": "Email",
+    "phone": "Phone",
+    "whatsapp": "WhatsApp",
+    "address": "Address",
+    "tagline": "Worldwide service available at all US ports — 24/7"
+  },
+  "footer": {
+    "tagline": "Marine Electrical Service & Parts Supply — 24/7 Worldwide. Florida-based operations, service at all US ports.",
+    "service": "Service",
+    "supply": "Supply",
+    "contact": "Contact",
+    "requestService": "Request service",
+    "serviceCatalog": "Service catalog",
+    "insulationDiagnostics": "Insulation diagnostics",
+    "emergencyAOG": "Emergency / AOG",
+    "requestQuote": "Request a quote",
+    "browseCatalog": "Browse catalog",
+    "unlistedPart": "Unlisted part",
+    "findEquivalent": "Find equivalent",
+    "worldwideServiceTag": "Worldwide service available at all US ports — 24/7",
+    "wyomingLlcFinePrint": "Levent Marine Electro Technical Services LLC · Registered in Wyoming, USA",
+    "rights": "© {year} LEVENT MARINE LLC · ALL RIGHTS RESERVED",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "cookies": "Cookies",
+    "accessibility": "Accessibility"
+  },
+  "common": {
+    "loading": "Loading…",
+    "back": "← Back",
+    "tryAgain": "Try again",
+    "close": "Close",
+    "next": "Next",
+    "previous": "Previous",
+    "emergency": "Emergency"
   }
 }
