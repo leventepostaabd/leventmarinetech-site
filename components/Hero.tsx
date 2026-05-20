@@ -54,8 +54,8 @@ export default function Hero({
       <div className="grid h-full w-full grid-cols-2">
         <HeroDoor
           side="left"
-          /* Replace with /hero/engine-room.jpg (or .mp4 poster) when assets land. */
-          image="/hero/engine-room-placeholder.svg"
+          /* Real legacy engine-room photo — Wave 0 polish. Video swap deferred to Wave 4. */
+          image="/hero/engine-room.jpg"
           label_en="Service"
           label_tr="Servis"
           kicker_en="Engineer on board"
@@ -67,8 +67,8 @@ export default function Hero({
         />
         <HeroDoor
           side="right"
-          /* Replace with /hero/warehouse.jpg when assets land. */
-          image="/hero/warehouse-placeholder.svg"
+          /* Real warehouse photo wired Wave 0 polish. Video swap deferred to Wave 4. */
+          image="/hero/warehouse.jpg"
           label_en="Supply"
           label_tr="Tedarik"
           kicker_en="Parts on the way"
