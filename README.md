@@ -1,103 +1,119 @@
-# Levent Marine Electro Technical Services — Web
+# Levent Marine — Platform v1
 
-Class-ready electrotechnical partner for bulker fleets.
-Pendik İstanbul + Sheridan Wyoming · 240+ vessels serviced · 8 class authorities.
-
-🌐 **Live site:** https://www.leventmarinetech.com
+Next.js 14 (App Router) + Supabase + Vercel. Replaces the static v4.x site that
+lives in `legacy/` for reference.
 
 ## Stack
 
-- **Static HTML + CSS + vanilla JS** (GitHub Pages friendly, no build step)
-- **Google Fonts** — Space Grotesk + Inter + JetBrains Mono (via CDN)
-- **Design system:** Deep Harbor palette (light primary, amber accent)
-- **i18n:** TR/EN runtime toggle (localStorage persistence)
-- **Backend:** `leventmarinetech-api` (ayrı repo) — form + authorized user panel API
+- **Next.js 14** App Router, TypeScript, server components.
+- **Tailwind CSS** with a custom marine palette (navy / amber / ink).
+- **Supabase**: Postgres (RFQ + service requests + products + supplier sources),
+  Auth (magic link), Storage (uploads & test reports — configured manually).
+- **Resend** for transactional notifications (optional — silently no-ops without `RESEND_API_KEY`).
+- **Vercel** for hosting + edge middleware + serverless functions.
 
-## Struktur
-
-```
-.
-├── index.html              # Ana sayfa — bento grid, 10 hizmet kategorisi
-├── profile.html            # Professional background + certifications
-├── authorized.html         # Class/Company/Admin yetkili panel
-├── css/
-│   ├── design.css          # v2 design system (TÜM stiller)
-│   ├── authorized.css      # Yetkili panel stilleri
-│   └── [eski dosyalar]     # Geriye uyumluluk için korundu
-├── js/
-│   ├── app.js              # v2 — i18n + services data + drawer + form + login
-│   └── authorized.js       # Yetkili panel mantığı
-├── assets/
-│   ├── IMAGES.md           # ~50 görsel için AI üretim prompt + dosya yolları
-│   ├── logo.png            # Ana logo
-│   ├── sample-certificate.pdf
-│   ├── services/           # Hizmet kart görselleri (10 kategori)
-│   ├── projects/           # Proje vakası görselleri
-│   ├── equipment/          # Test ekipmanları görselleri
-│   ├── about/              # Ofis + ekip görselleri
-│   └── brand/              # Logo SVG + OG image + motif
-├── CNAME                   # www.leventmarinetech.com
-├── CHANGELOG.md            # Sürüm notları
-└── README.md
-```
-
-## Yerel geliştirme
-
-Build gerekmiyor — dosyaları doğrudan aç veya statik sunucu başlat:
+## Local dev
 
 ```bash
-# Python 3
-python3 -m http.server 8080
-
-# Node (npx)
-npx serve -l 8080
-
-# PHP
-php -S localhost:8080
+npm install
+cp .env.example .env.local      # fill in Supabase + Resend keys
+npm run dev                      # http://localhost:3000
 ```
 
-Ardından http://localhost:8080 açın.
+The catalog and page content load from `content/*.json` at build/request time.
+RFQ submissions, login, and admin require Supabase env vars.
 
-## Dağıtım (Deployment)
+## Supabase setup
 
-GitHub Pages otomatik — `main` branch'e push olduğunda 1-2 dakikada yayına alınır.
+1. Create a new Supabase project at https://supabase.com.
+2. SQL editor → paste `supabase/migrations/0001_init.sql` → run.
+3. Storage → create buckets:
+   - `product-images` — public
+   - `attachments`    — private
+   - `reports`        — private
+4. Auth → enable Email (magic link). Site URL = your production URL.
+5. Settings → API → copy `URL`, `anon`, `service_role` into Vercel env vars.
 
-GitHub Settings → Pages → Source: **`main`** / `root` olarak ayarlı.
+## Vercel deploy
 
-Domain: `www.leventmarinetech.com` (CNAME dosyası üzerinden).
+1. New project → Import this repo, branch `platform-migration` for preview.
+2. Add environment variables (see `.env.example`).
+3. Deploy. Preview URL = `<project>.vercel.app`. Test wizards + login + admin.
+4. When ready: merge `platform-migration` → `main`, point DNS (CNAME) to Vercel,
+   disable GitHub Pages.
 
-## Servis Kataloğu
+## Make yourself admin
 
-10 ana kategori, ~80 alt hizmet. Bulker gemisinde karşılaşılan her elektrik ihtiyacı:
+After your first login (magic link), in Supabase SQL editor:
 
-1. **Güç & Dağıtım** — MSB/ESB, jeneratör, AVR, shaft generator, transformer, shore power
-2. **Tahrik & Motor** — bow thruster, deck crane, hatch cover, windlass, pompalar
-3. **Navigasyon & GMDSS** — radar, ECDIS, gyro, autopilot, AIS/VDR, GMDSS
-4. **Otomasyon & Kontrol** — AMS, IAS, PMS, PLC/SCADA, sensors
-5. **Güvenlik Sistemleri** — fire detection, CO2, PA/GA, gas detection, CCTV
-6. **Aydınlatma & Seyir Fenerleri** — nav lights, LED retrofit, cargo hold
-7. **Test & Sertifikasyon** — ACB/MCCB, insulation, protection relay, thermography
-8. **Commissioning & Retrofit** — FAT/SAT, VFD, LED, shore power, cyber security
-9. **Acil Müdahale & Remote ETO** — 24h response, retainer, PSC Green Pass
-10. **Class & Sertifika Hazırlığı** — Intermediate, Special, Annual, PSC, CII
+```sql
+update profiles set role = 'admin' where email = 'you@yourcompany.com';
+```
 
-## Sertifikasyon
+## Routes — public
 
-- ETO — STCW Reg. III/6
-- HV Operations (Up to 1000V) — STCW Reg. III/6
-- Advanced Fire Fighting, Medical First Aid, BST
-- Gas Tanker + Oil & Chemical Tanker Familiarization
+| Path | Purpose |
+|---|---|
+| `/`                                   | Landing — dual CTA (Service / Supply) |
+| `/services`                           | Service category index (11 lanes) |
+| `/services/[slug]`                    | Service detail (symptoms → tools → case → related supply) |
+| `/supply`                             | Catalog landing |
+| `/supply/categories`                  | Full category index |
+| `/supply/category/[slug]`             | Category listing |
+| `/supply/product/[slug]`              | Product detail + RFQ CTAs |
+| `/supply/unlisted-request`            | Unlisted-part intake |
+| `/supply/equivalent-part-finder`      | Cross-reference desk |
+| `/service-wizard`                     | Multi-step service intake (7 steps) |
+| `/supply-wizard`                      | Multi-step supply intake (6 steps) |
+| `/usa`                                | USA index |
+| `/usa/[slug]`                         | Regional pages (Houston, NY/NJ, Long Beach) |
+| `/about`, `/contact`                  | Company info |
+| `/privacy`, `/terms`, `/cookie-policy`, `/accessibility-statement` | Compliance |
 
-## Class Otoriteleri (uyumlu rapor formatı)
+## Routes — internal
 
-DNV · BV · ABS · Lloyd's Register · Türk Loydu · RINA · ClassNK · IRS
+| Path | Purpose |
+|---|---|
+| `/login`              | Magic-link sign-in |
+| `/admin`              | Operations dashboard (auth required, role=admin) |
+| `/admin/rfqs`         | RFQ list (supply / equivalent / unlisted) |
+| `/admin/service`      | Service request list |
+| `/admin/products`     | Catalog overview |
 
-## İletişim
+## API (POST)
 
-- 🇹🇷 Türkiye: +90 537 650 77 76 · Velibaba Mah. No:1, Pendik / İstanbul
-- 🇺🇸 USA: +1 619 384 04 03 · 32 N Gould St, Sheridan WY 82801
-- ✉️ info@leventmarinetech.com
+| Path | Purpose |
+|---|---|
+| `/api/service-request` | Service wizard endpoint — writes to `service_requests` |
+| `/api/quote-request`   | Supply / equivalent / unlisted endpoint — writes to `rfq_requests` |
 
-## Lisans
+## Content authoring
 
-© 2026 Levent Marine LLC. Tüm hakları saklıdır.
+JSON files in `content/`:
+
+- `services.json` — 11 services (symptoms, root causes, tools, case, supply)
+- `regions.json`  — 3 USA regional pages (port lists, scenarios, logistics)
+- `products.json` — 30 seed products (catalog + RFQ targets)
+
+Edit JSON, redeploy. Admin product editor will move to Supabase in a follow-up.
+
+## Business rules baked in
+
+- **No prices on customer-facing pages.** Every product has Request Quote.
+- **Supplier sources are admin-only.** RLS policy denies non-admin reads of `supplier_sources`.
+- **Equivalent finder always returns with an engineering note.** Disclaimer surfaced on every product page and the equivalent-finder form.
+- **AOG path is highlighted.** Urgent + AOG marked with amber/red across admin + customer UI; WhatsApp shortcuts in mobile bar and floating rail.
+
+## What's intentionally not yet implemented (Wave 2 candidates)
+
+- OCR from nameplate photos (hook ready, OpenAI Vision integration planned)
+- Live supplier-API integration (Amazon Business / Grainger / Radwell etc) — admin candidate fields exist, no auto-quote
+- AI chat widget (architecture-ready; no widget mounted)
+- Customer portal beyond basic auth (vessel-file area, RFQ history page) — scaffolded routes only
+- Email automation beyond `notifyAdmin` (no Resend templates yet)
+- Move products from JSON to Supabase + admin CRUD
+- Photo upload UI in wizards (Supabase storage already provisioned)
+
+## Legacy
+
+The previous static site is preserved at `legacy/`. Not bundled, not deployed — kept for reference only.
