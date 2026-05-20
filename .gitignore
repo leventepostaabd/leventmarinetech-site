@@ -36,4 +36,7 @@ tmp/
 temp/
 .cache/
 
+# Claude Code worktrees (parallel agent isolation)
+.claude/
+
 # legacy/ is intentionally tracked (reference copy of v4.x static site)
