@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import UnlistedClient from './UnlistedClient';
 
 export const metadata: Metadata = {
   title: 'Unlisted Part Request — Marine Supply',
-  description: 'Can\'t find the part in our catalog? Send the part number, photo, or nameplate — we go look.',
+  description: "Can't find the part in our catalog? Send the part number, photo, or nameplate and we go look. No prices on the public site — every quote is per RFQ.",
   alternates: { canonical: '/supply/unlisted-request' }
 };
 
@@ -19,8 +20,12 @@ export default function Page() {
       </nav>
       <div className="kicker mb-3">Unlisted item</div>
       <h1 className="mb-3">Can&apos;t find the part?</h1>
-      <p className="text-ink-muted max-w-2xl mb-10">Send a photo, the part number, or describe the nameplate. Our supplier network covers brands not in this catalog.</p>
-      <UnlistedClient />
+      <p className="text-ink-muted max-w-2xl mb-10">
+        Paste the model number, describe what you see on the nameplate, and upload a photo if you have one. Our supplier network covers brands not in this catalog.
+      </p>
+      <Suspense fallback={<div className="text-ink-subtle font-mono text-sm">Loading…</div>}>
+        <UnlistedClient />
+      </Suspense>
     </div>
   );
 }

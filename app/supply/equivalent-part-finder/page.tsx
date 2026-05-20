@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import EquivalentClient from './EquivalentClient';
 
 export const metadata: Metadata = {
   title: 'Equivalent Part Finder — Marine Supply',
-  description: 'If the exact item is obsolete or unavailable, we identify a compatible replacement or equivalent spare with an engineering note.',
+  description: 'If the exact item is obsolete or unavailable, we identify a compatible replacement with an engineering note. Upload a nameplate photo for fastest match.',
   alternates: { canonical: '/supply/equivalent-part-finder' }
 };
 
@@ -19,9 +20,15 @@ export default function Page() {
       </nav>
       <div className="kicker mb-3">Cross-reference desk</div>
       <h1 className="mb-3">Find an equivalent or compatible part.</h1>
-      <p className="text-ink-muted max-w-2xl mb-2">If the exact item is obsolete or unavailable, we propose a compatible replacement or equivalent spare.</p>
-      <p className="text-ink-subtle text-[13.5px] max-w-2xl mb-10">Every equivalent comes with an engineering note documenting where it matches the original and where it differs — so your superintendent has a paper trail.</p>
-      <EquivalentClient />
+      <p className="text-ink-muted max-w-2xl mb-2">
+        If the exact item is obsolete or unavailable, we propose a compatible replacement or equivalent spare.
+      </p>
+      <p className="text-ink-subtle text-[13.5px] max-w-2xl mb-10">
+        Every equivalent comes with an engineering note documenting where it matches the original and where it differs — so your superintendent has a paper trail.
+      </p>
+      <Suspense fallback={<div className="text-ink-subtle font-mono text-sm">Loading…</div>}>
+        <EquivalentClient />
+      </Suspense>
     </div>
   );
 }

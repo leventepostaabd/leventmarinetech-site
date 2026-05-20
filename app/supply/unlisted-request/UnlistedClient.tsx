@@ -1,11 +1,20 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+import PhotoUpload, { type UploadedFile } from '@/components/PhotoUpload';
 
 export default function UnlistedClient() {
-  const [state, setState] = useState<Record<string, any>>({});
+  const params = useSearchParams();
+  const [state, setState] = useState<Record<string, any>>({ quantity: 1 });
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState<{ ok: boolean; id?: string; via?: string } | null>(null);
   const [err, setErr] = useState<string | null>(null);
+
+  // Seed description from a search query if user landed here from the catalog search.
+  useEffect(() => {
+    const q = params.get('q');
+    if (q) setState((s) => ({ ...s, description: q }));
+  }, [params]);
 
   function bind(key: string) {
     return {
@@ -16,8 +25,10 @@ export default function UnlistedClient() {
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!state.vesselName && !state.partNumber && !state.description) {
-      setErr('Please add at least a vessel name, part number, or description.');
+    const hasAnyContent =
+      state.vesselName || state.partNumber || state.description || (state.attachments?.length ?? 0) > 0;
+    if (!hasAnyContent) {
+      setErr('Please add at least a vessel name, part number, description, or photo.');
       return;
     }
     if (!state.contactEmail) { setErr('Email is required.'); return; }
@@ -32,8 +43,11 @@ export default function UnlistedClient() {
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
       setDone({ ok: true, id: data?.id, via: 'api' });
-    } catch (e: any) {
-      const summary = Object.entries(state).map(([k, v]) => `${k}: ${v}`).join('\n');
+    } catch {
+      const summary = Object.entries(state)
+        .filter(([k]) => k !== 'attachments')
+        .map(([k, v]) => `${k}: ${typeof v === 'object' ? JSON.stringify(v) : v}`)
+        .join('\n');
       const text = encodeURIComponent(`LEVENT MARINE — unlisted part request\n\n${summary}`);
       window.open(`https://wa.me/16193840403?text=${text}`, '_blank', 'noopener');
       setDone({ ok: true, via: 'whatsapp' });
@@ -45,7 +59,10 @@ export default function UnlistedClient() {
   if (done?.ok) return (
     <div className="card border-l-4 border-l-green-600 max-w-2xl">
       <h2 className="mb-2">Got it.</h2>
-      <p className="text-ink-muted">We&apos;ll come back the same business day. Reference: <span className="font-mono">{done.id ?? 'sent via WhatsApp'}</span></p>
+      <p className="text-ink-muted">
+        We&apos;ll come back the same business day. Reference:{' '}
+        <span className="font-mono">{done.id ?? 'sent via WhatsApp'}</span>
+      </p>
     </div>
   );
 
@@ -65,21 +82,51 @@ export default function UnlistedClient() {
         <div><label className="field-label">Part number</label><input className="field-input" {...bind('partNumber')} /></div>
       </div>
       <div className="grid sm:grid-cols-[2fr_1fr] gap-3">
-        <div><label className="field-label">Product description *</label>
-        <input className="field-input" placeholder="What is it? Voltage, type, where it sits on the ship" {...bind('description')} /></div>
-        <div><label className="field-label">Quantity</label><input className="field-input" type="number" min={1} defaultValue={1} {...bind('quantity')} /></div>
+        <div>
+          <label className="field-label">Product description *</label>
+          <input
+            className="field-input"
+            placeholder="What is it? Voltage, type, where it sits on the ship"
+            {...bind('description')}
+          />
+        </div>
+        <div>
+          <label className="field-label">Quantity</label>
+          <input
+            className="field-input"
+            type="number"
+            min={1}
+            value={state.quantity ?? 1}
+            onChange={(e) => setState((s) => ({ ...s, quantity: parseInt(e.target.value, 10) || 1 }))}
+          />
+        </div>
       </div>
-      <div><label className="field-label">Notes</label>
-        <textarea className="field-input min-h-[100px]" {...bind('notes')} /></div>
-      <p className="text-[12px] text-ink-subtle">Upload photos/nameplate via WhatsApp +1 619 384 0403 after submission (we'll thread it to your reference).</p>
+      <div>
+        <label className="field-label">Notes</label>
+        <textarea className="field-input min-h-[100px]" {...bind('notes')} />
+      </div>
+
+      <div>
+        <label className="field-label">Nameplate / panel photos (up to 5)</label>
+        <PhotoUpload
+          prefix="unlisted"
+          onChange={(files: UploadedFile[]) => setState((s) => ({ ...s, attachments: files }))}
+        />
+      </div>
 
       <div className="border-t border-line pt-4 mt-2 grid sm:grid-cols-2 gap-3">
         <div><label className="field-label">Your name *</label><input className="field-input" required {...bind('contactName')} /></div>
         <div><label className="field-label">Email *</label><input className="field-input" type="email" required {...bind('contactEmail')} /></div>
       </div>
+      <div className="grid sm:grid-cols-2 gap-3">
+        <div><label className="field-label">WhatsApp</label><input className="field-input" placeholder="+1 ..." {...bind('contactWhatsapp')} /></div>
+        <div><label className="field-label">Company / fleet</label><input className="field-input" {...bind('company')} /></div>
+      </div>
 
       {err && <div className="text-[13px] font-mono text-red-600">{err}</div>}
-      <button type="submit" disabled={submitting} className="btn-accent btn-lg w-fit disabled:opacity-60">{submitting ? 'Sending…' : 'Send request'}</button>
+      <button type="submit" disabled={submitting} className="btn-accent btn-lg w-fit disabled:opacity-60">
+        {submitting ? 'Sending…' : 'Send request'}
+      </button>
     </form>
   );
 }
