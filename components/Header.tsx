@@ -2,10 +2,11 @@ import Link from 'next/link';
 import { SITE, NAV } from '@/lib/site';
 import { SpotlightTrigger } from '@/components/Spotlight';
 import LocaleToggle from '@/components/LocaleToggle';
-import { getLocale } from '@/lib/i18n';
+import { getLocale, getTranslator } from '@/lib/i18n';
 
 export default function Header() {
   const locale = getLocale();
+  const t = getTranslator(locale);
   return (
     <header className="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-line">
       <div className="container-x flex items-center justify-between h-[var(--header-h)] gap-5">
@@ -33,6 +34,19 @@ export default function Header() {
         <div className="flex items-center gap-2">
           <SpotlightTrigger />
           <LocaleToggle current={locale} />
+          {/*
+            Emergency CTA placeholder — Agent E owns the EmergencyModal.
+            For now this links to the contact page; Agent E will wire the modal.
+          */}
+          <Link
+            href="/contact#emergency"
+            data-emergency-trigger
+            aria-label={t('common.emergency')}
+            className="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 font-mono text-[12px] font-semibold text-red-600 no-underline hover:bg-red-500 hover:text-white hover:border-red-500 transition"
+          >
+            <span aria-hidden="true" className="inline-block w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+            <span>{t('common.emergency')}</span>
+          </Link>
           <a href={`tel:${SITE.phoneUS.replace(/\s/g, '')}`} aria-label="Call 24/7" className="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-line bg-navy-50 font-mono text-[12px] font-semibold text-ink no-underline hover:bg-amber hover:text-navy-700 hover:border-amber transition">
             <span aria-hidden="true" className="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse" />
             <span className="hidden lg:inline">{SITE.phoneUS}</span>

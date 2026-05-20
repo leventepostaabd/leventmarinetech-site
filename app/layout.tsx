@@ -10,14 +10,15 @@ import Spotlight from '@/components/Spotlight';
 import PageTransition from '@/components/PageTransition';
 import { SITE } from '@/lib/site';
 import { organizationSchema } from '@/lib/schema-org';
+import { getLocale } from '@/lib/i18n';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: 'Levent Marine — Marine Electrical Service & Parts Supply · Wyoming, USA + Tuzla, Türkiye',
+    default: 'Levent Marine — Marine Electrical Service & Parts Supply — 24/7 Worldwide',
     template: '%s · Levent Marine'
   },
-  description: 'Marine electrical service & technical parts supply for commercial vessels. Coast-to-coast US response · 24/7 AOG dispatch · 12 years onboard.',
+  description: 'Marine Electrical Service & Parts Supply — 24/7 Worldwide. Florida-based operations, Wyoming LLC. Service available at all US ports.',
   alternates: {
     canonical: '/',
     languages: { 'en-US': '/', 'tr-TR': '/tr' }
@@ -43,8 +44,9 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = getLocale();
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body>
         <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-amber focus:text-navy-700 focus:px-4 focus:py-2 focus:rounded-md focus:font-semibold">Skip to content</a>
         <Header />

@@ -13,24 +13,15 @@ export function organizationSchema() {
     image: `${SITE.url}/assets/brand/og-image.jpg`,
     telephone: SITE.phoneUS,
     priceRange: '$$',
-    address: [
-      {
-        '@type': 'PostalAddress',
-        streetAddress: SITE.addressUS.street,
-        addressLocality: SITE.addressUS.city,
-        addressRegion: SITE.addressUS.state,
-        postalCode: SITE.addressUS.zip,
-        addressCountry: SITE.addressUS.country
-      },
-      {
-        '@type': 'PostalAddress',
-        streetAddress: SITE.addressTR.street,
-        addressLocality: SITE.addressTR.city,
-        addressRegion: SITE.addressTR.region,
-        addressCountry: SITE.addressTR.country
-      }
-    ],
-    areaServed: ['US', 'TR', 'GR', 'CY', 'NL', 'DE', 'AE', 'SG'],
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: SITE.addressUS.street,
+      addressLocality: SITE.addressUS.city,
+      addressRegion: SITE.addressUS.state,
+      postalCode: SITE.addressUS.zip,
+      addressCountry: SITE.addressUS.country
+    },
+    areaServed: 'Worldwide',
     serviceType: [
       'Marine Electrical Repair',
       'Marine Technical Parts Supply',

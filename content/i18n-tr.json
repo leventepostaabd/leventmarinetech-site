@@ -2,17 +2,19 @@
   "nav": {
     "service": "Servis",
     "supply": "Tedarik",
-    "usa": "USA",
     "services": "Hizmetler",
     "about": "Hakkında",
     "contact": "İletişim",
-    "callHotline": "Hattı ara"
+    "callHotline": "Hattı ara",
+    "emergency": "Acil"
   },
   "home": {
-    "kicker": "Marine Elektrik Servisi · 2012'den beri",
+    "kicker": "Florida merkezli operasyon · Wyoming LLC",
     "h1Pre": "Marine Elektrik Servisi ve Parça Tedariki",
-    "h1Post": "— Wyoming, USA + Tuzla, Türkiye",
-    "sub": "Coast-to-coast US müdahalesi · 7/24 AOG sevkiyat · 12 yıl gemide.\nMühendis saatler içinde gemide, doğru parça bir gün içinde yolda.",
+    "h1Post": "— 7/24 Worldwide",
+    "slogan": "Marine Elektrik Servisi ve Parça Tedariki — 7/24 Worldwide",
+    "position": "Florida merkezli operasyon · Wyoming LLC",
+    "sub": "Tüm ABD limanlarında servis — 7/24 dünya çapında kapsam.\nMühendis saatler içinde gemide, doğru parça bir gün içinde yolda.",
     "tileServiceKicker": "01 · SERVİS",
     "tileServiceTitle": "Marine Elektrik Servisi",
     "tileServiceLead": "Jeneratör, MSB, tahrik, navigasyon, otomasyon, güvenlik, deck makinesi, survey hazırlığı. Geminize mühendis gönderiyoruz.",
@@ -27,9 +29,9 @@
     "step2Title": "Doğrula",
     "step2Desc": "Birebir veya uyumlu yedeği teyit ederiz. Onboard yıllardan birikmiş uyumluluk veritabanımız var.",
     "step3Title": "Tedarik et",
-    "step3Desc": "USA, Avrupa ve Asya'da güvenilir tedarikçi ağı. İçsel — tedarikçiyi veya marjı paylaşmayız.",
+    "step3Desc": "USA ve worldwide güvenilir tedarikçi ağı. İçsel — tedarikçiyi veya marjı paylaşmayız.",
     "step4Title": "Teslim et",
-    "step4Desc": "Doğrudan gemiye, liman acentesine veya depo konsolidasyonu. Gerekirse kendi faturamızla repack. USD veya TRY faturalama.",
+    "step4Desc": "Doğrudan gemiye, liman acentesine veya depo konsolidasyonu. Gerekirse kendi faturamızla repack. USD faturalama.",
     "quickKicker": "Şimdi ihtiyaç",
     "quickTitle": "Yaygın başlangıç noktaları.",
     "quickQuoteTitle": "Teklif iste",
@@ -41,7 +43,7 @@
     "trustKicker": "Neden biz",
     "trustTitle": "Onboard geçmiş. Aracı tedarikçi değil.",
     "trustP1": "Levent Marine, bulker, tanker, container ve OSV tipi gemilerde gerçek shipboard tecrübesi olan bir Marine Electro-Technical Officer tarafından yönetiliyor. Her RFQ, seyir halindeki bir gemide busbar terminasyonu yapmış birinin önünden geçer.",
-    "trustP2": "USA filolarına temiz USD faturalama ve TWIC/port-access uyumlu koordinasyon için Wyoming'de kayıtlıyız. Tuzla, Avrupa ve global mühendis sevkiyatımızın operasyonel üssü."
+    "trustP2": "Florida merkezli operasyon, Wyoming LLC tescil. USA filolarına temiz USD faturalama ve TWIC/port-access uyumlu koordinasyon. Tüm ABD limanlarına ve dünya çapına 7/24 servis."
   },
   "wizard": {
     "step": "Adım",
@@ -74,12 +76,18 @@
     "kicker": "İletişim",
     "title": "Bize ulaşın.",
     "lead": "AOG için en hızlı yol WhatsApp. RFQ için supply wizard her veriyi yakalar. Diğer her şey için email yeterli.",
-    "usaHq": "USA HQ",
-    "operationalBase": "Operasyonel üs",
-    "email": "Email"
+    "usaHq": "USA",
+    "operations": "Operasyon",
+    "operationsCity": "Florida merkezli operasyon",
+    "registeredHq": "Wyoming LLC · Tescilli merkez",
+    "email": "Email",
+    "phone": "Telefon",
+    "whatsapp": "WhatsApp",
+    "address": "Adres",
+    "tagline": "Tüm ABD limanlarında dünya çapında servis — 7/24"
   },
   "footer": {
-    "tagline": "Marine elektrik servisi ve teknik parça tedariki. Wyoming, USA + Tuzla, Türkiye. 12 yıl gemide, 247+ gemide servis.",
+    "tagline": "Marine Elektrik Servisi ve Parça Tedariki — 7/24 Worldwide. Florida merkezli operasyon, tüm ABD limanlarında servis.",
     "service": "Servis",
     "supply": "Tedarik",
     "contact": "İletişim",
@@ -91,7 +99,9 @@
     "browseCatalog": "Kataloğa bak",
     "unlistedPart": "Listede olmayan parça",
     "findEquivalent": "Uyumlu bul",
-    "rights": "© {year} LEVENT MARINE LLC · Wyoming + Tuzla · TÜM HAKLARI SAKLIDIR",
+    "worldwideServiceTag": "Tüm ABD limanlarında dünya çapında servis — 7/24",
+    "wyomingLlcFinePrint": "Levent Marine Electro Technical Services LLC · Wyoming, USA tescilli",
+    "rights": "© {year} LEVENT MARINE LLC · TÜM HAKLARI SAKLIDIR",
     "privacy": "Gizlilik",
     "terms": "Şartlar",
     "cookies": "Çerezler",
@@ -103,6 +113,7 @@
     "tryAgain": "Tekrar dene",
     "close": "Kapat",
     "next": "Sonraki",
-    "previous": "Önceki"
+    "previous": "Önceki",
+    "emergency": "Acil"
   }
 }
