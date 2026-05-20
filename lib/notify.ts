@@ -66,7 +66,7 @@ function adminFrame(title: string, urgency: string, body: string, ctaUrl?: strin
 <tr><td style="padding:20px 24px">${body}</td></tr>
 ${ctaUrl && ctaLabel ? `<tr><td style="padding:0 24px 24px"><a href="${ctaUrl}" style="display:inline-block;background:#F5A524;color:#0B1F3A;font-weight:700;text-decoration:none;padding:10px 18px;border-radius:6px;font-size:14px">${ctaLabel}</a></td></tr>` : ''}
 <tr><td style="background:#F6F8FB;padding:14px 24px;border-top:1px solid #E6ECF3;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.08em;color:#7A8AA3">
-LEVENT MARINE LLC · Wyoming + Tuzla · Internal alert
+LEVENT MARINE LLC · Wyoming LLC · Florida operations · Internal alert
 </td></tr></table></td></tr></table></body></html>`;
 }
 
@@ -203,8 +203,8 @@ function customerFrame(headline: string, refId: string, body: string) {
 </td></tr>
 <tr><td style="background:#F6F8FB;padding:16px 24px;border-top:1px solid #E6ECF3;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.08em;color:#7A8AA3;line-height:1.6">
 LEVENT MARINE ELECTRO TECHNICAL SERVICES LLC<br>
-32 N Gould St · Sheridan WY 82801 · USA<br>
-Velibaba Mah. No:1 · Pendik / Istanbul · Türkiye<br>
+32 N Gould St · Sheridan WY 82801 · USA (Wyoming LLC · Florida operations)<br>
+Worldwide service — 24/7<br>
 <a href="mailto:info@leventmarinetech.com" style="color:#7A8AA3">info@leventmarinetech.com</a>
 </td></tr></table></td></tr></table></body></html>`;
 }

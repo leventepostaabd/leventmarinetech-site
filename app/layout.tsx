@@ -8,6 +8,7 @@ import FloatingRail from '@/components/FloatingRail';
 import CookieBanner from '@/components/CookieBanner';
 import Spotlight from '@/components/Spotlight';
 import PageTransition from '@/components/PageTransition';
+import AboutModal from '@/components/AboutModal';
 import { SITE } from '@/lib/site';
 import { organizationSchema } from '@/lib/schema-org';
 import { getLocale } from '@/lib/i18n';
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MobileActionBar />
         <CookieBanner />
         <Spotlight />
+        <AboutModal />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}

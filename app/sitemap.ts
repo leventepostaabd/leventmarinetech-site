@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
-import { SITE, SERVICE_SLUGS, REGION_SLUGS } from '@/lib/site';
-import { readProducts } from '@/lib/content';
+import { SITE } from '@/lib/site';
+import { readProducts, readServices } from '@/lib/content';
 import { knowledgeSlugs } from './knowledge/_lib';
 
 /**
@@ -48,6 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const url = (p: string) => `${SITE.url}${p}`;
   const products = readProducts();
   const knowledge = knowledgeSlugs();
+  const services20 = readServices();
 
   const top = [
     { url: url('/'),                              lastModified: now, changeFrequency: 'weekly'  as const, priority: 1.0  },
@@ -58,24 +59,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url('/service-wizard'),                lastModified: now, changeFrequency: 'monthly' as const, priority: 0.9  },
     { url: url('/supply/equivalent-part-finder'), lastModified: now, changeFrequency: 'monthly' as const, priority: 0.85 },
     { url: url('/supply/unlisted-request'),       lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8  },
-    { url: url('/usa'),                           lastModified: now, changeFrequency: 'weekly'  as const, priority: 0.9  },
     { url: url('/about'),                         lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7  },
     { url: url('/contact'),                       lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7  },
     { url: url('/knowledge'),                     lastModified: now, changeFrequency: 'weekly'  as const, priority: 0.75 }
   ];
 
-  const services = SERVICE_SLUGS.map((slug) => ({
-    url: url(`/services/${slug}`),
+  const services = services20.map((s) => ({
+    url: url(`/services/${s.slug}`),
     lastModified: now,
     changeFrequency: 'monthly' as const,
     priority: 0.7
-  }));
-
-  const regions = REGION_SLUGS.map((slug) => ({
-    url: url(`/usa/${slug}`),
-    lastModified: now,
-    changeFrequency: 'monthly' as const,
-    priority: 0.8
   }));
 
   const productPages = products.map((p) => ({
@@ -116,7 +109,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...top,
     ...services,
-    ...regions,
     ...productPages,
     ...supplyCategoryUmbrella,
     ...supplyCategoryDetail,

@@ -41,22 +41,6 @@ export const NAV = [
   { label: 'Contact',     href: '/contact',           primary: false }
 ] as const;
 
-export const SERVICE_SLUGS = [
-  'power-distribution',
-  'propulsion-motors',
-  'navigation-gmdss',
-  'automation-control',
-  'safety-systems',
-  'lighting-nav-lights',
-  'testing-certification',
-  'commissioning-retrofit',
-  'emergency-remote-eto',
-  'survey-psc-prep',
-  'insulation-diagnostics'
-] as const;
-
-export const REGION_SLUGS = [
-  'houston-marine-electrical',
-  'new-york-nj-marine-electrical',
-  'long-beach-marine-electrical'
-] as const;
+// SERVICE_SLUGS removed — services now drive off content/services.json via readServices()
+// (see Agent B's lib/content.ts helpers).
+// REGION_SLUGS removed — Q14 decision: no /usa regional pages, single "all US ports" message.
