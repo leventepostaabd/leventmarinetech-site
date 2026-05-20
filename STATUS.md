@@ -39,12 +39,14 @@
 **Sorumlu Agent:** C
 **Hedef tamamlanma:** 2026-06-17
 
-- [ ] Arama kutusu (Amazon/eBay live) — *Agent C*
-- [ ] Kategori navigasyonu (Marine Elec / General Elec / General Marine) — *Agent C*
-- [ ] Foto yükleme UI + admin dashboard'a düşme — *Agent C*
-- [ ] Fiyat gizleme + "Get quote" butonları — *Agent C*
-- [ ] Amazon / eBay business API entegrasyonu (stub başlangıç) — *Agent C*
-- [ ] (İleride) OCR nameplate okuma — *deferred*
+- [x] Arama kutusu (Amazon/eBay live) — *Agent C* (live-completion against local index; `/api/supply-search` proxies `lib/ebay-amazon.ts`; live API wiring deferred to Wave 4 per stub)
+- [x] Kategori navigasyonu (Marine Elec / General Elec / General Marine) — *Agent C* (3 top-level + 21 subcategories in `content/products.json`)
+- [x] Foto yükleme UI + admin dashboard'a düşme — *Agent C* (`components/PhotoUpload.tsx` → Supabase `attachments` bucket; wired in unlisted-request, equivalent-finder, and step 3 of supply-wizard)
+- [x] Fiyat gizleme + "Get quote" butonları — *Agent C* (every product card + detail page shows only "In Stock" or "Get Quote"; sanitizeExternalUrl strips any price-bearing params)
+- [x] Amazon / eBay business API entegrasyonu (stub başlangıç) — *Agent C* (`lib/ebay-amazon.ts` exports `searchAmazonBusiness`, `searchEbay`, `getProductBySource`, `searchAllSources`, `sanitizeExternalUrl` — local-fallback today, TODO Wave 4)
+- [x] 6-step supply-wizard (category → brand → part+photo → vessel → urgency → contact)
+- [x] Equivalent-part-finder + unlisted-request now accept up to 5 photos
+- [ ] (İleride) OCR nameplate okuma — *deferred to Wave 4*
 
 ## Wave 3 — Güven & SEO (Hafta 4)
 
@@ -85,6 +87,6 @@ _henüz yok_
 |---|---|---|---|
 | A — Positioning | _will be assigned_ | _will be assigned_ | bekliyor |
 | B — Service | _will be assigned_ | _will be assigned_ | bekliyor |
-| C — Supply | _will be assigned_ | _will be assigned_ | bekliyor |
+| C — Supply | `worktree-agent-a5da769e675a3232f` | `.claude/worktrees/agent-a5da769e675a3232f` | Wave 2 complete · build OK · push pending |
 | D — Trust/SEO | _will be assigned_ | _will be assigned_ | bekliyor |
 | E — Hero/Emergency | _will be assigned_ | _will be assigned_ | bekliyor |
