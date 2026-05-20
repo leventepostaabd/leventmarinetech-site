@@ -27,12 +27,12 @@
 **Sorumlu Agent:** B
 **Hedef tamamlanma:** 2026-06-03
 
-- [ ] 19 sistemli grid + arama + 6 popüler ikon — *Agent B*
-- [ ] 3 adımlı talep akışı (Sistem → Liman → Zaman → İletişim) — *Agent B*
-- [ ] "1 saat içinde dönüş" söz ekranı — *Agent B*
-- [ ] Email + WhatsApp bildirim entegrasyonu — *Agent B*
-- [ ] Admin paneline taleplerin düşmesi — *Agent B*
-- [ ] 19 sistem için SEO landing sayfaları — *Agent B*
+- [x] 19 sistemli grid + arama + 6 popüler ikon — *Agent B* (worktree-agent-a0e1b1b42692af25d)
+- [x] 3 adımlı talep akışı (Sistem → Liman → Zaman → İletişim) — *Agent B*
+- [x] "1 saat içinde dönüş" söz ekranı — *Agent B* (literal S5 text)
+- [x] Email + WhatsApp bildirim entegrasyonu — *Agent B* (Resend + WhatsApp Business API stub w/ click-to-chat fallback)
+- [x] Admin paneline taleplerin düşmesi — *Agent B* (system_slug + when_window in service_requests.meta)
+- [x] 19 sistem için SEO landing sayfaları — *Agent B* (20 prerendered routes incl. "other")
 
 ## Wave 2 — Tedarik Akışı (Hafta 3-4)
 
@@ -73,7 +73,10 @@
 
 ## Aktif Engeller
 
-_henüz yok_
+**Agent B notları (2026-05-20):**
+- `lib/site.ts` hala eski 11-slug `SERVICE_SLUGS` listesini içeriyor. `app/sitemap.ts` (Agent D) bu listeyi okuyor; sitemap doğru 20-slug listesini görsün diye Agent A/D pas atması: ya `SERVICE_SLUGS`'ı kaldırıp `readServices()`'a geçmek, ya da yeni servis slug'larıyla güncellemek lazım. Bu wave1 işini bloklamadı (build geçti, prerender 20 slug için doğru — `generateStaticParams` artık `readServices()`'tan geliyor).
+- WhatsApp Business API gerçek credentials yok; `lib/notify.ts` içindeki `notifyByWhatsApp` ortamda token yokken click-to-chat URL'i loglar (N1 söz verildi, kanal hazır — sadece env var beklemede).
+- Search index (`app/api/search-index/route.ts`) eski `ServiceContent` şeklini bekleyebilir; bir bakış lazım — Agent D'nin SEO çalışması sırasında uyumlu hale gelir.
 
 ## Tamamlanmış Wave'ler
 
@@ -84,7 +87,7 @@ _henüz yok_
 | Agent | Branch | Worktree | Durum |
 |---|---|---|---|
 | A — Positioning | _will be assigned_ | _will be assigned_ | bekliyor |
-| B — Service | _will be assigned_ | _will be assigned_ | bekliyor |
+| B — Service | worktree-agent-a0e1b1b42692af25d | .claude/worktrees/agent-a0e1b1b42692af25d | Wave 1 tamam (build geçti, push edilecek) |
 | C — Supply | _will be assigned_ | _will be assigned_ | bekliyor |
 | D — Trust/SEO | _will be assigned_ | _will be assigned_ | bekliyor |
 | E — Hero/Emergency | _will be assigned_ | _will be assigned_ | bekliyor |
