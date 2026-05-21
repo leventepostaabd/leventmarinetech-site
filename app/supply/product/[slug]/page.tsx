@@ -195,8 +195,8 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             )}
 
             <div className="mt-6 pt-5 border-t border-line text-[11.5px] font-mono text-ink-subtle space-y-1">
-              <div className="uppercase tracking-[0.08em] text-ink">{locale === 'tr' ? 'Tedarik kaynağı' : 'Source channel'}</div>
-              <div>{p.source ? p.source.toUpperCase() : 'MANUAL'} · {locale === 'tr' ? 'OEM ağı' : 'OEM network'}</div>
+              <div className="uppercase tracking-[0.08em] text-ink">{locale === 'tr' ? 'Tedarik' : 'Sourcing'}</div>
+              <div>{locale === 'tr' ? 'OEM ve onaylı dağıtım ağı · ABD üzerinden sevkiyat' : 'OEM and approved distributor network · US-based shipping'}</div>
             </div>
           </aside>
         </div>

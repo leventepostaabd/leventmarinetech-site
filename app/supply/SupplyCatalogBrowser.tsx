@@ -241,11 +241,8 @@ export default function SupplyCatalogBrowser({
                   {labels.getQuote} →
                 </div>
 
-                {p.source && p.source !== 'manual' && (
-                  <span className="absolute right-3 top-3 rounded-full bg-amber/10 px-2 py-0.5 font-mono text-[9.5px] uppercase tracking-wider text-amber-600">
-                    {p.source}
-                  </span>
-                )}
+                {/* Source supplier names (Amazon / eBay) are intentionally
+                    not surfaced — only the product and our quote path show. */}
               </Link>
             </li>
           ))}
