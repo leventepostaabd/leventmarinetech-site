@@ -24,11 +24,15 @@ type Deck = {
 export default function ServiceImageDeck({
   items,
   locale,
-  intervalMs = 4500
+  intervalMs = 4500,
+  fillParent = false
 }: {
   items: Deck[];
   locale: 'en' | 'tr';
   intervalMs?: number;
+  /** When true, the deck fills the parent's height edge-to-edge (no rounded
+      corners, no max-height) — used by the wizard/services right column. */
+  fillParent?: boolean;
 }) {
   const [idx, setIdx] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -49,7 +53,9 @@ export default function ServiceImageDeck({
 
   return (
     <div
-      className="relative h-[78vh] min-h-[520px] max-h-[820px] w-full overflow-hidden rounded-2xl bg-navy-700"
+      className={`relative w-full overflow-hidden bg-navy-700 ${
+        fillParent ? 'h-full' : 'h-[78vh] min-h-[520px] max-h-[820px] rounded-2xl'
+      }`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       aria-label={locale === 'tr' ? 'Hizmet vitrini' : 'Service showcase'}

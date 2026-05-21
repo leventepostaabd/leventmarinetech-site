@@ -4,24 +4,16 @@ import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 /**
- * Locks body scroll on every route except inventory / long-form content
- * surfaces (the supply catalog by explicit rule, plus admin/portal where
- * staff need it). Honours the "single page, no scroll" design rule the
- * rest of the site is built on.
+ * Strict no-scroll rule (per user directive 2026-05-21):
+ *   "hic bir sekilde hic bir web sayfasinda assagi kayma istemiyoruz
+ *    malzeme katolog sayfasi haric"
+ *
+ * Only the supply catalog and the staff admin/portal/auth flows ever
+ * let the body scroll. Every other page must lay out inside one
+ * viewport, using lm-screen + lm-screen-body for any internal panel
+ * scroll that's still required (legal docs, knowledge posts).
  */
-const SCROLL_ALLOWED_PREFIXES = [
-  '/supply',
-  '/admin',
-  '/portal',
-  '/login',
-  '/auth',
-  '/knowledge',
-  '/privacy',
-  '/terms',
-  '/cookie-policy',
-  '/accessibility-statement',
-  '/about' // long-form SEO profile — locked single-viewport would gut it
-];
+const SCROLL_ALLOWED_PREFIXES = ['/supply', '/admin', '/portal', '/login', '/auth'];
 
 export default function ScrollLock() {
   const pathname = usePathname() || '/';

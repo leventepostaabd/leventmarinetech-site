@@ -61,7 +61,8 @@ export default function AboutPage() {
   };
 
   return (
-    <article>
+    <div className="lm-screen bg-white">
+      <article className="lm-screen-body">
       {/* HERO */}
       <section className="bg-navy-700 text-white py-20">
         <div className="container-x">
@@ -291,6 +292,7 @@ export default function AboutPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
-    </article>
+      </article>
+    </div>
   );
 }

@@ -5,6 +5,10 @@
 @layer base {
   :root {
     --header-h: 72px;
+    --lm-topbar-h: 56px;
+  }
+  @media (min-width: 768px) {
+    :root { --lm-topbar-h: 64px; }
   }
   html { scroll-behavior: smooth; }
   body {
@@ -83,10 +87,11 @@ body.lm-no-scroll {
 
 /* A reusable page shell for single-viewport screens: full height, flex column,
    inner content area scrolls if absolutely necessary, but the page itself
-   never does. */
+   never does. Padding-top leaves room for the fixed TopBar. */
 .lm-screen {
   height: 100vh;
   max-height: 100vh;
+  padding-top: var(--lm-topbar-h, 56px);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -95,4 +100,12 @@ body.lm-no-scroll {
   flex: 1 1 auto;
   min-height: 0;
   overflow-y: auto;
+}
+
+/* Variant for the homepage hero: no padding-top, TopBar overlays
+   transparently on the dark background. */
+.lm-screen-hero {
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
 }

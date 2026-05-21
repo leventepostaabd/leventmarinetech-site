@@ -1,10 +1,16 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import Link from 'next/link';
 import ServiceWizardClient from './ServiceWizardClient';
 import ServiceImageDeck from '@/components/ServiceImageDeck';
 import { readServices, readServicesFile } from '@/lib/content';
 import { getLocale } from '@/lib/i18n';
+
+export const metadata: Metadata = {
+  title: 'Request Marine Electrical Service — 1-Hour Callback | Levent Marine',
+  description:
+    'Three quick questions — port, when, contact. Our next available technician will contact you within 1 hour. 24/7 worldwide.',
+  alternates: { canonical: '/service-wizard' }
+};
 
 const SERVICE_IMAGE: Record<string, string> = {
   generator: '/services/01-generator.jpg',
@@ -19,13 +25,6 @@ const SERVICE_IMAGE: Record<string, string> = {
   'lighting-nav-lights': '/services/13-lighting.jpg',
   'ac-dc-motor': '/services/17-ac-dc-motor.jpg',
   'hvac-automation': '/services/18-hvac-automation.jpg'
-};
-
-export const metadata: Metadata = {
-  title: 'Request Marine Electrical Service — 1-Hour Callback | Levent Marine',
-  description:
-    'Three quick questions — port, when, contact. Our next available technician will contact you within 1 hour. 24/7 worldwide.',
-  alternates: { canonical: '/service-wizard' }
 };
 
 export default function Page() {
@@ -73,8 +72,6 @@ export default function Page() {
     ref_tr: file.wizard.ref_tr
   };
 
-  const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);
-
   const deckItems = services
     .filter((s) => SERVICE_IMAGE[s.slug])
     .map((s) => ({
@@ -88,41 +85,25 @@ export default function Page() {
 
   return (
     <div className="lm-screen bg-white">
-      {/* Compact heading bar — no breadcrumb, no big H1 chrome */}
-      <div className="shrink-0 border-b border-line px-6 pt-16 pb-4 md:px-12">
-        <div className="kicker mb-1">{t('Service intake', 'Servis talebi')}</div>
-        <h1 className="text-[22px] md:text-[26px] leading-tight font-bold">
-          {t('Request marine electrical service.', 'Denizcilik elektrik servisi talep et.')}
-        </h1>
-        <p className="text-ink-muted text-[13.5px] mt-1">
-          {t(
-            'Three quick questions — port, when, contact. Callback within 1 hour.',
-            'Üç hızlı soru — liman, ne zaman, iletişim. 1 saat içinde geri dönüş.'
-          )}{' '}
-          <Link href="/services" className="text-amber-600 no-underline hover:text-amber">
-            {t('← All systems', '← Tüm sistemler')}
-          </Link>
-        </p>
-      </div>
-
-      {/* Wizard body — form on the left, cycling service photos on the right (lg+) */}
-      <div className="lm-screen-body px-6 py-6 md:px-12 md:py-8">
-        <div className="grid h-full gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)]">
-          <div className="min-w-0">
-            <Suspense fallback={<div className="text-ink-subtle font-mono text-sm">Loading wizard…</div>}>
-              <ServiceWizardClient
-                services={services}
-                usPorts={file.us_ports}
-                copy={copy}
-                locale={locale}
-              />
-            </Suspense>
-          </div>
-
-          <aside className="hidden lg:block">
-            <ServiceImageDeck items={deckItems} locale={locale} />
-          </aside>
+      {/* No page heading — TopBar already shows the brand.
+          Body fills the entire remaining viewport. */}
+      <div className="lm-screen-body grid gap-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,42%)]">
+        {/* Left — request form, internal scroll only if the form really exceeds the panel */}
+        <div className="min-w-0 overflow-y-auto px-5 py-5 md:px-8 md:py-7">
+          <Suspense fallback={<div className="text-ink-subtle font-mono text-sm">Loading wizard…</div>}>
+            <ServiceWizardClient
+              services={services}
+              usPorts={file.us_ports}
+              copy={copy}
+              locale={locale}
+            />
+          </Suspense>
         </div>
+
+        {/* Right — cycling service photos, top to bottom edge (lg+) */}
+        <aside className="hidden lg:block">
+          <ServiceImageDeck items={deckItems} locale={locale} fillParent />
+        </aside>
       </div>
     </div>
   );
