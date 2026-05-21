@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import LocaleToggle from './LocaleToggle';
 import LeventLogo from './LeventLogo';
+import LogoLockup from './LogoLockup';
 
 /**
  * Top bar — the only persistent chrome on the entire site.
@@ -44,13 +45,15 @@ export default function TopBar({ locale }: { locale: 'en' | 'tr' }) {
   }, [open]);
 
   const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);
-  const isDark = pathname === '/';
+  // Pages where the right side carries a full-bleed dark photo deck and the
+  // TopBar should float transparently over it (no white bar on top).
+  const isHeroLike = pathname === '/' || pathname === '/service-wizard' || pathname === '/services';
 
   return (
     <>
       <header
         className={`fixed left-0 right-0 top-0 z-40 flex h-14 items-center px-4 transition-colors md:h-16 md:px-6 ${
-          isDark
+          isHeroLike
             ? 'bg-gradient-to-b from-navy-900/85 via-navy-900/55 to-transparent text-white'
             : 'bg-white/95 text-ink backdrop-blur border-b border-line'
         }`}
@@ -62,7 +65,7 @@ export default function TopBar({ locale }: { locale: 'en' | 'tr' }) {
           onClick={() => setOpen(true)}
           aria-label={t('Open menu', 'Menüyü aç')}
           className={`inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 transition ${
-            isDark
+            isHeroLike
               ? 'bg-white/10 text-white ring-white/20 hover:bg-white/20'
               : 'bg-white text-ink-muted ring-line hover:text-ink hover:ring-ink/40'
           }`}
@@ -74,29 +77,14 @@ export default function TopBar({ locale }: { locale: 'en' | 'tr' }) {
           </svg>
         </button>
 
-        {/* Logo composition — center */}
+        {/* Logo lockup — center. Currently variant B (horizontal classic).
+            Visit /brand-preview to compare A / B / C and pick the final one. */}
         <Link
           href="/"
           aria-label="Levent Marine — home"
-          className="absolute left-1/2 top-1/2 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-2.5 no-underline"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 no-underline"
         >
-          <LeventLogo size={30} tone={isDark ? 'light' : 'auto'} />
-          <span className="flex flex-col leading-none">
-            <span
-              className={`font-head text-[14px] font-extrabold uppercase tracking-[0.14em] md:text-[15px] ${
-                isDark ? 'text-white' : 'text-navy-700'
-              }`}
-            >
-              Levent Marine
-            </span>
-            <span
-              className={`mt-0.5 font-mono text-[9px] uppercase tracking-[0.22em] md:text-[10px] ${
-                isDark ? 'text-amber-300' : 'text-amber-600'
-              }`}
-            >
-              Electrotechnical Service · 24/7 Worldwide
-            </span>
-          </span>
+          <LogoLockup variant="B" tone={isHeroLike ? 'light' : 'dark'} scale={0.9} />
         </Link>
 
         {/* Locale toggle — right */}

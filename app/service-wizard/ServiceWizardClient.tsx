@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import type { ServiceContent } from '@/lib/content';
+import SystemPicker from './SystemPicker';
 
 type WizardWindow = { id: string; label_en: string; label_tr: string };
 type WizardCopy = {
@@ -208,99 +209,42 @@ export default function ServiceWizardClient({
     t(copy.step_contact.title_en, copy.step_contact.title_tr)
   ];
 
+  const popular = services.filter((s) => s.popular).slice(0, 6);
+
   return (
-    <div className="grid gap-8 md:grid-cols-[260px_1fr] max-w-5xl">
-      {/* Progress sidebar */}
-      <aside className="md:sticky md:top-24 md:self-start">
-        <div className="bg-navy-50 rounded-lg p-5 border border-line">
-          <div className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-ink-subtle mb-3">
-            {t('Step', 'Adım')} {stepNumber} / {totalSteps}
-          </div>
-          <div className="h-1 bg-line rounded-full overflow-hidden mb-5">
-            <div className="h-full bg-amber transition-all" style={{ width: `${progress}%` }} />
-          </div>
-          <ol className="space-y-2">
-            {stepTitles.map((title, i) => (
-              <li
-                key={i}
-                className={`flex items-start gap-2 text-[13px] ${
-                  i === step
-                    ? 'text-ink font-semibold'
-                    : i < step
-                    ? 'text-ink-muted'
-                    : 'text-ink-subtle'
-                }`}
-              >
-                <span
-                  className={`font-mono text-[11px] w-5 ${
-                    i < step ? 'text-green-700' : i === step ? 'text-amber' : 'text-ink-subtle'
-                  }`}
-                >
-                  {i < step ? '✓' : String(i + 1).padStart(2, '0')}
-                </span>
-                <span>{title}</span>
-              </li>
-            ))}
-          </ol>
+    <div className="flex h-full flex-col">
+      {/* Thin top progress strip — replaces the bulky sidebar */}
+      <div className="shrink-0 mb-5">
+        <div className="flex items-baseline justify-between mb-2">
+          <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-ink-subtle">
+            {t('Step', 'Adım')} {stepNumber} / {totalSteps} · {stepTitles[step]}
+          </span>
           {system && step > 0 && (
-            <div className="mt-5 pt-4 border-t border-line">
-              <div className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-ink-subtle mb-1.5">
-                {t('System', 'Sistem')}
-              </div>
-              <div className="text-[13.5px] font-semibold text-ink">
-                {locale === 'tr' ? system.name_tr : system.name_en}
-              </div>
-              <button
-                type="button"
-                onClick={() => setStep(0)}
-                className="mt-1 font-mono text-[11px] text-amber-600 hover:underline"
-              >
-                {t('Change', 'Değiştir')}
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={() => setStep(0)}
+              className="font-mono text-[11px] text-amber-600 hover:underline"
+            >
+              {locale === 'tr' ? system.name_tr : system.name_en} · {t('change', 'değiştir')}
+            </button>
           )}
         </div>
-      </aside>
+        <div className="h-1 bg-line rounded-full overflow-hidden">
+          <div className="h-full bg-amber transition-all" style={{ width: `${progress}%` }} />
+        </div>
+      </div>
 
       {/* Step body */}
-      <div className="max-w-xl">
-        {/* STEP 0 — System pick */}
+      <div className="flex-1 min-h-0">
+        {/* STEP 0 — System pick (compact: 6 popular + "see all" overlay) */}
         {step === 0 && (
-          <div>
-            <div className="kicker mb-3">
-              {t('Step', 'Adım')} 1 — {t('System', 'Sistem')}
-            </div>
-            <h2 className="mb-2 text-[26px]">
-              {t('Which system has the problem?', 'Hangi sistemde sorun var?')}
-            </h2>
-            <p className="text-ink-muted mb-6 text-[14.5px]">
-              {t(
-                'Pick the closest match. You can change it later.',
-                'En yakın seçeneği seçin. Daha sonra değiştirebilirsiniz.'
-              )}
-            </p>
-            <div className="grid gap-2 sm:grid-cols-2">
-              {services.map((s) => (
-                <button
-                  key={s.slug}
-                  type="button"
-                  onClick={() => setSystemSlug(s.slug)}
-                  className={`text-left px-3 py-2.5 rounded-md border transition ${
-                    systemSlug === s.slug
-                      ? 'border-amber bg-amber/10 text-ink'
-                      : 'border-line bg-white text-ink hover:border-amber'
-                  }`}
-                >
-                  <div className="font-semibold text-[13.5px]">
-                    {locale === 'tr' ? s.name_tr : s.name_en}
-                  </div>
-                  <div className="text-[11.5px] text-ink-subtle">
-                    {locale === 'tr' ? s.kicker_tr : s.kicker_en}
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
+          <SystemPicker
+            services={services}
+            popular={popular}
+            value={systemSlug}
+            onChange={setSystemSlug}
+            locale={locale}
+          />
         )}
 
         {/* STEP 1 — Port */}
