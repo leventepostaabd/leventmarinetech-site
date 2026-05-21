@@ -63,8 +63,8 @@
     "search_placeholder_tr": "Hangi sistemde sorun var?",
     "popular_en": "Most requested",
     "popular_tr": "En çok istenenler",
-    "see_all_en": "See all 19 systems",
-    "see_all_tr": "Tüm 19 sistemi gör",
+    "see_all_en": "See all systems",
+    "see_all_tr": "Tüm sistemleri gör",
     "close_en": "Close",
     "close_tr": "Kapat",
     "request_service_en": "Request service",
@@ -736,9 +736,77 @@
       "related_supply_categories": ["vdr-batteries", "cctv-cameras", "nvr-hdds"]
     },
     {
-      "slug": "other",
+      "slug": "smoke-detection",
       "popular": false,
       "order": 20,
+      "icon": "fire",
+      "name_en": "Smoke Detection",
+      "name_tr": "Duman Algılama",
+      "kicker_en": "Ionisation · Optical · Heat-rate",
+      "kicker_tr": "İyonizasyon · Optik · Isı hızı",
+      "summary_en": "Standalone smoke detection systems — sensitivity drift, beam-detector misalignment, sampling-line blockage. SOLAS / Class compliant test logs.",
+      "summary_tr": "Bağımsız duman algılama sistemleri — hassasiyet kayması, ışın dedektör hizasızlığı, örnekleme hattı tıkanması. SOLAS / Class uyumlu test kayıtları.",
+      "metaTitle": "Marine Smoke Detection Service — Sensitivity & Class Test | Levent Marine",
+      "metaDescription": "Marine smoke detection service — ionisation, optical, beam, aspirating systems. Sensitivity calibration, beam realignment, sampling-line clearance, class-witnessed test logs.",
+      "seo_keywords": ["marine smoke detection", "ionisation detector calibration", "beam detector alignment", "aspirating smoke detection"],
+      "symptoms": [
+        "Ionisation detector test card shows >20% sensitivity drift",
+        "Beam detector loses signal after the vessel rolls heavily",
+        "Aspirating sampling line clogged with cargo dust",
+        "False alarms only when galley fan is running"
+      ],
+      "common_causes": [
+        "Detector head dust loading beyond chamber threshold",
+        "Beam path misalignment after hot work nearby",
+        "Sampling pipe pin-hole blockage",
+        "Pressure differential through the protected space changed"
+      ],
+      "tools": [
+        "Manufacturer calibration kit (Solo 330 + Solo C3 test cap)",
+        "Beam alignment laser",
+        "Sampling-line flow meter",
+        "Class-witnessed test report template"
+      ],
+      "related_supply_categories": ["fire-detectors", "beam-detectors", "aspirating-tubing"]
+    },
+    {
+      "slug": "water-mist-system",
+      "popular": false,
+      "order": 21,
+      "icon": "fire",
+      "name_en": "Water Mist System",
+      "name_tr": "Su Sisi Sistemi",
+      "kicker_en": "ER fixed protection · Annual flow test · Solenoid",
+      "kicker_tr": "MD sabit söndürme · Yıllık akış testi · Solenoid",
+      "summary_en": "Engine-room high-pressure water-mist systems — pump pressure drift, nozzle clogging, section valve solenoid failures. Annual discharge & flow test, class survey reports.",
+      "summary_tr": "Makine dairesi yüksek basınçlı su sisi sistemleri — pompa basınç kayması, nozül tıkanması, seksiyon vana solenoid arızaları. Yıllık deşarj ve akış testi, class survey raporları.",
+      "metaTitle": "Marine Water Mist Service — HI-FOG, Marioff Pump & Nozzle | Levent Marine",
+      "metaDescription": "Marine water-mist (HI-FOG, Marioff) service — pump skid maintenance, nozzle inspection, section solenoid replacement, annual flow test with class-ready reports.",
+      "seo_keywords": ["marine water mist", "HI-FOG service", "Marioff water mist", "engine room water mist"],
+      "symptoms": [
+        "Section valve solenoid drops out when pump starts",
+        "Pump skid cannot hold 140 bar standby pressure",
+        "Local control panel shows nozzle-test pressure below threshold",
+        "Annual flow test fails on one zone only"
+      ],
+      "common_causes": [
+        "Section solenoid coil insulation breakdown",
+        "Strainer choked by sea-water deposits",
+        "Nozzle internal swirl chamber corrosion",
+        "Pump cavitation after suction-line leak"
+      ],
+      "tools": [
+        "HI-FOG / Marioff service manual + pressure-decay test kit",
+        "Strainer-cleaning tool",
+        "Insulation tester (Megger MIT525)",
+        "Manometer 0-160 bar, class-witnessed test sheet"
+      ],
+      "related_supply_categories": ["water-mist-nozzles", "solenoid-valves", "high-pressure-strainers"]
+    },
+    {
+      "slug": "other",
+      "popular": false,
+      "order": 22,
       "icon": "other",
       "name_en": "Other / Not listed",
       "name_tr": "Diğer / Liste dışı",
