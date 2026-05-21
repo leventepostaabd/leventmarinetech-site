@@ -77,14 +77,14 @@ export default function TopBar({ locale }: { locale: 'en' | 'tr' }) {
           </svg>
         </button>
 
-        {/* Logo lockup — center. Currently variant B (horizontal classic).
-            Visit /brand-preview to compare A / B / C and pick the final one. */}
+        {/* Logo lockup — center. Variant C (badge) pinned per user pick.
+            Visit /brand-preview to compare A / B / C side-by-side. */}
         <Link
           href="/"
           aria-label="Levent Marine — home"
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 no-underline"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 no-underline transition hover:scale-[1.02]"
         >
-          <LogoLockup variant="B" tone={isHeroLike ? 'light' : 'dark'} scale={0.9} />
+          <LogoLockup variant="C" tone={isHeroLike ? 'light' : 'dark'} scale={0.85} />
         </Link>
 
         {/* Locale toggle — right */}
