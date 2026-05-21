@@ -2,8 +2,24 @@ import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import Link from 'next/link';
 import ServiceWizardClient from './ServiceWizardClient';
+import ServiceImageDeck from '@/components/ServiceImageDeck';
 import { readServices, readServicesFile } from '@/lib/content';
 import { getLocale } from '@/lib/i18n';
+
+const SERVICE_IMAGE: Record<string, string> = {
+  generator: '/services/01-generator.jpg',
+  'main-engine-electrical': '/services/02-main-engine.jpg',
+  'fire-alarm': '/services/04-fire-alarm.jpg',
+  'engine-room-alarm': '/services/05-er-alarm.jpg',
+  'bridge-navigation': '/services/06-bridge-nav.jpg',
+  'gmdss-communication': '/services/07-gmdss.jpg',
+  'crane-deck-machinery': '/services/09-crane.jpg',
+  'shaft-earthing': '/services/11-shaft-earthing.jpg',
+  'plc-automation': '/services/12-plc-automation.jpg',
+  'lighting-nav-lights': '/services/13-lighting.jpg',
+  'ac-dc-motor': '/services/17-ac-dc-motor.jpg',
+  'hvac-automation': '/services/18-hvac-automation.jpg'
+};
 
 export const metadata: Metadata = {
   title: 'Request Marine Electrical Service — 1-Hour Callback | Levent Marine',
@@ -59,6 +75,17 @@ export default function Page() {
 
   const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);
 
+  const deckItems = services
+    .filter((s) => SERVICE_IMAGE[s.slug])
+    .map((s) => ({
+      slug: s.slug,
+      image: SERVICE_IMAGE[s.slug],
+      name_en: s.name_en,
+      name_tr: s.name_tr,
+      kicker_en: s.kicker_en,
+      kicker_tr: s.kicker_tr
+    }));
+
   return (
     <div className="lm-screen bg-white">
       {/* Compact heading bar — no breadcrumb, no big H1 chrome */}
@@ -78,16 +105,24 @@ export default function Page() {
         </p>
       </div>
 
-      {/* Wizard body — flex-1, internal scroll if the form ever exceeds the viewport */}
+      {/* Wizard body — form on the left, cycling service photos on the right (lg+) */}
       <div className="lm-screen-body px-6 py-6 md:px-12 md:py-8">
-        <Suspense fallback={<div className="text-ink-subtle font-mono text-sm">Loading wizard…</div>}>
-          <ServiceWizardClient
-            services={services}
-            usPorts={file.us_ports}
-            copy={copy}
-            locale={locale}
-          />
-        </Suspense>
+        <div className="grid h-full gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)]">
+          <div className="min-w-0">
+            <Suspense fallback={<div className="text-ink-subtle font-mono text-sm">Loading wizard…</div>}>
+              <ServiceWizardClient
+                services={services}
+                usPorts={file.us_ports}
+                copy={copy}
+                locale={locale}
+              />
+            </Suspense>
+          </div>
+
+          <aside className="hidden lg:block">
+            <ServiceImageDeck items={deckItems} locale={locale} />
+          </aside>
+        </div>
       </div>
     </div>
   );

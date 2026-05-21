@@ -128,8 +128,8 @@ export default function SupplyIndex() {
           </h2>
           <p className="text-ink-muted text-[14.5px] max-w-2xl mb-6">
             {locale === 'tr'
-              ? 'Aşağıdaki tabloda 47 ürün listeleniyor. Aramaya bir şey yazdıkça veya kategoriye tıkladıkça grid anında filtrelenir. eBay canlı bağlantısı entegre edildiğinde aynı kutu binlerce ürünü tarar.'
-              : 'The grid below shows 47 catalog items. Type or tap a chip and it filters in real time. Once the eBay live link is wired, the same box will scan thousands.'}
+              ? 'Tedarikçi ağımızdan canlı katalog. Aramaya yaz veya kategoriye tıkla — grid anında filtrelenir. Fiyat yok, sadece teklif.'
+              : 'Live catalog from our supplier network. Type or tap a chip and the grid filters in real time. No prices — quote only.'}
           </p>
 
           <SupplyCatalogBrowser

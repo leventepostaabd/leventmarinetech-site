@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import LocaleToggle from './LocaleToggle';
+import LeventLogo from './LeventLogo';
 
 type Locale = 'en' | 'tr';
 
@@ -46,17 +47,17 @@ export default function CornerNav({ locale }: { locale: Locale }) {
 
   return (
     <>
-      {/* Floating L mark (top-left) — returns to home */}
+      {/* Floating lightning-bolt L mark (top-left) — returns to home, animated */}
       <Link
         href="/"
         aria-label="Levent Marine — home"
-        className={`fixed left-5 top-5 z-40 inline-flex h-10 w-10 items-center justify-center rounded-full backdrop-blur transition ${
+        className={`fixed left-5 top-5 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full backdrop-blur transition hover:scale-105 ${
           isDark
-            ? 'bg-white/10 text-white hover:bg-white/20 ring-1 ring-white/20'
-            : 'bg-white/85 text-navy-700 hover:bg-white ring-1 ring-line shadow-sm'
+            ? 'bg-white/95 ring-1 ring-white/30 shadow-lg'
+            : 'bg-white ring-1 ring-line shadow-sm hover:shadow-md'
         }`}
       >
-        <span className="font-head text-[18px] font-extrabold leading-none">L</span>
+        <LeventLogo size={26} tone="auto" />
       </Link>
 
       {/* Floating menu button (top-right) */}
@@ -102,8 +103,11 @@ export default function CornerNav({ locale }: { locale: Locale }) {
               aria-label={t('Main navigation', 'Ana menü')}
             >
               <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
-                <span className="font-head text-[14px] font-bold uppercase tracking-[0.22em] text-white/70">
-                  Levent Marine
+                <span className="inline-flex items-center gap-3">
+                  <LeventLogo size={28} tone="light" />
+                  <span className="font-head text-[14px] font-bold uppercase tracking-[0.22em] text-white/80">
+                    Levent Marine
+                  </span>
                 </span>
                 <button
                   type="button"
