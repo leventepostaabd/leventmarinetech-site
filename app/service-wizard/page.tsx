@@ -12,9 +12,10 @@ export const metadata: Metadata = {
   alternates: { canonical: '/service-wizard' }
 };
 
+// Maps system slug → real photo path. Same map as /services — only systems
+// whose photo faithfully represents the label appear here.
 const SERVICE_IMAGE: Record<string, string> = {
   generator: '/services/01-generator.jpg',
-  'main-engine-electrical': '/services/02-main-engine.jpg',
   'fire-alarm': '/services/04-fire-alarm.jpg',
   'engine-room-alarm': '/services/05-er-alarm.jpg',
   'bridge-navigation': '/services/06-bridge-nav.jpg',
@@ -84,27 +85,25 @@ export default function Page() {
     }));
 
   return (
-    <div className="lm-screen bg-white">
-      {/* No page heading — TopBar already shows the brand.
-          Body fills the entire remaining viewport. */}
-      <div className="lm-screen-body grid gap-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,42%)]">
-        {/* Left — request form, internal scroll only if the form really exceeds the panel */}
-        <div className="min-w-0 overflow-y-auto px-5 py-5 md:px-8 md:py-7">
-          <Suspense fallback={<div className="text-ink-subtle font-mono text-sm">Loading wizard…</div>}>
-            <ServiceWizardClient
-              services={services}
-              usPorts={file.us_ports}
-              copy={copy}
-              locale={locale}
-            />
-          </Suspense>
-        </div>
-
-        {/* Right — cycling service photos, top to bottom edge (lg+) */}
-        <aside className="hidden lg:block">
-          <ServiceImageDeck items={deckItems} locale={locale} fillParent />
-        </aside>
+    <div className="lm-screen-hero grid bg-white lg:grid-cols-[minmax(0,1fr)_minmax(0,42%)]">
+      {/* Left — request form. Padded under the transparent TopBar so the
+          first heading clears it. No internal scroll. */}
+      <div className="min-w-0 flex flex-col px-5 pt-[calc(var(--lm-topbar-h)+1rem)] pb-5 md:px-10 md:pt-[calc(var(--lm-topbar-h)+1.25rem)] md:pb-8">
+        <Suspense fallback={<div className="text-ink-subtle font-mono text-sm">Loading wizard…</div>}>
+          <ServiceWizardClient
+            services={services}
+            usPorts={file.us_ports}
+            copy={copy}
+            locale={locale}
+          />
+        </Suspense>
       </div>
+
+      {/* Right — cycling service photos, edge-to-edge top→bottom. TopBar
+          floats transparently over the top of these images. */}
+      <aside className="hidden lg:block">
+        <ServiceImageDeck items={deckItems} locale={locale} fillParent />
+      </aside>
     </div>
   );
 }

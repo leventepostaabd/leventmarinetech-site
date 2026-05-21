@@ -11,9 +11,13 @@ export const metadata: Metadata = {
   alternates: { canonical: '/services' }
 };
 
+// Maps system slug → real photo path. Only systems with a faithful photo
+// are listed; the rest are skipped from the deck until Gemini frames land.
+// 'main-engine-electrical' is intentionally not mapped — the available shot
+// is a motor-overhaul scene, not an engine-control-side scene; the label
+// would mislead.
 const SERVICE_IMAGE: Record<string, string> = {
   generator: '/services/01-generator.jpg',
-  'main-engine-electrical': '/services/02-main-engine.jpg',
   'fire-alarm': '/services/04-fire-alarm.jpg',
   'engine-room-alarm': '/services/05-er-alarm.jpg',
   'bridge-navigation': '/services/06-bridge-nav.jpg',
@@ -60,17 +64,16 @@ export default function ServicesIndex() {
     }));
 
   return (
-    <div className="lm-screen bg-white">
-      {/* Body fills the entire viewport under the TopBar. Two columns, deck full height on right. */}
-      <div className="lm-screen-body grid gap-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,42%)]">
-        <div className="min-w-0 overflow-y-auto px-5 py-5 md:px-8 md:py-7">
-          <ServicesBrowser services={all} popular={popular} ui={ui} locale={locale} />
-        </div>
-
-        <aside className="hidden lg:block">
-          <ServiceImageDeck items={deckItems} locale={locale} fillParent />
-        </aside>
+    <div className="lm-screen-hero grid bg-white lg:grid-cols-[minmax(0,1fr)_minmax(0,42%)]">
+      {/* Left — search + popular + see-all. No internal scroll. */}
+      <div className="min-w-0 flex flex-col px-5 pt-[calc(var(--lm-topbar-h)+1rem)] pb-5 md:px-10 md:pt-[calc(var(--lm-topbar-h)+1.25rem)] md:pb-8">
+        <ServicesBrowser services={all} popular={popular} ui={ui} locale={locale} />
       </div>
+
+      {/* Right — full-bleed cycling deck. */}
+      <aside className="hidden lg:block">
+        <ServiceImageDeck items={deckItems} locale={locale} fillParent />
+      </aside>
     </div>
   );
 }
