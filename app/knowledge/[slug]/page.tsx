@@ -63,7 +63,8 @@ export default function KnowledgePost({ params }: Params) {
   });
 
   return (
-    <article>
+    <div className="lm-screen bg-white">
+      <article className="lm-screen-body">
       {/* HERO */}
       <section className="bg-navy-700 text-white pt-16 pb-12">
         <div className="container-x">
@@ -259,6 +260,7 @@ export default function KnowledgePost({ params }: Params) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqs) }}
         />
       )}
-    </article>
+      </article>
+    </div>
   );
 }

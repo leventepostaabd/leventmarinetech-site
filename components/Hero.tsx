@@ -27,28 +27,13 @@ export default function Hero({
 }: HeroProps) {
   const [emergencyOpen, setEmergencyOpen] = useState(false);
 
-  const text = slogan ?? SITE.tagline ?? FALLBACK_SLOGAN;
-  const safeSlogan = /24\/7/i.test(text) ? text : FALLBACK_SLOGAN;
-
   return (
     <section
       aria-label="Levent Marine — main entrance"
       className="relative w-full overflow-hidden bg-navy-900"
       style={{ height: '100vh' }}
     >
-      {/* Slogan ribbon */}
-      <motion.div
-        initial={{ opacity: 0, y: -8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.55, ease: [0.2, 0.8, 0.2, 1] }}
-        className="pointer-events-none absolute left-0 right-0 top-0 z-30 px-6 pt-6 text-center"
-      >
-        <div className="mx-auto inline-block max-w-4xl">
-          <p className="font-head text-[13px] uppercase tracking-[0.22em] text-white/85 md:text-sm">
-            {safeSlogan}
-          </p>
-        </div>
-      </motion.div>
+      {/* Slogan now lives in the global TopBar — no top ribbon needed here. */}
 
       {/* Split layout — full viewport, no scroll */}
       <div className="grid h-full w-full grid-cols-2">

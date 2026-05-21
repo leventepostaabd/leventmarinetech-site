@@ -36,7 +36,9 @@ export default function ServicesIndex() {
     search_placeholder:
       (locale === 'tr' ? file.ui.search_placeholder_tr : file.ui.search_placeholder_en) ??
       (locale === 'tr' ? 'Hangi sistemde sorun var?' : 'Which system has the problem?'),
-    popular: (locale === 'tr' ? file.ui.popular_tr : file.ui.popular_en) ?? (locale === 'tr' ? 'En sık talep' : 'Most requested'),
+    popular:
+      (locale === 'tr' ? file.ui.popular_tr : file.ui.popular_en) ??
+      (locale === 'tr' ? 'En sık talep' : 'Most requested'),
     see_all:
       (locale === 'tr' ? file.ui.see_all_tr : file.ui.see_all_en) ??
       (locale === 'tr' ? '19 sistemin tümünü gör' : 'See all 19 systems'),
@@ -59,29 +61,15 @@ export default function ServicesIndex() {
 
   return (
     <div className="lm-screen bg-white">
-      {/* Compact header — top padding clears the corner-nav buttons */}
-      <div className="shrink-0 px-6 pt-16 pb-3 md:px-12">
-        <div className="kicker mb-1">
-          {locale === 'tr' ? 'Servis kataloğu' : 'Service catalog'}
+      {/* Body fills the entire viewport under the TopBar. Two columns, deck full height on right. */}
+      <div className="lm-screen-body grid gap-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,42%)]">
+        <div className="min-w-0 overflow-y-auto px-5 py-5 md:px-8 md:py-7">
+          <ServicesBrowser services={all} popular={popular} ui={ui} locale={locale} />
         </div>
-        <h1 className="text-[22px] md:text-[28px] leading-tight font-bold">
-          {locale === 'tr'
-            ? 'Denizcilik elektrik servisi — 19 sistem, tek arama.'
-            : 'Marine electrical service — 19 systems, one call.'}
-        </h1>
-      </div>
 
-      {/* Body — two columns on desktop, deck right with full height */}
-      <div className="lm-screen-body px-6 pb-6 md:px-12">
-        <div className="grid h-full gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)]">
-          <div className="min-w-0">
-            <ServicesBrowser services={all} popular={popular} ui={ui} locale={locale} />
-          </div>
-
-          <aside className="hidden lg:block">
-            <ServiceImageDeck items={deckItems} locale={locale} />
-          </aside>
-        </div>
+        <aside className="hidden lg:block">
+          <ServiceImageDeck items={deckItems} locale={locale} fillParent />
+        </aside>
       </div>
     </div>
   );

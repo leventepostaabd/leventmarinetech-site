@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
-import CornerNav from '@/components/CornerNav';
+import TopBar from '@/components/TopBar';
 import CookieBanner from '@/components/CookieBanner';
 import Spotlight from '@/components/Spotlight';
 import PageTransition from '@/components/PageTransition';
@@ -52,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
 
         <ScrollLock />
-        <CornerNav locale={locale} />
+        <TopBar locale={locale} />
 
         <main id="main">
           <PageTransition>{children}</PageTransition>

@@ -42,7 +42,8 @@ export default function KnowledgeIndex() {
   };
 
   return (
-    <article>
+    <div className="lm-screen bg-white">
+      <article className="lm-screen-body">
       <section className="bg-navy-700 text-white py-20">
         <div className="container-x">
           <div className="kicker text-white/70 mb-3">Knowledge base</div>
@@ -124,6 +125,7 @@ export default function KnowledgeIndex() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }}
       />
-    </article>
+      </article>
+    </div>
   );
 }
