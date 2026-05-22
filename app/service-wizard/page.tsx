@@ -85,7 +85,7 @@ export default function Page() {
     }));
 
   return (
-    <div className="lm-screen-hero grid bg-white lg:grid-cols-[minmax(0,1fr)_minmax(0,42%)]">
+    <div className="lm-screen-hero grid bg-white lg:grid-cols-[minmax(0,1fr)_minmax(0,30%)]">
       {/* Left — request form. Padded under the transparent TopBar so the
           first heading clears it. No internal scroll. */}
       <div className="min-w-0 flex flex-col px-5 pt-[calc(var(--lm-topbar-h)+1rem)] pb-5 md:px-10 md:pt-[calc(var(--lm-topbar-h)+1.25rem)] md:pb-8">
