@@ -7,6 +7,7 @@ import {
 import { SITE } from '@/lib/site';
 import { breadcrumbSchema } from '@/lib/schema-org';
 import { getLocale } from '@/lib/i18n';
+import ProductImage from '@/components/ProductImage';
 
 export function generateStaticParams() {
   return readProducts().map((p) => ({ slug: p.slug }));
@@ -72,16 +73,14 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr_0.9fr] items-start">
             {/* IMAGE */}
-            {p.image ? (
-              <div className="aspect-square bg-navy-50 rounded-lg overflow-hidden border border-line">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={p.image} alt={name} className="w-full h-full object-cover" />
-              </div>
-            ) : (
-              <div className="aspect-square bg-navy-50 rounded-lg border border-line flex items-center justify-center text-ink-subtle">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
-              </div>
-            )}
+            <div className="aspect-square overflow-hidden rounded-lg border border-line bg-navy-50">
+              <ProductImage
+                src={p.image}
+                alt={name}
+                brand={p.brand}
+                partNumber={p.partNumber}
+              />
+            </div>
 
             <div>
               <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-amber-600 mb-2">{p.brand}</div>

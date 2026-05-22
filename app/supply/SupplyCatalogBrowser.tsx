@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import ProductImage from '@/components/ProductImage';
 
 type Product = {
   id: string;
@@ -202,21 +202,15 @@ export default function SupplyCatalogBrowser({
                 href={`/supply/product/${p.slug}`}
                 className="block card hover:border-amber group h-full no-underline relative overflow-hidden"
               >
-                {p.image && (
-                  <div className="relative -mx-5 -mt-5 mb-4 aspect-[4/3] overflow-hidden bg-navy-50">
-                    <Image
-                      src={p.image}
-                      alt={nameOf(p)}
-                      fill
-                      sizes="(min-width: 1024px) 22vw, (min-width: 640px) 40vw, 90vw"
-                      className="object-cover transition-transform group-hover:scale-105"
-                      onError={(e) => {
-                        // hide broken image gracefully
-                        (e.target as HTMLImageElement).style.display = 'none';
-                      }}
-                    />
-                  </div>
-                )}
+                <div className="relative -mx-5 -mt-5 mb-4 aspect-[4/3] overflow-hidden bg-navy-50">
+                  <ProductImage
+                    src={p.image}
+                    alt={nameOf(p)}
+                    brand={p.brand}
+                    partNumber={p.partNumber}
+                    className="transition-transform group-hover:scale-105"
+                  />
+                </div>
 
                 <div className="flex items-center justify-between mb-1.5">
                   <span className="font-mono text-[11px] text-ink-subtle">{p.brand ?? '—'}</span>
