@@ -17,6 +17,9 @@ export type BasketItem = {
   partNumber?: string;
   image?: string;
   quantity: number;
+  /** Raw supplier (eBay) unit price in USD — used to compute basket
+      estimate. Markup + shipping + AOG handled by lib/pricing. */
+  priceRaw?: number | null;
   addedAt: number;
 };
 

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getLocale } from '@/lib/i18n';
 import EbayCatalogGrid from './EbayCatalogGrid';
+import SourcingChannelTabs from './SourcingChannelTabs';
 
 export const metadata: Metadata = {
   title: 'Marine Technical Supply — Live Quote-Only Catalog',
@@ -44,6 +45,7 @@ export default function SupplyIndex() {
 
       {/* Live grid */}
       <div className="lm-screen-body px-5 py-5 md:px-8 md:py-6">
+        <SourcingChannelTabs locale={locale} />
         <EbayCatalogGrid locale={locale} />
       </div>
     </div>

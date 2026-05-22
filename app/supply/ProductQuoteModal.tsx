@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { addToBasket } from '@/lib/rfq-basket';
+import { estimateLine, fmt } from '@/lib/pricing';
 
 export type ModalProduct = {
   id: string;
@@ -13,6 +14,8 @@ export type ModalProduct = {
   partNumber?: string;
   description?: string;
   image?: string;
+  /** Raw supplier (eBay) price in USD — used for live estimate calc. */
+  priceRaw?: number | null;
 };
 
 type Urgency = 'aog' | 'urgent' | 'planned';
@@ -115,6 +118,7 @@ export default function ProductQuoteModal({
       brand: product.brand,
       partNumber: product.partNumber,
       image: product.image,
+      priceRaw: product.priceRaw ?? null,
       quantity: qty
     });
     onAdded?.();
@@ -261,6 +265,53 @@ export default function ProductQuoteModal({
                 </div>
               ) : (
                 <>
+                  {/* Estimated price breakdown — recalcs from qty + urgency + port */}
+                  {product.priceRaw != null && (() => {
+                    const est = estimateLine({
+                      unitPrice: product.priceRaw,
+                      quantity: qty,
+                      port,
+                      urgency
+                    });
+                    return (
+                      <div className="mb-5 rounded-lg border border-amber/40 bg-amber/5 px-4 py-3">
+                        <div className="flex items-baseline justify-between mb-2">
+                          <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-amber-700">
+                            {t('Estimated total', 'Tahmini toplam')}
+                          </span>
+                          <span className="font-head font-extrabold text-[22px] text-navy-700">
+                            {fmt(est.total, locale)}
+                          </span>
+                        </div>
+                        <ul className="space-y-0.5 text-[12px] font-mono text-ink-muted">
+                          <li className="flex justify-between">
+                            <span>
+                              {t('Items', 'Parça')} ({qty} × {fmt(est.unitMarked, locale)})
+                            </span>
+                            <span>{fmt(est.itemTotal, locale)}</span>
+                          </li>
+                          <li className="flex justify-between">
+                            <span>{t('Shipping', 'Kargo')} ({locale === 'tr' ? est.shippingTextTr : est.shippingTextEn})</span>
+                            <span>+{fmt(est.shipping, locale)}</span>
+                          </li>
+                          {est.aogFee > 0 && (
+                            <li className="flex justify-between text-red-700">
+                              <span>{t('AOG dispatch + express', 'AOG dispatch + express')}</span>
+                              <span>+{fmt(est.aogFee, locale)}</span>
+                            </li>
+                          )}
+                        </ul>
+                        <div className="mt-2 pt-2 border-t border-amber/30 text-[11px] text-ink-muted leading-relaxed">
+                          <strong className="text-navy-700">{locale === 'tr' ? est.deliveryTr : est.deliveryEn}.</strong>{' '}
+                          {t(
+                            'Estimate · final confirmed within 30 min once we verify supplier shipping + vessel compatibility.',
+                            'Tahmini · 30 dk içinde tedarikçi kargo + gemine uyumluluk doğrulandıktan sonra final.'
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })()}
+
                   {/* Same-day promise banner */}
                   <div className="mb-5 rounded-lg bg-amber/10 border border-amber/30 px-4 py-3">
                     <div className="flex items-start gap-2.5">
@@ -272,8 +323,8 @@ export default function ProductQuoteModal({
                           {t('Same-day quote.', 'Aynı gün içinde teklif.')}
                         </strong>{' '}
                         {t(
-                          'Most requests go back within 30 minutes; never later than end of business day. Every quote includes US-port lead time + compatibility note. No prices shown here — we tailor it to your vessel.',
-                          '30 dakika içinde dönüşün yapılır; en geç iş günü kapanmadan teklif elinde olur. Her teklif ABD-liman teslim süresi ve uyumluluk notu içerir. Burada fiyat yok — gemine özel hazırlıyoruz.'
+                          'Most requests go back within 30 minutes; never later than end of business day. Every quote includes US-port lead time + compatibility note.',
+                          '30 dakika içinde dönüşün yapılır; en geç iş günü kapanmadan teklif elinde olur. Her teklif ABD-liman teslim süresi ve uyumluluk notu içerir.'
                         )}
                       </div>
                     </div>

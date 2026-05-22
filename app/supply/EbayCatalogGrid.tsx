@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import ProductQuoteModal, { type ModalProduct } from './ProductQuoteModal';
+import { fmt } from '@/lib/pricing';
 
 type Item = {
   slug: string;
@@ -14,6 +15,12 @@ type Item = {
   in_stock: boolean;
   source: string;
   live: boolean;
+  /** Raw eBay price (USD) before markup — internal use only, not displayed. */
+  priceRaw?: number | null;
+  /** Estimated end-customer total (USD) for default planned + Florida → US East. */
+  estTotal?: number | null;
+  estDeliveryEn?: string | null;
+  estDeliveryTr?: string | null;
 };
 
 const PRESET_QUERIES = [
@@ -191,9 +198,10 @@ export default function EbayCatalogGrid({
                       brand: it.brand,
                       partNumber: it.partNumber,
                       description: it.description,
-                      image: it.image
+                      image: it.image,
+                      priceRaw: it.priceRaw ?? null
                     })}
-                    className="text-left w-full h-full rounded-xl border border-line bg-white hover:border-amber transition group overflow-hidden"
+                    className="text-left w-full h-full rounded-xl border border-line bg-white hover:border-amber transition group overflow-hidden flex flex-col"
                   >
                     <div className="aspect-[4/3] bg-navy-50 relative overflow-hidden">
                       {it.image ? (
@@ -213,7 +221,7 @@ export default function EbayCatalogGrid({
                         </div>
                       )}
                     </div>
-                    <div className="p-3.5">
+                    <div className="p-3.5 flex flex-col flex-1">
                       <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-amber-600 mb-1">
                         {it.brand || t('Brand on request', 'Marka teklifle')}
                       </div>
@@ -223,8 +231,26 @@ export default function EbayCatalogGrid({
                       {it.partNumber && (
                         <div className="font-mono text-[11px] text-ink-subtle mb-2">{it.partNumber}</div>
                       )}
-                      <div className="inline-flex items-center text-[11px] font-mono uppercase tracking-[0.12em] text-amber-600 group-hover:text-amber">
-                        {t('Get quote →', 'Teklif al →')}
+
+                      {/* Estimated price + delivery — vessel-specific final price disclaimer in modal */}
+                      <div className="mt-auto pt-2">
+                        {it.estTotal != null ? (
+                          <>
+                            <div className="font-head font-extrabold text-[16px] text-navy-700 leading-none">
+                              ~{fmt(it.estTotal, locale)}
+                            </div>
+                            <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-subtle mt-1">
+                              {locale === 'tr' ? it.estDeliveryTr : it.estDeliveryEn}
+                            </div>
+                            <div className="font-mono text-[9.5px] text-ink-subtle/80 mt-0.5">
+                              {t('Estimated · final in 30 min', 'Tahmini · 30 dk içinde final')}
+                            </div>
+                          </>
+                        ) : (
+                          <div className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-amber-600">
+                            {t('Quote on request', 'Talep üzerine teklif')}
+                          </div>
+                        )}
                       </div>
                     </div>
                   </button>

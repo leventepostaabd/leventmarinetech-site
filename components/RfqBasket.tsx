@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -12,6 +12,7 @@ import {
   removeFromBasket,
   updateQuantity
 } from '@/lib/rfq-basket';
+import { estimateBasket, fmt } from '@/lib/pricing';
 
 type Urgency = 'aog' | 'urgent' | 'planned';
 type View = 'list' | 'sent';
@@ -64,6 +65,14 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
   if (!showOn || items.length === 0 || !mounted) return null;
 
   const totalItems = items.reduce((sum, it) => sum + it.quantity, 0);
+
+  const estimate = useMemo(() => {
+    const priced = items
+      .filter((it) => typeof it.priceRaw === 'number')
+      .map((it) => ({ unitPrice: it.priceRaw as number, quantity: it.quantity }));
+    if (priced.length === 0) return null;
+    return estimateBasket({ lines: priced, port, urgency });
+  }, [items, port, urgency]);
 
   async function handleSubmit() {
     setErr(null);
@@ -258,13 +267,43 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
                       ))}
                     </ul>
 
+                    {/* Running estimate (when at least one item has a live price) */}
+                    {estimate && (
+                      <div className="mb-3 rounded-lg border border-amber/40 bg-amber/5 px-3.5 py-2.5">
+                        <div className="flex items-baseline justify-between mb-1">
+                          <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-amber-700">
+                            {t('Estimated total', 'Tahmini toplam')}
+                          </span>
+                          <span className="font-head font-extrabold text-[20px] text-navy-700">
+                            {fmt(estimate.total, locale)}
+                          </span>
+                        </div>
+                        <div className="font-mono text-[11px] text-ink-muted space-y-0.5">
+                          <div className="flex justify-between">
+                            <span>{t('Items (+30 %)', 'Parçalar (+%30)')}</span>
+                            <span>{fmt(estimate.itemTotal, locale)}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>{t('Shipping', 'Kargo')}</span>
+                            <span>+{fmt(estimate.shipping, locale)}</span>
+                          </div>
+                          {estimate.aogFee > 0 && (
+                            <div className="flex justify-between text-red-700">
+                              <span>{t('AOG dispatch', 'AOG dispatch')}</span>
+                              <span>+{fmt(estimate.aogFee, locale)}</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
                     {/* Promise */}
                     <div className="mb-4 rounded-lg bg-amber/10 border border-amber/30 px-3.5 py-2.5">
                       <div className="text-[12.5px] leading-relaxed">
                         <strong className="text-amber-700">{t('Same-day quote.', 'Aynı gün içinde teklif.')}</strong>{' '}
                         {t(
-                          'All items priced together. No prices shown — vessel-specific.',
-                          'Tüm kalemler birlikte teklif edilir. Fiyat yok — gemine özel.'
+                          'Estimate above; final confirmed within 30 minutes once we verify supplier shipping + vessel compatibility.',
+                          'Tahmini yukarıda; 30 dk içinde tedarikçi kargo + uyumluluk doğrulandıktan sonra final.'
                         )}
                       </div>
                     </div>
