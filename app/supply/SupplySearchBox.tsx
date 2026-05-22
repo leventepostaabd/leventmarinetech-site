@@ -10,7 +10,23 @@ type Suggestion = {
   partNumber: string;
   in_stock: boolean;
   source: string;
+  /** True for live external (eBay) results — no local product page exists. */
+  live?: boolean;
 };
+
+function suggestionHref(s: Suggestion) {
+  // Live external results have no static /supply/product/{slug} page — route
+  // them to the quote wizard with brand + part pre-filled.
+  if (s.live) {
+    const params = new URLSearchParams({
+      q: [s.brand, s.partNumber, s.name].filter(Boolean).join(' '),
+      brand: s.brand,
+      part: s.partNumber
+    });
+    return `/supply-wizard?${params.toString()}`;
+  }
+  return `/supply/product/${s.slug}`;
+}
 
 /**
  * Catalog-wide search box with live-completion against the local index.
@@ -137,7 +153,7 @@ export default function SupplySearchBox({
               {items.map((it) => (
                 <li key={it.slug}>
                   <Link
-                    href={`/supply/product/${it.slug}`}
+                    href={suggestionHref(it)}
                     className="flex items-center justify-between gap-3 px-4 py-3 hover:bg-navy-50 no-underline border-b border-line last:border-0"
                     onClick={() => setOpen(false)}
                   >
@@ -145,8 +161,12 @@ export default function SupplySearchBox({
                       <div className="text-[14px] font-semibold text-ink truncate">{it.name}</div>
                       <div className="font-mono text-[11.5px] text-ink-subtle">{it.brand} · {it.partNumber}</div>
                     </div>
-                    <span className={`font-mono text-[10.5px] uppercase tracking-wider shrink-0 ${it.in_stock ? 'text-green-700' : 'text-amber-600'}`}>
-                      {it.in_stock ? '● ' + (locale === 'tr' ? 'Stokta' : 'In Stock') : (locale === 'tr' ? 'Teklif' : 'Quote')}
+                    <span className={`font-mono text-[10.5px] uppercase tracking-wider shrink-0 ${it.live ? 'text-amber-600' : it.in_stock ? 'text-green-700' : 'text-amber-600'}`}>
+                      {it.live
+                        ? (locale === 'tr' ? 'Teklif al →' : 'Get quote →')
+                        : it.in_stock
+                          ? '● ' + (locale === 'tr' ? 'Stokta' : 'In Stock')
+                          : (locale === 'tr' ? 'Teklif' : 'Quote')}
                     </span>
                   </Link>
                 </li>

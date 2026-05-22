@@ -53,6 +53,10 @@ export type ExternalProduct = {
   in_stock?: boolean;
   /** Free-form availability label as returned by the supplier (no price). */
   availability_label?: string;
+  /** True for results returned from a live external API (eBay/Amazon Business).
+      These don't have a local /supply/product/{slug} page; the UI should
+      route a click into the quote wizard with brand/part pre-filled. */
+  live?: boolean;
 };
 
 export type SupplySearchOptions = {
@@ -214,7 +218,8 @@ export async function searchEbay(
       url: it.itemWebUrl ? sanitizeExternalUrl(it.itemWebUrl) : undefined,
       image: it.image?.imageUrl,
       in_stock: true,
-      availability_label: 'in-stock'
+      availability_label: 'in-stock',
+      live: true
     }));
 
     return { source: 'ebay', query, results, fromLocalFallback: false };

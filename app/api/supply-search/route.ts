@@ -37,7 +37,11 @@ export async function GET(req: Request) {
       brand: r.brand ?? '',
       partNumber: r.partNumber ?? '',
       in_stock: r.in_stock ?? false,
-      source: r.source
+      source: r.source,
+      // 'live' = result came from an external live API (eBay/Amazon) and
+      // has no static /supply/product/{slug} page. UI routes it to the
+      // quote wizard instead.
+      live: r.live ?? false
     }));
 
   return NextResponse.json(
