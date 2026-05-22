@@ -74,8 +74,8 @@ export default function ServiceImageDeck({
             alt={locale === 'tr' ? active.name_tr : active.name_en}
             fill
             priority
-            sizes="(min-width: 768px) 40vw, 100vw"
-            className="object-cover"
+            sizes="(min-width: 1024px) 30vw, 100vw"
+            className="object-cover object-center"
           />
           {/* Navy → transparent gradient for legible text */}
           <div className="absolute inset-0 bg-gradient-to-t from-navy-700/95 via-navy-700/35 to-transparent" />
