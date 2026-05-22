@@ -57,6 +57,10 @@ export type ExternalProduct = {
       These don't have a local /supply/product/{slug} page; the UI should
       route a click into the quote wizard with brand/part pre-filled. */
   live?: boolean;
+  /** Raw supplier price in USD — only surfaced for live external results
+      where we apply our own markup before display. Local catalog results
+      leave this undefined (quote-only). */
+  price?: number;
 };
 
 export type SupplySearchOptions = {
@@ -201,26 +205,34 @@ export async function searchEbay(
         shortDescription?: string;
         image?: { imageUrl?: string };
         itemWebUrl?: string;
+        price?: { value?: string; currency?: string };
         seller?: { username?: string };
       }>;
     };
 
     const items = Array.isArray(json.itemSummaries) ? json.itemSummaries : [];
-    const results: ExternalProduct[] = items.slice(0, limit).map((it) => ({
-      id: it.itemId ?? '',
-      slug: (it.itemId ?? '').toLowerCase(),
-      source: 'ebay',
-      name: it.title ?? '',
-      brand: it.brand,
-      partNumber: it.mpn,
-      description: it.shortDescription,
-      // Strip eBay's auction/price params from the outbound URL; prices stay off-site
-      url: it.itemWebUrl ? sanitizeExternalUrl(it.itemWebUrl) : undefined,
-      image: it.image?.imageUrl,
-      in_stock: true,
-      availability_label: 'in-stock',
-      live: true
-    }));
+    const results: ExternalProduct[] = items.slice(0, limit).map((it) => {
+      const rawPrice =
+        it.price?.value && it.price.currency === 'USD'
+          ? parseFloat(it.price.value)
+          : undefined;
+      return {
+        id: it.itemId ?? '',
+        slug: (it.itemId ?? '').toLowerCase(),
+        source: 'ebay',
+        name: it.title ?? '',
+        brand: it.brand,
+        partNumber: it.mpn,
+        description: it.shortDescription,
+        // Strip eBay's auction/price params from the outbound URL; prices stay off-site
+        url: it.itemWebUrl ? sanitizeExternalUrl(it.itemWebUrl) : undefined,
+        image: it.image?.imageUrl,
+        in_stock: true,
+        availability_label: 'in-stock',
+        live: true,
+        price: Number.isFinite(rawPrice) ? rawPrice : undefined
+      };
+    });
 
     return { source: 'ebay', query, results, fromLocalFallback: false };
   } catch {

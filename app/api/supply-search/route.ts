@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { searchAllSources } from '@/lib/ebay-amazon';
+import { estimateLine } from '@/lib/pricing';
 
 /**
  * GET /api/supply-search?q=<query>&brand=<brand>&limit=<n>
@@ -34,20 +35,34 @@ export async function GET(req: Request) {
     })
     .sort((a, b) => Number(b.in_stock) - Number(a.in_stock))
     .slice(0, limit)
-    .map((r) => ({
-      slug: r.slug ?? r.id,
-      name: r.name,
-      brand: r.brand ?? '',
-      partNumber: r.partNumber ?? '',
-      description: r.description ?? '',
-      image: r.image ?? '',
-      in_stock: r.in_stock ?? false,
-      source: r.source,
-      // 'live' = result came from an external live API (eBay/Amazon) and
-      // has no static /supply/product/{slug} page. UI routes it to the
-      // quote wizard instead.
-      live: r.live ?? false
-    }));
+    .map((r) => {
+      const estimate =
+        typeof r.price === 'number'
+          ? estimateLine({ unitPrice: r.price, quantity: 1, urgency: 'planned' })
+          : null;
+      return {
+        slug: r.slug ?? r.id,
+        name: r.name,
+        brand: r.brand ?? '',
+        partNumber: r.partNumber ?? '',
+        description: r.description ?? '',
+        image: r.image ?? '',
+        in_stock: r.in_stock ?? false,
+        source: r.source,
+        // 'live' = result came from an external live API (eBay/Amazon) and
+        // has no static /supply/product/{slug} page. UI routes it to the
+        // quote wizard instead.
+        live: r.live ?? false,
+        // Raw supplier price (we hide from card text; the modal uses it
+        // to recalc on quantity / urgency / port changes client-side).
+        priceRaw: typeof r.price === 'number' ? r.price : null,
+        // Pre-baked estimate for default conditions (planned, default ship
+        // baseline). Card shows total + delivery; modal can override.
+        estTotal: estimate ? estimate.total : null,
+        estDeliveryEn: estimate ? estimate.deliveryEn : null,
+        estDeliveryTr: estimate ? estimate.deliveryTr : null
+      };
+    });
 
   return NextResponse.json(
     { q, results: merged },
