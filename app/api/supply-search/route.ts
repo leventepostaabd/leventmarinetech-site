@@ -19,13 +19,16 @@ export async function GET(req: Request) {
 
   const buckets = await searchAllSources(q, { brand, limit });
 
-  // Dedupe by partNumber preferring in-stock Amazon results
+  // Dedupe by partNumber preferring in-stock Amazon results. Falsy check
+  // (||) instead of nullish (??) so that empty strings — which eBay can
+  // return for mpn — fall back to the id rather than collapsing every
+  // empty-MPN result into one bucket.
   const seen = new Set<string>();
   const merged = buckets
     .flatMap((b) => b.results.map((r) => ({ ...r, _src: b.source })))
     .filter((r) => {
-      const k = (r.partNumber ?? r.id).toLowerCase();
-      if (seen.has(k)) return false;
+      const k = (r.partNumber || r.id || '').toLowerCase();
+      if (!k || seen.has(k)) return false;
       seen.add(k);
       return true;
     })
@@ -36,6 +39,8 @@ export async function GET(req: Request) {
       name: r.name,
       brand: r.brand ?? '',
       partNumber: r.partNumber ?? '',
+      description: r.description ?? '',
+      image: r.image ?? '',
       in_stock: r.in_stock ?? false,
       source: r.source,
       // 'live' = result came from an external live API (eBay/Amazon) and
