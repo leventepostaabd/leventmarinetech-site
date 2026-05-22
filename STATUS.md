@@ -77,6 +77,23 @@
 
 ---
 
+## Bekleyen Mimari Tartışmalar
+
+**eBay → multi-source procurement engine (Phase 2 öncesi gündem):**
+Bir uzman dostumuzun mevcut yapı için verdiği değerlendirme — mevcut
+temel doğru (backend proxy + OAuth token cache + secure env vars +
+multi-source-ready stub var) ama Phase 2'ye geçmeden önce şunlar
+oturup konuşulacak:
+- Redis / Supabase KV ile sıcak cache (popüler arama terimleri için)
+- SKU normalization layer (örn. "ABB A16-30-10 220VAC" varyantlarını
+  birleştiren AI parsing katmanı) — marine sourcing'de en büyük edge
+- Amazon Business + Alibaba + direct vendor connector'larının aynı
+  arama yüzeyi altında birleşmesi
+- RFQ otomasyon dashboard'u (admin tarafı genişletme)
+- Predictive spare sourcing (Phase 3)
+Kullanıcı "yeri gelince hatırlat" dedi; supply MVP'si stabil + canlı
+trafik akmaya başladığında bunu gündeme getir.
+
 ## Aktif Engeller
 
 **Integration notes (2026-05-20):**
