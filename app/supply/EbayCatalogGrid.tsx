@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import ProductQuoteModal, { type ModalProduct } from './ProductQuoteModal';
 
 type Item = {
   slug: string;
@@ -49,6 +50,7 @@ export default function EbayCatalogGrid({
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+  const [picked, setPicked] = useState<ModalProduct | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);
@@ -178,16 +180,20 @@ export default function EbayCatalogGrid({
         {liveOnly.length > 0 && (
           <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {liveOnly.map((it) => {
-              const params = new URLSearchParams({
-                q: [it.brand, it.partNumber, it.name].filter(Boolean).join(' '),
-                brand: it.brand,
-                part: it.partNumber
-              });
               return (
                 <li key={it.slug}>
-                  <Link
-                    href={`/supply-wizard?${params.toString()}`}
-                    className="block h-full rounded-xl border border-line bg-white hover:border-amber transition group no-underline overflow-hidden"
+                  <button
+                    type="button"
+                    onClick={() => setPicked({
+                      id: it.slug,
+                      slug: it.slug,
+                      name: it.name,
+                      brand: it.brand,
+                      partNumber: it.partNumber,
+                      description: it.description,
+                      image: it.image
+                    })}
+                    className="text-left w-full h-full rounded-xl border border-line bg-white hover:border-amber transition group overflow-hidden"
                   >
                     <div className="aspect-[4/3] bg-navy-50 relative overflow-hidden">
                       {it.image ? (
@@ -221,13 +227,21 @@ export default function EbayCatalogGrid({
                         {t('Get quote →', 'Teklif al →')}
                       </div>
                     </div>
-                  </Link>
+                  </button>
                 </li>
               );
             })}
           </ul>
         )}
       </div>
+
+      {/* Product quote modal */}
+      <ProductQuoteModal
+        product={picked}
+        open={!!picked}
+        onClose={() => setPicked(null)}
+        locale={locale}
+      />
 
       {/* Footer helpers */}
       <div className="flex flex-wrap items-center gap-3 text-[12.5px] font-mono uppercase tracking-[0.1em] text-ink-subtle pt-2 border-t border-line">
