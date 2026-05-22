@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
@@ -55,7 +56,12 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
     return () => document.removeEventListener('keydown', onKey);
   }, [open]);
 
-  if (!showOn || items.length === 0) return null;
+  // Portal mount flag — needed because we render the floating button +
+  // drawer through document.body to escape any transformed parent.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
+  if (!showOn || items.length === 0 || !mounted) return null;
 
   const totalItems = items.reduce((sum, it) => sum + it.quantity, 0);
 
@@ -112,7 +118,7 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
     }
   }
 
-  return (
+  const ui = (
     <>
       {/* Floating badge */}
       <button
@@ -336,4 +342,6 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
       </AnimatePresence>
     </>
   );
+
+  return createPortal(ui, document.body);
 }

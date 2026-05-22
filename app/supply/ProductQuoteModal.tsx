@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { addToBasket } from '@/lib/rfq-basket';
 
@@ -78,6 +79,11 @@ export default function ProductQuoteModal({
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
   }, [open, onClose]);
+
+  // Portal target — escape any transformed parent so position:fixed
+  // is relative to the viewport, not PageTransition's motion div.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
 
   if (!product) return null;
 
@@ -162,7 +168,7 @@ export default function ProductQuoteModal({
     }
   }
 
-  return (
+  const content = (
     <AnimatePresence>
       {open && (
         <>
@@ -471,4 +477,9 @@ export default function ProductQuoteModal({
       )}
     </AnimatePresence>
   );
+
+  // Render through a portal so the modal is a direct child of <body>
+  // — escapes any transformed ancestor (e.g. PageTransition's motion.div)
+  // that would otherwise hijack our position:fixed.
+  return mounted ? createPortal(content, document.body) : null;
 }
