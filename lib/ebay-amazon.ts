@@ -23,6 +23,7 @@
  */
 
 import { readProducts, type ProductContent } from './content';
+import { getEbayAccessToken } from './ebay-auth';
 
 // ---------------------------------------------------------------------------
 //  Public types
@@ -140,21 +141,23 @@ export async function searchAmazonBusiness(
 
 /**
  * Search eBay Browse API by a free-form query. Falls back to local
- * catalog matches when `EBAY_APP_ID` (OAuth app token) is not configured
+ * catalog matches when EBAY_APP_ID / EBAY_CERT_ID are not configured
  * or when the request errors. Prices are stripped from results to honour
  * the F3 / T3 "quote-only" decision.
  *
- * Required env (set in Vercel Project → Settings → Environment Variables):
- *   - EBAY_APP_ID            — eBay developer app's OAuth client id
- *   - EBAY_OAUTH_TOKEN       — long-lived application token (server-only)
+ * Required env (set in Vercel → Project → Settings → Environment Variables):
+ *   - EBAY_APP_ID            — Production Client ID
+ *   - EBAY_CERT_ID           — Production Client Secret
  *   - EBAY_MARKETPLACE_ID    — optional, defaults to EBAY_US
+ *   - EBAY_ENV               — optional, 'production' (default) or 'sandbox'
+ *
+ * The OAuth application access token is fetched + cached by
+ * lib/ebay-auth.getEbayAccessToken() (2-hour TTL, in-memory).
  */
 export async function searchEbay(
   query: string,
   opts?: SupplySearchOptions
 ): Promise<SupplySearchResult> {
-  const token = process.env.EBAY_OAUTH_TOKEN;
-  const marketplace = process.env.EBAY_MARKETPLACE_ID ?? 'EBAY_US';
   const local = () => ({
     source: 'ebay' as const,
     query,
@@ -162,11 +165,14 @@ export async function searchEbay(
     fromLocalFallback: true as const
   });
 
-  if (!token || !query.trim()) return local();
+  if (!query.trim()) return local();
+  const auth = await getEbayAccessToken();
+  if (!auth) return local();
+  const { token, env } = auth;
 
   try {
     const limit = Math.min(opts?.limit ?? 12, 50);
-    const url = new URL('https://api.ebay.com/buy/browse/v1/item_summary/search');
+    const url = new URL(`${env.browseBase}/item_summary/search`);
     url.searchParams.set('q', query.slice(0, 100));
     url.searchParams.set('limit', String(limit));
     if (opts?.brand) url.searchParams.set('filter', `brand:{${opts.brand}}`);
@@ -174,7 +180,7 @@ export async function searchEbay(
     const res = await fetch(url.toString(), {
       headers: {
         Authorization: `Bearer ${token}`,
-        'X-EBAY-C-MARKETPLACE-ID': marketplace,
+        'X-EBAY-C-MARKETPLACE-ID': env.marketplaceId,
         Accept: 'application/json'
       },
       // Browse API is read-only — short revalidate so the page stays fast.
