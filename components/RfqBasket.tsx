@@ -95,23 +95,29 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
     try {
       // One POST per item — backend already accepts this; admin sees the
       // batch grouped by contact email + submission window.
+      // Note: `product` (FK to products.id) is intentionally omitted —
+      // basket items are live eBay results with no local id. The item
+      // name lives in `description` so the admin still sees it.
       const collected: string[] = [];
       for (const it of items) {
+        const description =
+          `${it.name}` +
+          (notes ? `\n\nNotes: ${notes}` : '') +
+          `\n\n[Batch RFQ · ${items.length} items]`;
         const res = await fetch('/api/quote-request', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             kind: 'supply',
-            product: it.name,
             brand: it.brand,
             partNumber: it.partNumber,
             quantity: it.quantity,
+            description,
             urgency,
             vesselName: vessel || undefined,
             port: port || undefined,
             contactName: name,
-            contactEmail: email,
-            notes: notes ? `[Batch RFQ · ${items.length} items] ${notes}` : `[Batch RFQ · ${items.length} items]`
+            contactEmail: email
           }),
           cache: 'no-store'
         });
