@@ -64,16 +64,16 @@ export default function AboutPage() {
     <div className="lm-screen bg-white">
       <article className="lm-screen-body">
       {/* HERO */}
-      <section className="bg-navy-700 text-white py-20">
+      <section className="bg-navy-700 text-white pt-10 pb-12 md:pt-14 md:pb-16">
         <div className="container-x">
           <div className="kicker text-white/70 mb-3">About</div>
-          <h1 className="text-white text-balance max-w-4xl">
+          <h1 className="text-white text-balance max-w-4xl text-[26px] md:text-[36px] leading-[1.1]">
             Marine Electrical Service &amp; Parts Supply
           </h1>
-          <p className="mt-4 font-mono text-[12px] uppercase tracking-[0.18em] text-amber">
+          <p className="mt-3 font-mono text-[11px] md:text-[12px] uppercase tracking-[0.18em] text-amber">
             24/7 Worldwide · Florida-based · Wyoming LLC
           </p>
-          <p className="mt-6 text-[17px] text-white/80 max-w-3xl leading-relaxed">
+          <p className="mt-5 text-[15px] md:text-[17px] text-white/80 max-w-3xl leading-relaxed">
             Levent Marine is a commercial-vessel-focused marine electrical service desk and
             technical parts supplier. Founded and operated by a working STCW Reg. III/6
             Electro-Technical Officer with sixteen years aboard bulkers, tankers, container
@@ -81,7 +81,7 @@ export default function AboutPage() {
             hours, ship AOG-grade spares the same day, and deliver class-aware reports the
             superintendent can hand straight to the surveyor.
           </p>
-          <div className="mt-7">
+          <div className="mt-6">
             <CertBadges />
           </div>
         </div>
@@ -271,8 +271,8 @@ export default function AboutPage() {
             <Link href="/service-wizard" className="btn-primary btn-lg no-underline">
               Request service
             </Link>
-            <Link href="/supply-wizard" className="btn-accent btn-lg no-underline">
-              Request a quote
+            <Link href="/supply" className="btn-accent btn-lg no-underline">
+              Browse supply
             </Link>
             <Link href="/contact" className="btn-ghost btn-lg no-underline">
               Contact
