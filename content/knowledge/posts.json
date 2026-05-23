@@ -21,8 +21,8 @@
         "BWTS UV reactor fault",
         "electrochlorination TRO sensor"
       ],
-      "relatedServices": ["safety-systems", "automation-control", "survey-psc-prep"],
-      "relatedSupply": ["sensors-transmitters", "plc-hmi", "alarm-monitoring"],
+      "relatedServices": ["bwts", "plc-automation", "engine-room-alarm"],
+      "relatedSupply": ["marine-sensors", "automation-plc", "alarm-monitoring"],
       "heroAlt": "ETO inspecting BWTS UV reactor and TRO sensor cabinet on a bulker engine room platform",
       "sections": [
         {
@@ -112,11 +112,11 @@
       ],
       "cta": {
         "service": {
-          "slug": "safety-systems",
+          "slug": "bwts",
           "label": "Request BWTS pre-survey attendance"
         },
         "supply": {
-          "slug": "sensors-transmitters",
+          "slug": "marine-sensors",
           "label": "Source BWTS sensors and spares"
         }
       },
@@ -154,7 +154,7 @@
         "shaft generator AVR diagnostic",
         "kVAR sharing imbalance"
       ],
-      "relatedServices": ["power-distribution", "testing-certification", "commissioning-retrofit"],
+      "relatedServices": ["generator", "switchboard", "transformer"],
       "relatedSupply": ["electrical-spares", "test-instruments", "breakers-contactors"],
       "heroAlt": "Engineer testing an AVR PCB on a Stamford alternator excitation cabinet with multimeter probes",
       "sections": [
@@ -217,7 +217,7 @@
       ],
       "cta": {
         "service": {
-          "slug": "power-distribution",
+          "slug": "generator",
           "label": "Request an AVR diagnostic attendance"
         },
         "supply": {
@@ -259,8 +259,8 @@
         "ship in port breakdown",
         "marine AOG checklist"
       ],
-      "relatedServices": ["emergency-remote-eto", "power-distribution", "navigation-gmdss"],
-      "relatedSupply": ["electrical-spares", "breakers-contactors", "sensors-transmitters"],
+      "relatedServices": ["other", "switchboard", "gmdss-communication"],
+      "relatedSupply": ["electrical-spares", "breakers-contactors", "marine-sensors"],
       "heroAlt": "Marine ETO arriving on a container vessel gangway with test kit and a spare control card during an emergency port attendance",
       "sections": [
         {
@@ -322,7 +322,7 @@
       ],
       "cta": {
         "service": {
-          "slug": "emergency-remote-eto",
+          "slug": "other",
           "label": "Open an emergency dispatch"
         },
         "supply": {
@@ -449,7 +449,7 @@
         "smoke detector contamination"
       ],
       "relatedServices": ["fire-alarm", "smoke-detection", "engine-room-alarm"],
-      "relatedSupply": ["fire-detectors", "alarm-monitoring"],
+      "relatedSupply": ["fire-safety-detection", "alarm-monitoring"],
       "heroAlt": "ETO with multimeter probing an Autronica BS-100 fire panel loop terminal during a false-alarm hunt",
       "sections": [
         {
@@ -501,7 +501,7 @@
           "label": "Book a fire-detection root-cause attendance"
         },
         "supply": {
-          "slug": "fire-detectors",
+          "slug": "fire-safety-detection",
           "label": "Source detector heads and loop modules"
         }
       },
@@ -540,7 +540,7 @@
         "AS controller card swap"
       ],
       "relatedServices": ["plc-automation", "engine-room-alarm", "switchboard"],
-      "relatedSupply": ["plc-hmi", "automation-control", "alarm-monitoring"],
+      "relatedSupply": ["automation-plc", "control-panels", "alarm-monitoring"],
       "heroAlt": "ETO removing a Kongsberg K-Chief 700 controller card from a marine engine control room cabinet",
       "sections": [
         {
@@ -592,7 +592,7 @@
           "label": "Book a controller-card replacement"
         },
         "supply": {
-          "slug": "plc-hmi",
+          "slug": "automation-plc",
           "label": "Source K-Chief and Praxis spares"
         }
       },
