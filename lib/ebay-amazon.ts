@@ -29,7 +29,7 @@ import { getEbayAccessToken } from './ebay-auth';
 //  Public types
 // ---------------------------------------------------------------------------
 
-export type SupplySource = 'amazon' | 'ebay' | 'manual';
+export type SupplySource = 'amazon' | 'ebay' | 'mouser' | 'digikey' | 'grainger' | 'manual';
 
 export type ExternalProduct = {
   /** Stable id from the external source. */
@@ -179,11 +179,24 @@ export async function searchEbay(
   const { token, env } = auth;
 
   try {
-    const limit = Math.min(opts?.limit ?? 12, 50);
+    // Increase requested limit so we can dedupe by MPN after filtering and
+    // still show a full grid. eBay's Browse API hard-caps at 200.
+    const requested = Math.min((opts?.limit ?? 12) * 4, 50);
     const url = new URL(`${env.browseBase}/item_summary/search`);
     url.searchParams.set('q', query.slice(0, 100));
-    url.searchParams.set('limit', String(limit));
-    if (opts?.brand) url.searchParams.set('filter', `brand:{${opts.brand}}`);
+    url.searchParams.set('limit', String(requested));
+
+    // Quality filters — these dramatically clean up the marketplace noise:
+    //   - conditionIds:{1000}  → NEW only (skip used, refurbished, parts)
+    //   - buyingOptions:{FIXED_PRICE} → skip auctions
+    //   - sellerFeedbackScore filter could be added; left off for now since
+    //     it can suppress small but legitimate marine specialists.
+    const filters: string[] = ['conditionIds:{1000}', 'buyingOptions:{FIXED_PRICE}'];
+    if (opts?.brand) filters.push(`brand:{${opts.brand}}`);
+    url.searchParams.set('filter', filters.join(','));
+
+    // Sort by best match (default); price ascending would surface used cheap
+    // copies from grey-market sellers, which we already filtered out above.
 
     const res = await fetch(url.toString(), {
       headers: {
@@ -191,7 +204,6 @@ export async function searchEbay(
         'X-EBAY-C-MARKETPLACE-ID': env.marketplaceId,
         Accept: 'application/json'
       },
-      // Browse API is read-only — short revalidate so the page stays fast.
       next: { revalidate: 60 }
     });
 
@@ -202,37 +214,67 @@ export async function searchEbay(
         title?: string;
         brand?: string;
         mpn?: string;
+        condition?: string;
         shortDescription?: string;
         image?: { imageUrl?: string };
         itemWebUrl?: string;
         price?: { value?: string; currency?: string };
-        seller?: { username?: string };
+        seller?: { username?: string; feedbackPercentage?: string };
       }>;
     };
 
     const items = Array.isArray(json.itemSummaries) ? json.itemSummaries : [];
-    const results: ExternalProduct[] = items.slice(0, limit).map((it) => {
-      const rawPrice =
-        it.price?.value && it.price.currency === 'USD'
-          ? parseFloat(it.price.value)
-          : undefined;
-      return {
-        id: it.itemId ?? '',
-        slug: (it.itemId ?? '').toLowerCase(),
-        source: 'ebay',
-        name: it.title ?? '',
-        brand: it.brand,
-        partNumber: it.mpn,
-        description: it.shortDescription,
-        // Strip eBay's auction/price params from the outbound URL; prices stay off-site
-        url: it.itemWebUrl ? sanitizeExternalUrl(it.itemWebUrl) : undefined,
-        image: it.image?.imageUrl,
-        in_stock: true,
-        availability_label: 'in-stock',
-        live: true,
-        price: Number.isFinite(rawPrice) ? rawPrice : undefined
-      };
-    });
+
+    // Dedupe within eBay by MPN — same part from multiple sellers shows up
+    // many times; keep the cheapest (USD) per MPN. Falls back to a
+    // normalised title-fragment when MPN is missing.
+    const cap = Math.min(opts?.limit ?? 12, 50);
+    const dedupeKey = (it: { mpn?: string; brand?: string; title?: string }) => {
+      const mpn = (it.mpn ?? '').replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+      if (mpn) return `${(it.brand ?? '').toLowerCase()}|${mpn}`;
+      // Fallback: first 4 significant words of the title
+      const title = (it.title ?? '')
+        .toLowerCase()
+        .replace(/[^a-z0-9 ]/g, ' ')
+        .split(/\s+/)
+        .filter((w) => w.length > 2)
+        .slice(0, 4)
+        .join(' ');
+      return title || (it.title ?? '').slice(0, 40).toLowerCase();
+    };
+    const seen = new Map<string, (typeof items)[number] & { _price: number }>();
+    for (const it of items) {
+      const k = dedupeKey(it);
+      if (!k) continue;
+      const price =
+        it.price?.value && it.price.currency === 'USD' ? parseFloat(it.price.value) : Number.POSITIVE_INFINITY;
+      const existing = seen.get(k);
+      if (!existing || price < existing._price) {
+        seen.set(k, { ...it, _price: price });
+      }
+    }
+
+    const results: ExternalProduct[] = Array.from(seen.values())
+      .slice(0, cap)
+      .map((it) => {
+        const rawPrice = Number.isFinite(it._price) ? it._price : undefined;
+        return {
+          id: it.itemId ?? '',
+          slug: (it.itemId ?? '').toLowerCase(),
+          source: 'ebay',
+          name: it.title ?? '',
+          brand: it.brand,
+          partNumber: it.mpn,
+          description: it.shortDescription,
+          // Strip eBay's auction/price params from the outbound URL
+          url: it.itemWebUrl ? sanitizeExternalUrl(it.itemWebUrl) : undefined,
+          image: it.image?.imageUrl,
+          in_stock: true,
+          availability_label: 'in-stock',
+          live: true,
+          price: rawPrice
+        };
+      });
 
     return { source: 'ebay', query, results, fromLocalFallback: false };
   } catch {
@@ -241,15 +283,33 @@ export async function searchEbay(
 }
 
 /**
- * Unified search across both sources. Useful for the catalog search box.
- * Order: Amazon first, then eBay, de-duped by partNumber.
+ * Unified search across every configured catalog provider.
+ *
+ * Order returned matches our quality priority — catalog distributors
+ * (Mouser, Digi-Key, Grainger) before the marketplace (eBay) before the
+ * local Amazon stub. Downstream dedupe should prefer the earlier source
+ * when the same MPN appears in multiple buckets.
  */
 export async function searchAllSources(
   query: string,
   opts?: SupplySearchOptions
 ): Promise<SupplySearchResult[]> {
-  const [a, e] = await Promise.all([searchAmazonBusiness(query, opts), searchEbay(query, opts)]);
-  return [a, e];
+  // Imports inline to avoid a circular reference (each provider imports
+  // ExternalProduct + sanitizeExternalUrl from this module).
+  const [{ searchMouser }, { searchDigiKey }, { searchGrainger }] = await Promise.all([
+    import('./mouser'),
+    import('./digikey'),
+    import('./grainger')
+  ]);
+
+  const [mouser, digikey, grainger, ebay, amazon] = await Promise.all([
+    searchMouser(query, opts),
+    searchDigiKey(query, opts),
+    searchGrainger(query, opts),
+    searchEbay(query, opts),
+    searchAmazonBusiness(query, opts)
+  ]);
+  return [mouser, digikey, grainger, ebay, amazon];
 }
 
 // ---------------------------------------------------------------------------
