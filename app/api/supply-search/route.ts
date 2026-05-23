@@ -1,18 +1,47 @@
 import { NextResponse } from 'next/server';
-import { searchAllSources } from '@/lib/ebay-amazon';
+import { searchAllSources, type ExternalProduct, type SupplySource } from '@/lib/ebay-amazon';
 import { estimateLine } from '@/lib/pricing';
+
+type FlatItem = ExternalProduct & { _src: SupplySource };
 
 /**
  * GET /api/supply-search?q=<query>&brand=<brand>&limit=<n>
- * Returns deduped supply suggestions across Amazon Business + eBay.
- * Prices are NEVER returned (decision T3/F3).
+ *
+ * Aggregates Mouser + Digi-Key + Grainger + eBay + local catalog into
+ * one deduped list. Prices are NEVER returned to the customer-facing
+ * UI in raw form — they're folded into `estTotal` (item × 1.30) so the
+ * shopper sees an estimated total with the same disclaimer everywhere
+ * else (decision T3/F3).
+ *
+ * Dedup rule: distributor sources (Mouser, Digi-Key, Grainger) win over
+ * marketplace (eBay) when the same brand+MPN appears in multiple
+ * buckets. The local Amazon stub is bottom of the list.
  */
+
+// Priority — lower = preferred when the same brand|MPN appears in two
+// different source buckets.
+const SOURCE_PRIORITY: Record<string, number> = {
+  mouser: 0,
+  digikey: 1,
+  grainger: 2,
+  ebay: 3,
+  amazon: 4,
+  manual: 5
+};
+
+function dedupeKey(it: { brand?: string; partNumber?: string; id?: string; name?: string }) {
+  const mpn = (it.partNumber ?? '').replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+  if (mpn) return `${(it.brand ?? '').toLowerCase()}|${mpn}`;
+  // Fallback to id when MPN missing (most marketplace fallback paths)
+  return (it.id ?? '').toLowerCase() || (it.name ?? '').slice(0, 40).toLowerCase();
+}
+
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const q = (url.searchParams.get('q') ?? '').trim();
   const brand = url.searchParams.get('brand') ?? undefined;
-  const limitRaw = parseInt(url.searchParams.get('limit') ?? '8', 10);
-  const limit = Number.isFinite(limitRaw) ? Math.min(Math.max(limitRaw, 1), 25) : 8;
+  const limitRaw = parseInt(url.searchParams.get('limit') ?? '24', 10);
+  const limit = Number.isFinite(limitRaw) ? Math.min(Math.max(limitRaw, 1), 50) : 24;
 
   if (!q || q.length < 2) {
     return NextResponse.json({ q, results: [] });
@@ -20,20 +49,38 @@ export async function GET(req: Request) {
 
   const buckets = await searchAllSources(q, { brand, limit });
 
-  // Dedupe by partNumber preferring in-stock Amazon results. Falsy check
-  // (||) instead of nullish (??) so that empty strings — which eBay can
-  // return for mpn — fall back to the id rather than collapsing every
-  // empty-MPN result into one bucket.
-  const seen = new Set<string>();
-  const merged = buckets
-    .flatMap((b) => b.results.map((r) => ({ ...r, _src: b.source })))
-    .filter((r) => {
-      const k = (r.partNumber || r.id || '').toLowerCase();
-      if (!k || seen.has(k)) return false;
-      seen.add(k);
-      return true;
+  // Flatten with source attached, dedupe by brand|MPN, keep the best-priority
+  // (cleanest) source per key. Within the same source, keep the first.
+  const map = new Map<string, FlatItem>();
+  for (const bucket of buckets) {
+    for (const r of bucket.results) {
+      const item: FlatItem = { ...r, _src: bucket.source };
+      const k = dedupeKey(item);
+      if (!k) continue;
+      const existing = map.get(k);
+      if (!existing) {
+        map.set(k, item);
+        continue;
+      }
+      const existingPrio = SOURCE_PRIORITY[existing._src] ?? 99;
+      const newPrio = SOURCE_PRIORITY[item._src] ?? 99;
+      if (newPrio < existingPrio) {
+        map.set(k, item);
+      }
+    }
+  }
+
+  const merged = Array.from(map.values())
+    // Sort by priority then by in-stock then by name (stable, readable order)
+    .sort((a, b) => {
+      const pa = SOURCE_PRIORITY[a._src] ?? 99;
+      const pb = SOURCE_PRIORITY[b._src] ?? 99;
+      if (pa !== pb) return pa - pb;
+      const sa = a.in_stock ? 0 : 1;
+      const sb = b.in_stock ? 0 : 1;
+      if (sa !== sb) return sa - sb;
+      return (a.name ?? '').localeCompare(b.name ?? '');
     })
-    .sort((a, b) => Number(b.in_stock) - Number(a.in_stock))
     .slice(0, limit)
     .map((r) => {
       const estimate =
@@ -49,15 +96,8 @@ export async function GET(req: Request) {
         image: r.image ?? '',
         in_stock: r.in_stock ?? false,
         source: r.source,
-        // 'live' = result came from an external live API (eBay/Amazon) and
-        // has no static /supply/product/{slug} page. UI routes it to the
-        // quote wizard instead.
         live: r.live ?? false,
-        // Raw supplier price (we hide from card text; the modal uses it
-        // to recalc on quantity / urgency / port changes client-side).
         priceRaw: typeof r.price === 'number' ? r.price : null,
-        // Pre-baked estimate for default conditions (planned, default ship
-        // baseline). Card shows total + delivery; modal can override.
         estTotal: estimate ? estimate.total : null,
         estDeliveryEn: estimate ? estimate.deliveryEn : null,
         estDeliveryTr: estimate ? estimate.deliveryTr : null
