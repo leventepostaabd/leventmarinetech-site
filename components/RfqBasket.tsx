@@ -136,12 +136,13 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
 
   const ui = (
     <>
-      {/* Floating badge */}
+      {/* Floating badge — respects iOS home indicator safe area */}
       <button
         type="button"
         onClick={() => { setOpen(true); setView('list'); }}
         aria-label={t('Open RFQ basket', 'RFQ sepetini aç')}
-        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full bg-amber px-4 py-2.5 text-navy-700 font-semibold shadow-[0_12px_32px_-8px_rgba(245,165,36,0.5)] ring-1 ring-amber/70 hover:bg-amber-600 transition"
+        style={{ bottom: 'calc(env(safe-area-inset-bottom, 0) + 1rem)' }}
+        className="fixed right-4 z-40 inline-flex items-center gap-2 rounded-full bg-amber px-4 py-3 text-navy-700 font-semibold shadow-[0_12px_32px_-8px_rgba(245,165,36,0.5)] ring-1 ring-amber/70 hover:bg-amber-600 transition active:scale-95"
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
           <path d="M3 3h2l3.6 12.59A2 2 0 0 0 10.55 17h7.45a2 2 0 0 0 1.95-1.57L21 8H6" />

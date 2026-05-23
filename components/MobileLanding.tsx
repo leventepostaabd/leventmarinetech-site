@@ -11,16 +11,13 @@ export type MobileLandingProps = {
   slogan?: string;
 };
 
-const FALLBACK_SLOGAN = 'Marine Electrical Service & Parts Supply — 24/7 Worldwide';
-
 /**
  * Mobile-only variant: three stacked big buttons (Service / Supply / Emergency).
- * No video, no split — just decisive action targets (F4).
+ * No video, no split — just decisive action targets (F4). Slogan stays in
+ * the global TopBar so it isn't repeated here.
  */
-export default function MobileLanding({ locale, slogan }: MobileLandingProps) {
+export default function MobileLanding({ locale }: MobileLandingProps) {
   const [open, setOpen] = useState(false);
-  const text = slogan ?? SITE.tagline ?? FALLBACK_SLOGAN;
-  const safeSlogan = /24\/7/i.test(text) ? text : FALLBACK_SLOGAN;
 
   const labels = {
     en: { service: 'Service', supply: 'Supply', emergency: 'Emergency', serviceSub: 'Engineer on board', supplySub: 'Parts on the way', emergencySub: '24/7 worldwide' },
@@ -30,23 +27,16 @@ export default function MobileLanding({ locale, slogan }: MobileLandingProps) {
   return (
     <section
       aria-label="Levent Marine — main entrance"
-      className="relative flex w-full flex-col bg-navy-900 px-5 py-8 text-white"
-      style={{ minHeight: 'calc(100vh - var(--header-h, 72px))' }}
+      className="relative flex w-full flex-col bg-navy-900 px-5 pb-[calc(env(safe-area-inset-bottom)+1rem)] text-white"
+      style={{
+        minHeight: '100vh',
+        paddingTop: 'calc(var(--lm-topbar-h, 56px) + 1.25rem)'
+      }}
     >
-      {/* Slogan */}
-      <motion.div
-        initial={{ opacity: 0, y: -6 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="px-1 pt-2"
-      >
-        <p className="font-head text-[11px] uppercase tracking-[0.22em] text-white/85">
-          {safeSlogan}
-        </p>
-      </motion.div>
+      {/* Slogan moved into the global TopBar — no duplicate ribbon here. */}
 
       {/* Stacked buttons */}
-      <div className="mt-7 flex flex-1 flex-col gap-4">
+      <div className="flex flex-1 flex-col gap-4">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

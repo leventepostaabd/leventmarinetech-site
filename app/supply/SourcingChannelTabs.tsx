@@ -77,14 +77,15 @@ export default function SourcingChannelTabs({ locale }: { locale: 'en' | 'tr' })
 
   return (
     <>
-      <div className="grid gap-2 sm:grid-cols-3">
+      {/* Tiles: always 3 columns. On phone the kicker subtitle hides. */}
+      <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
         {/* Upload list */}
         <button
           type="button"
           onClick={() => { setPendingFiles(null); setListOpen(true); }}
-          className="text-left rounded-lg border border-amber bg-amber/10 hover:bg-amber/15 transition px-3.5 py-2.5 group"
+          className="text-left rounded-lg border border-amber bg-amber/10 hover:bg-amber/15 transition px-2 py-2 sm:px-3.5 sm:py-2.5 group"
         >
-          <div className="flex items-center gap-2.5">
+          <div className="flex flex-col items-center text-center sm:flex-row sm:text-left sm:items-center gap-1.5 sm:gap-2.5">
             <div className="shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-md bg-amber text-navy-700">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -93,10 +94,10 @@ export default function SourcingChannelTabs({ locale }: { locale: 'en' | 'tr' })
               </svg>
             </div>
             <div className="min-w-0">
-              <div className="font-head font-bold text-[13px] text-navy-700 leading-tight">
-                {t('Upload your list', 'Listeni yükle')}
+              <div className="font-head font-bold text-[11.5px] sm:text-[13px] text-navy-700 leading-tight">
+                {t('Upload list', 'Liste yükle')}
               </div>
-              <div className="font-mono text-[9.5px] uppercase tracking-[0.1em] text-amber-700 mt-0.5">
+              <div className="hidden sm:block font-mono text-[9.5px] uppercase tracking-[0.1em] text-amber-700 mt-0.5">
                 Excel · Word · PDF · {t('drop anywhere', 'her yere bırak')}
               </div>
             </div>
@@ -108,7 +109,7 @@ export default function SourcingChannelTabs({ locale }: { locale: 'en' | 'tr' })
           href={mailHref}
           className="text-left rounded-lg border border-line bg-white hover:border-navy-700 transition px-3.5 py-2.5 group no-underline block"
         >
-          <div className="flex items-center gap-2.5">
+          <div className="flex flex-col items-center text-center sm:flex-row sm:text-left sm:items-center gap-1.5 sm:gap-2.5">
             <div className="shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-md bg-navy-700 text-white">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
@@ -116,10 +117,10 @@ export default function SourcingChannelTabs({ locale }: { locale: 'en' | 'tr' })
               </svg>
             </div>
             <div className="min-w-0">
-              <div className="font-head font-bold text-[13px] text-navy-700 leading-tight">
-                {t('Email RFQ', 'E-posta RFQ')}
+              <div className="font-head font-bold text-[11.5px] sm:text-[13px] text-navy-700 leading-tight">
+                {t('Email RFQ', 'E-posta')}
               </div>
-              <div className="font-mono text-[9.5px] text-ink-subtle mt-0.5 truncate">
+              <div className="hidden sm:block font-mono text-[9.5px] text-ink-subtle mt-0.5 truncate">
                 rfq@leventmarinetech.com
               </div>
             </div>
@@ -133,17 +134,17 @@ export default function SourcingChannelTabs({ locale }: { locale: 'en' | 'tr' })
           rel="noreferrer noopener"
           className="text-left rounded-lg border border-line bg-white hover:border-green-600 transition px-3.5 py-2.5 group no-underline block"
         >
-          <div className="flex items-center gap-2.5">
+          <div className="flex flex-col items-center text-center sm:flex-row sm:text-left sm:items-center gap-1.5 sm:gap-2.5">
             <div className="shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-md bg-[#25D366] text-white">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                 <path d="M20.5 3.5A11 11 0 0 0 12 0a11 11 0 0 0-9.5 16.5L0 24l7.7-2.5A11 11 0 1 0 20.5 3.5zM12 21.6a9.6 9.6 0 0 1-4.9-1.4l-.4-.2-4.6 1.5 1.5-4.5-.2-.3a9.6 9.6 0 1 1 8.6 5z" />
               </svg>
             </div>
             <div className="min-w-0">
-              <div className="font-head font-bold text-[13px] text-navy-700 leading-tight">
-                {t('Call or WhatsApp', 'Ara veya WhatsApp')}
+              <div className="font-head font-bold text-[11.5px] sm:text-[13px] text-navy-700 leading-tight">
+                {t('Call / WhatsApp', 'Ara / WhatsApp')}
               </div>
-              <div className="font-mono text-[9.5px] text-ink-subtle mt-0.5">
+              <div className="hidden sm:block font-mono text-[9.5px] text-ink-subtle mt-0.5">
                 +1 619 384 04 03
               </div>
             </div>

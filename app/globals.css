@@ -87,11 +87,11 @@ body.lm-no-scroll {
 
 /* A reusable page shell for single-viewport screens: full height, flex column,
    inner content area scrolls if absolutely necessary, but the page itself
-   never does. Padding-top leaves room for the fixed TopBar. */
+   never does. Padding-top leaves room for the fixed TopBar — plus iOS notch. */
 .lm-screen {
   height: 100vh;
   max-height: 100vh;
-  padding-top: var(--lm-topbar-h, 56px);
+  padding-top: calc(var(--lm-topbar-h, 56px) + env(safe-area-inset-top, 0));
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -100,6 +100,9 @@ body.lm-no-scroll {
   flex: 1 1 auto;
   min-height: 0;
   overflow-y: auto;
+  /* Bottom padding so iOS home indicator + floating RFQ pill don't
+     obscure the last row of cards / form button. */
+  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 4.5rem);
 }
 
 /* Variant for the homepage hero: no padding-top, TopBar overlays

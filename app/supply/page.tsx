@@ -27,23 +27,27 @@ export default function SupplyIndex() {
 
   return (
     <div className="lm-screen bg-navy-50">
-      {/* Fixed top — heading + channel tabs stay visible while grid scrolls */}
-      <div className="shrink-0 bg-white border-b border-line px-5 pt-5 pb-3 md:px-8 md:pt-5 md:pb-4">
-        <div className="kicker mb-1">
-          {t('Marine technical supply', 'Marine teknik tedarik')}
+      {/* Fixed top — compact on phone, fuller on desktop.
+          Heading hides on phone (TopBar already says "Marine Electrotechnical
+          Service") so the 3 channel tiles + search rise into view faster. */}
+      <div className="shrink-0 bg-white border-b border-line px-3 pt-3 pb-2 md:px-8 md:pt-5 md:pb-4">
+        <div className="hidden md:block">
+          <div className="kicker mb-1">
+            {t('Marine technical supply', 'Marine teknik tedarik')}
+          </div>
+          <h1 className="text-[20px] md:text-[24px] leading-tight font-bold mb-2">
+            {t(
+              'Find any marine part — live supplier search.',
+              'Her marine parça — canlı tedarik araması.'
+            )}
+          </h1>
         </div>
-        <h1 className="text-[20px] md:text-[24px] leading-tight font-bold mb-2">
-          {t(
-            'Find any marine part — live supplier search.',
-            'Her marine parça — canlı tedarik araması.'
-          )}
-        </h1>
 
         <SourcingChannelTabs locale={locale} />
       </div>
 
       {/* Live grid (scrolls inside) */}
-      <div className="lm-screen-body px-5 py-4 md:px-8 md:py-5">
+      <div className="lm-screen-body px-3 py-3 md:px-8 md:py-5">
         <EbayCatalogGrid locale={locale} />
       </div>
     </div>
