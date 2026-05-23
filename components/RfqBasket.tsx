@@ -62,13 +62,12 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setMounted(true); }, []);
 
-  if (!showOn || items.length === 0 || !mounted) return null;
-
-  const totalItems = items.reduce((sum, it) => sum + it.quantity, 0);
-
   /** Item-only subtotal (markup applied) — we deliberately do NOT show
       shipping/AOG here. Those depend on weight + port + carrier and only
-      get computed once the customer submits and we generate the quote. */
+      get computed once the customer submits and we generate the quote.
+
+      MUST be declared before any conditional early-return so the hook
+      count stays stable across renders (Rules of Hooks). */
   const itemSubtotal = useMemo(() => {
     const priced = items.filter((it) => typeof it.priceRaw === 'number');
     if (priced.length === 0) return null;
@@ -77,6 +76,10 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
       0
     );
   }, [items]);
+
+  if (!showOn || items.length === 0 || !mounted) return null;
+
+  const totalItems = items.reduce((sum, it) => sum + it.quantity, 0);
 
   async function handleSubmit() {
     setErr(null);
