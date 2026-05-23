@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { createServerSupabase } from '@/lib/supabase/server';
+import { createServerSupabase, createServiceSupabase } from '@/lib/supabase/server';
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
@@ -13,7 +13,17 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect('/login?next=/admin');
 
-  const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single();
+  // Use the service-role client to look up the profile row — the user-session
+  // client occasionally gets blocked by RLS during the first SSR render after
+  // a fresh login (the session cookie is set but Supabase hasn't propagated
+  // auth.uid() to the row yet). auth.getUser() above already JWT-verified
+  // the caller, so trusting user.id here is safe.
+  const service = createServiceSupabase();
+  const { data: profile } = await service
+    .from('profiles')
+    .select('role')
+    .eq('id', user.id)
+    .single();
   const role = profile?.role as string | undefined;
 
   if (role !== 'admin') {
