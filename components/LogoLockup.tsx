@@ -101,34 +101,33 @@ function HorizontalClassic({ tone, scale, className }: Required<Omit<LogoLockupP
 /* ---------------------------------------------------------------- C */
 
 function Badge({ tone, scale, className }: Required<Omit<LogoLockupProps, 'variant'>>) {
-  // Charcoal navy badge with a thin amber inner rule; designed to read
-  // calm + corporate at any size (business card to billboard).
-  const card =
-    tone === 'light'
-      ? 'bg-navy-900/65 ring-white/20 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_18px_50px_-12px_rgba(0,0,0,0.55)]'
-      : 'bg-navy-700 ring-navy-900/40 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_18px_50px_-12px_rgba(11,31,58,0.45)]';
-  const wordmark = 'text-white';
-  const kicker = 'text-amber-300/90';
-  const rule = tone === 'light' ? 'bg-amber-300/80' : 'bg-amber/90';
+  // Refined corporate-marine lockup: mark + vertical divider + wordmark
+  // + single-line kicker. Single colour throughout (no two-tone), wider
+  // tracking, no rounded plate. Reads at any size from business card
+  // to billboard.
+  const wordmark = tone === 'light' ? 'text-white' : 'text-navy-700';
+  const kicker = tone === 'light' ? 'text-amber-300/90' : 'text-amber-700';
+  const divider = tone === 'light' ? 'bg-white/30' : 'bg-navy-700/20';
 
   return (
     <div
-      className={`inline-flex items-center gap-3.5 rounded-[10px] px-3.5 py-2 ring-1 ${card} ${className}`}
+      className={`inline-flex items-center gap-3.5 ${className}`}
       style={{ transform: `scale(${scale})` }}
     >
-      <LeventLogo size={34} tone="light" />
+      <LeventLogo size={36} tone={tone === 'light' ? 'light' : 'auto'} />
+      <span aria-hidden className={`h-9 w-px ${divider}`} />
       <div className="flex flex-col leading-none">
-        <div className={`font-head font-black text-[17px] ${wordmark}`} style={{ letterSpacing: '0.02em' }}>
-          LEVENT&thinsp;<span className="text-amber">MARINE</span>
+        <div
+          className={`font-head font-extrabold text-[16px] ${wordmark}`}
+          style={{ letterSpacing: '0.06em' }}
+        >
+          LEVENT&nbsp;MARINE
         </div>
-        <div className="mt-1.5 flex items-center gap-2">
-          <span className={`h-px w-5 ${rule}`} aria-hidden />
-          <span
-            className={`font-mono text-[9px] font-medium uppercase ${kicker}`}
-            style={{ letterSpacing: '0.24em' }}
-          >
-            Electro-Technical · 24/7
-          </span>
+        <div
+          className={`mt-1.5 font-mono text-[9.5px] uppercase ${kicker}`}
+          style={{ letterSpacing: '0.22em' }}
+        >
+          Electrotechnical&nbsp;·&nbsp;24/7&nbsp;Worldwide
         </div>
       </div>
     </div>

@@ -97,14 +97,14 @@ export default function ProductQuoteModal({
   const content = (
     <AnimatePresence>
       {open && (
-        <>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 pointer-events-none">
           <motion.div
             key="lm-pq-scrim"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[60] bg-navy-900/70 backdrop-blur-sm"
+            className="absolute inset-0 bg-navy-900/70 backdrop-blur-sm pointer-events-auto"
             onClick={onClose}
             aria-hidden
           />
@@ -114,8 +114,8 @@ export default function ProductQuoteModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: 8 }}
             transition={{ duration: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
-            style={{ height: 'min(580px, 86vh)' }}
-            className="fixed left-1/2 top-1/2 z-[60] w-[min(560px,94vw)] -translate-x-1/2 -translate-y-1/2 flex flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
+            style={{ maxHeight: 'min(580px, 86vh)' }}
+            className="relative w-[min(560px,94vw)] flex flex-col overflow-hidden rounded-2xl bg-white shadow-2xl pointer-events-auto"
             role="dialog"
             aria-modal="true"
             aria-label={t('Add to RFQ', "RFQ'ye ekle")}
@@ -265,7 +265,7 @@ export default function ProductQuoteModal({
               </button>
             </div>
           </motion.div>
-        </>
+        </div>
       )}
     </AnimatePresence>
   );

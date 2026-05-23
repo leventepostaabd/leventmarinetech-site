@@ -1,17 +1,71 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ListRfqModal from './ListRfqModal';
 
 /**
- * Three big sourcing-channel tiles surfaced above the live search.
- * Marine procurement runs on relationships + email, not just e-commerce
- * — these tiles let an ETO/superintendent skip straight to the channel
- * that fits their workflow.
+ * Three sourcing-channel tiles surfaced above the live search.
+ *
+ * Also registers a window-level drag-drop interceptor: if the visitor
+ * drags ANY file onto the page (even before opening the upload modal),
+ * we catch it, open ListRfqModal, and pre-load the file so they just
+ * have to add company + contact info.
  */
 export default function SourcingChannelTabs({ locale }: { locale: 'en' | 'tr' }) {
   const [listOpen, setListOpen] = useState(false);
+  const [pendingFiles, setPendingFiles] = useState<File[] | null>(null);
+  const [showDropOverlay, setShowDropOverlay] = useState(false);
   const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);
+
+  // Window-level drag-drop: a file dragged onto the page anywhere opens the
+  // upload modal with the file already attached. Prevents the browser's
+  // default "view file in tab" behaviour.
+  useEffect(() => {
+    let dragCounter = 0;
+    function hasFiles(e: DragEvent) {
+      return Boolean(e.dataTransfer && Array.from(e.dataTransfer.types ?? []).includes('Files'));
+    }
+    function onDragEnter(e: DragEvent) {
+      if (!hasFiles(e)) return;
+      e.preventDefault();
+      dragCounter += 1;
+      setShowDropOverlay(true);
+    }
+    function onDragLeave(e: DragEvent) {
+      if (!hasFiles(e)) return;
+      e.preventDefault();
+      dragCounter -= 1;
+      if (dragCounter <= 0) {
+        dragCounter = 0;
+        setShowDropOverlay(false);
+      }
+    }
+    function onDragOver(e: DragEvent) {
+      if (!hasFiles(e)) return;
+      e.preventDefault();
+    }
+    function onDrop(e: DragEvent) {
+      if (!hasFiles(e)) return;
+      e.preventDefault();
+      dragCounter = 0;
+      setShowDropOverlay(false);
+      const files = e.dataTransfer?.files;
+      if (files && files.length > 0) {
+        setPendingFiles(Array.from(files));
+        setListOpen(true);
+      }
+    }
+    window.addEventListener('dragenter', onDragEnter);
+    window.addEventListener('dragleave', onDragLeave);
+    window.addEventListener('dragover', onDragOver);
+    window.addEventListener('drop', onDrop);
+    return () => {
+      window.removeEventListener('dragenter', onDragEnter);
+      window.removeEventListener('dragleave', onDragLeave);
+      window.removeEventListener('dragover', onDragOver);
+      window.removeEventListener('drop', onDrop);
+    };
+  }, []);
 
   const mailSubject = encodeURIComponent('RFQ — Levent Marine');
   const mailBody = encodeURIComponent(
@@ -23,30 +77,27 @@ export default function SourcingChannelTabs({ locale }: { locale: 'en' | 'tr' })
 
   return (
     <>
-      <div className="grid gap-2 sm:grid-cols-3 mb-4">
+      <div className="grid gap-2 sm:grid-cols-3">
         {/* Upload list */}
         <button
           type="button"
-          onClick={() => setListOpen(true)}
-          className="text-left rounded-xl border border-amber bg-amber/10 hover:bg-amber/20 transition p-3.5 group"
+          onClick={() => { setPendingFiles(null); setListOpen(true); }}
+          className="text-left rounded-lg border border-amber bg-amber/10 hover:bg-amber/15 transition px-3.5 py-2.5 group"
         >
-          <div className="flex items-start gap-3">
-            <div className="shrink-0 inline-flex h-9 w-9 items-center justify-center rounded-md bg-amber text-navy-700">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <div className="flex items-center gap-2.5">
+            <div className="shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-md bg-amber text-navy-700">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="17 8 12 3 7 8" />
                 <line x1="12" y1="3" x2="12" y2="15" />
               </svg>
             </div>
             <div className="min-w-0">
-              <div className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-amber-700 mb-0.5">
-                {t('Recommended for lists', 'Listeler için önerilir')}
-              </div>
-              <div className="font-head font-bold text-[14.5px] text-navy-700 leading-tight">
+              <div className="font-head font-bold text-[13px] text-navy-700 leading-tight">
                 {t('Upload your list', 'Listeni yükle')}
               </div>
-              <div className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-ink-muted mt-1">
-                Excel · Word · PDF
+              <div className="font-mono text-[9.5px] uppercase tracking-[0.1em] text-amber-700 mt-0.5">
+                Excel · Word · PDF · {t('drop anywhere', 'her yere bırak')}
               </div>
             </div>
           </div>
@@ -55,50 +106,44 @@ export default function SourcingChannelTabs({ locale }: { locale: 'en' | 'tr' })
         {/* Email */}
         <a
           href={mailHref}
-          className="text-left rounded-xl border border-line bg-white hover:border-navy-700 transition p-3.5 group no-underline block"
+          className="text-left rounded-lg border border-line bg-white hover:border-navy-700 transition px-3.5 py-2.5 group no-underline block"
         >
-          <div className="flex items-start gap-3">
-            <div className="shrink-0 inline-flex h-9 w-9 items-center justify-center rounded-md bg-navy-700 text-white">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <div className="flex items-center gap-2.5">
+            <div className="shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-md bg-navy-700 text-white">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                 <polyline points="22 6 12 13 2 6" />
               </svg>
             </div>
             <div className="min-w-0">
-              <div className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-ink-subtle mb-0.5">
-                {t('Existing fleet client', 'Mevcut filo müşterisi')}
-              </div>
-              <div className="font-head font-bold text-[14.5px] text-navy-700 leading-tight">
+              <div className="font-head font-bold text-[13px] text-navy-700 leading-tight">
                 {t('Email RFQ', 'E-posta RFQ')}
               </div>
-              <div className="font-mono text-[10.5px] text-ink-muted mt-1 truncate">
+              <div className="font-mono text-[9.5px] text-ink-subtle mt-0.5 truncate">
                 rfq@leventmarinetech.com
               </div>
             </div>
           </div>
         </a>
 
-        {/* Call / WhatsApp */}
+        {/* WhatsApp / Call */}
         <a
           href="https://wa.me/16193840403"
           target="_blank"
           rel="noreferrer noopener"
-          className="text-left rounded-xl border border-line bg-white hover:border-green-600 transition p-3.5 group no-underline block"
+          className="text-left rounded-lg border border-line bg-white hover:border-green-600 transition px-3.5 py-2.5 group no-underline block"
         >
-          <div className="flex items-start gap-3">
-            <div className="shrink-0 inline-flex h-9 w-9 items-center justify-center rounded-md bg-[#25D366] text-white">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+          <div className="flex items-center gap-2.5">
+            <div className="shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-md bg-[#25D366] text-white">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                 <path d="M20.5 3.5A11 11 0 0 0 12 0a11 11 0 0 0-9.5 16.5L0 24l7.7-2.5A11 11 0 1 0 20.5 3.5zM12 21.6a9.6 9.6 0 0 1-4.9-1.4l-.4-.2-4.6 1.5 1.5-4.5-.2-.3a9.6 9.6 0 1 1 8.6 5z" />
               </svg>
             </div>
             <div className="min-w-0">
-              <div className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-ink-subtle mb-0.5">
-                {t('24/7 · vessel on call', '24/7 · gemi acil')}
-              </div>
-              <div className="font-head font-bold text-[14.5px] text-navy-700 leading-tight">
+              <div className="font-head font-bold text-[13px] text-navy-700 leading-tight">
                 {t('Call or WhatsApp', 'Ara veya WhatsApp')}
               </div>
-              <div className="font-mono text-[10.5px] text-ink-muted mt-1">
+              <div className="font-mono text-[9.5px] text-ink-subtle mt-0.5">
                 +1 619 384 04 03
               </div>
             </div>
@@ -106,15 +151,31 @@ export default function SourcingChannelTabs({ locale }: { locale: 'en' | 'tr' })
         </a>
       </div>
 
-      {/* Divider tag — "or search & add to RFQ" */}
-      <div className="relative mb-3 text-center">
-        <span className="relative bg-white px-3 font-mono text-[10.5px] uppercase tracking-[0.18em] text-ink-subtle">
-          {t('— or search & build an RFQ below —', '— veya aşağıdan ara ve RFQ oluştur —')}
-        </span>
-        <span className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px bg-line -z-10" aria-hidden />
-      </div>
+      {/* Drag-drop overlay — visible while a file hovers over the page */}
+      {showDropOverlay && (
+        <div className="fixed inset-0 z-[55] flex items-center justify-center bg-amber/20 backdrop-blur-sm pointer-events-none">
+          <div className="rounded-2xl border-4 border-dashed border-amber-700 bg-white px-10 py-8 text-center shadow-2xl">
+            <svg className="mx-auto mb-3 text-amber-700" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+            <div className="font-head font-bold text-[18px] text-navy-700">
+              {t('Drop your list anywhere', 'Listeni nereye bıraksan al')}
+            </div>
+            <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-amber-700 mt-1">
+              Excel · Word · PDF · CSV
+            </div>
+          </div>
+        </div>
+      )}
 
-      <ListRfqModal open={listOpen} onClose={() => setListOpen(false)} locale={locale} />
+      <ListRfqModal
+        open={listOpen}
+        onClose={() => { setListOpen(false); setPendingFiles(null); }}
+        locale={locale}
+        initialFiles={pendingFiles}
+      />
     </>
   );
 }
