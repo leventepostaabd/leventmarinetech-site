@@ -344,6 +344,272 @@
           "answer": "We initiate the maker-to-courier handover in parallel, and stage the engineer for the install ahead of the part arrival. If a maker-direct shipment will not land in the survey window, we propose a documented equivalent and let the superintendent make the final call."
         }
       ]
+    },
+    {
+      "slug": "furuno-radar-magnetron-replacement-signs-swap-verification",
+      "title": "Furuno Radar Magnetron Replacement: Signs, Swap, and Class Verification",
+      "description": "When to change a Furuno MG5436 or MG5223F magnetron, how the swap actually runs on the bridge, and the performance monitor numbers the PSC inspector will want to see afterwards.",
+      "kicker": "Bridge electrical",
+      "datePublished": "2026-05-23",
+      "dateModified": "2026-05-23",
+      "readingTimeMin": 9,
+      "wordCount": 1340,
+      "category": "Bridge & Navigation",
+      "keywords": [
+        "Furuno radar magnetron",
+        "MG5436 replacement",
+        "MG5223F",
+        "FAR-2xx7 service",
+        "FR-21x5 maintenance",
+        "marine radar PM target",
+        "SOLAS Ch V Reg 19"
+      ],
+      "relatedServices": ["bridge-navigation", "gmdss-communication", "switchboard"],
+      "relatedSupply": ["radar-navigation", "test-instruments"],
+      "heroAlt": "Furuno MG5436 magnetron being replaced inside an open FAR-2xx7 transceiver on the monkey island",
+      "sections": [
+        {
+          "h": "How to tell the magnetron is the actual problem",
+          "p": [
+            "Furuno MG5436 (S-band) and MG5223F (X-band) magnetrons are wear items, not failure parts. Typical service life is 4,000-6,000 transmit hours on FAR-2xx7 and FR-21x5 series; the bridge calls us when small targets disappear, when the performance monitor (PM) screen no longer paints the reference echo at the correct range ring, or when the tune slider has to be pushed harder each watch to keep a clean picture. Before you tear down the antenna unit, rule out the obvious: dirty radome, antenna gearbox wear, IF amplifier drift, or a faulty modulator HV. The magnetron is a sealed glass tube — it cannot be repaired, only swapped.",
+            "Open the PM menu (7.2 on FAR-2xx7) and record the current TX power reading and PM target distance. Compare against the previous quarterly entry in the radar log. A 30 % or greater drop in PM target distance combined with a TX power reading more than two divisions below baseline is the classic magnetron-end-of-life signature. If both numbers are still inside tolerance and the bridge still reports weak returns, the fault is downstream and a magnetron swap will not fix it."
+          ]
+        },
+        {
+          "h": "Carry the right spare. The S-band and X-band are not interchangeable.",
+          "p": [
+            "Bulker bridges with a primary S-band ARPA (FAR-28x7) and a secondary X-band (FR-2115 or FAR-2117) need both tube types on board. The MG5436 is a 25 kW peak S-band magnetron; the MG5223F is a 25 kW X-band. They share form-factor magnets and waveguide flange spacing but the operating frequency, filament voltage profile and modulator pulse width are different. Fitting the wrong tube is rare because the flange will not seat, but it has been logged when a chief mate accepted a maker-direct delivery without checking the carton label.",
+            "Always carry one spare of each as ship's spare per SOLAS Ch. V Reg.19. PSC inspectors increasingly check that the spare is current production (not 8-year-old inventory with degraded magnets) and that the on-board service record shows the antenna-unit hour-meter against the magnetron change log."
+          ]
+        },
+        {
+          "h": "The swap — what actually runs on the bridge",
+          "p": [
+            "An ETO attendance for a magnetron change typically takes 90 minutes alongside, plus an additional 30 minutes for PM calibration. The antenna unit is isolated at the transceiver isolating switch, the modulator HV cap is discharged through a grounding stick (we carry one — do not skip this; a residual 8 kV stored charge has put deck crew in the infirmary), and the magnet block is removed in one piece. The new tube is degassed for ten minutes at low filament voltage before full transmit, which the FAR-2xx7 sequence handles automatically on initial keying.",
+            "Once the tube is in, the antenna gearbox grease is inspected and the waveguide flange torque is verified against the maker spec (typically 8-10 Nm — over-torquing distorts the choke joint and you will chase a phantom standing-wave fault for the next year). The wheelhouse then performs a PM target verification with the radar in standby-to-transmit cycle and the result is logged. If the PM reading does not return to within 10 % of the original baseline, the modulator-rectifier board is the next suspect, not the new magnetron."
+          ]
+        },
+        {
+          "h": "Class survey paperwork the surveyor expects",
+          "p": [
+            "PSC inspectors and class surveyors review the radar log against the magnetron change. The records that have to be on file are: the date of replacement, the antenna unit hour-meter at change, the PM target reading before and after, the make/model/serial of the magnetron fitted, the certificate of conformity from the maker, and the disposition of the removed tube (recycling certificate or disposal record). Missing any of these — especially the PM reading delta — is a writable observation under Reg.19 navigation equipment compliance.",
+            "Our class report template covers each of these in one page and is accepted by DNV, BV, ABS, Lloyd's, TL, RINA, ClassNK and IRS without rewrites. We attach the original ship's spare receipt as evidence of OEM provenance, plus a thermal-camera image of the modulator section showing the HV stage running cool after the tube swap. That image alone has closed two interim class deficiencies that would otherwise have cost a separate attendance."
+          ]
+        },
+        {
+          "h": "When to source a replacement before the bridge calls",
+          "p": [
+            "If the antenna unit hour-meter has crossed 5,000 hours and the next class survey window is inside six months, schedule the replacement during the next planned port call, not under the surveyor's clock. We pre-stage magnetrons in the Wyoming-LLC US distribution hub for the most-active bulker, tanker and container fleets — change-out can be planned around any US East Coast or Gulf port call with 48 hours' notice, or any West Coast port with 72 hours' notice.",
+            "For vessels working trans-Atlantic or trans-Pacific lanes, the better strategy is to send the spare to the next US port-of-call and time the attendance during cargo work. We coordinate with the agent for gangway delivery; the ETO meets the part on board. No vessel waiting time, no surprise repair at the next class survey."
+          ]
+        }
+      ],
+      "cta": {
+        "service": {
+          "slug": "bridge-navigation",
+          "label": "Schedule a magnetron replacement"
+        },
+        "supply": {
+          "slug": "radar-navigation",
+          "label": "Source Furuno magnetrons and bridge spares"
+        }
+      },
+      "faq": [
+        {
+          "question": "How many transmit hours can we expect from a new MG5436?",
+          "answer": "4,000 to 6,000 hours under normal bulker bridge duty. Tankers running radar in standby-active cycles can see slightly longer life; container vessels with heavier traffic-watch usage tend to hit the lower end."
+        },
+        {
+          "question": "Can we run on the secondary X-band radar if the S-band magnetron has failed?",
+          "answer": "Yes, regulatory minimum is one operational radar on commercial vessels. But SOLAS Ch.V Reg.19 still requires both installed radars to be operational at survey. Plan a replacement before the next survey window — a single-radar deficiency closes ports for some flag states."
+        },
+        {
+          "question": "What about non-OEM magnetrons? Are they acceptable?",
+          "answer": "Marine type-approved equivalents exist (e.g. Toshiba E3578 series matched to Furuno spec) and they work technically. Class society acceptance varies; some surveyors require OEM. We default to OEM unless the customer explicitly accepts the equivalent and the class society confirms in writing."
+        }
+      ]
+    },
+    {
+      "slug": "marine-fire-detection-false-alarm-8-step-root-cause-hunt",
+      "title": "Marine Fire Detection False Alarms — 8-Step Root-Cause Hunt",
+      "description": "Eight diagnostic steps an ETO walks before raising a deficiency or replacing the panel, covering Autronica BS-100, Consilium Salwico CS3000, and Notifier marine loops.",
+      "kicker": "Safety systems",
+      "datePublished": "2026-05-23",
+      "dateModified": "2026-05-23",
+      "readingTimeMin": 10,
+      "wordCount": 1480,
+      "category": "Safety & Compliance",
+      "keywords": [
+        "marine fire alarm false alarm",
+        "Autronica BS-100",
+        "Consilium Salwico CS3000",
+        "Notifier marine",
+        "fire detection loop fault",
+        "SOLAS Ch II-2",
+        "smoke detector contamination"
+      ],
+      "relatedServices": ["fire-alarm", "smoke-detection", "engine-room-alarm"],
+      "relatedSupply": ["fire-detectors", "alarm-monitoring"],
+      "heroAlt": "ETO with multimeter probing an Autronica BS-100 fire panel loop terminal during a false-alarm hunt",
+      "sections": [
+        {
+          "h": "Why a false alarm is not a panel problem until proven otherwise",
+          "p": [
+            "Engine-room and galley false alarms are the most common after-hours call we take from chief engineers. The instinct on board is to suspect the panel — and to log a deficiency for the surveyor — but in twelve years of attending these we have replaced exactly two panels for genuine controller faults. The rest were loop, detector head, or environmental. This 8-step walk-through is what we run before the panel is even opened.",
+            "The principle is simple: SOLAS Ch.II-2 Reg.7 requires that every detector head report inside a 10-second poll cycle, and that the panel store the originating zone for an annunciated alarm. A repeating alarm with the same zone but no smoke present is almost always a detector head, a loop short, or an environmental spike — not a faulty panel."
+          ]
+        },
+        {
+          "h": "Step 1-2: Read the event log, then walk the zone",
+          "p": [
+            "Open the panel event log and read the last 30 events. Note the originating zone, the time pattern (every watch change? when the galley extraction starts? after deck wash-down?), and whether the alarm acknowledges itself or holds. A zone that alarms on a specific time-of-day pattern is environmental — galley grease, deck wash spray, condensation from a sudden engine-room ventilation change.",
+            "Walk the zone with the maker's service tool connected (Autronica AutroMaster, Consilium SW3000, Notifier laptop). Look at the detector chamber values live. A clean ionisation head reads inside the maker's chamber range; a contaminated head reads close to the alarm threshold even at quiescent. The service tool plots the trend so you can spot a slow-drift detector before it cries wolf."
+          ]
+        },
+        {
+          "h": "Step 3-4: Detector head sensitivity and the Solo 330 functional test",
+          "p": [
+            "Pull the head, blow it gently with low-pressure dry air (workshop compressed air is too aggressive — use a Solo 423 puffer or canned air), and reseat. If the chamber reading drops back into range, the head was contaminated. Replace if it does not — sensitivity calibration is non-recoverable beyond a single cleaning cycle on most marine ionisation heads. Optical heads tolerate more cleanings but eventually need swap-out.",
+            "Run a Solo 330 functional test on every head in the suspect zone — synthetic smoke, calibrated dose, telescoping pole. The head should annunciate within 8-12 seconds and the panel should log the same zone the head is wired to. A mismatch here is the lurking 'zone wiring crossed at the last yard period' bug we see roughly once a year."
+          ]
+        },
+        {
+          "h": "Step 5-6: Loop electrical — current and shield",
+          "p": [
+            "Disconnect the loop at the panel and measure loop current at the maker-spec test voltage (typically 18-22 mA at 24 VDC for an Autronica BS-100 quiescent loop, slightly higher for Consilium). A loop current outside that band, or that swings more than 1 mA with deck-light switching, has an earth fault or a shield discontinuity.",
+            "Walk the loop with an insulation tester at 250 V (do not exceed — 500 V will damage some addressable modules) and look for shield-to-earth values below 10 MΩ. Hot-work-after-class-survey is the usual cause: somebody welded near a cable run, the shield was nicked, and the bilge water finished it off three months later. Splicing in a marine-grade shielded cable and re-terminating both ends usually closes the fault within an hour."
+          ]
+        },
+        {
+          "h": "Step 7-8: PA/GA STI and the panel firmware",
+          "p": [
+            "Engine room PA/GA systems share the speech-transmission-index (STI) requirement under IEC 60849 — an STI of 0.5 or better is the SOLAS-mandated threshold for intelligibility. We measure with a B&K 2270 + STI/STIPA module against the engine room background sound at 90 % MCR. An STI below 0.5 is a Convention non-conformity but is also a frequent root cause of 'false fire alarm' calls — the watchkeeper hears a partial announcement, assumes a fire, and confirms via the panel which is already in test mode.",
+            "Finally, check the panel firmware version against the maker's bulletin board. Consilium Salwico CS3000 had a known false-alarm logic bug in firmware revisions before 2.4.1 affecting galley extraction sensors. Autronica BS-100 had a similar issue with deck head condensation in revision 4.x. A firmware update closes the issue for the next ten years; we run it during a planned port call with the bridge supervisor present, not under PSC pressure."
+          ]
+        },
+        {
+          "h": "When to replace the panel — and when not to",
+          "p": [
+            "Panel replacement is rare and expensive. The case to replace is: repeated communication-failures between panel and zone controllers after every standard repair, or panel power-supply faults that survive new PSU modules. Otherwise, every false alarm we have closed in five years has been one of the eight items above. The cost-per-incident on a planned attendance is a fraction of an unplanned PSC observation that delays a port call.",
+            "The class-report template covers each step with the readings before and after, photographs of the detector chambers, and the firmware version stamped. Hand it to the surveyor; no rewriting required."
+          ]
+        }
+      ],
+      "cta": {
+        "service": {
+          "slug": "fire-alarm",
+          "label": "Book a fire-detection root-cause attendance"
+        },
+        "supply": {
+          "slug": "fire-detectors",
+          "label": "Source detector heads and loop modules"
+        }
+      },
+      "faq": [
+        {
+          "question": "Which maker's fire panels do we service?",
+          "answer": "Autronica BS-100 and AutroSafe IFG, Consilium Salwico CS3000 and CS4000, Notifier marine, Tyco Marioff (where the same loop architecture applies), Minimax (passenger ships). We carry the service tools for the first three on every dispatch."
+        },
+        {
+          "question": "How long does a typical false-alarm attendance take?",
+          "answer": "Three to six hours from boarding to class report. If the root cause is contamination, that's the long end (we test every head in the suspect zone and adjacent zones). Loop earth faults run shorter."
+        },
+        {
+          "question": "Can we cover SOLAS Ch.II-2 annual survey at the same attendance?",
+          "answer": "Yes. We coordinate the annual fire-detection survey with the root-cause attendance and produce a single combined class report. Surveyors prefer this — one visit, one signature, fewer port days lost."
+        }
+      ]
+    },
+    {
+      "slug": "kongsberg-k-chief-plc-card-replacement-walkthrough",
+      "title": "Engine Room PLC Card Replacement — Kongsberg K-Chief Walk-through",
+      "description": "How an ETO actually swaps a faulty Kongsberg K-Chief 700 or 600 module live, what to back up first, and the verification routine the chief engineer signs off.",
+      "kicker": "Automation",
+      "datePublished": "2026-05-23",
+      "dateModified": "2026-05-23",
+      "readingTimeMin": 11,
+      "wordCount": 1520,
+      "category": "Automation & Control",
+      "keywords": [
+        "Kongsberg K-Chief",
+        "K-Chief 700",
+        "K-Chief 600",
+        "marine PLC replacement",
+        "engine room automation",
+        "Praxis Selma",
+        "AS controller card swap"
+      ],
+      "relatedServices": ["plc-automation", "engine-room-alarm", "switchboard"],
+      "relatedSupply": ["plc-hmi", "automation-control", "alarm-monitoring"],
+      "heroAlt": "ETO removing a Kongsberg K-Chief 700 controller card from a marine engine control room cabinet",
+      "sections": [
+        {
+          "h": "Before you touch a card, back up the configuration",
+          "p": [
+            "A Kongsberg K-Chief 700 cabinet (the post-2010 monitoring/automation standard on most bulkers and tankers) does not retain its application program across a card swap unless you have an export of the configuration on a service laptop. The K-Chief Configuration Tool reads the controller, dumps the active configuration to a .cfg file, and timestamps it. Do this before you touch anything — including before you measure with a multimeter near energised terminals. We have lost two days on board because an enthusiastic third engineer pulled an AS-controller before the dump and the project file on the office laptop was three months stale.",
+            "Praxis Selma owners — same principle, different tool. The Praxis configuration export is from the Selma Studio with the cabinet still energised and communicating. K-Chief 600 (the earlier generation) supports the same export through the Kongsberg KME service tool. Whatever the platform, the rule is: dump first, swap second."
+          ]
+        },
+        {
+          "h": "Identify the card that has actually failed",
+          "p": [
+            "Bridge or ECR alarm pages will tell you the cabinet, the rack and slot, and usually the module type — but not always the failure mode. Open the cabinet, look at the controller LEDs at the front edge. A solid red 'CPU FAULT' is unambiguous; a flashing amber 'BUS ERROR' is often a backplane issue or a downstream input/output card pulling the bus low. A 'COMMS LOSS' on a remote I/O drop usually points to the field cabinet, not the central controller.",
+            "Before swapping any card, measure the 24 VDC backplane voltage at the test points printed on the inside of the cabinet door — Kongsberg standard is 22-26 V loaded. A drooping backplane voltage that recovers when you unplug one card pinpoints the failed module without trial-and-error replacements. Carry a clamp-on DC ammeter (Fluke 376 or equivalent) — current draw on the backplane is the second clue."
+          ]
+        },
+        {
+          "h": "The physical swap — sequence and ESD discipline",
+          "p": [
+            "K-Chief controllers are hot-swappable on the redundancy-protected racks but not on the single-controller pages. Read the cabinet wiring diagram before pulling any card. If the system has dual redundant controllers, fail over to the standby through the service tool before extracting the active. If not, schedule the swap during a planned standstill — at anchor, with the engine room manned and the chief informed.",
+            "ESD discipline is non-negotiable. Marine ECR cabinets accumulate a surprising amount of static, especially in dry air-con environments at sea. Wear the wrist strap clipped to the cabinet ground stud, not to the rack. Place the new card on a static-dissipative mat (we carry a folded one) before removing it from the antistatic bag. Insert with steady firm pressure until the backplane connector seats — Kongsberg cards seat with an audible click; if there is no click, you are not fully home and the bus will not initialise."
+          ]
+        },
+        {
+          "h": "Restore the configuration and verify on-line",
+          "p": [
+            "After the new card is seated, power-cycle the controller (or let it auto-boot if hot-swap was clean). The Configuration Tool then writes the saved .cfg back to the controller. Verify the firmware revision on the new card matches the project — Kongsberg pushed a K-Chief 700 firmware update in 2019 that changed the way alarm priorities are stored; mixing pre-2019 and post-2019 cards inside the same cabinet causes intermittent priority-swap faults that take days to diagnose.",
+            "Once configured, walk every alarm point under the chief engineer's watch. Trigger a test alarm at three different I/O modules (one binary input, one analogue input, one binary output) and confirm the ECR alarm page receives it in the correct priority and within the standard 2-second poll cycle. The chief engineer signs the test sheet; we leave a copy in the cabinet and one in the project file."
+          ]
+        },
+        {
+          "h": "Where the replacement card comes from",
+          "p": [
+            "Genuine Kongsberg cards are sourced through Kongsberg Maritime service centres — Houston, Seattle, Rotterdam are the closest hubs for US-port deliveries. Lead time is normally 24-72 hours for the high-runner modules (CPUs, common AI/AO modules) and 5-10 days for the lower-volume specialised cards. We stage frequent failure-mode spares (e.g. CP4-series CPUs) in our US distribution position to cut a day off the lead time when the vessel is already alongside.",
+            "Equivalent modules from third-party suppliers exist for some I/O cards but not the CPUs. Class society acceptance varies — DNV and ABS will usually accept a documented equivalent for non-safety-critical I/O; safety-critical fire and gas detection points require the OEM card. We default to OEM and only propose an equivalent when the lead time forces the question, and only with written customer acceptance."
+          ]
+        },
+        {
+          "h": "Praxis Selma and other automation platforms",
+          "p": [
+            "The same principles apply to Praxis Selma (common on Turkish-flag bulkers and some Greek tankers), ABB AC-700 (industrial-marine crossover platforms on offshore support and FPSOs), and Lyngsø Marine (older but still installed on container ships from early 2000s). Configuration export, card-level fault isolation, ESD-disciplined swap, on-line verification — the workflow is invariant.",
+            "What changes is the service tool, the backplane voltage spec and the firmware revision protocol. We carry tools for K-Chief 600/700, Praxis Selma, ABB AC-700 and Lyngsø on every automation dispatch. For platforms we do not normally cover (Yokogawa CENTUM marine variants, Honeywell), we coordinate with the maker for a parallel attendance — typically arriving at the next port with their service engineer."
+          ]
+        }
+      ],
+      "cta": {
+        "service": {
+          "slug": "plc-automation",
+          "label": "Book a controller-card replacement"
+        },
+        "supply": {
+          "slug": "plc-hmi",
+          "label": "Source K-Chief and Praxis spares"
+        }
+      },
+      "faq": [
+        {
+          "question": "Can we attend remotely if the cabinet has a service VPN?",
+          "answer": "For diagnostic and configuration export, yes — Kongsberg's remote service link lets us read the controller without boarding. The physical card swap still needs an ETO at the cabinet."
+        },
+        {
+          "question": "What about K-Chief 600 in older bulkers — is it still supported?",
+          "answer": "Yes. Spares are harder but available through Kongsberg service centres. We hold the K-Chief 600 service tool and the original maker software image for systems we cover regularly."
+        },
+        {
+          "question": "How long does a typical PLC card attendance run?",
+          "answer": "Four to eight hours alongside, depending on configuration restore time and whether dual-redundancy fail-over is available. Single-controller cabinets in single-line propulsion vessels need a planned standstill — usually scheduled during cargo work or at anchor."
+        }
+      ]
     }
   ]
 }

@@ -7,6 +7,7 @@ import PageTransition from '@/components/PageTransition';
 import AboutModal from '@/components/AboutModal';
 import ScrollLock from '@/components/ScrollLock';
 import RfqBasket from '@/components/RfqBasket';
+import Analytics from '@/components/Analytics';
 import { SITE } from '@/lib/site';
 import { organizationSchema } from '@/lib/schema-org';
 import { getLocale } from '@/lib/i18n';
@@ -31,7 +32,12 @@ export const metadata: Metadata = {
   },
   twitter: { card: 'summary_large_image', images: ['/assets/brand/og-image.jpg'] },
   icons: { icon: [{ url: '/assets/logo.svg', type: 'image/svg+xml' }, { url: '/assets/logo.png' }] },
-  robots: { index: true, follow: true }
+  robots: { index: true, follow: true },
+  // Google Search Console verification — set NEXT_PUBLIC_GSC_VERIFICATION
+  // to the value Google provides (just the content string, not the full meta).
+  ...(process.env.NEXT_PUBLIC_GSC_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GSC_VERIFICATION } }
+    : {})
 };
 
 export const viewport: Viewport = {
@@ -63,6 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Spotlight />
         <AboutModal />
         <RfqBasket locale={locale} />
+        <Analytics />
 
         <script
           type="application/ld+json"
