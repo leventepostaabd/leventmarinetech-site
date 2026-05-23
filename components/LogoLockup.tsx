@@ -105,26 +105,30 @@ function Badge({ tone, scale, className }: Required<Omit<LogoLockupProps, 'varia
   // + single-line kicker. Single colour throughout (no two-tone), wider
   // tracking, no rounded plate. Reads at any size from business card
   // to billboard.
+  //
+  // Responsive: on phones (<sm) the kicker line is hidden so the lockup
+  // collapses to mark + divider + wordmark only — fits 320px width
+  // between the menu button and the locale toggle.
   const wordmark = tone === 'light' ? 'text-white' : 'text-navy-700';
   const kicker = tone === 'light' ? 'text-amber-300/90' : 'text-amber-700';
   const divider = tone === 'light' ? 'bg-white/30' : 'bg-navy-700/20';
 
   return (
     <div
-      className={`inline-flex items-center gap-3.5 ${className}`}
+      className={`inline-flex items-center gap-2.5 sm:gap-3.5 ${className}`}
       style={{ transform: `scale(${scale})` }}
     >
-      <LeventLogo size={36} tone={tone === 'light' ? 'light' : 'auto'} />
-      <span aria-hidden className={`h-9 w-px ${divider}`} />
+      <LeventLogo size={32} tone={tone === 'light' ? 'light' : 'auto'} />
+      <span aria-hidden className={`h-7 w-px sm:h-9 ${divider}`} />
       <div className="flex flex-col leading-none">
         <div
-          className={`font-head font-extrabold text-[16px] ${wordmark}`}
+          className={`font-head font-extrabold text-[14px] sm:text-[16px] ${wordmark}`}
           style={{ letterSpacing: '0.06em' }}
         >
           LEVENT&nbsp;MARINE
         </div>
         <div
-          className={`mt-1.5 font-mono text-[9.5px] uppercase ${kicker}`}
+          className={`mt-1.5 hidden sm:block font-mono text-[9.5px] uppercase ${kicker}`}
           style={{ letterSpacing: '0.22em' }}
         >
           Electrotechnical&nbsp;·&nbsp;24/7&nbsp;Worldwide

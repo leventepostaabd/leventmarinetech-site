@@ -52,11 +52,12 @@ export default function TopBar({ locale }: { locale: 'en' | 'tr' }) {
   return (
     <>
       <header
-        className={`fixed left-0 right-0 top-0 z-40 flex h-14 items-center px-4 transition-colors md:h-16 md:px-6 ${
+        className={`fixed left-0 right-0 top-0 z-40 flex h-14 items-center px-3 transition-colors md:h-16 md:px-6 ${
           isHeroLike
             ? 'bg-gradient-to-b from-navy-900/85 via-navy-900/55 to-transparent text-white'
             : 'bg-white/95 text-ink backdrop-blur border-b border-line'
         }`}
+        style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}
         aria-label="Levent Marine top bar"
       >
         {/* Menu button — left */}
@@ -84,7 +85,7 @@ export default function TopBar({ locale }: { locale: 'en' | 'tr' }) {
           aria-label="Levent Marine — home"
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 no-underline transition hover:scale-[1.02]"
         >
-          <LogoLockup variant="C" tone={isHeroLike ? 'light' : 'dark'} scale={0.85} />
+          <LogoLockup variant="C" tone={isHeroLike ? 'light' : 'dark'} scale={0.82} />
         </Link>
 
         {/* Locale toggle — right */}
