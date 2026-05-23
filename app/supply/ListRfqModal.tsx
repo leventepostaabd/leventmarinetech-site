@@ -25,11 +25,15 @@ type Uploaded = { path: string; name: string; size: number };
 export default function ListRfqModal({
   open,
   onClose,
-  locale
+  locale,
+  initialFiles
 }: {
   open: boolean;
   onClose: () => void;
   locale: 'en' | 'tr';
+  /** Files pre-attached when the modal opens — used by the page-level
+      drag-drop interceptor in SourcingChannelTabs. */
+  initialFiles?: File[] | null;
 }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setMounted(true); }, []);
@@ -64,6 +68,14 @@ export default function ListRfqModal({
     setRef(null);
     return () => document.removeEventListener('keydown', onKey);
   }, [open, onClose]);
+
+  // Auto-upload any files passed in via initialFiles (page-level drag-drop).
+  // Runs exactly once per open+initialFiles pair.
+  useEffect(() => {
+    if (!open || !initialFiles || initialFiles.length === 0) return;
+    handleFiles(initialFiles);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, initialFiles]);
 
   async function uploadOne(file: File): Promise<Uploaded | null> {
     try {
@@ -143,14 +155,14 @@ export default function ListRfqModal({
   const content = (
     <AnimatePresence>
       {open && (
-        <>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 pointer-events-none">
           <motion.div
             key="lm-list-scrim"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[60] bg-navy-900/70 backdrop-blur-sm"
+            className="absolute inset-0 bg-navy-900/70 backdrop-blur-sm pointer-events-auto"
             onClick={onClose}
             aria-hidden
           />
@@ -160,7 +172,8 @@ export default function ListRfqModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: 8 }}
             transition={{ duration: 0.24, ease: [0.2, 0.8, 0.2, 1] }}
-            className="fixed left-1/2 top-1/2 z-[60] w-[min(720px,94vw)] max-h-[90vh] -translate-x-1/2 -translate-y-1/2 flex flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
+            style={{ maxHeight: '88vh' }}
+            className="relative w-[min(720px,94vw)] flex flex-col overflow-hidden rounded-2xl bg-white shadow-2xl pointer-events-auto"
             role="dialog"
             aria-modal="true"
           >
@@ -371,7 +384,7 @@ export default function ListRfqModal({
               )}
             </div>
           </motion.div>
-        </>
+        </div>
       )}
     </AnimatePresence>
   );
