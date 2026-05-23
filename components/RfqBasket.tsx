@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   type BasketItem,
@@ -28,6 +29,7 @@ type View = 'list' | 'sent';
  */
 export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
   const pathname = usePathname() || '/';
+  const router = useRouter();
   const [items, setItems] = useState<BasketItem[]>([]);
   const [open, setOpen] = useState(false);
   const [view, setView] = useState<View>('list');
@@ -52,7 +54,9 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeDrawer();
+    };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
   }, [open]);
@@ -77,9 +81,28 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
     );
   }, [items]);
 
-  if (!showOn || items.length === 0 || !mounted) return null;
+  // Keep the panel rendered after a successful submit (view === 'sent')
+  // even though clearBasket() empties items.length to 0 — without this the
+  // success message would never paint because the component unmounts.
+  if (!showOn || !mounted) return null;
+  if (items.length === 0 && view !== 'sent') return null;
 
   const totalItems = items.reduce((sum, it) => sum + it.quantity, 0);
+
+  // Closing from the sent view resets back to 'list' so next basket session
+  // starts fresh and the component unmounts cleanly (no leftover refs).
+  function closeDrawer() {
+    setOpen(false);
+    if (view === 'sent') {
+      setView('list');
+      setRefs([]);
+      setName('');
+      setEmail('');
+      setVessel('');
+      setPort('');
+      setNotes('');
+    }
+  }
 
   async function handleSubmit() {
     setErr(null);
@@ -170,7 +193,7 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
               className="fixed inset-0 z-50 bg-navy-900/60 backdrop-blur-sm"
-              onClick={() => setOpen(false)}
+              onClick={closeDrawer}
               aria-hidden
             />
             <motion.aside
@@ -187,15 +210,19 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
               <div className="shrink-0 flex items-center justify-between border-b border-line px-5 py-4">
                 <div>
                   <div className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-amber-600">
-                    {t('RFQ basket', 'RFQ sepeti')}
+                    {view === 'sent'
+                      ? t('Request received', 'Talep alındı')
+                      : t('RFQ basket', 'RFQ sepeti')}
                   </div>
                   <div className="font-head font-bold text-[15px] text-navy-700">
-                    {items.length} {t('parts', 'parça')} · {totalItems} {t('items', 'adet')}
+                    {view === 'sent'
+                      ? t('Same-day quote on the way', 'Aynı gün içinde teklif yolda')
+                      : `${items.length} ${t('parts', 'parça')} · ${totalItems} ${t('items', 'adet')}`}
                   </div>
                 </div>
                 <button
                   type="button"
-                  onClick={() => setOpen(false)}
+                  onClick={closeDrawer}
                   aria-label={t('Close', 'Kapat')}
                   className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-navy-50 hover:bg-navy-100"
                 >
@@ -207,24 +234,61 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
 
               <div className="flex-1 overflow-y-auto px-5 py-4">
                 {view === 'sent' ? (
-                  <div className="text-center py-8">
-                    <div className="mx-auto mb-3 inline-flex h-12 w-12 items-center justify-center rounded-full bg-green-100 text-green-700">
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                  <div className="text-center py-6">
+                    <div className="mx-auto mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-green-700">
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                     </div>
-                    <h3 className="text-[18px] font-bold mb-2 text-navy-700">
-                      {t("Sent. We'll reply with prices today.", 'Gönderildi. Bugün içinde fiyatlarla döneriz.')}
+                    <h3 className="text-[20px] font-bold mb-2 text-navy-700">
+                      {t('Got it. Check your inbox.', 'Aldık. Mail kutunu kontrol et.')}
                     </h3>
-                    <p className="text-ink-muted text-[13.5px] mb-3">
+                    <p className="text-ink-muted text-[13.5px] mb-2 max-w-xs mx-auto leading-relaxed">
                       {t(
-                        'Same-day turnaround. Most batch quotes within 1 hour.',
-                        'Aynı iş günü içinde. Çoğu toplu teklif 1 saat içinde döner.'
+                        "We've sent a confirmation. The full quote — item, shipping and ETA — comes back today, most within 30 minutes.",
+                        'Sana onay maili gönderdik. Tüm teklif (ürün, kargo, ETA) bugün içinde döner, çoğu 30 dk içinde.'
                       )}
                     </p>
-                    <div className="font-mono text-[12px] text-ink-subtle">
-                      {t('References', 'Referanslar')}:
-                      <div className="mt-1 text-ink">{refs.join(' · ')}</div>
+
+                    <div className="mt-4 inline-block rounded-md bg-navy-50 px-3 py-1.5 font-mono text-[11.5px] text-ink-subtle">
+                      {t('Refs', 'Referans')}: <span className="text-ink">{refs.join(' · ')}</span>
+                    </div>
+
+                    <div className="mt-6 pt-5 border-t border-line">
+                      <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle mb-3">
+                        {t('What next?', 'Sıradaki?')}
+                      </div>
+                      <div className="grid gap-2">
+                        <Link
+                          href="/supply"
+                          onClick={closeDrawer}
+                          className="btn-accent btn-md no-underline w-full text-center"
+                        >
+                          {t('Keep browsing supply', 'Tedarike devam et')} →
+                        </Link>
+                        <Link
+                          href="/service-wizard"
+                          onClick={closeDrawer}
+                          className="btn-primary btn-md no-underline w-full text-center"
+                        >
+                          {t('Need engineer on board? Request service', 'Mühendis lazım mı? Servis talep et')} →
+                        </Link>
+                        <a
+                          href="https://wa.me/16193840403"
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="rounded-md bg-[#25D366] px-4 py-2.5 text-white text-sm font-semibold no-underline hover:opacity-95 w-full text-center inline-block"
+                        >
+                          💬 {t('Anything urgent? WhatsApp', 'Acil bir şey mi? WhatsApp')}
+                        </a>
+                        <button
+                          type="button"
+                          onClick={closeDrawer}
+                          className="btn-ghost btn-md w-full"
+                        >
+                          {t('Done', 'Tamam')}
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ) : (
