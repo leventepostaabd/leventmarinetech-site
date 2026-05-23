@@ -12,7 +12,7 @@ import {
   removeFromBasket,
   updateQuantity
 } from '@/lib/rfq-basket';
-import { estimateBasket, fmt } from '@/lib/pricing';
+import { MARKUP_RATE, fmt } from '@/lib/pricing';
 
 type Urgency = 'aog' | 'urgent' | 'planned';
 type View = 'list' | 'sent';
@@ -66,13 +66,17 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
 
   const totalItems = items.reduce((sum, it) => sum + it.quantity, 0);
 
-  const estimate = useMemo(() => {
-    const priced = items
-      .filter((it) => typeof it.priceRaw === 'number')
-      .map((it) => ({ unitPrice: it.priceRaw as number, quantity: it.quantity }));
+  /** Item-only subtotal (markup applied) — we deliberately do NOT show
+      shipping/AOG here. Those depend on weight + port + carrier and only
+      get computed once the customer submits and we generate the quote. */
+  const itemSubtotal = useMemo(() => {
+    const priced = items.filter((it) => typeof it.priceRaw === 'number');
     if (priced.length === 0) return null;
-    return estimateBasket({ lines: priced, port, urgency });
-  }, [items, port, urgency]);
+    return priced.reduce(
+      (sum, it) => sum + (it.priceRaw as number) * (1 + MARKUP_RATE) * Math.max(1, it.quantity),
+      0
+    );
+  }, [items]);
 
   async function handleSubmit() {
     setErr(null);
@@ -267,32 +271,19 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
                       ))}
                     </ul>
 
-                    {/* Running estimate (when at least one item has a live price) */}
-                    {estimate && (
+                    {/* Item-only subtotal — no shipping baseline shown */}
+                    {itemSubtotal != null && (
                       <div className="mb-3 rounded-lg border border-amber/40 bg-amber/5 px-3.5 py-2.5">
-                        <div className="flex items-baseline justify-between mb-1">
+                        <div className="flex items-baseline justify-between">
                           <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-amber-700">
-                            {t('Estimated total', 'Tahmini toplam')}
+                            {t('Items subtotal', 'Ürün toplamı')}
                           </span>
                           <span className="font-head font-extrabold text-[20px] text-navy-700">
-                            {fmt(estimate.total, locale)}
+                            {fmt(itemSubtotal, locale)}
                           </span>
                         </div>
-                        <div className="font-mono text-[11px] text-ink-muted space-y-0.5">
-                          <div className="flex justify-between">
-                            <span>{t('Items (+30 %)', 'Parçalar (+%30)')}</span>
-                            <span>{fmt(estimate.itemTotal, locale)}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>{t('Shipping', 'Kargo')}</span>
-                            <span>+{fmt(estimate.shipping, locale)}</span>
-                          </div>
-                          {estimate.aogFee > 0 && (
-                            <div className="flex justify-between text-red-700">
-                              <span>{t('AOG dispatch', 'AOG dispatch')}</span>
-                              <span>+{fmt(estimate.aogFee, locale)}</span>
-                            </div>
-                          )}
+                        <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-amber-700">
+                          + {t('shipping after delivery info', 'kargo bilgi sonrası')}
                         </div>
                       </div>
                     )}
@@ -302,8 +293,8 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
                       <div className="text-[12.5px] leading-relaxed">
                         <strong className="text-amber-700">{t('Same-day quote.', 'Aynı gün içinde teklif.')}</strong>{' '}
                         {t(
-                          'Estimate above; final confirmed within 30 minutes once we verify supplier shipping + vessel compatibility.',
-                          'Tahmini yukarıda; 30 dk içinde tedarikçi kargo + uyumluluk doğrulandıktan sonra final.'
+                          'Submit company + delivery location below; we reply with the full price including shipping the same business day.',
+                          'Aşağıya firma + teslim yerini gir; tüm fiyatı (kargo dahil) aynı iş günü içinde döneriz.'
                         )}
                       </div>
                     </div>
