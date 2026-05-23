@@ -101,18 +101,28 @@ export default function Hero({
         </motion.div>
       </div>
 
-      {/* Footer hint (legibility / proof) — tucked into the very bottom edge */}
+      {/* Footer hint (legibility / proof) — tucked into the very bottom edge.
+          'About' button uses the global event so the modal opens without leaving
+          this no-scroll viewport (F1 decision). */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.7, duration: 0.5 }}
-        className="pointer-events-none absolute bottom-2 left-0 right-0 z-30 flex items-center justify-center gap-5 px-6 font-mono text-[9.5px] uppercase tracking-[0.18em] text-white/55"
+        className="absolute bottom-2 left-0 right-0 z-30 flex items-center justify-center gap-5 px-6 font-mono text-[9.5px] uppercase tracking-[0.18em] text-white/55"
       >
         <span>STCW III/6 ETO</span>
         <span aria-hidden>·</span>
         <span>24/7 AOG</span>
         <span aria-hidden>·</span>
         <span>{SITE.trust.vessels} vessels</span>
+        <span aria-hidden>·</span>
+        <button
+          type="button"
+          data-about-trigger
+          className="hover:text-amber transition-colors underline-offset-4 hover:underline"
+        >
+          {locale === 'tr' ? 'Hakkımızda' : 'About'}
+        </button>
       </motion.div>
 
       <EmergencyModal

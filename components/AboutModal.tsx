@@ -18,7 +18,14 @@ import CertBadges from './CertBadges';
  * Toggle externally via `[data-about-trigger]` attribute on any clickable element,
  * or programmatically by dispatching `window.dispatchEvent(new Event('lm:about-open'))`.
  */
-export default function AboutModal({ triggerLabel = 'About' }: { triggerLabel?: string }) {
+export default function AboutModal({
+  triggerLabel = 'About',
+  inlineTrigger = true
+}: {
+  triggerLabel?: string;
+  /** When mounted globally (e.g. from layout) pass false to hide the inline button. */
+  inlineTrigger?: boolean;
+}) {
   const [open, setOpen] = useState(false);
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
@@ -66,13 +73,15 @@ export default function AboutModal({ triggerLabel = 'About' }: { triggerLabel?: 
 
   return (
     <>
-      <button
-        type="button"
-        onClick={openModal}
-        className="text-[13px] font-mono uppercase tracking-[0.12em] text-ink-muted hover:text-amber-600 underline-offset-4 hover:underline transition"
-      >
-        {triggerLabel}
-      </button>
+      {inlineTrigger && (
+        <button
+          type="button"
+          onClick={openModal}
+          className="text-[13px] font-mono uppercase tracking-[0.12em] text-ink-muted hover:text-amber-600 underline-offset-4 hover:underline transition"
+        >
+          {triggerLabel}
+        </button>
+      )}
 
       {open && (
         <div

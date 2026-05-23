@@ -89,7 +89,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <CookieBanner />
         <Spotlight />
-        <AboutModal />
+        {/* Global event listener — opens via lm:about-open dispatch or [data-about-trigger] click. */}
+        <AboutModal inlineTrigger={false} />
         <RfqBasket locale={locale} />
         <Analytics />
 
