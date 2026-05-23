@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import ProductQuoteModal, { type ModalProduct } from './ProductQuoteModal';
-import { fmt } from '@/lib/pricing';
+import { MARKUP_RATE, fmt } from '@/lib/pricing';
 
 type Item = {
   slug: string;
@@ -232,18 +232,17 @@ export default function EbayCatalogGrid({
                         <div className="font-mono text-[11px] text-ink-subtle mb-2">{it.partNumber}</div>
                       )}
 
-                      {/* Estimated price + delivery — vessel-specific final price disclaimer in modal */}
+                      {/* Estimated ITEM price only — shipping is computed
+                          after the customer submits company + delivery info,
+                          so we don't show a misleading baseline here. */}
                       <div className="mt-auto pt-2">
-                        {it.estTotal != null ? (
+                        {it.priceRaw != null ? (
                           <>
                             <div className="font-head font-extrabold text-[16px] text-navy-700 leading-none">
-                              ~{fmt(it.estTotal, locale)}
+                              {fmt(it.priceRaw * (1 + MARKUP_RATE), locale)}
                             </div>
-                            <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-subtle mt-1">
-                              {locale === 'tr' ? it.estDeliveryTr : it.estDeliveryEn}
-                            </div>
-                            <div className="font-mono text-[9.5px] text-ink-subtle/80 mt-0.5">
-                              {t('Estimated · final in 30 min', 'Tahmini · 30 dk içinde final')}
+                            <div className="font-mono text-[9.5px] uppercase tracking-[0.12em] text-ink-subtle mt-1">
+                              {t('+ shipping · same-day quote', '+ kargo · aynı gün teklif')}
                             </div>
                           </>
                         ) : (
