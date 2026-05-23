@@ -4,7 +4,7 @@
 > buradaki ilgili kutucuğu işaretler, varsa not bırakır.
 > "Bugün ne durumdayız" sorusunun cevabı **bu dosyadadır**.
 
-**Son güncelleme:** 2026-05-20
+**Son güncelleme:** 2026-05-23
 
 ---
 
@@ -96,12 +96,13 @@ trafik akmaya başladığında bunu gündeme getir.
 
 ## Aktif Engeller
 
-**Integration notes (2026-05-20):**
-- `lib/site.ts` hala eski 11-slug `SERVICE_SLUGS` listesini içeriyor. `app/sitemap.ts` (Agent D) bu listeyi okuyor; sitemap doğru 20-slug listesini görsün diye `SERVICE_SLUGS`'ı kaldırıp `readServices()`'a geçilmeli veya 19 yeni slug'la güncellenmeli. Wave 1 build'i bloklamadı (`generateStaticParams` artık `readServices()`'tan).
-- WhatsApp Business API gerçek credentials yok; `lib/notify.ts` içindeki `notifyByWhatsApp` token yokken click-to-chat URL'i loglar (N1 söz verildi, kanal hazır — sadece env var beklemede).
-- `app/api/search-index/route.ts` eski `ServiceContent` şeklini okuyor olabilir — Agent D'nin SEO geçişinde yeni shape'e göre regenerate edilmeli.
-- Hero (Agent E) `<USAMap />`, `<LogoStrip />`, `<CertBadges compact />`, `<AboutModal />` componentlerini henüz import etmiyor — final integration commit'inde eklenecek.
-- Agent D'nin knowledge yazıları bazı `/services/{slug}`'lara link veriyor; Agent B'nin 19-slug listesinde olmayan slug'lar (safety-systems, automation-control, survey-psc-prep, navigation-gmdss, vb.) — yazılar düzeltilmeli ya da yeni slug map'i çıkarılmalı.
+**Integration notes:**
+- ✅ ~~`lib/site.ts` eski `SERVICE_SLUGS`~~ — kaldırıldı, `readServices()`'a geçildi (önceki commit).
+- ✅ ~~`content/search-index.json` eski 11-slug shape~~ — 2026-05-23 commit `937dc3e` ile services.json'dan regenerate edildi (22 service entry).
+- ✅ ~~Knowledge yazılarındaki kırık `/services/{slug}` linkleri~~ — 2026-05-23 commit `937dc3e` ile 8 service slug + 4 supply slug doğru ID'lere map'lendi.
+- ⏳ **Digi-Key API** — 2026-05-23 itibarıyla configured + ok (Mouser + Digi-Key + eBay üçü canlı). Grainger henüz B2B account approval bekliyor; marine motor/breaker traffic'i artana kadar lazım değil.
+- ⏳ **WhatsApp Business API** gerçek credentials yok; `lib/notify.ts` içindeki `notifyByWhatsApp` token yokken click-to-chat URL'i loglar (N1 söz verildi, kanal hazır — sadece env var beklemede).
+- ⏳ **Hero entegrasyon** — `<USAMap />`, `<LogoStrip />`, `<CertBadges compact />`, `<AboutModal />` componentleri ana sayfada doğru import edilmiş mi son bir kontrol gerek (Wave 4 cila kapsamında).
 
 ## Tamamlanmış Wave'ler
 
