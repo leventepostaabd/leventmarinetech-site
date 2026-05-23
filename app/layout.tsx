@@ -1,16 +1,38 @@
 import type { Metadata, Viewport } from 'next';
+import { Inter, Manrope, JetBrains_Mono } from 'next/font/google';
+import dynamic from 'next/dynamic';
 import './globals.css';
 import TopBar from '@/components/TopBar';
 import CookieBanner from '@/components/CookieBanner';
 import Spotlight from '@/components/Spotlight';
 import PageTransition from '@/components/PageTransition';
-import AboutModal from '@/components/AboutModal';
 import ScrollLock from '@/components/ScrollLock';
-import RfqBasket from '@/components/RfqBasket';
 import Analytics from '@/components/Analytics';
 import { SITE } from '@/lib/site';
 import { organizationSchema } from '@/lib/schema-org';
 import { getLocale } from '@/lib/i18n';
+
+const AboutModal = dynamic(() => import('@/components/AboutModal'), { ssr: false });
+const RfqBasket  = dynamic(() => import('@/components/RfqBasket'),  { ssr: false });
+
+const fontSans = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+  preload: true
+});
+const fontHead = Manrope({
+  subsets: ['latin'],
+  variable: '--font-head',
+  display: 'swap',
+  preload: true
+});
+const fontMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+  preload: false
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -49,7 +71,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const locale = getLocale();
   return (
-    <html lang={locale}>
+    <html lang={locale} className={`${fontSans.variable} ${fontHead.variable} ${fontMono.variable}`}>
       <body>
         <a
           href="#main"
