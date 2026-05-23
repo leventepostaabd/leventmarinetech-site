@@ -87,8 +87,11 @@ export default function Page() {
   return (
     <div className="lm-screen-hero grid bg-white lg:grid-cols-[minmax(0,1fr)_minmax(0,30%)]">
       {/* Left — request form. Padded under the transparent TopBar so the
-          first heading clears it. No internal scroll. */}
-      <div className="min-w-0 flex flex-col px-5 pt-[calc(var(--lm-topbar-h)+1rem)] pb-5 md:px-10 md:pt-[calc(var(--lm-topbar-h)+1.25rem)] md:pb-8">
+          first heading clears it (notch-aware). No internal scroll. */}
+      <div
+        className="min-w-0 flex flex-col px-5 pb-5 md:px-10 md:pb-8"
+        style={{ paddingTop: 'calc(var(--lm-topbar-h, 56px) + env(safe-area-inset-top, 0) + 1rem)' }}
+      >
         <Suspense fallback={<div className="text-ink-subtle font-mono text-sm">Loading wizard…</div>}>
           <ServiceWizardClient
             services={services}
