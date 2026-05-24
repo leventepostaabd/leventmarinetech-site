@@ -1,6 +1,310 @@
 {
   "regions": [
     {
+      "slug": "baltimore-marine-electrical",
+      "city": "Baltimore",
+      "state": "MD",
+      "metaTitle": "Marine Electrical Service Port of Baltimore | Levent Marine",
+      "metaDescription": "ETO and marine electrical attendance at Port of Baltimore (Helen Delich Bentley) — Seagirt, Dundalk, ro-ro and bulk vessel support 24/7.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Baltimore",
+      "intro": "The Helen Delich Bentley Port of Baltimore is the leading US port for ro-ro cargo (cars, trucks, construction and farm equipment) and a top-five East Coast container gateway. The 50 ft federal channel allows Neo-Panamax container calls to Seagirt Marine Terminal, while Dundalk Marine Terminal handles the bulk of PCTC and heavy-equipment ro-ro flows for Mercedes-Benz, GM, BMW, Subaru and Caterpillar. The Francis Scott Key Bridge replacement and channel-access work since 2024 has reshaped vessel routing, and current operations rely on the temporary federal channel — we coordinate closely with pilots for any anchorage or in-channel attendance. Most electrical attendances happen alongside. Common faults: PCTC stern-ramp, deck-fan and lighting circuit work after high-cycle discharge, container-ship bow-thruster VFD work, bulker AVR and reverse-power tuning on coal/grain exports out of Curtis Bay, and Wallenius and K-Line ro-ro emergency-generator AVR work on aging tonnage. Class attendance for ABS, DNV, NKK and Lloyd's is routine.",
+      "logistics": {
+        "airports": [
+          "BWI (Baltimore/Washington International)",
+          "IAD (Dulles)",
+          "PHL (Philadelphia)"
+        ],
+        "freightHubs": [
+          "FedEx BWI",
+          "UPS BWI",
+          "PHL overnight"
+        ],
+        "responseNote": "Engineer on board within 8-11 hours from Florida hub; same-day on AOG."
+      },
+      "ports": [
+        {
+          "name": "Seagirt Marine Terminal",
+          "lat": 39.2528,
+          "lng": -76.5511,
+          "vesselTypes": [
+            "Neo-Panamax container ships"
+          ],
+          "notes": "50 ft channel; STS, reefer and BWTS attendance routine."
+        },
+        {
+          "name": "Dundalk Marine Terminal",
+          "lat": 39.2569,
+          "lng": -76.5311,
+          "vesselTypes": [
+            "PCTC",
+            "Ro-ro",
+            "Breakbulk"
+          ],
+          "notes": "Largest US ro-ro hub; stern ramp and deck electrical common."
+        },
+        {
+          "name": "CSX Curtis Bay Coal Pier",
+          "lat": 39.2089,
+          "lng": -76.5811,
+          "vesselTypes": [
+            "Panamax bulkers",
+            "Capesize bulkers"
+          ],
+          "notes": "Met-coal exports; AVR and switchgear cleaning post-load."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "PCTC deck-fan motor failure at Dundalk Marine Terminal",
+          "summary": "Wallenius PCTC reports two of six cargo-deck ventilation fan motors tripped after Mercedes load-out, triggering CO/hydrogen alarm risk on next loading. We megger and replace one motor and rewind contacts on the second starter, restore full ventilation rate before next loading window."
+        },
+        {
+          "title": "Capesize bulker AVR drift at Curtis Bay",
+          "summary": "Capesize bulker loaded with met-coal reports DG1 voltage rising 8% off-load. We replace the AVR control card on a Cummins-Onan set, retune voltage droop and quadrature drop, perform load acceptance test through bow thruster and clear for departure."
+        }
+      ],
+      "usdInvoicing": "Invoiced in USD by Levent Marine LLC, Wyoming registered. NET 30 standard, NET 7 on AOG. Wire or ACH.",
+      "schemaCity": "Baltimore",
+      "schemaServiceArea": [
+        "Baltimore",
+        "Dundalk",
+        "Curtis Bay",
+        "Sparrows Point",
+        "Annapolis",
+        "Wilmington DE"
+      ]
+    },
+    {
+      "slug": "boston-marine-electrical",
+      "city": "Boston",
+      "state": "MA",
+      "metaTitle": "Marine Electrical Service Port of Boston Conley | Levent Marine",
+      "metaDescription": "Marine electrical attendance at Port of Boston — Conley Terminal, Everett LNG, cruise berths. 24/7 ETO support and parts supply, USD invoicing.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Boston",
+      "intro": "The Port of Boston combines Conley Terminal (the only full-service container terminal in New England, dredged to 47 ft for Neo-Panamax calls), the Everett LNG import terminal at Distrigas (one of only a handful of US LNG import facilities), the Black Falcon cruise terminal, and the Massport Marine Terminal for bulk and project cargo. The mix on any given day spans Neo-Panamax container ships on the Boston Express service, LNG carriers from Trinidad and the Caribbean, Holland America and Norwegian cruise vessels in season, and the occasional product tanker at the Chelsea River terminals. Most electrical attendances happen alongside; winter weather and ice can complicate launch work in the inner harbor. Common faults: container-ship BWTS and EGCS electrical work on Trans-Atlantic services, LNG carrier ESD and gas-detection electrical attendance, cruise HVAC and PMS work on seasonal calls, and cold-weather start failures on emergency generators after winter layovers at the M-Berth anchorages.",
+      "logistics": {
+        "airports": [
+          "BOS (Boston Logan)",
+          "PVD (Providence)",
+          "MHT (Manchester NH)"
+        ],
+        "freightHubs": [
+          "FedEx BOS",
+          "UPS BOS",
+          "Worldport (Louisville) overnight"
+        ],
+        "responseNote": "Engineer on board within 10-13 hours from Florida hub; same-day on AOG with first-flight booking."
+      },
+      "ports": [
+        {
+          "name": "Conley Container Terminal",
+          "lat": 42.3367,
+          "lng": -71.0089,
+          "vesselTypes": [
+            "Neo-Panamax container ships"
+          ],
+          "notes": "47 ft channel; only NE full-service container terminal."
+        },
+        {
+          "name": "Everett LNG (Distrigas)",
+          "lat": 42.4022,
+          "lng": -71.0344,
+          "vesselTypes": [
+            "LNG carriers"
+          ],
+          "notes": "ESD, gas detection and IT-system electrical; ex-zone certification required."
+        },
+        {
+          "name": "Black Falcon Cruise Terminal",
+          "lat": 42.3406,
+          "lng": -71.0286,
+          "vesselTypes": [
+            "Cruise ships"
+          ],
+          "notes": "Seasonal (Apr-Oct); HVAC and PMS turnaround attendance."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "LNG carrier ESD valve electrical fault at Everett",
+          "summary": "Trinidad-sourced LNG carrier reports manifold ESD valve solenoid drawing high current and failing to seat. We isolate, replace the EX-d solenoid coil with type-approved spare, megger downstream wiring, perform ESD logic test in concert with terminal SCADA and clear vessel for discharge resumption."
+        },
+        {
+          "title": "Container ship emergency generator cold-start failure post-winter layover",
+          "summary": "Neo-Panamax boxship returning from winter layoff at M-Berth fails emergency-generator black-start during pre-departure test. We diagnose a failed start-battery charger and frozen jacket-water heater contactor, replace both, verify successful 3-attempt start sequence and document for the attending DNV surveyor."
+        }
+      ],
+      "usdInvoicing": "Invoiced in USD by Levent Marine LLC, Wyoming registered. NET 30 standard, NET 7 on AOG. Wire or ACH.",
+      "schemaCity": "Boston",
+      "schemaServiceArea": [
+        "Boston",
+        "Everett",
+        "Chelsea",
+        "Quincy",
+        "Providence RI",
+        "Portsmouth NH",
+        "New Bedford"
+      ]
+    },
+    {
+      "slug": "charleston-marine-electrical",
+      "city": "Charleston",
+      "state": "SC",
+      "metaTitle": "Marine Electrical Service Port of Charleston | Levent Marine",
+      "metaDescription": "Marine electrical attendance at Port of Charleston — Wando Welch, Hugh K. Leatherman terminals. ULCV and Neo-Panamax box ship support 24/7.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Charleston",
+      "intro": "The Port of Charleston is the deepest harbor on the US East Coast at 52 ft, making it the East Coast's preferred call for partially laden ULCVs and a routine stop for Neo-Panamax boxships on the all-water service from Asia via Suez and Panama. Container operations split between Wando Welch Terminal (largest), the new Hugh K. Leatherman Terminal at North Charleston, and the North Charleston Terminal. Ro-ro flows for BMW Spartanburg exports run through Columbus Street Terminal. Most electrical attendances happen alongside at Wando Welch and Leatherman; the harbor approach is open and dead-ship windows are easy to schedule. Common faults: ULCV bow-thruster and main-engine remote-control system faults after long transits, BWTS commissioning and re-commissioning support on newbuilds calling Leatherman, reefer-stack power-management faults on the high-density Asia services, and aging-fleet switchboard insulation work on the secondary services. Class attendance is heavy here for ABS, DNV, Lloyd's and BV.",
+      "logistics": {
+        "airports": [
+          "CHS (Charleston International)",
+          "SAV (Savannah)"
+        ],
+        "freightHubs": [
+          "FedEx CHS",
+          "UPS CHS",
+          "Atlanta hub overnight"
+        ],
+        "responseNote": "Engineer on board within 6-9 hours from Florida hub; same-day for AOG."
+      },
+      "ports": [
+        {
+          "name": "Wando Welch Terminal",
+          "lat": 32.8408,
+          "lng": -79.8911,
+          "vesselTypes": [
+            "ULCV (partially laden)",
+            "Neo-Panamax container ships"
+          ],
+          "notes": "Largest container terminal in Charleston; STS and reefer attendance routine."
+        },
+        {
+          "name": "Hugh K. Leatherman Terminal",
+          "lat": 32.8542,
+          "lng": -79.9636,
+          "vesselTypes": [
+            "Neo-Panamax container ships"
+          ],
+          "notes": "Newest US container terminal; newbuild BWTS commissioning common."
+        },
+        {
+          "name": "Columbus Street Terminal",
+          "lat": 32.7822,
+          "lng": -79.9244,
+          "vesselTypes": [
+            "PCTC",
+            "Ro-ro",
+            "Breakbulk"
+          ],
+          "notes": "BMW export hub; ro-ro stern ramp and lighting electrical."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "ULCV main-engine remote-control alarm at Wando Welch",
+          "summary": "16,000 TEU boxship reports continuous main-engine telegraph mismatch alarm post-arrival. We connect to the MAN ECC, find a drifted telegraph potentiometer in the bridge wing console, recalibrate zero/span and verify telegraph response from all three control positions before pre-departure machinery check."
+        },
+        {
+          "title": "Newbuild BWTS UV-quartz fault at Leatherman",
+          "summary": "Newbuild Neo-Panamax boxship on third voyage trips BWTS on UV-intensity low. We dismantle the UV reactor, find biofilm coating the quartz sleeves from inadequate first-fill flushing, perform chemical clean, verify UVI to spec and update the BWMS log for the next port-state inspection."
+        }
+      ],
+      "usdInvoicing": "Invoiced in USD by Levent Marine LLC, Wyoming registered. NET 30 standard, NET 7 on AOG. Wire or ACH.",
+      "schemaCity": "Charleston",
+      "schemaServiceArea": [
+        "Charleston",
+        "Mt. Pleasant",
+        "North Charleston",
+        "Goose Creek",
+        "Summerville",
+        "Georgetown SC"
+      ]
+    },
+    {
+      "slug": "corpus-christi-marine-electrical",
+      "city": "Corpus Christi",
+      "state": "TX",
+      "metaTitle": "Marine Electrical Service Port of Corpus Christi | Levent Marine",
+      "metaDescription": "Marine electrical & ETO attendance at Port of Corpus Christi — largest US crude oil export port. Aframax, Suezmax, VLCC partial-load support 24/7.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Corpus Christi",
+      "intro": "The Port of Corpus Christi is the largest US energy port and the leading export gateway for US crude oil, condensate and LPG produced from the Permian and Eagle Ford basins. The Corpus Christi Ship Channel has been deepened and widened to 54 ft under the CIP program, supporting fully laden Suezmax tankers and partial-load VLCCs at the major liquid bulk terminals — Magellan, Buckeye, NuStar Sea Lift, Moda Ingleside (now Enbridge) and EPIC Marine. Bulk and breakbulk move through the inner harbor terminals. Most electrical attendances happen alongside at the energy terminals; the channel is straight and well-marked, and dead-ship windows can be coordinated with terminal operators. Common faults: cargo-pump VFD and inverter work on product and crude tankers, IG-system and vapor-emission control electrical interlocks driven by Texas TCEQ requirements, IT-system insulation faults on chemical tankers at Equistar and Citgo, and switchboard work on aging tonnage in the Aframax shuttle pool. Class attendance for ABS, DNV, BV and Lloyd's is routine, with significant ex-zone certified work in IECEx and NEC Class I Div 1 areas.",
+      "logistics": {
+        "airports": [
+          "CRP (Corpus Christi International)",
+          "HOU (Houston Hobby)",
+          "SAT (San Antonio)"
+        ],
+        "freightHubs": [
+          "FedEx CRP",
+          "UPS CRP",
+          "Houston IAH overnight"
+        ],
+        "responseNote": "Engineer on board within 7-10 hours from Florida hub; same-day on AOG with Gulf coverage."
+      },
+      "ports": [
+        {
+          "name": "Moda Ingleside Energy Center (Enbridge)",
+          "lat": 27.8453,
+          "lng": -97.2086,
+          "vesselTypes": [
+            "VLCC (partial)",
+            "Suezmax",
+            "Aframax"
+          ],
+          "notes": "Largest US crude export terminal; manifold-area ex-zone electrical."
+        },
+        {
+          "name": "EPIC Marine Terminal",
+          "lat": 27.8189,
+          "lng": -97.2389,
+          "vesselTypes": [
+            "Aframax",
+            "Suezmax"
+          ],
+          "notes": "Crude exports; cargo pump VFD and IG attendance."
+        },
+        {
+          "name": "Magellan Terminal (Corpus Christi East)",
+          "lat": 27.8019,
+          "lng": -97.3886,
+          "vesselTypes": [
+            "Product tankers",
+            "MR2 tankers"
+          ],
+          "notes": "Refined product exports; IT-system and IG attendance."
+        },
+        {
+          "name": "Bulk Terminal / Inner Harbor",
+          "lat": 27.8158,
+          "lng": -97.4189,
+          "vesselTypes": [
+            "Handysize bulkers",
+            "Project cargo"
+          ],
+          "notes": "Steel, breakbulk and grain; crane and switchboard attendance."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "Suezmax cargo pump VFD trip at Moda Ingleside during crude loading",
+          "summary": "Suezmax loading WTI at Ingleside trips No.2 cargo pump VFD on DC bus overvoltage, slowing terminal cargo rate. We connect to the ABB drive, replace the failed braking chopper module from spares, re-tune deceleration ramp and restore full pump speed within 90 minutes to meet terminal loading rate."
+        },
+        {
+          "title": "Chemical tanker IT-system insulation alarm at Equistar",
+          "summary": "Chemical tanker loading specialty cargo reports continuous 440V IT-system low-insulation alarm. We segregate downstream feeders, isolate to a cargo-area heat trace circuit with chafed insulation under deck cabling, repair and re-megger, document for the BV surveyor and resume cargo without delay to loading schedule."
+        }
+      ],
+      "usdInvoicing": "Invoiced in USD by Levent Marine LLC, Wyoming registered. NET 30 standard, NET 7 on AOG. Wire or ACH.",
+      "schemaCity": "Corpus Christi",
+      "schemaServiceArea": [
+        "Corpus Christi",
+        "Ingleside",
+        "Portland TX",
+        "Aransas Pass",
+        "Port Aransas",
+        "Rockport"
+      ]
+    },
+    {
       "slug": "houston-marine-electrical",
       "city": "Houston",
       "state": "TX",
@@ -9,8 +313,17 @@
       "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Houston",
       "intro": "The Port of Houston is the largest US port by foreign waterborne tonnage and the busiest petrochemical complex in the Western Hemisphere. The 52-mile Houston Ship Channel funnels Aframax and Suezmax tankers, LR1/LR2 product carriers, Panamax and Neo-Panamax container vessels, dry bulkers and chemical parcel tankers between Bolivar Roads and the Turning Basin daily. The channel is being deepened under Project 11, but draft and beam constraints still shape how electrical service is delivered: most attendances happen alongside at private terminals between Morgan's Point and Greens Bayou, or at anchorage in Bolivar Roads waiting on a berth window. Houston is dominated by liquid bulk — over 40% of US Gulf chemical exports load here — so a tanker electrical fault during cargo operations carries immediate demurrage and inerting-system risk. Container traffic at Bayport and Barbours Cut runs tight pilot-to-pilot windows, often under 24 hours. Levent Marine attends these vessels with a Houston-based response posture: an ETO with full tool kit and HV PPE can be alongside within 3-4 hours of confirmation, with class-format documentation (ABS, DNV, Lloyd's, BV) starting the moment we step aboard. Our Wyoming LLC issues USD invoices direct to US operators and to foreign owners' US agents, with W-9 on file and USCG/CBP-aware crew protocols.",
       "logistics": {
-        "airports": ["IAH — George Bush Intercontinental (primary intl air freight, direct IST via TK33)", "HOU — Hobby (domestic spares)", "EFD — Ellington Field (charter/AOG)"],
-        "freightHubs": ["FedEx Express via IAH (Memphis sort, overnight CONUS)", "UPS via IAH", "DHL Express gateway IAH", "Kuehne+Nagel / Expeditors offices in Pasadena and Deer Park"],
+        "airports": [
+          "IAH — George Bush Intercontinental (primary intl air freight, direct IST via TK33)",
+          "HOU — Hobby (domestic spares)",
+          "EFD — Ellington Field (charter/AOG)"
+        ],
+        "freightHubs": [
+          "FedEx Express via IAH (Memphis sort, overnight CONUS)",
+          "UPS via IAH",
+          "DHL Express gateway IAH",
+          "Kuehne+Nagel / Expeditors offices in Pasadena and Deer Park"
+        ],
         "responseNote": "Engineer mobilization to any Houston Ship Channel terminal is typically 3-4 hours from confirmation. Critical spares from our Istanbul stock arrive IAH within 18-24 hours via Turkish Cargo, cleared by our customs broker and trucked to the vessel under bonded courier."
       },
       "ports": [
@@ -18,35 +331,53 @@
           "name": "Bayport Container Terminal",
           "lat": 29.6228,
           "lng": -95.0211,
-          "vesselTypes": ["Neo-Panamax container", "Post-Panamax container"],
+          "vesselTypes": [
+            "Neo-Panamax container",
+            "Post-Panamax container"
+          ],
           "notes": "Tight 18-24h pilot-to-pilot turnaround; gantry-side electrical work requires terminal safety briefing and TWIC escort."
         },
         {
           "name": "Barbours Cut Terminal",
           "lat": 29.6856,
           "lng": -94.9897,
-          "vesselTypes": ["Panamax container", "Feeder container"],
+          "vesselTypes": [
+            "Panamax container",
+            "Feeder container"
+          ],
           "notes": "Oldest Houston container facility; legacy MSB and bow-thruster work common on older tonnage calling here."
         },
         {
           "name": "Turning Basin (Public Wharves 1-32)",
           "lat": 29.7458,
           "lng": -95.2756,
-          "vesselTypes": ["Project cargo", "Breakbulk", "Steel/scrap bulker", "RoRo"],
+          "vesselTypes": [
+            "Project cargo",
+            "Breakbulk",
+            "Steel/scrap bulker",
+            "RoRo"
+          ],
           "notes": "Furthest upstream berths; deck-crane and hatch-cover electrical issues frequent on aging bulkers."
         },
         {
           "name": "Bayport Liquid / Vopak / Targa Terminals",
           "lat": 29.6097,
           "lng": -95.0181,
-          "vesselTypes": ["Chemical parcel tanker", "MR product tanker", "LPG carrier"],
+          "vesselTypes": [
+            "Chemical parcel tanker",
+            "MR product tanker",
+            "LPG carrier"
+          ],
           "notes": "Strict hot-work permitting; cargo-pump VFD and IG-system faults must be resolved without breaking inert atmosphere."
         },
         {
           "name": "Houston Fuel Oil Terminal (HFOTCO)",
           "lat": 29.7158,
           "lng": -95.0739,
-          "vesselTypes": ["Aframax tanker", "Suezmax tanker"],
+          "vesselTypes": [
+            "Aframax tanker",
+            "Suezmax tanker"
+          ],
           "notes": "Large crude/residual handling; AVR and shaft-generator faults during loading are highest-priority calls."
         }
       ],
@@ -74,90 +405,88 @@
       ],
       "usdInvoicing": "Our Wyoming-registered US entity issues USD invoices directly to operators, P&I clubs, and US agents under W-9; we accept ACH, wire, and credit card. Crew, parts, and tooling movements through CBP and USCG Sector Houston-Galveston are handled with TWIC-cleared personnel and pre-cleared spare-parts manifests.",
       "schemaCity": "Houston",
-      "schemaServiceArea": ["Houston", "Pasadena", "Deer Park", "La Porte", "Baytown", "Texas City", "Galveston", "Freeport"]
+      "schemaServiceArea": [
+        "Houston",
+        "Pasadena",
+        "Deer Park",
+        "La Porte",
+        "Baytown",
+        "Texas City",
+        "Galveston",
+        "Freeport"
+      ]
     },
     {
-      "slug": "new-york-nj-marine-electrical",
-      "city": "Newark",
-      "state": "NJ",
-      "metaTitle": "New York & NJ Marine Electrical Service | Levent Marine",
-      "metaDescription": "Marine electrical service at Port Newark, Elizabeth, Bayonne, Howland Hook. AOG response, USCG Sector NY prep, MSB & automation work for container & LNG ships.",
-      "h1": "Marine Electrical Service & Parts Supply for the Port of New York and New Jersey",
-      "intro": "The Port of New York and New Jersey is the largest container port on the US East Coast and third largest in the country, handling over 9 million TEU annually across Port Newark, Elizabeth Marine Terminal (APM/Maher), GCT Bayonne, GCT New York (Howland Hook) and Red Hook Brooklyn. Since the 2017 Bayonne Bridge air-draft raise to 215 ft, the harbor now receives Ultra Large Container Vessels of 14,000-18,000 TEU on Asia-East Coast and Mediterranean-East Coast strings. The port also serves a heavy bunkering and ship-supply economy in Stapleton Anchorage, plus growing LNG-bunkering activity in Gravesend Bay. Berth windows are tight — Maher and APM operate on hard pilot-to-pilot schedules, often 22-26 hours from first line to last — so an electrical fault that delays sailing risks a missed-tide cascade through the Kill Van Kull. USCG Sector New York runs one of the most active PSC programs in the country; we routinely support owners preparing for Sector NY boarding, addressing addressable fire-detection deficiencies, GMDSS battery and antenna issues, emergency-generator black-start failures, and EEXI/CII-related power-management documentation. Levent Marine maintains a fly-in ETO posture for NY/NJ supported by an East Coast spares cache, with documentation built to ABS, DNV, Lloyd's Register, BV and ClassNK formats — the five classes most active here.",
+      "slug": "jacksonville-marine-electrical",
+      "city": "Jacksonville",
+      "state": "FL",
+      "metaTitle": "Marine Electrical Service JaxPort Jacksonville | Levent Marine",
+      "metaDescription": "ETO attendance and marine electrical service at JaxPort — Blount Island, Talleyrand, Dames Point. Ro-ro, container, bulk vessel support 24/7.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Jacksonville",
+      "intro": "JaxPort sits on the St. Johns River with the federal channel deepened to 47 ft, making it the third-largest vehicle-handling port in the United States and a key Southeast container gateway. Vessel mix includes pure car/truck carriers (PCTC) at Blount Island and Dames Point handling Toyota, Honda, Hyundai and BMW flows, container ships at the SSA Jacksonville Container Terminal and TraPac Terminal, plus a steady stream of bulkers and Puerto Rico-trade ro-ros at Trapac and Crowley terminals. Most electrical attendances happen alongside — the river is calm and dead-ship windows are easy to schedule with the terminal. Common faults: PCTC stern-ramp hydraulic and lighting circuits after high-cycle ro-ro discharge, bow-thruster VFD overcurrent on container ships during berthing, and emergency generator AVR work on aging Crowley Puerto Rico ro-ros. JaxPort calls include heavy involvement with Coast Guard inspections, especially on Puerto Rico-trade vessels, and we routinely attend ABS and Lloyd's surveys.",
       "logistics": {
-        "airports": ["EWR — Newark Liberty (5 min from Port Newark; primary harbor air freight)", "JFK — John F. Kennedy (intl cargo, Turkish Cargo daily widebody from IST)", "LGA — LaGuardia (domestic / crew rotation)", "TEB — Teterboro (charter/AOG)"],
-        "freightHubs": ["FedEx Express EWR gateway", "UPS via EWR", "DHL Express JFK gateway", "Lufthansa and Turkish Cargo JFK freighter capacity ex-EU/Turkey"],
-        "responseNote": "Engineer can be at a berth in Newark, Elizabeth or Bayonne within 60-90 minutes of EWR landing. Critical spares ex-Istanbul clear JFK in 14-18 hours via Turkish Cargo TK1 and are delivered to terminal gate the same day."
+        "airports": [
+          "JAX (Jacksonville International)",
+          "DAB (Daytona Beach)"
+        ],
+        "freightHubs": [
+          "UPS JAX",
+          "FedEx JAX ramp",
+          "Memphis overnight"
+        ],
+        "responseNote": "Engineer on board within 4-7 hours from Florida hub; same-day on AOG."
       },
       "ports": [
         {
-          "name": "Maher Terminals (Elizabeth)",
-          "lat": 40.6797,
-          "lng": -74.1503,
-          "vesselTypes": ["ULCV", "Neo-Panamax container"],
-          "notes": "Largest single container facility on US East Coast; STS-crane-side access requires ILA coordination and terminal escort."
+          "name": "Blount Island Terminal",
+          "lat": 30.397,
+          "lng": -81.5103,
+          "vesselTypes": [
+            "PCTC",
+            "Ro-ro"
+          ],
+          "notes": "Stern ramp, deck lighting and ventilation fan electrical common after discharge cycles."
         },
         {
-          "name": "APM Terminals Elizabeth",
-          "lat": 40.6786,
-          "lng": -74.1561,
-          "vesselTypes": ["ULCV", "Post-Panamax container"],
-          "notes": "Maersk/2M alliance home berth; tight 24h pilot-to-pilot turnaround typical."
+          "name": "Dames Point Container Terminal",
+          "lat": 30.3878,
+          "lng": -81.5572,
+          "vesselTypes": [
+            "Post-Panamax container ships"
+          ],
+          "notes": "Reefer plug, bow thruster and bridge nav attendance."
         },
         {
-          "name": "GCT Bayonne",
-          "lat": 40.6661,
-          "lng": -74.0939,
-          "vesselTypes": ["Post-Panamax container"],
-          "notes": "Semi-automated terminal; reefer-monitoring and shore-power-related electrical issues common."
-        },
-        {
-          "name": "GCT New York (Howland Hook)",
-          "lat": 40.6378,
-          "lng": -74.1850,
-          "vesselTypes": ["Panamax container", "Feeder container"],
-          "notes": "Staten Island side; longer crew transit but quieter berths for extended electrical work."
-        },
-        {
-          "name": "Port Newark Container Terminal (PNCT)",
-          "lat": 40.6886,
-          "lng": -74.1392,
-          "vesselTypes": ["Panamax container", "Neo-Panamax container"],
-          "notes": "Multi-line terminal; flexible berth windows useful for longer MSB or PLC commissioning jobs."
-        },
-        {
-          "name": "Stapleton Anchorage / Bayonne Bunker Berths",
-          "lat": 40.6258,
-          "lng": -74.0700,
-          "vesselTypes": ["Bunker tanker", "Bulker at anchor", "Cruise"],
-          "notes": "Anchorage attendance by launch from Caddell or Reinauer base; LNG bunker barge attendance growing."
+          "name": "Talleyrand Marine Terminal",
+          "lat": 30.3461,
+          "lng": -81.6253,
+          "vesselTypes": [
+            "Bulk carriers",
+            "Ro-ro",
+            "Project cargo"
+          ],
+          "notes": "Mixed cargo; crane and shore-power attendance."
         }
       ],
       "scenarios": [
         {
-          "title": "Emergency-generator black-start failure flagged by USCG Sector NY on a 14,000 TEU ULCV at Maher",
-          "summary": "Sector NY issues a SOLAS Ch.II-1 Reg.43 deficiency: emergency generator fails 45-second black-start. We attend within 90 minutes from EWR, diagnose a degraded starting-battery bank and faulty governor solenoid, replace both, witness three consecutive successful starts with the USCG officer present, and prepare the rectification letter cleared before tide change."
+          "title": "PCTC stern-ramp control fault at Blount Island",
+          "summary": "Toyota PCTC reports stern ramp will not lower past 30 degrees mid-discharge. We trace the proximity sensor circuit, find a corroded JIS-spec connector at the hinge pin, dry, re-pin and waterproof, and verify full hoist/lower cycle before discharge resumes."
         },
         {
-          "title": "Reefer-monitoring fault on a Neo-Panamax boxship at GCT Bayonne with 800 active reefer plugs",
-          "summary": "Reefer monitoring panel reports false alarms across two bays. We trace the fault to a corroded RS-485 backbone and a failed AC1700-pattern controller, replace the segment, recommission the network (Emerson/Carrier/EMS), and verify against the terminal's reefer-monitoring system. No cargo-condition claim arises."
-        },
-        {
-          "title": "GMDSS A3 station battery and antenna survey on a Panamax at PNCT before North Atlantic sailing",
-          "summary": "Owner requests a pre-departure GMDSS check ahead of class annual. We test MF/HF, VHF DSC, EPIRB, SART, NAVTEX and Inmarsat-C per IMO Res. A.1001(25), replace two degraded reserve batteries, retune the MF/HF antenna and issue a class-ready GMDSS performance test record."
-        },
-        {
-          "title": "MSB ACB retrofit and PMS reconfiguration during a 5-day layover at Howland Hook",
-          "summary": "Owner uses an extended window to retrofit three air circuit breakers and update the PMS load-shedding tables on a 6,800 TEU containership. We supply Terasaki/ABB-pattern ACBs, run primary injection, reprogram the PMS for the new trip curves, and complete FAT-style witness testing for the attending ABS surveyor."
-        },
-        {
-          "title": "Bunker-tanker cargo-pump VFD fault at Stapleton during STS bunkering of a cruise ship",
-          "summary": "VFD on a 600 m3/h cargo pump trips on DC overvoltage. We arrive by launch from Caddell, diagnose a failed braking-resistor circuit, install a replacement resistor pack and dynamic-braking module, verify ramp profile against the bunker schedule, and bunkering completes within the cruise vessel's departure window."
+          "title": "Container ship bow-thruster VFD overcurrent trip at Dames Point",
+          "summary": "Post-Panamax boxship trips bow thruster VFD on berthing approach, forcing tug-only maneuver. Alongside we read the fault log, find an IGBT module imbalance, swap the affected module from spares, re-run the auto-tune and certify thruster availability for next outbound."
         }
       ],
-      "usdInvoicing": "USD invoices issued from our Wyoming LLC directly to US managers, agents and P&I clubs, with W-9 and COI available on request. All field personnel hold TWIC and are familiar with USCG Sector New York access protocols, CBP I-95 crew-movement constraints, and MARSEC level escort requirements at NY/NJ terminals.",
-      "schemaCity": "Newark",
-      "schemaServiceArea": ["Newark", "Elizabeth", "Bayonne", "Jersey City", "Staten Island", "Brooklyn", "Port Newark", "Howland Hook", "Stapleton Anchorage"]
+      "usdInvoicing": "Invoiced in USD by Levent Marine LLC, Wyoming registered. NET 30 standard, NET 7 on AOG. Wire or ACH.",
+      "schemaCity": "Jacksonville",
+      "schemaServiceArea": [
+        "Jacksonville",
+        "Fernandina Beach",
+        "Brunswick GA",
+        "St. Augustine",
+        "Mayport"
+      ]
     },
     {
       "slug": "long-beach-marine-electrical",
@@ -168,8 +497,18 @@
       "h1": "Marine Electrical Service & Parts Supply at the Ports of Long Beach and Los Angeles",
       "intro": "The adjacent Ports of Long Beach and Los Angeles form the San Pedro Bay complex — the largest container gateway in the Western Hemisphere and the entry point for roughly 40% of all US containerized imports. The complex routinely handles 18,000-24,000 TEU Ultra Large Container Vessels on Trans-Pacific strings, alongside Capesize and Newcastlemax bulkers at Pier T coal and petcoke berths and Aframax product tankers at the Long Beach oil terminals. The combined ports operate under the strictest air-quality and shore-power regime in the US: CARB's At-Berth Regulation requires container, reefer and cruise vessels to shut down auxiliary engines and connect to High Voltage Shore Connection (HVSC, IEC/IEEE 80005-1) within two hours of berthing for at least 80% of port time, with bulkers and tankers being phased in. This drives constant demand for shore-power retrofit projects, HVSC commissioning, transformer and reactive-compensation work, and ABB/Cavotec/Schneider-pattern shore-connection fault diagnosis. The complex also feeds aggressive TPEB/TPWB turnaround windows where any delay cascades across the chassis pool and inland rail ramps. Levent Marine attends San Pedro Bay with a West Coast ETO posture, ABS- and DNV-format documentation, and parts logistics through LAX — one of the largest international air-cargo gateways in North America.",
       "logistics": {
-        "airports": ["LAX — Los Angeles Intl (largest West Coast air freight gateway; Turkish, Lufthansa, Korean, China Airlines freighter capacity ex-IST/EU)", "LGB — Long Beach (domestic / FedEx)", "ONT — Ontario (UPS West Coast hub, alt routing)", "SNA — John Wayne (charter/AOG)"],
-        "freightHubs": ["FedEx Express LAX gateway with Memphis sort connection", "UPS via ONT (major US hub)", "DHL Express LAX gateway", "Kuehne+Nagel / DSV / Expeditors marine offices in Carson and Long Beach"],
+        "airports": [
+          "LAX — Los Angeles Intl (largest West Coast air freight gateway; Turkish, Lufthansa, Korean, China Airlines freighter capacity ex-IST/EU)",
+          "LGB — Long Beach (domestic / FedEx)",
+          "ONT — Ontario (UPS West Coast hub, alt routing)",
+          "SNA — John Wayne (charter/AOG)"
+        ],
+        "freightHubs": [
+          "FedEx Express LAX gateway with Memphis sort connection",
+          "UPS via ONT (major US hub)",
+          "DHL Express LAX gateway",
+          "Kuehne+Nagel / DSV / Expeditors marine offices in Carson and Long Beach"
+        ],
         "responseNote": "Engineer to berth at any San Pedro Bay terminal within 60-90 minutes of LAX landing. Critical spares ex-Istanbul clear LAX in 16-20 hours via Turkish Cargo TK9, and we maintain a small consignment stock of common ACBs, AVRs and PLC I/O cards with a Carson-based 3PL."
       },
       "ports": [
@@ -177,42 +516,62 @@
           "name": "Long Beach Container Terminal (Pier E / Middle Harbor)",
           "lat": 33.7522,
           "lng": -118.2156,
-          "vesselTypes": ["ULCV", "Neo-Panamax container"],
+          "vesselTypes": [
+            "ULCV",
+            "Neo-Panamax container"
+          ],
           "notes": "Most automated terminal in North America; shore-power connection mandatory; AGV and OCR system interfaces require careful coordination on any onboard work."
         },
         {
           "name": "Pier T (TTI Terminal)",
-          "lat": 33.7400,
+          "lat": 33.74,
           "lng": -118.2261,
-          "vesselTypes": ["ULCV", "ONE/Hapag/Yang Ming services"],
+          "vesselTypes": [
+            "ULCV",
+            "ONE/Hapag/Yang Ming services"
+          ],
           "notes": "Deepest natural draft in the harbor; receives the largest boxships calling North America."
         },
         {
           "name": "Pier 400 (APM Terminals LA)",
           "lat": 33.7372,
           "lng": -118.2553,
-          "vesselTypes": ["ULCV", "Maersk strings"],
+          "vesselTypes": [
+            "ULCV",
+            "Maersk strings"
+          ],
           "notes": "Largest proprietary container terminal in the world by area; long quay enables multi-vessel concurrent shore-power demand."
         },
         {
           "name": "Pier G / Pier J (Long Beach bulk and breakbulk)",
           "lat": 33.7344,
           "lng": -118.1825,
-          "vesselTypes": ["Capesize bulker", "Newcastlemax bulker", "Panamax bulker"],
+          "vesselTypes": [
+            "Capesize bulker",
+            "Newcastlemax bulker",
+            "Panamax bulker"
+          ],
           "notes": "Coal, petcoke and iron-ore handling; deck crane, hatch cover and conveyor electrical issues frequent."
         },
         {
           "name": "Berths 121-131 (Long Beach Oil Terminals)",
           "lat": 33.7506,
           "lng": -118.2086,
-          "vesselTypes": ["Aframax tanker", "MR product tanker", "Chemical parcel tanker"],
+          "vesselTypes": [
+            "Aframax tanker",
+            "MR product tanker",
+            "Chemical parcel tanker"
+          ],
           "notes": "Liquid bulk terminals; shore-power phase-in under CARB ATB applies from 2027."
         },
         {
           "name": "Pier 300 (Yusen Terminals / WBCT)",
           "lat": 33.7383,
           "lng": -118.2611,
-          "vesselTypes": ["Post-Panamax container", "Neo-Panamax container"],
+          "vesselTypes": [
+            "Post-Panamax container",
+            "Neo-Panamax container"
+          ],
           "notes": "Joint NYK / Yang Ming services; common venue for automation and reefer-power retrofits."
         }
       ],
@@ -240,7 +599,1021 @@
       ],
       "usdInvoicing": "Wyoming LLC issues USD invoices directly to US operators, charterers and agents, with W-9 on file and ACH/wire/credit-card payment. All personnel hold TWIC; we operate fluently with USCG Sector Los Angeles-Long Beach access, CBP crew protocols, and CARB At-Berth Regulation documentation requirements.",
       "schemaCity": "Long Beach",
-      "schemaServiceArea": ["Long Beach", "Los Angeles", "San Pedro", "Wilmington", "Carson", "Terminal Island", "Port of Long Beach", "Port of Los Angeles"]
+      "schemaServiceArea": [
+        "Long Beach",
+        "Los Angeles",
+        "San Pedro",
+        "Wilmington",
+        "Carson",
+        "Terminal Island",
+        "Port of Long Beach",
+        "Port of Los Angeles"
+      ]
+    },
+    {
+      "slug": "los-angeles-marine-electrical",
+      "city": "Los Angeles",
+      "state": "CA",
+      "metaTitle": "Marine Electrical Service Port of Los Angeles | Levent Marine",
+      "metaDescription": "Marine electrical & ETO attendance at Port of Los Angeles — busiest US container port. ULCV, Neo-Panamax, cruise and bulk support 24/7.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Los Angeles",
+      "intro": "The Port of Los Angeles, alongside neighboring Long Beach, forms the San Pedro Bay port complex — the busiest container gateway in the Western Hemisphere. The main channel is dredged to 53 ft, easily accommodating the largest ULCVs on the trans-Pacific trade. Container operations span APM Pier 400, TraPac Pier 136, Yusen Terminal, Everport and West Basin Container Terminal, while the World Cruise Center hosts Princess, Carnival and NCL calls. CARB shore-power compliance (At-Berth regulation) makes cold-ironing electrical work a constant. Most electrical attendances happen alongside. Common faults: ULCV shore-power 6.6kV/11kV connection issues under AB617/At-Berth enforcement, BWTS commissioning and PSC defect rectification, bow-thruster and stern-thruster VFD work after long Pacific transits, Azipod oil-purifier and slip-ring monitoring electrical on cruise ships, and PMS tuning after engine-room retrofits. Class attendance for ABS, DNV, Lloyd's, ClassNK and KR is heavy.",
+      "logistics": {
+        "airports": [
+          "LAX (Los Angeles International)",
+          "LGB (Long Beach)",
+          "ONT (Ontario)"
+        ],
+        "freightHubs": [
+          "FedEx LAX (largest West Coast ramp)",
+          "UPS LAX",
+          "Worldport overnight"
+        ],
+        "responseNote": "Engineer on board within 12-16 hours from Florida hub; West Coast network for same-day on AOG."
+      },
+      "ports": [
+        {
+          "name": "APM Terminals Pier 400",
+          "lat": 33.735,
+          "lng": -118.2569,
+          "vesselTypes": [
+            "ULCV",
+            "Neo-Panamax container ships"
+          ],
+          "notes": "Largest single-operator container terminal in Western Hemisphere; shore-power mandatory."
+        },
+        {
+          "name": "TraPac Pier 136-147",
+          "lat": 33.7589,
+          "lng": -118.2486,
+          "vesselTypes": [
+            "Neo-Panamax container ships"
+          ],
+          "notes": "Semi-automated; reefer and shore-power attendance."
+        },
+        {
+          "name": "World Cruise Center (Berths 91-93)",
+          "lat": 33.735,
+          "lng": -118.2767,
+          "vesselTypes": [
+            "Cruise ships"
+          ],
+          "notes": "Shore-power capable; HVAC, PMS and Azipod attendance."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "ULCV shore-power 6.6kV cable fault at APM Pier 400 under CARB enforcement",
+          "summary": "Trans-Pacific ULCV attempting cold-ironing connection trips shore breaker on differential within 30 seconds, risking CARB At-Berth compliance penalty. We megger the ship-side cable, find a damaged shield termination at the receptacle, repair, re-test and certify connection — vessel remains in compliance for the berth window."
+        },
+        {
+          "title": "Cruise ship Azipod slip-ring brush wear alarm at World Cruise Center",
+          "summary": "Princess-class cruise vessel reports Azipod slip-ring brush-wear alarm 4 hours before scheduled departure. We open the brush-gear access, find three of twelve brushes worn past limit, replace from carry-on spares, vacuum and reseat, run no-load and load test before departure clearance."
+        }
+      ],
+      "usdInvoicing": "Invoiced in USD by Levent Marine LLC, Wyoming registered. NET 30 standard, NET 7 on AOG. Wire or ACH.",
+      "schemaCity": "Los Angeles",
+      "schemaServiceArea": [
+        "Los Angeles",
+        "Long Beach",
+        "San Pedro",
+        "Wilmington CA",
+        "Carson",
+        "Torrance"
+      ]
+    },
+    {
+      "slug": "miami-marine-electrical",
+      "city": "Miami",
+      "state": "FL",
+      "metaTitle": "Marine Electrical Service PortMiami | Levent Marine",
+      "metaDescription": "Marine electrical attendance at PortMiami — cruise capital of the world and Neo-Panamax container hub. ETO support, parts supply 24/7.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Miami",
+      "intro": "PortMiami is the busiest cruise port in the world and a Neo-Panamax-capable container hub, with the channel deepened to 50-52 ft post-Panama Canal expansion. Cruise berths along Dodge Island host Carnival, Royal Caribbean, MSC, NCL and Virgin Voyages on weekly turnarounds, with Oasis- and Icon-class vessels driving most demand. Container operations on the south side of the island serve MSC, CMA CGM and Hapag-Lloyd routes to South America and the Caribbean. Most electrical attendances happen alongside — turnaround windows on cruise are extremely tight, often 5-7 hours, and we frequently work hot to avoid delaying embarkation. Common faults: cruise-ship shore-power high-voltage (11kV) connection issues during cold-ironing (Miami has shore-power capability at multiple berths), Azipod and thruster VFD faults on Icon-class vessels, BWTS commissioning support on new container deliveries, and engine-room monitoring (ERM) sensor work on aging cruise tonnage. We coordinate cruise-line technical liaison directly and routinely attend with RINA, Lloyd's, DNV and BV.",
+      "logistics": {
+        "airports": [
+          "MIA (Miami International)",
+          "FLL (Fort Lauderdale)"
+        ],
+        "freightHubs": [
+          "Miami air cargo complex (largest US import gateway for Latin America)",
+          "FedEx MIA",
+          "UPS MIA"
+        ],
+        "responseNote": "Under 1 hour vessel-side for AOG; same-day for any cruise turnaround call."
+      },
+      "ports": [
+        {
+          "name": "Cruise Terminals A / E / F / G / J",
+          "lat": 25.7747,
+          "lng": -80.1717,
+          "vesselTypes": [
+            "Icon-class",
+            "Oasis-class",
+            "Mega-cruise"
+          ],
+          "notes": "Shore-power capable; 11kV cold-ironing connection attendance routine."
+        },
+        {
+          "name": "South Florida Container Terminal (POMTOC)",
+          "lat": 25.7728,
+          "lng": -80.1675,
+          "vesselTypes": [
+            "Neo-Panamax container ships",
+            "Caribbean feeders"
+          ],
+          "notes": "Reefer plug, BWTS and bridge nav attendance."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "Cruise ship 11kV shore-power connection failure at Terminal F",
+          "summary": "Icon-class vessel attempting cold-ironing connection trips shore breaker on differential. We measure shore-side cable insulation, find a degraded plug-side gasket allowing moisture into the 11kV connector, dry, swap O-rings and certify connection before generator shutdown to grid power."
+        },
+        {
+          "title": "Container ship BWTS UV reactor commissioning support",
+          "summary": "Newbuild Neo-Panamax boxship on maiden Miami call reports BWTS UV reactor high-temperature trips during ballast deballast. We tune the flow-control valve closed-loop response, recalibrate the UVI sensor, verify USCG type-approval log compliance and clear the system for Caribbean rotation."
+        }
+      ],
+      "usdInvoicing": "Invoiced in USD by Levent Marine LLC, Wyoming registered. NET 30 standard, NET 7 on AOG. Wire or ACH.",
+      "schemaCity": "Miami",
+      "schemaServiceArea": [
+        "Miami",
+        "Miami Beach",
+        "Coral Gables",
+        "Hialeah",
+        "Key Biscayne",
+        "Fort Lauderdale"
+      ]
+    },
+    {
+      "slug": "mobile-marine-electrical",
+      "city": "Mobile",
+      "state": "AL",
+      "metaTitle": "Marine Electrical Service Port of Mobile | Levent Marine",
+      "metaDescription": "Marine electrical & ETO attendance at Port of Mobile, AL. APM container terminal, McDuffie coal, bulk and tanker support 24/7 with USD invoicing.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Mobile",
+      "intro": "The Port of Mobile is the only deepwater port in Alabama and one of the fastest-growing container gateways on the Gulf, with the federal channel now dredged to 50 ft to handle Neo-Panamax boxships at APM Terminals. Calls split between APM at Choctaw Point, the McDuffie coal terminal handling Panamax and Capesize bulkers loading export met-coal, and the Pinto Island bulk and steel terminals serving the AM/NS Calvert plant. Tanker calls cluster around the Theodore Industrial Canal. Most electrical attendances happen alongside — Mobile Bay is exposed and anchorage work is weather-limited — though we do attend at Lower Mobile anchorage when vessels stage for berth. Common faults: shore-power synchronizing issues on container ships transitioning to cold-ironing trials, dust-ingress on bulker switchgear after extended coal loading, and bridge nav alarms (Furuno, JRC) that surface after Mississippi Sound shoal-water transits. We work routine class attendance for ABS, DNV and ClassNK, and coordinate parts through Mobile Regional and the Brookley cargo complex.",
+      "logistics": {
+        "airports": [
+          "MOB (Mobile Regional)",
+          "BFM (Mobile Downtown / Brookley)",
+          "PNS (Pensacola)"
+        ],
+        "freightHubs": [
+          "FedEx BFM",
+          "UPS Mobile gateway",
+          "Memphis FedEx hub overnight"
+        ],
+        "responseNote": "Engineer on board within 6-9 hours of intake from Florida hub; same-day Gulf coverage on AOG."
+      },
+      "ports": [
+        {
+          "name": "APM Terminals Mobile (Choctaw Point)",
+          "lat": 30.6635,
+          "lng": -88.0397,
+          "vesselTypes": [
+            "Neo-Panamax container ships",
+            "Feeders"
+          ],
+          "notes": "50 ft channel; STS and reefer attendance routine pre-departure."
+        },
+        {
+          "name": "McDuffie Coal Terminal",
+          "lat": 30.675,
+          "lng": -88.0322,
+          "vesselTypes": [
+            "Capesize bulkers",
+            "Panamax bulkers"
+          ],
+          "notes": "Heavy dust environment; switchboard and motor maintenance driven by coal exposure."
+        },
+        {
+          "name": "Pinto Island / AM/NS Calvert berths",
+          "lat": 30.7008,
+          "lng": -88.0331,
+          "vesselTypes": [
+            "Bulk carriers",
+            "Slab and steel carriers"
+          ],
+          "notes": "Project cargo and steel; crane and deck machinery electrical common."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "Capesize coal bulker switchboard earth fault at McDuffie",
+          "summary": "Vessel reports random 6.6kV earth-fault trips after 36-hour loading window. We open the MSB, find conductive coal dust bridging busbar standoffs, perform pressure-air clean and re-megger, restore insulation values above 100 MΩ and document for the ClassNK attending surveyor."
+        },
+        {
+          "title": "Container ship shore-power sync failure at APM",
+          "summary": "Neo-Panamax boxship attempts cold-ironing connection and shore breaker trips on out-of-phase. We verify phase rotation, recalibrate the synchronizing relay, reset the protection trip, and supervise successful parallel transfer ahead of the next inbound rotation."
+        }
+      ],
+      "usdInvoicing": "Invoiced in USD by Levent Marine LLC, Wyoming registered. NET 30 standard, NET 7 on AOG. Wire or ACH.",
+      "schemaCity": "Mobile",
+      "schemaServiceArea": [
+        "Mobile",
+        "Theodore",
+        "Chickasaw",
+        "Pensacola",
+        "Pascagoula",
+        "Gulfport"
+      ]
+    },
+    {
+      "slug": "new-orleans-marine-electrical",
+      "city": "New Orleans",
+      "state": "LA",
+      "metaTitle": "Marine Electrical Service Port of New Orleans | Levent Marine",
+      "metaDescription": "24/7 marine electrical service & technical parts supply at Port of New Orleans. ETO attendance on bulkers, tankers and boxships alongside or at anchorage.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of New Orleans",
+      "intro": "The Port of New Orleans sits 95 nautical miles upriver from the Southwest Pass, with the Mississippi River main channel maintained to 50 ft, opening calls to fully laden Aframax tankers, Panamax bulkers and post-Panamax boxships. The mix on any given day spans grain bulkers loading at Convent and Reserve, chemical and petroleum tankers working CHEMTREC-regulated docks below Algiers, and container ships at the Napoleon Avenue and Milan Street terminals. Most of our electrical attendances happen alongside on the river — current can exceed 4 knots, so dead-ship work is rare and we plan around live machinery. We also handle work-in-transit jobs as vessels stage at the Belle Chasse or Carrollton anchorages waiting for berth. Common drivers: switchboard AVR drift after long load-line transits from South America, IT-system insulation faults on chemical tankers loading specialty products at IMTT St. Rose, and main engine governor/safety circuit faults that surface during pilot embarkation. Class attendance for DNV, ABS and Lloyd's surveyors is routine, and we coordinate logistics through MSY (Louis Armstrong International) for crew and parts inbound from our Florida hub.",
+      "logistics": {
+        "airports": [
+          "MSY (Louis Armstrong New Orleans Intl)",
+          "BTR (Baton Rouge)"
+        ],
+        "freightHubs": [
+          "FedEx MSY ramp",
+          "UPS Kenner gateway",
+          "Memphis FedEx hub (overnight to NOLA)"
+        ],
+        "responseNote": "Engineer wheels-up from Florida to vessel-side within 6-10 hours of intake; same-day attendance possible for AOG calls before 1100 ET."
+      },
+      "ports": [
+        {
+          "name": "Napoleon Avenue Container Terminal",
+          "lat": 29.9322,
+          "lng": -90.1067,
+          "vesselTypes": [
+            "Panamax container ships",
+            "Feeder boxships"
+          ],
+          "notes": "Live-ship work required; river current and tidal swing constrain dead-ship windows."
+        },
+        {
+          "name": "Nashville Avenue Wharf",
+          "lat": 29.9285,
+          "lng": -90.1142,
+          "vesselTypes": [
+            "Bulk carriers",
+            "Project cargo"
+          ],
+          "notes": "Steel and rubber imports; reefer plug attendance common."
+        },
+        {
+          "name": "IMTT St. Rose",
+          "lat": 29.9486,
+          "lng": -90.3261,
+          "vesselTypes": [
+            "Chemical tankers",
+            "Product tankers"
+          ],
+          "notes": "Specialty chemical loading; IT-system and insulation monitor work driven by cargo IG circuits."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "Chemical tanker IT-system fault alongside IMTT St. Rose",
+          "summary": "MR2 product tanker loading caustic shows continuous low-insulation alarm on 440V IT distribution. We isolate by segregating downstream feeders, trace to a cargo pump motor megger failure, replace winding leads and re-commission with insulation log signed for the BV surveyor before resuming load."
+        },
+        {
+          "title": "Bulker AVR drift, alongside Convent grain elevator",
+          "summary": "Panamax bulker arrives from South America with No.2 DG voltage hunting under load. We replace the AVR sensing card, re-tune droop and quadrature drop on parallel, and run a load-acceptance test through the bow thruster start to clear the pre-departure machinery check."
+        }
+      ],
+      "usdInvoicing": "Invoiced in USD by Levent Marine LLC, Wyoming registered. NET 30 standard, NET 7 on AOG. Wire or ACH.",
+      "schemaCity": "New Orleans",
+      "schemaServiceArea": [
+        "New Orleans",
+        "Baton Rouge",
+        "Reserve",
+        "Convent",
+        "Belle Chasse",
+        "Plaquemines",
+        "St. Rose"
+      ]
+    },
+    {
+      "slug": "new-york-nj-marine-electrical",
+      "city": "Newark",
+      "state": "NJ",
+      "metaTitle": "New York & NJ Marine Electrical Service | Levent Marine",
+      "metaDescription": "Marine electrical service at Port Newark, Elizabeth, Bayonne, Howland Hook. AOG response, USCG Sector NY prep, MSB & automation work for container & LNG ships.",
+      "h1": "Marine Electrical Service & Parts Supply for the Port of New York and New Jersey",
+      "intro": "The Port of New York and New Jersey is the largest container port on the US East Coast and third largest in the country, handling over 9 million TEU annually across Port Newark, Elizabeth Marine Terminal (APM/Maher), GCT Bayonne, GCT New York (Howland Hook) and Red Hook Brooklyn. Since the 2017 Bayonne Bridge air-draft raise to 215 ft, the harbor now receives Ultra Large Container Vessels of 14,000-18,000 TEU on Asia-East Coast and Mediterranean-East Coast strings. The port also serves a heavy bunkering and ship-supply economy in Stapleton Anchorage, plus growing LNG-bunkering activity in Gravesend Bay. Berth windows are tight — Maher and APM operate on hard pilot-to-pilot schedules, often 22-26 hours from first line to last — so an electrical fault that delays sailing risks a missed-tide cascade through the Kill Van Kull. USCG Sector New York runs one of the most active PSC programs in the country; we routinely support owners preparing for Sector NY boarding, addressing addressable fire-detection deficiencies, GMDSS battery and antenna issues, emergency-generator black-start failures, and EEXI/CII-related power-management documentation. Levent Marine maintains a fly-in ETO posture for NY/NJ supported by an East Coast spares cache, with documentation built to ABS, DNV, Lloyd's Register, BV and ClassNK formats — the five classes most active here.",
+      "logistics": {
+        "airports": [
+          "EWR — Newark Liberty (5 min from Port Newark; primary harbor air freight)",
+          "JFK — John F. Kennedy (intl cargo, Turkish Cargo daily widebody from IST)",
+          "LGA — LaGuardia (domestic / crew rotation)",
+          "TEB — Teterboro (charter/AOG)"
+        ],
+        "freightHubs": [
+          "FedEx Express EWR gateway",
+          "UPS via EWR",
+          "DHL Express JFK gateway",
+          "Lufthansa and Turkish Cargo JFK freighter capacity ex-EU/Turkey"
+        ],
+        "responseNote": "Engineer can be at a berth in Newark, Elizabeth or Bayonne within 60-90 minutes of EWR landing. Critical spares ex-Istanbul clear JFK in 14-18 hours via Turkish Cargo TK1 and are delivered to terminal gate the same day."
+      },
+      "ports": [
+        {
+          "name": "Maher Terminals (Elizabeth)",
+          "lat": 40.6797,
+          "lng": -74.1503,
+          "vesselTypes": [
+            "ULCV",
+            "Neo-Panamax container"
+          ],
+          "notes": "Largest single container facility on US East Coast; STS-crane-side access requires ILA coordination and terminal escort."
+        },
+        {
+          "name": "APM Terminals Elizabeth",
+          "lat": 40.6786,
+          "lng": -74.1561,
+          "vesselTypes": [
+            "ULCV",
+            "Post-Panamax container"
+          ],
+          "notes": "Maersk/2M alliance home berth; tight 24h pilot-to-pilot turnaround typical."
+        },
+        {
+          "name": "GCT Bayonne",
+          "lat": 40.6661,
+          "lng": -74.0939,
+          "vesselTypes": [
+            "Post-Panamax container"
+          ],
+          "notes": "Semi-automated terminal; reefer-monitoring and shore-power-related electrical issues common."
+        },
+        {
+          "name": "GCT New York (Howland Hook)",
+          "lat": 40.6378,
+          "lng": -74.185,
+          "vesselTypes": [
+            "Panamax container",
+            "Feeder container"
+          ],
+          "notes": "Staten Island side; longer crew transit but quieter berths for extended electrical work."
+        },
+        {
+          "name": "Port Newark Container Terminal (PNCT)",
+          "lat": 40.6886,
+          "lng": -74.1392,
+          "vesselTypes": [
+            "Panamax container",
+            "Neo-Panamax container"
+          ],
+          "notes": "Multi-line terminal; flexible berth windows useful for longer MSB or PLC commissioning jobs."
+        },
+        {
+          "name": "Stapleton Anchorage / Bayonne Bunker Berths",
+          "lat": 40.6258,
+          "lng": -74.07,
+          "vesselTypes": [
+            "Bunker tanker",
+            "Bulker at anchor",
+            "Cruise"
+          ],
+          "notes": "Anchorage attendance by launch from Caddell or Reinauer base; LNG bunker barge attendance growing."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "Emergency-generator black-start failure flagged by USCG Sector NY on a 14,000 TEU ULCV at Maher",
+          "summary": "Sector NY issues a SOLAS Ch.II-1 Reg.43 deficiency: emergency generator fails 45-second black-start. We attend within 90 minutes from EWR, diagnose a degraded starting-battery bank and faulty governor solenoid, replace both, witness three consecutive successful starts with the USCG officer present, and prepare the rectification letter cleared before tide change."
+        },
+        {
+          "title": "Reefer-monitoring fault on a Neo-Panamax boxship at GCT Bayonne with 800 active reefer plugs",
+          "summary": "Reefer monitoring panel reports false alarms across two bays. We trace the fault to a corroded RS-485 backbone and a failed AC1700-pattern controller, replace the segment, recommission the network (Emerson/Carrier/EMS), and verify against the terminal's reefer-monitoring system. No cargo-condition claim arises."
+        },
+        {
+          "title": "GMDSS A3 station battery and antenna survey on a Panamax at PNCT before North Atlantic sailing",
+          "summary": "Owner requests a pre-departure GMDSS check ahead of class annual. We test MF/HF, VHF DSC, EPIRB, SART, NAVTEX and Inmarsat-C per IMO Res. A.1001(25), replace two degraded reserve batteries, retune the MF/HF antenna and issue a class-ready GMDSS performance test record."
+        },
+        {
+          "title": "MSB ACB retrofit and PMS reconfiguration during a 5-day layover at Howland Hook",
+          "summary": "Owner uses an extended window to retrofit three air circuit breakers and update the PMS load-shedding tables on a 6,800 TEU containership. We supply Terasaki/ABB-pattern ACBs, run primary injection, reprogram the PMS for the new trip curves, and complete FAT-style witness testing for the attending ABS surveyor."
+        },
+        {
+          "title": "Bunker-tanker cargo-pump VFD fault at Stapleton during STS bunkering of a cruise ship",
+          "summary": "VFD on a 600 m3/h cargo pump trips on DC overvoltage. We arrive by launch from Caddell, diagnose a failed braking-resistor circuit, install a replacement resistor pack and dynamic-braking module, verify ramp profile against the bunker schedule, and bunkering completes within the cruise vessel's departure window."
+        }
+      ],
+      "usdInvoicing": "USD invoices issued from our Wyoming LLC directly to US managers, agents and P&I clubs, with W-9 and COI available on request. All field personnel hold TWIC and are familiar with USCG Sector New York access protocols, CBP I-95 crew-movement constraints, and MARSEC level escort requirements at NY/NJ terminals.",
+      "schemaCity": "Newark",
+      "schemaServiceArea": [
+        "Newark",
+        "Elizabeth",
+        "Bayonne",
+        "Jersey City",
+        "Staten Island",
+        "Brooklyn",
+        "Port Newark",
+        "Howland Hook",
+        "Stapleton Anchorage"
+      ]
+    },
+    {
+      "slug": "norfolk-marine-electrical",
+      "city": "Norfolk",
+      "state": "VA",
+      "metaTitle": "Marine Electrical Service Port of Virginia Norfolk | Levent Marine",
+      "metaDescription": "Marine electrical & ETO attendance at Port of Virginia — Norfolk International, VIG, Portsmouth Marine Terminal. 24/7 ULCV and commercial vessel support.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Norfolk",
+      "intro": "The Port of Virginia at Norfolk operates the deepest channels on the US East Coast (currently being deepened to 55 ft and widened in two-way sections), making Hampton Roads the unrestricted gateway for fully laden ULCVs and tandem two-way ULCV traffic. Commercial container operations run through Norfolk International Terminals (NIT), Virginia International Gateway (VIG) in Portsmouth, and Newport News Marine Terminal. Naval Station Norfolk dominates the basin but commercial work is well-separated. Most electrical attendances happen alongside at NIT and VIG; we also attend at the Lynnhaven and Cape Henry anchorages for pre-berth jobs. Common faults: ULCV switchboard PMS and load-shedding tuning, bow-thruster and Azipod VFD faults on the largest classes after trans-Atlantic transit, BWTS and scrubber (EGCS) electrical attendance on retrofit fleets, and bridge navigation (radar/ECDIS) work driven by Chesapeake Bay routing requirements. Class attendance for ABS, DNV, Lloyd's, BV and ClassNK is constant.",
+      "logistics": {
+        "airports": [
+          "ORF (Norfolk International)",
+          "RIC (Richmond)",
+          "PHF (Newport News)"
+        ],
+        "freightHubs": [
+          "FedEx ORF",
+          "UPS ORF",
+          "Memphis overnight"
+        ],
+        "responseNote": "Engineer on board within 7-10 hours from Florida hub; same-day on AOG."
+      },
+      "ports": [
+        {
+          "name": "Norfolk International Terminals (NIT)",
+          "lat": 36.9133,
+          "lng": -76.3389,
+          "vesselTypes": [
+            "ULCV",
+            "Neo-Panamax container ships"
+          ],
+          "notes": "Largest NA-East container terminal by area; STS and reefer attendance routine."
+        },
+        {
+          "name": "Virginia International Gateway (VIG)",
+          "lat": 36.8836,
+          "lng": -76.3614,
+          "vesselTypes": [
+            "ULCV",
+            "Neo-Panamax container ships"
+          ],
+          "notes": "Fully semi-automated; BWTS and scrubber retrofit support common."
+        },
+        {
+          "name": "Newport News Marine Terminal",
+          "lat": 36.9719,
+          "lng": -76.4297,
+          "vesselTypes": [
+            "Breakbulk",
+            "Ro-ro",
+            "Project cargo"
+          ],
+          "notes": "Heavy-lift and project cargo; crane control and shore-power work."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "ULCV scrubber pump VFD trip during MARPOL Annex VI compliance check",
+          "summary": "18,000 TEU boxship inbound to NIT reports EGCS recirculation pump VFD tripping on overcurrent, jeopardizing ECA compliance. We measure pump bearing condition, find motor winding insulation degraded after seawater ingress, swap to spare motor and re-tune the VFD parameters before USCG verifies CEMS log."
+        },
+        {
+          "title": "Container ship PMS load-shedding mistrip at VIG",
+          "summary": "Neo-Panamax boxship reports DG3 tripping on reverse-power during reefer load surge. We connect to the Kongsberg PMS, find a misconfigured priority list after a recent software update, restore correct shedding sequence and run a live load-test through reefer plug energization."
+        }
+      ],
+      "usdInvoicing": "Invoiced in USD by Levent Marine LLC, Wyoming registered. NET 30 standard, NET 7 on AOG. Wire or ACH.",
+      "schemaCity": "Norfolk",
+      "schemaServiceArea": [
+        "Norfolk",
+        "Portsmouth",
+        "Newport News",
+        "Chesapeake",
+        "Virginia Beach",
+        "Hampton"
+      ]
+    },
+    {
+      "slug": "oakland-marine-electrical",
+      "city": "Oakland",
+      "state": "CA",
+      "metaTitle": "Marine Electrical Service Port of Oakland | Levent Marine",
+      "metaDescription": "Marine electrical & ETO attendance at Port of Oakland — OICT, TraPac, SSA Terminal. 24/7 ULCV and Neo-Panamax box ship support, USD invoicing.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Oakland",
+      "intro": "The Port of Oakland is the principal container gateway for Northern California and a major exporter of refrigerated agricultural cargo from the Central Valley. The 50 ft channel and inner harbor accommodate Neo-Panamax and partially laden ULCVs at Oakland International Container Terminal (OICT), TraPac, Ben E. Nutter / Everport and SSA Terminal. Cold-ironing under California's At-Berth regulation is mandatory for container and refrigerated cargo ships. Most electrical attendances happen alongside in the Outer and Middle Harbors; tidal currents through the Golden Gate make in-transit work impractical. Common faults: high-density reefer rack PLC and Modbus communication issues on the Asia-California reefer services, BWTS UV-quartz and TRO sensor faults, shore-power synchronization issues under At-Berth enforcement, and engine-room monitoring sensor work driven by CARB and EPA inspection cycles. Class attendance for ABS, DNV, Lloyd's, ClassNK and KR is routine.",
+      "logistics": {
+        "airports": [
+          "OAK (Oakland International)",
+          "SFO (San Francisco)",
+          "SJC (San Jose)"
+        ],
+        "freightHubs": [
+          "FedEx OAK (major hub)",
+          "UPS OAK",
+          "Worldport overnight"
+        ],
+        "responseNote": "Engineer on board within 12-15 hours from Florida hub; West Coast partner network for same-day on AOG."
+      },
+      "ports": [
+        {
+          "name": "Oakland International Container Terminal (OICT)",
+          "lat": 37.8086,
+          "lng": -122.3225,
+          "vesselTypes": [
+            "Neo-Panamax container ships",
+            "ULCV (partially laden)"
+          ],
+          "notes": "Largest Oakland terminal; shore-power mandatory."
+        },
+        {
+          "name": "TraPac Oakland (Berths 30-32)",
+          "lat": 37.8044,
+          "lng": -122.3147,
+          "vesselTypes": [
+            "Neo-Panamax container ships"
+          ],
+          "notes": "Reefer-heavy service; PLC and power monitoring attendance."
+        },
+        {
+          "name": "SSA Terminal (Berths 57-59)",
+          "lat": 37.7997,
+          "lng": -122.3092,
+          "vesselTypes": [
+            "Neo-Panamax container ships"
+          ],
+          "notes": "Mixed service; bow-thruster and BWTS attendance."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "Reefer container rack PLC communication loss at OICT",
+          "summary": "Asia-California reefer service vessel reports loss of monitoring on entire bay-12 reefer stack with 96 plugs energized. We trace to a failed PLC Ethernet card in the reefer monitoring panel, replace from spares, re-establish Modbus addressing and verify temperature trend logs for cold-chain integrity."
+        },
+        {
+          "title": "BWTS TRO sensor failure during ballast operation at TraPac",
+          "summary": "Container ship deballasting at TraPac reports BWTS TRO sensor reading negative, triggering system shutdown and slowing ballast. We dismantle the sensor, find membrane fouling from prior brackish ballast, clean and recalibrate against bench standard, restore ballast capability and update BWMS log."
+        }
+      ],
+      "usdInvoicing": "Invoiced in USD by Levent Marine LLC, Wyoming registered. NET 30 standard, NET 7 on AOG. Wire or ACH.",
+      "schemaCity": "Oakland",
+      "schemaServiceArea": [
+        "Oakland",
+        "Alameda",
+        "San Francisco",
+        "Richmond CA",
+        "Berkeley",
+        "San Jose"
+      ]
+    },
+    {
+      "slug": "port-everglades-marine-electrical",
+      "city": "Port Everglades",
+      "state": "FL",
+      "metaTitle": "Marine Electrical Service Port Everglades FL | Levent Marine",
+      "metaDescription": "Marine electrical & ETO support at Port Everglades — cruise, container, petroleum. 24/7 attendance, USD invoicing, class-compliant reports.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Port Everglades",
+      "intro": "Port Everglades in Broward County is one of the busiest cruise ports in the world and the principal petroleum gateway for South Florida, with the entrance channel currently at 42 ft and an ongoing deepening project to 48-50 ft. The cruise berths at the south end host Royal Caribbean Oasis-class, MSC, Princess and Celebrity vessels on weekly turnarounds, while the petroleum slips at the north end handle product tankers feeding Fort Lauderdale-area fuel terminals and the FPL Port Everglades plant. Container operations sit mid-port with MSC, ZIM and Mediterranean Shipping Company calls. Most electrical attendances happen alongside — turnaround windows on cruise are tight (often 6-8 hours), so we plan jobs to the minute. Common faults: passenger-area lighting and entertainment-system 60Hz/50Hz converter failures on European cruise vessels, IG-system pressure-switch electrical faults on product tankers loading at Slip 1-3, and reefer plug load-management issues on the MSC boxships. Port Everglades is one of our highest-volume ports given the South Florida cruise concentration.",
+      "logistics": {
+        "airports": [
+          "FLL (Fort Lauderdale-Hollywood)",
+          "MIA (Miami International)"
+        ],
+        "freightHubs": [
+          "FedEx FLL",
+          "UPS FLL gateway",
+          "Miami air cargo complex"
+        ],
+        "responseNote": "Under 1 hour vessel-side from Florida hub for AOG; routine attendance within 3 hours."
+      },
+      "ports": [
+        {
+          "name": "Cruise Terminals 18 / 19 / 25 / 26",
+          "lat": 26.0894,
+          "lng": -80.1175,
+          "vesselTypes": [
+            "Oasis-class cruise",
+            "Mega-cruise"
+          ],
+          "notes": "6-8 hour turnaround windows; HVAC, lighting, PMS and entertainment electrical."
+        },
+        {
+          "name": "Petroleum Slip 1-3",
+          "lat": 26.0964,
+          "lng": -80.1167,
+          "vesselTypes": [
+            "Product tankers",
+            "Bunker barges"
+          ],
+          "notes": "IG-system and cargo pump motor electrical, manifold area ex-zone work."
+        },
+        {
+          "name": "Southport Container Terminal",
+          "lat": 26.0789,
+          "lng": -80.1208,
+          "vesselTypes": [
+            "Container ships",
+            "Feeders"
+          ],
+          "notes": "Reefer plug load management and bow thruster work."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "Cruise ship HVAC automation fault during turnaround",
+          "summary": "Oasis-class vessel reports cabin-deck AHU fan running unstaged after fire damper trip-and-reset. We connect to the Siemens IAS, force the damper end-switch through manual override, identify a failed limit microswitch and replace from spares before passenger embarkation resumes."
+        },
+        {
+          "title": "Product tanker IG pressure low-low electrical trip at Slip 2",
+          "summary": "MR2 tanker loading gasoline trips IG fan on pressure low-low, forcing cargo stop. We bypass and trace the differential pressure transmitter circuit, find a moisture-soaked 4-20mA loop at the deck junction box, dry and re-pot, verify alarm reset, and resume cargo within 45 minutes."
+        }
+      ],
+      "usdInvoicing": "Invoiced in USD by Levent Marine LLC, Wyoming registered. NET 30 standard, NET 7 on AOG. Wire or ACH.",
+      "schemaCity": "Fort Lauderdale",
+      "schemaServiceArea": [
+        "Fort Lauderdale",
+        "Hollywood FL",
+        "Dania Beach",
+        "Miami",
+        "Hallandale",
+        "Pompano Beach"
+      ]
+    },
+    {
+      "slug": "portland-marine-electrical",
+      "city": "Portland",
+      "state": "OR",
+      "metaTitle": "Marine Electrical Service Port of Portland OR | Levent Marine",
+      "metaDescription": "Marine electrical & ETO attendance at Port of Portland — Columbia River T4, T5, T6. Ro-ro, grain and bulk vessel support 24/7, USD invoicing.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Portland",
+      "intro": "The Port of Portland sits 100 nautical miles up the Columbia River with a 43 ft maintained channel — the deepest river port on the US West Coast. Vessel traffic is dominated by ro-ro (Toyota, Honda, Hyundai, Ford imports and exports at Terminal 4), grain bulkers loading at Columbia Grain and CLD at Terminal 5, and breakbulk and project cargo at Terminal 6, which also handles container calls. The river pilotage from Astoria adds an 8-10 hour transit and electrical issues that surface en-route are typically attended on arrival at the Vancouver or St. Helens anchorages, or alongside in Portland. The river is fresh-water (lower corrosion but different cooling water chemistry), affecting BWTS and seachest sensor work. Most electrical attendances happen alongside. Common faults: PCTC stern-ramp and lighting circuit work after Toyota/Honda discharge, grain-bulker AVR and reverse-power tuning, BWTS challenge-water sensor recalibration for fresh-water operation, and bow-thruster motor work post-river-transit.",
+      "logistics": {
+        "airports": [
+          "PDX (Portland International)",
+          "SEA (Seattle-Tacoma)"
+        ],
+        "freightHubs": [
+          "FedEx PDX",
+          "UPS PDX",
+          "Memphis overnight"
+        ],
+        "responseNote": "Engineer on board within 13-17 hours from Florida hub; river-transit pilots add planning lead-time."
+      },
+      "ports": [
+        {
+          "name": "Terminal 4",
+          "lat": 45.6314,
+          "lng": -122.7686,
+          "vesselTypes": [
+            "PCTC",
+            "Ro-ro",
+            "Bulk"
+          ],
+          "notes": "Toyota and Honda hub; stern ramp and deck lighting electrical."
+        },
+        {
+          "name": "Terminal 5 (Columbia Grain / CLD)",
+          "lat": 45.6533,
+          "lng": -122.7531,
+          "vesselTypes": [
+            "Panamax bulkers",
+            "Handysize bulkers"
+          ],
+          "notes": "Grain export to Asia; AVR and switchboard attendance."
+        },
+        {
+          "name": "Terminal 6",
+          "lat": 45.6411,
+          "lng": -122.7497,
+          "vesselTypes": [
+            "Container ships",
+            "Breakbulk"
+          ],
+          "notes": "Container service restored 2020; bow-thruster and BWTS work."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "PCTC bow-thruster motor failure post-Columbia River transit at Terminal 4",
+          "summary": "Honda export PCTC reports bow-thruster motor megger drop to 0.4 MΩ after long river transit. We pull the motor, find seal-side moisture ingress, dry, re-megger to acceptable values and document a planned full overhaul for next yard period — vessel cleared for departure with single-thruster operation."
+        },
+        {
+          "title": "Grain bulker DG reverse-power trip at Terminal 5",
+          "summary": "Panamax bulker loading wheat for Japan trips DG3 on reverse-power during parallel. We bench-test the relay, find a faulty current input shunt and replace, recalibrate pickup and time delay, verify with a live-load acceptance test before pre-departure."
+        }
+      ],
+      "usdInvoicing": "Invoiced in USD by Levent Marine LLC, Wyoming registered. NET 30 standard, NET 7 on AOG. Wire or ACH.",
+      "schemaCity": "Portland",
+      "schemaServiceArea": [
+        "Portland",
+        "Vancouver WA",
+        "St. Helens",
+        "Longview WA",
+        "Kalama",
+        "Astoria"
+      ]
+    },
+    {
+      "slug": "savannah-marine-electrical",
+      "city": "Savannah",
+      "state": "GA",
+      "metaTitle": "Marine Electrical Service Port of Savannah | Levent Marine",
+      "metaDescription": "ETO and marine electrical service at Port of Savannah / Garden City Terminal — 2nd-busiest US container port. ULCV support, parts supply 24/7.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Savannah",
+      "intro": "The Port of Savannah is the second-busiest container port in the United States by TEU and the largest single-terminal facility in North America at Garden City Terminal, 21 nm up the Savannah River. The federal channel was deepened to 47 ft (54 ft at high tide) under SHEP, allowing fully laden Neo-Panamax and partially laden ULCV calls to MSC, ONE, Maersk and CMA CGM. The river transit is tide-restricted and pilots are conservative — vessels typically wait for high water at the Tybee Roads anchorage, which is also where we attend pre-arrival jobs. Most electrical attendances happen alongside at Garden City; the river current and narrow channel make in-transit work impractical. Common faults: reefer-rack PLC and power-monitoring faults on the high-density reefer ships, bow-thruster VFD work after long Atlantic crossings, BWTS de-ballast faults on tide-window-pressured vessels, and switchboard insulation faults on aging boxships in the secondary string. We routinely attend ABS, DNV, Lloyd's, BV and ClassNK surveys at Garden City.",
+      "logistics": {
+        "airports": [
+          "SAV (Savannah/Hilton Head Intl)",
+          "JAX (Jacksonville)"
+        ],
+        "freightHubs": [
+          "UPS SAV",
+          "FedEx SAV",
+          "JAX overnight"
+        ],
+        "responseNote": "Engineer on board within 5-8 hours from Florida hub; tide window planning critical."
+      },
+      "ports": [
+        {
+          "name": "Garden City Terminal",
+          "lat": 32.1158,
+          "lng": -81.1531,
+          "vesselTypes": [
+            "ULCV (partially laden)",
+            "Neo-Panamax container ships"
+          ],
+          "notes": "Largest single-terminal container facility in NA; tide-restricted access."
+        },
+        {
+          "name": "Ocean Terminal",
+          "lat": 32.0853,
+          "lng": -81.0903,
+          "vesselTypes": [
+            "Ro-ro",
+            "Breakbulk"
+          ],
+          "notes": "Forest products, project cargo and ro-ro; converting to all-container."
+        },
+        {
+          "name": "Tybee Roads anchorage",
+          "lat": 31.9694,
+          "lng": -80.7339,
+          "vesselTypes": [
+            "Container ships awaiting tide"
+          ],
+          "notes": "Pre-arrival attendance for tide-window pressure jobs."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "ULCV bow-thruster VFD trip pre-arrival at Tybee Roads",
+          "summary": "14,000 TEU boxship at anchor reports bow thruster will not start; tide window in 4 hours. We board by launch, find DC link capacitor pre-charge resistor failure, replace from carry-on spares, verify thruster start-test on shore-side mock load, and clear vessel for pilot embarkation in time."
+        },
+        {
+          "title": "Reefer-rack power monitoring fault at Garden City",
+          "summary": "Container ship reports 40 reefer plugs showing 'no power' on the cargo PC despite plug-level indicators healthy. We trace to a Modbus communication card in the reefer monitoring panel, swap with a spare, re-address devices and restore visibility before reefer discharge resumes."
+        }
+      ],
+      "usdInvoicing": "Invoiced in USD by Levent Marine LLC, Wyoming registered. NET 30 standard, NET 7 on AOG. Wire or ACH.",
+      "schemaCity": "Savannah",
+      "schemaServiceArea": [
+        "Savannah",
+        "Garden City",
+        "Pooler",
+        "Hilton Head",
+        "Brunswick GA",
+        "Hinesville"
+      ]
+    },
+    {
+      "slug": "seattle-marine-electrical",
+      "city": "Seattle",
+      "state": "WA",
+      "metaTitle": "Marine Electrical Service Port of Seattle NWSA | Levent Marine",
+      "metaDescription": "Marine electrical attendance at Port of Seattle / NWSA — Terminal 5, T18, T30, T46. ULCV box ship and cruise vessel support 24/7, USD invoicing.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Seattle",
+      "intro": "The Port of Seattle, operating jointly with Tacoma under the Northwest Seaport Alliance (NWSA), handles a major share of trans-Pacific container traffic to Puget Sound. The recently modernized Terminal 5 in West Seattle is dredged to 55 ft with shore-power infrastructure for the largest ULCVs on the SE Asia and China services. Container operations also run through Terminal 18 (Husky Terminal), Terminal 30 and Terminal 46, while Pier 66 / Pier 91 host Alaska-season cruise turnarounds for Norwegian, Princess, Holland America, Royal Caribbean and Carnival from May through September. Most electrical attendances happen alongside in the calm Elliott Bay waters. Common faults: Alaska-season cruise turnaround electrical work (HVAC, PMS, lifeboat winches, emergency lighting), ULCV shore-power high-voltage connection issues at the new T5, BWTS UV and electro-chlorination work on Asia services, and engine-room monitoring sensor work on cold-region ballast water operations. Class attendance for ABS, DNV, Lloyd's and ClassNK is routine.",
+      "logistics": {
+        "airports": [
+          "SEA (Seattle-Tacoma International)",
+          "BFI (Boeing Field)"
+        ],
+        "freightHubs": [
+          "FedEx SEA",
+          "UPS SEA",
+          "Anchorage hub for Alaska routing"
+        ],
+        "responseNote": "Engineer on board within 13-16 hours from Florida hub; same-day for Puget Sound AOG with West Coast network."
+      },
+      "ports": [
+        {
+          "name": "Terminal 5 (West Seattle)",
+          "lat": 47.5808,
+          "lng": -122.3625,
+          "vesselTypes": [
+            "ULCV",
+            "Neo-Panamax container ships"
+          ],
+          "notes": "55 ft channel; shore-power equipped for largest classes."
+        },
+        {
+          "name": "Terminal 18 (Husky Terminal)",
+          "lat": 47.5808,
+          "lng": -122.3411,
+          "vesselTypes": [
+            "Neo-Panamax container ships"
+          ],
+          "notes": "Joint NWSA operation; reefer and shore-power attendance."
+        },
+        {
+          "name": "Pier 91 / Smith Cove Cruise Terminal",
+          "lat": 47.6347,
+          "lng": -122.3756,
+          "vesselTypes": [
+            "Alaska-season cruise ships"
+          ],
+          "notes": "Saturday turnaround peak; HVAC, lifeboat winch and PMS attendance."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "Alaska-season cruise ship lifeboat winch motor failure at Pier 91",
+          "summary": "Princess-class vessel discovers stbd-aft lifeboat winch electric motor will not lower during pre-departure muster drill. We swap the brake assembly and rewind the failed lowering contactor, perform full SOLAS lower-recover test with USCG witness, and clear vessel for Saturday turnaround."
+        },
+        {
+          "title": "ULCV BWTS electro-chlorination cell fouling at Terminal 5",
+          "summary": "Trans-Pacific ULCV reports BWTS electro-chlorination cell tripping on low TRO during cold-water ballast at Elliott Bay. We isolate, dismantle and acid-clean the cell electrodes, restore TRO output to spec and update the BWMS log before next trans-Pacific departure."
+        }
+      ],
+      "usdInvoicing": "Invoiced in USD by Levent Marine LLC, Wyoming registered. NET 30 standard, NET 7 on AOG. Wire or ACH.",
+      "schemaCity": "Seattle",
+      "schemaServiceArea": [
+        "Seattle",
+        "Bellevue",
+        "Renton",
+        "Everett WA",
+        "Bremerton",
+        "Tacoma"
+      ]
+    },
+    {
+      "slug": "tacoma-marine-electrical",
+      "city": "Tacoma",
+      "state": "WA",
+      "metaTitle": "Marine Electrical Service Port of Tacoma NWSA | Levent Marine",
+      "metaDescription": "Marine electrical & ETO attendance at Port of Tacoma / NWSA — Husky, Washington United, Olympic. Container, bulk and Alaska-trade support 24/7.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Tacoma",
+      "intro": "The Port of Tacoma, operating under the Northwest Seaport Alliance with Seattle, is the principal container gateway for trade with Alaska as well as a major trans-Pacific container terminal. The Blair Waterway is dredged to 51 ft and the Sitcum Waterway to 45 ft, supporting Neo-Panamax box ships at Husky Terminal, Washington United Terminals (WUT), Olympic Container Terminal and Pierce County Terminal, plus the Totem Ocean Trailer Express (TOTE) ConRo ships on the dedicated Tacoma-Anchorage Alaska service. Bulk and breakbulk move through the EB-1 and EB-2 berths. Most electrical attendances happen alongside in the protected waterways. Common faults: TOTE and Matson Alaska-trade vessel electrical attendance on tight weekly schedules, ConRo stern-ramp and trailer-deck lighting circuits, container-ship BWTS UV-quartz fouling from cold-region ballast, bow-thruster VFD work after long Pacific crossings, and bulker AVR work on Capesize coal and grain exports out of EB-2.",
+      "logistics": {
+        "airports": [
+          "SEA (Seattle-Tacoma International)",
+          "BFI (Boeing Field)"
+        ],
+        "freightHubs": [
+          "FedEx SEA",
+          "UPS SEA",
+          "Anchorage gateway for AK trade"
+        ],
+        "responseNote": "Engineer on board within 13-16 hours from Florida hub; same-day for Puget Sound AOG via West Coast network."
+      },
+      "ports": [
+        {
+          "name": "Husky Terminal (Blair Waterway)",
+          "lat": 47.2767,
+          "lng": -122.4072,
+          "vesselTypes": [
+            "Neo-Panamax container ships"
+          ],
+          "notes": "Joint NWSA; reefer plug and bow-thruster attendance."
+        },
+        {
+          "name": "Washington United Terminals (WUT)",
+          "lat": 47.2719,
+          "lng": -122.4019,
+          "vesselTypes": [
+            "Neo-Panamax container ships"
+          ],
+          "notes": "Hyundai Merchant Marine flagship terminal; BWTS attendance."
+        },
+        {
+          "name": "TOTE Maritime Alaska berth",
+          "lat": 47.2697,
+          "lng": -122.4128,
+          "vesselTypes": [
+            "ConRo (Orca-class)"
+          ],
+          "notes": "Weekly Anchorage service; stern ramp and trailer deck electrical."
+        },
+        {
+          "name": "EB-2 Bulk Berth",
+          "lat": 47.2658,
+          "lng": -122.4189,
+          "vesselTypes": [
+            "Capesize bulkers",
+            "Panamax bulkers"
+          ],
+          "notes": "Coal and grain exports; AVR and switchgear attendance."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "TOTE Orca-class ConRo trailer-deck lighting circuit fault",
+          "summary": "Tacoma-Anchorage ConRo reports loss of trailer-deck 4 lighting feeder during loading, slowing trailer load-out and threatening sailing time. We isolate, trace to a water-ingressed JIS connector at deck-edge run, repair, megger and restore full lighting before the Friday sailing window."
+        },
+        {
+          "title": "Capesize bulker AVR drift at EB-2 grain berth",
+          "summary": "Capesize bulker loaded with grain reports DG2 voltage swinging 6% under load. We replace the AVR sensing card and re-tune droop, perform load acceptance through bow-thruster and main engine turning gear, and clear vessel for pre-departure machinery check with ClassNK surveyor."
+        }
+      ],
+      "usdInvoicing": "Invoiced in USD by Levent Marine LLC, Wyoming registered. NET 30 standard, NET 7 on AOG. Wire or ACH.",
+      "schemaCity": "Tacoma",
+      "schemaServiceArea": [
+        "Tacoma",
+        "Fife",
+        "Federal Way",
+        "Puyallup",
+        "Olympia",
+        "Seattle"
+      ]
+    },
+    {
+      "slug": "tampa-marine-electrical",
+      "city": "Tampa",
+      "state": "FL",
+      "metaTitle": "Marine Electrical Service Port of Tampa | Levent Marine",
+      "metaDescription": "Marine electrical service, ETO attendance and parts supply at Port Tampa Bay and Port Manatee. Phosphate, cruise, tanker and bulk vessel support 24/7.",
+      "h1": "Marine Electrical Service & Technical Parts Supply at the Port of Tampa",
+      "intro": "Port Tampa Bay is Florida's largest port by tonnage, with the Tampa Bay channel dredged to 43 ft and a turning basin sized for Panamax bulkers, Aframax tankers and Royal Caribbean / Carnival cruise ships at Channelside. Phosphate flows from Polk County via CSX rail to dry-bulk berths at Hooker's Point, while refined petroleum and LPG move through Big Bend and the Port Sutton tank farms. Port Manatee, 20 nm south, handles project cargo, fruit reefer, and additional bulk. Most electrical attendances happen alongside; weather windows are favorable year-round except hurricane season. Common faults: cruise-ship HVAC automation and PMS load-shedding tuning during quick turnaround, phosphate-bulker reverse-power trips on generator paralleling after long Pacific transits, and BWTS (UV and electro-chlorination) faults on tankers that surface during ballast operations. Class attendance for ABS, DNV, BV and Lloyd's is routine. As a Florida-based provider, this is our home port — engineers can be on board in under 2 hours for AOG calls in Tampa Bay.",
+      "logistics": {
+        "airports": [
+          "TPA (Tampa International)",
+          "SRQ (Sarasota-Bradenton)"
+        ],
+        "freightHubs": [
+          "FedEx TPA",
+          "UPS Tampa hub",
+          "Memphis overnight"
+        ],
+        "responseNote": "Same-day, under 2 hours vessel-side for Tampa Bay AOG; same-day for Manatee."
+      },
+      "ports": [
+        {
+          "name": "Port Tampa Bay — Hooker's Point",
+          "lat": 27.9094,
+          "lng": -82.4361,
+          "vesselTypes": [
+            "Panamax bulkers",
+            "Phosphate carriers"
+          ],
+          "notes": "Dry-bulk loading; reverse-power and AVR work common on departure."
+        },
+        {
+          "name": "Channelside Cruise Terminals 2/3/6",
+          "lat": 27.9425,
+          "lng": -82.4486,
+          "vesselTypes": [
+            "Cruise ships"
+          ],
+          "notes": "Turnaround windows; HVAC, PMS and entertainment-system electrical attendance."
+        },
+        {
+          "name": "Big Bend / Port Sutton tanker docks",
+          "lat": 27.8514,
+          "lng": -82.4017,
+          "vesselTypes": [
+            "Product tankers",
+            "LPG carriers"
+          ],
+          "notes": "IG-system electrical interlocks and cargo pump VFD work."
+        },
+        {
+          "name": "Port Manatee",
+          "lat": 27.6383,
+          "lng": -82.5611,
+          "vesselTypes": [
+            "Reefer",
+            "Project cargo",
+            "Bulk"
+          ],
+          "notes": "Reefer plug and crane electrical attendance."
+        }
+      ],
+      "scenarios": [
+        {
+          "title": "Phosphate bulker reverse-power trip at Hooker's Point",
+          "summary": "Panamax bulker paralleling DG2 to DG1 for departure suffers a reverse-power trip with no warning. We bench-test the reverse-power relay, find a drifted pickup setpoint, recalibrate to 8% pickup with 2-second delay, perform a live-load acceptance test and clear the vessel for pilot."
+        },
+        {
+          "title": "Cruise-ship HVAC chiller VFD fault during turnaround",
+          "summary": "Carnival-class cruise vessel reports passenger-area chiller VFD tripping on DC bus overvoltage 30 minutes before embarkation. We isolate, replace the braking resistor and diagnose a sticking regen contactor, restore chilled-water service and document for ABS class records before passenger boarding."
+        }
+      ],
+      "usdInvoicing": "Invoiced in USD by Levent Marine LLC, Wyoming registered. NET 30 standard, NET 7 on AOG. Wire or ACH.",
+      "schemaCity": "Tampa",
+      "schemaServiceArea": [
+        "Tampa",
+        "Port Manatee",
+        "St. Petersburg",
+        "Bradenton",
+        "Sarasota",
+        "Clearwater"
+      ]
     }
   ]
 }

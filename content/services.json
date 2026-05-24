@@ -225,6 +225,26 @@
         "engine-sensors",
         "actuators",
         "noris-spares"
+      ],
+      "faqs": [
+        {
+          "question_en": "Which main engine control platforms do your ETOs cover?",
+          "question_tr": "ETO ekibiniz hangi ana makine kontrol platformlarını kapsıyor?",
+          "answer_en": "We attend MAN B&W ME-C and ME-B (MOP/ECS, MPC cards, HCU back-up), Wartsila RT-flex and RT-flex96C WECS-9520, plus older Sulzer RTA mechanical-electronic governors. We troubleshoot Woodward 723PLUS and UG-25+ governors, fuel rack feedback potentiometers, Hall-effect RPM pickups, shaft turning gear interlocks and Lyngso/Kongsberg ECR alarm extensions over Modbus RTU and CAN. Class-acceptable safety trip testing (overspeed, low LO, oil mist) is part of the standard scope.",
+          "answer_tr": "MAN B&W ME-C ve ME-B (MOP/ECS, MPC kartları, HCU back-up), Wartsila RT-flex ve RT-flex96C WECS-9520 ile eski Sulzer RTA mekanik-elektronik governor sistemlerine müdahale ediyoruz. Woodward 723PLUS ve UG-25+ governor, fuel rack feedback potansiyometre, Hall-effect RPM pickup, shaft turning gear interlock ve Lyngso/Kongsberg ECR alarm extension hatlarını Modbus RTU ile CAN üzerinden arıza tespiti yapıyoruz. Class onaylı safety trip testleri (overspeed, low LO, oil mist) standart kapsamda."
+        },
+        {
+          "question_en": "How fast can you get an ETO to the berth for an ECR alarm fault?",
+          "question_tr": "ECR alarm arızası için gemiye ne kadar sürede ETO ulaştırabiliyorsunuz?",
+          "answer_en": "From the Florida desk we dispatch to any US Gulf or East Coast port within four to eight hours portal-to-gangway; West Coast and Great Lakes is typically next available flight, twelve to twenty hours. For a single ECR alarm card or RPM pickup fault, the attendance itself runs three to six hours alongside, including witness restart. We carry Fluke 87V, Fluke 754 process calibrator and a Tektronix scope for governor signal capture in our flyaway kit.",
+          "answer_tr": "Florida masamızdan ABD Gulf ve East Coast limanlarına 4-8 saat içinde gangway'e ulaşıyoruz; West Coast ve Great Lakes için ilk uygun uçuşla 12-20 saat. Tek bir ECR alarm kartı veya RPM pickup arızası için gemideki çalışma şahit restart dahil 3-6 saat. Flyaway kit'imizde Fluke 87V, Fluke 754 process calibrator ve governor sinyal yakalama için Tektronix osiloskop bulunuyor."
+        },
+        {
+          "question_en": "Will your report be accepted by my classification society for a condition-of-class clearance?",
+          "question_tr": "Raporunuz condition-of-class kaldırılması için klas tarafından kabul edilir mi?",
+          "answer_en": "Yes. We write attendance reports in the DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL and IRS expected formats, with calibration certificate annexes for the test gear used, signal-trend printouts and before/after parameter dumps from the MOP or WECS. If the surveyor is attending in parallel, we coordinate the safety trip witnessing live with the Chief Engineer so the CoC item can be lifted on the same call.",
+          "answer_tr": "Evet. Attendance raporlarını DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL ve IRS'in beklediği formatta yazıyoruz; kullanılan test cihazlarının kalibrasyon sertifikaları, sinyal trend çıktıları ve MOP veya WECS'ten öncesi/sonrası parametre dump'ları ile birlikte. Surveyor paralelde gemideyse, safety trip witness süreçlerini Chief Engineer ile canlı koordine edip CoC maddesini aynı ziyarette kaldırtıyoruz."
+        }
       ]
     },
     {
@@ -473,6 +493,26 @@
         "ecdis-spares",
         "gyro-bearings",
         "ais-antennas"
+      ],
+      "faqs": [
+        {
+          "question_en": "Which bridge equipment makers do you service?",
+          "question_tr": "Hangi köprü ekipmanı markalarına servis veriyorsunuz?",
+          "answer_en": "Furuno FAR-2xx7 and FAR-3xx0 radars, FR-21x5 series, JRC JAN-9201/7201 ECDIS, JMA-3300/5300/9100 radars, Sperry NaviGat 4000 and Standard 30 MF gyros, Raytheon Anschutz NP-2025/NP-5500 autopilots, Furuno FA-170 and JRC JHS-183 AIS Class A. We resolve NMEA 0183, IEC 61162-1/-2 talker-listener mismatches and NMEA 2000 backbone faults using a Actisense NMEA Reader and a USB-to-RS422 line monitor.",
+          "answer_tr": "Furuno FAR-2xx7 ve FAR-3xx0 radarlar, FR-21x5 serisi, JRC JAN-9201/7201 ECDIS, JMA-3300/5300/9100 radarlar, Sperry NaviGat 4000 ve Standard 30 MF cayrolar, Raytheon Anschutz NP-2025/NP-5500 otopilotlar, Furuno FA-170 ve JRC JHS-183 AIS Class A. NMEA 0183, IEC 61162-1/-2 talker-listener uyuşmazlıkları ve NMEA 2000 backbone arızalarını Actisense NMEA Reader ve USB-RS422 line monitor ile çözüyoruz."
+        },
+        {
+          "question_en": "How long does a typical bridge navigation attendance take?",
+          "question_tr": "Tipik bir köprü navigasyon müdahalesi ne kadar sürüyor?",
+          "answer_en": "A single-symptom call (one radar tx not radiating, one ECDIS frozen, one autopilot drift) is two to four hours alongside. A full bridge integration check after a yard period or a master-gyro swap runs eight to twelve hours, including sea-trial heading verification on a Pelorus compared to the magnetic compass. We bring a Furuno service dongle, JRC maintenance laptop image and a spare set of magnetrons in common 9 GHz ratings on request.",
+          "answer_tr": "Tek semptomlu çağrı (bir radar tx radyasyon vermiyor, bir ECDIS donmuş, bir otopilot drift) gemide 2-4 saat. Yard dönüşü veya master-gyro değişimi sonrası tam bridge integration kontrolü 8-12 saat; Pelorus ile manyetik pusulaya karşı sea-trial heading doğrulaması dahil. Talep üzerine Furuno servis dongle, JRC maintenance laptop image ve yaygın 9 GHz magnetron yedeklerini getiriyoruz."
+        },
+        {
+          "question_en": "Can you attend the annual class survey on the bridge equipment with the surveyor?",
+          "question_tr": "Köprü ekipmanının yıllık klas surveyini surveyor ile birlikte yapabiliyor musunuz?",
+          "answer_en": "Yes. We routinely attend with DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL and IRS surveyors for the annual navigation and radio item. We pre-flight radar performance monitor checks, ECDIS chart corrections vs. NM week, gyro error logbook entries and autopilot self-test before the surveyor steps on the bridge, so the witnessing itself takes about ninety minutes and the certificate is endorsed the same call.",
+          "answer_tr": "Evet. DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL ve IRS surveyorları ile yıllık navigation ve radio kalemini düzenli olarak birlikte yapıyoruz. Radar performance monitor kontrolleri, ECDIS chart corrections vs. NM haftası, cayro hata logbook girdileri ve autopilot self-test'leri surveyor köprüde olmadan önce ön-test ediyoruz; böylece witness işlemi yaklaşık 90 dakika sürüyor ve sertifika aynı ziyarette onaylanıyor."
+        }
       ]
     },
     {
@@ -518,6 +558,26 @@
         "gmdss-batteries",
         "epirb-hru",
         "antennas"
+      ],
+      "faqs": [
+        {
+          "question_en": "Which GMDSS equipment lines do you cover?",
+          "question_tr": "Hangi GMDSS ekipman hatlarını kapsıyorsunuz?",
+          "answer_en": "Sailor 6000-series VHF DSC, Furuno FM-8900S, JRC JHS-800S, Sailor RT-5022 MF/HF with HF-DSC scanning receiver, Cobham Sailor 250/500 FleetBroadband, JUE-87 INMARSAT-C, Jotron Tron 60S and McMurdo Smartfind G8 EPIRB, Jotron Tron SART20, Furuno NX-700 NAVTEX. We also reprogram MMSI (after flag/owner change), reload SafetyNET groups and update INMARSAT-C LES tables per the current Maritime Mobile manual.",
+          "answer_tr": "Sailor 6000 serisi VHF DSC, Furuno FM-8900S, JRC JHS-800S, Sailor RT-5022 MF/HF (HF-DSC scanning receiver dahil), Cobham Sailor 250/500 FleetBroadband, JUE-87 INMARSAT-C, Jotron Tron 60S ve McMurdo Smartfind G8 EPIRB, Jotron Tron SART20, Furuno NX-700 NAVTEX. Bayrak/sahip değişikliği sonrası MMSI yeniden programlama, SafetyNET gruplarını yükleme ve INMARSAT-C LES tablolarını güncel Maritime Mobile el kitabına göre güncelliyoruz."
+        },
+        {
+          "question_en": "Can you do the annual GMDSS radio survey on short notice?",
+          "question_tr": "Yıllık GMDSS radyo surveyini kısa sürede yapabiliyor musunuz?",
+          "answer_en": "Yes. Florida desk to US port is typically within twenty-four hours of confirmation, often same-day for Miami, Port Everglades, Jacksonville and Houston. The survey itself runs four to six hours: VHF DSC live test against a coast station, MF/HF dummy-load output measurement on a Bird 43 wattmeter, EPIRB self-test plus dedicated battery and HRU expiry check, SART self-test, INMARSAT-C link test and reserve-source 1-hour discharge on the GMDSS battery bank.",
+          "answer_tr": "Evet. Florida masamızdan ABD limanına onayın ardından tipik olarak 24 saat içinde, Miami, Port Everglades, Jacksonville ve Houston için çoğu zaman aynı gün. Survey kendisi 4-6 saat: kıyı istasyonuna karşı canlı VHF DSC test, Bird 43 wattmetre ile MF/HF dummy-load çıkış ölçümü, EPIRB self-test artısı dedikate batarya ve HRU son kullanma kontrolü, SART self-test, INMARSAT-C link testi ve GMDSS batarya bankında 1 saatlik reserve-source discharge."
+        },
+        {
+          "question_en": "Which class/administration paperwork do you produce after the radio survey?",
+          "question_tr": "Radyo survey'i sonrası hangi klas/idare evraklarını hazırlıyorsunuz?",
+          "answer_en": "We issue the GMDSS radio installation performance test report in the format expected by DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL, IRS and the flag administration's RO. Annexes include the Bird 43 power readings, battery discharge curve, EPIRB beacon decode (HEX ID, country, MMSI), SART 9 GHz sweep capture, and the radio log entry sign-off. The Safety Radio Certificate endorsement is handled with the attending surveyor the same call.",
+          "answer_tr": "DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL, IRS ve bayrak idaresinin RO'sunun beklediği formatta GMDSS radio installation performance test raporunu hazırlıyoruz. Ekler: Bird 43 güç okumaları, batarya discharge eğrisi, EPIRB beacon decode (HEX ID, ülke, MMSI), SART 9 GHz sweep yakalaması ve radio log girdi onayı. Safety Radio Certificate onayı aynı ziyarette surveyor ile yapılıyor."
+        }
       ]
     },
     {
@@ -699,6 +759,26 @@
         "level-sensors",
         "float-switches",
         "ocm-cells"
+      ],
+      "faqs": [
+        {
+          "question_en": "Which level and bilge sensor makes do you service?",
+          "question_tr": "Hangi level ve bilge sensor markalarına servis veriyorsunuz?",
+          "answer_en": "We attend Hawk Centurion guided-wave and Gladiator pulse radar gauges, Emerson Rosemount 5300/5408 GWR and 3051 differential pressure for tank gauging, KSR Kuebler magnetic float chambers, standard reed-type bilge floats and Deckma OMD-2008/OMD-32 oily-water 15 ppm monitors. We re-zero, span and bench-check sensors with a Druck DPI 620 and verify the OCM with a Marpol Annex I compliant test cell and certified bilge water sample.",
+          "answer_tr": "Hawk Centurion guided-wave ve Gladiator pulse radar gauges, tank gauging için Emerson Rosemount 5300/5408 GWR ve 3051 differential pressure, KSR Kuebler magnetic float chambers, standart reed-tipi bilge float'ları ve Deckma OMD-2008/OMD-32 oily-water 15 ppm monitörlerine müdahale ediyoruz. Druck DPI 620 ile sensörleri yeniden zero/span ve tezgah kontrolü yapıyoruz; OCM'yi Marpol Annex I uyumlu test hücresi ve sertifikalı bilge su numunesi ile doğruluyoruz."
+        },
+        {
+          "question_en": "What is the typical attendance time for a bilge alarm or OCM problem?",
+          "question_tr": "Bir bilge alarm veya OCM problemi için tipik müdahale süresi nedir?",
+          "answer_en": "Single bilge float or one tank-gauge channel: two to three hours alongside. Full E/R bilge well loop check (forward/aft, ER, ER aft, shaft tunnel) with PLC logic verification: six to eight hours. OCM 15 ppm overhaul including bench cell, optical window cleaning, zero/span on certified emulsion and three-way valve recirculation test: four to five hours. We carry spare Deckma cells and the Druck calibrator to avoid a second trip.",
+          "answer_tr": "Tek bilge float veya tek tank-gauge kanalı: gemide 2-3 saat. PLC logic doğrulaması ile tam E/R bilge kuyu loop kontrolü (forward/aft, ER, ER aft, shaft tunnel): 6-8 saat. OCM 15 ppm overhaul (tezgah hücre, optik pencere temizliği, sertifikalı emülsiyon üzerinde zero/span ve üç yollu vana recirculation testi dahil): 4-5 saat. İkinci sefer yapmamak için yedek Deckma hücreleri ve Druck kalibrator getiriyoruz."
+        },
+        {
+          "question_en": "Will the bilge / OCM report be accepted for the MARPOL Annex I survey?",
+          "question_tr": "Bilge / OCM raporunuz MARPOL Annex I surveyi için kabul edilir mi?",
+          "answer_en": "Yes. Reports are issued in DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL and IRS formats with the IOPP Certificate Form B item references. We attach Druck DPI 620 calibration cert, OCM cell certificate, the certified test emulsion lot number, three-way valve actuation log and a print of the resulting ORB Code C entry. If a USCG Subchapter D Port State officer attends, we hand them the same document pack on request.",
+          "answer_tr": "Evet. Raporlar IOPP Sertifikası Form B madde referansları ile DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL ve IRS formatlarında düzenleniyor. Druck DPI 620 kalibrasyon sertifikası, OCM hücre sertifikası, sertifikalı test emülsiyon lot numarası, üç yollu vana actuation log'u ve elde edilen ORB Code C kayıt çıktısı eklenir. USCG Subchapter D Port State subayı gemideyse talep üzerine aynı doküman paketini takdim ediyoruz."
+        }
       ]
     },
     {
@@ -739,6 +819,26 @@
       "related_supply_categories": [
         "shaft-brushes",
         "slip-rings"
+      ],
+      "faqs": [
+        {
+          "question_en": "Which shaft earthing brands and configurations do you service?",
+          "question_tr": "Hangi shaft earthing markalarına ve konfigürasyonlarına servis veriyorsunuz?",
+          "answer_en": "Wartsila/Cathelco shaft brush units, MORGAN AM and electro-graphite brushes on bronze or silver slip rings, plus Cathelco hull ICCP reference cells where the shaft earthing reading is corrupted by the ICCP loop. We rebuild the brush gear, true the slip ring with fine emery, verify spring pressure, and bond down to the main earth bar with tinned copper strap to MIL/IACS recommended sub-1 milliohm shaft-to-hull resistance.",
+          "answer_tr": "Wartsila/Cathelco shaft brush üniteleri, bronz veya gümüş slip ring üzerinde MORGAN AM ve elektro-grafit fırçalar, shaft earthing okumasının ICCP loop tarafından bozulduğu yerlerde Cathelco hull ICCP reference hücreleri. Brush gear'ı yeniliyoruz, slip ring'i ince zımpara ile true ediyoruz, yay basıncını doğruluyoruz ve kalaylı bakır strap ile ana topraklama barasına MIL/IACS tavsiye edilen 1 miliohm altı shaft-to-hull dirence kadar bonding yapıyoruz."
+        },
+        {
+          "question_en": "How long does a shaft brush refurbishment take alongside?",
+          "question_tr": "Bir shaft brush yenilemesi gemide ne kadar sürüyor?",
+          "answer_en": "With the shaft stopped and locked out by the Chief Engineer, brush bar refurbishment, slip-ring polish, new brush set and shaft-to-hull millivolt verification run three to five hours. We use a Megger DLRO10X for the bond resistance and a Fluke 289 logging on millivolt range to capture the potential shift over a five-minute window. If the slip ring requires lathe truing in workshop, we arrange it through a local US machinist and return next day.",
+          "answer_tr": "Şaft Chief Engineer tarafından durdurulup lock-out edildikten sonra brush bar yenileme, slip-ring polisajı, yeni brush seti ve shaft-to-hull milivolt doğrulaması 3-5 saat. Bond direnci için Megger DLRO10X, milivolt aralında 5 dakikalık potansiyel kaymasını yakalamak için Fluke 289 logging kullanıyoruz. Slip ring tezgah truing gerektiriyorsa, yerel ABD machinist ile organize edip ertesi gün dönüyoruz."
+        },
+        {
+          "question_en": "Do you log the shaft potential reading for class records?",
+          "question_tr": "Shaft potansiyel okumasını klas kayıtları için loglar mısınız?",
+          "answer_en": "Yes. The before/after shaft-to-hull millivolt reading, brush wear measurement and bond resistance are logged in the report format expected by DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL and IRS. We reference the relevant class guidance (e.g. DNV-CG-0339 for shaft earthing) and attach a photo of the new brush set. The chief engineer's PMS card is updated with the next monthly potential check interval before we leave the engine room.",
+          "answer_tr": "Evet. Önce/sonra shaft-to-hull milivolt okuması, brush aşınma ölçümü ve bond direnci, DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL ve IRS'in beklediği rapor formatında kayıt altına alınıyor. İlgili klas rehberini (örn. shaft earthing için DNV-CG-0339) referans veriyoruz ve yeni brush setinin fotoğrafını ekliyoruz. Makine dairesinden ayrılmadan önce chief engineer'in PMS kartı, bir sonraki aylık potansiyel kontrol aralığı ile güncelleniyor."
+        }
       ]
     },
     {
@@ -847,6 +947,26 @@
         "nav-lights",
         "led-floods",
         "marine-led"
+      ],
+      "faqs": [
+        {
+          "question_en": "Which navigation light and accommodation lighting brands do you support?",
+          "question_tr": "Hangi seyir feneri ve accommodation aydınlatma markalarını destekliyorsunuz?",
+          "answer_en": "Glamox MIR-R, MAX and ELP series, Den Haan Rotterdam DHR-70N and DHR-115N COLREG-approved nav lights, Aqua Signal Series 41 and 55, plus Phoenix and Wiska junction boxes. We retrofit MH and HPS cargo hold floods to LED (typically Glamox FX60 LED 250W) and replace failed magnetic ballasts with electronic equivalents. Type-approval markings (USCG, BV, DNV, Wheelmark MED) are verified on every replacement nav light before fitment.",
+          "answer_tr": "Glamox MIR-R, MAX ve ELP serisi, Den Haan Rotterdam DHR-70N ve DHR-115N COLREG onaylı seyir fenerleri, Aqua Signal Series 41 ve 55, ayrıca Phoenix ve Wiska junction box'ları. MH ve HPS cargo hold projektörlerini LED'e (tipik olarak Glamox FX60 LED 250W) retrofit ediyoruz ve arızalı manyetik balastları elektronik muadilleriyle değiştiriyoruz. Her değiştirilen seyir feneri için type-approval işaretleri (USCG, BV, DNV, Wheelmark MED) montaj öncesi doğrulanır."
+        },
+        {
+          "question_en": "How quickly can you replace a failed masthead or sidelight before sailing?",
+          "question_tr": "Kalkış öncesi arızalı masthead veya yan feneri ne kadar sürede değiştirebiliyorsunuz?",
+          "answer_en": "If the failure is reported before sailing window, we can usually land at the gangway with a type-approved spare within four to eight hours in Florida and Gulf ports, twelve to sixteen hours nationwide. Swap-out itself is one to two hours including light failure alarm reset at the nav light panel (typically Den Haan or Perko controller), main and emergency bus changeover test, and a logbook entry confirming visibility per COLREG Annex I.",
+          "answer_tr": "Arıza kalkış penceresi öncesinde bildirilirse, Florida ve Gulf limanlarında type-approved yedek ile gangway'e genelde 4-8 saat, ülke çapında 12-16 saat içinde varabiliyoruz. Değişim kendisi 1-2 saat: nav light panelinde light failure alarm reset (tipik olarak Den Haan veya Perko controller), ana ve emergency bus changeover testi ve COLREG Annex I'e göre görünürlüğü teyit eden logbook girdisi dahil."
+        },
+        {
+          "question_en": "Can you sign off a navigation light replacement on the Safety Equipment Certificate?",
+          "question_tr": "Bir seyir feneri değişimini Safety Equipment Certificate üzerinde onaylatabilir miyiz?",
+          "answer_en": "Replacement is documented on our service report with the type-approval certificate number of the new fixture, photographs of the rating plate, the light-failure alarm test result and continuity readings on Fluke 87V. For Safety Equipment Certificate endorsement, DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL or IRS surveyor attendance is required; we coordinate the joint visit so the endorsement is added on the same call without an extra port stop.",
+          "answer_tr": "Değişim, yeni armatürün type-approval sertifika numarası, rating plate fotoğrafları, light-failure alarm test sonucu ve Fluke 87V üzerindeki süreklilik okumaları ile servis raporumuzda belgelenir. Safety Equipment Certificate onayı için DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL veya IRS surveyor katılımı gerekir; ek bir liman durağı olmadan onayın aynı ziyarette eklenmesi için ortak ziyareti koordine ediyoruz."
+        }
       ]
     },
     {
@@ -888,6 +1008,26 @@
         "batteries",
         "ups-modules",
         "bms-cards"
+      ],
+      "faqs": [
+        {
+          "question_en": "Which marine battery and UPS systems do you service?",
+          "question_tr": "Hangi gemi batarya ve UPS sistemlerine servis veriyorsunuz?",
+          "answer_en": "GMDSS reserve battery banks (typically Hawker/Enersys Powersafe lead-acid 24V), emergency genset start banks (Mastervolt and Victron AGM), Riello Multi Sentry and Eaton 9355 UPS feeding nav, IAS and main switchboard control, plus lithium hybrid systems with Corvus and Leclanche BMS. We perform Megger BITE3 impedance tests, ten-hour capacity discharge with a 200 A load bank, and float/equalize charge verification with a Fluke 1587 insulation tester.",
+          "answer_tr": "GMDSS reserve batarya bankları (tipik olarak Hawker/Enersys Powersafe lead-acid 24V), emergency genset start bankları (Mastervolt ve Victron AGM), nav, IAS ve ana switchboard kontrolünü besleyen Riello Multi Sentry ve Eaton 9355 UPS'leri, ayrıca Corvus ve Leclanche BMS'li lityum hibrit sistemler. Megger BITE3 empedans testleri, 200 A load bank ile 10 saatlik kapasite discharge ve Fluke 1587 izolasyon test cihazı ile float/equalize charge doğrulaması yapıyoruz."
+        },
+        {
+          "question_en": "How long is a full GMDSS reserve battery capacity test alongside?",
+          "question_tr": "Tam bir GMDSS reserve batarya kapasite testi gemide ne kadar sürüyor?",
+          "answer_en": "Allowing for a one-hour reserve discharge per IMO Resolution A.694(17), the in-port test runs four to six hours including pre-test float voltage logging, individual cell impedance with the Megger BITE3, the discharge itself onto the actual GMDSS load, recharge initialization and a Hydran-style specific gravity check on flooded cells. If the bank fails the impedance threshold we can supply replacement Enersys cells from Florida stock within twenty-four hours.",
+          "answer_tr": "IMO Resolution A.694(17) uyarınca 1 saatlik reserve discharge sayarak limandaki test 4-6 saat: ön-test float voltaj loglama, Megger BITE3 ile hücre bazlı empedans, gerçek GMDSS yüküne yapılan discharge, recharge başlatma ve sulu hücrelerde Hydran tipi specific gravity kontrolü dahil. Bank empedans eşiğini geçemezse, yedek Enersys hücrelerini Florida stoğundan 24 saat içinde tedarik edebiliyoruz."
+        },
+        {
+          "question_en": "Do you provide a class-acceptable battery capacity test certificate?",
+          "question_tr": "Klas tarafından kabul edilen bir batarya kapasite test sertifikası sunuyor musunuz?",
+          "answer_en": "Yes. The certificate includes Megger BITE3 impedance per cell, ambient temperature, discharge current vs. time curve, calculated Ah delivered vs. C10 nameplate, and pass/fail against the IEEE 450 / IEC 60896 criteria used by DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL and IRS. Load bank and Megger calibration certificates are annexed. The Safety Radio surveyor can lift the reserve battery item against this document the same call.",
+          "answer_tr": "Evet. Sertifika; hücre başına Megger BITE3 empedans, ortam sıcaklığı, akıma karşı zaman discharge eğrisi, hesaplanan Ah teslimi vs. C10 nameplate ve DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL ve IRS tarafından kullanılan IEEE 450 / IEC 60896 kriterlerine karşı pass/fail içeriyor. Load bank ve Megger kalibrasyon sertifikaları ek olarak verilir. Safety Radio surveyor reserve batarya maddesini bu dokümana karşı aynı ziyarette kaldırabilir."
+        }
       ]
     },
     {
@@ -930,6 +1070,26 @@
         "shore-power-cables",
         "isolation-transformers",
         "earth-monitors"
+      ],
+      "faqs": [
+        {
+          "question_en": "Which shore-power configurations and brands do you commission?",
+          "question_tr": "Hangi kara bağlantısı konfigürasyonlarını ve markalarını devreye alıyorsunuz?",
+          "answer_en": "We commission IEC/IEEE 80005-1 HVSC installations at CARB-regulated California ports (Long Beach, Oakland), plus LVSC for OSVs and ferries on the Gulf and East Coast. Equipment lines include Cavotec MoorMaster shore connection panels, Schneider isolation transformers, ABB sync-check relays. We verify IT vs. TT earthing scheme selection, phase-rotation against the ship 60 Hz / 440 V bus and synchronizing closure with a Crompton sync-scope and Fluke 437-II power quality analyser.",
+          "answer_tr": "CARB regülasyonlu California limanlarında (Long Beach, Oakland) IEC/IEEE 80005-1 HVSC tesisatları, Gulf ve East Coast'taki OSV ve feribotlar için LVSC devreye alıyoruz. Ekipman hatları Cavotec MoorMaster shore connection panelleri, Schneider izolasyon trafoları, ABB sync-check röleleri. IT vs. TT topraklama şeması seçimi, gemi 60 Hz / 440 V busbar'a karşı faz sırası ve Crompton sync-scope ile Fluke 437-II güç kalite analizörü kullanılarak senkron kapatma doğrulanır."
+        },
+        {
+          "question_en": "How long does an initial shore-power connection take in a CARB port?",
+          "question_tr": "CARB limanda ilk kara bağlantısı ne kadar sürüyor?",
+          "answer_en": "First-time connection on an unfamiliar berth typically runs six to ten hours: pre-arrival paperwork with the terminal electrical authority, cable-handling system test, isolation transformer megger on a Megger MIT525, phase rotation and earth scheme verification, synchronization onto the live bus, and a one-hour soak load measurement. Routine reconnections on a vessel that has the procedure proven are forty-five minutes plus the terminal's safety checklist.",
+          "answer_tr": "Tanıdık olmayan bir iskelede ilk kez bağlantı tipik olarak 6-10 saat: terminal elektrik yetkilisi ile ön-varış evrakları, kablo ellelemesi sistem testi, Megger MIT525 ile izolasyon trafosu megger'i, faz sırası ve topraklama şeması doğrulaması, canlı busbar'a senkronizasyon ve 1 saatlik soak yük ölçümü. Prosedürün kanıtlandığı bir gemide rutin yeniden bağlantılar terminalin safety checklist'i artısı 45 dakika."
+        },
+        {
+          "question_en": "Do you issue the commissioning report acceptable to class and the port authority?",
+          "question_tr": "Klas ve liman otoritesi tarafından kabul edilebilir bir devreye alma raporu düzenliyor musunuz?",
+          "answer_en": "Yes. The commissioning pack covers IEC/IEEE 80005-1 clauses 6-8 with Megger MIT525 IR readings, Cavotec/Wabtec panel functional log, sync closure oscillogram, Fluke 437-II THD and unbalance measurements, and the safety interlock matrix. The report is recognized by DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL and IRS for the AMP/HVSC notation, and is in the format the Port of Long Beach and Port of Oakland environmental compliance teams expect.",
+          "answer_tr": "Evet. Devreye alma paketi IEC/IEEE 80005-1 madde 6-8'i kapsar; Megger MIT525 IR okumaları, Cavotec/Wabtec panel fonksiyonel log'u, sync kapanış osilogramı, Fluke 437-II THD ve dengesizlik ölçümleri ve safety interlock matrisi dahil. Rapor AMP/HVSC notasyonu için DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL ve IRS tarafından tanınır ve Port of Long Beach ile Port of Oakland environmental compliance ekiplerinin beklediği formattadır."
+        }
       ]
     },
     {
@@ -972,6 +1132,26 @@
         "transformer-spares",
         "cooling-fans",
         "tap-changers"
+      ],
+      "faqs": [
+        {
+          "question_en": "Which marine transformer types do you test and service?",
+          "question_tr": "Hangi gemi transformatör tiplerini test ediyor ve servis veriyorsunuz?",
+          "answer_en": "440/230V step-down lighting and galley transformers, 6.6 kV and 11 kV main HV transformers on LNG carriers and cruise ships, plus isolation transformers for shore-power and bow-thruster VFD front ends. Standard test set includes Megger TTR300 turns-ratio, Megger MIT525 5 kV insulation, OMICRON CPC 100 winding resistance and FLIR T540 thermography under load. Dielectric oil sampling is sent to a US-based ISO 17025 lab for dissolved-gas analysis when DGA is in scope.",
+          "answer_tr": "440/230V step-down aydınlatma ve mutfak trafoları, LNG carrier ve cruise gemilerinde 6.6 kV ve 11 kV ana HV trafoları, ayrıca shore-power ve bow-thruster VFD ön tarafı için izolasyon trafoları. Standart test seti Megger TTR300 turns-ratio, Megger MIT525 5 kV izolasyon, OMICRON CPC 100 sargı direnci ve yük altında FLIR T540 termografi içerir. Dielektrik yağ numunesi, DGA kapsam dahilindeyse ABD merkezli ISO 17025 laboratuvarına dissolved-gas analizi için gönderilir."
+        },
+        {
+          "question_en": "How long does a routine transformer test take?",
+          "question_tr": "Rutin bir transformatör testi ne kadar sürüyor?",
+          "answer_en": "A 440/230V lighting transformer routine (visual, IR, TTR, thermography on load) is two to three hours including isolation. A 6.6 kV main bus tx full routine with OMICRON CPC 100 sweep, oil sample draw and bushing tan-delta is six to ten hours, requiring a planned blackout window agreed with the Chief Engineer. We schedule HV work around cargo operations and bring all our own LOTO locks plus a calibrated Salisbury HV glove set rated 17 kV.",
+          "answer_tr": "Bir 440/230V aydınlatma trafosu rutini (görsel, IR, TTR, yük altında termografi) izolasyon dahil 2-3 saat. OMICRON CPC 100 sweep, yağ numune alımı ve bushing tan-delta ile bir 6.6 kV ana busbar trafosu tam rutini 6-10 saat; Chief Engineer ile mutabık kalınan planlı blackout penceresi gerekir. HV çalışmayı yük operasyonları etrafında planlıyoruz ve tüm LOTO kilitlerimizi artısı 17 kV dereceli kalibre Salisbury HV eldiven setini getiriyoruz."
+        },
+        {
+          "question_en": "Will the transformer test report be accepted for the special survey?",
+          "question_tr": "Transformatör test raporu special survey için kabul edilir mi?",
+          "answer_en": "Yes. Reports are in the format expected by DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL and IRS for the electrical special survey item. We include Megger TTR300 calibration cert, MIT525 5 kV insulation readings with polarization index, OMICRON winding resistance, thermography images with delta-T against ambient, and DGA lab report where applicable. The chief engineer's PMS is updated with the next 30-month re-test interval before we sign off.",
+          "answer_tr": "Evet. Raporlar elektriksel special survey kalemi için DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL ve IRS'in beklediği formattadır. Megger TTR300 kalibrasyon sertifikası, polarization index ile MIT525 5 kV izolasyon okumaları, OMICRON sargı direnci, ortama karşı delta-T'li termografi görüntüleri ve uygunsa DGA lab raporu dahildir. Sign-off etmeden önce chief engineer'in PMS'i bir sonraki 30-aylık yeniden test aralığı ile güncellenir."
+        }
       ]
     },
     {
@@ -1077,6 +1257,26 @@
         "hvac-controllers",
         "dampers",
         "reefer-sockets"
+      ],
+      "faqs": [
+        {
+          "question_en": "Which HVAC automation platforms and unit brands do you cover?",
+          "question_tr": "Hangi HVAC otomasyon platformlarını ve ünite markalarını kapsıyorsunuz?",
+          "answer_en": "Carrier 30RB and 30XA marine chillers, Daikin marine packaged AC units, JCM (Johnson Controls Marine) AHU controllers, plus Heinen and Hopman accommodation AHU with Honeywell and Sauter DDC controllers over Modbus RTU and BACnet/IP. We service ER ventilation interlocks tied into CO2 release with a Fluke 975 AirMeter, troubleshoot VFD fan-speed loops (ABB ACS580) and recommission reefer container plug-in points (440V/60Hz/32A) including the monitoring receptacle insulation test.",
+          "answer_tr": "Carrier 30RB ve 30XA marine chiller'lar, Daikin marine paket AC üniteleri, JCM (Johnson Controls Marine) AHU controller'lar, ayrıca Modbus RTU ve BACnet/IP üzerinden Honeywell ve Sauter DDC controller'li Heinen and Hopman accommodation AHU. Fluke 975 AirMeter ile CO2 release'e bağlı ER ventilation interlock'larını servisliyoruz, VFD fan-speed loop'larını (ABB ACS580) sorun gideriyoruz ve reefer container plug-in noktalarını (440V/60Hz/32A) izleme prizinin izolasyon testi dahil yeniden devreye alıyoruz."
+        },
+        {
+          "question_en": "How long does a typical accommodation HVAC fault attendance take?",
+          "question_tr": "Tipik bir accommodation HVAC arıza müdahalesi ne kadar sürüyor?",
+          "answer_en": "A single chilled water AHU control fault (sensor, damper actuator, VFD trip) is three to four hours alongside. A full accommodation HVAC and ER ventilation interlock recommission after a refit is twelve to sixteen hours, including ER fan / fire damper / CO2 release matrix witnessed live. We carry Sauter and Honeywell PC tools, a Fluke 975 IAQ meter and ABB ACS-AP-x programming panels in the flyaway kit to avoid an OEM call-out fee.",
+          "answer_tr": "Tek bir chilled water AHU kontrol arızası (sensor, damper aktüatör, VFD trip) gemide 3-4 saat. Refit sonrası tam accommodation HVAC ve ER ventilation interlock yeniden devreye alma 12-16 saat: canlı witness'lanan ER fan / fire damper / CO2 release matrisi dahil. Bir OEM call-out ücretinden kaçınmak için flyaway kit'inde Sauter ve Honeywell PC araçları, Fluke 975 IAQ metre ve ABB ACS-AP-x programlama panellerini getiriyoruz."
+        },
+        {
+          "question_en": "Can you certify the ER ventilation / CO2 release interlock for class?",
+          "question_tr": "ER havalandırma / CO2 release interlock'unu klas için sertifikalandırabilir misiniz?",
+          "answer_en": "Yes. The interlock matrix test (ER supply fan stop, exhaust fan stop, fire damper closure, FO/LO transfer pump stop, CO2 release armed) is documented in the report format expected by DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL and IRS for the SOLAS Ch II-2 item. We attach the cause-and-effect matrix marked up against the actual response time, Fluke 975 air-change measurement and a photo of the CO2 release station after the test, reset to ready state.",
+          "answer_tr": "Evet. Interlock matris testi (ER supply fan stop, exhaust fan stop, fire damper kapanması, FO/LO transfer pompa stop, CO2 release armed) SOLAS Ch II-2 kalemi için DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL ve IRS'in beklediği rapor formatında belgelenir. Gerçek tepki süresine karşı işaretlenmiş cause-and-effect matrisi, Fluke 975 hava değişim ölçümü ve testten sonra ready durumuna resetlenmiş CO2 release istasyonunun fotoğrafı eklenir."
+        }
       ]
     },
     {
@@ -1120,6 +1320,26 @@
         "vdr-batteries",
         "cctv-cameras",
         "nvr-hdds"
+      ],
+      "faqs": [
+        {
+          "question_en": "Which VDR and CCTV makers do you cover for annual testing?",
+          "question_tr": "Yıllık test için hangi VDR ve CCTV markalarını kapsıyorsunuz?",
+          "answer_en": "Furuno VR-7000 and VR-3000, JRC JCY-1900 and JCY-1800, Danelec DM100 S-VDR and DM200 VDR, plus Headway and Rutter on retrofits. CCTV side we service Bosch Dinion and Flexidome, Axis fixed and PTZ, with Milestone XProtect and Bosch DIVAR NVRs sized for the IMO 12-hour bridge plus 30-day ER retention typically demanded by operators. We download annual VDR samples and replay with the OEM playback software for completeness verification.",
+          "answer_tr": "Furuno VR-7000 ve VR-3000, JRC JCY-1900 ve JCY-1800, Danelec DM100 S-VDR ve DM200 VDR, ayrıca retrofit'lerde Headway ve Rutter. CCTV tarafında Bosch Dinion ve Flexidome, Axis sabit ve PTZ, operatörlerin tipik olarak talep ettiği IMO 12-saat köprü artısı 30-gün ER retention'a göre boyutlandırılmış Milestone XProtect ve Bosch DIVAR NVR'lere servis veriyoruz. Yıllık VDR örnekleri indiriliyor ve bütünlük doğrulaması için OEM playback yazılımı ile replay ediliyor."
+        },
+        {
+          "question_en": "How long does the VDR Annual Performance Test (APT) take alongside?",
+          "question_tr": "VDR Yıllık Performans Testi (APT) gemide ne kadar sürüyor?",
+          "answer_en": "A full IMO Res. MSC.333(90) APT runs five to seven hours: data integrity check on the fixed and float capsules, microphone audibility on the bridge wings and ECR, NMEA sentence inventory against IEC 61162, radar image capture verification, alarm and date/time stamp checks, and battery back-up endurance verified for two hours. We end with a downloadable APT certificate uploaded to the operator's fleet system within twenty-four hours of leaving the vessel.",
+          "answer_tr": "Tam bir IMO Res. MSC.333(90) APT'si 5-7 saat: sabit ve float kapsüllerinde veri bütünlük kontrolü, köprü kanatları ve ECR'da mikrofon duyulabilirlik, IEC 61162'ye karşı NMEA cümle envanteri, radar image yakalama doğrulaması, alarm ve tarih/saat damga kontrolleri ve 2 saat doğrulanan batarya back-up enduransı. Gemiden ayrıldıktan sonra 24 saat içinde operatörün filo sistemine yüklenen indirilebilir bir APT sertifikası ile bitiriyoruz."
+        },
+        {
+          "question_en": "Is the APT certificate accepted by class without a separate surveyor visit?",
+          "question_tr": "APT sertifikası ayrı bir surveyor ziyareti olmadan klas tarafından kabul edilir mi?",
+          "answer_en": "Yes. Levent Marine is an independent service provider; the APT certificate we issue carries the OEM software version, capsule serial numbers, microphone calibration trace and is in the format DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL and IRS accept toward the Safety Equipment Certificate VDR item without a separate class attendance. The certificate is valid for twelve months from the test date and is auto-mailed to the operator and the flag administration on completion.",
+          "answer_tr": "Evet. Levent Marine bağımsız bir servis sağlayıcısıdır; düzenlediğimiz APT sertifikası OEM yazılım versiyonu, kapsül seri numaraları, mikrofon kalibrasyon iz kaydını taşır ve ayrı bir klas ziyareti gerekmeksizin Safety Equipment Certificate VDR kalemine yönelik DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL ve IRS tarafından kabul edilen formattadır. Sertifika test tarihinden itibaren 12 ay geçerlidir ve tamamlandığında operatöre ve bayrak idaresine otomatik olarak postalanır."
+        }
       ]
     },
     {
@@ -1163,6 +1383,26 @@
         "fire-detectors",
         "beam-detectors",
         "aspirating-tubing"
+      ],
+      "faqs": [
+        {
+          "question_en": "Which smoke-detection technologies and brands do you service?",
+          "question_tr": "Hangi duman alarm teknolojilerini ve markalarını servisliyorsunuz?",
+          "answer_en": "Consilium Salwico, Autronica BS-100, Thorn Marine and Notifier addressable loops with ionisation, optical (photoelectric) and beam detectors, plus Wagner Titanus and VESDA-E aspirating systems on cargo and machinery spaces. We test sensitivity drift with the manufacturer's hand-held service tool (e.g. Consilium SMT-2), clear sampling-line blockages with reverse air-purge, and verify zone addressing on the loop with a Fluke 87V and the panel's diagnostic menu.",
+          "answer_tr": "Consilium Salwico, Autronica BS-100, Thorn Marine ve Notifier adresli loop'lar; iyonizasyon, optik (fotoelektrik) ve beam dedektörler, ayrıca kargo ve makine sahalarında Wagner Titanus ve VESDA-E aspirating sistemler. İmalatçının el tipi servis aleti ile (örn. Consilium SMT-2) hassasiyet drift'i test ediyoruz, sampling line tıkanıklıklarını ters hava purge ile açıyoruz ve loop üzerinde zone adreslemesini Fluke 87V ve panelin diagnostic menüsü ile doğruluyoruz."
+        },
+        {
+          "question_en": "How long does a full smoke-detection system test take?",
+          "question_tr": "Tam bir duman alarm sistem testi ne kadar sürüyor?",
+          "answer_en": "On a mid-size bulker with 120-160 addressable detectors, a full point-to-point test using smoke aerosol and the panel log takes eight to ten hours over a watch. Aspirating system sensitivity verification with calibrated smoke and flow-test of each sampling pipe adds two to four hours. We disable cross-trips to general alarm and CO2 release at the panel during testing with the Chief Officer's sign-off and restore them with a witnessed end-to-end test before leaving.",
+          "answer_tr": "Orta boy bir bulker'da 120-160 adresli dedektör ile duman aerosol ve panel log kullanılarak tam point-to-point testi bir vardiya boyunca 8-10 saat. Kalibre duman ile aspirating sistem hassasiyet doğrulaması ve her sampling boru için flow testi 2-4 saat ekler. Test sırasında panelden general alarm ve CO2 release'e cross-trip'leri Chief Officer onayı ile devre dışı bırakıyoruz ve ayrılmadan witness'lanan end-to-end test ile geri yüklüyoruz."
+        },
+        {
+          "question_en": "Is the smoke-detection report acceptable to class and flag?",
+          "question_tr": "Duman alarm raporu klas ve bayrak tarafından kabul edilir mi?",
+          "answer_en": "Yes. The report references SOLAS Ch II-2 Reg. 7 and FSS Code Ch 9, lists each addressable point with detector type, sensitivity reading, pass/fail and date of last replacement, and is in the format DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL and IRS surveyors expect for the annual / renewal Safety Construction survey item. Service tool calibration certificate and aspirating flow-test print are annexed.",
+          "answer_tr": "Evet. Rapor SOLAS Ch II-2 Reg. 7 ve FSS Code Ch 9'a referans verir, her adresli noktayı dedektör tipi, hassasiyet okuması, pass/fail ve son değişim tarihi ile listeler ve DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL ve IRS surveyorlarının yıllık / yenileme Safety Construction survey kalemi için beklediği formattadır. Servis aleti kalibrasyon sertifikası ve aspirating flow-test çıktısı eklenir."
+        }
       ]
     },
     {
@@ -1206,6 +1446,26 @@
         "water-mist-nozzles",
         "solenoid-valves",
         "high-pressure-strainers"
+      ],
+      "faqs": [
+        {
+          "question_en": "Which engine-room water-mist systems do you service?",
+          "question_tr": "Hangi makine dairesi water-mist sistemlerine servis veriyorsunuz?",
+          "answer_en": "Marioff HI-FOG OEM-grade service on the GPU pump skid (electric and diesel-driven), section selector solenoid valves, accumulator pre-charge and the dedicated detection panel. Also Ultra Fog and Tyco AquaMist installations. We pressure-test the high-pressure piping to 140 bar with a calibrated Druck DPI 705E reference, replace clogged spray heads, and verify section valve actuation against the detection panel cause-and-effect matrix per FSS Code Ch 7.",
+          "answer_tr": "Marioff HI-FOG OEM kalitesinde GPU pompa skid'i (elektrik ve dizel tahrikli), section selector solenoid vanalar, akümülator ön-şarjı ve dedikate algılama paneli servisi. Ayrıca Ultra Fog ve Tyco AquaMist tesisatları. Yüksek basınç borulamasını kalibre Druck DPI 705E referansı ile 140 bar'a basınç test ediyoruz, tıkanmış sprey kafalarını değiştiriyoruz ve FSS Code Ch 7'ye göre section vana aktüasyonunu detection panel cause-and-effect matrisine karşı doğruluyoruz."
+        },
+        {
+          "question_en": "How long does the annual water-mist discharge test take?",
+          "question_tr": "Yıllık water-mist deşarj testi ne kadar sürüyor?",
+          "answer_en": "The annual is six to eight hours alongside: pump skid start sequence verified (electric primary, diesel back-up auto-cut), accumulator pressure logged, one ER section discharged to a temporary catch tray to confirm nozzle pattern, the other sections actuated dry to confirm valve operation. Pre-charge nitrogen is topped up, filters changed, and the system is left armed with the Master Fire Safety Plan signed off by the Chief Engineer and the attending surveyor.",
+          "answer_tr": "Yıllık gemide 6-8 saat: pompa skid'i start sırası doğrulanır (elektrik birincil, dizel back-up otomatik geçiş), akümülator basıncı kayda alınır, bir ER section geçici toplama tepsisine deşarj edilerek nozzle paterni teyit edilir, diğer section'lar vana operasyonunu teyit etmek için kuru aktüate edilir. Ön-şarj nitrojeni tamamlanır, filtreler değiştirilir ve sistem Chief Engineer ile katılan surveyor tarafından imzalanan Master Fire Safety Plan ile armed bırakılır."
+        },
+        {
+          "question_en": "Do you coordinate the discharge test with the class surveyor?",
+          "question_tr": "Deşarj testini klas surveyor ile koordine ediyor musunuz?",
+          "answer_en": "Yes. The annual water-mist discharge is a witnessed test for DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL and IRS. We pre-attend the day before to clear nozzles, check pump and detection panel, then time the live discharge for the surveyor's arrival window. The report references FSS Code Ch 7 and MSC/Circ.1165, attaches the Druck pressure test record and a photo of each restored section with its locking pin re-inserted.",
+          "answer_tr": "Evet. Yıllık water-mist deşarjı DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL ve IRS için witness'lanan bir testtir. Nozzle'ları temizlemek, pompa ve detection paneli kontrol etmek için bir gün önce ön-katılım sağlıyoruz, sonra canlı deşarjı surveyor'ın varış penceresine zamanlıyoruz. Rapor FSS Code Ch 7 ve MSC/Circ.1165'e referans verir, Druck basınç testi kaydını ve locking pin'i yeniden takılmış her geri yüklenen section'ın fotoğrafını ekler."
+        }
       ]
     },
     {
@@ -1229,7 +1489,27 @@
       "symptoms": [],
       "common_causes": [],
       "tools": [],
-      "related_supply_categories": []
+      "related_supply_categories": [],
+      "faqs": [
+        {
+          "question_en": "My system isn't in the wizard list. Can I still raise a service request?",
+          "question_tr": "Sistemim wizard listesinde yok. Yine de bir servis talebi açabilir miyim?",
+          "answer_en": "Yes. Pick the Other / Doesn't fit option in the service wizard. Describe the system in free text (maker, model, symptom, when it started, any error codes on the ECR alarm printer or panel display), upload a photo of the nameplate and the alarm screen, and your vessel position or next port. The intake is reviewed by an ETO at the Florida desk within thirty minutes during US working hours and within two hours overnight or weekend.",
+          "answer_tr": "Evet. Servis wizard'ında Other / Doesn't fit seçeneğini seçin. Sistemi serbest metinle tarif edin (marka, model, semptom, ne zaman başladığı, ECR alarm printer veya panel display'indeki hata kodları), nameplate ve alarm ekranının fotoğrafını, gemi pozisyonunu veya bir sonraki limanı yükleyin. Intake, ABD çalışma saatleri içinde 30 dakika içinde, gece veya hafta sonu ise 2 saat içinde Florida masamızdaki bir ETO tarafından incelenir."
+        },
+        {
+          "question_en": "How does the wizard route an unusual or specialised system?",
+          "question_tr": "Wizard alışılmadık veya özelleşmiş bir sistemi nasıl yönlendiriyor?",
+          "answer_en": "The intake is triaged against our service matrix. If it maps to one of the 19 listed systems (e.g. you described an AC motor problem under Other), we re-tag and dispatch the relevant specialist. If it is genuinely off-list (specialised research-vessel sonar, dynamic positioning, hybrid Li-ion energy storage), we either deploy our generalist ETO with OEM remote support from the maker, or sub-contract to a vetted US partner and remain the single point of contact, single invoice, single report.",
+          "answer_tr": "Intake servis matrisimize karşı triage edilir. 19 listelenen sistemden birine eş-leşirse (örn. Other altında bir AC motor problemi tarif ettiniz), yeniden etiketleyip ilgili uzmanı gönderiyoruz. Gerçekten liste dışındaysa (özelleşmiş araştırma gemisi sonarı, dinamik konumlandırma, hibrit Li-ion enerji depolama), ya genel ETO'muzu OEM üretici uzaktan destek ile gönderiyoruz ya da incelenmiş bir ABD ortağıyla sub-contract yapıp tek temas noktası, tek fatura ve tek rapor olarak kalıyoruz."
+        },
+        {
+          "question_en": "Can you still produce a class-acceptable report for an off-list system?",
+          "question_tr": "Liste dışı bir sistem için yine de klas tarafından kabul edilen bir rapor çıkartabilir misiniz?",
+          "answer_en": "Yes. Regardless of system, the attendance report is structured to the expectations of DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL and IRS: scope of work, test instruments used with calibration certs (Fluke 87V, Megger MIT525, OMICRON CPC 100, FLIR T540, Druck DPI 620 as relevant), before/after measurements, photos, observed defects, corrective action and recommendation. If the work touches a statutory item, we coordinate joint attendance with the surveyor on the same call.",
+          "answer_tr": "Evet. Sistem ne olursa olsun, attendance raporu DNV, BV, ABS, Lloyd's Register, ClassNK, RINA, TL ve IRS'in beklentilerine göre yapılandırılır: iş kapsamı, kullanılan test cihazları ile kalibrasyon sertifikaları (gerektiğinde Fluke 87V, Megger MIT525, OMICRON CPC 100, FLIR T540, Druck DPI 620), önce/sonra ölçümler, fotoğraflar, gözlenen kusurlar, düzeltici eylem ve tavsiye. Eğer çalışma statutory bir kalemi etkiliyorsa, aynı ziyarette surveyor ile ortak katılım koordine ediyoruz."
+        }
+      ]
     }
   ]
 }

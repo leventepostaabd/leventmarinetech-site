@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { SITE } from '@/lib/site';
-import { readServices } from '@/lib/content';
+import { readServices, readRegionsList } from '@/lib/content';
 import { knowledgeSlugs } from './knowledge/_lib';
 
 /**
@@ -35,7 +35,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url('/supply/unlisted-request'),       lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8  },
     { url: url('/about'),                         lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7  },
     { url: url('/contact'),                       lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7  },
-    { url: url('/knowledge'),                     lastModified: now, changeFrequency: 'weekly'  as const, priority: 0.75 }
+    { url: url('/knowledge'),                     lastModified: now, changeFrequency: 'weekly'  as const, priority: 0.75 },
+    { url: url('/ports'),                         lastModified: now, changeFrequency: 'monthly' as const, priority: 0.85 }
   ];
 
   const services = services20.map((s) => ({
@@ -43,6 +44,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: now,
     changeFrequency: 'monthly' as const,
     priority: 0.7
+  }));
+
+  const portPages = readRegionsList().map((r) => ({
+    url: url(`/ports/${r.slug}`),
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.75
   }));
 
   const knowledgePages = knowledge.map((slug) => ({
@@ -62,6 +70,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...top,
     ...services,
+    ...portPages,
     ...knowledgePages,
     ...legal
   ];

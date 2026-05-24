@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import PhotoUpload, { type UploadedFile } from '@/components/PhotoUpload';
+import { whatsappUrl } from '@/lib/whatsapp';
 
 export default function UnlistedClient() {
   const params = useSearchParams();
@@ -48,8 +49,18 @@ export default function UnlistedClient() {
         .filter(([k]) => k !== 'attachments')
         .map(([k, v]) => `${k}: ${typeof v === 'object' ? JSON.stringify(v) : v}`)
         .join('\n');
-      const text = encodeURIComponent(`LEVENT MARINE — unlisted part request\n\n${summary}`);
-      window.open(`https://wa.me/16193840403?text=${text}`, '_blank', 'noopener');
+      window.open(
+        whatsappUrl({
+          intent: 'supply',
+          vessel: state.vesselName,
+          imo: state.imo,
+          port: state.port,
+          partNumber: state.partNumber,
+          description: `Unlisted part request:\n${summary}`
+        }),
+        '_blank',
+        'noopener'
+      );
       setDone({ ok: true, via: 'whatsapp' });
     } finally {
       setSubmitting(false);

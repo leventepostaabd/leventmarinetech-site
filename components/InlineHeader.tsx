@@ -25,6 +25,7 @@ const NAV: { href: string; en: string; tr: string }[] = [
   { href: '/',              en: 'Home',      tr: 'Ana sayfa' },
   { href: '/services',      en: 'Service',   tr: 'Servis' },
   { href: '/supply',        en: 'Supply',    tr: 'Tedarik' },
+  { href: '/ports',         en: 'US Ports',  tr: 'ABD limanları' },
   { href: '/about',         en: 'About',     tr: 'Hakkımızda' },
   { href: '/contact',       en: 'Contact',   tr: 'İletişim' },
   { href: '/knowledge',     en: 'Knowledge', tr: 'Bilgi' }
