@@ -4,6 +4,7 @@ import { SUPPLY_IMAGE } from '@/lib/deck-images';
 import EbayCatalogGrid from './EbayCatalogGrid';
 import SourcingChannelTabs from './SourcingChannelTabs';
 import ServiceImageDeck from '@/components/ServiceImageDeck';
+import InlineHeader from '@/components/InlineHeader';
 
 export const metadata: Metadata = {
   title: 'Marine Technical Supply — Live Quote-Only Catalog',
@@ -104,34 +105,41 @@ export default function SupplyIndex() {
   const locale = getLocale();
   const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);
 
+  const heroLine = t(
+    'Marine parts — sourced fast, delivered to every US port.',
+    'Marine yedek parça — hızlı tedarik, her ABD limanına teslim.'
+  );
+  const heroSub = t(
+    '24/7 — Florida-based, Wyoming LLC. Quote-only, no public prices.',
+    '24/7 — Florida merkezli, Wyoming LLC. Sadece teklif, fiyat gösterilmez.'
+  );
+
   return (
-    <div className="h-screen max-h-screen overflow-hidden bg-navy-50 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,30%)]">
-      {/* LEFT — heading + tabs + scrolling grid. Own padding-top for the
-          floating TopBar so the artwork on the right can run edge-to-edge. */}
+    <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,30%)]">
+      {/* LEFT — inline header + soft hero + channels + scrolling grid. */}
       <div
         className="flex h-full flex-col min-w-0 min-h-0"
-        style={{ paddingTop: 'calc(var(--lm-topbar-h, 56px) + env(safe-area-inset-top, 0))' }}
+        style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}
       >
-        {/* Fixed top — compact on phone, fuller on desktop. */}
-        <div className="shrink-0 bg-white border-b border-line px-3 pt-3 pb-2 md:px-8 md:pt-5 md:pb-4">
-          <div className="hidden md:block">
-            <div className="kicker mb-1">
-              {t('Marine technical supply', 'Marine teknik tedarik')}
-            </div>
-            <h1 className="text-[20px] md:text-[24px] leading-tight font-bold mb-2">
-              {t(
-                'Find any marine part — live supplier search.',
-                'Her marine parça — canlı tedarik araması.'
-              )}
+        {/* Fixed top — header, hero copy, action tiles. */}
+        <div className="shrink-0 bg-white px-5 pb-3 md:px-10 md:pb-4">
+          <InlineHeader locale={locale} />
+
+          <section className="mt-1 mb-4 max-w-3xl md:mt-3 md:mb-5">
+            <h1 className="font-head text-[26px] md:text-[36px] lg:text-[40px] font-extrabold leading-[1.1] tracking-[-0.01em] text-ink">
+              {heroLine}
             </h1>
-          </div>
+            <p className="mt-2.5 md:mt-3 text-[14.5px] md:text-[16px] leading-relaxed text-ink-muted max-w-2xl">
+              {heroSub}
+            </p>
+          </section>
 
           <SourcingChannelTabs locale={locale} />
         </div>
 
         {/* Live grid (scrolls inside). */}
         <div
-          className="flex-1 overflow-y-auto px-3 py-3 md:px-8 md:py-5"
+          className="flex-1 overflow-y-auto px-5 py-4 md:px-10 md:py-5"
           style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0) + 4.5rem)' }}
         >
           <EbayCatalogGrid locale={locale} />

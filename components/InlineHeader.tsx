@@ -6,22 +6,18 @@ import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import LocaleToggle from './LocaleToggle';
 import LeventLogo from './LeventLogo';
-import LogoLockup from './LogoLockup';
 
 /**
- * Top bar — the only persistent chrome on the entire site.
+ * InlineHeader — page-internal top strip used by /services and /supply.
  *
- * Layout:
- *   ┌────────────────────────────────────────────────────────────────┐
- *   │ [☰]   [⚡L]  LEVENT MARINE ELECTROTECHNICAL SERVICE          │
- *   │              ↳ Marine Electrical Service & Parts Supply — 24/7│
- *   └────────────────────────────────────────────────────────────────┘
+ * Instead of the global fixed TopBar these two pages own their own header
+ * that sits at the top of the LEFT column (where the controls live). The
+ * RIGHT column on those pages is the artwork deck and runs ceiling to
+ * floor without anything covering it.
  *
- * Menu button (left) opens the slide-in drawer.
- * Logo + wordmark + slogan sit as one composition top-center.
- *
- * On the hero ("/"): transparent over the dark video/photo background.
- * On every other page: clean white with a thin border.
+ * Carries hamburger menu → drawer, brand lockup, and locale toggle. The
+ * drawer markup is intentionally duplicated from TopBar so the two
+ * placements stay independent.
  */
 
 const NAV: { href: string; en: string; tr: string }[] = [
@@ -33,7 +29,7 @@ const NAV: { href: string; en: string; tr: string }[] = [
   { href: '/knowledge',     en: 'Knowledge', tr: 'Bilgi' }
 ];
 
-export default function TopBar({ locale }: { locale: 'en' | 'tr' }) {
+export default function InlineHeader({ locale }: { locale: 'en' | 'tr' }) {
   const pathname = usePathname() || '/';
   const [open, setOpen] = useState(false);
 
@@ -45,35 +41,16 @@ export default function TopBar({ locale }: { locale: 'en' | 'tr' }) {
   }, [open]);
 
   const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);
-  // /services and /supply now mount their own InlineHeader inside the
-  // left column so the right artwork can run full bleed. Hide the global
-  // TopBar entirely on those routes.
-  if (pathname === '/services' || pathname === '/supply') return null;
-  // Pages where the right side carries a full-bleed dark photo deck and the
-  // TopBar should float transparently over it (no white bar on top).
-  const isHeroLike = pathname === '/' || pathname === '/service-wizard';
 
   return (
     <>
-      <header
-        className={`fixed left-0 right-0 top-0 z-40 flex h-14 items-center px-3 transition-colors md:h-16 md:px-6 ${
-          isHeroLike
-            ? 'bg-gradient-to-b from-navy-900/85 via-navy-900/55 to-transparent text-white'
-            : 'bg-white/95 text-ink backdrop-blur border-b border-line'
-        }`}
-        style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}
-        aria-label="Levent Marine top bar"
-      >
-        {/* Menu button — left */}
+      <div className="flex items-center gap-3 py-3 md:py-4">
+        {/* Hamburger */}
         <button
           type="button"
           onClick={() => setOpen(true)}
           aria-label={t('Open menu', 'Menüyü aç')}
-          className={`inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 transition ${
-            isHeroLike
-              ? 'bg-white/10 text-white ring-white/20 hover:bg-white/20'
-              : 'bg-white text-ink-muted ring-line hover:text-ink hover:ring-ink/40'
-          }`}
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-navy-50 text-ink-muted ring-1 ring-line transition hover:bg-navy-100 hover:text-ink"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
             <line x1="3" y1="6" x2="21" y2="6" />
@@ -82,28 +59,30 @@ export default function TopBar({ locale }: { locale: 'en' | 'tr' }) {
           </svg>
         </button>
 
-        {/* Logo lockup — center. Variant C (badge) pinned per user pick.
-            Visit /brand-preview to compare A / B / C side-by-side. */}
+        {/* Brand lockup — left aligned */}
         <Link
           href="/"
           aria-label="Levent Marine — home"
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 no-underline transition hover:scale-[1.02]"
+          className="inline-flex items-center gap-2.5 no-underline transition hover:opacity-80"
         >
-          <LogoLockup variant="C" tone={isHeroLike ? 'light' : 'dark'} scale={0.82} />
+          <LeventLogo size={26} />
+          <span className="font-head text-[15px] font-extrabold tracking-[0.04em] text-ink">
+            Levent Marine
+          </span>
         </Link>
 
         {/* Locale toggle — right */}
         <div className="ml-auto">
           <LocaleToggle current={locale} />
         </div>
-      </header>
+      </div>
 
-      {/* Drawer */}
+      {/* Drawer — mirrors TopBar's drawer markup */}
       <AnimatePresence>
         {open && (
           <>
             <motion.div
-              key="lm-nav-scrim"
+              key="lm-inh-scrim"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -113,7 +92,7 @@ export default function TopBar({ locale }: { locale: 'en' | 'tr' }) {
               aria-hidden
             />
             <motion.aside
-              key="lm-nav-panel"
+              key="lm-inh-panel"
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
