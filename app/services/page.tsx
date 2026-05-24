@@ -55,12 +55,9 @@ export default function ServicesIndex() {
         <ServicesBrowser services={all} popular={popular} ui={ui} locale={locale} />
       </div>
 
-      {/* Right — full-bleed cycling deck. Top padding matches the fixed
-          TopBar so the artwork is not clipped behind it. */}
-      <aside
-        className="hidden lg:block"
-        style={{ paddingTop: 'calc(var(--lm-topbar-h, 56px) + env(safe-area-inset-top, 0))' }}
-      >
+      {/* Right — full-bleed cycling deck, edge to edge top→bottom. The
+          TopBar floats transparently over the top of the artwork. */}
+      <aside className="hidden lg:block">
         <ServiceImageDeck items={deckItems} locale={locale} fillParent />
       </aside>
     </div>

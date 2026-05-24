@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { addToBasket } from '@/lib/rfq-basket';
-import { MARKUP_RATE, fmt } from '@/lib/pricing';
 
 export type ModalProduct = {
   id: string;
@@ -61,9 +60,6 @@ export default function ProductQuoteModal({
   }, [open, onClose]);
 
   if (!product) return null;
-
-  const unitMarked = product.priceRaw != null ? product.priceRaw * (1 + MARKUP_RATE) : null;
-  const itemTotal = unitMarked != null ? unitMarked * qty : null;
 
   const waText = encodeURIComponent(
     `Hi Levent Marine,\n\n` +
@@ -156,36 +152,19 @@ export default function ProductQuoteModal({
 
             {/* Body */}
             <div className="flex-1 overflow-y-auto p-4">
-              {/* Estimated item price — clear, no shipping */}
+              {/* Quote-only banner — no item price, no shipping math.
+                  Item + shipping + lead time all travel through the RFQ
+                  reply (decision F3 / T3 — no public prices). */}
               <div className="mb-4 rounded-lg border border-amber/40 bg-amber/5 px-4 py-3">
-                <div className="flex items-baseline justify-between">
-                  <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-amber-700">
-                    {t('Estimated item price', 'Tahmini ürün fiyatı')}
-                  </span>
-                  {itemTotal != null ? (
-                    <span className="font-head font-extrabold text-[22px] text-navy-700">
-                      {fmt(itemTotal, locale)}
-                    </span>
-                  ) : (
-                    <span className="font-mono text-[12px] uppercase tracking-[0.12em] text-amber-600">
-                      {t('Quote on request', 'Talep üzerine teklif')}
-                    </span>
-                  )}
+                <div className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-amber-700 mb-1.5">
+                  {t('Quote-only request', 'Sadece teklif')}
                 </div>
-                {unitMarked != null && qty > 1 && (
-                  <div className="font-mono text-[11px] text-ink-muted mt-0.5">
-                    {qty} × {fmt(unitMarked, locale)}
-                  </div>
-                )}
-                <div className="mt-2.5 pt-2.5 border-t border-amber/30 text-[12px] text-ink-muted leading-relaxed">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-amber-700 block mb-1">
-                    + {t('shipping calculated after delivery info', 'kargo bilgilerinizden sonra hesaplanır')}
-                  </span>
+                <p className="text-[13px] text-ink leading-relaxed">
                   {t(
-                    'Once you submit your company info + delivery port, we reply with the full price (item + shipping + any vessel-specific compatibility) the same business day. Most quotes within 30 minutes.',
-                    'Firma bilgisi + teslim limanını ilettiğinizde, tüm fiyatı (ürün + kargo + gemine özel uyumluluk varsa) aynı iş günü içinde döneriz. Çoğu teklif 30 dk içinde.'
+                    'Submit your delivery port + vessel and we reply with item price, shipping and lead time the same business day. Most quotes within 30 minutes.',
+                    'Teslim limanı + gemi bilgisi gönderin, aynı iş günü içinde ürün fiyatı, kargo ve teslim süresiyle dönelim. Çoğu teklif 30 dk içinde.'
                   )}
-                </div>
+                </p>
               </div>
 
               {/* Quantity */}
