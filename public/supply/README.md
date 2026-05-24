@@ -8,14 +8,14 @@ with `hrefPrefix="/supply/category/"` and `readMoreLabel="Browse category"`.
 
 | Filename | Category slug | Card label (EN) |
 |---|---|---|
-| `cableconnectsupply.png` | `cables-glands` | Cables & Glands |
-| `cranesupply.png` | `deck-mechanical` | Crane & Deck Hardware |
-| `enginesupply.png` | `engine-room-consumables` | Engine Room Consumables |
-| `mainswitchboardcomp.png` | `msb-components` | MSB / ESB Components |
-| `motorsupply.png` | `motors-drives` | Motors & Drives (VFD) |
-| `navisupply.png` | `radar-navigation` | Radar & Bridge Navigation |
-| `plcsupply.png` | `automation-plc` | PLC & Automation |
-| `sensorsupply.png` | `marine-sensors` | Marine Sensors & Transmitters |
+| `cableconnectsupply.webp` | `cables-glands` | Cables & Glands |
+| `cranesupply.webp` | `deck-mechanical` | Crane & Deck Hardware |
+| `enginesupply.webp` | `engine-room-consumables` | Engine Room Consumables |
+| `mainswitchboardcomp.webp` | `msb-components` | MSB / ESB Components |
+| `motorsupply.webp` | `motors-drives` | Motors & Drives (VFD) |
+| `navisupply.webp` | `radar-navigation` | Radar & Bridge Navigation |
+| `plcsupply.webp` | `automation-plc` | PLC & Automation |
+| `sensorsupply.webp` | `marine-sensors` | Marine Sensors & Transmitters |
 
 Mapping + labels live in `app/supply/page.tsx` → `SUPPLY_DECK`.
 

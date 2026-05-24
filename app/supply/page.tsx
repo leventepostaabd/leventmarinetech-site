@@ -23,7 +23,7 @@ const SUPPLY_DECK: Array<{
 }> = [
   {
     slug: 'cables-glands',
-    image: '/supply/cableconnectsupply.png',
+    image: '/supply/cableconnectsupply.webp',
     name_en: 'Cables & Glands',
     name_tr: 'Kablo & Rakor',
     kicker_en: 'Lapp Olflex Marine · Hawke ATEX',
@@ -31,7 +31,7 @@ const SUPPLY_DECK: Array<{
   },
   {
     slug: 'deck-mechanical',
-    image: '/supply/cranesupply.png',
+    image: '/supply/cranesupply.webp',
     name_en: 'Crane & Deck Hardware',
     name_tr: 'Vinç & Güverte Donanımı',
     kicker_en: 'MacGregor · NMF · Liebherr deck spares',
@@ -39,7 +39,7 @@ const SUPPLY_DECK: Array<{
   },
   {
     slug: 'engine-room-consumables',
-    image: '/supply/enginesupply.png',
+    image: '/supply/enginesupply.webp',
     name_en: 'Engine Room Consumables',
     name_tr: 'Makine Dairesi Sarf',
     kicker_en: 'Level switches · gaskets · sealing kits',
@@ -47,7 +47,7 @@ const SUPPLY_DECK: Array<{
   },
   {
     slug: 'msb-components',
-    image: '/supply/mainswitchboardcomp.png',
+    image: '/supply/mainswitchboardcomp.webp',
     name_en: 'MSB / ESB Components',
     name_tr: 'MSB / ESB Bileşenleri',
     kicker_en: 'AVR · ACB trip units · sync panels',
@@ -55,7 +55,7 @@ const SUPPLY_DECK: Array<{
   },
   {
     slug: 'motors-drives',
-    image: '/supply/motorsupply.png',
+    image: '/supply/motorsupply.webp',
     name_en: 'Motors & Drives (VFD)',
     name_tr: 'Motor & Sürücüler (VFD)',
     kicker_en: 'ABB M3BP · Vacon · Danfoss FC marine',
@@ -63,7 +63,7 @@ const SUPPLY_DECK: Array<{
   },
   {
     slug: 'radar-navigation',
-    image: '/supply/navisupply.png',
+    image: '/supply/navisupply.webp',
     name_en: 'Radar & Bridge Navigation',
     name_tr: 'Radar & Köprü Üstü Seyir',
     kicker_en: 'Furuno · JRC · Sperry — magnetrons, ECDIS',
@@ -71,7 +71,7 @@ const SUPPLY_DECK: Array<{
   },
   {
     slug: 'automation-plc',
-    image: '/supply/plcsupply.png',
+    image: '/supply/plcsupply.webp',
     name_en: 'PLC & Automation',
     name_tr: 'PLC & Otomasyon',
     kicker_en: 'Siemens S7 · Allen-Bradley · Omron I/O',
@@ -79,7 +79,7 @@ const SUPPLY_DECK: Array<{
   },
   {
     slug: 'marine-sensors',
-    image: '/supply/sensorsupply.png',
+    image: '/supply/sensorsupply.webp',
     name_en: 'Marine Sensors & Transmitters',
     name_tr: 'Denizcilik Sensör & Transmitter',
     kicker_en: 'Pressure · level · temperature · vibration',

@@ -15,14 +15,14 @@ export const metadata: Metadata = {
 // Maps system slug → vertical brochure-style deck image (user-prepared,
 // captions on the artwork). Kept in sync with /services SERVICE_IMAGE.
 const SERVICE_IMAGE: Record<string, string> = {
-  'bwts':                 '/services/bwts.png',
-  'engine-room-alarm':    '/services/condition.png',
-  'crane-deck-machinery': '/services/cranes.png',
-  'fire-alarm':           '/services/firealarm.png',
-  'generator':            '/services/gensyc.png',
-  'ac-dc-motor':          '/services/motor.png',
-  'plc-automation':       '/services/plc.png',
-  'switchboard':          '/services/thermal.png'
+  'bwts':                 '/services/bwts.webp',
+  'engine-room-alarm':    '/services/condition.webp',
+  'crane-deck-machinery': '/services/cranes.webp',
+  'fire-alarm':           '/services/firealarm.webp',
+  'generator':            '/services/gensyc.webp',
+  'ac-dc-motor':          '/services/motor.webp',
+  'plc-automation':       '/services/plc.webp',
+  'switchboard':          '/services/thermal.webp'
 };
 
 export default function Page() {

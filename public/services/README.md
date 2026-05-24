@@ -8,14 +8,14 @@ a small headline + kicker overlay at the bottom.
 
 | Filename | Service slug | Card label (EN) |
 |---|---|---|
-| `bwts.png` | `bwts` | BWTS |
-| `condition.png` | `engine-room-alarm` | Engine Room Alarm / Monitoring |
-| `cranes.png` | `crane-deck-machinery` | Crane & Deck Machinery |
-| `firealarm.png` | `fire-alarm` | Fire Alarm & Detection |
-| `gensyc.png` | `generator` | Generator (Diesel · Shaft · Emergency · AVR) |
-| `motor.png` | `ac-dc-motor` | AC/DC Motor |
-| `plc.png` | `plc-automation` | PLC & Automation / IAS |
-| `thermal.png` | `switchboard` | Switchboard (MSB / ESB / PMS) |
+| `bwts.webp` | `bwts` | BWTS |
+| `condition.webp` | `engine-room-alarm` | Engine Room Alarm / Monitoring |
+| `cranes.webp` | `crane-deck-machinery` | Crane & Deck Machinery |
+| `firealarm.webp` | `fire-alarm` | Fire Alarm & Detection |
+| `gensyc.webp` | `generator` | Generator (Diesel · Shaft · Emergency · AVR) |
+| `motor.webp` | `ac-dc-motor` | AC/DC Motor |
+| `plc.webp` | `plc-automation` | PLC & Automation / IAS |
+| `thermal.webp` | `switchboard` | Switchboard (MSB / ESB / PMS) |
 
 If a filename in this list is missing, the corresponding slug is skipped from
 the deck. The mapping lives in:
@@ -31,7 +31,7 @@ Keep the two maps in sync when adding new slugs.
   width on `lg+` screens.
 - **Size:** target 1080×1920 max, 200–500 KB per file after compression.
   PNG is fine for brochure art; convert to optimized PNG via `pngquant`
-  (e.g. `pngquant --quality=70-85 *.png`) or WebP at quality 80 if file
+  (e.g. `pngquant --quality=70-85 *.webp`) or WebP at quality 80 if file
   size is an issue.
 - **Safe zone:** keep critical text within the centre 80% — the bottom
   is overlaid by a navy→transparent gradient + headline.
