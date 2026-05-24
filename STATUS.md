@@ -4,7 +4,7 @@
 > buradaki ilgili kutucuğu işaretler, varsa not bırakır.
 > "Bugün ne durumdayız" sorusunun cevabı **bu dosyadadır**.
 
-**Son güncelleme:** 2026-05-23
+**Son güncelleme:** 2026-05-24
 
 ---
 
@@ -86,25 +86,25 @@
 - [x] TrustStats component
 - [x] Mobile scroll fix on /services
 
-## Wave 6 — Lead Pipeline + CRM Admin Panel — 🚧 **PLANLANIYOR** (2026-05-24)
+## Wave 6 — Lead Pipeline + CRM Admin Panel — 🚧 **DEVAM EDİYOR** (2026-05-24)
 
 > **Onaylanan plan:** ROADMAP.md → Wave 6.
 > **Mimari kararlar:** DECISIONS.md Oturum 2 (C1-C8, D1-D4, K1-K4, R1).
 
-### Faz 1 — Çekirdek CRM (Hafta 7)
-- [ ] Supabase migration: `companies`, `vessels`, `leads`, `lead_notes`, `lead_events`, `inbound_messages` + RLS
-- [ ] `/admin/leads` (Servis | Parça sekmeli, priority sıralı, search) + `/admin/leads/[id]` (taslak + stage + notlar)
-- [ ] `/admin` dashboard (bu hafta yeni/öncelikli/bekleyen)
-- [ ] Inbound entegrasyonu: site formları → leads, IMO match logic
-- [ ] `rfq@` mailbox webhook → inbound_messages + leads attach
-- [ ] **Manuel doğrulama:** 10-15 Türk işletmeli gemi elle gir, Claude API ile skor+taslak
+### Faz 1 — Çekirdek CRM (Hafta 7) — ✅ **TAMAMLANDI**
+- [x] Supabase migration: `companies`, `vessels`, `leads`, `lead_notes`, `lead_events`, `inbound_messages` + RLS — `supabase/migrations/0002_crm.sql` (canlıya uygulandı)
+- [x] `/admin/leads` (Servis | Parça sekmeli, priority sıralı, search) + `/admin/leads/[id]` (taslak + stage + notlar) — `app/admin/leads/*`, `LeadDetailClient.tsx`
+- [x] `/admin` dashboard CRM KPI satırı — `app/admin/page.tsx` + `leadCounts()`
+- [x] Inbound entegrasyonu: site formları → leads, IMO match logic — `lib/crm.ts` `ingestInboundForm`, `/api/{service,quote}-request`
+- [ ] `rfq@` mailbox webhook → inbound_messages + leads attach — *deferred (kullanıcı tarafı mailbox kurulumu)*
+- [x] Manuel lead girişi — `app/admin/leads/new`
 
-### Faz 2 — Pipeline scraper'ları (Hafta 8)
-- [ ] `psc_inspections` + `data_sync_log` tabloları
-- [ ] Job 1: `collect_turkish_operators` (Equasis haftalık)
-- [ ] Job 2: `enrich_psc` (USCG CGMIX + Paris MoU CSV + Tokyo MoU)
-- [ ] Job 3: `score_and_draft` (Claude API, ağırlıklı skor + bilingual draft)
-- [ ] Cron runner (Vercel Cron veya Supabase pg_cron)
+### Faz 2 — Scoring brain + pipeline scraper'ları (Hafta 8)
+- [x] Job 3: `score_and_draft` — **scoring brain** (`lib/scoring.ts`, manuel tetik, `claude-opus-4-7` adaptive thinking + structured output, bilingual draft) + `/admin/leads/[id]` "Score with AI" butonu. *Çalışması için Vercel'e `ANTHROPIC_API_KEY` eklenmeli.*
+- [ ] (Faz 2-B) `psc_inspections` + `data_sync_log` tabloları
+- [ ] (Faz 2-B) Job 1: `collect_turkish_operators` (Equasis haftalık) — *Equasis ToS doğrulaması bekliyor (K1)*
+- [ ] (Faz 2-B) Job 2: `enrich_psc` (USCG CGMIX + Paris MoU CSV + Tokyo MoU)
+- [ ] (Faz 2-B) Cron runner (Vercel Cron veya Supabase pg_cron)
 
 ### Faz 3 — Gelişmiş (Hafta 9+)
 - [ ] `/admin/sync` (data_sync_log görünüm)

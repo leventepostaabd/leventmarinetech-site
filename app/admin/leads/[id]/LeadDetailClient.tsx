@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import { addLeadNote, saveLeadDraft, updateLeadStage } from '@/app/admin/_actions';
+import { addLeadNote, saveLeadDraft, scoreLeadWithAI, updateLeadStage } from '@/app/admin/_actions';
 import type { LeadEvent, LeadNote, LeadStage, LeadWithRefs } from '@/lib/crm';
+import type { ScoringResult } from '@/lib/scoring';
 
 export default function LeadDetailClient({
   lead,
@@ -24,6 +25,18 @@ export default function LeadDetailClient({
   const [saving, startSave] = useTransition();
   const [stageSaving, startStage] = useTransition();
   const [noteSaving, startNote] = useTransition();
+  const [scoring, startScore] = useTransition();
+  const [ai, setAi] = useState<ScoringResult | null>(null);
+  const [aiError, setAiError] = useState<string | null>(null);
+
+  function runScore() {
+    setAiError(null);
+    startScore(async () => {
+      const res = await scoreLeadWithAI(lead.id);
+      if (res.ok) setAi(res.result);
+      else setAiError(res.error);
+    });
+  }
 
   const ctx = (lead.context ?? {}) as Record<string, string>;
   const reason = (lead.priority_reason ?? {}) as Record<string, unknown>;
@@ -46,15 +59,66 @@ export default function LeadDetailClient({
                 Edit and copy — the panel <span className="font-bold">does not send</span>. You send from your own WhatsApp / email.
               </p>
             </div>
-            <button
-              type="button"
-              onClick={copy}
-              className="btn-ghost btn-sm"
-              disabled={!draft.trim()}
-            >
-              {copied ? '✓ Copied' : 'Copy'}
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={runScore}
+                disabled={scoring}
+                className="btn-ghost btn-sm disabled:opacity-60"
+                title="Ask Claude to score this lead and draft outreach"
+              >
+                {scoring ? 'Scoring…' : '✦ Score with AI'}
+              </button>
+              <button
+                type="button"
+                onClick={copy}
+                className="btn-ghost btn-sm"
+                disabled={!draft.trim()}
+              >
+                {copied ? '✓ Copied' : 'Copy'}
+              </button>
+            </div>
           </div>
+
+          {aiError && (
+            <div className="mb-3 rounded-md bg-red-50 ring-1 ring-red-200 px-3 py-2 text-[12.5px] text-red-700">
+              {aiError}
+            </div>
+          )}
+
+          {ai && (
+            <div className="mb-4 rounded-md bg-navy-50/50 ring-1 ring-line p-3 space-y-3">
+              <div className="flex items-center gap-3">
+                <span className="font-head text-2xl font-extrabold text-ink">{ai.priority_score}</span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-subtle">AI priority</span>
+              </div>
+              <p className="text-[13px] text-ink-muted">{ai.rationale}</p>
+              {ai.factors.length > 0 && (
+                <ul className="space-y-1">
+                  {ai.factors.map((f, i) => (
+                    <li key={i} className="text-[12px] text-ink">
+                      <span className={`font-mono text-[10px] uppercase tracking-wider mr-1.5 ${
+                        f.weight === 'high' ? 'text-red-600' : f.weight === 'medium' ? 'text-amber-600' : 'text-ink-subtle'
+                      }`}>{f.weight}</span>
+                      <span className="font-semibold">{f.label}:</span> <span className="text-ink-muted">{f.note}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <div className="text-[12.5px] text-ink">
+                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-subtle mr-1.5">Next</span>
+                {ai.recommended_action}
+              </div>
+              <div className="flex flex-wrap gap-2 pt-1">
+                <button type="button" onClick={() => setDraft(ai.draft_en)} className="btn-accent btn-sm">
+                  Use English draft
+                </button>
+                <button type="button" onClick={() => setDraft(ai.draft_tr)} className="btn-ghost btn-sm">
+                  Türkçe taslağı kullan
+                </button>
+              </div>
+            </div>
+          )}
           <textarea
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
