@@ -60,21 +60,64 @@
 - [x] 3 başlangıç blog yazısı + `/knowledge` altyapısı — *Agent D* — `app/knowledge/*`, `content/knowledge/posts.json`
 - [x] schema.org + OG + sitemap + robots güncellemeleri — *Agent D* — `lib/schema-org.ts`, `app/sitemap.ts`, `app/robots.ts`
 
-## Wave 4 — Cila & Devam (Hafta 5+)
+## Wave 4 — Cila & Devam — ✅ **TAMAMLANDI** (2026-05-23/24)
 
-**Son güncelleme:** 2026-05-23 — perf pass + 3 knowledge + integration fixes.
+- [x] Hero artwork (servicesmain + supplymain WebP, 4 MB → 231 KB) — `8886252`
+- [x] Animasyonlar (framer-motion + CSS stagger) — `fe5d02d`
+- [x] Knowledge yazıları 6 → 12 — `fbce28d` + `8d5a6f0`
+- [x] Lighthouse — Mobile 92 / Desktop 100 / Acc 95 / Best 100 / SEO 100
+- [x] Custom domain + SSL (önceden bağlanmış, doğrulandı)
+- [x] Hero ↔ AboutModal entegrasyonu — `69712f7`
+- [x] LogoStrip SVG auto-detect altyapısı — `e36c306`
+- [ ] WhatsApp Business API real creds — *kod hazır; sen-tarafı Meta onboarding*
+- [ ] OCR nameplate — *ertelendi (kullanıcı kararı)*
 
-- [ ] Video'ların hero'ya entegrasyonu (statik → canlı geçiş) — *kullanıcı asset hazırlıyor*
-- [x] Animasyonlar (framer-motion zaten yaygın; knowledge listesi stagger `fe5d02d`)
-- [x] 3 yeni blog yazısı (toplam **9** — `fbce28d`: shore-power, GMDSS, VFD codes)
-- [ ] Lighthouse 95+ skor optimizasyon — *perf pass `e356d43` yapıldı (next/font + dynamic modals), Lighthouse skorunu kullanıcı ölçecek*
-- [ ] Core Web Vitals — *next/font swap + modal lazy load CWV'yi düzeltir; sahada doğrulama bekleniyor*
-- [x] Custom domain + SSL bağlama — *geçmiş session'da bağlanmış; `https://www.leventmarinetech.com` canlı, SSL aktif*
-- [ ] Hero için gerçek görseller (`MEDIA-ASSETS.md` Section 2/3) — *altyapı hazır, kullanıcı dosya hazırlıyor; `/public/hero/engine-room.jpg` + `warehouse.jpg` üzerine yaz, video için HeroDoor'a `videoSrc` ekle*
-- [ ] OCR nameplate okuma — *2026-05-23: kullanıcı "şimdilik bekle" dedi, ertelendi*
-- [ ] WhatsApp Business API credentials — *`lib/notify.ts` kod hazır; Meta Developers app + WABA + phone-number provision sen-tarafı*
-- [x] LogoStrip için gerçek logo SVG'leri — *altyapı: `e36c306` ile `/public/logos/<key>.svg` auto-detect + wordmark fallback. README'de talimat. Müşterilerden izin alıp SVG eklemek sen-tarafı*
-- [x] Hero ↔ AboutModal entegrasyonu — *`69712f7`: orphan trigger kaldırıldı, Hero + MobileLanding footer'da global trigger eklendi (F1 uyumlu)*
+## Wave 5 — UX & SEO Genişleme — ✅ **TAMAMLANDI** (2026-05-24)
+
+- [x] InlineHeader pattern (TopBar yerine sol başta brand+menu+locale) — `889d212`
+- [x] Soft Amazon-style UI (rounded-2xl, soft tinted bg)
+- [x] Full-bleed deck artwork (header altında kesilmek yok)
+- [x] WhatsApp pre-fill templates — `8ac0337`
+- [x] /supply quote-only (tüm fiyatlar kaldırıldı)
+- [x] /about + /contact tam bilingual
+- [x] /services/[slug] tam bilingual + back button + sidecar image
+- [x] 22/22 servis FAQ + FAQPage schema (66 bilingual FAQs) — `4ed0276`
+- [x] 17 yeni port micro-landing (toplam 20) + /ports route + LocalBusiness schema — `4ed0276`
+- [x] TrustStats component
+- [x] Mobile scroll fix on /services
+
+## Wave 6 — Lead Pipeline + CRM Admin Panel — 🚧 **PLANLANIYOR** (2026-05-24)
+
+> **Onaylanan plan:** ROADMAP.md → Wave 6.
+> **Mimari kararlar:** DECISIONS.md Oturum 2 (C1-C8, D1-D4, K1-K4, R1).
+
+### Faz 1 — Çekirdek CRM (Hafta 7)
+- [ ] Supabase migration: `companies`, `vessels`, `leads`, `lead_notes`, `lead_events`, `inbound_messages` + RLS
+- [ ] `/admin/leads` (Servis | Parça sekmeli, priority sıralı, search) + `/admin/leads/[id]` (taslak + stage + notlar)
+- [ ] `/admin` dashboard (bu hafta yeni/öncelikli/bekleyen)
+- [ ] Inbound entegrasyonu: site formları → leads, IMO match logic
+- [ ] `rfq@` mailbox webhook → inbound_messages + leads attach
+- [ ] **Manuel doğrulama:** 10-15 Türk işletmeli gemi elle gir, Claude API ile skor+taslak
+
+### Faz 2 — Pipeline scraper'ları (Hafta 8)
+- [ ] `psc_inspections` + `data_sync_log` tabloları
+- [ ] Job 1: `collect_turkish_operators` (Equasis haftalık)
+- [ ] Job 2: `enrich_psc` (USCG CGMIX + Paris MoU CSV + Tokyo MoU)
+- [ ] Job 3: `score_and_draft` (Claude API, ağırlıklı skor + bilingual draft)
+- [ ] Cron runner (Vercel Cron veya Supabase pg_cron)
+
+### Faz 3 — Gelişmiş (Hafta 9+)
+- [ ] `/admin/sync` (data_sync_log görünüm)
+- [ ] `quotes` tablosu
+- [ ] RFQ otomasyonu (Mouser/Digi-Key eşleştirme)
+- [ ] Supabase realtime webhook'lar
+- [ ] Time-in-stage view + toplu eylemler + raporlama
+
+### Sınırlar
+- ❌ Panel taslak hazırlar, **GÖNDERMEZ**
+- ❌ LinkedIn/WhatsApp otomatik mesaj YOK
+- ❌ Kişisel veri YOK — sadece public firma + gemi + PSC
+- ❌ Faz 1 bitmeden Faz 2'ye geçme
 
 ---
 

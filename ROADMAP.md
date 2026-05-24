@@ -216,13 +216,85 @@ Müşteri SPA akışını kullanır, görmez. Google crawl eder, indeksler.
 - [ ] 3 başlangıç blog yazısı + `/knowledge` altyapısı
 - [ ] schema.org + OG + sitemap + robots
 
-### Wave 4 — Cila & Devam (Hafta 5+)
-- [ ] Video'ların hero'ya entegrasyonu (statik → canlı geçiş)
-- [ ] Animasyonlar (anime.js / GSAP)
-- [ ] 3 yeni blog yazısı (toplam 6-8)
-- [ ] Lighthouse 95+ skor optimizasyon
-- [ ] Performance + Core Web Vitals
-- [ ] Domain SSL + custom domain bağlama
+### Wave 4 — Cila & Devam (Hafta 5+) — ✅ **TAMAMLANDI** (2026-05-23/24)
+- [x] Hero görselleri (servicesmain + supplymain WebP, 4 MB → 231 KB)
+- [x] Animasyonlar (framer-motion + CSS stagger)
+- [x] Knowledge yazıları 6 → 12 (BWTS, AVR, AOG, Furuno radar, Fire alarm, Kongsberg PLC, Cold ironing, GMDSS survey, Marine VFD, Special Survey, IACS cyber, lithium BMS)
+- [x] Lighthouse — Mobile 92 / Desktop 100 / Acc 95 / Best 100 / SEO 100
+- [x] Custom domain + SSL (önceden bağlanmış)
+- [x] 16 vertical brochure deck images (services + supply) WebP optimized
+- [x] LogoStrip SVG auto-detect altyapısı
+- [x] AboutModal global trigger wiring
+
+### Wave 5 — UX & SEO Genişleme (Hafta 6) — ✅ **TAMAMLANDI** (2026-05-24)
+- [x] InlineHeader pattern (TopBar yerine /services + /supply sol başta brand+menu+locale)
+- [x] Soft Amazon-style UI (rounded-2xl, soft tinted backgrounds, gentle ring)
+- [x] Full-bleed deck artwork tavandan tabana
+- [x] WhatsApp pre-fill templates (Vessel/IMO/Port/System scaffold)
+- [x] /supply quote-only (tüm fiyatlar kaldırıldı)
+- [x] /about + /contact tam bilingual (35 i18n keys + TR çevirileri)
+- [x] /services/[slug] tam bilingual + back button + sidecar image
+- [x] 22/22 servis için 3 FAQ + FAQPage schema (66 bilingual FAQs)
+- [x] 17 yeni port micro-landing (3 → 20 toplam) + /ports route + LocalBusiness schema
+- [x] TrustStats merkezi component (vessels / years / dispatch / network)
+- [x] Mobile scroll fix on lm-screen-hero
+
+### Wave 6 — Lead Pipeline + CRM Admin Panel (Hafta 7-9) — 🚧 **PLANLANIYOR**
+
+> **Amaç:** USA'ya gelen Türk işletmeli gemilere odaklı, halka açık verilerden
+> beslenen otomatik lead hazırlık pipeline'ı + sitenin Next.js/Supabase altyapısına
+> entegre, gelen taleplerle giden leadleri **tek tabloda birleştiren** CRM.
+>
+> **Kritik disiplin:** ÖNCE Faz 1 canlı veriyle çalışsın, SONRA Faz 2-3'e geçilsin.
+> Boş tablo doldurma tuzağından kaçın. Bkz. DECISIONS Oturum 2 (C1-C8).
+
+#### Faz 1 — Çekirdek CRM + Inbound entegrasyonu (Hafta 7)
+
+**Veritabanı (Supabase migration):**
+- [ ] `companies` (id, name, country, imo_company_no, website, contact_email, contact_phone, notes)
+- [ ] `vessels` (id, company_id, name, imo_no UNIQUE, vessel_type, year_built, flag)
+- [ ] `leads` (id, company_id, vessel_id, source, track, stage, priority_score, priority_reason **jsonb**, draft_message, assigned_to **uuid FK auth.users**)
+- [ ] `lead_notes` (id, lead_id, author, body)
+- [ ] `lead_events` (id, lead_id, event_type, detail jsonb)
+- [ ] `inbound_messages` (id, lead_id, channel, subject, body, attachments jsonb, received_at) — **C4 refinement**
+- [ ] Tüm tablolarda RLS, `is_admin` rolü
+
+**Admin panel:**
+- [ ] `/admin/leads` — Servis | Parça sekmeli liste, priority_score sıralı, **search** (company + vessel + IMO) — **C5 refinement**
+- [ ] `/admin/leads/[id]` — firma + gemi + skor + sebep, düzenlenebilir taslak ("kopyala" butonu, gönderim YOK), stage dropdown (→ otomatik lead_events kayıt), notlar
+- [ ] `/admin` dashboard — bu hafta yeni/öncelikli/bekleyen lead sayıları + "bugün dokun" listesi (X gün cevapsız)
+
+**Inbound entegrasyon:**
+- [ ] /service-wizard submit → leads (source='service_wizard', track='service', stage='new') + IMO match logic (var olan vessel'a attach VEYA stub oluştur)
+- [ ] /supply-wizard + ProductQuoteModal + ListRfqModal → leads (source='supply_rfq', track='supply')
+- [ ] `rfq@leventmarinetech.com` mailbox webhook → inbound_messages + leads attach
+
+**Manuel doğrulama:** 10-15 Türk işletmeli gemiyi Equasis'ten elle gir, Claude API ile skoru + taslağı üret. Otomasyondan **önce** akışı doğrula.
+
+#### Faz 2 — Pipeline veri toplama (Hafta 8)
+
+- [ ] `psc_inspections` tablosu (id, vessel_id, imo_no, port, country, inspection_date, deficiencies, detained, mou, source_url)
+- [ ] `data_sync_log` tablosu (id, source, run_at, rows_found, status, notes)
+- [ ] **Job 1 `collect_turkish_operators`** — Equasis scraper (haftalık) → companies + vessels upsert
+- [ ] **Job 2 `enrich_psc`** — USCG CGMIX + Paris MoU CSV + Tokyo MoU search (haftalık) → psc_inspections
+- [ ] **Job 3 `score_and_draft`** — Claude API, ağırlıklı skor (fleet_age, recent_us_psc, detained_12m), bilingual draft (service / supply track ayrı) → leads insert (stage='new')
+- [ ] Cron job runner (Vercel Cron veya Supabase pg_cron)
+
+#### Faz 3 — Gelişmiş (Hafta 9+)
+
+- [ ] `/admin/sync` — data_sync_log görünümü (hangi kaynak ne zaman tarandı, hata var mı)
+- [ ] `quotes` tablosu — stage='quoting' olduğunda gerçek teklif PDF + tedarikçi breakdown
+- [ ] RFQ otomasyonu: gelen parça talebini Mouser/Digi-Key/eBay'den otomatik eşleştirme + fiyat taslağı
+- [ ] Webhook'lar (Supabase realtime) — yeni lead geldiğinde panel anlık güncellensin
+- [ ] Time-in-stage view (her aşamada ortalama süre)
+- [ ] Toplu eylemler, e-posta dizisi, gelişmiş raporlama
+
+#### Sınırlar (kasıtlı olarak yapılmayacaklar)
+
+- ❌ Panel taslak hazırlar, **GÖNDERMEZ**. Gönderim her zaman sen, kendi WhatsApp/mail hesabından
+- ❌ LinkedIn / WhatsApp otomatik mesaj
+- ❌ Kişisel veri / yüz verisi toplama — yalnızca **public firma + gemi + PSC** verisi
+- ❌ Faz 1 bitmeden Faz 2'ye geçme
 
 ---
 

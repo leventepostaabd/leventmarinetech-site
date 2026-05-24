@@ -109,19 +109,56 @@
 
 ---
 
-## Oturum 2 — _henüz yok_
+## Oturum 2 — Lead Pipeline + CRM mimarisi (2026-05-24)
 
-Sonraki kararlar buraya eklenecek. Format:
+Türk işletmeli gemilere odaklı, halka açık verilerden beslenen lead pipeline +
+gelen RFQ'ları birleştiren CRM admin paneli kararları. Wave 6 başlangıcı.
 
-```
-### Oturum N — Başlık (YYYY-MM-DD)
+### Mimari
+
 | # | Karar | Sebep |
 |---|---|---|
-| ID | ... | ... |
-```
+| C1 | **Phased rollout** — Faz 1 (çekirdek + manual data) → Faz 2 (otomatik scraper) → Faz 3 (gelişmiş) | Boş tabloya veri pompalama tuzağından kaçınmak. Manuel akış doğrulanmadan otomasyon yok |
+| C2 | **Tek `leads` tablosu — inbound + outbound birleşik** (`source` field ile ayrım) | İki paralel sistem yerine tek doğru akış. Servis/Tedarik ayrımı `track` field'inde |
+| C3 | **Stage values minimal** — `new` → `contacted` → `replied` → `quoting` → `won` / `lost` | Over-engineered 17-stage CRM'lerden bilinçli kaçınma. Sade tutmak operasyonu hızlandırır |
+| C4 | **`inbound_messages` ayrı tablo** — email/form/WhatsApp body + attachments + threading orada saklanır | leads tablosu skor + stage + taslak için, mesaj geçmişi farklı yaşam döngüsü gerektirir |
+| C5 | **`priority_reason` jsonb** (`text` değil) — skor bileşenleri (`fleet_age`, `recent_us_psc`, `detained_12m`, ağırlıklar) ayrı tutulur | Skorlama ağırlıkları değişince eski leadleri yeniden skorlamak için ham bileşenler şart |
+| C6 | **`assigned_to` uuid FK auth.users** (`text` değil) — şu an sen tek kullanıcısın ama type-safe | İleride ekip eklenirse migration gerekmez. Cheap to get right at start |
+| C7 | **Search baştan eklenecek** — Postgres `to_tsvector` ile company + vessel + IMO arama, Faz 1'de | 20+ lead'den sonra search yokken panel kullanılamaz; sonradan eklemek hayli zor |
+| C8 | **Inbound matching race** — form submit'te IMO match VEYA stub vessel+company oluştur (Job 1 sonra zenginleştirir) | Aynı vessel iki kez girilmesin diye explicit upsert mantığı şart |
 
-Bir önceki karar değişiyorsa:
+### Veri etiği / KVKK / GDPR
 
-```
-| S5 | ~~"1 saat içinde dönüş"~~ → **"30 dakika içinde dönüş"** | Müşteri %X daha hızlı talep dönmeye değer veriyor |
-```
+| # | Karar | Sebep |
+|---|---|---|
+| D1 | Yalnızca **public firma + gemi + PSC** verisi toplanır | Equasis (public), USCG CGMIX (public), Paris/Tokyo MoU (public). Sınır net |
+| D2 | **Kişisel veri / yüz verisi / özel iletişim TOPLAMA YOK** | KVKK/GDPR uyumu, hukuki temizlik |
+| D3 | **Panel taslak hazırlar, GÖNDERMEZ** — gönderim her zaman sen, kendi WhatsApp/mail'den | Otomatik outreach yasal gri alan; manuel kontrol kayıt için de iyi |
+| D4 | **LinkedIn / WhatsApp otomatik mesaj YOK** — platform ToS ihlali + spam riski | Marka itibarı için kritik |
+
+### Kaynaklar
+
+| # | Karar | Sebep |
+|---|---|---|
+| K1 | Equasis (https://equasis.org) → gemi-işletmeci public veritabanı. **ToS Faz 2 öncesi teyit edilmeli** (manuel CSV export alternatif) | Türk operatörlerin DOC + flag + owner verisinin tek public kaynağı |
+| K2 | USCG CGMIX (https://cgmix.uscg.mil) → ABD PSC kontrolleri public API | Bulk-friendly, rate-limit dostu |
+| K3 | Paris MoU bulk CSV (https://parismou.org) → AB PSC public bulk | Türk gemilerinin AB liman geçmişi de skorda |
+| K4 | Tokyo MoU search (sadece search, bulk API yok) → manuel veya sınırlı scrape | Düşük öncelik, Faz 2 sonu |
+
+### Doruk pattern reuse
+
+| # | Karar | Sebep |
+|---|---|---|
+| R1 | Doruk Soğutma mimarisi → bu projede yeniden kullanılır: SQLite → Supabase, Telegram bot → admin panel, scraping deseni aynen, Claude relevance → Claude scoring + draft | Kanıtlanmış mental model, sıfırdan icat değil |
+
+### Sınırlar (kasıtlı olarak yapılmayacaklar — Faz 1 için)
+
+- ❌ Toplu eylemler (Faz 3)
+- ❌ E-posta dizisi entegrasyonu (Faz 3)
+- ❌ Tedarikçi otomatik eşleştirme (Faz 3)
+- ❌ Gelişmiş raporlama (Faz 3)
+- ❌ Webhook'lar / Supabase realtime (Faz 3)
+
+---
+
+## Oturum 3 — _henüz yok_
