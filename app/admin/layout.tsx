@@ -56,6 +56,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         </div>
         <nav className="flex flex-wrap gap-1 text-[12.5px] font-mono">
           <NavLink href="/admin">Overview</NavLink>
+          <NavLink href="/admin/leads">Leads</NavLink>
           <NavLink href="/admin/rfqs">RFQs</NavLink>
           <NavLink href="/admin/service">Service</NavLink>
           <NavLink href="/admin/products">Products</NavLink>

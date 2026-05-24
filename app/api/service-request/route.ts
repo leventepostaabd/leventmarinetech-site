@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { createServiceSupabase } from '@/lib/supabase/server';
 import { notifyAdminService, ackCustomerService, notifyByWhatsApp } from '@/lib/notify';
 import { getService } from '@/lib/content';
+import { ingestInboundForm } from '@/lib/crm';
 
 /**
  * POST /api/service-request
@@ -163,6 +164,23 @@ export async function POST(req: Request) {
     }
 
     const refId = String(row?.id ?? '').slice(0, 8).toUpperCase();
+
+    // CRM (Wave 6 Phase 1) — also create/attach a lead. Non-blocking;
+    // the canonical record is still service_requests above.
+    ingestInboundForm({
+      source: 'service_wizard',
+      track: 'service',
+      contact_name: d.contact.name,
+      contact_email: d.contact.email,
+      contact_phone: d.contact.phone,
+      vessel_name: d.contact.vessel_name,
+      imo: d.contact.imo,
+      port: d.port,
+      urgency,
+      system: problemCategory,
+      description: d.notes,
+      raw_payload: { service_request_id: row?.id, ref: refId, when: d.when, when_window: d.when }
+    }).catch((e) => console.error('[crm] service-wizard ingest failed', e));
 
     // Fan out: Email (Resend) + WhatsApp (admin link / Business API stub).
     Promise.all([
