@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import ListRfqModal from './ListRfqModal';
+import { whatsappUrl } from '@/lib/whatsapp';
 
 /**
  * Three sourcing-channel tiles surfaced above the live search.
@@ -129,7 +130,7 @@ export default function SourcingChannelTabs({ locale }: { locale: 'en' | 'tr' })
 
         {/* WhatsApp / Call */}
         <a
-          href="https://wa.me/16193840403"
+          href={whatsappUrl({ locale, intent: 'supply' })}
           target="_blank"
           rel="noreferrer noopener"
           className="text-left rounded-2xl bg-[#25D366]/10 ring-1 ring-[#25D366]/35 hover:bg-[#25D366]/15 hover:ring-[#25D366]/60 transition px-3 py-3 sm:px-4 sm:py-3.5 group no-underline block shadow-sm hover:shadow-md"

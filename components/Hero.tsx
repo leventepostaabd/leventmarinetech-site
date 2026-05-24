@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import HeroDoor from './HeroDoor';
 import EmergencyModal from './EmergencyModal';
+import TrustStats from './TrustStats';
 import { SITE } from '@/lib/site';
 
 export type HeroProps = {
@@ -108,21 +109,22 @@ export default function Hero({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.7, duration: 0.5 }}
-        className="absolute bottom-2 left-0 right-0 z-30 flex items-center justify-center gap-5 px-6 font-mono text-[9.5px] uppercase tracking-[0.18em] text-white/55"
+        className="absolute bottom-3 left-0 right-0 z-30 px-6 flex flex-col items-center gap-2"
       >
-        <span>STCW III/6 ETO</span>
-        <span aria-hidden>·</span>
-        <span>24/7 AOG</span>
-        <span aria-hidden>·</span>
-        <span>{SITE.trust.vessels} vessels</span>
-        <span aria-hidden>·</span>
-        <button
-          type="button"
-          data-about-trigger
-          className="hover:text-amber transition-colors underline-offset-4 hover:underline"
-        >
-          {locale === 'tr' ? 'Hakkımızda' : 'About'}
-        </button>
+        <TrustStats variant="mono" locale={locale} />
+        <div className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-white/55 flex items-center gap-3">
+          <span>STCW III/6 ETO</span>
+          <span aria-hidden>·</span>
+          <span>24/7 AOG</span>
+          <span aria-hidden>·</span>
+          <button
+            type="button"
+            data-about-trigger
+            className="hover:text-amber transition-colors underline-offset-4 hover:underline"
+          >
+            {locale === 'tr' ? 'Hakkımızda' : 'About'}
+          </button>
+        </div>
       </motion.div>
 
       <EmergencyModal
