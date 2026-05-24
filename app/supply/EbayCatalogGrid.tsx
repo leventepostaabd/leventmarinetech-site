@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import ProductQuoteModal, { type ModalProduct } from './ProductQuoteModal';
-import { MARKUP_RATE, fmt } from '@/lib/pricing';
 
 type Item = {
   slug: string;
@@ -232,24 +231,13 @@ export default function EbayCatalogGrid({
                         <div className="font-mono text-[11px] text-ink-subtle mb-2">{it.partNumber}</div>
                       )}
 
-                      {/* Estimated ITEM price only — shipping is computed
-                          after the customer submits company + delivery info,
-                          so we don't show a misleading baseline here. */}
+                      {/* No price shown to the customer (decision F3 / T3).
+                          Item identity is enough; price + lead time travel
+                          through the RFQ form and back via email / WhatsApp. */}
                       <div className="mt-auto pt-2">
-                        {it.priceRaw != null ? (
-                          <>
-                            <div className="font-head font-extrabold text-[16px] text-navy-700 leading-none">
-                              {fmt(it.priceRaw * (1 + MARKUP_RATE), locale)}
-                            </div>
-                            <div className="font-mono text-[9.5px] uppercase tracking-[0.12em] text-ink-subtle mt-1">
-                              {t('+ shipping · same-day quote', '+ kargo · aynı gün teklif')}
-                            </div>
-                          </>
-                        ) : (
-                          <div className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-amber-600">
-                            {t('Quote on request', 'Talep üzerine teklif')}
-                          </div>
-                        )}
+                        <span className="inline-flex items-center gap-1.5 rounded-md bg-amber/15 px-2.5 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-amber-700 group-hover:bg-amber group-hover:text-navy-700 transition">
+                          {t('Get a quote', 'Teklif iste')} →
+                        </span>
                       </div>
                     </div>
                   </button>

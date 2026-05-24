@@ -47,7 +47,11 @@ export default function TopBar({ locale }: { locale: 'en' | 'tr' }) {
   const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);
   // Pages where the right side carries a full-bleed dark photo deck and the
   // TopBar should float transparently over it (no white bar on top).
-  const isHeroLike = pathname === '/' || pathname === '/service-wizard' || pathname === '/services';
+  const isHeroLike =
+    pathname === '/' ||
+    pathname === '/service-wizard' ||
+    pathname === '/services' ||
+    pathname === '/supply';
 
   return (
     <>

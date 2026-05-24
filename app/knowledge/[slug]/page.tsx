@@ -164,7 +164,7 @@ export default function KnowledgePost({ params }: Params) {
                 </p>
               </Link>
               <Link
-                href={`/supply/category/${post.cta.supply.slug}`}
+                href="/supply"
                 className="card no-underline group hover:border-amber"
               >
                 <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-amber mb-1">
@@ -174,7 +174,7 @@ export default function KnowledgePost({ params }: Params) {
                   {post.cta.supply.label}
                 </h3>
                 <p className="text-ink-subtle text-[12.5px] font-mono">
-                  /supply/category/{post.cta.supply.slug}
+                  /supply
                 </p>
               </Link>
             </section>
@@ -222,13 +222,14 @@ export default function KnowledgePost({ params }: Params) {
                 <div className="kicker mb-3">Related supply</div>
                 <ul className="space-y-2 text-[13px]">
                   {post.relatedSupply.map((s) => (
-                    <li key={s}>
-                      <Link href={`/supply/category/${s}`} className="text-ink hover:text-amber-600 no-underline capitalize">
-                        {s.replace(/-/g, ' ')}
-                      </Link>
+                    <li key={s} className="capitalize text-ink-muted">
+                      {s.replace(/-/g, ' ')}
                     </li>
                   ))}
                 </ul>
+                <Link href="/supply" className="mt-3 inline-flex items-center gap-1.5 text-[12px] font-mono uppercase tracking-[0.12em] text-amber hover:text-amber-600 no-underline">
+                  Browse supply →
+                </Link>
               </div>
             )}
 

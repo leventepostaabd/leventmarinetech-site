@@ -105,9 +105,13 @@ export default function SupplyIndex() {
   const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);
 
   return (
-    <div className="lm-screen bg-navy-50 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,30%)]">
-      {/* LEFT — heading + tabs + scrolling grid */}
-      <div className="flex flex-col min-w-0 min-h-0">
+    <div className="h-screen max-h-screen overflow-hidden bg-navy-50 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,30%)]">
+      {/* LEFT — heading + tabs + scrolling grid. Own padding-top for the
+          floating TopBar so the artwork on the right can run edge-to-edge. */}
+      <div
+        className="flex h-full flex-col min-w-0 min-h-0"
+        style={{ paddingTop: 'calc(var(--lm-topbar-h, 56px) + env(safe-area-inset-top, 0))' }}
+      >
         {/* Fixed top — compact on phone, fuller on desktop. */}
         <div className="shrink-0 bg-white border-b border-line px-3 pt-3 pb-2 md:px-8 md:pt-5 md:pb-4">
           <div className="hidden md:block">
@@ -125,20 +129,24 @@ export default function SupplyIndex() {
           <SourcingChannelTabs locale={locale} />
         </div>
 
-        {/* Live grid (scrolls inside) */}
-        <div className="lm-screen-body px-3 py-3 md:px-8 md:py-5">
+        {/* Live grid (scrolls inside). */}
+        <div
+          className="flex-1 overflow-y-auto px-3 py-3 md:px-8 md:py-5"
+          style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0) + 4.5rem)' }}
+        >
           <EbayCatalogGrid locale={locale} />
         </div>
       </div>
 
-      {/* RIGHT — full-bleed cycling deck (lg+ only). */}
-      <aside className="hidden lg:block">
+      {/* RIGHT — full-bleed cycling deck (lg+ only). Runs edge-to-edge
+          ceiling to floor; the transparent TopBar floats over the top of
+          the artwork instead of pushing it down. */}
+      <aside className="hidden lg:block h-screen">
         <ServiceImageDeck
           items={SUPPLY_DECK}
           locale={locale}
           fillParent
-          hrefPrefix="/supply/category/"
-          readMoreLabel={{ en: 'Browse category', tr: 'Kategoriye git' }}
+          ctaEnabled={false}
         />
       </aside>
     </div>

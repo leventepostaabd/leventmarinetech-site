@@ -27,7 +27,8 @@ export default function ServiceImageDeck({
   intervalMs = 4500,
   fillParent = false,
   hrefPrefix = '/services/',
-  readMoreLabel
+  readMoreLabel,
+  ctaEnabled = true
 }: {
   items: Deck[];
   locale: 'en' | 'tr';
@@ -36,10 +37,14 @@ export default function ServiceImageDeck({
       corners, no max-height) — used by the wizard/services right column. */
   fillParent?: boolean;
   /** Path prefix before the slug. Defaults to /services/. Pass /supply/category/
-      to reuse this deck on the supply page. */
+      to reuse this deck on the supply page. Ignored when ctaEnabled is false. */
   hrefPrefix?: string;
   /** Localised CTA label override. Defaults to "Read more" / "Detayını oku". */
   readMoreLabel?: { en: string; tr: string };
+  /** When false, the deck is pure showcase — no link / button on the artwork.
+      Used on /supply where the customer doesn't need to navigate into a
+      category page; the artwork is marketing only. */
+  ctaEnabled?: boolean;
 }) {
   const [idx, setIdx] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -84,22 +89,26 @@ export default function ServiceImageDeck({
             sizes="(min-width: 1024px) 30vw, 100vw"
             className="object-cover object-center"
           />
-          {/* Subtle bottom gradient — only enough to seat the CTA legibly,
-              the artwork already carries its own captions. */}
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-navy-700/85 to-transparent" />
+          {ctaEnabled && (
+            <>
+              {/* Subtle bottom gradient — only enough to seat the CTA legibly,
+                  the artwork already carries its own captions. */}
+              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-navy-700/85 to-transparent" />
 
-          {/* Single CTA — opens the dedicated detail page where the same
-              image is shown again with full content. */}
-          <div className="absolute inset-x-0 bottom-0 p-7 md:p-9">
-            <Link
-              href={`${hrefPrefix}${active.slug}`}
-              className="inline-flex items-center gap-2 rounded-md bg-amber px-4 py-2.5 text-[13px] font-mono font-semibold uppercase tracking-[0.12em] text-navy-700 no-underline shadow-lg transition hover:bg-amber-600"
-            >
-              {locale === 'tr'
-                ? readMoreLabel?.tr ?? 'Detayını oku'
-                : readMoreLabel?.en ?? 'Read more'} →
-            </Link>
-          </div>
+              {/* Single CTA — opens the dedicated detail page where the same
+                  image is shown again with full content. */}
+              <div className="absolute inset-x-0 bottom-0 p-7 md:p-9">
+                <Link
+                  href={`${hrefPrefix}${active.slug}`}
+                  className="inline-flex items-center gap-2 rounded-md bg-amber px-4 py-2.5 text-[13px] font-mono font-semibold uppercase tracking-[0.12em] text-navy-700 no-underline shadow-lg transition hover:bg-amber-600"
+                >
+                  {locale === 'tr'
+                    ? readMoreLabel?.tr ?? 'Detayını oku'
+                    : readMoreLabel?.en ?? 'Read more'} →
+                </Link>
+              </div>
+            </>
+          )}
         </motion.div>
       </AnimatePresence>
 
