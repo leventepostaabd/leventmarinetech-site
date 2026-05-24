@@ -3,6 +3,342 @@
   "generated": "2026-05-23",
   "posts": [
     {
+      "slug": "special-survey-electrical-prep-bulker-tanker-walkthrough",
+      "title": "Special Survey Electrical Prep: 10-Point Walk-Through for Bulkers and Tankers",
+      "description": "What the surveyor walks with on day one of a 5-year Special Survey — ACB primary injection, insulation resistance trends across the 440V distribution, bus-tie discrimination on paper, emergency switchboard blackout drill, and the class-template paperwork that closes the visit in days instead of weeks.",
+      "kicker": "Class & survey",
+      "datePublished": "2026-05-23",
+      "dateModified": "2026-05-23",
+      "readingTimeMin": 13,
+      "wordCount": 1690,
+      "category": "Compliance & Class",
+      "keywords": [
+        "special survey electrical prep",
+        "5-year class survey ship",
+        "ACB primary injection marine",
+        "marine insulation resistance trend",
+        "bus tie discrimination ship",
+        "emergency switchboard blackout test",
+        "DNV special survey checklist"
+      ],
+      "relatedServices": ["switchboard", "generator", "fire-alarm"],
+      "relatedSupply": ["electrical-spares", "msb-components", "test-instruments"],
+      "heroAlt": "ETO running ACB primary injection with a SVERKER 900 test set on a bulker main switchboard during Special Survey preparation",
+      "sections": [
+        {
+          "h": "Why Special Survey writes more electrical findings than any other class event",
+          "p": [
+            "A 5-year Special Survey carries roughly four times the writable-deficiency rate of an Annual Survey across the same vessel category. The reason is not that the equipment failed in year five — it is that the documentation gap from five years of incremental change has accumulated. Every Annual Survey patched the small things. The Special Survey asks the question nobody asks at the Annual: does the as-fitted electrical installation still match the as-classed drawings, and is each protection device set to a value that the discrimination calculation still supports?",
+            "We attend Special Survey preparation on bulkers, product tankers, container ships and offshore support vessels at all major US ports. The walk-through below is the version we run with the chief engineer's electrical team approximately three months before the surveyor boards. It is not a substitute for the class society's checklist — it is a working ETO's pre-pass, designed to clear the most common findings before they are written up."
+          ]
+        },
+        {
+          "h": "1. Switchboard ACB primary injection — schedule it, do not surprise it",
+          "p": [
+            "Every Air Circuit Breaker (ACB) on the main switchboard, the emergency switchboard and any 690V or 6.6kV substation needs a primary injection test against its nameplate trip curve at the 5-year Special. The test is not optional. Vessels that go through five years without an injection record on the ACBs will be required to do them under the surveyor's clock — which means a stripped switchboard during the survey, which means the survey closes in weeks rather than days.",
+            "Run primary injection with a SVERKER 900 or equivalent (3000A capability for typical marine ACBs, 5000A if the installation includes large bus-tie breakers). Capture long-time pickup, short-time pickup, instantaneous pickup, and ground-fault pickup if fitted. Compare each against the nameplate ±10% per IEC 60947-2. ACBs that drift outside that band need the trip unit replaced — the unit, not the entire breaker."
+          ]
+        },
+        {
+          "h": "2. Insulation resistance trend across the 440V distribution",
+          "p": [
+            "Single insulation readings from the Special Survey week mean nothing. What the surveyor expects is a trend across the survey cycle — typically four to five readings spaced six months apart for each major feeder. A trend that is flat or rising is a healthy installation. A trend that is sloping down 10–15% per year is a feeder approaching the IEEE 43 recommended minimum, and the surveyor will flag it as a watch item even if the current value is technically passing.",
+            "Audit the engine room insulation log. If readings are missing for periods longer than nine months, take three new readings now (using a Megger MIT525 at 1kV with PI/DAR on motors, 500V for general distribution) and add them to the log with the operating context — wet bilge, dry season, motor recently cleaned. Surveyors accept a documented gap with explanation; they do not accept a blank period."
+          ]
+        },
+        {
+          "h": "3. Bus-tie discrimination — surveyors check the trip-curve overlap on paper",
+          "p": [
+            "Discrimination between an upstream ACB and a downstream feeder breaker is a paper calculation supported by the trip-curve overlap in the protection coordination study. The Special Survey asks for the coordination study; vessels that produce a study from the original shipyard are routinely flagged if any breakers have been replaced or any settings have been changed since. The study has to reflect the as-fitted installation, not the as-built one.",
+            "Rebuild the coordination study before the survey if any ACB trip unit, MCCB or MCB has been replaced, re-rated or re-set in the past 5 years. We carry parametric coordination tools (ETAP, SKM PowerTools) and can rebuild the study in a working day for a typical mid-size vessel. The output is a one-page coordination diagram per bus, time-current curves overlaid, and a written conclusion the surveyor signs against."
+          ]
+        },
+        {
+          "h": "4. Emergency switchboard load test — actual blackout drill, not document",
+          "p": [
+            "SOLAS II-1 Reg.43 requires the emergency generator to auto-start within 45 seconds of a main-bus blackout and to take the emergency switchboard load to full rating within an additional 15 seconds. The Annual Survey accepts a witnessed start-test on the dock; the Special Survey asks for the full blackout drill — main breaker open, lights out, emergency genset cranks, breaker closes, ER lighting recovers, steering gear recovers, fire pump auto-starts.",
+            "Schedule the drill at anchor or during a quiet alongside watch. The fuel oil purifiers and the boiler can be excluded by isolation; the steering gear, the fire pump, the bridge navigation and the radio installation cannot. If the emergency genset cannot take all four within 60 seconds total, you have a writable observation. We carry a stop-watch capture device that timestamps the breaker state changes to a class-witnessed log."
+          ]
+        },
+        {
+          "h": "5. Fire detection loop integrity + sensitivity calibration certificates",
+          "p": [
+            "The fire detection loop is checked at every Annual; the Special Survey adds a sensitivity audit. Every detector head should have a sensitivity certificate within the past calendar year for ionisation, optical and beam types. Heads that have been cleaned but not re-certified post-cleaning will be flagged. Heads beyond their maker-rated 10-year service life (typical for Autronica, Consilium and Notifier marine) are condemned at Special, regardless of sensitivity readings.",
+            "Run the Solo 330 functional test on every head; capture the chamber reading from the maker's service tool; replace the heads scheduled for end-of-life regardless of operational status. We carry replacement heads for the major marine brands as ship's spare consumables — change-out is faster than re-certification of an end-of-life head, and the surveyor accepts the new ones without further dispute."
+          ]
+        },
+        {
+          "h": "6. UPS battery discharge under load — the GMDSS test extended",
+          "p": [
+            "The GMDSS reserve battery discharge test runs annually. The Special Survey extends the test to every UPS bank on the vessel — bridge navigation UPS, BWTS control UPS, fire panel UPS, IAS UPS, switchboard tripping coil UPS. Each has to deliver its rated capacity under maker-defined load for the documented autonomy time.",
+            "We run discharge banks calibrated against the load profile for each UPS. Vessels with UPS banks that have been topped up but never discharge-tested are common; the Special Survey is where 'looks charged' is replaced with 'measures full capacity for the rated time'. Replacement of failing banks before the survey is faster than after."
+          ]
+        },
+        {
+          "h": "7. Earthing continuity audit — every JB lug torque-verified",
+          "p": [
+            "Earth continuity from every junction box back to the hull-earth reference is the test surveyors run that nobody on board expects. A Megger DLRO10HD low-resistance ohmmeter measures the bonding path; readings above 100 milliohm on a 4mm² bonding strap indicate a corroded lug or a loose torque, and the surveyor will pick on it. The remedy is to retorque every accessible bonding lug against the maker spec and re-test.",
+            "We attend the audit with a torque wrench calibrated to the marine standard (typically 8–14 Nm on M6 brass lugs) and capture the readings to a class-witnessed log. The audit takes a day on a typical bulker, two days on a container vessel. It is the most preventable Special Survey finding category in our experience."
+          ]
+        },
+        {
+          "h": "8. PMS load-share verification under transient load",
+          "p": [
+            "The Power Management System (PMS) is checked at every Annual on paper; the Special Survey checks under load. A transient load — typically a bow thruster start or a heavy crane swing — should result in a load share of ±10% kW between running gensets within the maker-spec response time. Vessels with PMS that has been re-configured for fleet-specific operations sometimes fail this on the transient; the steady-state share is fine.",
+            "Capture the load share with a Hioki PW3198 power-quality analyser at the load-share CT outputs during a scheduled transient event. Compare against the maker's response curve. If the share is outside ±10% during the transient, the load-share CT installation or the PMS gain setting is the next investigation step."
+          ]
+        },
+        {
+          "h": "9. Class report templates — DNV / BV / ABS / Lloyd's / TL formats",
+          "p": [
+            "Each class society has a slightly different Special Survey report format. DNV uses the Form D series; BV uses the AS-1140; ABS uses the SR-12; Lloyd's uses the SP-100; Türk Loydu uses a single combined PDF. The technical content is the same; the format and the appendix ordering differs. We carry templates pre-formatted to each society to compress the post-attendance correspondence cycle.",
+            "The surveyor receives the completed package by email before they sign the certificate. Vessels that have the package ready before the surveyor leaves the gangway close their Special Survey in days rather than the weeks of back-and-forth that follow incomplete reporting."
+          ]
+        },
+        {
+          "h": "10. When to schedule the survey relative to dry dock",
+          "p": [
+            "The Special Survey window overlaps the dry-docking window by design — vessels save attendance days by combining the two. The trade-off is that the dry-dock work itself generates new electrical changes (motor refurbishments, switchboard cleaning, new lighting fixtures) that the surveyor then has to re-acceptance. The cleanest sequence is to schedule the major electrical work for the early dry-dock days, leave a settled-state buffer of 48 hours, then start the survey attendance.",
+            "We coordinate the survey window with the yard and the class surveyor at vessels with a planned dry-dock in the coming 12 months. Early coordination is the single biggest determinant of total survey time on board."
+          ]
+        }
+      ],
+      "cta": {
+        "service": {
+          "slug": "switchboard",
+          "label": "Book a Special Survey electrical attendance"
+        },
+        "supply": {
+          "slug": "msb-components",
+          "label": "Source ACB trip units and switchboard spares"
+        }
+      },
+      "faq": [
+        {
+          "question": "How early should Special Survey preparation start?",
+          "answer": "Three months ahead for a routine bulker or tanker; six months ahead for a container vessel or offshore unit with extensive automation. The 10-point walk-through itself takes two to three working days; the remediation of any findings drives the rest of the timeline."
+        },
+        {
+          "question": "Which other surveys overlap with the 5-year Special?",
+          "answer": "The dry-dock attendance, the BWTS commissioning anniversary, the GMDSS annual radio survey, and the IOPP renewal if it falls in the same window. We coordinate the schedule so the surveyors witness overlapping items once instead of repeatedly."
+        },
+        {
+          "question": "Can we attend the survey itself on board, alongside the surveyor?",
+          "answer": "Yes — and this is the recommended setup for vessels with complex automation or HV installations. The ETO answers the surveyor's questions on the spot, runs the supporting tests in real time, and produces the class-acceptable report before the surveyor leaves."
+        }
+      ]
+    },
+    {
+      "slug": "iacs-ur-e26-e27-marine-cyber-compliance-checklist",
+      "title": "IACS UR E26 & E27 Marine Cyber Compliance: What ETOs Actually Check",
+      "description": "The IACS Unified Requirements E26 (cyber resilience of ships) and E27 (cyber resilience of on-board systems) apply to vessels contracted after 1 January 2024 — and to most retrofits. The compliance checklist a working ETO runs on the engine-room network, IAS, BWTS controller and the navigation suite before the delivery surveyor boards.",
+      "kicker": "Marine cyber",
+      "datePublished": "2026-05-23",
+      "dateModified": "2026-05-23",
+      "readingTimeMin": 12,
+      "wordCount": 1580,
+      "category": "Automation & Control",
+      "keywords": [
+        "IACS UR E26",
+        "IACS UR E27",
+        "marine cyber resilience",
+        "ship cybersecurity compliance",
+        "OT cyber marine",
+        "engine room network segmentation",
+        "PLC patch management ship"
+      ],
+      "relatedServices": ["plc-automation", "switchboard", "engine-room-alarm"],
+      "relatedSupply": ["automation-plc", "control-panels", "alarm-monitoring"],
+      "heroAlt": "ETO with a laptop reviewing the asset inventory of an engine room IAS network against the IACS UR E26 baseline checklist",
+      "sections": [
+        {
+          "h": "What E26 and E27 actually require — short version for working ETOs",
+          "p": [
+            "IACS Unified Requirement E26 sets the cyber resilience requirements for the vessel as a system. E27 sets the cyber resilience requirements for each on-board system and equipment item. Both apply mandatorily to vessels for which the building contract was signed on or after 1 January 2024, and increasingly to retrofits as flag states adopt the framework into their inspection regimes. The practical impact for working ETOs is that the engine-room IAS, the BWTS controller, the bridge navigation suite and any networked auxiliary system now has to demonstrate baseline cyber hygiene at survey — and the documentation has to be aboard, not in the office.",
+            "The good news: the E26/E27 baseline is largely things experienced ETOs already do, formalised. The bad news: vessels that have run for years on shared service accounts, flat networks and no audit log will need a remediation sprint before the delivery surveyor accepts the vessel. This article walks the compliance checklist as a pre-survey pass — what to fix, what to document, what to defer with an accepted exception."
+          ]
+        },
+        {
+          "h": "The asset inventory — every networked device, including the ones nobody documented",
+          "p": [
+            "E26 starts with a complete asset inventory of every networked device aboard. Every device. The IAS PLCs and HMIs are obvious; the BWTS HMI, the fire panel network card, the bridge ECDIS, the VDR, the engine maker's remote-service modem — all of these are in scope. So is the maker's service laptop the third engineer leaves plugged into the K-Chief network 'in case it is needed'.",
+            "Build the inventory from a port scan of every accessible network segment, cross-checked against the cabinet wiring diagrams and the maker's commissioning documentation. Devices that respond to a scan but are not on any drawing are typically the highest-risk finding — they are unknown to the chief and to the surveyor. We run the scan with a hardened laptop on each engine-room and bridge segment; the output is a CSV with IP, MAC, hostname, maker, firmware version and the cabinet location. That CSV becomes the master asset inventory for E26/E27 audits."
+          ]
+        },
+        {
+          "h": "Network segmentation — engineering network vs entertainment network",
+          "p": [
+            "E26 mandates segmentation between safety-critical OT networks (engine control, navigation, BWTS, fire detection) and the crew-welfare or commercial networks (Wi-Fi, satellite Internet, cargo manifest systems). The simplest test: from the crew Wi-Fi VLAN, can a laptop reach the IAS HMI by IP? If the answer is yes, there is no segmentation. The remedy is a managed switch with VLANs and an explicit ACL between them.",
+            "Most modern vessels already have a managed switch in the bridge equipment rack; the segmentation is often half-done because the original commissioning engineer documented the design but the second yard period plugged a cable across the boundary. Audit the actual flows with a port mirror and a network analyser; if traffic is crossing the boundary, find the cable and fix the configuration."
+          ]
+        },
+        {
+          "h": "Patch management on PLC and HMI without breaking the maker's warranty",
+          "p": [
+            "E27 requires that on-board systems be maintained against the maker's published cyber bulletins. The risk most ETOs raise is that applying a firmware update to a PLC mid-cycle can void the maker's warranty or destabilise a tuned application. The IACS framework accommodates this through a documented exception: an unpatched system is acceptable if the exception is logged, the compensating controls are documented, and the maker's bulletin reference is on file.",
+            "In practice: maintain a patch register listing every cyber bulletin received from Kongsberg, Praxis, ABB, Siemens, Schneider, Yokogawa, Honeywell and the navigation makers. For each bulletin, record the decision (apply, defer with exception, not applicable) and the compensating control if deferred. Apply patches during planned port calls, not at sea; verify the maker's warranty is maintained by recording the maker's confirmation in the patch register entry."
+          ]
+        },
+        {
+          "h": "Account management — the shared root password problem",
+          "p": [
+            "The single most common E26 finding we see during pre-delivery audits is shared service accounts. The K-Chief commissioning password is the same one used in the second engineer's notebook is the same one written on the cabinet door. E26 requires per-user accounts where the platform supports them; for platforms that do not (older HMIs with a single service account), the requirement is documented physical access control instead.",
+            "Audit the account list on every platform. Where per-user accounts are possible, create them and revoke shared accounts. Where they are not, document the physical access control (cabinet locks, key custody log) and the routine for changing the shared password after personnel changes. The latter is acceptable to surveyors as a compensating control if it is consistently followed."
+          ]
+        },
+        {
+          "h": "Logging and audit trail — what the surveyor checks",
+          "p": [
+            "E26 requires an audit trail for safety-critical OT actions. The IAS already logs alarm acknowledgements with the user account that acknowledged; the BWTS logs cycle starts with the user account that initiated; the fire panel logs alarm tests with the user. The surveyor checks that these logs are retained for at least the maker-recommended period (typically 6 months on the device, longer if extracted to an off-device archive) and that the user identities are real per-user accounts where possible.",
+            "Configure log extraction to a hardened storage point — typically a dedicated NAS on the engineering segment with WORM (write-once, read-many) retention. Extract weekly. The surveyor wants to see the extraction routine and the storage configuration, not necessarily the log contents themselves."
+          ]
+        },
+        {
+          "h": "Incident response — playbook the bridge can actually execute",
+          "p": [
+            "E26 requires an incident response procedure that the duty officer on the bridge can execute without specialist support. The procedure has to cover the most likely scenarios: loss of bridge navigation network, suspected unauthorised access to the IAS, ransomware indication on a crew laptop, satellite link compromise. The procedure is a one-page flowchart that the duty officer can follow at 03:00 with a 4-hour-old alarm.",
+            "Test the procedure at least quarterly with a tabletop exercise. The surveyor will not run the exercise; they will check the exercise log and the after-action notes. Vessels that have a real-looking procedure with no exercise log are flagged; vessels that have a simple procedure with documented quarterly exercises pass without dispute."
+          ]
+        },
+        {
+          "h": "Practical: getting a non-compliant vessel through delivery survey",
+          "p": [
+            "Most vessels in the next 18 months will undergo their first E26/E27 surveyor visit either at delivery (newbuilds), at intermediate survey (retrofits), or at the next port-state-control inspection. The remediation effort scales with the network complexity. A small bulker with one IAS and a Furuno bridge can typically clear the audit in two days; a container vessel with three networked IAS sub-systems and an extensive deck monitoring network needs four to seven days.",
+            "Schedule the pre-audit attendance during a planned port call no later than 30 days before the survey. The findings drive the remediation plan; the remediation plan drives the schedule of the next attendance. We attend pre-audit work at all major US ports under the standard wizard flow."
+          ]
+        }
+      ],
+      "cta": {
+        "service": {
+          "slug": "plc-automation",
+          "label": "Book an IACS UR E26/E27 pre-audit attendance"
+        },
+        "supply": {
+          "slug": "automation-plc",
+          "label": "Source managed switches and IAS spares"
+        }
+      },
+      "faq": [
+        {
+          "question": "Which vessels does IACS UR E26/E27 actually affect right now?",
+          "answer": "Mandatorily, vessels contracted after 1 January 2024. In practice, flag states are extending the framework to retrofit-classed vessels at intermediate survey, and port-state control regimes are starting to ask for the documentation on any vessel calling. Treat it as the new baseline rather than a future requirement."
+        },
+        {
+          "question": "Can we retrofit an older vessel for E26 compliance?",
+          "answer": "Yes — most older vessels can reach E26 baseline within a single planned port-call window. The biggest variable is the state of the OT network: vessels with a flat unmanaged network need a managed switch retrofit, which is the longest single line item. Audit first, then plan."
+        },
+        {
+          "question": "Which class societies are strict on E26/E27 enforcement?",
+          "answer": "DNV and Lloyd's Register are running the most assertive interpretation today, ABS is close behind, BV and ClassNK are aligned to the IACS baseline. Türk Loydu and IRS accept the IACS baseline and add their own implementation notes. Format the documentation to the class society that will witness the survey."
+        }
+      ]
+    },
+    {
+      "slug": "lithium-hybrid-bms-marine-commissioning-class-acceptance-failure-modes",
+      "title": "Lithium Hybrid BMS for Vessels: Commissioning Checks, Class Acceptance, Failure Modes",
+      "description": "A working-ETO walk-through of marine lithium energy-storage commissioning — CAN bus termination, thermal-runaway interlocks, cell imbalance under regen, class acceptance under DNV B-100 and ABS Guide for ESS, and the failure modes that catch crews who treat the system like a bigger lead-acid bank.",
+      "kicker": "Energy storage",
+      "datePublished": "2026-05-23",
+      "dateModified": "2026-05-23",
+      "readingTimeMin": 12,
+      "wordCount": 1610,
+      "category": "Power Systems",
+      "keywords": [
+        "marine lithium battery",
+        "lithium hybrid BMS ship",
+        "Corvus marine battery",
+        "Leclanché marine ESS",
+        "DNV battery rule B-100",
+        "ABS Guide ESS",
+        "marine battery thermal runaway"
+      ],
+      "relatedServices": ["battery-ups", "switchboard", "transformer"],
+      "relatedSupply": ["batteries-ups", "msb-components", "electrical-spares"],
+      "heroAlt": "Marine engineer inspecting a Corvus Energy lithium battery cabinet with the BMS HMI showing cell voltages and pack temperature on a hybrid ferry",
+      "sections": [
+        {
+          "h": "Why lithium hybrid is on every ship type now — bulker, OSV, ferry, tug",
+          "p": [
+            "Five years ago, marine lithium energy storage was a hybrid ferry technology. Today it is being retrofitted to offshore support vessels for peak-shaving on dynamic-positioning loads, to tugs for the all-electric short-haul, to coastal bulkers for harbour manoeuvring, and to container ships for shore-side cold ironing buffering. The Battery Management System (BMS) has gone from a niche commissioning item to a recurring service line.",
+            "The pattern we see is that the maker (Corvus Energy, Leclanché, Akasol, Saft, Spear Power Systems, Rolls-Royce/Kongsberg Energy Storage) commissions the system once, walks the chief engineer through the HMI, and leaves. The chief is now responsible for a system whose failure modes are unlike anything they have managed before. This walk-through is what we cover during the first six months of service on a newly-commissioned marine lithium pack."
+          ]
+        },
+        {
+          "h": "BMS commissioning — what the maker engineer leaves vs what you have to verify",
+          "p": [
+            "The maker's commissioning sequence covers the as-installed pack — cell balance, BMS communication, contactor sequence, thermal sensors. What it does not cover, because the maker does not run it, is the integration with the vessel's protection scheme. Specifically: the trip from the BMS into the upstream breaker, the alarm routing into the IAS, and the energy management interaction with the diesel-electric source.",
+            "Within the first month of operation, verify three integrations. First: a BMS-triggered open command actually opens the upstream contactor within the documented response time (typically 40 ms for marine ESS). Second: every BMS alarm category appears on the IAS at the priority documented in the BWMP. Third: the energy management system correctly de-prioritises the battery when state of charge drops below the maker-documented minimum operating range. Document the three tests; surveyors at the first annual will ask for them."
+          ]
+        },
+        {
+          "h": "CAN bus termination and the silent comm-drop fault",
+          "p": [
+            "Marine lithium BMS systems use a CAN bus (often two redundant buses) between the master controller and the cell-string controllers. The bus needs a 120-ohm termination at each end; missing termination is the most common cause of intermittent communication faults that the BMS HMI logs as 'comm drop' without any visible source.",
+            "Verify termination with an oscilloscope and a known reference signal at first commissioning, and re-verify after any cabinet maintenance that involved opening the CAN cable. Termination resistors are typically built into the cell-string controller modules, but they can fail open and the failure looks identical to a poor cable termination. Carry spare resistors and the maker's pinout diagram on every BMS attendance."
+          ]
+        },
+        {
+          "h": "Thermal runaway monitoring — what 'going into safe state' actually means",
+          "p": [
+            "Lithium energy storage systems carry a thermal-runaway risk that lead-acid does not. The mitigation is a chain of thermal sensors plus an early-warning alarm matrix plus an automatic transition to a 'safe state' that disconnects the pack from the bus. The chief engineer needs to understand what the safe state actually looks like — typically the contactors open, the cooling system runs at maximum, the BMS holds the cell-string controllers in a low-power monitoring mode, and the IAS displays the safe-state status for the duration.",
+            "Test the safe-state transition during commissioning by simulating a thermal alarm input. Verify that the contactors actually open, that the cooling actually runs at full, and that the IAS displays the correct state for the operator. We have seen safe-state transitions where the contactors opened but the IAS displayed a generic 'BMS fault' that gave the operator no clue what action to take — that is a documentation failure, not a hardware failure, and it has to be fixed before the operator is asked to handle a real event."
+          ]
+        },
+        {
+          "h": "Class acceptance — DNV B-100, ABS Guide for ESS, BV NR 547",
+          "p": [
+            "Each major class society publishes a separate rule for marine energy storage. DNV's B-100 is the most prescriptive and the most widely adopted for newbuilds. ABS publishes the Guide for Use of Lithium-Ion Batteries; BV uses NR 547; Lloyd's Register has its own ESS framework. The technical baseline is similar across all four — fire protection, thermal management, BMS independence, alarm matrix, abuse testing — but the documentation format differs.",
+            "Confirm at the first survey which rule the vessel is classed against and align the operating documentation to that rule's format. Vessels that switched class society between commissioning and the first survey often have a rule mismatch that triggers a documentation rewrite; we attend the rewrite as part of a single planned survey window."
+          ]
+        },
+        {
+          "h": "Real failure modes — overcurrent during regen, cell imbalance, cooling-loop fault",
+          "p": [
+            "The three failure modes we see most often in service: (1) BMS trip on overcurrent during a regenerative event — typically a winch brake-energy dump or a thruster reversal — where the pack absorbs more current than its rated charge limit. The remedy is to limit the regenerative current at the source via the drive's parameter set, not at the BMS. (2) Cell imbalance after long periods at the same state of charge — the BMS balancing routine has to run during a planned operating cycle, and vessels that hold the pack at 80 % SOC for weeks at a time drift outside balance tolerance. (3) Cooling-loop fault, typically a sensor or a circulating-pump failure, that triggers the safe-state transition even though the cells are healthy.",
+            "Each failure mode has a specific signature in the BMS log. Training the chief engineer to read the log instead of just acknowledging the alarm is the highest-leverage maintenance activity we can offer in the first year of service."
+          ]
+        },
+        {
+          "h": "Fire suppression interlock with the ESS cabinet",
+          "p": [
+            "Marine lithium ESS cabinets are typically protected by an aerosol or a clean-agent fire suppression system, separate from the engine-room fixed suppression. The interlock between the ESS BMS and the suppression system has to be tested at commissioning and again at every annual: a thermal-runaway transition should trigger the suppression as the last line of defence, not as the first.",
+            "Verify the interlock sequence with the maker's commissioning engineer if possible, or independently with the suppression system supplier. The test cannot be a real discharge — instead, simulate the trigger and verify the suppression control panel acknowledges the input and initiates its own sequence up to the pre-discharge warning. Document the test; the surveyor will not accept the absence of a test as evidence of compliance."
+          ]
+        },
+        {
+          "h": "Maintenance window — capacity test, balancing cycle",
+          "p": [
+            "Marine lithium packs need an annual capacity test under maker-defined load and a balancing cycle at least quarterly. The capacity test is best run during a planned port stay; it cycles the pack through its operating range and verifies the available capacity against the nameplate. A pack that has drifted to below 80 % of nameplate capacity is at end of useful life for safety-critical applications and needs replacement scheduling.",
+            "The balancing cycle is a passive task the BMS runs autonomously if it is told to; vessels that disable the balancing 'to extend service life' are creating the cell imbalance failure mode we covered above. Leave the balancing routine enabled; schedule the capacity test annually; replace the pack when capacity drops below the application's minimum threshold."
+          ]
+        }
+      ],
+      "cta": {
+        "service": {
+          "slug": "battery-ups",
+          "label": "Book a lithium BMS commissioning audit"
+        },
+        "supply": {
+          "slug": "batteries-ups",
+          "label": "Source BMS modules, contactors and cell strings"
+        }
+      },
+      "faq": [
+        {
+          "question": "What is the typical service life of a marine lithium pack?",
+          "answer": "Eight to twelve years on a duty cycle of one to two equivalent full cycles per day, with capacity dropping to roughly 80 % of nameplate by end of life. Heavily-cycled applications (hybrid ferry, all-electric tug) sit at the shorter end; peak-shaving applications (DP-supported OSV) sit at the longer end."
+        },
+        {
+          "question": "Can we mix lithium chemistries in a single bank?",
+          "answer": "No. Each cell chemistry (NMC, LFP, LTO) has a different voltage curve, charge profile and thermal characteristic. Mixing them in series or in parallel breaks the BMS assumption and creates an imbalance condition that the protection system cannot resolve safely. Specify a single chemistry for the entire pack."
+        },
+        {
+          "question": "What is the recall/maintenance interval for marine lithium ESS?",
+          "answer": "Quarterly balancing cycle (passive, the BMS runs it autonomously); annual capacity test under load; alarm interlock verification at every annual survey; thermal-sensor calibration at the 5-year Special Survey. Beyond these, the maker's service bulletins drive any chemistry-specific maintenance."
+        }
+      ]
+    },
+    {
       "slug": "cold-ironing-pre-connection-checklist-us-berths",
       "title": "Cold Ironing Pre-Connection Checklist: 9-Point Walk-Through for US Berths",
       "description": "What the duty engineer checks before plugging into shore power at a CARB or IEC/IEEE 80005-1 berth — phase rotation, isolation transformer scheme, earth-fault monitor disagreement and bus synchronisation across US East Coast, Gulf and West Coast ports.",
