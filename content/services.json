@@ -19,10 +19,26 @@
       "en": "When do you need us?",
       "tr": "Ne zaman gerekiyor?",
       "options": [
-        { "id": "now", "en": "Now — emergency on board", "tr": "Şimdi — gemide acil durum" },
-        { "id": "24h", "en": "Within 24 hours", "tr": "24 saat içinde" },
-        { "id": "week", "en": "Within a week", "tr": "1 hafta içinde" },
-        { "id": "planned", "en": "Planned date", "tr": "Planlı tarih" }
+        {
+          "id": "now",
+          "en": "Now — emergency on board",
+          "tr": "Şimdi — gemide acil durum"
+        },
+        {
+          "id": "24h",
+          "en": "Within 24 hours",
+          "tr": "24 saat içinde"
+        },
+        {
+          "id": "week",
+          "en": "Within a week",
+          "tr": "1 hafta içinde"
+        },
+        {
+          "id": "planned",
+          "en": "Planned date",
+          "tr": "Planlı tarih"
+        }
       ]
     },
     "step_contact": {
@@ -49,14 +65,33 @@
     "ref_tr": "Referans"
   },
   "us_ports": [
-    "Houston, TX", "New Orleans, LA", "Mobile, AL", "Tampa, FL", "Jacksonville, FL",
-    "Port Everglades, FL", "Miami, FL", "Savannah, GA", "Charleston, SC",
-    "Norfolk, VA", "Baltimore, MD", "Philadelphia, PA", "New York / New Jersey",
-    "Boston, MA", "Portland, ME",
-    "Los Angeles, CA", "Long Beach, CA", "Oakland, CA", "Seattle, WA", "Tacoma, WA",
-    "Portland, OR", "Anchorage, AK",
-    "Corpus Christi, TX", "Galveston, TX", "Beaumont, TX",
-    "Honolulu, HI", "San Juan, PR"
+    "Houston, TX",
+    "New Orleans, LA",
+    "Mobile, AL",
+    "Tampa, FL",
+    "Jacksonville, FL",
+    "Port Everglades, FL",
+    "Miami, FL",
+    "Savannah, GA",
+    "Charleston, SC",
+    "Norfolk, VA",
+    "Baltimore, MD",
+    "Philadelphia, PA",
+    "New York / New Jersey",
+    "Boston, MA",
+    "Portland, ME",
+    "Los Angeles, CA",
+    "Long Beach, CA",
+    "Oakland, CA",
+    "Seattle, WA",
+    "Tacoma, WA",
+    "Portland, OR",
+    "Anchorage, AK",
+    "Corpus Christi, TX",
+    "Galveston, TX",
+    "Beaumont, TX",
+    "Honolulu, HI",
+    "San Juan, PR"
   ],
   "ui": {
     "search_placeholder_en": "Which system has the problem?",
@@ -86,7 +121,13 @@
       "summary_tr": "Ana, yardımcı, şaft ve acil jeneratörler — AVR salınımı, voltaj sapması, ters güç tripi, senkron arızası, paralel yük dengesizliği.",
       "metaTitle": "Marine Generator Service — Diesel, Shaft, Emergency, AVR | Levent Marine",
       "metaDescription": "Marine generator electrical service. Diesel and shaft generators, emergency gensets, AVR retuning, sync panel troubleshooting. 24/7 worldwide, 1-hour technician callback.",
-      "seo_keywords": ["marine generator service", "AVR repair ship", "shaft generator commissioning", "emergency generator SOLAS", "diesel generator sync"],
+      "seo_keywords": [
+        "marine generator service",
+        "AVR repair ship",
+        "shaft generator commissioning",
+        "emergency generator SOLAS",
+        "diesel generator sync"
+      ],
       "symptoms": [
         "AVR hunting ±30V at light load (Stamford MX341/MX321)",
         "Reverse power trip during PTI/PTO transition on shaft generator",
@@ -113,7 +154,32 @@
         "Fluke 438-II motor & generator analyser",
         "DEIF / Selco / Woodward service tools"
       ],
-      "related_supply_categories": ["avr-spares", "governor-modules", "sync-relays", "start-batteries"]
+      "related_supply_categories": [
+        "avr-spares",
+        "governor-modules",
+        "sync-relays",
+        "start-batteries"
+      ],
+      "faqs": [
+        {
+          "question_en": "Which AVR makers do we work with?",
+          "question_tr": "Hangi AVR markaları ile çalışıyoruz?",
+          "answer_en": "Stamford (Cummins), Mecc Alte, Marathon, Leroy-Somer and Basler. Replacements are sourced through approved marine channels with declaration.",
+          "answer_tr": "Stamford (Cummins), Mecc Alte, Marathon, Leroy-Somer ve Basler. Yedek parçalar declaration ile onaylı marine kanallardan tedarik edilir."
+        },
+        {
+          "question_en": "How long does an AVR diagnostic attendance typically take?",
+          "question_tr": "AVR tanı attendance'ı tipik olarak ne kadar sürer?",
+          "answer_en": "Diagnostic attendance: four to six hours per set. Replacement and commissioning: a further three to four hours including load-step testing and parallel verification.",
+          "answer_tr": "Tanı attendance'ı: set başına dört ila altı saat. Değiştirme ve devreye alma: load-step testi ve paralel doğrulama dahil ek üç-dört saat."
+        },
+        {
+          "question_en": "Can we attend during cargo operations?",
+          "question_tr": "Kargo operasyonu sırasında attendance yapabilir miyiz?",
+          "answer_en": "Diagnostics that do not require taking the set offline can be performed during normal operation. Replacement and commissioning typically require a planned shutdown of the affected set; we coordinate with the chief engineer.",
+          "answer_tr": "Set'i offline almayı gerektirmeyen tanı işlemleri normal operasyon sırasında yapılabilir. Değiştirme ve devreye alma tipik olarak etkilenen set'in planlı kapatılmasını gerektirir; chief engineer ile koordine ederiz."
+        }
+      ]
     },
     {
       "slug": "main-engine-electrical",
@@ -128,7 +194,13 @@
       "summary_tr": "Telgraf, yakıt aktüatörleri, devir sensörleri, güvenlik trip mantığı ve start hava valfleri — MAN, Wärtsilä, Hyundai-MAN B&W yavaş ve orta devir motorlarda.",
       "metaTitle": "Main Engine Electrical & Control Service | Levent Marine",
       "metaDescription": "Marine main engine electrical and control-side service. Telegraph, governor, sensor and safety-trip troubleshooting. MAN, Wärtsilä, Hyundai. 24/7 worldwide.",
-      "seo_keywords": ["main engine electrical service", "MAN ECR", "Wärtsilä governor", "engine safety trips", "fuel rack actuator"],
+      "seo_keywords": [
+        "main engine electrical service",
+        "MAN ECR",
+        "Wärtsilä governor",
+        "engine safety trips",
+        "fuel rack actuator"
+      ],
       "symptoms": [
         "Telegraph order disagreement between bridge and ECR",
         "Random shutdown on overspeed trip with no real overspeed event",
@@ -149,7 +221,11 @@
         "FLIR T540 thermal imager",
         "Engine maker service laptop (MAN CoCoS, Wärtsilä Wise)"
       ],
-      "related_supply_categories": ["engine-sensors", "actuators", "noris-spares"]
+      "related_supply_categories": [
+        "engine-sensors",
+        "actuators",
+        "noris-spares"
+      ]
     },
     {
       "slug": "switchboard",
@@ -164,7 +240,13 @@
       "summary_tr": "Ana pano, acil pano, ACB primary injection, PMS yük paylaşımı, blackout kurtarma, bus-tie diskriminasyonu.",
       "metaTitle": "Marine Switchboard Service — MSB/ESB/PMS | Levent Marine",
       "metaDescription": "Main and emergency switchboard service, ACB primary injection, PMS load-sharing, blackout recovery. Terasaki, ABB, Mitsubishi, Schneider. 24/7 worldwide.",
-      "seo_keywords": ["MSB service ship", "ACB primary injection", "PMS load sharing", "marine ESB", "Terasaki ACB"],
+      "seo_keywords": [
+        "MSB service ship",
+        "ACB primary injection",
+        "PMS load sharing",
+        "marine ESB",
+        "Terasaki ACB"
+      ],
       "symptoms": [
         "Bus-tie ACB trips on overcurrent during heavy consumer start",
         "PMS fails to start next priority generator at 85% load",
@@ -186,7 +268,32 @@
         "FLIR T540 thermography",
         "Doble F6150e protection relay test set"
       ],
-      "related_supply_categories": ["acb-trip-units", "schneider-coils", "deif-relays", "pms-cards"]
+      "related_supply_categories": [
+        "acb-trip-units",
+        "schneider-coils",
+        "deif-relays",
+        "pms-cards"
+      ],
+      "faqs": [
+        {
+          "question_en": "Do we run ACB primary injection on board?",
+          "question_tr": "ACB primary injection'ı gemide yapıyor muyuz?",
+          "answer_en": "Yes — SVERKER 900 primary injection set (3000 A capability, 5000 A for larger bus-tie breakers). Captures long-time, short-time, instantaneous and ground-fault pickup against the nameplate trip curve per IEC 60947-2.",
+          "answer_tr": "Evet — SVERKER 900 primary injection set'i (3000 A kapasiteli, daha büyük bus-tie breaker'lar için 5000 A). IEC 60947-2'ye göre nameplate trip curve'ünü karşı long-time, short-time, instantaneous ve ground-fault pickup yakalar."
+        },
+        {
+          "question_en": "Which switchboard makers do we cover?",
+          "question_tr": "Hangi switchboard markalarını destekliyoruz?",
+          "answer_en": "Terasaki AR/AT, ABB Emax 2 marine, Schneider Masterpact NW, Siemens 3WL, Mitsubishi marine ACBs. PMS platforms: DEIF AGC-4, Selco T2000, Woodward 2301D and DPG. Trip unit replacements sourced through approved channels.",
+          "answer_tr": "Terasaki AR/AT, ABB Emax 2 marine, Schneider Masterpact NW, Siemens 3WL, Mitsubishi marine ACB'leri. PMS platformları: DEIF AGC-4, Selco T2000, Woodward 2301D ve DPG. Trip unit değişimleri onaylı kanallardan tedarik edilir."
+        },
+        {
+          "question_en": "Can we attend the Special Survey alongside the surveyor?",
+          "question_tr": "Special Survey'i surveyor ile birlikte attendance yapabilir miyiz?",
+          "answer_en": "Yes — and this is the recommended setup for vessels with complex automation or HV installations. The ETO answers the surveyor's questions on the spot, runs the supporting tests in real time, and produces the class-acceptable report before the surveyor leaves.",
+          "answer_tr": "Evet — ve bu, karmaşık otomasyon veya HV tesisatına sahip gemiler için önerilen kurulumdur. ETO surveyor'ın sorularını anında yanıtlar, destekleyici testleri gerçek zamanlı olarak çalıştırır ve surveyor ayrılmadan class-kabul edilebilir raporu üretir."
+        }
+      ]
     },
     {
       "slug": "fire-alarm",
@@ -201,7 +308,13 @@
       "summary_tr": "Loop arızaları, yanlış alarm, dedektör hassasiyeti, CO2/HI-FOG salım matrisi, PA/GA STI. SOLAS Bölüm II-2 hazır.",
       "metaTitle": "Marine Fire Alarm Service — Autronica, Consilium | Levent Marine",
       "metaDescription": "Marine fire detection service. Autronica, Consilium, Notifier panels. Loop faults, false-alarm hunts, CO2 release logic, SOLAS Ch. II-2 prep. 24/7 worldwide.",
-      "seo_keywords": ["marine fire alarm service", "Autronica BS-100", "Consilium Salwico", "SOLAS fire detection", "CO2 release test"],
+      "seo_keywords": [
+        "marine fire alarm service",
+        "Autronica BS-100",
+        "Consilium Salwico",
+        "SOLAS fire detection",
+        "CO2 release test"
+      ],
       "symptoms": [
         "Autronica BS-100 zone fault, loop current outside 18–22 mA",
         "Consilium Salwico CS3000 false alarms in galley",
@@ -223,7 +336,32 @@
         "Solo 330 functional smoke/heat tester pole",
         "Cal gas: CH4 50% LEL, H2S 10 ppm, CO 100 ppm"
       ],
-      "related_supply_categories": ["fire-detectors", "co2-solenoids", "pa-ga-amps", "loop-cable"]
+      "related_supply_categories": [
+        "fire-detectors",
+        "co2-solenoids",
+        "pa-ga-amps",
+        "loop-cable"
+      ],
+      "faqs": [
+        {
+          "question_en": "Which fire panel makers do we service?",
+          "question_tr": "Hangi fire panel markalarına servis veriyoruz?",
+          "answer_en": "Autronica BS-100 and AutroSafe IFG, Consilium Salwico CS3000 and CS4000, Notifier marine, Tyco Marioff (where the loop architecture applies), Minimax (passenger ships). Service tools for the first three on every dispatch.",
+          "answer_tr": "Autronica BS-100 ve AutroSafe IFG, Consilium Salwico CS3000 ve CS4000, Notifier marine, Tyco Marioff (loop mimarisi uygun olduğunda), Minimax (yolcu gemileri). İlk üçünün service araçları her dispatch'te yanımızda."
+        },
+        {
+          "question_en": "How long does a typical false-alarm attendance take?",
+          "question_tr": "Tipik bir false-alarm attendance ne kadar sürer?",
+          "answer_en": "Three to six hours from boarding to class report. Contamination cases run longer (every head in the suspect zone and adjacent zones gets tested). Loop earth faults are typically shorter.",
+          "answer_tr": "Boarding'den class raporuna kadar üç ila altı saat. Contamination vakaları daha uzun sürer (şüpheli zone ve komşu zone'lardaki her detektör test edilir). Loop earth fault'ları tipik olarak daha kısa."
+        },
+        {
+          "question_en": "Can we cover SOLAS Ch.II-2 annual survey at the same attendance?",
+          "question_tr": "SOLAS Ch.II-2 yıllık survey'i aynı attendance'ta yapabilir miyiz?",
+          "answer_en": "Yes. We coordinate the annual fire-detection survey with the root-cause attendance and produce a single combined class report. Surveyors prefer this — one visit, one signature, fewer port days lost.",
+          "answer_tr": "Evet. Yıllık fire-detection survey'ini root-cause attendance ile koordine eder ve tek bir birleşik class raporu üretiriz. Surveyor'lar bunu tercih eder — tek ziyaret, tek imza, daha az port-day kaybı."
+        }
+      ]
     },
     {
       "slug": "engine-room-alarm",
@@ -238,7 +376,13 @@
       "summary_tr": "AMS panelleri (Praxis, Kongsberg, NORIS), mühendis dead-man'i, uzatma alarmı, PT100 / 4–20 mA sensör kalibrasyonu.",
       "metaTitle": "Engine Room Alarm & Monitoring Service | Levent Marine",
       "metaDescription": "Marine engine room alarm system service. AMS panels, dead-man, extension alarm, sensor calibration. Praxis, Kongsberg, NORIS. 24/7 worldwide.",
-      "seo_keywords": ["AMS alarm ship", "engine room monitoring", "Praxis Megachief", "Kongsberg K-Chief", "dead-man alarm"],
+      "seo_keywords": [
+        "AMS alarm ship",
+        "engine room monitoring",
+        "Praxis Megachief",
+        "Kongsberg K-Chief",
+        "dead-man alarm"
+      ],
       "symptoms": [
         "Alarm flood >10 alarms per 10 min (EEMUA 191 breach)",
         "Praxis Megachief HMI black screen after hours",
@@ -258,7 +402,31 @@
         "Wireshark with Modbus dissectors",
         "B&B RS485 bus analyser"
       ],
-      "related_supply_categories": ["ams-cards", "pt100-tx", "alarm-bells"]
+      "related_supply_categories": [
+        "ams-cards",
+        "pt100-tx",
+        "alarm-bells"
+      ],
+      "faqs": [
+        {
+          "question_en": "Which AMS / IAS platforms do we service?",
+          "question_tr": "Hangi AMS / IAS platformlarına servis veriyoruz?",
+          "answer_en": "Praxis Megachief, Praxis Selma, Kongsberg K-Chief 600/700, NORIS FlexView, Lyngsø Marine, ABB AC-700. We carry the relevant service tools and a baseline spares pack on every dispatch.",
+          "answer_tr": "Praxis Megachief, Praxis Selma, Kongsberg K-Chief 600/700, NORIS FlexView, Lyngsø Marine, ABB AC-700. Her dispatch'te ilgili service araçları ve baseline yedek paketi yanımızda."
+        },
+        {
+          "question_en": "Can we attend at-sea remotely for alarm investigation?",
+          "question_tr": "Alarm araştırması için at-sea remote attendance yapabilir miyiz?",
+          "answer_en": "If the vessel has a service VPN, yes — we read the alarm log, snapshot the HMI graphics and trace the I/O channel without boarding. Physical replacement still needs an ETO at the next port call.",
+          "answer_tr": "Geminin service VPN'i varsa, evet — alarm log'unu okur, HMI grafiklerini anlık olarak yakalar ve I/O kanalını board olmadan izleriz. Fiziksel değiştirme hâlâ bir sonraki port call'da ETO gerektirir."
+        },
+        {
+          "question_en": "How long does a typical alarm investigation take?",
+          "question_tr": "Tipik bir alarm araştırması ne kadar sürer?",
+          "answer_en": "Three to five hours alongside for a standard alarm-flood investigation — log analysis, sensor calibration check, transmitter calibration, alarm rationalisation per EEMUA 191. Re-programming the IAS takes longer and is scheduled separately.",
+          "answer_tr": "Standart alarm-flood araştırması için alongside üç ila beş saat — log analizi, sensör kalibrasyon kontrolü, transmitter kalibrasyonu, EEMUA 191'e göre alarm rasyonalizasyonu. IAS'i yeniden programlama daha uzun sürer ve ayrı planlanır."
+        }
+      ]
     },
     {
       "slug": "bridge-navigation",
@@ -273,7 +441,13 @@
       "summary_tr": "Furuno, JRC, Sperry, Raytheon Anschütz. Zayıf radar yankısı, ECDIS donmaları, cayro hizalama, otopilot dümen salınımı.",
       "metaTitle": "Marine Bridge Navigation Service — Radar, ECDIS, Gyro | Levent Marine",
       "metaDescription": "Marine bridge equipment service. Radar magnetron, ECDIS faults, gyro alignment, autopilot tuning. Furuno, JRC, Sperry, Raytheon. 24/7 worldwide.",
-      "seo_keywords": ["marine radar service", "Furuno FAR-2228", "JRC ECDIS", "Sperry gyro alignment", "autopilot rudder hunt"],
+      "seo_keywords": [
+        "marine radar service",
+        "Furuno FAR-2228",
+        "JRC ECDIS",
+        "Sperry gyro alignment",
+        "autopilot rudder hunt"
+      ],
       "symptoms": [
         "Furuno FAR-2228 weak echo, magnetron current below 1.5 mA",
         "JRC JAN-9201 ECDIS frozen during ENC update",
@@ -294,7 +468,12 @@
         "Furuno FSV & JRC service terminal",
         "Actisense NGT-1 NMEA protocol analyser"
       ],
-      "related_supply_categories": ["magnetrons", "ecdis-spares", "gyro-bearings", "ais-antennas"]
+      "related_supply_categories": [
+        "magnetrons",
+        "ecdis-spares",
+        "gyro-bearings",
+        "ais-antennas"
+      ]
     },
     {
       "slug": "gmdss-communication",
@@ -309,7 +488,13 @@
       "summary_tr": "GMDSS yıllık radyo denetimi, VHF/MF/HF DSC, INMARSAT-C/FleetBroadband, EPIRB hidrostatik bırakma, yedek pil deşarj testleri.",
       "metaTitle": "GMDSS & Marine Communication Service | Levent Marine",
       "metaDescription": "GMDSS annual radio survey, VHF/MF/HF DSC, INMARSAT, EPIRB. Class-acceptable certificates DNV, BV, ABS, Lloyd's. 24/7 worldwide.",
-      "seo_keywords": ["GMDSS annual survey", "marine VHF service", "INMARSAT FleetBroadband", "EPIRB battery", "Jotron Tron 60S"],
+      "seo_keywords": [
+        "GMDSS annual survey",
+        "marine VHF service",
+        "INMARSAT FleetBroadband",
+        "EPIRB battery",
+        "Jotron Tron 60S"
+      ],
       "symptoms": [
         "GMDSS reserve battery below 6 h discharge",
         "DSC test call to coast station fails",
@@ -329,7 +514,11 @@
         "GMDSS test set per ITU-R recommendations",
         "Anritsu MS2720T spectrum analyser"
       ],
-      "related_supply_categories": ["gmdss-batteries", "epirb-hru", "antennas"]
+      "related_supply_categories": [
+        "gmdss-batteries",
+        "epirb-hru",
+        "antennas"
+      ]
     },
     {
       "slug": "bwts",
@@ -344,7 +533,13 @@
       "summary_tr": "Alfa Laval PureBallast, Wärtsilä Aquarius, Optimarin, Hyde Guardian. UV lamp arızaları, sensör kalibrasyonu, USCG uyumu, IMO BWMS Kodu.",
       "metaTitle": "BWTS Service — PureBallast, Aquarius, Optimarin | Levent Marine",
       "metaDescription": "Ballast water treatment system electrical and control service. UV lamp faults, sensor calibration, USCG and IMO BWMS Code compliance. 24/7 worldwide.",
-      "seo_keywords": ["BWTS service", "PureBallast 3", "Optimarin BWMS", "USCG BWMS", "ballast UV lamp"],
+      "seo_keywords": [
+        "BWTS service",
+        "PureBallast 3",
+        "Optimarin BWMS",
+        "USCG BWMS",
+        "ballast UV lamp"
+      ],
       "symptoms": [
         "UV transmittance below 50% on PureBallast 3 reactor",
         "Total residual oxidant (TRO) sensor drift on electro-chlorination",
@@ -367,7 +562,32 @@
         "Druck DPI 620 calibrator for DP transmitters",
         "FLIR T540 for reactor cabinet thermography"
       ],
-      "related_supply_categories": ["uv-lamps", "tro-sensors", "uvt-sensors", "bwts-vfds"]
+      "related_supply_categories": [
+        "uv-lamps",
+        "tro-sensors",
+        "uvt-sensors",
+        "bwts-vfds"
+      ],
+      "faqs": [
+        {
+          "question_en": "How long does a typical BWTS pre-survey attendance take?",
+          "question_tr": "Tipik BWTS pre-survey attendance ne kadar sürer?",
+          "answer_en": "Approximately four to six hours per ballast pump line on a quiet vessel with co-operative crew. Plan a full day for a Panamax bulker with two ballast pumps and a parallel treatment skid.",
+          "answer_tr": "Sakin bir gemide, hazır bir mürettebatla ballast pompası hattı başına yaklaşık dört ila altı saat. İki ballast pompası ve paralel arıtım skid'i olan Panamax bulker için tam bir gün planlayın."
+        },
+        {
+          "question_en": "Can a ship's electrician do this without a class-experienced ETO?",
+          "question_tr": "Class-deneyimli ETO olmadan gemi elektrikçisi yapabilir mi?",
+          "answer_en": "Procedural items (sample-point walks, BWMP documentation review, alarm exercise) sit within most ship's electrician scopes. UV intensity verification, TRO sensor calibration and indicative-analysis sampling typically need a marine ETO with current BWMS Code understanding and the right kit.",
+          "answer_tr": "Prosedürel maddeler (sample-point yürüyüşleri, BWMP doküman incelemesi, alarm testi) çoğu gemi elektrikçisinin kapsamındadır. UV yoğunluk doğrulama, TRO sensör kalibrasyonu ve indicative-analysis sampling tipik olarak güncel BWMS Code bilgisi ve uygun kite sahip bir marine ETO gerektirir."
+        },
+        {
+          "question_en": "Which class societies are we set up to write the report for?",
+          "question_tr": "Hangi class society'leri için rapor yazıyoruz?",
+          "answer_en": "DNV, BV, ABS, Lloyd's Register, Türk Loydu, RINA, ClassNK and IRS. Each report is pre-formatted to the requesting society's template; the surveyor receives the package by email before the engineer leaves the gangway.",
+          "answer_tr": "DNV, BV, ABS, Lloyd's Register, Türk Loydu, RINA, ClassNK ve IRS. Her rapor talep eden society'nin şablonuna göre önceden formatlanır; surveyor, mühendis gangway'i terk etmeden paketi e-posta ile alır."
+        }
+      ]
     },
     {
       "slug": "crane-deck-machinery",
@@ -382,7 +602,13 @@
       "summary_tr": "Güverte vinci VFD tripleri, ambar kapağı sekans arızaları, ırgat aşırı yük, bağlama vinci joystick kayması, kumanya vinci limit anahtarları.",
       "metaTitle": "Marine Crane & Deck Machinery Electrical Service | Levent Marine",
       "metaDescription": "Marine deck crane, hatch cover, windlass and mooring winch electrical service. VFD troubleshooting, limit switches, load cells. 24/7 worldwide.",
-      "seo_keywords": ["marine crane VFD", "deck crane service", "hatch cover sequence", "windlass overload", "MacGregor crane"],
+      "seo_keywords": [
+        "marine crane VFD",
+        "deck crane service",
+        "hatch cover sequence",
+        "windlass overload",
+        "MacGregor crane"
+      ],
       "symptoms": [
         "Deck crane VFD F0007 overvoltage trip during boom lowering",
         "Hatch cover motor single-phasing after rain ingress",
@@ -404,7 +630,32 @@
         "ABB ACS / Siemens / Yaskawa service tools",
         "Druck DPI 620 for 4–20 mA loops"
       ],
-      "related_supply_categories": ["vfd-spares", "limit-switches", "load-cells", "motor-spares"]
+      "related_supply_categories": [
+        "vfd-spares",
+        "limit-switches",
+        "load-cells",
+        "motor-spares"
+      ],
+      "faqs": [
+        {
+          "question_en": "Can we attend crane VFD faults at any US port?",
+          "question_tr": "Herhangi bir ABD limanında crane VFD arızasına attendance yapabilir miyiz?",
+          "answer_en": "Yes. We attend at all major US ports — East Coast, Gulf, West Coast — under the standard wizard flow. Engineer typically on the gangway within four to six hours of intake, faster at the largest hubs (Houston, NY/NJ, Long Beach).",
+          "answer_tr": "Evet. Standart wizard akışı altında tüm büyük ABD limanlarına attendance yapıyoruz — East Coast, Gulf, West Coast. Mühendis tipik olarak intake'ten dört ila altı saat içinde gangway'de, en büyük hub'larda (Houston, NY/NJ, Long Beach) daha hızlı."
+        },
+        {
+          "question_en": "Do we handle hatch cover automation as well as deck cranes?",
+          "question_tr": "Güverte vinçlerinin yanı sıra hatch cover otomasyonuna da bakıyor muyuz?",
+          "answer_en": "Yes — hatch cover sequence faults, single-phasing, motor JB ingress and limit-switch chatter all fall in the same dispatch. Same kit (Fluke 438-II, Megger MIT525, ABB / Siemens / Yaskawa service tools) handles both.",
+          "answer_tr": "Evet — hatch cover sekans arızaları, single-phasing, motor JB ingress ve limit-switch chatter aynı dispatch içinde. Aynı kit (Fluke 438-II, Megger MIT525, ABB / Siemens / Yaskawa service araçları) her ikisini de halleder."
+        },
+        {
+          "question_en": "How long does a typical crane VFD attendance take?",
+          "question_tr": "Tipik bir crane VFD attendance'ı ne kadar sürer?",
+          "answer_en": "Diagnostic capture (DC bus voltage during a load-cycle, brake resistor verification) runs two to four hours. Brake resistor replacement is a further sixty to ninety minutes. Full controller replacement with commissioning is half a day.",
+          "answer_tr": "Tanı captures (load-cycle sırasında DC bus voltage, brake resistor doğrulama) iki ila dört saat. Brake resistor değişimi ek altmış ila doksan dakika. Devreye alma ile birlikte tam controller değişimi yarım gün."
+        }
+      ]
     },
     {
       "slug": "bilge-level",
@@ -419,7 +670,13 @@
       "summary_tr": "Sintine alarmları, ambar yüksek seviye sensörleri, tank radar ölçümü, şamandıralı anahtarlar, sintine ayrıştırıcı OCM 15 ppm.",
       "metaTitle": "Marine Bilge & Level Sensor Service | Levent Marine",
       "metaDescription": "Marine bilge alarms, tank gauging radar, float switches, oily-water separator 15 ppm. Hawk, KSR Kuebler, Emerson Rosemount. 24/7 worldwide.",
-      "seo_keywords": ["bilge alarm ship", "tank radar gauging", "OCM 15ppm", "Hawk radar level", "high level cargo hold"],
+      "seo_keywords": [
+        "bilge alarm ship",
+        "tank radar gauging",
+        "OCM 15ppm",
+        "Hawk radar level",
+        "high level cargo hold"
+      ],
       "symptoms": [
         "Bilge alarm chatter in heavy weather",
         "Tank radar reads 0% on full tank (Hawk, Emerson)",
@@ -438,7 +695,11 @@
         "Emerson 475 HART communicator",
         "OCM calibration test fluid"
       ],
-      "related_supply_categories": ["level-sensors", "float-switches", "ocm-cells"]
+      "related_supply_categories": [
+        "level-sensors",
+        "float-switches",
+        "ocm-cells"
+      ]
     },
     {
       "slug": "shaft-earthing",
@@ -453,7 +714,12 @@
       "summary_tr": "Şaft topraklama fırçaları, bilezikler, gövde-şaft potansiyel izleme, kaçak akıma karşı koruma.",
       "metaTitle": "Shaft Earthing Device Service | Levent Marine",
       "metaDescription": "Marine shaft earthing device service. Brush and slip ring replacement, hull-to-shaft potential monitoring. Class-acceptable test reports. 24/7 worldwide.",
-      "seo_keywords": ["shaft earthing device", "shaft brush replacement", "marine galvanic protection", "Wärtsilä shaft brush"],
+      "seo_keywords": [
+        "shaft earthing device",
+        "shaft brush replacement",
+        "marine galvanic protection",
+        "Wärtsilä shaft brush"
+      ],
       "symptoms": [
         "Shaft-to-hull voltage rising above 50 mV trend",
         "Worn brush, sparking visible on slip ring",
@@ -470,7 +736,10 @@
         "Calibrated mV shunt for shaft potential",
         "Vibration meter for bracket"
       ],
-      "related_supply_categories": ["shaft-brushes", "slip-rings"]
+      "related_supply_categories": [
+        "shaft-brushes",
+        "slip-rings"
+      ]
     },
     {
       "slug": "plc-automation",
@@ -485,7 +754,13 @@
       "summary_tr": "PLC arıza bulma, IAS yeniden programlama, alarm rasyonalizasyonu (EEMUA 191), yedekli CPU senkron, OT siber temel.",
       "metaTitle": "Marine PLC & Automation Service — IAS, IACS Cyber | Levent Marine",
       "metaDescription": "Marine PLC, IAS, automation system service. Siemens S7, Allen-Bradley ControlLogix, Kongsberg K-Chief. IACS UR E26/E27 cyber prep. 24/7 worldwide.",
-      "seo_keywords": ["marine PLC service", "Siemens S7-1500 ship", "Kongsberg K-Chief 600", "IAS retrofit", "IACS UR E26"],
+      "seo_keywords": [
+        "marine PLC service",
+        "Siemens S7-1500 ship",
+        "Kongsberg K-Chief 600",
+        "IAS retrofit",
+        "IACS UR E26"
+      ],
       "symptoms": [
         "PLC battery low warning, backup memory at risk",
         "Modbus RTU comms drop between PLC and remote I/O",
@@ -505,7 +780,32 @@
         "B&B USB-COMi RS485 bus analyser",
         "Tek MSO44 mixed-signal scope"
       ],
-      "related_supply_categories": ["plc-cpus", "remote-io", "hmi-spares", "industrial-switches"]
+      "related_supply_categories": [
+        "plc-cpus",
+        "remote-io",
+        "hmi-spares",
+        "industrial-switches"
+      ],
+      "faqs": [
+        {
+          "question_en": "Can we attend remotely via the cabinet's service VPN?",
+          "question_tr": "Kabinetin service VPN'i üzerinden remote attendance yapabilir miyiz?",
+          "answer_en": "For diagnostic and configuration export, yes — Kongsberg / Praxis / ABB remote service links let us read the controller without boarding. The physical card swap still needs an ETO at the cabinet.",
+          "answer_tr": "Tanı ve konfigürasyon ihracı için evet — Kongsberg / Praxis / ABB remote service link'leri controller'ı board olmadan okumamıza olanak verir. Fiziksel kart değişimi hâlâ kabinette ETO gerektirir."
+        },
+        {
+          "question_en": "Which automation platforms do we cover?",
+          "question_tr": "Hangi otomasyon platformlarını destekliyoruz?",
+          "answer_en": "Kongsberg K-Chief 600/700, Praxis Selma, ABB AC-700, Lyngsø Marine, Siemens S7-1500 marine variants, Allen-Bradley ControlLogix. Service tools and basic spares for each on every dispatch.",
+          "answer_tr": "Kongsberg K-Chief 600/700, Praxis Selma, ABB AC-700, Lyngsø Marine, Siemens S7-1500 marine varyantları, Allen-Bradley ControlLogix. Her dispatch'te her birinin service araçları ve temel yedekleri."
+        },
+        {
+          "question_en": "How long does a typical PLC card attendance run?",
+          "question_tr": "Tipik bir PLC kart attendance ne kadar sürer?",
+          "answer_en": "Four to eight hours alongside, depending on configuration restore time and whether dual-redundancy fail-over is available. Single-controller cabinets in single-line propulsion vessels need a planned standstill.",
+          "answer_tr": "Konfigürasyon restore süresi ve dual-redundancy fail-over olup olmamasına bağlı olarak alongside dört ila sekiz saat. Tek hatlı propulsion gemilerindeki tek-controller kabinetleri planlı standstill gerektirir."
+        }
+      ]
     },
     {
       "slug": "lighting-nav-lights",
@@ -520,7 +820,13 @@
       "summary_tr": "Seyir feneri kontrol arızaları, COLREG tip onaylı LED retrofit, ambar projektörleri, makine dairesi ve acil aydınlatma yenileme.",
       "metaTitle": "Navigation Light & LED Retrofit Service | Levent Marine",
       "metaDescription": "Marine navigation light controller, LED retrofit with COLREG type approval, cargo hold floods, emergency lighting. Glamox, Den Haan, Aqua Signal. 24/7 worldwide.",
-      "seo_keywords": ["nav light controller", "COLREG LED retrofit", "marine emergency lighting", "Den Haan Rotterdam", "cargo hold flood"],
+      "seo_keywords": [
+        "nav light controller",
+        "COLREG LED retrofit",
+        "marine emergency lighting",
+        "Den Haan Rotterdam",
+        "cargo hold flood"
+      ],
       "symptoms": [
         "Nav light failure alarm with bulb intact",
         "Cargo hold MH lamp restrike time over 15 min",
@@ -537,7 +843,11 @@
         "Fluke 1735 power logger",
         "DNV / DEKRA type approval cross-reference"
       ],
-      "related_supply_categories": ["nav-lights", "led-floods", "marine-led"]
+      "related_supply_categories": [
+        "nav-lights",
+        "led-floods",
+        "marine-led"
+      ]
     },
     {
       "slug": "battery-ups",
@@ -552,7 +862,12 @@
       "summary_tr": "GMDSS yedek, navigasyon UPS, acil jeneratör start aküleri, lityum hibrit BMS desteği.",
       "metaTitle": "Marine Battery & UPS Service | Levent Marine",
       "metaDescription": "Marine battery and UPS service. GMDSS reserve, navigation UPS, emergency genset start batteries, lithium hybrid BMS. 24/7 worldwide.",
-      "seo_keywords": ["marine battery service", "GMDSS battery test", "UPS marine", "lithium ship battery"],
+      "seo_keywords": [
+        "marine battery service",
+        "GMDSS battery test",
+        "UPS marine",
+        "lithium ship battery"
+      ],
       "symptoms": [
         "UPS alarms on inverter fault, no transfer",
         "Start battery cranks below 9 V on emergency genset",
@@ -569,7 +884,11 @@
         "Discharge load bank up to 200 A",
         "Hioki BT3554 internal resistance meter"
       ],
-      "related_supply_categories": ["batteries", "ups-modules", "bms-cards"]
+      "related_supply_categories": [
+        "batteries",
+        "ups-modules",
+        "bms-cards"
+      ]
     },
     {
       "slug": "shore-connection",
@@ -584,7 +903,13 @@
       "summary_tr": "Yüksek ve alçak gerilim sahil gücü, izolasyon transformatör şemaları, toprak hatası izleme, IEC/IEEE 80005-1 uyumlu retrofit paketleri.",
       "metaTitle": "Marine Shore Connection / Cold Ironing Service | Levent Marine",
       "metaDescription": "Marine shore power and cold ironing service. HV and LV, isolation transformer, earth-fault monitoring, IEC/IEEE 80005-1 compliance. 24/7 worldwide.",
-      "seo_keywords": ["shore power service", "cold ironing", "IEC/IEEE 80005-1", "marine shore connection", "Cavotec shore power"],
+      "seo_keywords": [
+        "shore power service",
+        "cold ironing",
+        "IEC/IEEE 80005-1",
+        "marine shore connection",
+        "Cavotec shore power"
+      ],
       "symptoms": [
         "Shore power connection trips immediately at berth",
         "Earth-fault monitor disagreement with shore RCD",
@@ -601,7 +926,11 @@
         "Fluke 1735 power logger",
         "Megger MFT1741 multifunction installation tester"
       ],
-      "related_supply_categories": ["shore-power-cables", "isolation-transformers", "earth-monitors"]
+      "related_supply_categories": [
+        "shore-power-cables",
+        "isolation-transformers",
+        "earth-monitors"
+      ]
     },
     {
       "slug": "transformer",
@@ -616,7 +945,12 @@
       "summary_tr": "Düşürücü transformatörler, aydınlatma transformatörleri, YG (6.6 kV / 11 kV) üniteler. Sargı oranı, vektör grubu, yüksüz ve yüklü kayıp testleri.",
       "metaTitle": "Marine Transformer Service & Testing | Levent Marine",
       "metaDescription": "Marine transformer service. 440/230V step-down, lighting, HV. Winding ratio, vector group, dielectric, thermography. Class-acceptable reports. 24/7 worldwide.",
-      "seo_keywords": ["marine transformer test", "ship 440 230 transformer", "HV transformer marine", "winding ratio test"],
+      "seo_keywords": [
+        "marine transformer test",
+        "ship 440 230 transformer",
+        "HV transformer marine",
+        "winding ratio test"
+      ],
       "symptoms": [
         "Transformer hum and oil weep on 440/230V step-down",
         "Insulation drop on 220V lighting bus",
@@ -634,7 +968,11 @@
         "Megger MIT525 5kV insulation tester",
         "FLIR T540 thermography"
       ],
-      "related_supply_categories": ["transformer-spares", "cooling-fans", "tap-changers"]
+      "related_supply_categories": [
+        "transformer-spares",
+        "cooling-fans",
+        "tap-changers"
+      ]
     },
     {
       "slug": "ac-dc-motor",
@@ -649,7 +987,13 @@
       "summary_tr": "Bow thruster, makine dairesi fanları, kargo pompaları, soğutma suyu pompaları. Motor IR/PI, yatak durumu, VFD parametre seti.",
       "metaTitle": "Marine AC/DC Motor Service & Testing | Levent Marine",
       "metaDescription": "Marine motor service. Bow thruster, fans, pumps. IR/PI testing per IEEE 43, bearing analysis, VFD tuning. ABB, Siemens, Yaskawa drives. 24/7 worldwide.",
-      "seo_keywords": ["marine motor IR PI", "bow thruster motor", "ABB ACS880 marine", "cargo pump motor", "MCSA motor analysis"],
+      "seo_keywords": [
+        "marine motor IR PI",
+        "bow thruster motor",
+        "ABB ACS880 marine",
+        "cargo pump motor",
+        "MCSA motor analysis"
+      ],
       "symptoms": [
         "Cargo pump motor IR drops to 0.3 MΩ after tank cleaning",
         "Bow thruster motor temperature alarm at 85 °C",
@@ -668,7 +1012,31 @@
         "Fluke 438-II motor analyser (current signature)",
         "SKF TKSA 41 laser shaft alignment"
       ],
-      "related_supply_categories": ["motors", "vfd-spares", "bearings"]
+      "related_supply_categories": [
+        "motors",
+        "vfd-spares",
+        "bearings"
+      ],
+      "faqs": [
+        {
+          "question_en": "Which VFD makers do we cover?",
+          "question_tr": "Hangi VFD markalarını destekliyoruz?",
+          "answer_en": "ABB ACS series (550, 880, 1000), Siemens Sinamics G/S, Yaskawa A1000/U1000, Schneider Altivar Process, Danfoss VLT marine, Vacon NXP. Service tools and basic spares for each.",
+          "answer_tr": "ABB ACS serisi (550, 880, 1000), Siemens Sinamics G/S, Yaskawa A1000/U1000, Schneider Altivar Process, Danfoss VLT marine, Vacon NXP. Her birinin service araçları ve temel yedekleri."
+        },
+        {
+          "question_en": "How long does a typical VFD / motor diagnostic attendance take?",
+          "question_tr": "Tipik bir VFD / motor tanı attendance'ı ne kadar sürer?",
+          "answer_en": "Three to five hours alongside, including DC bus voltage capture, motor current signature, brake resistor test and parameter audit. Replacement varies — brake resistor swap is 60–90 minutes; chopper or front-end module is half a day.",
+          "answer_tr": "DC bus voltage capture, motor current signature, brake resistor testi ve parametre denetimi dahil alongside üç ila beş saat. Değiştirme süreleri değişir — brake resistor değişimi 60–90 dakika; chopper veya front-end modülü yarım gün."
+        },
+        {
+          "question_en": "Can we attend during cargo operations?",
+          "question_tr": "Kargo operasyonu sırasında attendance yapabilir miyiz?",
+          "answer_en": "Diagnostic capture is non-disruptive and runs on the equipment in its normal duty cycle. Component replacement requires the affected machinery to be taken off-line, which we schedule around the cargo plan with the chief engineer.",
+          "answer_tr": "Tanı captures bozucu değildir ve ekipman normal duty cycle'ında çalışırken yapılır. Component değişimi etkilenen makinanın off-line alınmasını gerektirir; chief engineer ile kargo planına göre programlarız."
+        }
+      ]
     },
     {
       "slug": "hvac-automation",
@@ -683,7 +1051,12 @@
       "summary_tr": "Yaşam mahalli HVAC kontrolörleri, CO2 salımıyla kilitlenmeli MD havalandırma, reefer konteyner soket noktaları.",
       "metaTitle": "Marine HVAC Automation Service | Levent Marine",
       "metaDescription": "Marine HVAC automation service. Accommodation, engine room ventilation, reefer plug-in points. Carrier, Daikin marine, JCM. 24/7 worldwide.",
-      "seo_keywords": ["marine HVAC automation", "reefer plug-in point", "engine room ventilation", "accommodation AC ship"],
+      "seo_keywords": [
+        "marine HVAC automation",
+        "reefer plug-in point",
+        "engine room ventilation",
+        "accommodation AC ship"
+      ],
       "symptoms": [
         "Accommodation HVAC zone temperature drift ±5 °C",
         "ER ventilation damper fails to close on CO2 release",
@@ -700,7 +1073,11 @@
         "Fluke 1587 FC insulation multimeter",
         "FLIR T540 thermography"
       ],
-      "related_supply_categories": ["hvac-controllers", "dampers", "reefer-sockets"]
+      "related_supply_categories": [
+        "hvac-controllers",
+        "dampers",
+        "reefer-sockets"
+      ]
     },
     {
       "slug": "cctv-vdr",
@@ -715,7 +1092,13 @@
       "summary_tr": "VDR yıllık performans testi, köprü ses kanalı kaydı, makine dairesi ve ambar CCTV, NVR kayıt süresi denetimi.",
       "metaTitle": "Marine CCTV & VDR Service — Annual Test | Levent Marine",
       "metaDescription": "VDR annual performance test, CCTV bridge and engine room cameras, NVR retention. Furuno VR-7000, JRC, Danelec. 24/7 worldwide.",
-      "seo_keywords": ["VDR annual test", "Furuno VR-7000", "marine CCTV", "Danelec VDR", "NVR retention ship"],
+      "seo_keywords": [
+        "VDR annual test",
+        "Furuno VR-7000",
+        "marine CCTV",
+        "Danelec VDR",
+        "NVR retention ship"
+      ],
       "symptoms": [
         "VDR annual test fails on bridge audio channel",
         "Engine room CCTV image black on camera 3",
@@ -733,7 +1116,11 @@
         "B&K 2270 sound level analyser",
         "Megger BITE3 for VDR backup battery"
       ],
-      "related_supply_categories": ["vdr-batteries", "cctv-cameras", "nvr-hdds"]
+      "related_supply_categories": [
+        "vdr-batteries",
+        "cctv-cameras",
+        "nvr-hdds"
+      ]
     },
     {
       "slug": "smoke-detection",
@@ -748,7 +1135,12 @@
       "summary_tr": "Bağımsız duman algılama sistemleri — hassasiyet kayması, ışın dedektör hizasızlığı, örnekleme hattı tıkanması. SOLAS / Class uyumlu test kayıtları.",
       "metaTitle": "Marine Smoke Detection Service — Sensitivity & Class Test | Levent Marine",
       "metaDescription": "Marine smoke detection service — ionisation, optical, beam, aspirating systems. Sensitivity calibration, beam realignment, sampling-line clearance, class-witnessed test logs.",
-      "seo_keywords": ["marine smoke detection", "ionisation detector calibration", "beam detector alignment", "aspirating smoke detection"],
+      "seo_keywords": [
+        "marine smoke detection",
+        "ionisation detector calibration",
+        "beam detector alignment",
+        "aspirating smoke detection"
+      ],
       "symptoms": [
         "Ionisation detector test card shows >20% sensitivity drift",
         "Beam detector loses signal after the vessel rolls heavily",
@@ -767,7 +1159,11 @@
         "Sampling-line flow meter",
         "Class-witnessed test report template"
       ],
-      "related_supply_categories": ["fire-detectors", "beam-detectors", "aspirating-tubing"]
+      "related_supply_categories": [
+        "fire-detectors",
+        "beam-detectors",
+        "aspirating-tubing"
+      ]
     },
     {
       "slug": "water-mist-system",
@@ -782,7 +1178,12 @@
       "summary_tr": "Makine dairesi yüksek basınçlı su sisi sistemleri — pompa basınç kayması, nozül tıkanması, seksiyon vana solenoid arızaları. Yıllık deşarj ve akış testi, class survey raporları.",
       "metaTitle": "Marine Water Mist Service — HI-FOG, Marioff Pump & Nozzle | Levent Marine",
       "metaDescription": "Marine water-mist (HI-FOG, Marioff) service — pump skid maintenance, nozzle inspection, section solenoid replacement, annual flow test with class-ready reports.",
-      "seo_keywords": ["marine water mist", "HI-FOG service", "Marioff water mist", "engine room water mist"],
+      "seo_keywords": [
+        "marine water mist",
+        "HI-FOG service",
+        "Marioff water mist",
+        "engine room water mist"
+      ],
       "symptoms": [
         "Section valve solenoid drops out when pump starts",
         "Pump skid cannot hold 140 bar standby pressure",
@@ -801,7 +1202,11 @@
         "Insulation tester (Megger MIT525)",
         "Manometer 0-160 bar, class-witnessed test sheet"
       ],
-      "related_supply_categories": ["water-mist-nozzles", "solenoid-valves", "high-pressure-strainers"]
+      "related_supply_categories": [
+        "water-mist-nozzles",
+        "solenoid-valves",
+        "high-pressure-strainers"
+      ]
     },
     {
       "slug": "other",
@@ -816,7 +1221,11 @@
       "summary_tr": "Bu listeye uymayan bir sisteminiz mi var? Bize anlatın — marine elektrik ve kontrol problemlerinin çoğu yukarıdaki 19'a giriyor, ama girmiyorsa kısa bir cümle yazın, doğru ekibe yönlendirelim.",
       "metaTitle": "Custom Marine Electrical Request | Levent Marine",
       "metaDescription": "Doesn't fit a standard system? Free-text marine electrical request. We route it within the hour. 24/7 worldwide.",
-      "seo_keywords": ["marine electrical custom request", "ETO worldwide", "marine ad-hoc service"],
+      "seo_keywords": [
+        "marine electrical custom request",
+        "ETO worldwide",
+        "marine ad-hoc service"
+      ],
       "symptoms": [],
       "common_causes": [],
       "tools": [],
