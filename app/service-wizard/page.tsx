@@ -12,20 +12,17 @@ export const metadata: Metadata = {
   alternates: { canonical: '/service-wizard' }
 };
 
-// Maps system slug → real photo path. Same map as /services — only systems
-// whose photo faithfully represents the label appear here.
+// Maps system slug → vertical brochure-style deck image (user-prepared,
+// captions on the artwork). Kept in sync with /services SERVICE_IMAGE.
 const SERVICE_IMAGE: Record<string, string> = {
-  generator: '/services/01-generator.jpg',
-  'fire-alarm': '/services/04-fire-alarm.jpg',
-  'engine-room-alarm': '/services/05-er-alarm.jpg',
-  'bridge-navigation': '/services/06-bridge-nav.jpg',
-  'gmdss-communication': '/services/07-gmdss.jpg',
-  'crane-deck-machinery': '/services/09-crane.jpg',
-  'shaft-earthing': '/services/11-shaft-earthing.jpg',
-  'plc-automation': '/services/12-plc-automation.jpg',
-  'lighting-nav-lights': '/services/13-lighting.jpg',
-  'ac-dc-motor': '/services/17-ac-dc-motor.jpg',
-  'hvac-automation': '/services/18-hvac-automation.jpg'
+  'bwts':                 '/services/bwts.png',
+  'engine-room-alarm':    '/services/condition.png',
+  'crane-deck-machinery': '/services/cranes.png',
+  'fire-alarm':           '/services/firealarm.png',
+  'generator':            '/services/gensyc.png',
+  'ac-dc-motor':          '/services/motor.png',
+  'plc-automation':       '/services/plc.png',
+  'switchboard':          '/services/thermal.png'
 };
 
 export default function Page() {
