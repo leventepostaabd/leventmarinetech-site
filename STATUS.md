@@ -4,7 +4,7 @@
 > buradaki ilgili kutucuğu işaretler, varsa not bırakır.
 > "Bugün ne durumdayız" sorusunun cevabı **bu dosyadadır**.
 
-**Son güncelleme:** 2026-05-20
+**Son güncelleme:** 2026-05-23
 
 ---
 
@@ -62,18 +62,19 @@
 
 ## Wave 4 — Cila & Devam (Hafta 5+)
 
-**Sorumlu Agent:** _atanmamış_
+**Son güncelleme:** 2026-05-23 — perf pass + 3 knowledge + integration fixes.
 
-- [ ] Video'ların hero'ya entegrasyonu (statik → canlı geçiş)
-- [ ] Animasyonlar (anime.js / GSAP)
-- [ ] 3 yeni blog yazısı (toplam 6-8)
-- [ ] Lighthouse 95+ skor optimizasyon
-- [ ] Core Web Vitals
-- [ ] Custom domain + SSL bağlama
-- [ ] Hero için gerçek görseller (`MEDIA-ASSETS.md` Section 2 reuse + Section 3 yeni üretim)
-- [ ] OCR nameplate okuma (Agent C deferred item)
-- [ ] WhatsApp Business API credentials provision
-- [ ] LogoStrip için gerçek logo SVG'leri (`public/logos/`)
+- [ ] Video'ların hero'ya entegrasyonu (statik → canlı geçiş) — *kullanıcı asset hazırlıyor*
+- [x] Animasyonlar (framer-motion zaten yaygın; knowledge listesi stagger `fe5d02d`)
+- [x] 3 yeni blog yazısı (toplam **9** — `fbce28d`: shore-power, GMDSS, VFD codes)
+- [ ] Lighthouse 95+ skor optimizasyon — *perf pass `e356d43` yapıldı (next/font + dynamic modals), Lighthouse skorunu kullanıcı ölçecek*
+- [ ] Core Web Vitals — *next/font swap + modal lazy load CWV'yi düzeltir; sahada doğrulama bekleniyor*
+- [x] Custom domain + SSL bağlama — *geçmiş session'da bağlanmış; `https://www.leventmarinetech.com` canlı, SSL aktif*
+- [ ] Hero için gerçek görseller (`MEDIA-ASSETS.md` Section 2/3) — *altyapı hazır, kullanıcı dosya hazırlıyor; `/public/hero/engine-room.jpg` + `warehouse.jpg` üzerine yaz, video için HeroDoor'a `videoSrc` ekle*
+- [ ] OCR nameplate okuma — *2026-05-23: kullanıcı "şimdilik bekle" dedi, ertelendi*
+- [ ] WhatsApp Business API credentials — *`lib/notify.ts` kod hazır; Meta Developers app + WABA + phone-number provision sen-tarafı*
+- [x] LogoStrip için gerçek logo SVG'leri — *altyapı: `e36c306` ile `/public/logos/<key>.svg` auto-detect + wordmark fallback. README'de talimat. Müşterilerden izin alıp SVG eklemek sen-tarafı*
+- [x] Hero ↔ AboutModal entegrasyonu — *`69712f7`: orphan trigger kaldırıldı, Hero + MobileLanding footer'da global trigger eklendi (F1 uyumlu)*
 
 ---
 
@@ -96,12 +97,13 @@ trafik akmaya başladığında bunu gündeme getir.
 
 ## Aktif Engeller
 
-**Integration notes (2026-05-20):**
-- `lib/site.ts` hala eski 11-slug `SERVICE_SLUGS` listesini içeriyor. `app/sitemap.ts` (Agent D) bu listeyi okuyor; sitemap doğru 20-slug listesini görsün diye `SERVICE_SLUGS`'ı kaldırıp `readServices()`'a geçilmeli veya 19 yeni slug'la güncellenmeli. Wave 1 build'i bloklamadı (`generateStaticParams` artık `readServices()`'tan).
-- WhatsApp Business API gerçek credentials yok; `lib/notify.ts` içindeki `notifyByWhatsApp` token yokken click-to-chat URL'i loglar (N1 söz verildi, kanal hazır — sadece env var beklemede).
-- `app/api/search-index/route.ts` eski `ServiceContent` şeklini okuyor olabilir — Agent D'nin SEO geçişinde yeni shape'e göre regenerate edilmeli.
-- Hero (Agent E) `<USAMap />`, `<LogoStrip />`, `<CertBadges compact />`, `<AboutModal />` componentlerini henüz import etmiyor — final integration commit'inde eklenecek.
-- Agent D'nin knowledge yazıları bazı `/services/{slug}`'lara link veriyor; Agent B'nin 19-slug listesinde olmayan slug'lar (safety-systems, automation-control, survey-psc-prep, navigation-gmdss, vb.) — yazılar düzeltilmeli ya da yeni slug map'i çıkarılmalı.
+**Integration notes:**
+- ✅ ~~`lib/site.ts` eski `SERVICE_SLUGS`~~ — kaldırıldı, `readServices()`'a geçildi (önceki commit).
+- ✅ ~~`content/search-index.json` eski 11-slug shape~~ — 2026-05-23 commit `937dc3e` ile services.json'dan regenerate edildi (22 service entry).
+- ✅ ~~Knowledge yazılarındaki kırık `/services/{slug}` linkleri~~ — 2026-05-23 commit `937dc3e` ile 8 service slug + 4 supply slug doğru ID'lere map'lendi.
+- ⏳ **Digi-Key API** — 2026-05-23 itibarıyla configured + ok (Mouser + Digi-Key + eBay üçü canlı). Grainger henüz B2B account approval bekliyor; marine motor/breaker traffic'i artana kadar lazım değil.
+- ⏳ **WhatsApp Business API** gerçek credentials yok; `lib/notify.ts` içindeki `notifyByWhatsApp` token yokken click-to-chat URL'i loglar (N1 söz verildi, kanal hazır — sadece env var beklemede).
+- ✅ ~~Hero ↔ AboutModal entegrasyonu~~ — 2026-05-23 commit `69712f7` ile global trigger Hero + MobileLanding footer'a eklendi. USAMap/LogoStrip/CertBadges F1 (no-scroll) uyumu için `/about` ve `/contact` sayfalarında kalıyor — quick-look AboutModal homepage'den açılıyor.
 
 ## Tamamlanmış Wave'ler
 

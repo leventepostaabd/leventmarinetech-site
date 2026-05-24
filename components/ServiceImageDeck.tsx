@@ -15,17 +15,19 @@ type Deck = {
 };
 
 /**
- * Service image deck — vertical wide showcase that auto-advances
- * through service photos with bilingual headline + kicker overlay.
+ * Service / supply image deck — vertical wide showcase that auto-advances
+ * through items with bilingual headline + kicker overlay.
  *
- * Lives next to the services search/grid; conveys "this is what we do"
- * visually before the customer ever fills the form.
+ * Lives next to the services search/grid and the supply grid; conveys
+ * "this is what we do" visually before the customer ever fills the form.
  */
 export default function ServiceImageDeck({
   items,
   locale,
   intervalMs = 4500,
-  fillParent = false
+  fillParent = false,
+  hrefPrefix = '/services/',
+  readMoreLabel
 }: {
   items: Deck[];
   locale: 'en' | 'tr';
@@ -33,6 +35,11 @@ export default function ServiceImageDeck({
   /** When true, the deck fills the parent's height edge-to-edge (no rounded
       corners, no max-height) — used by the wizard/services right column. */
   fillParent?: boolean;
+  /** Path prefix before the slug. Defaults to /services/. Pass /supply/category/
+      to reuse this deck on the supply page. */
+  hrefPrefix?: string;
+  /** Localised CTA label override. Defaults to "Read more" / "Detayını oku". */
+  readMoreLabel?: { en: string; tr: string };
 }) {
   const [idx, setIdx] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -94,10 +101,12 @@ export default function ServiceImageDeck({
               {locale === 'tr' ? active.kicker_tr : active.kicker_en}
             </p>
             <Link
-              href={`/services/${active.slug}`}
+              href={`${hrefPrefix}${active.slug}`}
               className="inline-flex items-center gap-2 text-[13px] font-mono uppercase tracking-[0.14em] text-amber hover:text-amber-300 no-underline"
             >
-              {locale === 'tr' ? 'Detayını oku' : 'Read more'} →
+              {locale === 'tr'
+                ? readMoreLabel?.tr ?? 'Detayını oku'
+                : readMoreLabel?.en ?? 'Read more'} →
             </Link>
           </div>
         </motion.div>

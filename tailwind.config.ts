@@ -37,9 +37,9 @@ const config: Config = {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        head: ['Manrope', 'Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'ui-monospace', 'monospace']
+        sans: ['var(--font-sans)', 'Inter', 'system-ui', 'sans-serif'],
+        head: ['var(--font-head)', 'Manrope', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'JetBrains Mono', 'ui-monospace', 'monospace']
       },
       borderRadius: {
         sm: '6px',

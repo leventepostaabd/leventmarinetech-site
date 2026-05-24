@@ -65,11 +65,15 @@ export default function KnowledgeIndex() {
             <p className="text-ink-muted">No articles published yet.</p>
           ) : (
             <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {posts.map((p) => (
-                <li key={p.slug}>
+              {posts.map((p, i) => (
+                <li
+                  key={p.slug}
+                  className="motion-safe:animate-fade-up"
+                  style={{ animationDelay: `${Math.min(i * 60, 360)}ms`, animationFillMode: 'backwards' }}
+                >
                   <Link
                     href={`/knowledge/${p.slug}`}
-                    className="card no-underline h-full flex flex-col group hover:border-amber"
+                    className="card no-underline h-full flex flex-col group hover:border-amber transition-transform duration-200 hover:-translate-y-0.5"
                   >
                     <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-amber mb-2">
                       {p.category}

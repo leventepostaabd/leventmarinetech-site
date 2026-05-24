@@ -109,11 +109,18 @@ export default function MobileLanding({ locale }: MobileLandingProps) {
         </motion.div>
       </div>
 
-      {/* Bottom trust strip */}
+      {/* Bottom trust strip — About trigger opens the quick-look modal */}
       <div className="mt-6 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-1 pb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-white/60">
         <span>STCW III/6 ETO</span>
         <span>{SITE.trust.vessels} vessels</span>
         <span>24/7 AOG</span>
+        <button
+          type="button"
+          data-about-trigger
+          className="hover:text-amber transition-colors underline-offset-4 hover:underline"
+        >
+          {locale === 'tr' ? 'Hakkımızda' : 'About'}
+        </button>
       </div>
 
       <EmergencyModal open={open} onClose={() => setOpen(false)} locale={locale} />
