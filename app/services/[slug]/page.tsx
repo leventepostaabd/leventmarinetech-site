@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getService, readServices } from '@/lib/content';
+import { serviceImage } from '@/lib/deck-images';
 import { SITE } from '@/lib/site';
 import { serviceSchema, breadcrumbSchema } from '@/lib/schema-org';
 
@@ -33,12 +35,26 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
 
   const url = `${SITE.url}/services/${s.slug}`;
   const requestHref = `/service-wizard?system=${encodeURIComponent(s.slug)}`;
+  const heroImage = serviceImage(s.slug);
 
   return (
     <article>
-      {/* HERO */}
-      <header className="bg-navy-700 text-white py-14 md:py-20">
-        <div className="container-x">
+      {/* HERO — two-column on lg: text + dedicated artwork on the right. */}
+      <header className="bg-navy-700 text-white">
+        <div className="container-x py-10 md:py-14">
+          {/* Prominent back button — stands above the breadcrumb so the reader
+              always sees how to step out of this detail page. */}
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-2 rounded-md border border-white/25 bg-white/5 px-4 py-2 text-[13px] font-mono uppercase tracking-[0.14em] text-white no-underline transition hover:border-amber hover:bg-amber hover:text-navy-700 mb-6"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M19 12H5" />
+              <path d="M12 19l-7-7 7-7" />
+            </svg>
+            Back to services
+          </Link>
+
           <nav className="text-[12px] font-mono text-white/55 mb-6" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-amber no-underline">Home</Link>
             <span className="mx-2">/</span>
@@ -46,23 +62,42 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
             <span className="mx-2">/</span>
             <span className="text-white">{s.name_en}</span>
           </nav>
-          <div className="kicker text-white/70 mb-3">{s.kicker_en}</div>
-          <h1 className="text-white text-balance max-w-4xl">{s.name_en}</h1>
-          <p className="mt-5 text-[17px] text-white/75 max-w-3xl leading-relaxed">{s.summary_en}</p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Link href={requestHref} className="btn-accent btn-lg">Request service →</Link>
-            <a
-              href={SITE.whatsappUS}
-              target="_blank"
-              rel="noopener"
-              className="btn-ghost btn-lg !bg-transparent !text-white !border-white/30 hover:!bg-white/10"
-            >
-              WhatsApp US
-            </a>
+
+          <div className={heroImage ? 'grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px] items-start' : ''}>
+            <div className="min-w-0">
+              <div className="kicker text-white/70 mb-3">{s.kicker_en}</div>
+              <h1 className="text-white text-balance max-w-4xl">{s.name_en}</h1>
+              <p className="mt-5 text-[17px] text-white/75 max-w-3xl leading-relaxed">{s.summary_en}</p>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Link href={requestHref} className="btn-accent btn-lg">Request service →</Link>
+                <a
+                  href={SITE.whatsappUS}
+                  target="_blank"
+                  rel="noopener"
+                  className="btn-ghost btn-lg !bg-transparent !text-white !border-white/30 hover:!bg-white/10"
+                >
+                  WhatsApp US
+                </a>
+              </div>
+              <p className="mt-6 text-[13px] text-white/55 font-mono">
+                Service available at all US ports — 24/7 worldwide. Our next available technician contacts you within 1 hour.
+              </p>
+            </div>
+
+            {heroImage && (
+              <div className="relative w-full overflow-hidden rounded-lg border border-white/10 bg-navy-900 shadow-xl lg:max-w-[320px]">
+                <Image
+                  src={heroImage}
+                  alt={s.name_en}
+                  width={1080}
+                  height={1920}
+                  priority
+                  sizes="(min-width: 1024px) 320px, 100vw"
+                  className="h-auto w-full object-contain"
+                />
+              </div>
+            )}
           </div>
-          <p className="mt-6 text-[13px] text-white/55 font-mono">
-            Service available at all US ports — 24/7 worldwide. Our next available technician contacts you within 1 hour.
-          </p>
         </div>
       </header>
 

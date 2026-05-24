@@ -4,25 +4,13 @@ import ServiceWizardClient from './ServiceWizardClient';
 import ServiceImageDeck from '@/components/ServiceImageDeck';
 import { readServices, readServicesFile } from '@/lib/content';
 import { getLocale } from '@/lib/i18n';
+import { SERVICE_IMAGE } from '@/lib/deck-images';
 
 export const metadata: Metadata = {
   title: 'Request Marine Electrical Service — 1-Hour Callback | Levent Marine',
   description:
     'Three quick questions — port, when, contact. Our next available technician will contact you within 1 hour. 24/7 worldwide.',
   alternates: { canonical: '/service-wizard' }
-};
-
-// Maps system slug → vertical brochure-style deck image (user-prepared,
-// captions on the artwork). Kept in sync with /services SERVICE_IMAGE.
-const SERVICE_IMAGE: Record<string, string> = {
-  'bwts':                 '/services/bwts.webp',
-  'engine-room-alarm':    '/services/condition.webp',
-  'crane-deck-machinery': '/services/cranes.webp',
-  'fire-alarm':           '/services/firealarm.webp',
-  'generator':            '/services/gensyc.webp',
-  'ac-dc-motor':          '/services/motor.webp',
-  'plc-automation':       '/services/plc.webp',
-  'switchboard':          '/services/thermal.webp'
 };
 
 export default function Page() {
@@ -99,9 +87,12 @@ export default function Page() {
         </Suspense>
       </div>
 
-      {/* Right — cycling service photos, edge-to-edge top→bottom. TopBar
-          floats transparently over the top of these images. */}
-      <aside className="hidden lg:block">
+      {/* Right — cycling service photos. Top padding matches the fixed
+          TopBar so the artwork is not clipped behind it. */}
+      <aside
+        className="hidden lg:block"
+        style={{ paddingTop: 'calc(var(--lm-topbar-h, 56px) + env(safe-area-inset-top, 0))' }}
+      >
         <ServiceImageDeck items={deckItems} locale={locale} fillParent />
       </aside>
     </div>

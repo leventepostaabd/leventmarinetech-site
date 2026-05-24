@@ -84,25 +84,16 @@ export default function ServiceImageDeck({
             sizes="(min-width: 1024px) 30vw, 100vw"
             className="object-cover object-center"
           />
-          {/* Navy → transparent gradient for legible text */}
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-700/95 via-navy-700/35 to-transparent" />
+          {/* Subtle bottom gradient — only enough to seat the CTA legibly,
+              the artwork already carries its own captions. */}
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-navy-700/85 to-transparent" />
 
-          {/* Overlay text */}
+          {/* Single CTA — opens the dedicated detail page where the same
+              image is shown again with full content. */}
           <div className="absolute inset-x-0 bottom-0 p-7 md:p-9">
-            <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-amber-400 mb-2">
-              {String(idx + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}
-              {' · '}
-              {locale === 'tr' ? 'Servis veriyoruz' : 'We service'}
-            </div>
-            <h3 className="font-head text-white text-[26px] md:text-[30px] font-bold leading-tight mb-1.5">
-              {locale === 'tr' ? active.name_tr : active.name_en}
-            </h3>
-            <p className="text-white/80 text-[15px] md:text-[16px] leading-snug mb-5 max-w-md">
-              {locale === 'tr' ? active.kicker_tr : active.kicker_en}
-            </p>
             <Link
               href={`${hrefPrefix}${active.slug}`}
-              className="inline-flex items-center gap-2 text-[13px] font-mono uppercase tracking-[0.14em] text-amber hover:text-amber-300 no-underline"
+              className="inline-flex items-center gap-2 rounded-md bg-amber px-4 py-2.5 text-[13px] font-mono font-semibold uppercase tracking-[0.12em] text-navy-700 no-underline shadow-lg transition hover:bg-amber-600"
             >
               {locale === 'tr'
                 ? readMoreLabel?.tr ?? 'Detayını oku'

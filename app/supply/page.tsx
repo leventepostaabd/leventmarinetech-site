@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getLocale } from '@/lib/i18n';
+import { SUPPLY_IMAGE } from '@/lib/deck-images';
 import EbayCatalogGrid from './EbayCatalogGrid';
 import SourcingChannelTabs from './SourcingChannelTabs';
 import ServiceImageDeck from '@/components/ServiceImageDeck';
@@ -23,7 +24,7 @@ const SUPPLY_DECK: Array<{
 }> = [
   {
     slug: 'cables-glands',
-    image: '/supply/cableconnectsupply.webp',
+    image: SUPPLY_IMAGE['cables-glands']!,
     name_en: 'Cables & Glands',
     name_tr: 'Kablo & Rakor',
     kicker_en: 'Lapp Olflex Marine · Hawke ATEX',
@@ -31,7 +32,7 @@ const SUPPLY_DECK: Array<{
   },
   {
     slug: 'deck-mechanical',
-    image: '/supply/cranesupply.webp',
+    image: SUPPLY_IMAGE['deck-mechanical']!,
     name_en: 'Crane & Deck Hardware',
     name_tr: 'Vinç & Güverte Donanımı',
     kicker_en: 'MacGregor · NMF · Liebherr deck spares',
@@ -39,7 +40,7 @@ const SUPPLY_DECK: Array<{
   },
   {
     slug: 'engine-room-consumables',
-    image: '/supply/enginesupply.webp',
+    image: SUPPLY_IMAGE['engine-room-consumables']!,
     name_en: 'Engine Room Consumables',
     name_tr: 'Makine Dairesi Sarf',
     kicker_en: 'Level switches · gaskets · sealing kits',
@@ -47,7 +48,7 @@ const SUPPLY_DECK: Array<{
   },
   {
     slug: 'msb-components',
-    image: '/supply/mainswitchboardcomp.webp',
+    image: SUPPLY_IMAGE['msb-components']!,
     name_en: 'MSB / ESB Components',
     name_tr: 'MSB / ESB Bileşenleri',
     kicker_en: 'AVR · ACB trip units · sync panels',
@@ -55,7 +56,7 @@ const SUPPLY_DECK: Array<{
   },
   {
     slug: 'motors-drives',
-    image: '/supply/motorsupply.webp',
+    image: SUPPLY_IMAGE['motors-drives']!,
     name_en: 'Motors & Drives (VFD)',
     name_tr: 'Motor & Sürücüler (VFD)',
     kicker_en: 'ABB M3BP · Vacon · Danfoss FC marine',
@@ -63,7 +64,7 @@ const SUPPLY_DECK: Array<{
   },
   {
     slug: 'radar-navigation',
-    image: '/supply/navisupply.webp',
+    image: SUPPLY_IMAGE['radar-navigation']!,
     name_en: 'Radar & Bridge Navigation',
     name_tr: 'Radar & Köprü Üstü Seyir',
     kicker_en: 'Furuno · JRC · Sperry — magnetrons, ECDIS',
@@ -71,7 +72,7 @@ const SUPPLY_DECK: Array<{
   },
   {
     slug: 'automation-plc',
-    image: '/supply/plcsupply.webp',
+    image: SUPPLY_IMAGE['automation-plc']!,
     name_en: 'PLC & Automation',
     name_tr: 'PLC & Otomasyon',
     kicker_en: 'Siemens S7 · Allen-Bradley · Omron I/O',
@@ -79,7 +80,7 @@ const SUPPLY_DECK: Array<{
   },
   {
     slug: 'marine-sensors',
-    image: '/supply/sensorsupply.webp',
+    image: SUPPLY_IMAGE['marine-sensors']!,
     name_en: 'Marine Sensors & Transmitters',
     name_tr: 'Denizcilik Sensör & Transmitter',
     kicker_en: 'Pressure · level · temperature · vibration',

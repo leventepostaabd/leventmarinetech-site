@@ -1,10 +1,12 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import {
   readProducts, readCategories, readProductLabels,
   categoryBySlug, subcategoryBySlug, productsByTopCategory, productsBySubcategory
 } from '@/lib/content';
+import { supplyImage } from '@/lib/deck-images';
 import { getLocale } from '@/lib/i18n';
 import CategoryListing from './CategoryListing';
 
@@ -62,9 +64,24 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
     : null;
 
   const brands = Array.from(new Set(items.map((p) => p.brand))).sort((a, b) => a.localeCompare(b));
+  const heroImage = supplyImage(params.slug);
+  const backLabel = locale === 'tr' ? 'Tedariğe dön' : 'Back to supply';
 
   return (
     <div className="container-x py-12 md:py-16">
+      {/* Prominent back button — sits above the breadcrumb so the reader
+          always sees how to step out of this listing. */}
+      <Link
+        href="/supply"
+        className="inline-flex items-center gap-2 rounded-md border border-line bg-white px-4 py-2 text-[13px] font-mono uppercase tracking-[0.14em] text-ink no-underline transition hover:border-amber hover:text-amber-600 mb-6"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <path d="M19 12H5" />
+          <path d="M12 19l-7-7 7-7" />
+        </svg>
+        {backLabel}
+      </Link>
+
       <nav className="text-[12px] font-mono text-ink-subtle mb-6">
         <Link href="/" className="hover:text-amber-600 no-underline">Home</Link>
         <span className="mx-2">/</span>
@@ -83,13 +100,31 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
         <span className="capitalize">{heading}</span>
       </nav>
 
-      <div className="kicker mb-3 capitalize">{heading}</div>
-      <h1 className="mb-3 capitalize">{heading}</h1>
-      {top && (
-        <p className="text-ink-muted max-w-3xl mb-4">{locale === 'tr' ? top.summary_tr : top.summary_en}</p>
-      )}
-      <p className="text-ink-subtle text-[12.5px] mb-2">{labels.noPrice}</p>
-      <p className="text-ink-muted mb-8">{items.length} {locale === 'tr' ? 'ürün' : 'items'}.</p>
+      <div className={heroImage ? 'grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] items-start mb-8' : 'mb-8'}>
+        <div className="min-w-0">
+          <div className="kicker mb-3 capitalize">{heading}</div>
+          <h1 className="mb-3 capitalize">{heading}</h1>
+          {top && (
+            <p className="text-ink-muted max-w-3xl mb-4">{locale === 'tr' ? top.summary_tr : top.summary_en}</p>
+          )}
+          <p className="text-ink-subtle text-[12.5px] mb-2">{labels.noPrice}</p>
+          <p className="text-ink-muted">{items.length} {locale === 'tr' ? 'ürün' : 'items'}.</p>
+        </div>
+
+        {heroImage && (
+          <div className="relative w-full overflow-hidden rounded-lg border border-line bg-navy-50 shadow-md lg:max-w-[320px]">
+            <Image
+              src={heroImage}
+              alt={heading}
+              width={1080}
+              height={1920}
+              priority
+              sizes="(min-width: 1024px) 320px, 100vw"
+              className="h-auto w-full object-contain"
+            />
+          </div>
+        )}
+      </div>
 
       {/* If this is a top-level category, surface the sub-category chips. */}
       {top && (
