@@ -40,7 +40,7 @@ export default function Hero({
         <HeroDoor
           side="left"
           /* User-provided main artwork for the Service door — Wave 4 swap. */
-          image="/hero/servicesmain.png"
+          image="/hero/servicesmain.webp"
           label_en="Service"
           label_tr="Servis"
           kicker_en="Engineer on board"
@@ -53,7 +53,7 @@ export default function Hero({
         <HeroDoor
           side="right"
           /* User-provided main artwork for the Supply door — Wave 4 swap. */
-          image="/hero/supplymain.png"
+          image="/hero/supplymain.webp"
           label_en="Supply"
           label_tr="Tedarik"
           kicker_en="Parts on the way"
