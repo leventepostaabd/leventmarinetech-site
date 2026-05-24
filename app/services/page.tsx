@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { readPopularServices, readServices, readServicesFile } from '@/lib/content';
 import { getLocale } from '@/lib/i18n';
+import { SERVICE_IMAGE } from '@/lib/deck-images';
 import ServicesBrowser from './ServicesBrowser';
 import ServiceImageDeck from '@/components/ServiceImageDeck';
 
@@ -9,20 +10,6 @@ export const metadata: Metadata = {
   description:
     'Pick the system that has the problem — generator, BWTS, fire alarm, bridge nav, PLC, crane, and 13 more. Three quick questions, then our next available technician calls you within 1 hour.',
   alternates: { canonical: '/services' }
-};
-
-// Maps system slug → vertical brochure-style deck image (user-prepared,
-// captions already on the artwork). Eight systems covered; the rest of the
-// 22 services are skipped from the deck and rely on the search/grid.
-const SERVICE_IMAGE: Record<string, string> = {
-  'bwts':                 '/services/bwts.webp',
-  'engine-room-alarm':    '/services/condition.webp',
-  'crane-deck-machinery': '/services/cranes.webp',
-  'fire-alarm':           '/services/firealarm.webp',
-  'generator':            '/services/gensyc.webp',
-  'ac-dc-motor':          '/services/motor.webp',
-  'plc-automation':       '/services/plc.webp',
-  'switchboard':          '/services/thermal.webp'
 };
 
 export default function ServicesIndex() {
@@ -68,8 +55,12 @@ export default function ServicesIndex() {
         <ServicesBrowser services={all} popular={popular} ui={ui} locale={locale} />
       </div>
 
-      {/* Right — full-bleed cycling deck. */}
-      <aside className="hidden lg:block">
+      {/* Right — full-bleed cycling deck. Top padding matches the fixed
+          TopBar so the artwork is not clipped behind it. */}
+      <aside
+        className="hidden lg:block"
+        style={{ paddingTop: 'calc(var(--lm-topbar-h, 56px) + env(safe-area-inset-top, 0))' }}
+      >
         <ServiceImageDeck items={deckItems} locale={locale} fillParent />
       </aside>
     </div>
