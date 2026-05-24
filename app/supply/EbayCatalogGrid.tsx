@@ -97,10 +97,10 @@ export default function EbayCatalogGrid({
 
   return (
     <div className="flex flex-col gap-5">
-      {/* Search bar */}
+      {/* Search bar — soft pill, no hard border, gentle amber halo on focus */}
       <div className="relative">
         <svg
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle"
+          className="absolute left-5 top-1/2 -translate-y-1/2 text-ink-subtle"
           width="20" height="20" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
         >
@@ -112,31 +112,31 @@ export default function EbayCatalogGrid({
           onChange={(e) => setQ(e.target.value)}
           placeholder={t('Brand, part no, model, system…', 'Marka, parça no, model, sistem…')}
           aria-label={t('Search marine supply', 'Marine tedarik ara')}
-          className="w-full bg-white text-ink placeholder:text-ink-subtle border border-line-strong rounded-lg pl-12 pr-32 py-3.5 text-[15px] focus:border-amber focus:ring-2 focus:ring-amber/30 focus:outline-none shadow-sm"
-          autoFocus
+          className="w-full bg-navy-50/70 text-ink placeholder:text-ink-subtle rounded-full pl-13 pr-32 py-4 text-[15px] ring-1 ring-line/60 outline-none transition hover:bg-navy-50 focus:bg-white focus:ring-2 focus:ring-amber/50"
+          style={{ paddingLeft: '3.25rem' }}
         />
         {q && (
           <button
             type="button"
             onClick={() => setQ('')}
-            className="absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[11px] uppercase tracking-[0.12em] text-ink-subtle hover:text-ink"
+            className="absolute right-4 top-1/2 -translate-y-1/2 inline-flex items-center gap-1.5 rounded-full bg-white/70 px-3 py-1 text-[11px] text-ink-subtle ring-1 ring-line transition hover:bg-white hover:text-ink"
           >
             ✕ {t('clear', 'temizle')}
           </button>
         )}
       </div>
 
-      {/* Preset query chips */}
-      <div className="flex flex-wrap gap-1.5">
+      {/* Preset query chips — softer pills */}
+      <div className="flex flex-wrap gap-2">
         {PRESET_QUERIES.map((p) => (
           <button
             key={p.q}
             type="button"
             onClick={() => setQ(p.q)}
-            className={`px-2.5 py-1 rounded-full border font-mono text-[10.5px] uppercase tracking-[0.1em] transition ${
+            className={`px-3.5 py-1.5 rounded-full text-[11.5px] transition ${
               q === p.q
-                ? 'bg-navy-700 text-white border-navy-700'
-                : 'bg-white text-ink-muted border-line hover:border-amber hover:text-amber-600'
+                ? 'bg-navy-700 text-white shadow-sm'
+                : 'bg-navy-50/60 text-ink-muted ring-1 ring-line/60 hover:bg-amber/10 hover:text-amber-700 hover:ring-amber/40'
             }`}
           >
             {locale === 'tr' ? p.tr : p.en}
@@ -200,7 +200,7 @@ export default function EbayCatalogGrid({
                       image: it.image,
                       priceRaw: it.priceRaw ?? null
                     })}
-                    className="text-left w-full h-full rounded-xl border border-line bg-white hover:border-amber transition group overflow-hidden flex flex-col"
+                    className="text-left w-full h-full rounded-2xl bg-white ring-1 ring-line/60 hover:ring-amber/60 hover:shadow-md transition group overflow-hidden flex flex-col shadow-sm"
                   >
                     <div className="aspect-[4/3] bg-navy-50 relative overflow-hidden">
                       {it.image ? (

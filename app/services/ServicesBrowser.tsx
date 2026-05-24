@@ -57,14 +57,14 @@ export default function ServicesBrowser({
   }, [services, query]);
 
   return (
-    <div className="mt-8">
-      {/* Search */}
+    <div className="mt-6 md:mt-8">
+      {/* Search — soft pill, no hard borders, amber halo on focus */}
       <div className="relative max-w-2xl">
         <svg
           aria-hidden
           width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           strokeWidth="2" strokeLinecap="round"
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle pointer-events-none"
+          className="absolute left-5 top-1/2 -translate-y-1/2 text-ink-subtle pointer-events-none"
         >
           <circle cx="11" cy="11" r="7" />
           <path d="m21 21-4.3-4.3" />
@@ -75,7 +75,7 @@ export default function ServicesBrowser({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={ui.search_placeholder}
-          className="w-full rounded-lg border border-line bg-white pl-11 pr-4 py-3.5 text-[15px] outline-none focus:border-amber focus:ring-2 focus:ring-amber/20 shadow-sm"
+          className="w-full rounded-full bg-navy-50/70 pl-12 pr-5 py-4 text-[15px] text-ink placeholder:text-ink-subtle outline-none ring-1 ring-line/60 transition focus:bg-white focus:ring-2 focus:ring-amber/50 hover:bg-navy-50"
           aria-label={ui.search_placeholder}
         />
       </div>

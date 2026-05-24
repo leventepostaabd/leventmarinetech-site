@@ -4,6 +4,7 @@ import { getLocale } from '@/lib/i18n';
 import { SERVICE_IMAGE } from '@/lib/deck-images';
 import ServicesBrowser from './ServicesBrowser';
 import ServiceImageDeck from '@/components/ServiceImageDeck';
+import InlineHeader from '@/components/InlineHeader';
 
 export const metadata: Metadata = {
   title: 'Marine Electrical Service — 19 Systems, 24/7 Worldwide | Levent Marine',
@@ -45,18 +46,35 @@ export default function ServicesIndex() {
       kicker_tr: s.kicker_tr
     }));
 
+  const heroLine = locale === 'tr'
+    ? 'Florida merkezli marine elektrik servisi. Her ABD limanına 7/24.'
+    : 'Florida-based marine electrical service. Every US port, 24/7.';
+  const heroSub = locale === 'tr'
+    ? '24/7 — Wyoming LLC, Florida operasyon. Hangi sistem arızalı?'
+    : '24/7 — Wyoming LLC, Florida ops. Which system has the problem?';
+
   return (
     <div className="lm-screen-hero grid bg-white lg:grid-cols-[minmax(0,1fr)_minmax(0,30%)]">
-      {/* Left — search + popular + see-all. No internal scroll. */}
+      {/* Left — inline header + soft hero + browser. */}
       <div
         className="min-w-0 flex flex-col px-5 pb-5 md:px-10 md:pb-8"
-        style={{ paddingTop: 'calc(var(--lm-topbar-h, 56px) + env(safe-area-inset-top, 0) + 1rem)' }}
+        style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}
       >
+        <InlineHeader locale={locale} />
+
+        <section className="mt-2 md:mt-4 max-w-3xl">
+          <h1 className="font-head text-[28px] md:text-[40px] lg:text-[44px] font-extrabold leading-[1.1] tracking-[-0.01em] text-ink">
+            {heroLine}
+          </h1>
+          <p className="mt-3 md:mt-4 text-[15px] md:text-[16.5px] leading-relaxed text-ink-muted max-w-2xl">
+            {heroSub}
+          </p>
+        </section>
+
         <ServicesBrowser services={all} popular={popular} ui={ui} locale={locale} />
       </div>
 
-      {/* Right — full-bleed cycling deck, edge to edge top→bottom. The
-          TopBar floats transparently over the top of the artwork. */}
+      {/* Right — full-bleed cycling deck, edge to edge top→bottom. */}
       <aside className="hidden lg:block">
         <ServiceImageDeck items={deckItems} locale={locale} fillParent />
       </aside>
