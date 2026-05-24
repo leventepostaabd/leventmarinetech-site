@@ -5,6 +5,7 @@ import LogoStrip from '@/components/LogoStrip';
 import CertBadges, { CERTIFICATIONS } from '@/components/CertBadges';
 import { SITE } from '@/lib/site';
 import { organizationSchema, breadcrumbSchema } from '@/lib/schema-org';
+import { getLocale, getTranslator } from '@/lib/i18n';
 
 /**
  * /about — SEO depth page (Y2).
@@ -48,6 +49,8 @@ const CLIENT_LIST = [
 ] as const;
 
 export default function AboutPage() {
+  const locale = getLocale();
+  const t = getTranslator(locale);
   const breadcrumb = breadcrumbSchema([
     { name: 'Home',  url: `${SITE.url}/` },
     { name: 'About', url: `${SITE.url}/about` }
@@ -66,20 +69,15 @@ export default function AboutPage() {
       {/* HERO */}
       <section className="bg-navy-700 text-white pt-10 pb-12 md:pt-14 md:pb-16">
         <div className="container-x">
-          <div className="kicker text-white/70 mb-3">About</div>
+          <div className="kicker text-white/70 mb-3">{t('about.kicker')}</div>
           <h1 className="text-white text-balance max-w-4xl text-[26px] md:text-[36px] leading-[1.1]">
-            Marine Electrical Service &amp; Parts Supply
+            {t('about.h1')}
           </h1>
           <p className="mt-3 font-mono text-[11px] md:text-[12px] uppercase tracking-[0.18em] text-amber">
-            24/7 Worldwide · Florida-based · Wyoming LLC
+            {t('about.position')}
           </p>
           <p className="mt-5 text-[15px] md:text-[17px] text-white/80 max-w-3xl leading-relaxed">
-            Levent Marine is a commercial-vessel-focused marine electrical service desk and
-            technical parts supplier. Founded and operated by a working STCW Reg. III/6
-            Electro-Technical Officer with sixteen years aboard bulkers, tankers, container
-            ships and offshore support units. We dispatch an engineer to any US port within
-            hours, ship AOG-grade spares the same day, and deliver class-aware reports the
-            superintendent can hand straight to the surveyor.
+            {t('about.lead')}
           </p>
           <div className="mt-6">
             <CertBadges />
@@ -91,10 +89,10 @@ export default function AboutPage() {
       <section className="py-12 bg-white border-b border-line">
         <div className="container-x">
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <li className="stat"><span className="num">16 yr</span><span className="lbl">onboard background</span></li>
-            <li className="stat"><span className="num">25</span><span className="lbl">US ports covered</span></li>
-            <li className="stat"><span className="num">24/7</span><span className="lbl">aog dispatch</span></li>
-            <li className="stat"><span className="num">8</span><span className="lbl">class authorities</span></li>
+            <li className="stat"><span className="num">16 yr</span><span className="lbl">{t('about.statsYearsLbl')}</span></li>
+            <li className="stat"><span className="num">25</span><span className="lbl">{t('about.statsPortsLbl')}</span></li>
+            <li className="stat"><span className="num">24/7</span><span className="lbl">{t('about.statsAogLbl')}</span></li>
+            <li className="stat"><span className="num">8</span><span className="lbl">{t('about.statsClassLbl')}</span></li>
           </ul>
         </div>
       </section>
@@ -103,30 +101,23 @@ export default function AboutPage() {
       <section className="py-16 bg-white">
         <div className="container-x grid gap-12 md:grid-cols-2">
           <div>
-            <div className="kicker mb-3">Background</div>
-            <h2 className="mb-4 text-[26px]">Sixteen years on the deckplate, not behind a desk.</h2>
+            <div className="kicker mb-3">{t('about.backgroundKicker')}</div>
+            <h2 className="mb-4 text-[26px]">{t('about.backgroundH2')}</h2>
             <p className="text-ink-muted leading-relaxed mb-4">
-              The lead engineer carries a current STCW III/6 ETO licence with HV &le; 1000 V
-              endorsement, plus Advanced Fire Fighting (VI/3), Medical First Aid (VI/4-1),
-              Basic Safety (VI/1) and Gas / Oil &amp; Chemical Tanker familiarisation.
-              Every RFQ, every dispatch and every report is reviewed by someone who has
-              actually terminated a busbar on a moving deck &mdash; not forwarded to a generic
-              procurement agent.
+              {t('about.backgroundP1')}
             </p>
             <p className="text-ink-muted leading-relaxed">
-              When the OEM is obsolete, we propose a compatible replacement and document
-              where it matches and where it differs. The final call belongs to your
-              superintendent &mdash; we provide the paper trail and the class wording.
+              {t('about.backgroundP2')}
             </p>
           </div>
           <div>
-            <div className="kicker mb-3">What we do not do</div>
-            <h2 className="mb-4 text-[26px]">Commercial vessels only.</h2>
+            <div className="kicker mb-3">{t('about.notDoKicker')}</div>
+            <h2 className="mb-4 text-[26px]">{t('about.notDoH2')}</h2>
             <ul className="space-y-3 text-ink-muted text-[14.5px] leading-relaxed">
-              <li>• No yachts, no pleasure craft, no superyacht refits.</li>
-              <li>• No public pricing &mdash; every order is RFQ-first to protect margin and audit trail.</li>
-              <li>• No customer login required &mdash; single sender / sole contact through the wizard.</li>
-              <li>• No subcontracting of class-witnessed work to unbranded third parties.</li>
+              <li>• {t('about.notDo1')}</li>
+              <li>• {t('about.notDo2')}</li>
+              <li>• {t('about.notDo3')}</li>
+              <li>• {t('about.notDo4')}</li>
             </ul>
           </div>
         </div>
@@ -135,9 +126,9 @@ export default function AboutPage() {
       {/* CERTIFICATIONS DETAIL */}
       <section className="py-16 bg-navy-50 border-y border-line">
         <div className="container-x">
-          <div className="kicker mb-3">Certifications</div>
+          <div className="kicker mb-3">{t('about.certsKicker')}</div>
           <h2 className="mb-6 text-[26px] max-w-3xl">
-            STCW endorsements held by the lead engineer.
+            {t('about.certsH2')}
           </h2>
           <ul className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
             {CERTIFICATIONS.map((c) => (
@@ -157,13 +148,10 @@ export default function AboutPage() {
       <section className="py-16 bg-white">
         <div className="container-x grid gap-10 md:grid-cols-[1fr_1.2fr]">
           <div>
-            <div className="kicker mb-3">Equipment</div>
-            <h2 className="mb-4 text-[26px]">Test kit on every dispatch.</h2>
+            <div className="kicker mb-3">{t('about.equipmentKicker')}</div>
+            <h2 className="mb-4 text-[26px]">{t('about.equipmentH2')}</h2>
             <p className="text-ink-muted leading-relaxed text-[14.5px]">
-              We arrive with the meter, not just the wrench. Standard go-bag includes
-              insulation testers up to 5 kV, infrared cameras, power-quality analysers and
-              protection-relay test sets. Heavier kit (primary injection, partial-discharge,
-              transformer ratiometer) follows on the next freight if the job calls for it.
+              {t('about.equipmentLead')}
             </p>
             <div
               className="mt-6 aspect-[4/3] w-full rounded-md bg-navy-700 border border-navy-600 grid place-items-center"
@@ -194,9 +182,9 @@ export default function AboutPage() {
       {/* CLIENT LIST */}
       <section className="py-12 bg-navy-50 border-y border-line">
         <div className="container-x">
-          <div className="kicker mb-3">Repeat fleets</div>
+          <div className="kicker mb-3">{t('about.clientsKicker')}</div>
           <h2 className="mb-6 text-[24px] max-w-3xl">
-            A small list, deliberately. Long-running working relationships.
+            {t('about.clientsH2')}
           </h2>
           <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
             {CLIENT_LIST.map((c) => (
@@ -214,9 +202,9 @@ export default function AboutPage() {
       {/* CLASS AUTHORITIES */}
       <section className="py-16 bg-white">
         <div className="container-x">
-          <div className="kicker mb-3">Class authorities</div>
+          <div className="kicker mb-3">{t('about.classKicker')}</div>
           <h2 className="mb-6 text-[26px] max-w-3xl">
-            Reports written for the eight major class societies.
+            {t('about.classH2')}
           </h2>
           <ul className="flex flex-wrap gap-2.5">
             {CLASS_AUTHORITIES.map((c) => (
@@ -229,10 +217,7 @@ export default function AboutPage() {
             ))}
           </ul>
           <p className="mt-5 text-ink-muted text-[14px] leading-relaxed max-w-3xl">
-            Every dispatch concludes with a report formatted to the requesting class
-            society&apos;s template &mdash; including measured values, calibration certificate IDs,
-            photographic evidence and a recommended action list with timing. Hand it
-            straight to the surveyor; no rewriting required.
+            {t('about.classLead')}
           </p>
         </div>
       </section>
@@ -240,11 +225,10 @@ export default function AboutPage() {
       {/* COVERAGE MAP */}
       <section className="py-16 bg-navy-700 text-white">
         <div className="container-x">
-          <div className="kicker text-white/70 mb-3">Coverage</div>
-          <h2 className="text-white mb-3 text-[26px]">Twenty-five US ports. One number.</h2>
+          <div className="kicker text-white/70 mb-3">{t('about.coverageKicker')}</div>
+          <h2 className="text-white mb-3 text-[26px]">{t('about.coverageH2')}</h2>
           <p className="text-white/75 max-w-3xl text-[15px] leading-relaxed mb-8">
-            Service available at all US ports &mdash; East Coast, West Coast, Gulf, Great Lakes,
-            plus Anchorage and Honolulu. Worldwide attendance available on request.
+            {t('about.coverageLead')}
           </p>
           <div className="rounded-lg overflow-hidden border border-navy-600 bg-navy-800/60">
             <USAMap />
@@ -258,28 +242,26 @@ export default function AboutPage() {
       {/* CTA */}
       <section className="py-20 bg-white">
         <div className="container-x text-center">
-          <div className="kicker justify-center mb-3 inline-block">Next step</div>
+          <div className="kicker justify-center mb-3 inline-block">{t('about.nextStepKicker')}</div>
           <h2 className="mb-4 max-w-2xl mx-auto">
-            Vessel due in a US port? Tell us the system and the ETA.
+            {t('about.nextStepH2')}
           </h2>
           <p className="text-ink-muted max-w-2xl mx-auto mb-7 text-[15.5px] leading-relaxed">
-            Three taps in the wizard puts an engineer or a quote on your superintendent&apos;s
-            desk. Email + WhatsApp acknowledgement within minutes &mdash; first available technician
-            on the phone within an hour.
+            {t('about.nextStepLead')}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link href="/service-wizard" className="btn-primary btn-lg no-underline">
-              Request service
+              {t('about.requestService')}
             </Link>
             <Link href="/supply" className="btn-accent btn-lg no-underline">
-              Browse supply
+              {t('about.browseSupply')}
             </Link>
             <Link href="/contact" className="btn-ghost btn-lg no-underline">
-              Contact
+              {t('about.contact')}
             </Link>
           </div>
           <p className="mt-8 text-[11px] font-mono uppercase tracking-[0.14em] text-ink-subtle">
-            {SITE.legalName} · Wyoming LLC · Florida operations · 24/7 worldwide
+            {SITE.legalName} · {t('about.finePrint')}
           </p>
         </div>
       </section>

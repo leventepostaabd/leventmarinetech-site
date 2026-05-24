@@ -66,10 +66,9 @@ export default function Contact() {
           {/* US coverage card — real USAMap */}
           <div className="card relative overflow-hidden">
             <div className="kicker mb-3">{t('contact.operations')}</div>
-            <h3 className="mb-2 text-[18px]">Service available at all US ports.</h3>
+            <h3 className="mb-2 text-[18px]">{t('contact.coverageH3')}</h3>
             <p className="text-ink-muted text-[13.5px] leading-relaxed mb-4">
-              Florida operations · Wyoming LLC · 24/7 worldwide. We dispatch to any
-              US port within hours and ship AOG spares the same day.
+              {t('contact.coverageLead')}
             </p>
             <div className="-mx-2">
               <USAMap />
@@ -78,24 +77,23 @@ export default function Contact() {
 
           {/* Direct request CTAs */}
           <div className="card md:col-span-2">
-            <div className="kicker mb-3">Fastest paths</div>
+            <div className="kicker mb-3">{t('contact.fastestPaths')}</div>
             <p className="text-ink-muted text-[14px] mb-4">
-              For RFQs and service requests, the forms below capture vessel, port, urgency
-              and technical context so we can quote the same day. Pure email is fine too.
+              {t('contact.fastestPathsLead')}
             </p>
             <ul className="text-[14px] space-y-1 font-mono mb-5">
               <li>
                 <a href={`mailto:${SITE.email}`} className="no-underline hover:text-amber-600">
                   {SITE.email}
-                </a>{' '}— general & RFQ
+                </a>{' '}— {t('contact.emailGeneral')}
               </li>
             </ul>
             <div className="flex flex-wrap gap-2">
               <Link href="/service-wizard" className="btn-accent btn-md no-underline">
-                Service request
+                {t('contact.serviceRequest')}
               </Link>
               <Link href="/supply" className="btn-primary btn-md no-underline">
-                Browse supply
+                {t('contact.browseSupply')}
               </Link>
               <a
                 href={SITE.whatsapp}
@@ -103,7 +101,7 @@ export default function Contact() {
                 rel="noopener"
                 className="rounded-md bg-[#25D366] px-4 py-2.5 text-white text-sm font-semibold no-underline hover:opacity-95"
               >
-                💬 WhatsApp now
+                💬 {t('contact.whatsappNow')}
               </a>
             </div>
           </div>

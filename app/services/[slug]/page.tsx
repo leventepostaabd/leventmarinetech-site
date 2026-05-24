@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { getService, readServices } from '@/lib/content';
 import { serviceImage } from '@/lib/deck-images';
 import { SITE } from '@/lib/site';
-import { serviceSchema, breadcrumbSchema } from '@/lib/schema-org';
+import { serviceSchema, breadcrumbSchema, faqSchema } from '@/lib/schema-org';
 
 /** Per-system SEO landing page (Wave 1 / Agent B). One page per slug. */
 
@@ -181,6 +181,29 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
         </section>
       )}
 
+      {/* FAQ — bilingual stored, rendered EN here (matches page locale).
+          Also emitted as schema.org FAQPage below for rich-snippet eligibility. */}
+      {s.faqs && s.faqs.length > 0 && (
+        <section className="py-14 md:py-16 bg-navy-50 border-y border-line">
+          <div className="container-x">
+            <div className="kicker mb-3">FAQ</div>
+            <h2 className="mb-6 text-[26px] max-w-3xl">Common questions for this system.</h2>
+            <dl className="max-w-3xl space-y-5">
+              {s.faqs.map((f) => (
+                <div key={f.question_en} className="rounded-2xl bg-white ring-1 ring-line/60 p-5 md:p-6 shadow-sm">
+                  <dt className="font-head font-bold text-ink text-[16px] md:text-[17px] mb-2">
+                    {f.question_en}
+                  </dt>
+                  <dd className="text-ink-muted text-[14.5px] leading-relaxed">
+                    {f.answer_en}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+      )}
+
       {/* CTA */}
       <section className="py-14 md:py-16 bg-navy-700 text-white">
         <div className="container-x text-center">
@@ -220,6 +243,16 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
           )
         }}
       />
+      {s.faqs && s.faqs.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              faqSchema(s.faqs.map((f) => ({ question: f.question_en, answer: f.answer_en })))
+            )
+          }}
+        />
+      )}
     </article>
   );
 }

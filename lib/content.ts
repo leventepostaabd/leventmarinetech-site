@@ -8,6 +8,13 @@ import path from 'node:path';
  * 19 real marine systems + 1 "other" fallback. Bilingual (EN + TR).
  * No prices, no internal info — customer-facing only.
  */
+export type ServiceFaq = {
+  question_en: string;
+  question_tr: string;
+  answer_en: string;
+  answer_tr: string;
+};
+
 export type ServiceContent = {
   slug: string;
   popular: boolean;
@@ -26,6 +33,10 @@ export type ServiceContent = {
   common_causes: string[];
   tools: string[];
   related_supply_categories: string[];
+  /** Optional bilingual FAQ block, rendered on the detail page and emitted
+      as schema.org FAQPage. Present only for the 8 deck-promoted services
+      in the first pass; remaining 14 follow in a later content batch. */
+  faqs?: ServiceFaq[];
 };
 
 export type ServiceWizardOption = { id: string; en: string; tr: string };
