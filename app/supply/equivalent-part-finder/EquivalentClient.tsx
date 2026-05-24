@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import PhotoUpload, { type UploadedFile } from '@/components/PhotoUpload';
+import { whatsappUrl } from '@/lib/whatsapp';
 
 export default function EquivalentClient() {
   const params = useSearchParams();
@@ -39,12 +40,23 @@ export default function EquivalentClient() {
       if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
       setDone({ ok: true, id: data?.id });
     } catch {
-      const summary = Object.entries(s)
+      const description = Object.entries(s)
         .filter(([k]) => k !== 'attachments')
         .map(([k, v]) => `${k}: ${v}`)
         .join('\n');
-      const text = encodeURIComponent(`LEVENT MARINE — equivalent part finder\n\n${summary}`);
-      window.open(`https://wa.me/16193840403?text=${text}`, '_blank', 'noopener');
+      window.open(
+        whatsappUrl({
+          intent: 'supply',
+          brand: s.originalBrand,
+          partNumber: s.originalPartNumber,
+          vessel: s.vesselName,
+          imo: s.imo,
+          port: s.port,
+          description: `Equivalent finder request:\n${description}`
+        }),
+        '_blank',
+        'noopener'
+      );
       setDone({ ok: true, via: 'whatsapp' });
     } finally {
       setSubmitting(false);

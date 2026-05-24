@@ -239,9 +239,24 @@ export function getService(slug: string): ServiceContent | undefined {
 }
 
 export function readRegions(): Record<string, RegionContent> {
-  const arr = readJson<RegionContent[] | Record<string, RegionContent>>('regions.json', []);
-  if (Array.isArray(arr)) return Object.fromEntries(arr.map((r) => [r.slug, r]));
-  return arr;
+  const data = readJson<
+    { regions: RegionContent[] } | RegionContent[] | Record<string, RegionContent>
+  >('regions.json', []);
+  if (Array.isArray(data)) return Object.fromEntries(data.map((r) => [r.slug, r]));
+  if (data && typeof data === 'object' && 'regions' in data) {
+    return Object.fromEntries(
+      (data as { regions: RegionContent[] }).regions.map((r) => [r.slug, r])
+    );
+  }
+  return data as Record<string, RegionContent>;
+}
+
+export function readRegionsList(): RegionContent[] {
+  return Object.values(readRegions()).sort((a, b) => a.city.localeCompare(b.city));
+}
+
+export function getRegion(slug: string): RegionContent | undefined {
+  return readRegions()[slug];
 }
 
 function readProductsFile(): ProductsFile {

@@ -32,8 +32,8 @@ export default function Footer() {
           <ul className="space-y-1.5 text-[13px] text-white/70">
             <li><Link href="/service-wizard" className="hover:text-amber no-underline">{t('footer.requestService')}</Link></li>
             <li><Link href="/services" className="hover:text-amber no-underline">{t('footer.serviceCatalog')}</Link></li>
-            <li><Link href="/services/insulation-diagnostics" className="hover:text-amber no-underline">{t('footer.insulationDiagnostics')}</Link></li>
-            <li><Link href="/services/emergency-remote-eto" className="hover:text-amber no-underline">{t('footer.emergencyAOG')}</Link></li>
+            <li><Link href="/ports" className="hover:text-amber no-underline">{t('footer.usPorts')}</Link></li>
+            <li><Link href="/knowledge" className="hover:text-amber no-underline">{t('footer.knowledge')}</Link></li>
           </ul>
         </div>
 
