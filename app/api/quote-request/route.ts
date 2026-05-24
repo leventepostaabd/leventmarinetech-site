@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createServiceSupabase } from '@/lib/supabase/server';
 import { notifyAdminRfq, ackCustomerRfq } from '@/lib/notify';
+import { ingestInboundForm } from '@/lib/crm';
 
 const Body = z.object({
   kind: z.enum(['supply', 'equivalent', 'unlisted']).optional(),  // defaults to supply
@@ -108,6 +109,25 @@ export async function POST(req: Request) {
 
   // Fire-and-forget notifications (don't block the API response)
   const refId = String(row?.id ?? '').slice(0, 8).toUpperCase();
+
+  // CRM (Wave 6 Phase 1) — also create/attach a lead.
+  ingestInboundForm({
+    source: 'supply_rfq',
+    track: 'supply',
+    contact_name: d.contactName,
+    contact_email: d.contactEmail,
+    contact_phone: d.contactPhone,
+    company_name: d.company,
+    vessel_name: d.vesselName,
+    imo: d.imo,
+    port: d.currentPort ?? d.port,
+    urgency: d.urgency,
+    brand: d.brand ?? d.originalBrand,
+    part_number: d.partNumber ?? d.originalPartNumber ?? d.model,
+    description: d.description ?? d.notes ?? d.failureDescription,
+    raw_payload: { rfq_request_id: row?.id, ref: refId, kind }
+  }).catch((e) => console.error('[crm] supply-rfq ingest failed', e));
+
   Promise.all([
     notifyAdminRfq({
       id: String(row?.id ?? ''),

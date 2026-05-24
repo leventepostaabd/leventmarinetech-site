@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { createServerSupabase } from '@/lib/supabase/server';
+import { leadCounts } from '@/lib/crm';
 
 async function loadOverview() {
   const supabase = createServerSupabase();
@@ -40,10 +41,10 @@ async function loadOverview() {
 }
 
 export default async function AdminHome() {
-  const k = await loadOverview();
+  const [k, leads] = await Promise.all([loadOverview(), leadCounts()]);
   return (
     <div className="space-y-8">
-      {/* KPIs */}
+      {/* Operational KPIs */}
       <section className="space-y-3">
         <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle">
           Live counters
@@ -57,6 +58,23 @@ export default async function AdminHome() {
           <KPI label="Service today" value={k.svcToday} href="/admin/service" tone="muted" />
           <KPI label="RFQs · total" value={k.rfqTotal} href="/admin/rfqs" tone="muted" />
           <KPI label="Service · total" value={k.svcTotal} href="/admin/service" tone="muted" />
+        </div>
+      </section>
+
+      {/* CRM — Wave 6 Phase 1 */}
+      <section className="space-y-3">
+        <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle">
+          CRM pipeline
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <KPI label="Leads · new" value={leads.byStage.new} href="/admin/leads?stage=new" hot />
+          <KPI label="Contacted · awaiting reply" value={leads.byStage.contacted} href="/admin/leads?stage=contacted" />
+          <KPI label="Quoting" value={leads.byStage.quoting} href="/admin/leads?stage=quoting" />
+          <KPI label="New this week" value={leads.newThisWeek} href="/admin/leads" tone="muted" />
+          <KPI label="Service track" value={leads.byTrack.service} href="/admin/leads?tab=service" tone="muted" />
+          <KPI label="Supply track" value={leads.byTrack.supply} href="/admin/leads?tab=supply" tone="muted" />
+          <KPI label="Won" value={leads.byStage.won} href="/admin/leads?stage=won" tone="muted" />
+          <KPI label="Leads · total" value={leads.total} href="/admin/leads" tone="muted" />
         </div>
       </section>
 

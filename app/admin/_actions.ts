@@ -127,3 +127,99 @@ export async function attachmentSignedUrl(path: string, expiresInSec = 3600): Pr
   if (error) return null;
   return data?.signedUrl ?? null;
 }
+
+// =====================================================================
+// CRM — Wave 6 Phase 1 server actions
+// =====================================================================
+
+import {
+  addLeadNote as crmAddNote,
+  createLead as crmCreateLead,
+  updateLeadDraft as crmUpdateDraft,
+  updateLeadStage as crmUpdateStage,
+  upsertCompany,
+  upsertVessel,
+  type LeadStage,
+  type LeadSource,
+  type LeadTrack
+} from '@/lib/crm';
+
+export async function updateLeadStage(id: string, stage: string) {
+  const user = await requireAdmin();
+  const valid: LeadStage[] = ['new', 'contacted', 'replied', 'quoting', 'won', 'lost'];
+  if (!valid.includes(stage as LeadStage)) {
+    throw new Error(`Invalid lead stage: ${stage}`);
+  }
+  await crmUpdateStage(id, stage as LeadStage, user.email ?? user.id);
+  revalidatePath(`/admin/leads/${id}`);
+  revalidatePath('/admin/leads');
+  revalidatePath('/admin');
+}
+
+export async function saveLeadDraft(id: string, draft: string) {
+  await requireAdmin();
+  await crmUpdateDraft(id, draft);
+  revalidatePath(`/admin/leads/${id}`);
+}
+
+export async function addLeadNote(leadId: string, body: string) {
+  const user = await requireAdmin();
+  if (!body.trim()) return;
+  await crmAddNote({ lead_id: leadId, body: body.trim(), author: user.email ?? user.id });
+  revalidatePath(`/admin/leads/${leadId}`);
+}
+
+export async function createManualLead(input: {
+  track: string;
+  company_name: string;
+  vessel_name?: string;
+  imo?: string;
+  contact_email?: string;
+  contact_phone?: string;
+  port?: string;
+  system?: string;
+  brand?: string;
+  part_number?: string;
+  priority_score?: number;
+  draft_message?: string;
+  note?: string;
+}) {
+  const user = await requireAdmin();
+  const track = input.track as LeadTrack;
+  if (track !== 'service' && track !== 'supply') {
+    throw new Error(`Invalid track: ${input.track}`);
+  }
+  if (!input.company_name?.trim()) throw new Error('Company name required');
+
+  const company = await upsertCompany({ name: input.company_name, contact_email: input.contact_email ?? null, contact_phone: input.contact_phone ?? null });
+  const vessel = (input.vessel_name?.trim() || input.imo?.trim())
+    ? await upsertVessel({ name: input.vessel_name?.trim() || 'Unknown vessel', imo_no: input.imo?.trim() || null, company_id: company.id })
+    : null;
+
+  const context: Record<string, unknown> = {};
+  if (input.port) context.port = input.port;
+  if (input.system) context.system = input.system;
+  if (input.brand) context.brand = input.brand;
+  if (input.part_number) context.part_number = input.part_number;
+  if (input.contact_email) context.contact_email = input.contact_email;
+  if (input.contact_phone) context.contact_phone = input.contact_phone;
+
+  const lead = await crmCreateLead({
+    source: 'manual' as LeadSource,
+    track,
+    company_id: company.id,
+    vessel_id: vessel?.id ?? null,
+    priority_score: input.priority_score ?? 50,
+    priority_reason: { reason: 'manual', actor: user.email ?? user.id },
+    draft_message: input.draft_message ?? null,
+    context
+  });
+
+  if (input.note?.trim()) {
+    await crmAddNote({ lead_id: lead.id, body: input.note.trim(), author: user.email ?? user.id });
+  }
+
+  revalidatePath('/admin/leads');
+  revalidatePath('/admin');
+  return { lead_id: lead.id };
+}
