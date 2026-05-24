@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import type { ServiceContent } from '@/lib/content';
+import { whatsappUrl } from '@/lib/whatsapp';
 import SystemPicker from './SystemPicker';
 
 type WizardWindow = { id: string; label_en: string; label_tr: string };
@@ -179,7 +180,11 @@ export default function ServiceWizardClient({
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a
-              href="https://wa.me/16193840403"
+              href={whatsappUrl({
+                locale,
+                intent: 'service',
+                description: done.ref ? (locale === 'tr' ? `Az önce talep gönderdim, referans: ${done.ref}` : `Just submitted a request, reference: ${done.ref}`) : undefined
+              })}
               target="_blank"
               rel="noopener"
               className="btn-accent btn-md"

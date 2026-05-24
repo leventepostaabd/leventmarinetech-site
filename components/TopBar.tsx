@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import LocaleToggle from './LocaleToggle';
 import LeventLogo from './LeventLogo';
 import LogoLockup from './LogoLockup';
+import { whatsappUrl } from '@/lib/whatsapp';
 
 /**
  * Top bar — the only persistent chrome on the entire site.
@@ -169,7 +170,7 @@ export default function TopBar({ locale }: { locale: 'en' | 'tr' }) {
                     <a href="tel:+16193840403" className="text-white no-underline hover:text-amber-300">
                       📞 +1 619 384 04 03
                     </a>
-                    <a href="https://wa.me/16193840403" className="text-white no-underline hover:text-amber-300" target="_blank" rel="noreferrer noopener">
+                    <a href={whatsappUrl({ locale, intent: 'general' })} className="text-white no-underline hover:text-amber-300" target="_blank" rel="noreferrer noopener">
                       💬 WhatsApp · 24/7
                     </a>
                     <a href="mailto:info@leventmarinetech.com" className="text-white no-underline hover:text-amber-300">

@@ -13,6 +13,7 @@ import {
   removeFromBasket,
   updateQuantity
 } from '@/lib/rfq-basket';
+import { whatsappUrl } from '@/lib/whatsapp';
 import { MARKUP_RATE, fmt } from '@/lib/pricing';
 
 type Urgency = 'aog' | 'urgent' | 'planned';
@@ -274,7 +275,7 @@ export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
                           {t('Need engineer on board? Request service', 'Mühendis lazım mı? Servis talep et')} →
                         </Link>
                         <a
-                          href="https://wa.me/16193840403"
+                          href={whatsappUrl({ locale, intent: 'supply' })}
                           target="_blank"
                           rel="noreferrer noopener"
                           className="rounded-md bg-[#25D366] px-4 py-2.5 text-white text-sm font-semibold no-underline hover:opacity-95 w-full text-center inline-block"
