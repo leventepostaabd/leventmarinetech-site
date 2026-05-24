@@ -135,6 +135,8 @@ export async function attachmentSignedUrl(path: string, expiresInSec = 3600): Pr
 import {
   addLeadNote as crmAddNote,
   createLead as crmCreateLead,
+  getLead as crmGetLead,
+  recordEvent as crmRecordEvent,
   updateLeadDraft as crmUpdateDraft,
   updateLeadStage as crmUpdateStage,
   upsertCompany,
@@ -143,6 +145,7 @@ import {
   type LeadSource,
   type LeadTrack
 } from '@/lib/crm';
+import { scoreLead, ScoringUnavailableError, type ScoringResult } from '@/lib/scoring';
 
 export async function updateLeadStage(id: string, stage: string) {
   const user = await requireAdmin();
@@ -222,4 +225,57 @@ export async function createManualLead(input: {
   revalidatePath('/admin/leads');
   revalidatePath('/admin');
   return { lead_id: lead.id };
+}
+
+/**
+ * Score a lead with Claude and persist the score + reasoning. Returns the
+ * full result (including bilingual drafts) so the client can let the operator
+ * choose whether to apply a draft — we never clobber a hand-written draft (D3).
+ */
+export async function scoreLeadWithAI(
+  id: string
+): Promise<{ ok: true; result: ScoringResult } | { ok: false; error: string }> {
+  const user = await requireAdmin();
+  const lead = await crmGetLead(id);
+  if (!lead) return { ok: false, error: 'Lead not found.' };
+
+  let result: ScoringResult;
+  try {
+    result = await scoreLead(lead);
+  } catch (e) {
+    if (e instanceof ScoringUnavailableError) {
+      return { ok: false, error: 'AI scoring is not configured (missing ANTHROPIC_API_KEY).' };
+    }
+    console.error('[scoring] scoreLeadWithAI failed', e);
+    return { ok: false, error: 'Scoring failed — see server logs.' };
+  }
+
+  const supabase = createServiceSupabase();
+  if (!supabase) return { ok: false, error: 'Supabase service role unavailable' };
+  const { error } = await supabase
+    .from('leads')
+    .update({
+      priority_score: result.priority_score,
+      priority_reason: {
+        reason: 'ai',
+        scored_by: user.email ?? user.id,
+        scored_at: new Date().toISOString(),
+        rationale: result.rationale,
+        recommended_action: result.recommended_action,
+        factors: result.factors
+      },
+      updated_at: new Date().toISOString()
+    })
+    .eq('id', id);
+  if (error) return { ok: false, error: error.message };
+
+  await crmRecordEvent(id, 'ai_scored', {
+    score: result.priority_score,
+    actor: user.email ?? user.id
+  });
+
+  revalidatePath(`/admin/leads/${id}`);
+  revalidatePath('/admin/leads');
+  revalidatePath('/admin');
+  return { ok: true, result };
 }
