@@ -30,7 +30,7 @@ export default function SystemPicker({
   popular: Service[];
   value: string;
   onChange: (slug: string) => void;
-  locale: 'en' | 'tr';
+  locale: Locale;
 }) {
   const [q, setQ] = useState('');
   const [open, setOpen] = useState(false);

@@ -8,6 +8,7 @@ import LocaleToggle from './LocaleToggle';
 import LeventLogo from './LeventLogo';
 import LogoLockup from './LogoLockup';
 import { whatsappUrl } from '@/lib/whatsapp';
+import { ct } from '@/lib/i18n-client';
 
 /**
  * Top bar — the only persistent chrome on the entire site.
@@ -25,17 +26,17 @@ import { whatsappUrl } from '@/lib/whatsapp';
  * On every other page: clean white with a thin border.
  */
 
-const NAV: { href: string; en: string; tr: string }[] = [
-  { href: '/',              en: 'Home',      tr: 'Ana sayfa' },
-  { href: '/services',      en: 'Service',   tr: 'Servis' },
-  { href: '/supply',        en: 'Supply',    tr: 'Tedarik' },
-  { href: '/ports',         en: 'US Ports',  tr: 'ABD limanları' },
-  { href: '/about',         en: 'About',     tr: 'Hakkımızda' },
-  { href: '/contact',       en: 'Contact',   tr: 'İletişim' },
-  { href: '/knowledge',     en: 'Knowledge', tr: 'Bilgi' }
+const NAV: { href: string; key: string }[] = [
+  { href: '/',          key: 'home' },
+  { href: '/services',  key: 'service' },
+  { href: '/supply',    key: 'supply' },
+  { href: '/ports',     key: 'ports' },
+  { href: '/about',     key: 'about' },
+  { href: '/contact',   key: 'contact' },
+  { href: '/knowledge', key: 'knowledge' }
 ];
 
-export default function TopBar({ locale }: { locale: 'en' | 'tr' }) {
+export default function TopBar({ locale }: { locale: Locale }) {
   const pathname = usePathname() || '/';
   const [open, setOpen] = useState(false);
 
@@ -156,7 +157,7 @@ export default function TopBar({ locale }: { locale: 'en' | 'tr' }) {
                             active ? 'bg-amber/15 text-amber-300' : 'text-white hover:bg-white/10'
                           }`}
                         >
-                          {t(it.en, it.tr)}
+                          {ct(locale, `nav.${it.key}`)}
                         </Link>
                       </li>
                     );
@@ -165,7 +166,7 @@ export default function TopBar({ locale }: { locale: 'en' | 'tr' }) {
 
                 <div className="mt-8">
                   <div className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-white/45 mb-2">
-                    {t('Emergency', 'Acil')}
+                    {ct(locale, 'nav.emergency')}
                   </div>
                   <div className="flex flex-col gap-2 text-[14px]">
                     <a href="tel:+16193840403" className="text-white no-underline hover:text-amber-300">

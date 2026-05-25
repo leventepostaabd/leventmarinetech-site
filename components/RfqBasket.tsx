@@ -28,7 +28,7 @@ type View = 'list' | 'sent';
  * editors, single contact form, single submit. Backend reuses
  * /api/quote-request with kind='supply' and one POST per item.
  */
-export default function RfqBasket({ locale = 'en' as 'en' | 'tr' } = {}) {
+export default function RfqBasket({ locale = 'en' as Locale } = {}) {
   const pathname = usePathname() || '/';
   const router = useRouter();
   const [items, setItems] = useState<BasketItem[]>([]);

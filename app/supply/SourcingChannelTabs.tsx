@@ -12,7 +12,7 @@ import { whatsappUrl } from '@/lib/whatsapp';
  * we catch it, open ListRfqModal, and pre-load the file so they just
  * have to add company + contact info.
  */
-export default function SourcingChannelTabs({ locale }: { locale: 'en' | 'tr' }) {
+export default function SourcingChannelTabs({ locale }: { locale: Locale }) {
   const [listOpen, setListOpen] = useState(false);
   const [pendingFiles, setPendingFiles] = useState<File[] | null>(null);
   const [showDropOverlay, setShowDropOverlay] = useState(false);

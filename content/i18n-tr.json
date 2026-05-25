@@ -6,7 +6,10 @@
     "about": "Hakkında",
     "contact": "İletişim",
     "callHotline": "Hattı ara",
-    "emergency": "Acil"
+    "emergency": "Acil",
+    "home": "Ana sayfa",
+    "ports": "ABD limanları",
+    "knowledge": "Bilgi"
   },
   "home": {
     "kicker": "Florida merkezli operasyon · Wyoming LLC",
@@ -43,7 +46,11 @@
     "trustKicker": "Neden biz",
     "trustTitle": "Onboard geçmiş. Aracı tedarikçi değil.",
     "trustP1": "Levent Marine, bulker, tanker, container ve OSV tipi gemilerde gerçek shipboard tecrübesi olan bir Marine Electro-Technical Officer tarafından yönetiliyor. Her RFQ, seyir halindeki bir gemide busbar terminasyonu yapmış birinin önünden geçer.",
-    "trustP2": "Florida merkezli operasyon, Wyoming LLC tescil. USA filolarına temiz USD faturalama ve TWIC/port-access uyumlu koordinasyon. Tüm ABD limanlarına ve dünya çapına 7/24 servis."
+    "trustP2": "Florida merkezli operasyon, Wyoming LLC tescil. USA filolarına temiz USD faturalama ve TWIC/port-access uyumlu koordinasyon. Tüm ABD limanlarına ve dünya çapına 7/24 servis.",
+    "doorServiceKicker": "Mühendis gemide",
+    "doorServiceCta": "Servis istiyorum",
+    "doorSupplyKicker": "Parça yolda",
+    "doorSupplyCta": "Parça istiyorum"
   },
   "wizard": {
     "step": "Adım",

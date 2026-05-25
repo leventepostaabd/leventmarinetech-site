@@ -33,7 +33,7 @@ export default function TrustStats({
   className = ''
 }: {
   variant?: Variant;
-  locale?: 'en' | 'tr';
+  locale?: Locale;
   className?: string;
 }) {
   const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);

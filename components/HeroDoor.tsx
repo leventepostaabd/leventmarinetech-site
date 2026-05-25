@@ -7,15 +7,12 @@ export type HeroDoorProps = {
   side: 'left' | 'right';
   image: string;
   videoSrc?: string;
-  label_en: string;
-  label_tr: string;
+  /** Pre-resolved (already localised) display strings. */
+  label: string;
   ctaHref: string;
-  ctaLabel_en: string;
-  ctaLabel_tr: string;
-  locale: 'en' | 'tr';
+  ctaLabel: string;
   /** Optional small kicker text shown above CTA */
-  kicker_en?: string;
-  kicker_tr?: string;
+  kicker?: string;
 };
 
 /**
@@ -28,18 +25,11 @@ export default function HeroDoor({
   side,
   image,
   videoSrc,
-  label_en,
-  label_tr,
+  label,
   ctaHref,
-  ctaLabel_en,
-  ctaLabel_tr,
-  locale,
-  kicker_en,
-  kicker_tr
+  ctaLabel,
+  kicker
 }: HeroDoorProps) {
-  const label = locale === 'tr' ? label_tr : label_en;
-  const ctaLabel = locale === 'tr' ? ctaLabel_tr : ctaLabel_en;
-  const kicker = locale === 'tr' ? kicker_tr : kicker_en;
   const fromX = side === 'left' ? -32 : 32;
 
   return (

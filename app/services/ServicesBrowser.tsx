@@ -34,7 +34,7 @@ export default function ServicesBrowser({
   services: ServiceContent[];
   popular: ServiceContent[];
   ui: UI;
-  locale?: 'en' | 'tr';
+  locale?: Locale;
 }) {
   const [query, setQuery] = useState('');
   const [allOpen, setAllOpen] = useState(false);

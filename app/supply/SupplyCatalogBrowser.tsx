@@ -58,7 +58,7 @@ export default function SupplyCatalogBrowser({
   products: Product[];
   categories: CategoryOption[];
   labels: Labels;
-  locale: 'en' | 'tr';
+  locale: Locale;
 }) {
   const [q, setQ] = useState('');
   const [cat, setCat] = useState<string>('all');

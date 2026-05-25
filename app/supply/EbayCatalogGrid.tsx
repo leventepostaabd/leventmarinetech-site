@@ -49,7 +49,7 @@ export default function EbayCatalogGrid({
   locale,
   initialQuery = 'marine electrical'
 }: {
-  locale: 'en' | 'tr';
+  locale: Locale;
   initialQuery?: string;
 }) {
   const [q, setQ] = useState(initialQuery);

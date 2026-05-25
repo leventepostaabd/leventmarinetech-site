@@ -39,7 +39,7 @@ export default function SupplySearchBox({
 }: {
   placeholder: string;
   hint?: string;
-  locale: 'en' | 'tr';
+  locale: Locale;
 }) {
   const router = useRouter();
   const [q, setQ] = useState('');

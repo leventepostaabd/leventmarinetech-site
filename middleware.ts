@@ -6,18 +6,29 @@ const LOCALE_MANUAL_COOKIE = 'lm.locale.manual';
 
 /**
  * Determine the auto-detected locale from Vercel's geo headers.
- * - TR country (Türkiye) → 'tr'
- * - everything else      → 'en'
+ * - TR                         → 'tr'
+ * - GR / CY                    → 'el'
+ * - ES + major LatAm countries → 'es'
+ * - DE / AT / CH               → 'de'
+ * - everything else            → 'en'
  *
  * Vercel injects geo on `request.geo` in Edge runtime. We also read the
  * `x-vercel-ip-country` header as a fallback (works on most Edge deployments).
  */
-function detectLocaleFromGeo(request: NextRequest): 'en' | 'tr' {
-  const country =
+const COUNTRY_LOCALE: Record<string, Locale> = {
+  TR: 'tr',
+  GR: 'el', CY: 'el',
+  ES: 'es', MX: 'es', AR: 'es', CO: 'es', CL: 'es', PE: 'es', VE: 'es', EC: 'es', UY: 'es', PY: 'es', BO: 'es', GT: 'es', DO: 'es', CR: 'es', PA: 'es',
+  DE: 'de', AT: 'de', CH: 'de'
+};
+
+function detectLocaleFromGeo(request: NextRequest): Locale {
+  const country = (
     (request as unknown as { geo?: { country?: string } }).geo?.country ||
     request.headers.get('x-vercel-ip-country') ||
-    '';
-  return country.toUpperCase() === 'TR' ? 'tr' : 'en';
+    ''
+  ).toUpperCase();
+  return COUNTRY_LOCALE[country] ?? 'en';
 }
 
 export async function middleware(request: NextRequest) {

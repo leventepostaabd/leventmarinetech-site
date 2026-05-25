@@ -5,9 +5,10 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import EmergencyModal from './EmergencyModal';
 import { SITE } from '@/lib/site';
+import { ct } from '@/lib/i18n-client';
 
 export type MobileLandingProps = {
-  locale: 'en' | 'tr';
+  locale: Locale;
   slogan?: string;
 };
 
@@ -20,9 +21,13 @@ export default function MobileLanding({ locale }: MobileLandingProps) {
   const [open, setOpen] = useState(false);
 
   const labels = {
-    en: { service: 'Service', supply: 'Supply', emergency: 'Emergency', serviceSub: 'Engineer on board', supplySub: 'Parts on the way', emergencySub: '24/7 worldwide' },
-    tr: { service: 'Servis', supply: 'Tedarik', emergency: 'Acil', serviceSub: 'Mühendis gemide', supplySub: 'Parça yolda', emergencySub: '7/24 worldwide' }
-  }[locale];
+    service: ct(locale, 'nav.service'),
+    supply: ct(locale, 'nav.supply'),
+    emergency: ct(locale, 'nav.emergency'),
+    serviceSub: ct(locale, 'home.doorServiceKicker'),
+    supplySub: ct(locale, 'home.doorSupplyKicker'),
+    emergencySub: '24/7 worldwide'
+  };
 
   return (
     <section

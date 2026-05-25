@@ -31,7 +31,7 @@ export default function ServiceImageDeck({
   ctaEnabled = true
 }: {
   items: Deck[];
-  locale: 'en' | 'tr';
+  locale: Locale;
   intervalMs?: number;
   /** When true, the deck fills the parent's height edge-to-edge (no rounded
       corners, no max-height) — used by the wizard/services right column. */
