@@ -24,15 +24,25 @@ export default function Contact() {
 
       <div className="lm-screen-body px-5 pb-8 md:px-12">
         <div className="grid gap-4 md:grid-cols-2 max-w-5xl">
-          {/* USA HQ card */}
+          {/* USA HQ card — Florida operations lead, Wyoming as registered office */}
           <div className="card">
             <div className="kicker mb-3">{t('contact.usaHq')}</div>
-            <h3 className="mb-2 text-[18px]">{t('contact.operationsCity')}</h3>
-            <p className="text-[13px] text-ink-muted mb-4">{t('contact.registeredHq')}</p>
-            <address className="not-italic text-ink-muted text-[14px] leading-relaxed mb-4">
-              {SITE.address.street}<br />
-              {SITE.address.city}, {SITE.address.state} {SITE.address.zip}
-            </address>
+            <div className="flex flex-wrap items-center gap-2 mb-2">
+              <h3 className="text-[20px] leading-none">{t('contact.operationsCity')}</h3>
+              <span className="inline-flex items-center rounded-full bg-amber/15 px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-amber-700">
+                {t('contact.opsBase')}
+              </span>
+            </div>
+            <p className="text-[13.5px] text-ink-muted leading-relaxed mb-4">{t('contact.flAddressNote')}</p>
+            <div className="border-t border-line pt-3 mb-4">
+              <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-subtle mb-1.5">
+                {t('contact.registeredOffice')}
+              </div>
+              <address className="not-italic text-ink-muted text-[13.5px] leading-relaxed">
+                {SITE.address.street}<br />
+                {SITE.address.city}, {SITE.address.state} {SITE.address.zip}
+              </address>
+            </div>
             <ul className="text-[14px] space-y-1.5">
               <li>
                 <a

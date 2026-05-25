@@ -99,27 +99,15 @@ export default function AboutPage() {
 
       {/* WHO WE ARE */}
       <section className="py-16 bg-white">
-        <div className="container-x grid gap-12 md:grid-cols-2">
-          <div>
-            <div className="kicker mb-3">{t('about.backgroundKicker')}</div>
-            <h2 className="mb-4 text-[26px]">{t('about.backgroundH2')}</h2>
-            <p className="text-ink-muted leading-relaxed mb-4">
-              {t('about.backgroundP1')}
-            </p>
-            <p className="text-ink-muted leading-relaxed">
-              {t('about.backgroundP2')}
-            </p>
-          </div>
-          <div>
-            <div className="kicker mb-3">{t('about.notDoKicker')}</div>
-            <h2 className="mb-4 text-[26px]">{t('about.notDoH2')}</h2>
-            <ul className="space-y-3 text-ink-muted text-[14.5px] leading-relaxed">
-              <li>• {t('about.notDo1')}</li>
-              <li>• {t('about.notDo2')}</li>
-              <li>• {t('about.notDo3')}</li>
-              <li>• {t('about.notDo4')}</li>
-            </ul>
-          </div>
+        <div className="container-x max-w-3xl">
+          <div className="kicker mb-3">{t('about.backgroundKicker')}</div>
+          <h2 className="mb-4 text-[26px]">{t('about.backgroundH2')}</h2>
+          <p className="text-ink-muted leading-relaxed mb-4">
+            {t('about.backgroundP1')}
+          </p>
+          <p className="text-ink-muted leading-relaxed">
+            {t('about.backgroundP2')}
+          </p>
         </div>
       </section>
 
