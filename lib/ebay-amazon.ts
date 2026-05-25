@@ -289,7 +289,15 @@ export async function searchEbay(
  * (Mouser, Digi-Key, Grainger) before the marketplace (eBay) before the
  * local Amazon stub. Downstream dedupe should prefer the earlier source
  * when the same MPN appears in multiple buckets.
+ *
+ * NOTE (2026-05): the eBay feed is PAUSED. Marketplace listings (used /
+ * grey-market photos, noisy titles, inconsistent images) were degrading
+ * the catalog grid, so only the distributor sources are surfaced for now.
+ * Re-enable later by adding 'ebay' back to LIVE_SOURCES — the eBay code
+ * path (searchEbay) is left fully intact.
  */
+const LIVE_SOURCES: SupplySource[] = ['mouser', 'digikey', 'grainger'];
+
 export async function searchAllSources(
   query: string,
   opts?: SupplySearchOptions
@@ -302,14 +310,14 @@ export async function searchAllSources(
     import('./grainger')
   ]);
 
-  const [mouser, digikey, grainger, ebay, amazon] = await Promise.all([
-    searchMouser(query, opts),
-    searchDigiKey(query, opts),
-    searchGrainger(query, opts),
-    searchEbay(query, opts),
-    searchAmazonBusiness(query, opts)
-  ]);
-  return [mouser, digikey, grainger, ebay, amazon];
+  const tasks: Array<Promise<SupplySearchResult>> = [];
+  if (LIVE_SOURCES.includes('mouser')) tasks.push(searchMouser(query, opts));
+  if (LIVE_SOURCES.includes('digikey')) tasks.push(searchDigiKey(query, opts));
+  if (LIVE_SOURCES.includes('grainger')) tasks.push(searchGrainger(query, opts));
+  if (LIVE_SOURCES.includes('ebay')) tasks.push(searchEbay(query, opts));
+  if (LIVE_SOURCES.includes('amazon')) tasks.push(searchAmazonBusiness(query, opts));
+
+  return Promise.all(tasks);
 }
 
 // ---------------------------------------------------------------------------
