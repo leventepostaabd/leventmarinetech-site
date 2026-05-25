@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import ServiceWizardClient from './ServiceWizardClient';
 import ServiceImageDeck from '@/components/ServiceImageDeck';
+import InlineHeader from '@/components/InlineHeader';
 import { readServices, readServicesFile } from '@/lib/content';
 import { getLocale } from '@/lib/i18n';
 import { SERVICE_IMAGE } from '@/lib/deck-images';
@@ -71,12 +72,14 @@ export default function Page() {
 
   return (
     <div className="lm-screen-hero grid bg-white lg:grid-cols-[minmax(0,1fr)_minmax(0,30%)]">
-      {/* Left — request form. Padded under the transparent TopBar so the
-          first heading clears it (notch-aware). No internal scroll. */}
+      {/* Left — inline header (matches /services and /supply) + request form.
+          The right artwork runs full bleed; no global bar covers it. */}
       <div
         className="min-w-0 flex flex-col px-5 pb-5 md:px-10 md:pb-8"
-        style={{ paddingTop: 'calc(var(--lm-topbar-h, 56px) + env(safe-area-inset-top, 0) + 1rem)' }}
+        style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}
       >
+        <InlineHeader locale={locale} />
+
         <Suspense fallback={<div className="text-ink-subtle font-mono text-sm">Loading wizard…</div>}>
           <ServiceWizardClient
             services={services}

@@ -47,13 +47,13 @@ export default function TopBar({ locale }: { locale: 'en' | 'tr' }) {
   }, [open]);
 
   const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);
-  // /services and /supply now mount their own InlineHeader inside the
-  // left column so the right artwork can run full bleed. Hide the global
-  // TopBar entirely on those routes.
-  if (pathname === '/services' || pathname === '/supply') return null;
+  // /services, /supply and /service-wizard now mount their own InlineHeader
+  // inside the left column so the right artwork can run full bleed. Hide the
+  // global TopBar entirely on those routes.
+  if (pathname === '/services' || pathname === '/supply' || pathname === '/service-wizard') return null;
   // Pages where the right side carries a full-bleed dark photo deck and the
   // TopBar should float transparently over it (no white bar on top).
-  const isHeroLike = pathname === '/' || pathname === '/service-wizard';
+  const isHeroLike = pathname === '/';
 
   return (
     <>
