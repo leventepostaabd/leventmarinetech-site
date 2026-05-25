@@ -87,7 +87,7 @@ export default function ServiceImageDeck({
             fill
             priority
             sizes="(min-width: 1024px) 30vw, 100vw"
-            className="object-cover object-center"
+            className="object-contain object-center"
           />
           {ctaEnabled && (
             <>
