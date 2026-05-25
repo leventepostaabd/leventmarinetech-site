@@ -12,18 +12,18 @@ import { getLocale, getTranslator } from '@/lib/i18n';
  *
  * Quick-look modal lives in <AboutModal /> rendered from the homepage. This
  * page is the search-engine-optimised long-form profile: company narrative,
- * 16-year background, equipment, client list, cert detail, class authorities,
+ * engineer background, equipment, client list, cert detail, class authorities,
  * coverage map. Server-rendered, full metadata, breadcrumb + about schema.
  */
 export const metadata: Metadata = {
   title: 'About — Marine Electrical Service & Parts Supply',
   description:
-    "Florida-based, Wyoming-registered marine electrical service desk. 16 years onboard, STCW III/6 ETO, class-aware reports for DNV · BV · ABS · Lloyd's · TL · RINA · ClassNK · IRS. 24/7 worldwide.",
+    "Florida-based, Wyoming-registered marine electrical service desk. STCW III/6 ETO and control-system engineer, class-aware reports for DNV · BV · ABS · Lloyd's · TL · RINA · ClassNK · IRS. 24/7 worldwide.",
   alternates: { canonical: '/about' },
   openGraph: {
-    title: 'About Levent Marine — 16 yr ETO, US-registered, worldwide',
+    title: 'About Levent Marine — STCW III/6 ETO, US-registered, worldwide',
     description:
-      'Marine electrical service and parts supply by an active STCW III/6 Electro-Technical Officer. Class-aware paperwork, US-port response, AOG parts dispatch.',
+      'Marine electrical service and parts supply by an active STCW III/6 Electro-Technical Officer and control-system engineer. Class-aware paperwork, US-port response, AOG parts dispatch.',
     type: 'profile'
   }
 };
@@ -89,7 +89,7 @@ export default function AboutPage() {
       <section className="py-12 bg-white border-b border-line">
         <div className="container-x">
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <li className="stat"><span className="num">16 yr</span><span className="lbl">{t('about.statsYearsLbl')}</span></li>
+            <li className="stat"><span className="num">19</span><span className="lbl">{t('about.statsYearsLbl')}</span></li>
             <li className="stat"><span className="num">25</span><span className="lbl">{t('about.statsPortsLbl')}</span></li>
             <li className="stat"><span className="num">24/7</span><span className="lbl">{t('about.statsAogLbl')}</span></li>
             <li className="stat"><span className="num">8</span><span className="lbl">{t('about.statsClassLbl')}</span></li>
@@ -99,27 +99,15 @@ export default function AboutPage() {
 
       {/* WHO WE ARE */}
       <section className="py-16 bg-white">
-        <div className="container-x grid gap-12 md:grid-cols-2">
-          <div>
-            <div className="kicker mb-3">{t('about.backgroundKicker')}</div>
-            <h2 className="mb-4 text-[26px]">{t('about.backgroundH2')}</h2>
-            <p className="text-ink-muted leading-relaxed mb-4">
-              {t('about.backgroundP1')}
-            </p>
-            <p className="text-ink-muted leading-relaxed">
-              {t('about.backgroundP2')}
-            </p>
-          </div>
-          <div>
-            <div className="kicker mb-3">{t('about.notDoKicker')}</div>
-            <h2 className="mb-4 text-[26px]">{t('about.notDoH2')}</h2>
-            <ul className="space-y-3 text-ink-muted text-[14.5px] leading-relaxed">
-              <li>• {t('about.notDo1')}</li>
-              <li>• {t('about.notDo2')}</li>
-              <li>• {t('about.notDo3')}</li>
-              <li>• {t('about.notDo4')}</li>
-            </ul>
-          </div>
+        <div className="container-x max-w-3xl">
+          <div className="kicker mb-3">{t('about.backgroundKicker')}</div>
+          <h2 className="mb-4 text-[26px]">{t('about.backgroundH2')}</h2>
+          <p className="text-ink-muted leading-relaxed mb-4">
+            {t('about.backgroundP1')}
+          </p>
+          <p className="text-ink-muted leading-relaxed">
+            {t('about.backgroundP2')}
+          </p>
         </div>
       </section>
 
