@@ -1,5 +1,5 @@
 /**
- * CertBadges — STCW certification chips visible on About surfaces and the
+ * CertBadges — certification chips visible on About surfaces and the
  * trust band. Each chip exposes its full name on hover/focus via title +
  * aria-label so screen-readers receive the long form, sighted users see the
  * compact abbreviation.
@@ -14,6 +14,9 @@ export type CertBadge = {
 export const CERTIFICATIONS: CertBadge[] = [
   { abbr: 'ETO',           full: 'Electro-Technical Officer',                  reg: 'STCW Reg. III/6'  },
   { abbr: 'HV ≤ 1000V', full: 'High Voltage Operations',                  reg: 'Up to 1000V'      },
+  { abbr: 'NFPA 70E',      full: 'Electrical Safety in the Workplace',         reg: 'NFPA 70E'         },
+  { abbr: 'OSHA',          full: 'Occupational Safety & Health',               reg: 'US OSHA'          },
+  { abbr: 'TWIC',          full: 'Transportation Worker Identification Credential', reg: 'TSA · US'    },
   { abbr: 'AFF',           full: 'Advanced Fire Fighting',                     reg: 'STCW VI/3'        },
   { abbr: 'MFA',           full: 'Medical First Aid',                          reg: 'STCW VI/4-1'      },
   { abbr: 'BST',           full: 'Basic Safety Training',                      reg: 'STCW VI/1'        },
@@ -31,7 +34,7 @@ export default function CertBadges({
   return (
     <ul
       className={`flex flex-wrap gap-2 ${className}`}
-      aria-label="STCW certifications held by the lead engineer"
+      aria-label="Certifications held by the engineer"
     >
       {CERTIFICATIONS.map((c) => {
         const long = `${c.full} (${c.reg})`;

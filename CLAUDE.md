@@ -136,6 +136,8 @@ Uyumlu rapor formatları: DNV · BV · ABS · Lloyd's · TL · RINA · ClassNK �
 - HV Operations (Up to 1000V) — STCW Reg. III/6
 - Advanced Fire Fighting (VI/3), Medical First Aid (VI/4-1), BST (VI/1)
 - Gas Tanker Familiarization (V/1-2), Oil & Chemical Tanker (V/1-1)
+- NFPA 70E (electrical safety), OSHA, TWIC kartı (US)
+- **Pozisyon:** Control System Engineer + 12 yıl ETO (bulk carrier / container / cement carrier / offshore research vessel) + 2 yıl electrical superintendent. **NOT:** "baş mühendis / chief engineer" DEĞİL — bu ifadeyi kullanma.
 
 ## Mevcut Müşteriler (Logo Şeridi)
 

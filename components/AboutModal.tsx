@@ -113,7 +113,7 @@ export default function AboutModal({
                   </svg>
                 </div>
                 <div className="absolute bottom-3 left-3 right-3 font-mono text-[10px] uppercase tracking-[0.14em] text-white/70">
-                  Lead ETO
+                  STCW III/6 ETO · Control Systems
                 </div>
               </div>
 
@@ -137,9 +137,11 @@ export default function AboutModal({
 
                 <p className="text-ink-muted text-[14.5px] leading-relaxed">
                   Florida-based, Wyoming-registered marine electrical desk run by an active
-                  STCW III/6 Electro-Technical Officer. 16 years aboard bulkers, tankers, container
-                  vessels and offshore units. Engineer on board at any US port within hours;
-                  AOG parts shipped same day. Class-aware paperwork on every job.
+                  STCW III/6 Electro-Technical Officer and control-system engineer — twelve years
+                  at sea on bulk carriers, container ships, cement carriers and offshore research
+                  vessels, plus two years ashore as an electrical superintendent. Engineer on board
+                  at any US port within hours; AOG parts shipped same day. Class-aware paperwork on
+                  every job.
                 </p>
 
                 <div className="mt-4">

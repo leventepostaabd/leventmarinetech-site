@@ -12,18 +12,18 @@ import { getLocale, getTranslator } from '@/lib/i18n';
  *
  * Quick-look modal lives in <AboutModal /> rendered from the homepage. This
  * page is the search-engine-optimised long-form profile: company narrative,
- * 16-year background, equipment, client list, cert detail, class authorities,
+ * engineer background, equipment, client list, cert detail, class authorities,
  * coverage map. Server-rendered, full metadata, breadcrumb + about schema.
  */
 export const metadata: Metadata = {
   title: 'About — Marine Electrical Service & Parts Supply',
   description:
-    "Florida-based, Wyoming-registered marine electrical service desk. 16 years onboard, STCW III/6 ETO, class-aware reports for DNV · BV · ABS · Lloyd's · TL · RINA · ClassNK · IRS. 24/7 worldwide.",
+    "Florida-based, Wyoming-registered marine electrical service desk. STCW III/6 ETO and control-system engineer, class-aware reports for DNV · BV · ABS · Lloyd's · TL · RINA · ClassNK · IRS. 24/7 worldwide.",
   alternates: { canonical: '/about' },
   openGraph: {
-    title: 'About Levent Marine — 16 yr ETO, US-registered, worldwide',
+    title: 'About Levent Marine — STCW III/6 ETO, US-registered, worldwide',
     description:
-      'Marine electrical service and parts supply by an active STCW III/6 Electro-Technical Officer. Class-aware paperwork, US-port response, AOG parts dispatch.',
+      'Marine electrical service and parts supply by an active STCW III/6 Electro-Technical Officer and control-system engineer. Class-aware paperwork, US-port response, AOG parts dispatch.',
     type: 'profile'
   }
 };
@@ -89,7 +89,7 @@ export default function AboutPage() {
       <section className="py-12 bg-white border-b border-line">
         <div className="container-x">
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <li className="stat"><span className="num">16 yr</span><span className="lbl">{t('about.statsYearsLbl')}</span></li>
+            <li className="stat"><span className="num">19</span><span className="lbl">{t('about.statsYearsLbl')}</span></li>
             <li className="stat"><span className="num">25</span><span className="lbl">{t('about.statsPortsLbl')}</span></li>
             <li className="stat"><span className="num">24/7</span><span className="lbl">{t('about.statsAogLbl')}</span></li>
             <li className="stat"><span className="num">8</span><span className="lbl">{t('about.statsClassLbl')}</span></li>
