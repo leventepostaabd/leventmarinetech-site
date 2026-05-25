@@ -58,26 +58,32 @@ export default function HeroDoor({
           loop
           playsInline
           poster={image}
-          className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-[1200ms] group-hover:scale-[1.03]"
+          className="absolute inset-0 h-full w-full object-cover opacity-95 brightness-110 saturate-[1.12] transition-transform duration-[1200ms] group-hover:scale-[1.03]"
           aria-hidden
         />
       ) : (
         <div
           aria-hidden
-          className="absolute inset-0 bg-cover bg-center opacity-60 transition-transform duration-[1200ms] group-hover:scale-[1.03]"
+          className="absolute inset-0 bg-cover bg-center opacity-100 brightness-110 contrast-[1.05] saturate-[1.12] transition-transform duration-[1200ms] group-hover:scale-[1.03]"
           style={{ backgroundImage: `url(${image})` }}
         />
       )}
 
-      {/* Color wash for legibility */}
+      {/* Color wash for legibility — lightened so the artwork stays vivid; a
+          small bottom-anchored darkening keeps the centred white label + CTA
+          readable without dulling the whole image. */}
       <div
         aria-hidden
         className={[
           'absolute inset-0',
           side === 'left'
-            ? 'bg-gradient-to-br from-navy-900/85 via-navy-700/60 to-navy-700/30'
-            : 'bg-gradient-to-bl from-navy-900/85 via-navy-700/60 to-navy-700/30'
+            ? 'bg-gradient-to-br from-navy-900/55 via-navy-700/25 to-navy-700/5'
+            : 'bg-gradient-to-bl from-navy-900/55 via-navy-700/25 to-navy-700/5'
         ].join(' ')}
+      />
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-navy-900/55 via-navy-900/15 to-transparent"
       />
 
       {/* Soft amber radial accent */}
