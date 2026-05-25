@@ -40,7 +40,7 @@ export default function ProductQuoteModal({
   open: boolean;
   onClose: () => void;
   onAdded?: () => void;
-  locale: 'en' | 'tr';
+  locale: Locale;
 }) {
   const [qty, setQty] = useState(1);
   const [mounted, setMounted] = useState(false);

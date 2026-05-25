@@ -159,7 +159,7 @@ function round2(n: number) {
 }
 
 /** USD formatter, no rounding (figures already round2). */
-export function fmt(n: number, locale: 'en' | 'tr' = 'en') {
+export function fmt(n: number, locale: Locale = 'en') {
   return new Intl.NumberFormat(locale === 'tr' ? 'tr-TR' : 'en-US', {
     style: 'currency',
     currency: 'USD',

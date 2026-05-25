@@ -6,7 +6,10 @@
     "about": "About",
     "contact": "Contact",
     "callHotline": "24/7 Hotline",
-    "emergency": "Emergency"
+    "emergency": "Emergency",
+    "home": "Home",
+    "ports": "US Ports",
+    "knowledge": "Knowledge"
   },
   "home": {
     "kicker": "Florida-based operations · Wyoming LLC",
@@ -21,7 +24,11 @@
     "tileSupplyKicker": "02 · SUPPLY",
     "tileSupplyTitle": "Technical Parts Supply",
     "tileSupplyLead": "Obsolete OEM, AOG emergency, compatible alternative, repack and ship. We source, verify, and deliver to vessel / agent / port.",
-    "searchPlaceholder": "Search by part number, maker, vessel system, or upload a photo…"
+    "searchPlaceholder": "Search by part number, maker, vessel system, or upload a photo…",
+    "doorServiceKicker": "Engineer on board",
+    "doorServiceCta": "I need service",
+    "doorSupplyKicker": "Parts on the way",
+    "doorSupplyCta": "I need parts"
   },
   "wizard": {
     "step": "Step",

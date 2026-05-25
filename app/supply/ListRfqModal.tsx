@@ -30,7 +30,7 @@ export default function ListRfqModal({
 }: {
   open: boolean;
   onClose: () => void;
-  locale: 'en' | 'tr';
+  locale: Locale;
   /** Files pre-attached when the modal opens — used by the page-level
       drag-drop interceptor in SourcingChannelTabs. */
   initialFiles?: File[] | null;

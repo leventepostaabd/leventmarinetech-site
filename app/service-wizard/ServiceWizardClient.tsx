@@ -50,7 +50,7 @@ export default function ServiceWizardClient({
   defaultSystem?: string;
   usPorts: string[];
   copy: WizardCopy;
-  locale?: 'en' | 'tr';
+  locale?: Locale;
 }) {
   const params = useSearchParams();
   const initialSystem = params.get('system') ?? defaultSystem ?? '';

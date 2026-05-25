@@ -24,7 +24,7 @@ import { ingestInboundForm } from '@/lib/crm';
  *       imo?: string
  *     },
  *     notes?:  string,
- *     locale?: 'en' | 'tr'
+ *     locale?: Locale
  *   }
  *
  * Legacy v1 fields (vesselType, problemCategory, …) are still accepted

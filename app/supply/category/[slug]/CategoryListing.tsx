@@ -6,7 +6,7 @@ import type { ProductContent } from '@/lib/content';
 type Props = {
   products: ProductContent[];
   brands: string[];
-  locale: 'en' | 'tr';
+  locale: Locale;
   labels: {
     inStock: string;
     getQuote: string;

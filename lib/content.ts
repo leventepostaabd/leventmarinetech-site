@@ -165,7 +165,7 @@ export type ProductsFile = {
   generated?: string;
   currency?: string;
   note?: string;
-  labels?: Record<'en' | 'tr', ProductLabels>;
+  labels?: Record<Locale, ProductLabels>;
   categories?: Category[];
   products: ProductContent[];
 };
@@ -273,8 +273,8 @@ export function readCategories(): Category[] {
   return readProductsFile().categories ?? [];
 }
 
-export function readProductLabels(locale: 'en' | 'tr' = 'en'): ProductLabels {
-  const labels = readProductsFile().labels;
+export function readProductLabels(locale: Locale = 'en'): ProductLabels {
+  const labels = readProductsFile().labels as Record<string, ProductLabels> | undefined;
   if (labels && labels[locale]) return labels[locale];
   // Sensible fallback so pages render even if labels missing.
   return {

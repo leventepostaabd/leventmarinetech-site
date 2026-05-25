@@ -7,7 +7,7 @@ import { SITE } from '@/lib/site';
 export type EmergencyModalProps = {
   open: boolean;
   onClose: () => void;
-  locale: 'en' | 'tr';
+  locale: Locale;
 };
 
 type FormState = {
@@ -65,7 +65,7 @@ const COPY = {
 } as const;
 
 export default function EmergencyModal({ open, onClose, locale }: EmergencyModalProps) {
-  const t = COPY[locale];
+  const t = COPY[locale as keyof typeof COPY] ?? COPY.en;
   const overlayRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const firstFocusRef = useRef<HTMLAnchorElement>(null);

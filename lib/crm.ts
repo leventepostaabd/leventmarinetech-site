@@ -561,12 +561,12 @@ function priorityScoreForInbound(urgency: string | null | undefined, track: Lead
   return 40;
 }
 
-export function stageLabel(stage: LeadStage, locale: 'en' | 'tr' = 'en'): string {
+export function stageLabel(stage: LeadStage, locale: Locale = 'en'): string {
   const map = {
     en: { new: 'New', contacted: 'Contacted', replied: 'Replied', quoting: 'Quoting', won: 'Won', lost: 'Lost' },
     tr: { new: 'Yeni', contacted: 'İletildi', replied: 'Yanıtlandı', quoting: 'Teklif', won: 'Kazandı', lost: 'Kayıp' }
   } as const;
-  return map[locale][stage];
+  return (map[locale as keyof typeof map] ?? map.en)[stage];
 }
 
 export function sourceLabel(src: LeadSource): string {

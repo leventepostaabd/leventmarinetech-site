@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server';
 
+const LOCALES = ['en', 'tr', 'el', 'es', 'de'];
+
 export async function POST(req: Request) {
   const { locale, returnTo } = await req.json().catch(() => ({}));
-  const valid = locale === 'en' || locale === 'tr' ? locale : 'en';
+  const valid = LOCALES.includes(locale) ? locale : 'en';
   const res = NextResponse.json({ ok: true, locale: valid });
   res.cookies.set('lm.locale', valid, {
     path: '/',

@@ -19,7 +19,7 @@ export default function ServiceTile({
   variant = 'tile'
 }: {
   s: ServiceContent;
-  locale?: 'en' | 'tr';
+  locale?: Locale;
   variant?: 'tile' | 'compact';
 }) {
   const name = locale === 'tr' ? s.name_tr : s.name_en;

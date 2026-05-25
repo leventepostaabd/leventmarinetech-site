@@ -6,9 +6,10 @@ import HeroDoor from './HeroDoor';
 import EmergencyModal from './EmergencyModal';
 import TrustStats from './TrustStats';
 import { SITE } from '@/lib/site';
+import { ct } from '@/lib/i18n-client';
 
 export type HeroProps = {
-  locale: 'en' | 'tr';
+  locale: Locale;
   /** Slogan from i18n (preferred). Falls back to P4 literal. */
   slogan?: string;
   /** Optional CTA labels override (i18n). */
@@ -42,27 +43,19 @@ export default function Hero({
           side="left"
           /* User-provided main artwork for the Service door — Wave 4 swap. */
           image="/hero/servicesmain.webp"
-          label_en="Service"
-          label_tr="Servis"
-          kicker_en="Engineer on board"
-          kicker_tr="Mühendis gemide"
+          label={ct(locale, 'nav.service')}
+          kicker={ct(locale, 'home.doorServiceKicker')}
           ctaHref="/service-wizard"
-          ctaLabel_en="I need service"
-          ctaLabel_tr="Servis istiyorum"
-          locale={locale}
+          ctaLabel={serviceCta ?? ct(locale, 'home.doorServiceCta')}
         />
         <HeroDoor
           side="right"
           /* User-provided main artwork for the Supply door — Wave 4 swap. */
           image="/hero/supplymain.webp"
-          label_en="Supply"
-          label_tr="Tedarik"
-          kicker_en="Parts on the way"
-          kicker_tr="Parça yolda"
+          label={ct(locale, 'nav.supply')}
+          kicker={ct(locale, 'home.doorSupplyKicker')}
           ctaHref="/supply"
-          ctaLabel_en="I need parts"
-          ctaLabel_tr="Parça istiyorum"
-          locale={locale}
+          ctaLabel={supplyCta ?? ct(locale, 'home.doorSupplyCta')}
         />
       </div>
 

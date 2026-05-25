@@ -12,7 +12,7 @@ const BASE = `https://wa.me/${PHONE}`;
 
 export type WhatsAppCtx = {
   /** UI language for the template. Defaults to English. */
-  locale?: 'en' | 'tr';
+  locale?: Locale;
   /** What the customer is asking for. */
   intent?: 'service' | 'supply' | 'emergency' | 'general' | 'product';
   /** Pre-fill for known context. */
@@ -26,7 +26,7 @@ export type WhatsAppCtx = {
   description?: string;
 };
 
-function intro(locale: 'en' | 'tr', intent: WhatsAppCtx['intent']) {
+function intro(locale: Locale, intent: WhatsAppCtx['intent']) {
   const tr = {
     service:   'Merhaba Levent Marine,\n\nGemide servis ihtiyacımız var:',
     supply:    'Merhaba Levent Marine,\n\nAşağıdaki parça için teklif rica ediyorum:',
@@ -45,7 +45,7 @@ function intro(locale: 'en' | 'tr', intent: WhatsAppCtx['intent']) {
   return locale === 'tr' ? tr[key] : en[key];
 }
 
-function fields(locale: 'en' | 'tr', ctx: WhatsAppCtx): string[] {
+function fields(locale: Locale, ctx: WhatsAppCtx): string[] {
   const labelOf = (en: string, tr: string) => (locale === 'tr' ? tr : en);
   const out: string[] = [];
 
