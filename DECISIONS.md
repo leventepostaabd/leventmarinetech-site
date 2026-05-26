@@ -161,4 +161,11 @@ gelen RFQ'ları birleştiren CRM admin paneli kararları. Wave 6 başlangıcı.
 
 ---
 
-## Oturum 3 — _henüz yok_
+## Oturum 3 — Tedarik (supply) yönü
+
+| # | Karar | Sebep |
+|---|---|---|
+| S6 | Amazon + eBay marketplace API entegrasyonu **yapılmayacak**; müşteri-yüzü supply, **elle küre edilmiş kendi kataloğumuzu** (`content/products.json`) gösterir, istemci tarafında filtrelenir | Marketplace araması alakasız/gri-pazar sonuçları getiriyordu; satılacak ürünleri biz seçeriz, sipariş gelince kaynağı zaten biliyoruz |
+| S7 | Mouser + Digi-Key + Grainger canlı araması **"dağıtıcı ağında ara" yedeği** olarak kalır (müşteri açıkça isteyince çalışır), varsayılan grid'i kirletmez | Part-no ile gerçek dağıtıcı sonucu lazım olduğunda; Mouser Order API başvurusu da bu yönde |
+| S8 | `products.json`'da `source`/`source_url` **iç sourcing notu** olarak tutulur, müşteriye gösterilmez; fiyat asla gösterilmez (F3/T3) | Sipariş gelince nereden alacağımızı görmek için faydalı, ama müşteri-yüzü temiz kalır |
+

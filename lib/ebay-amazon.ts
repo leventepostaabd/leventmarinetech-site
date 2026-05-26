@@ -285,16 +285,13 @@ export async function searchEbay(
 /**
  * Unified search across every configured catalog provider.
  *
- * Order returned matches our quality priority — catalog distributors
- * (Mouser, Digi-Key, Grainger) before the marketplace (eBay) before the
- * local Amazon stub. Downstream dedupe should prefer the earlier source
- * when the same MPN appears in multiple buckets.
- *
- * NOTE (2026-05): the eBay feed is PAUSED. Marketplace listings (used /
- * grey-market photos, noisy titles, inconsistent images) were degrading
- * the catalog grid, so only the distributor sources are surfaced for now.
- * Re-enable later by adding 'ebay' back to LIVE_SOURCES — the eBay code
- * path (searchEbay) is left fully intact.
+ * This powers the "search our distributor network" fallback only — the
+ * customer-facing /supply grid shows our own hand-curated catalog, filtered
+ * client-side. Only catalog distributors (Mouser, Digi-Key, Grainger) are
+ * queried live. The marketplace feeds (Amazon Business, eBay) are
+ * intentionally NOT surfaced: their listings (used / grey-market photos,
+ * noisy titles) brought in irrelevant results. The searchEbay /
+ * searchAmazonBusiness code paths are left intact but dormant.
  */
 const LIVE_SOURCES: SupplySource[] = ['mouser', 'digikey', 'grainger'];
 
@@ -314,8 +311,6 @@ export async function searchAllSources(
   if (LIVE_SOURCES.includes('mouser')) tasks.push(searchMouser(query, opts));
   if (LIVE_SOURCES.includes('digikey')) tasks.push(searchDigiKey(query, opts));
   if (LIVE_SOURCES.includes('grainger')) tasks.push(searchGrainger(query, opts));
-  if (LIVE_SOURCES.includes('ebay')) tasks.push(searchEbay(query, opts));
-  if (LIVE_SOURCES.includes('amazon')) tasks.push(searchAmazonBusiness(query, opts));
 
   return Promise.all(tasks);
 }
