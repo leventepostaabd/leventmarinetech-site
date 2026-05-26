@@ -52,6 +52,12 @@
     "doorSupplyKicker": "Parça yolda",
     "doorSupplyCta": "Parça istiyorum"
   },
+  "bridge": {
+    "needService": "Gemide elektrik arızası mı var?",
+    "requestService": "7/24 servis talep et →",
+    "needParts": "Parça da mı lazım?",
+    "browseSupply": "Yedek parça tedariğine göz at →"
+  },
   "wizard": {
     "step": "Adım",
     "of": "/",

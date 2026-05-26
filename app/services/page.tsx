@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { readPopularServices, readServices, readServicesFile } from '@/lib/content';
 import { getLocale, getTranslator } from '@/lib/i18n';
 import { pick } from '@/lib/i18n-client';
@@ -58,6 +59,12 @@ export default function ServicesIndex() {
             </h1>
             <p className="mt-2.5 md:mt-3 text-[14.5px] md:text-[16px] leading-relaxed text-ink-muted max-w-2xl">
               {heroSub}
+            </p>
+            <p className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-ink-muted">
+              <span>{t('bridge.needParts')}</span>
+              <Link href="/supply" className="font-semibold text-amber-600 no-underline hover:text-amber">
+                {t('bridge.browseSupply')}
+              </Link>
             </p>
           </section>
         </div>

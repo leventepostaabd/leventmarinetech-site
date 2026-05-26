@@ -30,6 +30,12 @@
     "doorSupplyKicker": "Parts on the way",
     "doorSupplyCta": "I need parts"
   },
+  "bridge": {
+    "needService": "Electrical fault on board?",
+    "requestService": "Request 24/7 service →",
+    "needParts": "Need parts too?",
+    "browseSupply": "Browse parts supply →"
+  },
   "wizard": {
     "step": "Step",
     "of": "/",

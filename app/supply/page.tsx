@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getLocale, getTranslator } from '@/lib/i18n';
 import { SUPPLY_IMAGE } from '@/lib/deck-images';
+import Link from 'next/link';
 import EbayCatalogGrid from './EbayCatalogGrid';
 import SourcingChannelTabs from './SourcingChannelTabs';
 import ServiceImageDeck from '@/components/ServiceImageDeck';
@@ -132,6 +133,12 @@ export default function SupplyIndex() {
             </h1>
             <p className="mt-2.5 md:mt-3 text-[14.5px] md:text-[16px] leading-relaxed text-ink-muted max-w-2xl">
               {heroSub}
+            </p>
+            <p className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-ink-muted">
+              <span>{t('bridge.needService')}</span>
+              <Link href="/service-wizard" className="font-semibold text-amber-600 no-underline hover:text-amber">
+                {t('bridge.requestService')}
+              </Link>
             </p>
           </section>
 

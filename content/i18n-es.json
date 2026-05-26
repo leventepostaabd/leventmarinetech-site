@@ -30,6 +30,12 @@
     "doorSupplyKicker": "Repuestos en camino",
     "doorSupplyCta": "Necesito repuestos"
   },
+  "bridge": {
+    "needService": "¿Avería eléctrica a bordo?",
+    "requestService": "Solicitar servicio 24/7 →",
+    "needParts": "¿También necesita repuestos?",
+    "browseSupply": "Ver el suministro de repuestos →"
+  },
   "wizard": {
     "step": "Paso",
     "of": "/",
