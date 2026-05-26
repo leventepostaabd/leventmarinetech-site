@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getRegion, readRegionsList } from '@/lib/content';
+import { getLocale, getTranslator } from '@/lib/i18n';
 import { SITE } from '@/lib/site';
 import { breadcrumbSchema, localBusinessSchema } from '@/lib/schema-org';
 
@@ -31,6 +32,7 @@ export default function PortPage({ params }: Params) {
   const r = getRegion(params.slug);
   if (!r) notFound();
 
+  const t = getTranslator(getLocale());
   const url = `${SITE.url}/ports/${r.slug}`;
   const breadcrumb = breadcrumbSchema([
     { name: 'Home',     url: SITE.url },
@@ -58,13 +60,13 @@ export default function PortPage({ params }: Params) {
               <path d="M19 12H5" />
               <path d="M12 19l-7-7 7-7" />
             </svg>
-            All US ports
+            {t('portDetail.allPorts')}
           </Link>
 
           <nav className="text-[12px] font-mono text-white/55 mb-6" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-amber no-underline">Home</Link>
+            <Link href="/" className="hover:text-amber no-underline">{t('portDetail.breadcrumbHome')}</Link>
             <span className="mx-2">/</span>
-            <Link href="/ports" className="hover:text-amber no-underline">US Ports</Link>
+            <Link href="/ports" className="hover:text-amber no-underline">{t('portDetail.breadcrumbPorts')}</Link>
             <span className="mx-2">/</span>
             <span className="text-white">{r.city}, {r.state}</span>
           </nav>
@@ -76,7 +78,7 @@ export default function PortPage({ params }: Params) {
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link href={`/service-wizard?port=${encodeURIComponent(r.city)}`} className="btn-accent btn-lg">
-              Request service at {r.city} →
+              {t('portDetail.requestPrefix')} {r.city} →
             </Link>
             <a
               href={SITE.whatsappUS}
@@ -84,7 +86,7 @@ export default function PortPage({ params }: Params) {
               rel="noopener"
               className="btn-ghost btn-lg !bg-transparent !text-white !border-white/30 hover:!bg-white/10"
             >
-              WhatsApp US
+              {t('portDetail.whatsappUs')}
             </a>
           </div>
           {r.logistics?.responseNote && (
@@ -98,8 +100,8 @@ export default function PortPage({ params }: Params) {
         <section className="py-12 md:py-14 bg-white">
           <div className="container-x grid gap-10 md:grid-cols-2">
             <div>
-              <div className="kicker mb-3">Local logistics</div>
-              <h2 className="mb-4 text-[24px]">Getting an engineer and a part on board.</h2>
+              <div className="kicker mb-3">{t('portDetail.logisticsKicker')}</div>
+              <h2 className="mb-4 text-[24px]">{t('portDetail.logisticsH2')}</h2>
               <p className="text-ink-muted leading-relaxed text-[14.5px]">
                 {r.logistics.responseNote}
               </p>
@@ -108,7 +110,7 @@ export default function PortPage({ params }: Params) {
               {r.logistics.airports?.length > 0 && (
                 <div>
                   <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-amber-600 mb-2">
-                    Nearest airports
+                    {t('portDetail.airports')}
                   </div>
                   <ul className="flex flex-wrap gap-2">
                     {r.logistics.airports.map((a) => (
@@ -120,7 +122,7 @@ export default function PortPage({ params }: Params) {
               {r.logistics.freightHubs?.length > 0 && (
                 <div>
                   <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-amber-600 mb-2">
-                    Freight gateways
+                    {t('portDetail.freightHubs')}
                   </div>
                   <ul className="flex flex-wrap gap-2">
                     {r.logistics.freightHubs.map((f) => (
@@ -138,8 +140,8 @@ export default function PortPage({ params }: Params) {
       {r.ports && r.ports.length > 0 && (
         <section className="py-12 md:py-14 bg-navy-50 border-y border-line">
           <div className="container-x">
-            <div className="kicker mb-3">Terminals we attend</div>
-            <h2 className="mb-6 text-[24px] max-w-3xl">{r.city} — berth-level coverage.</h2>
+            <div className="kicker mb-3">{t('portDetail.terminalsKicker')}</div>
+            <h2 className="mb-6 text-[24px] max-w-3xl">{r.city} {t('portDetail.terminalsH2Suffix')}</h2>
             <ul className="grid gap-4 md:grid-cols-2">
               {r.ports.map((p) => (
                 <li key={p.name} className="card">
@@ -167,8 +169,8 @@ export default function PortPage({ params }: Params) {
       {r.scenarios && r.scenarios.length > 0 && (
         <section className="py-12 md:py-14 bg-white">
           <div className="container-x">
-            <div className="kicker mb-3">Recent attendance patterns</div>
-            <h2 className="mb-6 text-[24px] max-w-3xl">What we typically get called for at {r.city}.</h2>
+            <div className="kicker mb-3">{t('portDetail.scenariosKicker')}</div>
+            <h2 className="mb-6 text-[24px] max-w-3xl">{t('portDetail.scenariosH2Prefix')} {r.city}.</h2>
             <ul className="grid gap-5 md:grid-cols-2">
               {r.scenarios.map((s, i) => (
                 <li key={i} className="rounded-2xl bg-navy-50 ring-1 ring-line/60 p-5 md:p-6">
@@ -187,7 +189,7 @@ export default function PortPage({ params }: Params) {
           <div className="container-x text-center">
             <p className="text-ink-muted text-[14px] max-w-2xl mx-auto leading-relaxed">
               <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-amber-700 block mb-1.5">
-                Invoicing
+                {t('portDetail.invoicingLabel')}
               </span>
               {r.usdInvoicing}
             </p>
@@ -199,18 +201,17 @@ export default function PortPage({ params }: Params) {
       <section className="py-14 md:py-16 bg-navy-700 text-white">
         <div className="container-x text-center">
           <h2 className="text-white mb-3 text-balance">
-            Vessel calling {r.city}?
+            {t('portDetail.ctaPrefix')} {r.city}?
           </h2>
           <p className="text-white/70 max-w-xl mx-auto mb-7">
-            Three quick questions — system, ETA, contact. Engineer on board within hours; AOG
-            spares same day.
+            {t('portDetail.ctaLead')}
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Link
               href={`/service-wizard?port=${encodeURIComponent(r.city)}`}
               className="btn-accent btn-lg"
             >
-              Request service →
+              {t('portDetail.ctaRequest')}
             </Link>
             <a
               href={SITE.whatsappUS}
@@ -218,7 +219,7 @@ export default function PortPage({ params }: Params) {
               rel="noopener"
               className="btn-ghost btn-lg !bg-transparent !text-white !border-white/30 hover:!bg-white/10"
             >
-              WhatsApp US
+              {t('portDetail.whatsappUs')}
             </a>
           </div>
         </div>

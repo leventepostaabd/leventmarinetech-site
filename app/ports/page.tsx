@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { readRegionsList } from '@/lib/content';
+import { getLocale, getTranslator } from '@/lib/i18n';
 import { SITE } from '@/lib/site';
 import { breadcrumbSchema } from '@/lib/schema-org';
 
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 
 export default function PortsIndex() {
   const regions = readRegionsList();
+  const t = getTranslator(getLocale());
   const breadcrumb = breadcrumbSchema([
     { name: 'Home', url: `${SITE.url}/` },
     { name: 'US Ports', url: `${SITE.url}/ports` }
@@ -34,15 +36,12 @@ export default function PortsIndex() {
       <article className="lm-screen-body">
         <section className="bg-navy-700 text-white py-16 md:py-20">
           <div className="container-x">
-            <div className="kicker text-white/70 mb-3">US port coverage</div>
+            <div className="kicker text-white/70 mb-3">{t('portsIndex.kicker')}</div>
             <h1 className="text-white text-balance max-w-4xl text-[28px] md:text-[40px] leading-[1.1]">
-              Marine electrical service at every major US port.
+              {t('portsIndex.h1')}
             </h1>
             <p className="mt-5 text-[15.5px] md:text-[17px] text-white/75 max-w-3xl leading-relaxed">
-              Florida-based operations, Wyoming LLC. We dispatch an engineer to your vessel
-              within hours at any US East Coast, Gulf, West Coast or Pacific port. AOG-grade
-              spares ship the same day. Pick the port — port-specific intake notes, local
-              freight gateways and likely fault patterns wait inside.
+              {t('portsIndex.lead')}
             </p>
           </div>
         </section>
@@ -66,7 +65,7 @@ export default function PortsIndex() {
                       {r.intro}
                     </p>
                     <div className="mt-auto pt-3 border-t border-line text-[11px] font-mono text-ink-subtle">
-                      {r.logistics?.responseNote ?? 'Engineer on board within hours'}
+                      {r.logistics?.responseNote ?? t('portsIndex.responseFallback')}
                     </div>
                   </Link>
                 </li>
@@ -77,17 +76,16 @@ export default function PortsIndex() {
 
         <section className="py-12 bg-navy-50 border-y border-line">
           <div className="container-x text-center">
-            <h2 className="text-[22px] mb-2">Port not listed?</h2>
+            <h2 className="text-[22px] mb-2">{t('portsIndex.notListedH2')}</h2>
             <p className="text-ink-muted max-w-2xl mx-auto mb-5 text-[14.5px]">
-              Worldwide attendance available on request. Tell us the port, the system and the
-              ETA — we route from the nearest US gateway and ship parts on the same routing.
+              {t('portsIndex.notListedLead')}
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Link href="/service-wizard" className="btn-primary btn-md no-underline">
-                Request service
+                {t('portsIndex.requestService')}
               </Link>
               <Link href="/contact" className="btn-ghost btn-md no-underline">
-                Contact
+                {t('portsIndex.contact')}
               </Link>
             </div>
           </div>
