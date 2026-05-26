@@ -18,3 +18,13 @@ export function ct(locale: Locale, key: string): string {
   const v = walk(DICT[locale], key) ?? walk(DICT.en, key) ?? key;
   return typeof v === 'string' ? v : key;
 }
+
+/**
+ * Pick a localised field off a content object that uses the `<base>_<locale>`
+ * convention (e.g. name_en / name_tr / name_el). Falls back to the English
+ * field so locales without a translation degrade gracefully.
+ */
+export function pick(obj: Record<string, any> | undefined, base: string, locale: Locale): string {
+  if (!obj) return '';
+  return obj[`${base}_${locale}`] ?? obj[`${base}_en`] ?? '';
+}

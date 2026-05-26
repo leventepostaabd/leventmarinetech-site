@@ -5,6 +5,7 @@ import ServiceImageDeck from '@/components/ServiceImageDeck';
 import InlineHeader from '@/components/InlineHeader';
 import { readServices, readServicesFile } from '@/lib/content';
 import { getLocale } from '@/lib/i18n';
+import { pick } from '@/lib/i18n-client';
 import { SERVICE_IMAGE } from '@/lib/deck-images';
 
 export const metadata: Metadata = {
@@ -64,10 +65,8 @@ export default function Page() {
     .map((s) => ({
       slug: s.slug,
       image: SERVICE_IMAGE[s.slug],
-      name_en: s.name_en,
-      name_tr: s.name_tr,
-      kicker_en: s.kicker_en,
-      kicker_tr: s.kicker_tr
+      name: pick(s, 'name', locale),
+      kicker: pick(s, 'kicker', locale)
     }));
 
   return (

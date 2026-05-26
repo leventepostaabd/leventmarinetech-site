@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { readProducts, readCategories, readProductLabels } from '@/lib/content';
 import { getLocale } from '@/lib/i18n';
+import { pick } from '@/lib/i18n-client';
 
 export const metadata: Metadata = {
   title: 'Catalog — All Categories',
@@ -14,7 +15,7 @@ export default function CategoriesPage() {
   const labels = readProductLabels(locale);
   const products = readProducts();
   const categories = readCategories().sort((a, b) => a.order - b.order);
-  const nameOf = (c: { name_en: string; name_tr: string }) => (locale === 'tr' ? c.name_tr : c.name_en);
+  const nameOf = (c: Record<string, any>) => pick(c, 'name', locale);
 
   return (
     <div className="container-x py-12 md:py-16">

@@ -188,5 +188,49 @@
     "ctaPrefix": "Buque por llegar",
     "ctaLead": "Tres preguntas rápidas — sistema, ETA, contacto. Ingeniero a bordo en cuestión de horas; repuestos AOG el mismo día.",
     "ctaRequest": "Solicitar servicio →"
+  },
+  "services": {
+    "heroLine": "Servicio eléctrico marino con base en Florida. Cada puerto de US, 24/7.",
+    "heroSub": "24/7 — Wyoming LLC, operaciones en Florida. ¿Qué sistema tiene el problema?",
+    "searchPlaceholder": "¿Qué sistema tiene el problema?",
+    "mostRequested": "Más solicitados",
+    "seeAll": "Ver los 19 sistemas",
+    "close": "Cerrar",
+    "noMatches": "Ningún sistema coincide con esa búsqueda.",
+    "allSystems": "Todos los sistemas",
+    "systemsCount": "19 sistemas + Otro",
+    "notListed": "No listado",
+    "details": "Detalles",
+    "requestService": "Solicitar servicio"
+  },
+  "supply": {
+    "heroLine": "Repuestos marinos — abastecidos rápido, entregados a cada puerto de US.",
+    "heroSub": "24/7 — Con base en Florida, Wyoming LLC. Solo cotización, sin precios públicos.",
+    "searchPlaceholder": "Marca, n.º de pieza, modelo, sistema…",
+    "searching": "Buscando en la red de suministro en vivo…",
+    "liveResults": "{n} resultados en vivo",
+    "quoteOnly": "Solo cotización · sin precios",
+    "noMatchTitle": "Aún no hay coincidencias en vivo. Pruebe marca + modelo.",
+    "uploadNameplate": "Subir foto de la placa",
+    "requestAnyway": "Solicitar cotización igualmente",
+    "stepByStep": "Solicitud paso a paso",
+    "unlistedItem": "Pieza no listada",
+    "findEquivalent": "Buscar equivalente",
+    "getQuote": "Solicitar cotización",
+    "brandOnRequest": "Marca a solicitud",
+    "noPhoto": "Sin foto",
+    "clear": "limpiar",
+    "errorSearch": "Búsqueda no disponible temporalmente. Pruebe un término algo distinto.",
+    "errorNetwork": "Error de red. Reintente en un momento.",
+    "deck": {
+      "cables-glands": "Cables y Prensaestopas",
+      "deck-mechanical": "Equipo de Grúas y Cubierta",
+      "engine-room-consumables": "Consumibles de Sala de Máquinas",
+      "msb-components": "Componentes MSB / ESB",
+      "motors-drives": "Motores y Variadores (VFD)",
+      "radar-navigation": "Radar y Navegación de Puente",
+      "automation-plc": "PLC y Automatización",
+      "marine-sensors": "Sensores y Transmisores Marinos"
+    }
   }
 }

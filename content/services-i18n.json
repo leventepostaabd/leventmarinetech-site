@@ -1,0 +1,405 @@
+{
+  "ui": {
+    "search_placeholder": {
+      "el": "Σε ποιο σύστημα υπάρχει το πρόβλημα;",
+      "es": "¿Qué sistema tiene el problema?",
+      "de": "Welches System hat das Problem?"
+    },
+    "popular": {
+      "el": "Πιο ζητούμενα",
+      "es": "Más solicitados",
+      "de": "Am häufigsten angefragt"
+    },
+    "see_all": {
+      "el": "Δείτε όλα τα συστήματα",
+      "es": "Ver todos los sistemas",
+      "de": "Alle Systeme anzeigen"
+    },
+    "close": {
+      "el": "Κλείσιμο",
+      "es": "Cerrar",
+      "de": "Schließen"
+    },
+    "no_matches": {
+      "el": "Κανένα σύστημα δεν ταιριάζει με αυτή την αναζήτηση. Δοκιμάστε «Άλλο / δεν αναφέρεται».",
+      "es": "Ningún sistema coincide con esa búsqueda. Pruebe \"Otro / no listado\".",
+      "de": "Kein System passt zu dieser Suche. Versuchen Sie \"Sonstiges / nicht aufgeführt\"."
+    }
+  },
+  "services": {
+    "generator": {
+      "name": {
+        "el": "Γεννήτρια",
+        "es": "Generador",
+        "de": "Generator"
+      },
+      "kicker": {
+        "el": "Πετρελαίου · Άξονα · Ανάγκης · AVR",
+        "es": "Diésel · De eje · De emergencia · AVR",
+        "de": "Diesel · Wellengenerator · Notstrom · AVR"
+      },
+      "summary": {
+        "el": "Κύριες, βοηθητικές, αξονικές και γεννήτριες ανάγκης — ταλάντωση AVR, ολίσθηση τάσης, ενεργοποιήσεις αντίστροφης ισχύος, αστοχίες συγχρονισμού, ανισοκατανομή παράλληλου φορτίου.",
+        "es": "Generadores principales, auxiliares, de eje y de emergencia — oscilación del AVR, deriva de tensión, disparos por potencia inversa, fallos de sincronización, desequilibrio de carga en paralelo.",
+        "de": "Haupt-, Hilfs-, Wellen- und Notstromgeneratoren — AVR-Pendeln, Spannungsdrift, Rückleistungsauslösungen, Synchronisierungsfehler, Lastunsymmetrie im Parallelbetrieb."
+      }
+    },
+    "main-engine-electrical": {
+      "name": {
+        "el": "Κύρια Μηχανή — Ηλεκτρική / Πλευρά Ελέγχου",
+        "es": "Motor Principal — Lado Eléctrico / de Control",
+        "de": "Hauptmaschine — Elektrik / Steuerungsseite"
+      },
+      "kicker": {
+        "el": "Έλεγχος μηχανής · Αισθητήρες · Διατάξεις ασφαλείας",
+        "es": "Control del motor · Sensores · Disparos de seguridad",
+        "de": "Maschinensteuerung · Sensoren · Sicherheitsabschaltungen"
+      },
+      "summary": {
+        "el": "Τηλέγραφος μηχανής, ενεργοποιητές κρεμαγιέρας καυσίμου, αισθητήρες στροφών (RPM), λογική διατάξεων ασφαλείας και βαλβίδες αέρα εκκίνησης σε αργόστροφες και μεσόστροφες μηχανές MAN, Wärtsilä, Hyundai-MAN B&W.",
+        "es": "Telégrafo de máquinas, actuadores de la cremallera de combustible, captadores de RPM, lógica de disparos de seguridad y válvulas de aire de arranque en motores de baja y media velocidad MAN, Wärtsilä, Hyundai-MAN B&W.",
+        "de": "Maschinentelegraf, Aktuatoren der Regelstange, Drehzahlaufnehmer (RPM), Sicherheitsabschaltlogik und Anlassluftventile bei langsam- und mittelschnelllaufenden Motoren von MAN, Wärtsilä, Hyundai-MAN B&W."
+      }
+    },
+    "switchboard": {
+      "name": {
+        "el": "Πίνακας Διανομής (MSB / ESB / PMS)",
+        "es": "Cuadro Eléctrico (MSB / ESB / PMS)",
+        "de": "Schalttafel (MSB / ESB / PMS)"
+      },
+      "kicker": {
+        "el": "Κύριος · Ανάγκης · Διαχείριση ισχύος",
+        "es": "Principal · Emergencia · Gestión de energía",
+        "de": "Haupt · Notstrom · Energiemanagement"
+      },
+      "summary": {
+        "el": "Κύριος πίνακας διανομής, πίνακας ανάγκης, πρωτεύουσα έγχυση ACB, κατανομή φορτίου PMS, αποκατάσταση blackout, διάκριση ζυγο-σύνδεσης (bus-tie).",
+        "es": "Cuadro principal, cuadro de emergencia, inyección primaria de ACB, reparto de carga PMS, recuperación de apagón, discriminación del acoplamiento de barras (bus-tie).",
+        "de": "Hauptschalttafel, Notschalttafel, ACB-Primäreinspeisung, PMS-Lastverteilung, Blackout-Wiederherstellung, Kuppelschalter-Selektivität (bus-tie)."
+      }
+    },
+    "fire-alarm": {
+      "name": {
+        "el": "Πυρανίχνευση & Συναγερμός Πυρκαγιάς",
+        "es": "Alarma y Detección de Incendios",
+        "de": "Feuermelde- & Branderkennungsanlage"
+      },
+      "kicker": {
+        "el": "Autronica · Consilium · Notifier",
+        "es": "Autronica · Consilium · Notifier",
+        "de": "Autronica · Consilium · Notifier"
+      },
+      "summary": {
+        "el": "Βλάβες βρόχου, ψευδείς συναγερμοί, ευαισθησία κεφαλής ανιχνευτή, μήτρα απελευθέρωσης CO2/HI-FOG, STI του PA/GA. Έτοιμο για SOLAS Κεφ. II-2.",
+        "es": "Fallos de lazo, falsas alarmas, sensibilidad de la cabeza del detector, matriz de descarga CO2/HI-FOG, STI de PA/GA. Conforme a SOLAS Cap. II-2.",
+        "de": "Schleifenfehler, Fehlalarme, Empfindlichkeit der Melderköpfe, CO2/HI-FOG-Auslösematrix, STI der PA/GA. Bereit für SOLAS Kap. II-2."
+      }
+    },
+    "engine-room-alarm": {
+      "name": {
+        "el": "Συναγερμός / Επιτήρηση Μηχανοστασίου",
+        "es": "Alarma / Monitorización de la Sala de Máquinas",
+        "de": "Maschinenraumalarm / -überwachung"
+      },
+      "kicker": {
+        "el": "AMS · Συναγερμός επέκτασης · Dead-man",
+        "es": "AMS · Alarma de extensión · Dead-man",
+        "de": "AMS · Erweiterungsalarm · Dead-man"
+      },
+      "summary": {
+        "el": "Πίνακες AMS (Praxis, Kongsberg, NORIS), dead-man μηχανικού, συναγερμός επέκτασης, βαθμονόμηση αισθητήρων σε βρόχους PT100 / 4–20 mA.",
+        "es": "Paneles AMS (Praxis, Kongsberg, NORIS), dead-man del maquinista, alarma de extensión, calibración de sensores en lazos PT100 / 4–20 mA.",
+        "de": "AMS-Panels (Praxis, Kongsberg, NORIS), Dead-man des Ingenieurs, Erweiterungsalarm, Sensorkalibrierung an PT100- / 4–20-mA-Schleifen."
+      }
+    },
+    "bridge-navigation": {
+      "name": {
+        "el": "Ναυτιλία Γέφυρας",
+        "es": "Navegación del Puente",
+        "de": "Brückennavigation"
+      },
+      "kicker": {
+        "el": "Radar · ECDIS · Γυροσκόπιο · Αυτόματος πλοηγός",
+        "es": "Radar · ECDIS · Girocompás · Piloto automático",
+        "de": "Radar · ECDIS · Kreiselkompass · Autopilot"
+      },
+      "summary": {
+        "el": "Furuno, JRC, Sperry, Raytheon Anschütz. Ασθενής ηχώ μάγνητρον, παγώματα ECDIS, ευθυγράμμιση γυροσκοπίου, ταλάντωση πηδαλίου αυτόματου πλοηγού.",
+        "es": "Furuno, JRC, Sperry, Raytheon Anschütz. Eco débil del magnetrón, bloqueos del ECDIS, alineación del girocompás, oscilación del timón del piloto automático.",
+        "de": "Furuno, JRC, Sperry, Raytheon Anschütz. Schwaches Magnetron-Echo, ECDIS-Abstürze, Kreiselkompass-Ausrichtung, Ruderpendeln des Autopiloten."
+      }
+    },
+    "gmdss-communication": {
+      "name": {
+        "el": "Επικοινωνίες / GMDSS",
+        "es": "Comunicaciones / GMDSS",
+        "de": "Kommunikation / GMDSS"
+      },
+      "kicker": {
+        "el": "VHF · MF/HF · INMARSAT · EPIRB",
+        "es": "VHF · MF/HF · INMARSAT · EPIRB",
+        "de": "VHF · MF/HF · INMARSAT · EPIRB"
+      },
+      "summary": {
+        "el": "Ετήσια επιθεώρηση ραδιοεπικοινωνιών GMDSS, VHF/MF/HF DSC, INMARSAT-C/FleetBroadband, υδροστατική απελευθέρωση EPIRB, δοκιμές εκφόρτισης εφεδρικής μπαταρίας.",
+        "es": "Inspección anual de radio GMDSS, VHF/MF/HF DSC, INMARSAT-C/FleetBroadband, liberación hidrostática del EPIRB, pruebas de descarga de la batería de reserva.",
+        "de": "Jährliche GMDSS-Funkbesichtigung, VHF/MF/HF DSC, INMARSAT-C/FleetBroadband, hydrostatische Auslösung der EPIRB, Entladetests der Reservebatterie."
+      }
+    },
+    "bwts": {
+      "name": {
+        "el": "BWTS",
+        "es": "BWTS",
+        "de": "BWTS"
+      },
+      "kicker": {
+        "el": "Επεξεργασία θαλάσσιου έρματος",
+        "es": "Tratamiento del agua de lastre",
+        "de": "Ballastwasseraufbereitung"
+      },
+      "summary": {
+        "el": "Alfa Laval PureBallast, Wärtsilä Aquarius, Optimarin, Hyde Guardian. Βλάβες λαμπτήρων UV, βαθμονόμηση αισθητήρων, συμμόρφωση USCG, IMO BWMS Code.",
+        "es": "Alfa Laval PureBallast, Wärtsilä Aquarius, Optimarin, Hyde Guardian. Fallos de lámparas UV, calibración de sensores, cumplimiento de USCG, IMO BWMS Code.",
+        "de": "Alfa Laval PureBallast, Wärtsilä Aquarius, Optimarin, Hyde Guardian. UV-Lampenfehler, Sensorkalibrierung, USCG-Konformität, IMO BWMS Code."
+      }
+    },
+    "crane-deck-machinery": {
+      "name": {
+        "el": "Γερανός & Μηχανήματα Καταστρώματος",
+        "es": "Grúa y Maquinaria de Cubierta",
+        "de": "Kran & Decksmaschinen"
+      },
+      "kicker": {
+        "el": "Γερανός καταστρώματος · Καπάκι αμπαριού · Εργάτης · Πρόσδεση",
+        "es": "Grúa de cubierta · Tapa de escotilla · Molinete · Amarre",
+        "de": "Deckskran · Lukendeckel · Ankerwinde · Festmacherwinde"
+      },
+      "summary": {
+        "el": "Ενεργοποιήσεις VFD γερανού καταστρώματος, βλάβες ακολουθίας καπακιού αμπαριού, υπερφόρτωση εργάτη, ολίσθηση χειριστηρίου (joystick) βαρούλκου πρόσδεσης, τερματικοί διακόπτες γερανού εφοδίων.",
+        "es": "Disparos del VFD de la grúa de cubierta, fallos de secuencia de la tapa de escotilla, sobrecarga del molinete, deriva del joystick del chigre de amarre, finales de carrera de la grúa de provisiones.",
+        "de": "VFD-Auslösungen des Deckskrans, Sequenzfehler des Lukendeckels, Überlastung der Ankerwinde, Joystick-Drift der Festmacherwinde, Endschalter des Proviantkrans."
+      }
+    },
+    "bilge-level": {
+      "name": {
+        "el": "Σεντίνα / Αισθητήρας Στάθμης / Συναγερμός",
+        "es": "Sentina / Sensor de Nivel / Alarma",
+        "de": "Bilge / Füllstandsensor / Alarm"
+      },
+      "kicker": {
+        "el": "Συναγερμός σεντίνας · Μέτρηση δεξαμενών · Διακόπτες πλωτήρα",
+        "es": "Alarma de sentina · Medición de tanques · Interruptores de flotador",
+        "de": "Bilgealarm · Tankpeilung · Schwimmerschalter"
+      },
+      "summary": {
+        "el": "Συναγερμοί σεντίνας, αισθητήρες υψηλής στάθμης κυτών φορτίου, μέτρηση δεξαμενών με radar, διακόπτες πλωτήρα, OCM 15 ppm διαχωριστή ελαιωδών υδάτων.",
+        "es": "Alarmas de sentina, sensores de nivel alto en bodegas de carga, medición de tanques por radar, interruptores de flotador, OCM de 15 ppm del separador de aguas oleosas.",
+        "de": "Bilgealarme, Hochstandsensoren in Laderäumen, Radar-Tankpeilung, Schwimmerschalter, 15-ppm-OCM des Öl-Wasser-Separators."
+      }
+    },
+    "shaft-earthing": {
+      "name": {
+        "el": "Διάταξη Γείωσης Άξονα",
+        "es": "Dispositivo de Puesta a Tierra del Eje",
+        "de": "Wellenerdungsvorrichtung"
+      },
+      "kicker": {
+        "el": "Ψήκτρα · Δακτύλιος ολίσθησης · Γαλβανική προστασία",
+        "es": "Escobilla · Anillo rozante · Protección galvánica",
+        "de": "Bürste · Schleifring · Galvanischer Schutz"
+      },
+      "summary": {
+        "el": "Ψήκτρες γείωσης άξονα, δακτύλιοι ολίσθησης, παρακολούθηση δυναμικού γάστρας-προς-άξονα, προστασία από ρεύματα διαφυγής.",
+        "es": "Escobillas de puesta a tierra del eje, anillos rozantes, monitorización del potencial casco-eje, protección contra corrientes vagabundas.",
+        "de": "Wellenerdungsbürsten, Schleifringe, Überwachung des Rumpf-Wellen-Potenzials, Schutz gegen Streuströme."
+      }
+    },
+    "plc-automation": {
+      "name": {
+        "el": "PLC & Αυτοματισμός / IAS",
+        "es": "PLC y Automatización / IAS",
+        "de": "PLC & Automatisierung / IAS"
+      },
+      "kicker": {
+        "el": "Siemens · Allen-Bradley · Kongsberg",
+        "es": "Siemens · Allen-Bradley · Kongsberg",
+        "de": "Siemens · Allen-Bradley · Kongsberg"
+      },
+      "summary": {
+        "el": "Εντοπισμός βλαβών PLC, επαναπρογραμματισμός IAS, εξορθολογισμός συναγερμών (EEMUA 191), συγχρονισμός εφεδρικής CPU, βασική γραμμή κυβερνοασφάλειας OT.",
+        "es": "Localización de fallos en PLC, reprogramación de IAS, racionalización de alarmas (EEMUA 191), sincronización de CPU redundante, línea base de ciberseguridad OT.",
+        "de": "PLC-Fehlersuche, IAS-Neuprogrammierung, Alarmrationalisierung (EEMUA 191), Synchronisierung redundanter CPU, OT-Cybersicherheits-Baseline."
+      }
+    },
+    "lighting-nav-lights": {
+      "name": {
+        "el": "Φωτισμός & Φανοί Ναυσιπλοΐας",
+        "es": "Iluminación y Luces de Navegación",
+        "de": "Beleuchtung & Navigationslichter"
+      },
+      "kicker": {
+        "el": "Μετατροπή σε LED · COLREG · Φωτισμός ανάγκης",
+        "es": "Reconversión a LED · COLREG · Iluminación de emergencia",
+        "de": "LED-Nachrüstung · COLREG · Notbeleuchtung"
+      },
+      "summary": {
+        "el": "Βλάβες ελεγκτή φανών ναυσιπλοΐας, μετατροπή σε LED με έγκριση τύπου COLREG, προβολείς κυτών φορτίου, αναβαθμίσεις φωτισμού μηχανοστασίου και ανάγκης.",
+        "es": "Fallos del controlador de luces de navegación, reconversión a LED con homologación COLREG, proyectores de bodegas de carga, mejoras de iluminación de sala de máquinas y de emergencia.",
+        "de": "Fehler der Navigationslicht-Steuerung, LED-Nachrüstung mit COLREG-Typgenehmigung, Laderaumstrahler, Modernisierung der Maschinenraum- und Notbeleuchtung."
+      }
+    },
+    "battery-ups": {
+      "name": {
+        "el": "Μπαταρία / UPS",
+        "es": "Batería / UPS",
+        "de": "Batterie / USV"
+      },
+      "kicker": {
+        "el": "Μπαταρία GMDSS · UPS · Μπαταρία εκκίνησης",
+        "es": "Batería GMDSS · UPS · Batería de arranque",
+        "de": "GMDSS-Batterie · USV · Starterbatterie"
+      },
+      "summary": {
+        "el": "Εφεδρική GMDSS, UPS για ναυτιλία, μπαταρίες εκκίνησης για γεννήτρια ανάγκης, υποστήριξη υβριδικού BMS λιθίου.",
+        "es": "Reserva GMDSS, UPS para navegación, baterías de arranque para el grupo de emergencia, soporte de BMS híbrido de litio.",
+        "de": "GMDSS-Reserve, USV für die Navigation, Starterbatterien für das Notstromaggregat, Unterstützung für Lithium-Hybrid-BMS."
+      }
+    },
+    "shore-connection": {
+      "name": {
+        "el": "Σύνδεση Ξηράς",
+        "es": "Conexión a Tierra",
+        "de": "Landstromanschluss"
+      },
+      "kicker": {
+        "el": "Cold ironing · HV/LV · IEC/IEEE 80005-1",
+        "es": "Cold ironing · HV/LV · IEC/IEEE 80005-1",
+        "de": "Cold Ironing · HV/LV · IEC/IEEE 80005-1"
+      },
+      "summary": {
+        "el": "Ρευματοδότηση ξηράς υψηλής και χαμηλής τάσης, διατάξεις μετασχηματιστή απομόνωσης, παρακολούθηση σφάλματος γείωσης, πακέτα μετασκευής σύμφωνα με IEC/IEEE 80005-1.",
+        "es": "Suministro eléctrico desde tierra de alta y baja tensión, esquemas de transformador de aislamiento, monitorización de fallo a tierra, paquetes de adaptación conformes a IEC/IEEE 80005-1.",
+        "de": "Landstromversorgung in Hoch- und Niederspannung, Trenntransformator-Schaltungen, Erdschlussüberwachung, Nachrüstpakete gemäß IEC/IEEE 80005-1."
+      }
+    },
+    "transformer": {
+      "name": {
+        "el": "Μετασχηματιστής",
+        "es": "Transformador",
+        "de": "Transformator"
+      },
+      "kicker": {
+        "el": "440/230V · Φωτισμός · Υποβιβασμός HV",
+        "es": "440/230V · Iluminación · Reducción de HV",
+        "de": "440/230V · Beleuchtung · HV-Heruntertransformierung"
+      },
+      "summary": {
+        "el": "Μετασχηματιστές υποβιβασμού, μετασχηματιστές φωτισμού, μονάδες HV (6.6 kV / 11 kV). Δοκιμές λόγου τυλιγμάτων, διανυσματικής ομάδας, απωλειών κενού φορτίου και φορτίου.",
+        "es": "Transformadores reductores, transformadores de iluminación, unidades de HV (6.6 kV / 11 kV). Pruebas de relación de transformación, grupo vectorial, pérdidas en vacío y en carga.",
+        "de": "Heruntertransformierende Transformatoren, Beleuchtungstransformatoren, HV-Einheiten (6.6 kV / 11 kV). Prüfung von Übersetzungsverhältnis, Schaltgruppe, Leerlauf- und Lastverlusten."
+      }
+    },
+    "ac-dc-motor": {
+      "name": {
+        "el": "Κινητήρας AC/DC",
+        "es": "Motor AC/DC",
+        "de": "AC/DC-Motor"
+      },
+      "kicker": {
+        "el": "Προωστήρας πλώρης · Ανεμιστήρας · Κινητήρας αντλίας",
+        "es": "Hélice de proa · Ventilador · Motor de bomba",
+        "de": "Bugstrahlruder · Lüfter · Pumpenmotor"
+      },
+      "summary": {
+        "el": "Προωστήρας πλώρης, ανεμιστήρες μηχανοστασίου, αντλίες φορτίου, αντλίες ψυκτικού νερού. IR/PI κινητήρα, κατάσταση εδράνων, παραμετροποίηση VFD.",
+        "es": "Hélice de proa, ventiladores de sala de máquinas, bombas de carga, bombas de agua de refrigeración. IR/PI del motor, estado de los rodamientos, ajuste de parámetros del VFD.",
+        "de": "Bugstrahlruder, Maschinenraumlüfter, Ladepumpen, Kühlwasserpumpen. Motor-IR/PI, Lagerzustand, VFD-Parametrierung."
+      }
+    },
+    "hvac-automation": {
+      "name": {
+        "el": "Αυτοματισμός HVAC",
+        "es": "Automatización HVAC",
+        "de": "HVAC-Automatisierung"
+      },
+      "kicker": {
+        "el": "Ενδιαίτηση · Εξαερισμός ΜΧ · Reefer",
+        "es": "Acomodación · Ventilación de sala de máquinas · Reefer",
+        "de": "Unterkunft · Maschinenraumlüftung · Reefer"
+      },
+      "summary": {
+        "el": "Ελεγκτές HVAC ενδιαίτησης, μανδαλώσεις εξαερισμού μηχανοστασίου με απελευθέρωση CO2, σημεία σύνδεσης εμπορευματοκιβωτίων reefer.",
+        "es": "Controladores HVAC de acomodación, enclavamientos de la ventilación de la sala de máquinas con la descarga de CO2, puntos de conexión de contenedores reefer.",
+        "de": "HVAC-Steuerungen der Unterkunft, Verriegelungen der Maschinenraumlüftung mit CO2-Auslösung, Anschlusspunkte für Reefer-Container."
+      }
+    },
+    "cctv-vdr": {
+      "name": {
+        "el": "CCTV / VDR",
+        "es": "CCTV / VDR",
+        "de": "CCTV / VDR"
+      },
+      "kicker": {
+        "el": "VDR γέφυρας · CCTV μηχανοστασίου · Κάμερα φορτίου",
+        "es": "VDR del puente · CCTV de sala de máquinas · Cámara de carga",
+        "de": "Brücken-VDR · Maschinenraum-CCTV · Ladungskamera"
+      },
+      "summary": {
+        "el": "Ετήσια δοκιμή απόδοσης VDR, εγγραφή καναλιού ήχου γέφυρας, CCTV μηχανοστασίου και κυτών φορτίου, έλεγχος περιόδου διατήρησης NVR.",
+        "es": "Prueba anual de rendimiento del VDR, grabación del canal de audio del puente, CCTV de la sala de máquinas y de las bodegas de carga, auditoría del período de retención del NVR.",
+        "de": "Jährliche VDR-Leistungsprüfung, Aufzeichnung des Brücken-Audiokanals, CCTV in Maschinenraum und Laderäumen, Prüfung der NVR-Aufbewahrungsdauer."
+      }
+    },
+    "smoke-detection": {
+      "name": {
+        "el": "Ανίχνευση Καπνού",
+        "es": "Detección de Humo",
+        "de": "Raucherkennung"
+      },
+      "kicker": {
+        "el": "Ιονισμού · Οπτικός · Θερμικού ρυθμού",
+        "es": "Ionización · Óptico · Termovelocimétrico",
+        "de": "Ionisation · Optisch · Wärmedifferential"
+      },
+      "summary": {
+        "el": "Αυτόνομα συστήματα ανίχνευσης καπνού — ολίσθηση ευαισθησίας, κακή ευθυγράμμιση ανιχνευτή δέσμης, απόφραξη γραμμής δειγματοληψίας. Αρχεία δοκιμών συμβατά με SOLAS / Class.",
+        "es": "Sistemas autónomos de detección de humo — deriva de sensibilidad, desalineación del detector de haz, obstrucción de la línea de muestreo. Registros de prueba conformes a SOLAS / Class.",
+        "de": "Eigenständige Raucherkennungssysteme — Empfindlichkeitsdrift, Fehlausrichtung des Linienmelders, Verstopfung der Ansaugleitung. SOLAS-/Class-konforme Prüfprotokolle."
+      }
+    },
+    "water-mist-system": {
+      "name": {
+        "el": "Σύστημα Νεφελώματος Νερού",
+        "es": "Sistema de Niebla de Agua",
+        "de": "Wassernebelanlage"
+      },
+      "kicker": {
+        "el": "Σταθερή προστασία ΜΧ · Ετήσια δοκιμή ροής · Ηλεκτροβαλβίδα",
+        "es": "Protección fija de sala de máquinas · Prueba anual de caudal · Solenoide",
+        "de": "Stationärer Maschinenraumschutz · Jährliche Durchflussprüfung · Magnetventil"
+      },
+      "summary": {
+        "el": "Συστήματα νεφελώματος νερού υψηλής πίεσης μηχανοστασίου — ολίσθηση πίεσης αντλίας, έμφραξη ακροφυσίων, αστοχίες ηλεκτροβαλβίδας βαλβίδας τομέα. Ετήσια δοκιμή εκκένωσης & ροής, αναφορές επιθεώρησης Class.",
+        "es": "Sistemas de niebla de agua de alta presión para sala de máquinas — deriva de presión de la bomba, obstrucción de toberas, fallos del solenoide de la válvula de sección. Prueba anual de descarga y caudal, informes de inspección Class.",
+        "de": "Hochdruck-Wassernebelanlagen für den Maschinenraum — Pumpendruckdrift, Düsenverstopfung, Ausfälle des Sektionsventil-Magnetventils. Jährliche Auslöse- & Durchflussprüfung, Class-Besichtigungsberichte."
+      }
+    },
+    "other": {
+      "name": {
+        "el": "Άλλο / Δεν αναφέρεται",
+        "es": "Otro / No listado",
+        "de": "Sonstiges / Nicht aufgeführt"
+      },
+      "kicker": {
+        "el": "Περιγράψτε το σύστημά σας",
+        "es": "Describa su sistema",
+        "de": "Beschreiben Sie Ihr System"
+      },
+      "summary": {
+        "el": "Έχετε ένα σύστημα που δεν ταιριάζει; Πείτε μας τι είναι — τα περισσότερα προβλήματα θαλάσσιων ηλεκτρικών και ελέγχου εντάσσονται σε ένα από τα 19 παραπάνω, αλλά αν το δικό σας δεν εντάσσεται, γράψτε μια πρόταση και θα το δρομολογήσουμε.",
+        "es": "¿Tiene un sistema que no encaja? Díganos cuál es — la mayoría de los problemas eléctricos y de control marinos entran en uno de los 19 anteriores, pero si el suyo no, escriba una frase y lo encaminaremos.",
+        "de": "Haben Sie ein System, das nicht passt? Sagen Sie uns, worum es sich handelt — die meisten elektrischen und Steuerungsprobleme an Bord fallen in eine der 19 oben genannten Kategorien, aber falls Ihres nicht, schreiben Sie einen Satz und wir leiten es weiter."
+      }
+    }
+  }
+}

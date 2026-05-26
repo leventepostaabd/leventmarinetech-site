@@ -76,8 +76,35 @@
     "title": "Ticari gemiler için parça ve yedek — tedarik, doğrula, sevk et.",
     "lead": "Marine elektrik ve otomasyon yedekleri için B2B procurement desk. Sitede fiyat yok — her teklif RFQ üzerinden, gemiye, limana ve aciliyete göre. Güvenilir tedarikçi ağından tedarik eder, taahhütten önce uyumluluğu doğrularız.",
     "requestQuote": "Teklif iste",
-    "findEquivalent": "Uyumlu parça bul",
-    "unlisted": "Listede olmayan parça"
+    "findEquivalent": "Eşdeğer bul",
+    "unlisted": "Listede olmayan parça",
+    "heroLine": "Marine yedek parça — hızlı tedarik, her ABD limanına teslim.",
+    "heroSub": "7/24 — Florida merkezli, Wyoming LLC. Sadece teklif, fiyat gösterilmez.",
+    "searchPlaceholder": "Marka, parça no, model, sistem…",
+    "searching": "Tedarikçi ağı taranıyor…",
+    "liveResults": "{n} canlı sonuç",
+    "quoteOnly": "Sadece teklif · fiyat yok",
+    "noMatchTitle": "Henüz canlı eşleşme yok. Marka + model dene.",
+    "uploadNameplate": "Etiket fotoğrafı yükle",
+    "requestAnyway": "Yine de teklif iste",
+    "stepByStep": "Adım-adım talep",
+    "unlistedItem": "Listede yok",
+    "getQuote": "Teklif iste",
+    "brandOnRequest": "Marka teklifle",
+    "noPhoto": "Foto yok",
+    "clear": "temizle",
+    "errorSearch": "Arama şu an cevap vermiyor. Biraz farklı bir kelimeyle dene.",
+    "errorNetwork": "Ağ hatası. Biraz sonra tekrar dene.",
+    "deck": {
+      "cables-glands": "Kablo & Rakor",
+      "deck-mechanical": "Vinç & Güverte Donanımı",
+      "engine-room-consumables": "Makine Dairesi Sarf",
+      "msb-components": "MSB / ESB Bileşenleri",
+      "motors-drives": "Motor & Sürücüler (VFD)",
+      "radar-navigation": "Radar & Köprü Üstü Seyir",
+      "automation-plc": "PLC & Otomasyon",
+      "marine-sensors": "Denizcilik Sensör & Transmitter"
+    }
   },
   "contact": {
     "kicker": "İletişim",
@@ -226,5 +253,19 @@
     "ctaPrefix": "Gemi şu limana geliyor:",
     "ctaLead": "Üç hızlı soru — sistem, ETA, iletişim. Saatler içinde gemide mühendis; AOG yedek parçalar aynı gün.",
     "ctaRequest": "Servis talep et →"
+  },
+  "services": {
+    "heroLine": "Florida merkezli marine elektrik servisi. Her ABD limanına 7/24.",
+    "heroSub": "7/24 — Wyoming LLC, Florida operasyon. Hangi sistem arızalı?",
+    "searchPlaceholder": "Hangi sistemde sorun var?",
+    "mostRequested": "En sık talep",
+    "seeAll": "19 sistemin tümünü gör",
+    "close": "Kapat",
+    "noMatches": "Eşleşen sistem yok.",
+    "allSystems": "Tüm sistemler",
+    "systemsCount": "19 sistem + Diğer",
+    "notListed": "Liste dışı",
+    "details": "Detay",
+    "requestService": "Servis talep et"
   }
 }

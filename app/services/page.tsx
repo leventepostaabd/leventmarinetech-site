@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { readPopularServices, readServices, readServicesFile } from '@/lib/content';
-import { getLocale } from '@/lib/i18n';
+import { getLocale, getTranslator } from '@/lib/i18n';
+import { pick } from '@/lib/i18n-client';
 import { SERVICE_IMAGE } from '@/lib/deck-images';
 import ServicesBrowser from './ServicesBrowser';
 import ServiceImageDeck from '@/components/ServiceImageDeck';
@@ -19,20 +20,13 @@ export default function ServicesIndex() {
   const popular = readPopularServices();
   const locale = getLocale();
 
+  const t = getTranslator(locale);
   const ui = {
-    search_placeholder:
-      (locale === 'tr' ? file.ui.search_placeholder_tr : file.ui.search_placeholder_en) ??
-      (locale === 'tr' ? 'Hangi sistemde sorun var?' : 'Which system has the problem?'),
-    popular:
-      (locale === 'tr' ? file.ui.popular_tr : file.ui.popular_en) ??
-      (locale === 'tr' ? 'En sık talep' : 'Most requested'),
-    see_all:
-      (locale === 'tr' ? file.ui.see_all_tr : file.ui.see_all_en) ??
-      (locale === 'tr' ? '19 sistemin tümünü gör' : 'See all 19 systems'),
-    close: (locale === 'tr' ? file.ui.close_tr : file.ui.close_en) ?? (locale === 'tr' ? 'Kapat' : 'Close'),
-    no_matches:
-      (locale === 'tr' ? file.ui.no_matches_tr : file.ui.no_matches_en) ??
-      (locale === 'tr' ? 'Eşleşen sistem yok.' : 'No system matches that search.')
+    search_placeholder: t('services.searchPlaceholder'),
+    popular: t('services.mostRequested'),
+    see_all: t('services.seeAll'),
+    close: t('services.close'),
+    no_matches: t('services.noMatches')
   };
 
   const deckItems = all
@@ -40,18 +34,12 @@ export default function ServicesIndex() {
     .map((s) => ({
       slug: s.slug,
       image: SERVICE_IMAGE[s.slug],
-      name_en: s.name_en,
-      name_tr: s.name_tr,
-      kicker_en: s.kicker_en,
-      kicker_tr: s.kicker_tr
+      name: pick(s, 'name', locale),
+      kicker: pick(s, 'kicker', locale)
     }));
 
-  const heroLine = locale === 'tr'
-    ? 'Florida merkezli marine elektrik servisi. Her ABD limanına 7/24.'
-    : 'Florida-based marine electrical service. Every US port, 24/7.';
-  const heroSub = locale === 'tr'
-    ? '24/7 — Wyoming LLC, Florida operasyon. Hangi sistem arızalı?'
-    : '24/7 — Wyoming LLC, Florida ops. Which system has the problem?';
+  const heroLine = t('services.heroLine');
+  const heroSub = t('services.heroSub');
 
   return (
     <div className="lm-screen-hero grid bg-white lg:grid-cols-[minmax(0,1fr)_minmax(0,30%)]">

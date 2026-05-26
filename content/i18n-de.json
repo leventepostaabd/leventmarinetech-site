@@ -188,5 +188,49 @@
     "ctaPrefix": "Schiff läuft an",
     "ctaLead": "Drei kurze Fragen — System, ETA, Kontakt. Techniker innerhalb weniger Stunden an Bord; AOG-Ersatzteile noch am selben Tag.",
     "ctaRequest": "Service anfragen →"
+  },
+  "services": {
+    "heroLine": "Schiffselektrik-Service mit Sitz in Florida. Jeder US-Hafen, 24/7.",
+    "heroSub": "24/7 — Wyoming LLC, Betrieb in Florida. Welches System hat das Problem?",
+    "searchPlaceholder": "Welches System hat das Problem?",
+    "mostRequested": "Am häufigsten angefragt",
+    "seeAll": "Alle 19 Systeme ansehen",
+    "close": "Schließen",
+    "noMatches": "Kein System entspricht dieser Suche.",
+    "allSystems": "Alle Systeme",
+    "systemsCount": "19 Systeme + Sonstiges",
+    "notListed": "Nicht gelistet",
+    "details": "Details",
+    "requestService": "Service anfragen"
+  },
+  "supply": {
+    "heroLine": "Schiffsersatzteile — schnell beschafft, an jeden US-Hafen geliefert.",
+    "heroSub": "24/7 — Sitz in Florida, Wyoming LLC. Nur Angebot, keine öffentlichen Preise.",
+    "searchPlaceholder": "Marke, Teilenr., Modell, System…",
+    "searching": "Live-Liefernetz wird durchsucht…",
+    "liveResults": "{n} Live-Ergebnisse",
+    "quoteOnly": "Nur Angebot · keine Preise",
+    "noMatchTitle": "Noch keine Live-Treffer. Versuchen Sie Marke + Modell.",
+    "uploadNameplate": "Typenschild-Foto hochladen",
+    "requestAnyway": "Trotzdem Angebot anfordern",
+    "stepByStep": "Schritt-für-Schritt-Erfassung",
+    "unlistedItem": "Nicht gelistetes Teil",
+    "findEquivalent": "Äquivalent finden",
+    "getQuote": "Angebot anfordern",
+    "brandOnRequest": "Marke auf Anfrage",
+    "noPhoto": "Kein Foto",
+    "clear": "löschen",
+    "errorSearch": "Suche vorübergehend nicht verfügbar. Versuchen Sie eine etwas andere Anfrage.",
+    "errorNetwork": "Netzwerkfehler. Bitte gleich erneut versuchen.",
+    "deck": {
+      "cables-glands": "Kabel & Verschraubungen",
+      "deck-mechanical": "Kran- & Deckausrüstung",
+      "engine-room-consumables": "Maschinenraum-Verbrauchsmaterial",
+      "msb-components": "MSB / ESB Komponenten",
+      "motors-drives": "Motoren & Antriebe (VFD)",
+      "radar-navigation": "Radar & Brückennavigation",
+      "automation-plc": "PLC & Automation",
+      "marine-sensors": "Marine-Sensoren & Transmitter"
+    }
   }
 }

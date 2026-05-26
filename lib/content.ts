@@ -1,5 +1,33 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import servicesI18n from '@/content/services-i18n.json';
+import productsI18n from '@/content/products-i18n.json';
+
+// Browse-content translation overlays (el/es/de). Merged onto the en/tr base
+// at read time as `<base>_<locale>` fields so the locale picker finds them;
+// missing entries fall back to English. Deep technical fields (symptoms,
+// causes, FAQs) are intentionally not translated and stay English.
+const SVC_I18N = (servicesI18n as { services?: Record<string, any> }).services ?? {};
+const PROD_I18N = productsI18n as {
+  labels?: Record<string, any>;
+  categories?: Record<string, { name?: Record<string, string> }>;
+  subcategories?: Record<string, { name?: Record<string, string> }>;
+};
+
+function applyI18nOverlay<T extends { slug?: string }>(
+  item: T,
+  table: Record<string, { name?: Record<string, string>; kicker?: Record<string, string>; summary?: Record<string, string> }>,
+  bases: string[]
+): T {
+  const o = item.slug ? table[item.slug] : undefined;
+  if (!o) return item;
+  const m: Record<string, any> = { ...item };
+  for (const base of bases) {
+    const tr = (o as any)[base] as Record<string, string> | undefined;
+    if (tr) for (const l of ['el', 'es', 'de']) if (tr[l]) m[`${base}_${l}`] = tr[l];
+  }
+  return m as T;
+}
 
 /**
  * Service system entry — keyed by slug.
@@ -212,7 +240,10 @@ export function readServicesFile(): ServicesFile {
 
 /** Services list, sorted by `order`. */
 export function readServices(): ServiceContent[] {
-  return readServicesFile().services.slice().sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  return readServicesFile()
+    .services.slice()
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+    .map((s) => applyI18nOverlay(s, SVC_I18N, ['name', 'kicker', 'summary']));
 }
 
 /** Map slug → ServiceContent. */
@@ -223,7 +254,9 @@ export function readServiceMap(): Record<string, ServiceContent> {
 /** Popular system slugs (S1 default: Generator · BWTS · Fire Alarm · Bridge Nav · PLC · Crane). */
 export function readPopularServices(): ServiceContent[] {
   const file = readServicesFile();
-  const map = Object.fromEntries(file.services.map((s) => [s.slug, s]));
+  const map = Object.fromEntries(
+    file.services.map((s) => [s.slug, applyI18nOverlay(s, SVC_I18N, ['name', 'kicker', 'summary'])])
+  );
   const popular: ServiceContent[] = [];
   for (const slug of file.popular) if (map[slug]) popular.push(map[slug]);
   // fallback if popular list empty — pick first 6 by order
@@ -270,11 +303,21 @@ export function readProducts(): ProductContent[] {
 }
 
 export function readCategories(): Category[] {
-  return readProductsFile().categories ?? [];
+  return (readProductsFile().categories ?? []).map((c) => {
+    const merged: any = applyI18nOverlay(c, PROD_I18N.categories ?? {}, ['name']);
+    if (Array.isArray(merged.subcategories)) {
+      merged.subcategories = merged.subcategories.map((s: any) =>
+        applyI18nOverlay(s, PROD_I18N.subcategories ?? {}, ['name'])
+      );
+    }
+    return merged as Category;
+  });
 }
 
 export function readProductLabels(locale: Locale = 'en'): ProductLabels {
   const labels = readProductsFile().labels as Record<string, ProductLabels> | undefined;
+  const overlay = PROD_I18N.labels?.[locale];
+  if (overlay) return { ...(labels?.en ?? {}), ...overlay } as ProductLabels;
   if (labels && labels[locale]) return labels[locale];
   // Sensible fallback so pages render even if labels missing.
   return {

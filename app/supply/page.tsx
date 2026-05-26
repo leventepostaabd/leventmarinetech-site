@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { getLocale } from '@/lib/i18n';
+import { getLocale, getTranslator } from '@/lib/i18n';
 import { SUPPLY_IMAGE } from '@/lib/deck-images';
 import EbayCatalogGrid from './EbayCatalogGrid';
 import SourcingChannelTabs from './SourcingChannelTabs';
@@ -103,16 +103,17 @@ const SUPPLY_DECK: Array<{
  */
 export default function SupplyIndex() {
   const locale = getLocale();
-  const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);
+  const t = getTranslator(locale);
 
-  const heroLine = t(
-    'Marine parts — sourced fast, delivered to every US port.',
-    'Marine yedek parça — hızlı tedarik, her ABD limanına teslim.'
-  );
-  const heroSub = t(
-    '24/7 — Florida-based, Wyoming LLC. Quote-only, no public prices.',
-    '24/7 — Florida merkezli, Wyoming LLC. Sadece teklif, fiyat gösterilmez.'
-  );
+  const heroLine = t('supply.heroLine');
+  const heroSub = t('supply.heroSub');
+
+  const deckItems = SUPPLY_DECK.map((d) => ({
+    slug: d.slug,
+    image: d.image,
+    name: t(`supply.deck.${d.slug}`),
+    kicker: d.kicker_en
+  }));
 
   return (
     <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,30%)]">
@@ -151,7 +152,7 @@ export default function SupplyIndex() {
           the artwork instead of pushing it down. */}
       <aside className="hidden lg:block h-screen">
         <ServiceImageDeck
-          items={SUPPLY_DECK}
+          items={deckItems}
           locale={locale}
           fillParent
           ctaEnabled={false}
