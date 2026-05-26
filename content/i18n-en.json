@@ -188,5 +188,49 @@
     "ctaPrefix": "Vessel calling",
     "ctaLead": "Three quick questions — system, ETA, contact. Engineer on board within hours; AOG spares same day.",
     "ctaRequest": "Request service →"
+  },
+  "services": {
+    "heroLine": "Florida-based marine electrical service. Every US port, 24/7.",
+    "heroSub": "24/7 — Wyoming LLC, Florida ops. Which system has the problem?",
+    "searchPlaceholder": "Which system has the problem?",
+    "mostRequested": "Most requested",
+    "seeAll": "See all 19 systems",
+    "close": "Close",
+    "noMatches": "No system matches that search.",
+    "allSystems": "All systems",
+    "systemsCount": "19 systems + Other",
+    "notListed": "Not listed",
+    "details": "Details",
+    "requestService": "Request service"
+  },
+  "supply": {
+    "heroLine": "Marine parts — sourced fast, delivered to every US port.",
+    "heroSub": "24/7 — Florida-based, Wyoming LLC. Quote-only, no public prices.",
+    "searchPlaceholder": "Brand, part no, model, system…",
+    "searching": "Searching live supply network…",
+    "liveResults": "{n} live results",
+    "quoteOnly": "Quote-only · no prices shown",
+    "noMatchTitle": "No live matches yet. Try a brand + model.",
+    "uploadNameplate": "Upload nameplate photo",
+    "requestAnyway": "Request quote anyway",
+    "stepByStep": "Step-by-step intake",
+    "unlistedItem": "Unlisted item",
+    "findEquivalent": "Find equivalent",
+    "getQuote": "Get a quote",
+    "brandOnRequest": "Brand on request",
+    "noPhoto": "No photo",
+    "clear": "clear",
+    "errorSearch": "Search temporarily unavailable. Try a slightly different query.",
+    "errorNetwork": "Network error. Retry in a moment.",
+    "deck": {
+      "cables-glands": "Cables & Glands",
+      "deck-mechanical": "Crane & Deck Hardware",
+      "engine-room-consumables": "Engine Room Consumables",
+      "msb-components": "MSB / ESB Components",
+      "motors-drives": "Motors & Drives (VFD)",
+      "radar-navigation": "Radar & Bridge Navigation",
+      "automation-plc": "PLC & Automation",
+      "marine-sensors": "Marine Sensors & Transmitters"
+    }
   }
 }

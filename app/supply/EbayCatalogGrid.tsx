@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import ProductQuoteModal, { type ModalProduct } from './ProductQuoteModal';
+import { ct } from '@/lib/i18n-client';
 
 type Item = {
   slug: string;
@@ -75,14 +76,14 @@ export default function EbayCatalogGrid({
       try {
         const res = await fetch('/api/supply-search?q=' + encodeURIComponent(q) + '&limit=24', { cache: 'no-store' });
         if (!res.ok) {
-          setErr(t('Search temporarily unavailable. Try a slightly different query.', 'Arama şu an cevap vermiyor. Biraz farklı bir kelimeyle dene.'));
+          setErr(ct(locale, 'supply.errorSearch'));
           setItems([]);
         } else {
           const data = await res.json();
           setItems(Array.isArray(data?.results) ? data.results : []);
         }
       } catch {
-        setErr(t('Network error. Retry in a moment.', 'Ağ hatası. Biraz sonra tekrar dene.'));
+        setErr(ct(locale, 'supply.errorNetwork'));
         setItems([]);
       } finally {
         setLoading(false);
@@ -110,7 +111,7 @@ export default function EbayCatalogGrid({
           type="search"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder={t('Brand, part no, model, system…', 'Marka, parça no, model, sistem…')}
+          placeholder={ct(locale, 'supply.searchPlaceholder')}
           aria-label={t('Search marine supply', 'Marine tedarik ara')}
           className="w-full bg-navy-50/70 text-ink placeholder:text-ink-subtle rounded-full pl-13 pr-32 py-4 text-[15px] ring-1 ring-line/60 outline-none transition hover:bg-navy-50 focus:bg-white focus:ring-2 focus:ring-amber/50"
           style={{ paddingLeft: '3.25rem' }}
@@ -121,7 +122,7 @@ export default function EbayCatalogGrid({
             onClick={() => setQ('')}
             className="absolute right-4 top-1/2 -translate-y-1/2 inline-flex items-center gap-1.5 rounded-full bg-white/70 px-3 py-1 text-[11px] text-ink-subtle ring-1 ring-line transition hover:bg-white hover:text-ink"
           >
-            ✕ {t('clear', 'temizle')}
+            ✕ {ct(locale, 'supply.clear')}
           </button>
         )}
       </div>
@@ -148,11 +149,11 @@ export default function EbayCatalogGrid({
       <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.14em] text-ink-subtle">
         <span>
           {loading
-            ? t('Searching live supply network…', 'Tedarikçi ağı taranıyor…')
-            : t(`${liveOnly.length} live results`, `${liveOnly.length} canlı sonuç`)}
+            ? ct(locale, 'supply.searching')
+            : ct(locale, 'supply.liveResults').replace('{n}', String(liveOnly.length))}
         </span>
         <span className="text-amber-600">
-          {t('Quote-only · no prices shown', 'Sadece teklif · fiyat yok')}
+          {ct(locale, 'supply.quoteOnly')}
         </span>
       </div>
 
@@ -167,17 +168,14 @@ export default function EbayCatalogGrid({
         {!err && !loading && liveOnly.length === 0 && (
           <div className="rounded-xl border border-line bg-white p-10 text-center">
             <p className="text-[15px] text-ink-muted mb-3">
-              {t(
-                'No live matches yet. Try a brand + model, e.g. "Furuno MG5436".',
-                'Henüz canlı eşleşme yok. Marka + model dene, örn. "Furuno MG5436".'
-              )}
+              {ct(locale, 'supply.noMatchTitle')}
             </p>
             <div className="flex flex-wrap justify-center gap-2">
               <Link href={`/supply/unlisted-request?q=${encodeURIComponent(q)}`} className="btn-accent btn-sm no-underline">
-                {t('Upload nameplate photo', 'Etiket fotoğrafı yükle')}
+                {ct(locale, 'supply.uploadNameplate')}
               </Link>
               <Link href={`/supply-wizard?q=${encodeURIComponent(q)}`} className="btn-ghost btn-sm no-underline">
-                {t('Request quote anyway', 'Yine de teklif iste')}
+                {ct(locale, 'supply.requestAnyway')}
               </Link>
             </div>
           </div>
@@ -216,13 +214,13 @@ export default function EbayCatalogGrid({
                         />
                       ) : (
                         <div className="h-full w-full flex items-center justify-center text-ink-subtle font-mono text-[10px] uppercase tracking-[0.16em]">
-                          {t('No photo', 'Foto yok')}
+                          {ct(locale, 'supply.noPhoto')}
                         </div>
                       )}
                     </div>
                     <div className="p-3.5 flex flex-col flex-1">
                       <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-amber-600 mb-1">
-                        {it.brand || t('Brand on request', 'Marka teklifle')}
+                        {it.brand || ct(locale, 'supply.brandOnRequest')}
                       </div>
                       <h3 className="text-[13px] font-semibold text-ink leading-tight mb-1 line-clamp-2">
                         {it.name}
@@ -236,7 +234,7 @@ export default function EbayCatalogGrid({
                           through the RFQ form and back via email / WhatsApp. */}
                       <div className="mt-auto pt-2">
                         <span className="inline-flex items-center gap-1.5 rounded-md bg-amber/15 px-2.5 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-amber-700 group-hover:bg-amber group-hover:text-navy-700 transition">
-                          {t('Get a quote', 'Teklif iste')} →
+                          {ct(locale, 'supply.getQuote')} →
                         </span>
                       </div>
                     </div>
@@ -259,15 +257,15 @@ export default function EbayCatalogGrid({
       {/* Footer helpers */}
       <div className="flex flex-wrap items-center gap-3 text-[12.5px] font-mono uppercase tracking-[0.1em] text-ink-subtle pt-2 border-t border-line">
         <Link href="/supply-wizard" className="hover:text-amber no-underline">
-          {t('Step-by-step intake →', 'Adım-adım talep →')}
+          {ct(locale, 'supply.stepByStep')} →
         </Link>
         <span className="opacity-40">·</span>
         <Link href="/supply/unlisted-request" className="hover:text-amber no-underline">
-          {t('Unlisted item →', 'Listede yok →')}
+          {ct(locale, 'supply.unlistedItem')} →
         </Link>
         <span className="opacity-40">·</span>
         <Link href="/supply/equivalent-part-finder" className="hover:text-amber no-underline">
-          {t('Find equivalent →', 'Eşdeğer bul →')}
+          {ct(locale, 'supply.findEquivalent')} →
         </Link>
       </div>
     </div>

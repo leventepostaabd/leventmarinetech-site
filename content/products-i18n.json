@@ -1,0 +1,215 @@
+{
+  "labels": {
+    "el": {
+      "catalogTitle": "Βρείτε οποιοδήποτε ανταλλακτικό — επικολλήστε ένα μοντέλο, ανεβάστε μια φωτογραφία ή περιηγηθείτε.",
+      "searchPlaceholder": "Αναζήτηση κατά μάρκα, κωδικό ανταλλακτικού, μοντέλο ή σύστημα",
+      "categoriesHeading": "Περιήγηση ανά κατηγορία",
+      "inStock": "Σε Απόθεμα",
+      "getQuote": "Λάβετε Προσφορά",
+      "requestEquivalent": "Αίτηση Ισοδύναμου",
+      "filterBrand": "Μάρκα",
+      "filterAvailability": "Διαθεσιμότητα",
+      "filterAll": "Όλα",
+      "noPrice": "Οι τιμές δίνονται μόνο κατόπιν προσφοράς. Κάθε RFQ λαμβάνει υπόψη το πλοίο, το λιμάνι, το επείγον και την επαλήθευση συμβατότητας.",
+      "photoCta": "Δεν γνωρίζετε το μοντέλο; Ανεβάστε φωτογραφία της πινακίδας — αναγνωρίζουμε και αντιστοιχίζουμε."
+    },
+    "es": {
+      "catalogTitle": "Encuentre cualquier repuesto — pegue un modelo, suba una foto o explore.",
+      "searchPlaceholder": "Buscar por marca, número de pieza, modelo o sistema",
+      "categoriesHeading": "Explorar por categoría",
+      "inStock": "En Stock",
+      "getQuote": "Solicitar Presupuesto",
+      "requestEquivalent": "Solicitar Equivalente",
+      "filterBrand": "Marca",
+      "filterAvailability": "Disponibilidad",
+      "filterAll": "Todos",
+      "noPrice": "Los precios son solo por cotización. Cada RFQ considera el buque, el puerto, la urgencia y la verificación de compatibilidad.",
+      "photoCta": "¿No conoce el modelo? Suba una foto de la placa de características — la identificamos y la emparejamos."
+    },
+    "de": {
+      "catalogTitle": "Finden Sie jedes Ersatzteil — Modell einfügen, Foto hochladen oder durchsuchen.",
+      "searchPlaceholder": "Suche nach Marke, Teilenummer, Modell oder System",
+      "categoriesHeading": "Nach Kategorie durchsuchen",
+      "inStock": "Auf Lager",
+      "getQuote": "Angebot Anfordern",
+      "requestEquivalent": "Äquivalent Anfragen",
+      "filterBrand": "Marke",
+      "filterAvailability": "Verfügbarkeit",
+      "filterAll": "Alle",
+      "noPrice": "Preise nur auf Anfrage. Jede RFQ berücksichtigt Schiff, Hafen, Dringlichkeit und Kompatibilitätsprüfung.",
+      "photoCta": "Modell unbekannt? Laden Sie ein Foto des Typenschilds hoch — wir identifizieren und finden das passende Teil."
+    }
+  },
+  "categories": {
+    "marine-electric": {
+      "name": {
+        "el": "Ναυτιλιακός Ηλεκτρισμός",
+        "es": "Electricidad Naval",
+        "de": "Schiffselektrik"
+      }
+    },
+    "general-electric": {
+      "name": {
+        "el": "Γενικός Ηλεκτρισμός",
+        "es": "Electricidad General",
+        "de": "Allgemeine Elektrik"
+      }
+    },
+    "general-marine": {
+      "name": {
+        "el": "Γενικός Ναυτιλιακός Εξοπλισμός",
+        "es": "Equipamiento Naval General",
+        "de": "Allgemeine Schiffsausrüstung"
+      }
+    }
+  },
+  "subcategories": {
+    "radar-navigation": {
+      "name": {
+        "el": "Ραντάρ & Πλοήγηση Γέφυρας",
+        "es": "Radar y Navegación del Puente",
+        "de": "Radar & Brückennavigation"
+      }
+    },
+    "gmdss-communication": {
+      "name": {
+        "el": "GMDSS & Επικοινωνίες",
+        "es": "GMDSS y Comunicaciones",
+        "de": "GMDSS & Kommunikation"
+      }
+    },
+    "fire-safety-detection": {
+      "name": {
+        "el": "Πυρανίχνευση & Ασφάλεια",
+        "es": "Detección de Incendios y Seguridad",
+        "de": "Branderkennung & Sicherheit"
+      }
+    },
+    "alarm-monitoring": {
+      "name": {
+        "el": "Συναγερμός & Παρακολούθηση (AMS/IAS)",
+        "es": "Alarma y Monitorización (AMS/IAS)",
+        "de": "Alarm & Überwachung (AMS/IAS)"
+      }
+    },
+    "automation-plc": {
+      "name": {
+        "el": "PLC & Αυτοματισμός",
+        "es": "PLC y Automatización",
+        "de": "PLC & Automatisierung"
+      }
+    },
+    "bwts-skids": {
+      "name": {
+        "el": "BWTS & Μονάδες Επεξεργασίας",
+        "es": "BWTS y Módulos de Tratamiento",
+        "de": "BWTS & Aufbereitungsmodule"
+      }
+    },
+    "marine-sensors": {
+      "name": {
+        "el": "Ναυτιλιακοί Αισθητήρες & Πομποί",
+        "es": "Sensores y Transmisores Navales",
+        "de": "Schiffssensoren & Messumformer"
+      }
+    },
+    "navigation-lights": {
+      "name": {
+        "el": "Φανοί Ναυσιπλοΐας",
+        "es": "Luces de Navegación",
+        "de": "Navigationslichter"
+      }
+    },
+    "msb-components": {
+      "name": {
+        "el": "Εξαρτήματα MSB / ESB",
+        "es": "Componentes MSB / ESB",
+        "de": "MSB / ESB Komponenten"
+      }
+    },
+    "marine-lsa": {
+      "name": {
+        "el": "Ηλεκτρικά Σωστικά Μέσα LSA (SOLAS)",
+        "es": "Equipos Eléctricos LSA (SOLAS)",
+        "de": "Elektrische Rettungsmittel LSA (SOLAS)"
+      }
+    },
+    "breakers-contactors": {
+      "name": {
+        "el": "Διακόπτες & Ρελέ Ισχύος",
+        "es": "Interruptores y Contactores",
+        "de": "Leistungsschalter & Schütze"
+      }
+    },
+    "motors-drives": {
+      "name": {
+        "el": "Κινητήρες & Μετατροπείς (VFD)",
+        "es": "Motores y Variadores (VFD)",
+        "de": "Motoren & Antriebe (VFD)"
+      }
+    },
+    "cables-glands": {
+      "name": {
+        "el": "Καλώδια & Στυπιοθλίπτες",
+        "es": "Cables y Prensaestopas",
+        "de": "Kabel & Kabelverschraubungen"
+      }
+    },
+    "control-panels": {
+      "name": {
+        "el": "Πίνακες Ελέγχου & HMI",
+        "es": "Paneles de Control y HMI",
+        "de": "Steuer- & HMI-Panels"
+      }
+    },
+    "batteries-ups": {
+      "name": {
+        "el": "Μπαταρίες & UPS",
+        "es": "Baterías y UPS",
+        "de": "Batterien & USV"
+      }
+    },
+    "test-instruments": {
+      "name": {
+        "el": "Όργανα Μετρήσεων",
+        "es": "Instrumentos de Medición",
+        "de": "Messinstrumente"
+      }
+    },
+    "electrical-spares": {
+      "name": {
+        "el": "Ηλεκτρικά Ανταλλακτικά",
+        "es": "Repuestos Eléctricos",
+        "de": "Elektrische Ersatzteile"
+      }
+    },
+    "valves-solenoid": {
+      "name": {
+        "el": "Βαλβίδες & Ηλεκτρομαγνητικές Βαλβίδες",
+        "es": "Válvulas y Solenoides",
+        "de": "Ventile & Magnetventile"
+      }
+    },
+    "fans-ventilation": {
+      "name": {
+        "el": "Ανεμιστήρες & Εξαερισμός",
+        "es": "Ventiladores y Ventilación",
+        "de": "Ventilatoren & Belüftung"
+      }
+    },
+    "engine-room-consumables": {
+      "name": {
+        "el": "Αναλώσιμα Μηχανοστασίου",
+        "es": "Consumibles de Sala de Máquinas",
+        "de": "Maschinenraum-Verbrauchsmaterial"
+      }
+    },
+    "deck-mechanical": {
+      "name": {
+        "el": "Μηχανικά Εξαρτήματα Καταστρώματος",
+        "es": "Accesorios Mecánicos de Cubierta",
+        "de": "Mechanische Decksbeschläge"
+      }
+    }
+  }
+}

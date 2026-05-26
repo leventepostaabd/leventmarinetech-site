@@ -4,14 +4,14 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
+import { ct } from '@/lib/i18n-client';
 
 type Deck = {
   slug: string;
   image: string;
-  name_en: string;
-  name_tr: string;
-  kicker_en: string;
-  kicker_tr: string;
+  /** Pre-resolved (already localised) display strings. */
+  name: string;
+  kicker: string;
 };
 
 /**
@@ -83,7 +83,7 @@ export default function ServiceImageDeck({
         >
           <Image
             src={active.image}
-            alt={locale === 'tr' ? active.name_tr : active.name_en}
+            alt={active.name}
             fill
             priority
             sizes="(min-width: 1024px) 30vw, 100vw"
@@ -102,9 +102,9 @@ export default function ServiceImageDeck({
                   href={`${hrefPrefix}${active.slug}`}
                   className="inline-flex items-center gap-2 rounded-md bg-amber px-4 py-2.5 text-[13px] font-mono font-semibold uppercase tracking-[0.12em] text-navy-700 no-underline shadow-lg transition hover:bg-amber-600"
                 >
-                  {locale === 'tr'
-                    ? readMoreLabel?.tr ?? 'Detayını oku'
-                    : readMoreLabel?.en ?? 'Read more'} →
+                  {readMoreLabel
+                    ? (locale === 'tr' ? readMoreLabel.tr : readMoreLabel.en)
+                    : ct(locale, 'services.details')} →
                 </Link>
               </div>
             </>
@@ -118,7 +118,7 @@ export default function ServiceImageDeck({
           <button
             key={it.slug}
             onClick={() => setIdx(i)}
-            aria-label={locale === 'tr' ? it.name_tr : it.name_en}
+            aria-label={it.name}
             className={`block h-6 w-1 rounded-full transition-all ${
               i === idx ? 'bg-amber' : 'bg-white/30 hover:bg-white/60'
             }`}

@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import type { ServiceContent } from '@/lib/content';
+import { ct, pick } from '@/lib/i18n-client';
 
 /**
  * Service system tile — used in the /services grid + the "see all" modal.
@@ -22,11 +23,11 @@ export default function ServiceTile({
   locale?: Locale;
   variant?: 'tile' | 'compact';
 }) {
-  const name = locale === 'tr' ? s.name_tr : s.name_en;
-  const kicker = locale === 'tr' ? s.kicker_tr : s.kicker_en;
-  const summary = locale === 'tr' ? s.summary_tr : s.summary_en;
-  const ctaLabel = locale === 'tr' ? 'Servis talep et' : 'Request service';
-  const detailLabel = locale === 'tr' ? 'Detay' : 'Details';
+  const name = pick(s as any, 'name', locale);
+  const kicker = pick(s as any, 'kicker', locale);
+  const summary = pick(s as any, 'summary', locale);
+  const ctaLabel = ct(locale, 'services.requestService');
+  const detailLabel = ct(locale, 'services.details');
   const requestHref = `/service-wizard?system=${encodeURIComponent(s.slug)}`;
   const detailHref = `/services/${s.slug}`;
 

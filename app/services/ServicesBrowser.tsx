@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import ServiceTile from '@/components/ServiceTile';
 import type { ServiceContent } from '@/lib/content';
+import { ct } from '@/lib/i18n-client';
 
 type UI = {
   search_placeholder: string;
@@ -151,13 +152,13 @@ export default function ServicesBrowser({
               onClick={(e) => e.stopPropagation()}
               role="dialog"
               aria-modal="true"
-              aria-label={locale === 'tr' ? 'Tüm sistemler' : 'All systems'}
+              aria-label={ct(locale, 'services.allSystems')}
             >
               <header className="flex items-center justify-between gap-4 px-6 py-4 border-b border-line bg-white">
                 <div>
                   <div className="kicker mb-0.5">{ui.popular}</div>
                   <h2 className="text-[20px]">
-                    {locale === 'tr' ? '19 sistem + Diğer' : '19 systems + Other'}
+                    {ct(locale, 'services.systemsCount')}
                   </h2>
                 </div>
                 <button
@@ -179,7 +180,7 @@ export default function ServicesBrowser({
                 </div>
                 {other && (
                   <div className="mt-5">
-                    <div className="kicker mb-2">{locale === 'tr' ? 'Liste dışı' : 'Not listed'}</div>
+                    <div className="kicker mb-2">{ct(locale, 'services.notListed')}</div>
                     <ServiceTile s={other} locale={locale} variant="compact" />
                   </div>
                 )}
