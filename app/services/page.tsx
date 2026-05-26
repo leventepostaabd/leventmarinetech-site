@@ -42,28 +42,37 @@ export default function ServicesIndex() {
   const heroSub = t('services.heroSub');
 
   return (
-    <div className="lm-screen-hero grid bg-white lg:grid-cols-[minmax(0,1fr)_minmax(0,30%)]">
-      {/* Left — inline header + soft hero + browser. */}
+    <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,30%)]">
+      {/* Left — inline header + soft hero (fixed) + scrolling browser. */}
       <div
-        className="min-w-0 flex flex-col px-5 pb-5 md:px-10 md:pb-8"
+        className="flex h-full flex-col min-w-0 min-h-0"
         style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}
       >
-        <InlineHeader locale={locale} />
+        {/* Fixed top — header + hero copy stay put while the list scrolls. */}
+        <div className="shrink-0 bg-white px-5 pb-3 md:px-10 md:pb-4">
+          <InlineHeader locale={locale} />
 
-        <section className="mt-2 md:mt-4 max-w-3xl">
-          <h1 className="font-head text-[28px] md:text-[40px] lg:text-[44px] font-extrabold leading-[1.1] tracking-[-0.01em] text-ink">
-            {heroLine}
-          </h1>
-          <p className="mt-3 md:mt-4 text-[15px] md:text-[16.5px] leading-relaxed text-ink-muted max-w-2xl">
-            {heroSub}
-          </p>
-        </section>
+          <section className="mt-2 mb-1 max-w-3xl md:mt-3 md:mb-2">
+            <h1 className="font-head text-[26px] md:text-[36px] lg:text-[40px] font-extrabold leading-[1.1] tracking-[-0.01em] text-ink">
+              {heroLine}
+            </h1>
+            <p className="mt-2.5 md:mt-3 text-[14.5px] md:text-[16px] leading-relaxed text-ink-muted max-w-2xl">
+              {heroSub}
+            </p>
+          </section>
+        </div>
 
-        <ServicesBrowser services={all} popular={popular} ui={ui} locale={locale} />
+        {/* Browser (scrolls inside). */}
+        <div
+          className="flex-1 overflow-y-auto min-h-0 px-5 pb-5 md:px-10 md:pb-8"
+          style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0) + 2rem)' }}
+        >
+          <ServicesBrowser services={all} popular={popular} ui={ui} locale={locale} />
+        </div>
       </div>
 
       {/* Right — full-bleed cycling deck, edge to edge top→bottom. */}
-      <aside className="hidden lg:block">
+      <aside className="hidden lg:block h-screen">
         <ServiceImageDeck items={deckItems} locale={locale} fillParent />
       </aside>
     </div>
