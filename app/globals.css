@@ -105,17 +105,3 @@ body.lm-no-scroll {
   padding-bottom: calc(env(safe-area-inset-bottom, 0) + 4.5rem);
 }
 
-/* Variant for /services and /service-wizard: full viewport on desktop
-   (right-column artwork runs ceiling to floor), but on mobile/tablet the
-   left column needs natural document scroll because the deck is hidden
-   and the search + tiles legitimately exceed one viewport. */
-.lm-screen-hero {
-  min-height: 100vh;
-}
-@media (min-width: 1024px) {
-  .lm-screen-hero {
-    height: 100vh;
-    max-height: 100vh;
-    overflow: hidden;
-  }
-}

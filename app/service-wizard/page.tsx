@@ -70,28 +70,35 @@ export default function Page() {
     }));
 
   return (
-    <div className="lm-screen-hero grid bg-white lg:grid-cols-[minmax(0,1fr)_minmax(0,30%)]">
-      {/* Left — inline header (matches /services and /supply) + request form.
-          The right artwork runs full bleed; no global bar covers it. */}
+    <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,30%)]">
+      {/* Left — inline header (matches /services and /supply, fixed) + request
+          form that scrolls inside. The right artwork runs full bleed. */}
       <div
-        className="min-w-0 flex flex-col px-5 pb-5 md:px-10 md:pb-8"
+        className="flex h-full flex-col min-w-0 min-h-0"
         style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}
       >
-        <InlineHeader locale={locale} />
+        <div className="shrink-0 bg-white px-5 md:px-10">
+          <InlineHeader locale={locale} />
+        </div>
 
-        <Suspense fallback={<div className="text-ink-subtle font-mono text-sm">Loading wizard…</div>}>
-          <ServiceWizardClient
-            services={services}
-            usPorts={file.us_ports}
-            copy={copy}
-            locale={locale}
-          />
-        </Suspense>
+        <div
+          className="flex-1 overflow-y-auto min-h-0 px-5 pb-5 md:px-10 md:pb-8"
+          style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0) + 2rem)' }}
+        >
+          <Suspense fallback={<div className="text-ink-subtle font-mono text-sm">Loading wizard…</div>}>
+            <ServiceWizardClient
+              services={services}
+              usPorts={file.us_ports}
+              copy={copy}
+              locale={locale}
+            />
+          </Suspense>
+        </div>
       </div>
 
       {/* Right — cycling service photos, edge to edge top→bottom. The
           TopBar floats transparently over the top of the artwork. */}
-      <aside className="hidden lg:block">
+      <aside className="hidden lg:block h-screen">
         <ServiceImageDeck items={deckItems} locale={locale} fillParent />
       </aside>
     </div>
