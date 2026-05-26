@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getLocale, getTranslator } from '@/lib/i18n';
+import { readProducts } from '@/lib/content';
 import { SUPPLY_IMAGE } from '@/lib/deck-images';
 import Link from 'next/link';
 import EbayCatalogGrid from './EbayCatalogGrid';
@@ -116,6 +117,20 @@ export default function SupplyIndex() {
     kicker: d.kicker_en
   }));
 
+  // Our hand-curated marine catalog — the products we choose to sell. Shown
+  // as the default grid and filtered client-side; the distributor live search
+  // (Mouser etc.) is a separate fallback. Sourcing channel stays internal.
+  const catalog = readProducts().map((p) => ({
+    slug: p.slug,
+    name: (locale === 'tr' ? p.name_tr : p.name_en) ?? p.name,
+    brand: p.brand ?? '',
+    partNumber: p.partNumber ?? '',
+    description:
+      (locale === 'tr' ? p.description_tr : p.description_en) ?? p.shortDescription ?? '',
+    image: p.image ?? '',
+    in_stock: p.in_stock ?? p.availability === 'in-stock'
+  }));
+
   return (
     <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,30%)]">
       {/* LEFT — inline header + soft hero + channels + scrolling grid. */}
@@ -150,7 +165,7 @@ export default function SupplyIndex() {
           className="flex-1 overflow-y-auto px-5 py-4 md:px-10 md:py-5"
           style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0) + 4.5rem)' }}
         >
-          <EbayCatalogGrid locale={locale} />
+          <EbayCatalogGrid locale={locale} catalog={catalog} />
         </div>
       </div>
 

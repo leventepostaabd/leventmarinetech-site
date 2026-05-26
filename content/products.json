@@ -89,6 +89,48 @@
   ],
   "products": [
     {
+      "id": "example-led-navigation-light",
+      "slug": "example-led-navigation-light",
+      "sku": "NAV-LED-EX",
+      "name": "Example — LED Navigation Light (masthead)",
+      "name_en": "Example — LED Navigation Light (masthead)",
+      "name_tr": "Örnek — LED Seyir Feneri (silyon)",
+      "brand": "Example Brand",
+      "partNumber": "EX-NAV-001",
+      "alternativePartNumbers": [],
+      "category": "navigation-lights",
+      "category_slug": "marine-electric",
+      "subcategory_slug": "navigation-lights",
+      "shortDescription": "Template product — copy this block to add a real item we sell. Fill name, brand, part number, image and descriptions; keep source/source_url as an internal sourcing note (not shown to customers).",
+      "description_en": "Template product. Duplicate this entry in content/products.json for each item we want to sell, set the fields, and drop the photo into public/assets/supply/. Customers see name, brand, part number, photo and a 'Get quote' button — never a price.",
+      "description_tr": "Şablon ürün. Satmak istediğimiz her kalem için bu kaydı content/products.json içinde kopyala, alanları doldur ve fotoğrafı public/assets/supply/ altına koy. Müşteri yalnızca ad, marka, parça no, foto ve 'Teklif al' görür — fiyat asla.",
+      "longDescription": "This is a worked example so the catalog format is clear. Replace every field with the real product's data. The image path is relative to /public.",
+      "image": "/assets/supply/example-led-navigation-light.jpg",
+      "specs": {
+        "voltage": "24V DC",
+        "current": "0.5 A",
+        "power": "12 W",
+        "ip": "IP67",
+        "tempRange": "-25 to +55 degC"
+      },
+      "applications": [
+        "Masthead navigation light",
+        "Bridge nav-light panel"
+      ],
+      "compatibleSystems": [
+        "Navigation light control panel"
+      ],
+      "availability": "rfq-required",
+      "in_stock": false,
+      "source": "manual",
+      "source_url": "",
+      "equivalents": [],
+      "deliveryEstimate": "Quote on request",
+      "imageHint": "Product photo on white background.",
+      "tags": ["example", "template", "navigation", "led"],
+      "disclaimer": "Example/template entry — replace with a real product before launch."
+    },
+    {
       "id": "furuno-magnetron-mg5436",
       "slug": "furuno-mg5436-magnetron",
       "sku": "MG5436",

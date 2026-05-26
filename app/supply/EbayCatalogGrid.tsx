@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import ProductQuoteModal, { type ModalProduct } from './ProductQuoteModal';
 import { ct } from '@/lib/i18n-client';
@@ -13,92 +13,163 @@ type Item = {
   description?: string;
   image?: string;
   in_stock: boolean;
-  source: string;
-  live: boolean;
-  /** Raw eBay price (USD) before markup — internal use only, not displayed. */
+  /** Raw distributor price (USD) — internal only, never displayed. */
   priceRaw?: number | null;
-  /** Estimated end-customer total (USD) for default planned + Florida → US East. */
-  estTotal?: number | null;
-  estDeliveryEn?: string | null;
-  estDeliveryTr?: string | null;
 };
 
 const PRESET_QUERIES = [
   { en: 'Marine electrical', tr: 'Marine elektrik', q: 'marine electrical' },
-  { en: 'Radar / magnetron',  tr: 'Radar / magnetron', q: 'marine radar magnetron' },
-  { en: 'GMDSS / VHF',        tr: 'GMDSS / VHF',       q: 'marine gmdss vhf' },
-  { en: 'BWTS spares',        tr: 'BWTS yedek',        q: 'ballast water treatment' },
-  { en: 'AVR / generator',    tr: 'AVR / jeneratör',   q: 'marine generator avr' },
-  { en: 'Fire detection',     tr: 'Yangın algılama',   q: 'marine fire detector' },
-  { en: 'LED nav lights',     tr: 'LED seyir feneri',  q: 'marine led navigation light' },
-  { en: 'PLC modules',        tr: 'PLC modülleri',     q: 'marine plc module' }
+  { en: 'Radar / magnetron',  tr: 'Radar / magnetron', q: 'radar magnetron' },
+  { en: 'GMDSS / VHF',        tr: 'GMDSS / VHF',       q: 'gmdss vhf' },
+  { en: 'BWTS spares',        tr: 'BWTS yedek',        q: 'ballast water bwts' },
+  { en: 'AVR / generator',    tr: 'AVR / jeneratör',   q: 'generator avr' },
+  { en: 'Fire detection',     tr: 'Yangın algılama',   q: 'fire detector' },
+  { en: 'LED nav lights',     tr: 'LED seyir feneri',  q: 'navigation light' },
+  { en: 'PLC modules',        tr: 'PLC modülleri',     q: 'plc module' }
 ];
 
+function tokens(s: string): string[] {
+  return s.toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length >= 2);
+}
+
 /**
- * Live eBay-powered catalog grid for /supply.
+ * /supply catalog grid.
  *
- * UX:
- *  - Search box at the top — debounced, hits /api/supply-search.
- *  - 8 preset query chips so the page isn't empty on first load.
- *  - Grid of cards with eBay's photo / brand / model. Cards link into
- *    /supply-wizard with brand + part pre-filled (the customer asks for
- *    a quote; we never expose eBay's price).
- *  - Empty / loading / error states all render in-place — page doesn't
- *    grow. The grid uses internal scroll inside lm-screen-body.
+ * Primary content is OUR hand-curated marine catalog (passed in as `catalog`),
+ * filtered client-side as the customer types — no irrelevant marketplace junk.
+ * When nothing in our catalog matches, a clearly-labelled fallback runs a live
+ * search of our distributor network (Mouser / Digi-Key / Grainger) via
+ * /api/supply-search. Prices are never shown — quote-only (decision F3 / T3).
  */
 export default function EbayCatalogGrid({
   locale,
-  initialQuery = 'marine electrical'
+  catalog
 }: {
   locale: Locale;
-  initialQuery?: string;
+  catalog: Item[];
 }) {
-  const [q, setQ] = useState(initialQuery);
-  const [items, setItems] = useState<Item[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState<string | null>(null);
+  const [q, setQ] = useState('');
   const [picked, setPicked] = useState<ModalProduct | null>(null);
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Distributor-network fallback (live)
+  const [distItems, setDistItems] = useState<Item[]>([]);
+  const [distLoading, setDistLoading] = useState(false);
+  const [distErr, setDistErr] = useState<string | null>(null);
+  const [distRan, setDistRan] = useState(false);
+  const distAbort = useRef<AbortController | null>(null);
 
   const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);
 
-  // Debounced fetch whenever q changes
+  // Reset the distributor fallback whenever the query changes.
   useEffect(() => {
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    if (!q || q.trim().length < 2) {
-      setItems([]);
-      setLoading(false);
-      return;
-    }
-    setLoading(true);
-    setErr(null);
-    debounceRef.current = setTimeout(async () => {
-      try {
-        const res = await fetch('/api/supply-search?q=' + encodeURIComponent(q) + '&limit=24', { cache: 'no-store' });
-        if (!res.ok) {
-          setErr(ct(locale, 'supply.errorSearch'));
-          setItems([]);
-        } else {
-          const data = await res.json();
-          setItems(Array.isArray(data?.results) ? data.results : []);
-        }
-      } catch {
-        setErr(ct(locale, 'supply.errorNetwork'));
-        setItems([]);
-      } finally {
-        setLoading(false);
-      }
-    }, 280);
-    return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-    };
-  }, [q, locale]);
+    setDistItems([]);
+    setDistRan(false);
+    setDistErr(null);
+  }, [q]);
 
-  const liveOnly = items.filter((it) => it.live);
+  const filtered = useMemo(() => {
+    const toks = tokens(q);
+    if (toks.length === 0) return catalog;
+    return catalog.filter((it) => {
+      const hay = `${it.name} ${it.brand} ${it.partNumber} ${it.description ?? ''}`.toLowerCase();
+      return toks.some((tk) => hay.includes(tk));
+    });
+  }, [catalog, q]);
+
+  async function searchDistributors() {
+    const query = q.trim();
+    if (query.length < 2) return;
+    distAbort.current?.abort();
+    const ac = new AbortController();
+    distAbort.current = ac;
+    setDistLoading(true);
+    setDistErr(null);
+    setDistRan(true);
+    try {
+      const res = await fetch('/api/supply-search?q=' + encodeURIComponent(query) + '&limit=24', {
+        cache: 'no-store',
+        signal: ac.signal
+      });
+      if (!res.ok) {
+        setDistErr(ct(locale, 'supply.errorSearch'));
+        setDistItems([]);
+      } else {
+        const data = await res.json();
+        const live = Array.isArray(data?.results) ? data.results.filter((r: any) => r.live) : [];
+        setDistItems(live);
+      }
+    } catch (e: any) {
+      if (e?.name !== 'AbortError') {
+        setDistErr(ct(locale, 'supply.errorNetwork'));
+        setDistItems([]);
+      }
+    } finally {
+      setDistLoading(false);
+    }
+  }
+
+  function openCard(it: Item) {
+    setPicked({
+      id: it.slug,
+      slug: it.slug,
+      name: it.name,
+      brand: it.brand,
+      partNumber: it.partNumber,
+      description: it.description,
+      image: it.image,
+      priceRaw: it.priceRaw ?? null
+    });
+  }
+
+  function Card({ it }: { it: Item }) {
+    return (
+      <button
+        type="button"
+        onClick={() => openCard(it)}
+        className="text-left w-full h-full rounded-2xl bg-white ring-1 ring-line/60 hover:ring-amber/60 hover:shadow-md transition group overflow-hidden flex flex-col shadow-sm"
+      >
+        <div className="aspect-[4/3] bg-navy-50 relative overflow-hidden">
+          {it.image ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={it.image}
+              alt={it.name}
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform group-hover:scale-105"
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
+            />
+          ) : (
+            <div className="h-full w-full flex items-center justify-center text-ink-subtle font-mono text-[10px] uppercase tracking-[0.16em]">
+              {ct(locale, 'supply.noPhoto')}
+            </div>
+          )}
+        </div>
+        <div className="p-3.5 flex flex-col flex-1">
+          <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-amber-600 mb-1">
+            {it.brand || ct(locale, 'supply.brandOnRequest')}
+          </div>
+          <h3 className="text-[13px] font-semibold text-ink leading-tight mb-1 line-clamp-2">
+            {it.name}
+          </h3>
+          {it.partNumber && (
+            <div className="font-mono text-[11px] text-ink-subtle mb-2">{it.partNumber}</div>
+          )}
+          {/* No price shown to the customer (decision F3 / T3). */}
+          <div className="mt-auto pt-2">
+            <span className="inline-flex items-center gap-1.5 rounded-md bg-amber/15 px-2.5 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-amber-700 group-hover:bg-amber group-hover:text-navy-700 transition">
+              {ct(locale, 'supply.getQuote')} →
+            </span>
+          </div>
+        </div>
+      </button>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-5">
-      {/* Search bar — soft pill, no hard border, gentle amber halo on focus */}
+      {/* Search bar — filters our catalog client-side */}
       <div className="relative">
         <svg
           className="absolute left-5 top-1/2 -translate-y-1/2 text-ink-subtle"
@@ -127,7 +198,7 @@ export default function EbayCatalogGrid({
         )}
       </div>
 
-      {/* Preset query chips — softer pills */}
+      {/* Preset query chips */}
       <div className="flex flex-wrap gap-2">
         {PRESET_QUERIES.map((p) => (
           <button
@@ -147,104 +218,83 @@ export default function EbayCatalogGrid({
 
       {/* Result counter */}
       <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.14em] text-ink-subtle">
-        <span>
-          {loading
-            ? ct(locale, 'supply.searching')
-            : ct(locale, 'supply.liveResults').replace('{n}', String(liveOnly.length))}
-        </span>
-        <span className="text-amber-600">
-          {ct(locale, 'supply.quoteOnly')}
-        </span>
+        <span>{ct(locale, 'supply.catalogResults').replace('{n}', String(filtered.length))}</span>
+        <span className="text-amber-600">{ct(locale, 'supply.quoteOnly')}</span>
       </div>
 
-      {/* Grid / states */}
+      {/* Catalog grid / empty state */}
       <div className="flex-1 min-h-0">
-        {err && (
-          <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-[13.5px] text-red-700">
-            {err}
-          </div>
-        )}
-
-        {!err && !loading && liveOnly.length === 0 && (
+        {filtered.length > 0 ? (
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {filtered.map((it) => (
+              <li key={it.slug}><Card it={it} /></li>
+            ))}
+          </ul>
+        ) : (
           <div className="rounded-xl border border-line bg-white p-10 text-center">
-            <p className="text-[15px] text-ink-muted mb-3">
+            <p className="text-[15px] text-ink-muted mb-4">
               {ct(locale, 'supply.noMatchTitle')}
             </p>
             <div className="flex flex-wrap justify-center gap-2">
-              <Link href={`/supply/unlisted-request?q=${encodeURIComponent(q)}`} className="btn-accent btn-sm no-underline">
+              <button type="button" onClick={searchDistributors} className="btn-accent btn-sm">
+                {ct(locale, 'supply.distributorCta')}
+              </button>
+              <Link href={`/supply/unlisted-request?q=${encodeURIComponent(q)}`} className="btn-ghost btn-sm no-underline">
                 {ct(locale, 'supply.uploadNameplate')}
-              </Link>
-              <Link href={`/supply-wizard?q=${encodeURIComponent(q)}`} className="btn-ghost btn-sm no-underline">
-                {ct(locale, 'supply.requestAnyway')}
               </Link>
             </div>
           </div>
         )}
-
-        {liveOnly.length > 0 && (
-          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {liveOnly.map((it) => {
-              return (
-                <li key={it.slug}>
-                  <button
-                    type="button"
-                    onClick={() => setPicked({
-                      id: it.slug,
-                      slug: it.slug,
-                      name: it.name,
-                      brand: it.brand,
-                      partNumber: it.partNumber,
-                      description: it.description,
-                      image: it.image,
-                      priceRaw: it.priceRaw ?? null
-                    })}
-                    className="text-left w-full h-full rounded-2xl bg-white ring-1 ring-line/60 hover:ring-amber/60 hover:shadow-md transition group overflow-hidden flex flex-col shadow-sm"
-                  >
-                    <div className="aspect-[4/3] bg-navy-50 relative overflow-hidden">
-                      {it.image ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={it.image}
-                          alt={it.name}
-                          loading="lazy"
-                          className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = 'none';
-                          }}
-                        />
-                      ) : (
-                        <div className="h-full w-full flex items-center justify-center text-ink-subtle font-mono text-[10px] uppercase tracking-[0.16em]">
-                          {ct(locale, 'supply.noPhoto')}
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-3.5 flex flex-col flex-1">
-                      <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-amber-600 mb-1">
-                        {it.brand || ct(locale, 'supply.brandOnRequest')}
-                      </div>
-                      <h3 className="text-[13px] font-semibold text-ink leading-tight mb-1 line-clamp-2">
-                        {it.name}
-                      </h3>
-                      {it.partNumber && (
-                        <div className="font-mono text-[11px] text-ink-subtle mb-2">{it.partNumber}</div>
-                      )}
-
-                      {/* No price shown to the customer (decision F3 / T3).
-                          Item identity is enough; price + lead time travel
-                          through the RFQ form and back via email / WhatsApp. */}
-                      <div className="mt-auto pt-2">
-                        <span className="inline-flex items-center gap-1.5 rounded-md bg-amber/15 px-2.5 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-amber-700 group-hover:bg-amber group-hover:text-navy-700 transition">
-                          {ct(locale, 'supply.getQuote')} →
-                        </span>
-                      </div>
-                    </div>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        )}
       </div>
+
+      {/* Distributor-network fallback (live) — only when the customer asks */}
+      {q.trim().length >= 2 && (
+        <div className="border-t border-line pt-4">
+          {!distRan && filtered.length > 0 && (
+            <button
+              type="button"
+              onClick={searchDistributors}
+              className="font-mono text-[11.5px] uppercase tracking-[0.12em] text-amber-700 hover:text-amber"
+            >
+              {ct(locale, 'supply.distributorCta')}
+            </button>
+          )}
+
+          {distLoading && (
+            <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-subtle">
+              {ct(locale, 'supply.searching')}
+            </div>
+          )}
+
+          {distErr && (
+            <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-[13.5px] text-red-700">
+              {distErr}
+            </div>
+          )}
+
+          {distRan && !distLoading && !distErr && (
+            distItems.length > 0 ? (
+              <>
+                <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-subtle mb-3">
+                  {ct(locale, 'supply.distributorResults')} · {distItems.length}
+                </div>
+                <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {distItems.map((it) => (
+                    <li key={it.slug}><Card it={it} /></li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <div className="flex flex-wrap items-center gap-2 text-[13.5px] text-ink-muted">
+                <span>{ct(locale, 'supply.noMatchTitle')}</span>
+                <Link href={`/supply/unlisted-request?q=${encodeURIComponent(q)}`} className="btn-accent btn-sm no-underline">
+                  {ct(locale, 'supply.uploadNameplate')}
+                </Link>
+              </div>
+            )
+          )}
+        </div>
+      )}
 
       {/* Product quote modal */}
       <ProductQuoteModal
