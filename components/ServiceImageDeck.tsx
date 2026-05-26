@@ -91,13 +91,13 @@ export default function ServiceImageDeck({
           />
           {ctaEnabled && (
             <>
-              {/* Subtle bottom gradient — only enough to seat the CTA legibly,
-                  the artwork already carries its own captions. */}
-              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-navy-700/85 to-transparent" />
+              {/* Subtle top gradient — seats the CTA legibly at the top, clear
+                  of the captions baked into the lower half of the artwork. */}
+              <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-navy-700/85 to-transparent" />
 
-              {/* Single CTA — opens the dedicated detail page where the same
-                  image is shown again with full content. */}
-              <div className="absolute inset-x-0 bottom-0 p-7 md:p-9">
+              {/* Single CTA — top-right, over the photo area rather than the
+                  baked-in captions below. Opens the detail page. */}
+              <div className="absolute right-0 top-0 p-5 md:p-6 z-20">
                 <Link
                   href={`${hrefPrefix}${active.slug}`}
                   className="inline-flex items-center gap-2 rounded-md bg-amber px-4 py-2.5 text-[13px] font-mono font-semibold uppercase tracking-[0.12em] text-navy-700 no-underline shadow-lg transition hover:bg-amber-600"
@@ -112,8 +112,8 @@ export default function ServiceImageDeck({
         </motion.div>
       </AnimatePresence>
 
-      {/* Progress dots */}
-      <div className="absolute right-5 top-5 flex flex-col gap-1.5 z-10">
+      {/* Progress dots — bottom-right, clear of the top CTA. */}
+      <div className="absolute right-5 bottom-5 flex flex-col gap-1.5 z-10">
         {items.map((it, i) => (
           <button
             key={it.slug}
@@ -129,7 +129,7 @@ export default function ServiceImageDeck({
       {/* Pause indicator (silent) */}
       <div
         aria-hidden
-        className={`absolute left-5 top-5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40 transition ${
+        className={`absolute left-5 bottom-5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40 transition ${
           paused ? 'opacity-100' : 'opacity-0'
         }`}
       >

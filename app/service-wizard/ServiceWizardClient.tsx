@@ -188,6 +188,9 @@ export default function ServiceWizardClient({
             <Link href="/services" className="btn-ghost btn-md">
               {t('wizard.backToServices')}
             </Link>
+            <Link href="/supply" className="btn-ghost btn-md">
+              {t('bridge.browseSupply')}
+            </Link>
           </div>
         </div>
       </div>

@@ -30,6 +30,12 @@
     "doorSupplyKicker": "Ανταλλακτικά καθ’ οδόν",
     "doorSupplyCta": "Χρειάζομαι ανταλλακτικά"
   },
+  "bridge": {
+    "needService": "Ηλεκτρική βλάβη εν πλω;",
+    "requestService": "Ζητήστε σέρβις 24/7 →",
+    "needParts": "Χρειάζεστε και ανταλλακτικά;",
+    "browseSupply": "Δείτε τα ανταλλακτικά →"
+  },
   "wizard": {
     "step": "Βήμα",
     "of": "/",
