@@ -3,26 +3,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import type { ServiceContent } from '@/lib/content';
+import { ct, pick } from '@/lib/i18n-client';
 import { whatsappUrl } from '@/lib/whatsapp';
 import SystemPicker from './SystemPicker';
-
-type WizardWindow = { id: string; label_en: string; label_tr: string };
-type WizardCopy = {
-  step_port: { title_en: string; title_tr: string; hint_en: string; hint_tr: string };
-  step_when: { title_en: string; title_tr: string; options: WizardWindow[] };
-  step_contact: {
-    title_en: string; title_tr: string;
-    name_en: string; name_tr: string;
-    email_en: string; email_tr: string;
-    phone_en: string; phone_tr: string;
-    vessel_en: string; vessel_tr: string;
-    imo_en: string; imo_tr: string;
-  };
-  submit_en: string; submit_tr: string;
-  promise_en: string; promise_tr: string;
-  received_en: string; received_tr: string;
-  ref_en: string; ref_tr: string;
-};
 
 /**
  * 3-step service request wizard (DECISIONS.md S4, S5).
@@ -38,18 +21,26 @@ type WizardCopy = {
  *
  * System is preselected via ?system=<slug>. Customer can still change
  * it from a small inline selector on every step.
+ *
+ * All UI copy is resolved through the i18n dictionaries (en/tr/el/es/de)
+ * via `ct`, and system names via `pick`, so every locale is honoured.
  */
+const WHEN_OPTIONS = [
+  { id: 'now', key: 'wizard.whenNow' },
+  { id: '24h', key: 'wizard.when24h' },
+  { id: 'week', key: 'wizard.whenWeek' },
+  { id: 'planned', key: 'wizard.whenPlanned' }
+] as const;
+
 export default function ServiceWizardClient({
   services,
   defaultSystem,
   usPorts,
-  copy,
   locale = 'en'
 }: {
   services: ServiceContent[];
   defaultSystem?: string;
   usPorts: string[];
-  copy: WizardCopy;
   locale?: Locale;
 }) {
   const params = useSearchParams();
@@ -75,7 +66,7 @@ export default function ServiceWizardClient({
   const [err, setErr] = useState<string | null>(null);
   const [done, setDone] = useState<{ ref: string } | null>(null);
 
-  const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);
+  const t = (key: string) => ct(locale, key);
 
   const system = useMemo(
     () => services.find((s) => s.slug === systemSlug),
@@ -98,17 +89,17 @@ export default function ServiceWizardClient({
   }, [params, systemSlug]);
 
   function canAdvance(): string | null {
-    if (step === 0) return systemSlug ? null : t('Pick a system.', 'Bir sistem seçin.');
-    if (step === 1) return port.trim() ? null : t('Add the port.', 'Limanı ekleyin.');
+    if (step === 0) return systemSlug ? null : t('wizard.errPickSystem');
+    if (step === 1) return port.trim() ? null : t('wizard.errPort');
     if (step === 2) {
-      if (!whenWindow) return t('Pick a time window.', 'Bir zaman aralığı seçin.');
-      if (whenWindow === 'planned' && !plannedDate) return t('Pick a planned date.', 'Planlı bir tarih seçin.');
+      if (!whenWindow) return t('wizard.errWhen');
+      if (whenWindow === 'planned' && !plannedDate) return t('wizard.errPlanned');
       return null;
     }
     if (step === 3) {
-      if (!name.trim()) return t('Your name is required.', 'Adınız gerekli.');
+      if (!name.trim()) return t('wizard.errName');
       if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        return t('Valid email required.', 'Geçerli e-posta gerekli.');
+        return t('wizard.errEmail');
       }
       return null;
     }
@@ -138,7 +129,7 @@ export default function ServiceWizardClient({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           system_slug: systemSlug,
-          system_name: locale === 'tr' ? system?.name_tr : system?.name_en,
+          system_name: system ? pick(system, 'name', locale) : undefined,
           port,
           when: whenWindow,
           planned_date: whenWindow === 'planned' ? plannedDate : undefined,
@@ -157,7 +148,7 @@ export default function ServiceWizardClient({
       if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
       setDone({ ref: data?.id ?? '—' });
     } catch (e2: any) {
-      setErr(e2?.message ?? t('Submission failed. Please WhatsApp us.', 'Gönderim başarısız. Lütfen WhatsApp ile yazın.'));
+      setErr(e2?.message ?? t('wizard.errSubmit'));
     } finally {
       setSubmitting(false);
     }
@@ -169,13 +160,13 @@ export default function ServiceWizardClient({
       <div className="max-w-2xl mx-auto">
         <div className="card border-l-4 border-l-green-600">
           <div className="kicker mb-3 !text-green-700 before:!bg-green-600">
-            {t(copy.received_en, copy.received_tr)}
+            {t('wizard.received')}
           </div>
           <h2 className="mb-3 text-balance">
-            {t(copy.promise_en, copy.promise_tr)}
+            {t('wizard.promise')}
           </h2>
           <p className="text-ink-muted text-[14.5px] leading-relaxed">
-            {t(copy.ref_en, copy.ref_tr)}:{' '}
+            {t('wizard.ref')}:{' '}
             <span className="font-mono text-ink">{done.ref}</span>
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
@@ -192,10 +183,10 @@ export default function ServiceWizardClient({
               WhatsApp US (+1 619 384 0403)
             </a>
             <a href="tel:+16193840403" className="btn-ghost btn-md">
-              {t('Call now', 'Şimdi ara')}
+              {t('wizard.callNow')}
             </a>
             <Link href="/services" className="btn-ghost btn-md">
-              {t('Back to services', 'Servislere dön')}
+              {t('wizard.backToServices')}
             </Link>
           </div>
         </div>
@@ -208,10 +199,10 @@ export default function ServiceWizardClient({
   const stepNumber = step + 1;
   const progress = ((step + 1) / totalSteps) * 100;
   const stepTitles = [
-    t('System', 'Sistem'),
-    t(copy.step_port.title_en, copy.step_port.title_tr),
-    t(copy.step_when.title_en, copy.step_when.title_tr),
-    t(copy.step_contact.title_en, copy.step_contact.title_tr)
+    t('wizard.system'),
+    t('wizard.portTitle'),
+    t('wizard.whenTitle'),
+    t('wizard.contactTitle')
   ];
 
   const popular = services.filter((s) => s.popular).slice(0, 6);
@@ -222,7 +213,7 @@ export default function ServiceWizardClient({
       <div className="shrink-0 mb-5">
         <div className="flex items-baseline justify-between mb-2">
           <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-ink-subtle">
-            {t('Step', 'Adım')} {stepNumber} / {totalSteps} · {stepTitles[step]}
+            {t('wizard.step')} {stepNumber} / {totalSteps} · {stepTitles[step]}
           </span>
           {system && step > 0 && (
             <button
@@ -230,7 +221,7 @@ export default function ServiceWizardClient({
               onClick={() => setStep(0)}
               className="font-mono text-[11px] text-amber-600 hover:underline"
             >
-              {locale === 'tr' ? system.name_tr : system.name_en} · {t('change', 'değiştir')}
+              {pick(system, 'name', locale)} · {t('wizard.change')}
             </button>
           )}
         </div>
@@ -256,11 +247,11 @@ export default function ServiceWizardClient({
         {step === 1 && (
           <div>
             <div className="kicker mb-3">
-              {t('Step', 'Adım')} 2 — {t('Port', 'Liman')}
+              {t('wizard.step')} 2 — {t('wizard.port')}
             </div>
-            <h2 className="mb-2 text-[26px]">{t(copy.step_port.title_en, copy.step_port.title_tr)}</h2>
+            <h2 className="mb-2 text-[26px]">{t('wizard.portTitle')}</h2>
             <p className="text-ink-muted mb-6 text-[14.5px]">
-              {t(copy.step_port.hint_en, copy.step_port.hint_tr)}
+              {t('wizard.portHint')}
             </p>
             <div className="relative">
               <input
@@ -269,7 +260,7 @@ export default function ServiceWizardClient({
                 onFocus={() => setPortOpen(true)}
                 onBlur={() => setTimeout(() => setPortOpen(false), 120)}
                 onChange={(e) => { setPort(e.target.value); setPortOpen(true); }}
-                placeholder={t('e.g. Houston, TX', 'örn. Houston, TX')}
+                placeholder={t('wizard.portPlaceholder')}
                 className="field-input"
                 autoFocus
                 autoComplete="off"
@@ -298,7 +289,7 @@ export default function ServiceWizardClient({
                       onClick={() => setPortOpen(false)}
                       className="block w-full text-left px-3 py-2 text-[12px] text-ink-subtle border-t border-line italic"
                     >
-                      {t('Other / not listed — keep typing', 'Diğer / liste dışı — yazmaya devam edin')}
+                      {t('wizard.portOther')}
                     </button>
                   </li>
                 </ul>
@@ -311,11 +302,11 @@ export default function ServiceWizardClient({
         {step === 2 && (
           <div>
             <div className="kicker mb-3">
-              {t('Step', 'Adım')} 3 — {t('When', 'Zaman')}
+              {t('wizard.step')} 3 — {t('wizard.when')}
             </div>
-            <h2 className="mb-6 text-[26px]">{t(copy.step_when.title_en, copy.step_when.title_tr)}</h2>
+            <h2 className="mb-6 text-[26px]">{t('wizard.whenTitle')}</h2>
             <div className="grid gap-2">
-              {copy.step_when.options.map((opt) => {
+              {WHEN_OPTIONS.map((opt) => {
                 const on = whenWindow === opt.id;
                 return (
                   <button
@@ -328,14 +319,14 @@ export default function ServiceWizardClient({
                         : 'border-line bg-white text-ink hover:border-amber'
                     }`}
                   >
-                    <div className="font-semibold">{t(opt.label_en, opt.label_tr)}</div>
+                    <div className="font-semibold">{t(opt.key)}</div>
                   </button>
                 );
               })}
             </div>
             {whenWindow === 'planned' && (
               <div className="mt-4">
-                <label className="field-label">{t('Planned date', 'Planlı tarih')}</label>
+                <label className="field-label">{t('wizard.plannedDate')}</label>
                 <input
                   type="date"
                   value={plannedDate}
@@ -351,17 +342,17 @@ export default function ServiceWizardClient({
         {step === 3 && (
           <div>
             <div className="kicker mb-3">
-              {t('Step', 'Adım')} 4 — {t('Contact', 'İletişim')}
+              {t('wizard.step')} 4 — {t('wizard.contact')}
             </div>
             <h2 className="mb-6 text-[26px]">
-              {t(copy.step_contact.title_en, copy.step_contact.title_tr)}
+              {t('wizard.contactTitle')}
             </h2>
 
             <div className="space-y-4">
               <div className="grid sm:grid-cols-2 gap-3">
                 <div>
                   <label className="field-label">
-                    {t(copy.step_contact.name_en, copy.step_contact.name_tr)} *
+                    {t('wizard.name')} *
                   </label>
                   <input
                     type="text"
@@ -373,7 +364,7 @@ export default function ServiceWizardClient({
                 </div>
                 <div>
                   <label className="field-label">
-                    {t(copy.step_contact.phone_en, copy.step_contact.phone_tr)}
+                    {t('wizard.phone')}
                   </label>
                   <input
                     type="tel"
@@ -387,7 +378,7 @@ export default function ServiceWizardClient({
               </div>
               <div>
                 <label className="field-label">
-                  {t(copy.step_contact.email_en, copy.step_contact.email_tr)} *
+                  {t('wizard.email')} *
                 </label>
                 <input
                   type="email"
@@ -400,7 +391,7 @@ export default function ServiceWizardClient({
               <div className="grid sm:grid-cols-2 gap-3">
                 <div>
                   <label className="field-label">
-                    {t(copy.step_contact.vessel_en, copy.step_contact.vessel_tr)}
+                    {t('wizard.vessel')}
                   </label>
                   <input
                     type="text"
@@ -412,7 +403,7 @@ export default function ServiceWizardClient({
                 </div>
                 <div>
                   <label className="field-label">
-                    {t(copy.step_contact.imo_en, copy.step_contact.imo_tr)}
+                    {t('wizard.imo')}
                   </label>
                   <input
                     type="text"
@@ -425,22 +416,19 @@ export default function ServiceWizardClient({
               </div>
               <div>
                 <label className="field-label">
-                  {t('Anything else? (optional)', 'Eklemek istediğiniz? (opsiyonel)')}
+                  {t('wizard.notes')}
                 </label>
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   className="field-input min-h-[80px]"
-                  placeholder={t(
-                    'Symptoms, error codes, what the bridge reported — anything helps.',
-                    'Belirtiler, hata kodları, köprüden gelen bilgi — ne biliyorsanız.'
-                  )}
+                  placeholder={t('wizard.notesPlaceholder')}
                 />
               </div>
             </div>
 
             <p className="mt-5 text-[12px] text-ink-subtle">
-              {t(copy.promise_en, copy.promise_tr)}
+              {t('wizard.promise')}
             </p>
           </div>
         )}
@@ -458,7 +446,7 @@ export default function ServiceWizardClient({
             disabled={step === 0 || submitting}
             className="btn-ghost btn-md disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            ← {t('Back', 'Geri')}
+            {t('wizard.back')}
           </button>
           {step === 3 ? (
             <button
@@ -467,11 +455,11 @@ export default function ServiceWizardClient({
               disabled={submitting}
               className="btn-accent btn-lg disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {submitting ? t('Sending…', 'Gönderiliyor…') : t(copy.submit_en, copy.submit_tr)}
+              {submitting ? t('wizard.submitting') : t('wizard.submit')}
             </button>
           ) : (
             <button type="button" onClick={goNext} className="btn-primary btn-md">
-              {t('Continue', 'Devam')} →
+              {t('wizard.continue')}
             </button>
           )}
         </div>

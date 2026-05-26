@@ -20,46 +20,6 @@ export default function Page() {
   const services = readServices();
   const locale = getLocale();
 
-  const copy = {
-    step_port: {
-      title_en: file.wizard.step_port.en,
-      title_tr: file.wizard.step_port.tr,
-      hint_en: file.wizard.step_port.hint_en,
-      hint_tr: file.wizard.step_port.hint_tr
-    },
-    step_when: {
-      title_en: file.wizard.step_when.en,
-      title_tr: file.wizard.step_when.tr,
-      options: file.wizard.step_when.options.map((o) => ({
-        id: o.id,
-        label_en: o.en,
-        label_tr: o.tr
-      }))
-    },
-    step_contact: {
-      title_en: file.wizard.step_contact.en,
-      title_tr: file.wizard.step_contact.tr,
-      name_en: file.wizard.step_contact.name_en,
-      name_tr: file.wizard.step_contact.name_tr,
-      email_en: file.wizard.step_contact.email_en,
-      email_tr: file.wizard.step_contact.email_tr,
-      phone_en: file.wizard.step_contact.phone_en,
-      phone_tr: file.wizard.step_contact.phone_tr,
-      vessel_en: file.wizard.step_contact.vessel_en,
-      vessel_tr: file.wizard.step_contact.vessel_tr,
-      imo_en: file.wizard.step_contact.imo_en,
-      imo_tr: file.wizard.step_contact.imo_tr
-    },
-    submit_en: file.wizard.submit_en,
-    submit_tr: file.wizard.submit_tr,
-    promise_en: file.wizard.promise_en,
-    promise_tr: file.wizard.promise_tr,
-    received_en: file.wizard.received_en,
-    received_tr: file.wizard.received_tr,
-    ref_en: file.wizard.ref_en,
-    ref_tr: file.wizard.ref_tr
-  };
-
   const deckItems = services
     .filter((s) => SERVICE_IMAGE[s.slug])
     .map((s) => ({
@@ -89,7 +49,6 @@ export default function Page() {
             <ServiceWizardClient
               services={services}
               usPorts={file.us_ports}
-              copy={copy}
               locale={locale}
             />
           </Suspense>

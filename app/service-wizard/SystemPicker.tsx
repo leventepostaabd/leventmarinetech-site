@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { ct, pick } from '@/lib/i18n-client';
 
 type Service = {
   slug: string;
@@ -34,7 +35,6 @@ export default function SystemPicker({
 }) {
   const [q, setQ] = useState('');
   const [open, setOpen] = useState(false);
-  const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);
 
   const matches = useMemo(() => {
     const qq = q.trim().toLowerCase();
@@ -50,10 +50,10 @@ export default function SystemPicker({
   return (
     <div>
       <h2 className="text-[22px] md:text-[24px] font-bold leading-tight mb-1.5">
-        {t('Which system has the problem?', 'Hangi sistemde sorun var?')}
+        {ct(locale, 'services.searchPlaceholder')}
       </h2>
       <p className="text-ink-muted text-[13.5px] mb-4">
-        {t('Type to search, tap a tile, or open the full list — your choice.', 'Yaz, arama yap; bir kutucuğa tıkla; ya da tam listeyi aç.')}
+        {ct(locale, 'services.pickerHint')}
       </p>
 
       {/* Live search */}
@@ -65,16 +65,16 @@ export default function SystemPicker({
           type="search"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder={t('e.g. BWTS, magnetron, fire alarm…', 'örn. BWTS, magnetron, yangın alarmı…')}
+          placeholder={ct(locale, 'services.searchExample')}
           className="field-input pl-10"
-          aria-label={t('Search systems', 'Sistem ara')}
+          aria-label={ct(locale, 'services.searchPlaceholder')}
         />
         {/* Match dropdown */}
         {q && (
           <ul className="absolute z-20 left-0 right-0 mt-1 max-h-56 overflow-auto rounded-md border border-line bg-white shadow-lg">
             {matches.length === 0 ? (
               <li className="px-3 py-2 text-[12.5px] text-ink-subtle">
-                {t('No system matches that search.', 'Bu aramaya uyan sistem yok.')}
+                {ct(locale, 'services.noMatches')}
               </li>
             ) : (
               matches.slice(0, 8).map((s) => (
@@ -84,8 +84,8 @@ export default function SystemPicker({
                     onClick={() => { onChange(s.slug); setQ(''); }}
                     className="block w-full text-left px-3 py-2 text-[13.5px] hover:bg-amber/10"
                   >
-                    <span className="font-semibold">{locale === 'tr' ? s.name_tr : s.name_en}</span>
-                    <span className="ml-2 text-ink-subtle">{locale === 'tr' ? s.kicker_tr : s.kicker_en}</span>
+                    <span className="font-semibold">{pick(s, 'name', locale)}</span>
+                    <span className="ml-2 text-ink-subtle">{pick(s, 'kicker', locale)}</span>
                   </button>
                 </li>
               ))
@@ -96,7 +96,7 @@ export default function SystemPicker({
 
       {/* Popular six (always visible) */}
       <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-subtle mb-2">
-        {t('Most requested', 'En sık gelen')}
+        {ct(locale, 'services.mostRequested')}
       </div>
       <div className="grid gap-2 sm:grid-cols-2">
         {popular.map((s) => {
@@ -112,8 +112,8 @@ export default function SystemPicker({
                   : 'border-line bg-white text-ink hover:border-amber'
               }`}
             >
-              <div className="font-semibold text-[13.5px]">{locale === 'tr' ? s.name_tr : s.name_en}</div>
-              <div className="text-[11.5px] text-ink-subtle">{locale === 'tr' ? s.kicker_tr : s.kicker_en}</div>
+              <div className="font-semibold text-[13.5px]">{pick(s, 'name', locale)}</div>
+              <div className="text-[11.5px] text-ink-subtle">{pick(s, 'kicker', locale)}</div>
             </button>
           );
         })}
@@ -125,7 +125,7 @@ export default function SystemPicker({
         onClick={() => setOpen(true)}
         className="mt-3 font-mono text-[11.5px] uppercase tracking-[0.14em] text-amber-600 hover:text-amber"
       >
-        {t('See all 19 systems →', '19 sistemin tümünü gör →')}
+        {ct(locale, 'services.seeAll')} →
       </button>
 
       {/* Full-list modal — overlay, doesn't grow the page */}
@@ -153,12 +153,12 @@ export default function SystemPicker({
             >
               <div className="shrink-0 flex items-center justify-between border-b border-line px-5 py-3">
                 <span className="font-head font-bold text-[15px] text-navy-700">
-                  {t('All 19 systems + Other', '19 sistem + Diğer')}
+                  {ct(locale, 'services.systemsCount')}
                 </span>
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  aria-label={t('Close', 'Kapat')}
+                  aria-label={ct(locale, 'services.close')}
                   className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-navy-50 hover:bg-navy-100"
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
