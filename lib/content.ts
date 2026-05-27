@@ -146,6 +146,12 @@ export type ProductContent = {
   /** Origin of the listing — amazon | ebay | manual. */
   source?: ProductSource;
   source_url?: string;
+  /** Optional public selling price (USD). When set, shown to the customer;
+      when null, the card shows "Get quote" (decision S9). */
+  price?: number | null;
+  /** Internal cost (USD) — what we pay to source the item. NEVER shown to
+      customers; admin-only (decision S9). */
+  cost?: number | null;
   /** Slugs of equivalent / cross-reference products. */
   equivalents?: string[];
   deliveryEstimate: string;

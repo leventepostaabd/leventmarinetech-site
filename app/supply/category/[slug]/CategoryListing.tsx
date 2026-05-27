@@ -104,9 +104,15 @@ export default function CategoryListing({ products, brands, locale, labels }: Pr
                   <h3 className="text-[15.5px] font-bold mb-1 group-hover:text-amber-600 leading-snug">{name}</h3>
                   <div className="font-mono text-[11.5px] text-ink-subtle mb-2">{p.partNumber}</div>
                   <p className="text-[13px] text-ink-muted line-clamp-3">{desc}</p>
-                  <div className="mt-3 inline-flex items-center text-[11.5px] font-mono uppercase tracking-wider text-amber-600 group-hover:text-amber">
-                    {labels.getQuote} →
-                  </div>
+                  {typeof p.price === 'number' ? (
+                    <div className="mt-3 inline-flex items-center text-[15px] font-bold text-navy-700 group-hover:text-amber-600">
+                      ${p.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </div>
+                  ) : (
+                    <div className="mt-3 inline-flex items-center text-[11.5px] font-mono uppercase tracking-wider text-amber-600 group-hover:text-amber">
+                      {labels.getQuote} →
+                    </div>
+                  )}
                 </Link>
               </li>
             );

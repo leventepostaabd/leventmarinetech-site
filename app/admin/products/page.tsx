@@ -1,41 +1,41 @@
-import Link from 'next/link';
-import { readProducts } from '@/lib/content';
+import { getAllProductsAdmin } from '@/lib/products-db';
+import { readCategories } from '@/lib/content';
+import ProductAdminClient, { type AdminProduct, type CategoryOption } from './ProductAdminClient';
 
 export const dynamic = 'force-dynamic';
 
-export default function AdminProducts() {
-  const products = readProducts();
-  return (
-    <div>
-      <div className="flex justify-between items-center mb-5">
-        <div>
-          <h2>Products</h2>
-          <p className="text-[13px] text-ink-muted">Currently sourced from <span className="font-mono">/content/products.json</span> ({products.length} items). Migrate to Supabase later via <code className="font-mono text-[12px] bg-navy-50 px-1.5 py-0.5 rounded">supabase/migrations/0001_init.sql</code>.</p>
-        </div>
-      </div>
+export default async function AdminProducts() {
+  const products = await getAllProductsAdmin();
+  const categories: CategoryOption[] = readCategories()
+    .sort((a, b) => a.order - b.order)
+    .map((c) => ({
+      slug: c.slug,
+      name: c.name_en,
+      subcategories: c.subcategories.map((s) => ({ slug: s.slug, name: s.name_en }))
+    }));
 
-      <div className="overflow-x-auto card !p-0">
-        <table className="w-full text-[13px]">
-          <thead className="bg-navy-50 text-left">
-            <tr>
-              {['Name', 'Brand', 'Part', 'Category', 'Availability'].map((h) => (
-                <th key={h} className="px-3 py-2 font-mono text-[10.5px] uppercase tracking-wider text-ink-subtle">{h}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((p) => (
-              <tr key={p.id} className="border-t border-line hover:bg-navy-50">
-                <td className="px-3 py-2"><Link href={`/supply/product/${p.slug}`} className="text-ink hover:text-amber-600 no-underline">{p.name}</Link></td>
-                <td className="px-3 py-2">{p.brand}</td>
-                <td className="px-3 py-2 font-mono text-[11.5px]">{p.partNumber}</td>
-                <td className="px-3 py-2 text-ink-muted capitalize">{p.category.replace(/-/g, ' ')}</td>
-                <td className="px-3 py-2 font-mono text-[10.5px] uppercase">{p.availability.replace(/-/g, ' ')}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
+  const rows: AdminProduct[] = products.map((p) => ({
+    id: p.id,
+    slug: p.slug,
+    name: p.name,
+    name_tr: p.name_tr ?? '',
+    brand: p.brand ?? '',
+    part_number: p.partNumber ?? '',
+    category: p.category_slug ?? '',
+    subcategory: p.subcategory_slug ?? '',
+    short_description: p.shortDescription ?? '',
+    short_description_tr: p.description_tr ?? '',
+    long_description: p.longDescription ?? '',
+    availability: p.availability,
+    delivery_estimate: p.deliveryEstimate ?? '',
+    image_url: p.image ?? '',
+    price_usd: p.price ?? null,
+    cost_usd: p.cost ?? null,
+    source: p.source ?? '',
+    source_url: p.source_url ?? '',
+    tags: p.tags ?? [],
+    published: p.published
+  }));
+
+  return <ProductAdminClient initialProducts={rows} categories={categories} />;
 }
