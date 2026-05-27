@@ -13,6 +13,9 @@ type Item = {
   description?: string;
   image?: string;
   in_stock: boolean;
+  /** Optional public selling price (USD). Shown when set; otherwise the card
+      shows "Get quote" (decision S9). */
+  price?: number | null;
   /** Raw distributor price (USD) — internal only, never displayed. */
   priceRaw?: number | null;
 };
@@ -156,11 +159,17 @@ export default function EbayCatalogGrid({
           {it.partNumber && (
             <div className="font-mono text-[11px] text-ink-subtle mb-2">{it.partNumber}</div>
           )}
-          {/* No price shown to the customer (decision F3 / T3). */}
+          {/* Price shown only when set (decision S9); otherwise "Get quote". */}
           <div className="mt-auto pt-2">
-            <span className="inline-flex items-center gap-1.5 rounded-md bg-amber/15 px-2.5 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-amber-700 group-hover:bg-amber group-hover:text-navy-700 transition">
-              {ct(locale, 'supply.getQuote')} →
-            </span>
+            {typeof it.price === 'number' ? (
+              <span className="inline-flex items-center gap-1.5 rounded-md bg-navy-700 px-2.5 py-1.5 font-mono text-[11px] font-semibold tracking-[0.04em] text-white group-hover:bg-amber group-hover:text-navy-700 transition">
+                ${it.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 rounded-md bg-amber/15 px-2.5 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-amber-700 group-hover:bg-amber group-hover:text-navy-700 transition">
+                {ct(locale, 'supply.getQuote')} →
+              </span>
+            )}
           </div>
         </div>
       </button>

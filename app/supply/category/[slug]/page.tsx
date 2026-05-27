@@ -3,23 +3,16 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import {
-  readProducts, readCategories, readProductLabels,
-  categoryBySlug, subcategoryBySlug, productsByTopCategory, productsBySubcategory
+  readProductLabels, categoryBySlug, subcategoryBySlug
 } from '@/lib/content';
+import { getProductsByTopCategory, getProductsBySubcategory } from '@/lib/products-db';
 import { supplyImage } from '@/lib/deck-images';
 import { getLocale } from '@/lib/i18n';
 import CategoryListing from './CategoryListing';
 
-export function generateStaticParams() {
-  const slugs = new Set<string>();
-  readCategories().forEach((c) => {
-    slugs.add(c.slug);
-    c.subcategories.forEach((s) => slugs.add(s.slug));
-  });
-  // Legacy single-category slugs (backward compat)
-  readProducts().forEach((p) => slugs.add(p.category));
-  return Array.from(slugs).map((slug) => ({ slug }));
-}
+// Catalog is admin-managed in Supabase — render on demand so new/edited
+// products appear without a rebuild.
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const top = categoryBySlug(params.slug);
@@ -35,18 +28,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default function CategoryPage({ params }: { params: { slug: string } }) {
+export default async function CategoryPage({ params }: { params: { slug: string } }) {
   const locale = getLocale();
   const labels = readProductLabels(locale);
 
   const top = categoryBySlug(params.slug);
   const subHit = subcategoryBySlug(params.slug);
 
-  let items = top
-    ? productsByTopCategory(params.slug)
-    : subHit
-    ? productsBySubcategory(params.slug)
-    : productsBySubcategory(params.slug); // legacy slug
+  const items = top
+    ? await getProductsByTopCategory(params.slug)
+    : await getProductsBySubcategory(params.slug); // subcategory or legacy slug
 
   if (items.length === 0) notFound();
 

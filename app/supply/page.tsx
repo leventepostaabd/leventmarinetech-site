@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { getLocale, getTranslator } from '@/lib/i18n';
-import { readProducts } from '@/lib/content';
+import { getProducts } from '@/lib/products-db';
 import { SUPPLY_IMAGE } from '@/lib/deck-images';
 import Link from 'next/link';
 import EbayCatalogGrid from './EbayCatalogGrid';
@@ -103,7 +103,9 @@ const SUPPLY_DECK: Array<{
  *     file dropped anywhere on the page opens the Upload-List modal with
  *     the file already attached.
  */
-export default function SupplyIndex() {
+export const dynamic = 'force-dynamic';
+
+export default async function SupplyIndex() {
   const locale = getLocale();
   const t = getTranslator(locale);
 
@@ -120,7 +122,7 @@ export default function SupplyIndex() {
   // Our hand-curated marine catalog — the products we choose to sell. Shown
   // as the default grid and filtered client-side; the distributor live search
   // (Mouser etc.) is a separate fallback. Sourcing channel stays internal.
-  const catalog = readProducts().map((p) => ({
+  const catalog = (await getProducts()).map((p) => ({
     slug: p.slug,
     name: (locale === 'tr' ? p.name_tr : p.name_en) ?? p.name,
     brand: p.brand ?? '',
@@ -128,7 +130,8 @@ export default function SupplyIndex() {
     description:
       (locale === 'tr' ? p.description_tr : p.description_en) ?? p.shortDescription ?? '',
     image: p.image ?? '',
-    in_stock: p.in_stock ?? p.availability === 'in-stock'
+    in_stock: p.in_stock ?? p.availability === 'in-stock',
+    price: p.price ?? null
   }));
 
   return (

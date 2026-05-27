@@ -2,19 +2,19 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import {
-  productBySlug, readProducts, readProductLabels, subcategoryBySlug, categoryBySlug
+  readProductLabels, subcategoryBySlug, categoryBySlug
 } from '@/lib/content';
+import { getProductBySlug, getProducts } from '@/lib/products-db';
 import { SITE } from '@/lib/site';
 import { breadcrumbSchema } from '@/lib/schema-org';
 import { getLocale } from '@/lib/i18n';
 import ProductImage from '@/components/ProductImage';
 
-export function generateStaticParams() {
-  return readProducts().map((p) => ({ slug: p.slug }));
-}
+// Admin-managed catalog (Supabase) — render on demand.
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const p = productBySlug(params.slug);
+  const p = await getProductBySlug(params.slug);
   if (!p) return {};
   return {
     title: `${p.name} — ${p.brand} ${p.partNumber}`,
@@ -23,8 +23,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
-  const p = productBySlug(params.slug);
+export default async function ProductPage({ params }: { params: { slug: string } }) {
+  const all = await getProducts();
+  const p = all.find((x) => x.slug === params.slug);
   if (!p) notFound();
   const locale = getLocale();
   const labels = readProductLabels(locale);
@@ -38,9 +39,9 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const topCat = p.category_slug ? categoryBySlug(p.category_slug) : subHit?.category;
   const labelOf = (en: string, tr?: string) => (locale === 'tr' && tr ? tr : en);
 
-  // Equivalents — fetch matching products
+  // Equivalents — match against the already-loaded catalog
   const equivalents = (p.equivalents ?? [])
-    .map((slug) => productBySlug(slug))
+    .map((slug) => all.find((x) => x.slug === slug))
     .filter((e): e is NonNullable<typeof e> => Boolean(e));
 
   return (
@@ -95,7 +96,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               </div>
             </div>
 
-            {/* RIGHT: CTA box — NEVER show price (F3 / T3) */}
+            {/* RIGHT: CTA box — price shown only when set (decision S9) */}
             <aside className="card border-l-4 border-l-amber">
               <div className="flex justify-between items-center mb-3">
                 <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-ink-subtle">
@@ -105,6 +106,12 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                   {p.in_stock ? '● ' + labels.inStock : labels.getQuote}
                 </span>
               </div>
+              {typeof p.price === 'number' && (
+                <div className="mb-3 font-head text-[28px] font-extrabold text-navy-700">
+                  ${p.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  <span className="ml-1 font-mono text-[11px] font-normal text-ink-subtle">USD</span>
+                </div>
+              )}
               <div className="font-mono text-[12.5px] text-ink-muted mb-5 leading-snug">{p.deliveryEstimate}</div>
 
               <div className="flex flex-col gap-2">
@@ -119,9 +126,11 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                 </Link>
               </div>
               <p className="mt-4 text-[11.5px] text-ink-subtle leading-relaxed">{p.disclaimer}</p>
-              <p className="mt-3 text-[11px] font-mono uppercase tracking-[0.06em] text-ink-subtle/80">
-                {labels.noPrice}
-              </p>
+              {typeof p.price !== 'number' && (
+                <p className="mt-3 text-[11px] font-mono uppercase tracking-[0.06em] text-ink-subtle/80">
+                  {labels.noPrice}
+                </p>
+              )}
             </aside>
           </div>
         </div>
@@ -218,8 +227,9 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             offers: {
               '@type': 'Offer',
               availability: p.in_stock ? 'https://schema.org/InStock' : 'https://schema.org/PreOrder',
-              // Intentionally no price — RFQ-only sales (T3 / F3).
               priceCurrency: 'USD',
+              // Price emitted only when set; otherwise RFQ-only (decision S9).
+              ...(typeof p.price === 'number' ? { price: p.price } : {}),
               seller: { '@type': 'Organization', name: SITE.legalName }
             }
           })

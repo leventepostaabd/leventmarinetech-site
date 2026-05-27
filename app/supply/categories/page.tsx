@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { readProducts, readCategories, readProductLabels } from '@/lib/content';
+import { readCategories, readProductLabels } from '@/lib/content';
+import { getProducts } from '@/lib/products-db';
 import { getLocale } from '@/lib/i18n';
 import { pick } from '@/lib/i18n-client';
 
@@ -10,10 +11,12 @@ export const metadata: Metadata = {
   alternates: { canonical: '/supply/categories' }
 };
 
-export default function CategoriesPage() {
+export const dynamic = 'force-dynamic';
+
+export default async function CategoriesPage() {
   const locale = getLocale();
   const labels = readProductLabels(locale);
-  const products = readProducts();
+  const products = await getProducts();
   const categories = readCategories().sort((a, b) => a.order - b.order);
   const nameOf = (c: Record<string, any>) => pick(c, 'name', locale);
 

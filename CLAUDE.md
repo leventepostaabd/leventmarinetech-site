@@ -80,7 +80,7 @@ Tailwind config + CSS variables. **Direkt HEX kullanma, theme token kullan.**
 1. **Bağlam dosyalarını koru:** `ROADMAP.md` · `DECISIONS.md` · `STATUS.md` · `AGENT-GUIDE.md` — bunlar tek doğru kaynak. Yön değişikliği → önce buraya yansıt, sonra koda dokun.
 2. **Her metin TR + EN olmalı.** `content/i18n-en.json` + `content/i18n-tr.json`'a ekle.
 3. **TR adres/telefon YASAK** (P3). Sadece USA: Wyoming adres + US telefon + WhatsApp.
-4. **Fiyat YASAK** müşteri-yüzünde (F3, T3). Sadece "In stock / Get quote".
+4. **Fiyat opsiyonel** müşteri-yüzünde (S9 — F3/T3 güncellendi). Ürünün `price_usd` alanı doluysa fiyat gösterilir; boşsa "Get quote". **Maliyet (`cost_usd`) asla gösterilmez** — sadece admin.
 5. **Müşteri scroll'a zorlama** masaüstünde (F1). Yatay akış + modal.
 6. **Müşteri login yok** (Y5). Sadece admin login.
 7. **Müşteri logoları:** MSC · TP · Polaris · NORD · Bright · Çebi · MEDLOG (P5, G1).
