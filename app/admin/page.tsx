@@ -47,53 +47,53 @@ export default async function AdminHome() {
       {/* Operational KPIs */}
       <section className="space-y-3">
         <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle">
-          Live counters
+          Canlı sayaçlar
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <KPI label="AOG · active" value={k.rfqAog + k.svcAog} href="/admin/rfqs?urgency=aog" hot tone="red" />
-          <KPI label="RFQs · new" value={k.rfqNew} href="/admin/rfqs?status=new" hot />
-          <KPI label="Quoted · awaiting" value={k.rfqQuoted} href="/admin/rfqs?status=quoted" />
-          <KPI label="Service · new" value={k.svcNew} href="/admin/service?status=new" hot />
-          <KPI label="RFQs today" value={k.rfqToday} href="/admin/rfqs" tone="muted" />
-          <KPI label="Service today" value={k.svcToday} href="/admin/service" tone="muted" />
-          <KPI label="RFQs · total" value={k.rfqTotal} href="/admin/rfqs" tone="muted" />
-          <KPI label="Service · total" value={k.svcTotal} href="/admin/service" tone="muted" />
+          <KPI label="AOG · aktif" value={k.rfqAog + k.svcAog} href="/admin/rfqs?urgency=aog" hot tone="red" />
+          <KPI label="Teklif Talepleri · yeni" value={k.rfqNew} href="/admin/rfqs?status=new" hot />
+          <KPI label="Teklif verildi · bekliyor" value={k.rfqQuoted} href="/admin/rfqs?status=quoted" />
+          <KPI label="Servis · yeni" value={k.svcNew} href="/admin/service?status=new" hot />
+          <KPI label="Bugünkü teklif talepleri" value={k.rfqToday} href="/admin/rfqs" tone="muted" />
+          <KPI label="Bugünkü servis" value={k.svcToday} href="/admin/service" tone="muted" />
+          <KPI label="Teklif Talepleri · toplam" value={k.rfqTotal} href="/admin/rfqs" tone="muted" />
+          <KPI label="Servis · toplam" value={k.svcTotal} href="/admin/service" tone="muted" />
         </div>
       </section>
 
       {/* CRM — Wave 6 Phase 1 */}
       <section className="space-y-3">
         <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle">
-          CRM pipeline
+          CRM hattı
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <KPI label="Leads · new" value={leads.byStage.new} href="/admin/leads?stage=new" hot />
-          <KPI label="Contacted · awaiting reply" value={leads.byStage.contacted} href="/admin/leads?stage=contacted" />
-          <KPI label="Quoting" value={leads.byStage.quoting} href="/admin/leads?stage=quoting" />
-          <KPI label="New this week" value={leads.newThisWeek} href="/admin/leads" tone="muted" />
-          <KPI label="Service track" value={leads.byTrack.service} href="/admin/leads?tab=service" tone="muted" />
-          <KPI label="Supply track" value={leads.byTrack.supply} href="/admin/leads?tab=supply" tone="muted" />
-          <KPI label="Won" value={leads.byStage.won} href="/admin/leads?stage=won" tone="muted" />
-          <KPI label="Leads · total" value={leads.total} href="/admin/leads" tone="muted" />
+          <KPI label="Müşteri Adayları · yeni" value={leads.byStage.new} href="/admin/leads?stage=new" hot />
+          <KPI label="İletişime geçildi · yanıt bekliyor" value={leads.byStage.contacted} href="/admin/leads?stage=contacted" />
+          <KPI label="Teklif aşamasında" value={leads.byStage.quoting} href="/admin/leads?stage=quoting" />
+          <KPI label="Bu hafta yeni" value={leads.newThisWeek} href="/admin/leads" tone="muted" />
+          <KPI label="Servis kanalı" value={leads.byTrack.service} href="/admin/leads?tab=service" tone="muted" />
+          <KPI label="Tedarik kanalı" value={leads.byTrack.supply} href="/admin/leads?tab=supply" tone="muted" />
+          <KPI label="Kazanıldı" value={leads.byStage.won} href="/admin/leads?stage=won" tone="muted" />
+          <KPI label="Müşteri Adayları · toplam" value={leads.total} href="/admin/leads" tone="muted" />
         </div>
       </section>
 
       {/* Latest 5 of each */}
       <section className="grid gap-5 lg:grid-cols-2">
-        <LatestList title="Latest RFQs" href="/admin/rfqs" rows={k.rfqLatest.map((r: any) => ({
+        <LatestList title="Son Teklif Talepleri" href="/admin/rfqs" rows={k.rfqLatest.map((r: any) => ({
           id: r.id,
           link: `/admin/rfqs/${r.id}`,
-          primary: r.brand ? `${r.brand} ${r.part_number ?? ''}`.trim() : (r.part_number ?? 'Untitled'),
+          primary: r.brand ? `${r.brand} ${r.part_number ?? ''}`.trim() : (r.part_number ?? 'Başlıksız'),
           secondary: r.contact_name + (r.vessel_name ? ' · ' + r.vessel_name : ''),
           urgency: r.urgency,
           status: r.status,
           when: r.created_at
         }))} />
 
-        <LatestList title="Latest service requests" href="/admin/service" rows={k.svcLatest.map((r: any) => ({
+        <LatestList title="Son servis talepleri" href="/admin/service" rows={k.svcLatest.map((r: any) => ({
           id: r.id,
           link: `/admin/service/${r.id}`,
-          primary: r.problem_category ?? 'Service',
+          primary: r.problem_category ?? 'Servis',
           secondary: (r.vessel_name ?? '—') + ' · ' + (r.port ?? '—'),
           urgency: r.urgency,
           status: r.status,
@@ -125,7 +125,7 @@ function KPI({
     <Link href={href} className={`card no-underline group ${accent}`}>
       <div className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-ink-subtle mb-1.5">{label}</div>
       <div className={`font-head text-3xl font-extrabold ${numColor}`}>{value}</div>
-      <div className="text-[11px] text-amber-600 group-hover:translate-x-0.5 transition font-mono mt-1.5">View →</div>
+      <div className="text-[11px] text-amber-600 group-hover:translate-x-0.5 transition font-mono mt-1.5">Görüntüle →</div>
     </Link>
   );
 }
@@ -146,12 +146,12 @@ function LatestList({ title, href, rows }: { title: string; href: string; rows: 
       <div className="flex items-center justify-between border-b border-line px-4 py-3">
         <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle">{title}</div>
         <Link href={href} className="font-mono text-[11px] uppercase tracking-[0.12em] text-amber-600 no-underline hover:text-amber">
-          See all →
+          Tümünü gör →
         </Link>
       </div>
       <ul>
         {rows.length === 0 && (
-          <li className="px-4 py-6 text-center text-ink-subtle text-[13px]">No entries yet.</li>
+          <li className="px-4 py-6 text-center text-ink-subtle text-[13px]">Henüz kayıt yok.</li>
         )}
         {rows.map((r) => (
           <li key={r.id} className="border-t border-line first:border-t-0">

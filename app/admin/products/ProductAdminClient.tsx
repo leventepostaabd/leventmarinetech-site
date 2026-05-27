@@ -138,7 +138,7 @@ export default function ProductAdminClient({
       const { url } = await uploadProductImage(fd);
       set('image_url', url);
     } catch (err: any) {
-      setError(err?.message ?? 'Upload failed');
+      setError(err?.message ?? 'Yükleme başarısız');
     } finally {
       setUploading(false);
       if (fileRef.current) fileRef.current.value = '';
@@ -175,19 +175,19 @@ export default function ProductAdminClient({
       setOpen(false);
       router.refresh();
     } catch (err: any) {
-      setError(err?.message ?? 'Save failed');
+      setError(err?.message ?? 'Kaydetme başarısız');
     } finally {
       setSaving(false);
     }
   }
 
   async function onDelete(p: AdminProduct) {
-    if (!window.confirm(`Delete "${p.name}"? This cannot be undone.`)) return;
+    if (!window.confirm(`"${p.name}" silinsin mi? Bu işlem geri alınamaz.`)) return;
     try {
       await deleteProduct(p.id);
       router.refresh();
     } catch (err: any) {
-      window.alert(err?.message ?? 'Delete failed');
+      window.alert(err?.message ?? 'Silme başarısız');
     }
   }
 
@@ -197,15 +197,15 @@ export default function ProductAdminClient({
     <div>
       <div className="flex flex-wrap justify-between items-center gap-3 mb-5">
         <div>
-          <h2>Products</h2>
+          <h2>Ürünler</h2>
           <p className="text-[13px] text-ink-muted">
-            {initialProducts.length} items in the Supabase catalog. Add, edit, or remove — changes
-            appear on the live site immediately. Cost is internal-only; price is shown to customers
-            only when set.
+            Supabase kataloğunda {initialProducts.length} öğe. Ekle, düzenle veya kaldır — değişiklikler
+            canlı sitede anında görünür. Maliyet yalnızca dahilidir; fiyat müşteriye yalnızca girildiğinde
+            gösterilir.
           </p>
         </div>
         <button type="button" onClick={openNew} className="btn-accent btn-md">
-          + Add product
+          + Ürün Ekle
         </button>
       </div>
 
@@ -213,7 +213,7 @@ export default function ProductAdminClient({
         type="search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Filter by name, brand, part, category…"
+        placeholder="Ada, markaya, parçaya, kategoriye göre filtrele…"
         className="w-full mb-4 rounded-md border border-line bg-white px-3 py-2 text-[13px] focus:border-amber focus:ring-2 focus:ring-amber/30 focus:outline-none"
       />
 
@@ -221,7 +221,7 @@ export default function ProductAdminClient({
         <table className="w-full text-[13px]">
           <thead className="bg-navy-50 text-left">
             <tr>
-              {['', 'Name', 'Brand', 'Part', 'Category', 'Price', 'Cost', 'Live', ''].map((h, i) => (
+              {['', 'Ad', 'Marka', 'Parça No', 'Kategori', 'Fiyat', 'Maliyet', 'Yayında', ''].map((h, i) => (
                 <th key={i} className="px-3 py-2 font-mono text-[10.5px] uppercase tracking-wider text-ink-subtle">{h}</th>
               ))}
             </tr>
@@ -244,21 +244,21 @@ export default function ProductAdminClient({
                 <td className="px-3 py-2">{p.brand}</td>
                 <td className="px-3 py-2 font-mono text-[11.5px]">{p.part_number}</td>
                 <td className="px-3 py-2 text-ink-muted">{catName(p.category)}</td>
-                <td className="px-3 py-2 font-mono">{p.price_usd === null ? <span className="text-ink-subtle">Quote</span> : `$${p.price_usd.toFixed(2)}`}</td>
+                <td className="px-3 py-2 font-mono">{p.price_usd === null ? <span className="text-ink-subtle">Teklif al</span> : `$${p.price_usd.toFixed(2)}`}</td>
                 <td className="px-3 py-2 font-mono text-ink-subtle">{p.cost_usd === null ? '—' : `$${p.cost_usd.toFixed(2)}`}</td>
                 <td className="px-3 py-2">
                   <span className={`font-mono text-[10px] uppercase ${p.published ? 'text-green-700' : 'text-ink-subtle'}`}>
-                    {p.published ? '● live' : 'hidden'}
+                    {p.published ? '● yayında' : 'gizli'}
                   </span>
                 </td>
                 <td className="px-3 py-2 whitespace-nowrap text-right">
-                  <button type="button" onClick={() => openEdit(p)} className="text-amber-600 hover:text-amber mr-3">Edit</button>
-                  <button type="button" onClick={() => onDelete(p)} className="text-red-600 hover:text-red-700">Delete</button>
+                  <button type="button" onClick={() => openEdit(p)} className="text-amber-600 hover:text-amber mr-3">Düzenle</button>
+                  <button type="button" onClick={() => onDelete(p)} className="text-red-600 hover:text-red-700">Sil</button>
                 </td>
               </tr>
             ))}
             {filtered.length === 0 && (
-              <tr><td colSpan={9} className="px-3 py-8 text-center text-ink-muted">No products match.</td></tr>
+              <tr><td colSpan={9} className="px-3 py-8 text-center text-ink-muted">Eşleşen ürün yok.</td></tr>
             )}
           </tbody>
         </table>
@@ -271,7 +271,7 @@ export default function ProductAdminClient({
             className="my-8 w-full max-w-2xl rounded-xl bg-white p-6 shadow-2xl"
           >
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-[18px] font-bold">{editingId ? 'Edit product' : 'Add product'}</h3>
+              <h3 className="text-[18px] font-bold">{editingId ? 'Ürünü Düzenle' : 'Ürün Ekle'}</h3>
               <button type="button" onClick={() => setOpen(false)} className="text-ink-subtle hover:text-ink text-[20px] leading-none">✕</button>
             </div>
 
@@ -280,21 +280,21 @@ export default function ProductAdminClient({
             )}
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Name (EN) *" full>
+              <Field label="Ad (EN) *" full>
                 <input required value={form.name} onChange={(e) => set('name', e.target.value)} className={inputCls} />
               </Field>
-              <Field label="Name (TR)" full>
+              <Field label="Ad (TR)" full>
                 <input value={form.name_tr} onChange={(e) => set('name_tr', e.target.value)} className={inputCls} />
               </Field>
 
-              <Field label="Brand">
+              <Field label="Marka">
                 <input value={form.brand} onChange={(e) => set('brand', e.target.value)} className={inputCls} />
               </Field>
-              <Field label="Part number">
+              <Field label="Parça No">
                 <input value={form.part_number} onChange={(e) => set('part_number', e.target.value)} className={inputCls} />
               </Field>
 
-              <Field label="Category *">
+              <Field label="Kategori *">
                 <select
                   value={form.category}
                   onChange={(e) => { set('category', e.target.value); set('subcategory', ''); }}
@@ -303,62 +303,62 @@ export default function ProductAdminClient({
                   {categories.map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}
                 </select>
               </Field>
-              <Field label="Subcategory">
+              <Field label="Alt Kategori">
                 <select value={form.subcategory} onChange={(e) => set('subcategory', e.target.value)} className={inputCls}>
-                  <option value="">— none —</option>
+                  <option value="">— yok —</option>
                   {subOptions.map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
                 </select>
               </Field>
 
-              <Field label="Short description (EN)" full>
+              <Field label="Kısa Açıklama (EN)" full>
                 <textarea value={form.short_description} onChange={(e) => set('short_description', e.target.value)} rows={2} className={inputCls} />
               </Field>
-              <Field label="Short description (TR)" full>
+              <Field label="Kısa Açıklama (TR)" full>
                 <textarea value={form.short_description_tr} onChange={(e) => set('short_description_tr', e.target.value)} rows={2} className={inputCls} />
               </Field>
-              <Field label="Long description" full>
+              <Field label="Uzun Açıklama" full>
                 <textarea value={form.long_description} onChange={(e) => set('long_description', e.target.value)} rows={3} className={inputCls} />
               </Field>
 
-              <Field label="Price (USD) — shown to customer if set">
-                <input type="number" step="0.01" min="0" value={form.price_usd} onChange={(e) => set('price_usd', e.target.value)} placeholder="empty = Get quote" className={inputCls} />
+              <Field label="Fiyat (USD) — girilirse müşteriye gösterilir">
+                <input type="number" step="0.01" min="0" value={form.price_usd} onChange={(e) => set('price_usd', e.target.value)} placeholder="boş = Teklif al" className={inputCls} />
               </Field>
-              <Field label="Cost (USD) — internal, hidden">
-                <input type="number" step="0.01" min="0" value={form.cost_usd} onChange={(e) => set('cost_usd', e.target.value)} placeholder="what we pay" className={inputCls} />
+              <Field label="Maliyet (USD) — dahili, gizli">
+                <input type="number" step="0.01" min="0" value={form.cost_usd} onChange={(e) => set('cost_usd', e.target.value)} placeholder="bizim ödediğimiz" className={inputCls} />
               </Field>
 
-              <Field label="Availability">
+              <Field label="Stok Durumu">
                 <select value={form.availability} onChange={(e) => set('availability', e.target.value as FormState['availability'])} className={inputCls}>
-                  <option value="in-stock">In stock</option>
-                  <option value="available-supplier">Available from supplier</option>
-                  <option value="rfq-required">RFQ required</option>
+                  <option value="in-stock">Stokta</option>
+                  <option value="available-supplier">Tedarikçiden temin edilebilir</option>
+                  <option value="rfq-required">Teklif Gerekli</option>
                 </select>
               </Field>
-              <Field label="Delivery estimate">
+              <Field label="Tahmini Teslimat">
                 <input value={form.delivery_estimate} onChange={(e) => set('delivery_estimate', e.target.value)} className={inputCls} />
               </Field>
 
-              <Field label="Source (internal note, e.g. Amazon/eBay)">
+              <Field label="Kaynak (dahili not, örn. Amazon/eBay)">
                 <input value={form.source} onChange={(e) => set('source', e.target.value)} className={inputCls} />
               </Field>
-              <Field label="Source URL (internal)">
+              <Field label="Kaynak URL (dahili)">
                 <input value={form.source_url} onChange={(e) => set('source_url', e.target.value)} className={inputCls} />
               </Field>
 
-              <Field label="Tags (comma separated)" full>
+              <Field label="Etiketler (virgülle ayrılmış)" full>
                 <input value={form.tags} onChange={(e) => set('tags', e.target.value)} className={inputCls} />
               </Field>
 
-              <Field label="Product image" full>
+              <Field label="Ürün Görseli" full>
                 <div className="flex items-center gap-3">
                   {form.image_url && (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={form.image_url} alt="" className="h-16 w-16 rounded object-cover bg-navy-50 border border-line" />
                   )}
                   <input ref={fileRef} type="file" accept="image/*" onChange={onPickImage} className="text-[12px]" />
-                  {uploading && <span className="text-[12px] text-ink-subtle">Uploading…</span>}
+                  {uploading && <span className="text-[12px] text-ink-subtle">Yükleniyor…</span>}
                   {form.image_url && (
-                    <button type="button" onClick={() => set('image_url', '')} className="text-[12px] text-red-600">remove</button>
+                    <button type="button" onClick={() => set('image_url', '')} className="text-[12px] text-red-600">kaldır</button>
                   )}
                 </div>
               </Field>
@@ -366,15 +366,15 @@ export default function ProductAdminClient({
               <Field label="" full>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input type="checkbox" checked={form.published} onChange={(e) => set('published', e.target.checked)} className="rounded border-line-strong text-amber focus:ring-amber" />
-                  <span className="text-[13px]">Published (visible on the site)</span>
+                  <span className="text-[13px]">Yayında (sitede görünür)</span>
                 </label>
               </Field>
             </div>
 
             <div className="mt-6 flex justify-end gap-2">
-              <button type="button" onClick={() => setOpen(false)} className="btn-ghost btn-md">Cancel</button>
+              <button type="button" onClick={() => setOpen(false)} className="btn-ghost btn-md">İptal</button>
               <button type="submit" disabled={saving || uploading} className="btn-accent btn-md disabled:opacity-50">
-                {saving ? 'Saving…' : editingId ? 'Save changes' : 'Create product'}
+                {saving ? 'Kaydediliyor…' : editingId ? 'Değişiklikleri Kaydet' : 'Ürün Oluştur'}
               </button>
             </div>
           </form>

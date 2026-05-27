@@ -37,7 +37,7 @@ export default async function AdminRfqDetail({ params }: { params: { id: string 
         href={`/admin/rfqs${rfq.status === 'new' ? '?status=new' : ''}`}
         className="font-mono text-[11.5px] uppercase tracking-[0.12em] text-amber-600 no-underline hover:text-amber"
       >
-        ← Back to RFQs
+        ← Teklif Taleplerine dön
       </Link>
 
       <RfqDetailClient rfq={rfq} attachments={attachments} />

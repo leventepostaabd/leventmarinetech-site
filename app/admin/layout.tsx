@@ -30,12 +30,12 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     return (
       <div className="container-x py-20" style={{ paddingTop: 'calc(var(--lm-topbar-h, 56px) + 4rem)' }}>
         <div className="card border-l-4 border-l-red-600 max-w-xl">
-          <h1 className="text-2xl mb-2">Admin access required</h1>
+          <h1 className="text-2xl mb-2">Admin erişimi gerekli</h1>
           <p className="text-ink-muted mb-3">
-            Your account exists but isn&apos;t marked admin. Ask the system owner to set{' '}
-            <span className="font-mono">role = &apos;admin&apos;</span> on your profile row in Supabase.
+            Hesabınız mevcut ama admin olarak işaretli değil. Sistem sahibinden Supabase&apos;deki profil satırınızda{' '}
+            <span className="font-mono">role = &apos;admin&apos;</span> ayarlamasını isteyin.
           </p>
-          <a href="/" className="btn-primary btn-md">Back to site</a>
+          <a href="/" className="btn-primary btn-md">Siteye dön</a>
         </div>
       </div>
     );
@@ -52,19 +52,19 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-line">
         <div>
           <div className="kicker">Admin · {user.email}</div>
-          <h1 className="text-2xl mt-1">Operations dashboard</h1>
+          <h1 className="text-2xl mt-1">Operasyon Paneli</h1>
         </div>
         <nav className="flex flex-wrap gap-1 text-[12.5px] font-mono">
-          <NavLink href="/admin">Overview</NavLink>
-          <NavLink href="/admin/leads">Leads</NavLink>
-          <NavLink href="/admin/rfqs">RFQs</NavLink>
-          <NavLink href="/admin/service">Service</NavLink>
-          <NavLink href="/admin/products">Products</NavLink>
+          <NavLink href="/admin">Genel Bakış</NavLink>
+          <NavLink href="/admin/leads">Müşteri Adayları</NavLink>
+          <NavLink href="/admin/rfqs">Teklif Talepleri</NavLink>
+          <NavLink href="/admin/service">Servis</NavLink>
+          <NavLink href="/admin/products">Ürünler</NavLink>
           <Link
             href="/admin/logout"
             className="px-3 py-1.5 rounded-md text-ink-subtle hover:bg-navy-50 no-underline"
           >
-            Sign out
+            Çıkış Yap
           </Link>
         </nav>
       </div>

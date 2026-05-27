@@ -192,7 +192,7 @@ export async function createManualLead(input: {
   if (track !== 'service' && track !== 'supply') {
     throw new Error(`Invalid track: ${input.track}`);
   }
-  if (!input.company_name?.trim()) throw new Error('Company name required');
+  if (!input.company_name?.trim()) throw new Error('Firma adı zorunlu');
 
   const company = await upsertCompany({ name: input.company_name, contact_email: input.contact_email ?? null, contact_phone: input.contact_phone ?? null });
   const vessel = (input.vessel_name?.trim() || input.imo?.trim())
@@ -237,17 +237,17 @@ export async function scoreLeadWithAI(
 ): Promise<{ ok: true; result: ScoringResult } | { ok: false; error: string }> {
   const user = await requireAdmin();
   const lead = await crmGetLead(id);
-  if (!lead) return { ok: false, error: 'Lead not found.' };
+  if (!lead) return { ok: false, error: 'Aday bulunamadı.' };
 
   let result: ScoringResult;
   try {
     result = await scoreLead(lead);
   } catch (e) {
     if (e instanceof ScoringUnavailableError) {
-      return { ok: false, error: 'AI scoring is not configured (missing ANTHROPIC_API_KEY).' };
+      return { ok: false, error: 'AI puanlama yapılandırılmamış (ANTHROPIC_API_KEY eksik).' };
     }
     console.error('[scoring] scoreLeadWithAI failed', e);
-    return { ok: false, error: 'Scoring failed — see server logs.' };
+    return { ok: false, error: 'Puanlama başarısız — sunucu günlüklerine bakın.' };
   }
 
   const supabase = createServiceSupabase();
