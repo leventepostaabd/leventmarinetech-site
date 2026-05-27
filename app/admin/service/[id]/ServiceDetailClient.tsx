@@ -23,6 +23,23 @@ const STATUS_TONE: Record<string, string> = {
   cancelled: 'bg-red-50 text-red-700 border-red-200'
 };
 
+// Display-only Turkish labels — underlying slug values are unchanged.
+const STATUS_LABEL: Record<string, string> = {
+  new: 'Yeni',
+  reviewing: 'İnceleniyor',
+  scheduled: 'Planlandı',
+  on_attendance: 'Serviste',
+  reporting: 'Raporlanıyor',
+  closed: 'Kapatıldı',
+  cancelled: 'İptal edildi'
+};
+
+const URGENCY_LABEL: Record<string, string> = {
+  aog: 'AOG',
+  urgent: 'Acil',
+  planned: 'Planlı'
+};
+
 type Req = Record<string, any>;
 type Attachment = { name: string; path: string; url: string | null; size?: number };
 
@@ -92,24 +109,24 @@ export default function ServiceDetailClient({ req, attachments }: { req: Req; at
           <div className="flex items-start justify-between gap-3 mb-2">
             <div>
               <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle mb-1">
-                service · created {new Date(req.created_at).toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short' })}
+                servis · oluşturuldu {new Date(req.created_at).toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short' })}
               </div>
               <h2 className="text-[20px] font-bold leading-tight">
-                {req.problem_category || 'Service request'} — {req.vessel_name || 'unnamed vessel'}
+                {req.problem_category || 'Servis talebi'} — {req.vessel_name || 'isimsiz gemi'}
               </h2>
             </div>
             <span className={`font-mono text-[10.5px] uppercase tracking-wider px-2 py-1 rounded ${urgencyTone}`}>
-              {req.urgency}
+              {URGENCY_LABEL[req.urgency] ?? req.urgency}
             </span>
           </div>
 
           <div className="grid grid-cols-2 gap-x-6 gap-y-2 mt-4 text-[13px]">
-            <Row label="System"        value={req.problem_category} />
-            <Row label="Vessel"        value={req.vessel_name} />
+            <Row label="Sistem"        value={req.problem_category} />
+            <Row label="Gemi"          value={req.vessel_name} />
             <Row label="IMO"           value={req.imo_number} mono />
-            <Row label="Vessel type"   value={req.vessel_type} />
-            <Row label="Class society" value={req.class_society} />
-            <Row label="Port"          value={req.port} />
+            <Row label="Gemi tipi"     value={req.vessel_type} />
+            <Row label="Klas kuruluşu" value={req.class_society} />
+            <Row label="Liman"         value={req.port} />
             <Row label="ETA"           value={req.eta ? new Date(req.eta).toLocaleString('en-US') : null} />
           </div>
         </div>
@@ -117,7 +134,7 @@ export default function ServiceDetailClient({ req, attachments }: { req: Req; at
         {Array.isArray(req.symptoms) && req.symptoms.length > 0 && (
           <div className="card">
             <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle mb-2">
-              Symptoms ({req.symptoms.length})
+              Belirtiler ({req.symptoms.length})
             </div>
             <ul className="space-y-1 text-[13.5px] text-ink leading-relaxed">
               {req.symptoms.map((s: string, i: number) => (
@@ -130,7 +147,7 @@ export default function ServiceDetailClient({ req, attachments }: { req: Req; at
         {req.notes && (
           <div className="card">
             <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle mb-2">
-              Customer notes
+              Müşteri notları
             </div>
             <pre className="whitespace-pre-wrap font-sans text-[13.5px] text-ink leading-relaxed">
               {req.notes}
@@ -141,7 +158,7 @@ export default function ServiceDetailClient({ req, attachments }: { req: Req; at
         {attachments.length > 0 && (
           <div className="card">
             <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle mb-3">
-              Attachments ({attachments.length})
+              Ekler ({attachments.length})
             </div>
             <ul className="space-y-1.5">
               {attachments.map((a, i) => (
@@ -154,10 +171,10 @@ export default function ServiceDetailClient({ req, attachments }: { req: Req; at
                       rel="noopener noreferrer"
                       className="font-mono text-[11px] uppercase tracking-[0.12em] text-amber-600 hover:text-amber no-underline ml-3 shrink-0"
                     >
-                      Download
+                      İndir
                     </a>
                   ) : (
-                    <span className="font-mono text-[11px] uppercase text-red-600 ml-3 shrink-0">File missing</span>
+                    <span className="font-mono text-[11px] uppercase text-red-600 ml-3 shrink-0">Dosya eksik</span>
                   )}
                 </li>
               ))}
@@ -167,13 +184,13 @@ export default function ServiceDetailClient({ req, attachments }: { req: Req; at
 
         <div className="card border-l-4 border-l-amber">
           <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-amber-700 mb-2">
-            Internal · admin only
+            Dahili · yalnızca admin
           </div>
           <textarea
             value={internalNotes}
             onChange={(e) => setInternalNotes(e.target.value)}
             rows={4}
-            placeholder="Engineer notes, scope, parts ordered, follow-up reminders…"
+            placeholder="Mühendis notları, kapsam, sipariş edilen parçalar, takip hatırlatmaları…"
             className="field-input text-[13px]"
           />
           <div className="mt-3 flex items-center gap-3">
@@ -183,11 +200,11 @@ export default function ServiceDetailClient({ req, attachments }: { req: Req; at
               disabled={pending}
               className="btn-primary btn-md disabled:opacity-60"
             >
-              {pending ? 'Saving…' : 'Save notes'}
+              {pending ? 'Kaydediliyor…' : 'Notları Kaydet'}
             </button>
             {savedTick > 0 && !pending && (
               <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-green-700">
-                ✓ Saved
+                ✓ Kaydedildi
               </span>
             )}
           </div>
@@ -197,7 +214,7 @@ export default function ServiceDetailClient({ req, attachments }: { req: Req; at
       <aside className="space-y-5 lg:sticky lg:top-6 lg:self-start">
         <div className="card">
           <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle mb-2">
-            Customer
+            Müşteri
           </div>
           <div className="text-[15px] font-semibold text-ink">{req.contact_name || '—'}</div>
           {req.company && <div className="text-[13px] text-ink-muted">{req.company}</div>}
@@ -213,7 +230,7 @@ export default function ServiceDetailClient({ req, attachments }: { req: Req; at
           <div className="mt-4 grid grid-cols-2 gap-2">
             {mailUrl && (
               <a href={mailUrl} className="btn-primary btn-sm no-underline text-center">
-                ✉ Email reply
+                ✉ E-posta yanıtı
               </a>
             )}
             {waUrl && (
@@ -231,10 +248,10 @@ export default function ServiceDetailClient({ req, attachments }: { req: Req; at
 
         <div className="card">
           <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle mb-2">
-            Status
+            Durum
           </div>
           <div className={`mb-3 inline-flex items-center px-3 py-1.5 rounded-md border text-[12.5px] font-mono uppercase tracking-wider ${STATUS_TONE[status] ?? STATUS_TONE.new}`}>
-            {status}
+            {STATUS_LABEL[status] ?? status}
           </div>
           <ul className="space-y-1">
             {STATUSES.map((s) => (
@@ -249,7 +266,7 @@ export default function ServiceDetailClient({ req, attachments }: { req: Req; at
                       : 'bg-white text-ink hover:bg-navy-50'
                   }`}
                 >
-                  {s}
+                  {STATUS_LABEL[s] ?? s}
                 </button>
               </li>
             ))}

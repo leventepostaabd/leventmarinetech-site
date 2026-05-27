@@ -13,29 +13,29 @@ export default async function LeadsListPage({ searchParams }: { searchParams: SP
   const leads = await listLeads({ track: tab, stage, search, limit: 300 });
 
   const stageOptions: { value: LeadStage | ''; label: string }[] = [
-    { value: '', label: 'All stages' },
-    { value: 'new', label: 'New' },
-    { value: 'contacted', label: 'Contacted' },
-    { value: 'replied', label: 'Replied' },
-    { value: 'quoting', label: 'Quoting' },
-    { value: 'won', label: 'Won' },
-    { value: 'lost', label: 'Lost' }
+    { value: '', label: 'Tüm aşamalar' },
+    { value: 'new', label: 'Yeni' },
+    { value: 'contacted', label: 'İletişime geçildi' },
+    { value: 'replied', label: 'Yanıtladı' },
+    { value: 'quoting', label: 'Teklif aşamasında' },
+    { value: 'won', label: 'Kazanıldı' },
+    { value: 'lost', label: 'Kaybedildi' }
   ];
 
   return (
     <div className="space-y-5">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <div className="kicker">Leads</div>
-          <h2 className="text-[22px] mt-1">CRM pipeline — {tab === 'service' ? 'Service' : 'Supply'} track</h2>
+          <div className="kicker">Müşteri Adayları</div>
+          <h2 className="text-[22px] mt-1">CRM hattı — {tab === 'service' ? 'Servis' : 'Tedarik'} kanalı</h2>
         </div>
-        <Link href="/admin/leads/new" className="btn-accent btn-sm">+ New lead</Link>
+        <Link href="/admin/leads/new" className="btn-accent btn-sm">+ Yeni Aday</Link>
       </header>
 
       {/* Track tabs */}
       <div className="flex gap-1 border-b border-line">
-        <TabLink active={tab === 'service'} href={`/admin/leads?tab=service${stage ? `&stage=${stage}` : ''}${search ? `&q=${encodeURIComponent(search)}` : ''}`}>Service</TabLink>
-        <TabLink active={tab === 'supply'} href={`/admin/leads?tab=supply${stage ? `&stage=${stage}` : ''}${search ? `&q=${encodeURIComponent(search)}` : ''}`}>Supply</TabLink>
+        <TabLink active={tab === 'service'} href={`/admin/leads?tab=service${stage ? `&stage=${stage}` : ''}${search ? `&q=${encodeURIComponent(search)}` : ''}`}>Servis</TabLink>
+        <TabLink active={tab === 'supply'} href={`/admin/leads?tab=supply${stage ? `&stage=${stage}` : ''}${search ? `&q=${encodeURIComponent(search)}` : ''}`}>Tedarik</TabLink>
       </div>
 
       {/* Filters */}
@@ -45,7 +45,7 @@ export default async function LeadsListPage({ searchParams }: { searchParams: SP
           type="search"
           name="q"
           defaultValue={search ?? ''}
-          placeholder="Search company / vessel / IMO…"
+          placeholder="Firma / gemi / IMO ara…"
           className="rounded-full bg-navy-50/70 px-4 py-2 text-[13.5px] ring-1 ring-line/60 focus:outline-none focus:bg-white focus:ring-2 focus:ring-amber/50 min-w-[260px]"
         />
         <select
@@ -57,10 +57,10 @@ export default async function LeadsListPage({ searchParams }: { searchParams: SP
             <option key={s.value} value={s.value}>{s.label}</option>
           ))}
         </select>
-        <button type="submit" className="btn-ghost btn-sm">Filter</button>
+        <button type="submit" className="btn-ghost btn-sm">Filtrele</button>
         {(stage || search) && (
           <Link href={`/admin/leads?tab=${tab}`} className="text-[12px] font-mono text-ink-subtle hover:text-ink">
-            ✕ Clear
+            ✕ Temizle
           </Link>
         )}
       </form>
@@ -68,11 +68,11 @@ export default async function LeadsListPage({ searchParams }: { searchParams: SP
       {/* List */}
       {leads.length === 0 ? (
         <div className="card border-l-4 border-l-amber/60">
-          <p className="text-ink-muted text-[14px] mb-2">No leads yet on this track.</p>
+          <p className="text-ink-muted text-[14px] mb-2">Bu kanalda henüz kayıt yok.</p>
           <p className="text-ink-subtle text-[12.5px]">
-            Inbound form submissions land here automatically. You can also{' '}
-            <Link href="/admin/leads/new" className="text-amber-600 hover:underline">add a manual lead</Link>{' '}
-            from public sources (Equasis, PSC reports).
+            Gelen form gönderimleri buraya otomatik düşer. Ayrıca herkese açık kaynaklardan
+            (Equasis, PSC raporları){' '}
+            <Link href="/admin/leads/new" className="text-amber-600 hover:underline">manuel aday ekleyebilirsiniz</Link>.
           </p>
         </div>
       ) : (
@@ -80,12 +80,12 @@ export default async function LeadsListPage({ searchParams }: { searchParams: SP
           <table className="w-full text-[13.5px]">
             <thead className="bg-navy-50 text-left text-[11px] font-mono uppercase tracking-[0.12em] text-ink-subtle">
               <tr>
-                <th className="px-3 py-2.5">Score</th>
-                <th className="px-3 py-2.5">Company / Vessel</th>
-                <th className="px-3 py-2.5">Context</th>
-                <th className="px-3 py-2.5">Stage</th>
-                <th className="px-3 py-2.5">Source</th>
-                <th className="px-3 py-2.5">Created</th>
+                <th className="px-3 py-2.5">Puan</th>
+                <th className="px-3 py-2.5">Firma / Gemi</th>
+                <th className="px-3 py-2.5">Bağlam</th>
+                <th className="px-3 py-2.5">Aşama</th>
+                <th className="px-3 py-2.5">Kaynak</th>
+                <th className="px-3 py-2.5">Oluşturuldu</th>
               </tr>
             </thead>
             <tbody>
@@ -101,7 +101,7 @@ export default async function LeadsListPage({ searchParams }: { searchParams: SP
                     </td>
                     <td className="px-3 py-2.5">
                       <Link href={`/admin/leads/${l.id}`} className="text-ink hover:text-amber-600 no-underline font-medium">
-                        {l.company?.name ?? <span className="text-ink-subtle italic">No company</span>}
+                        {l.company?.name ?? <span className="text-ink-subtle italic">Firma yok</span>}
                       </Link>
                       {l.vessel && (
                         <div className="text-[11.5px] font-mono text-ink-subtle mt-0.5">

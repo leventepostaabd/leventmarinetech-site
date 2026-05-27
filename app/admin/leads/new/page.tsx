@@ -30,41 +30,41 @@ export default function NewLeadPage() {
     <div className="max-w-3xl space-y-5">
       <header>
         <Link href="/admin/leads" className="font-mono text-[12px] text-ink-subtle hover:text-ink no-underline">
-          ← Back to leads
+          ← Adaylara dön
         </Link>
-        <h2 className="text-[22px] mt-2">New manual lead</h2>
+        <h2 className="text-[22px] mt-2">Yeni manuel aday</h2>
         <p className="text-ink-muted text-[13.5px] mt-1">
-          Use this to enter a vessel you found on Equasis or a PSC report.
-          Public data only — no personal contacts.
+          Equasis veya bir PSC raporunda bulduğunuz bir gemiyi girmek için kullanın.
+          Yalnızca herkese açık veriler — kişisel iletişim bilgisi yok.
         </p>
       </header>
 
       <form action={submit} className="grid gap-4">
         <div className="grid gap-1">
-          <label className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle">Track *</label>
+          <label className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle">Kanal *</label>
           <select name="track" required className="rounded-md bg-white px-3 py-2 ring-1 ring-line text-[14px]">
-            <option value="service">Service</option>
-            <option value="supply">Supply</option>
+            <option value="service">Servis</option>
+            <option value="supply">Tedarik</option>
           </select>
         </div>
 
         <fieldset className="grid sm:grid-cols-2 gap-3">
-          <Field label="Company / operator *" name="company_name" required />
-          <Field label="Vessel name" name="vessel_name" />
-          <Field label="IMO no" name="imo" placeholder="7-digit" />
-          <Field label="Port" name="port" />
-          <Field label="Contact email" name="contact_email" type="email" />
-          <Field label="Contact phone" name="contact_phone" />
+          <Field label="Firma / operatör *" name="company_name" required />
+          <Field label="Gemi adı" name="vessel_name" />
+          <Field label="IMO no" name="imo" placeholder="7 haneli" />
+          <Field label="Liman" name="port" />
+          <Field label="İletişim e-postası" name="contact_email" type="email" />
+          <Field label="İletişim telefonu" name="contact_phone" />
         </fieldset>
 
         <fieldset className="grid sm:grid-cols-3 gap-3">
-          <Field label="System (service)" name="system" placeholder="e.g. AVR, BWTS" />
-          <Field label="Brand (supply)" name="brand" />
-          <Field label="Part number (supply)" name="part_number" />
+          <Field label="Sistem (servis)" name="system" placeholder="örn. AVR, BWTS" />
+          <Field label="Marka (tedarik)" name="brand" />
+          <Field label="Parça No (tedarik)" name="part_number" />
         </fieldset>
 
         <div className="grid gap-1">
-          <label className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle">Priority score 0–100</label>
+          <label className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle">Öncelik puanı 0–100</label>
           <input
             type="number"
             name="priority_score"
@@ -76,28 +76,28 @@ export default function NewLeadPage() {
         </div>
 
         <div className="grid gap-1">
-          <label className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle">Draft outreach message</label>
+          <label className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle">Taslak iletişim mesajı</label>
           <textarea
             name="draft_message"
             rows={6}
-            placeholder="Initial outreach you intend to send by WhatsApp or email. Not auto-sent."
+            placeholder="WhatsApp veya e-posta ile göndermeyi planladığınız ilk mesaj. Otomatik gönderilmez."
             className="rounded-md bg-white px-3 py-2 ring-1 ring-line text-[14px] leading-relaxed font-sans"
           />
         </div>
 
         <div className="grid gap-1">
-          <label className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle">Internal note</label>
+          <label className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle">Dahili not</label>
           <textarea
             name="note"
             rows={3}
-            placeholder="Why this lead — fleet age, recent US PSC, etc."
+            placeholder="Bu aday neden — filo yaşı, son US PSC, vb."
             className="rounded-md bg-white px-3 py-2 ring-1 ring-line text-[14px] font-sans"
           />
         </div>
 
         <div className="flex gap-3 pt-2">
-          <button type="submit" className="btn-accent btn-md">Create lead</button>
-          <Link href="/admin/leads" className="btn-ghost btn-md no-underline">Cancel</Link>
+          <button type="submit" className="btn-accent btn-md">Adayı Kaydet</button>
+          <Link href="/admin/leads" className="btn-ghost btn-md no-underline">İptal</Link>
         </div>
       </form>
     </div>

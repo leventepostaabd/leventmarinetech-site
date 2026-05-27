@@ -13,6 +13,25 @@ const STATUS_TONE: Record<string, string> = {
   cancelled: 'bg-red-50 text-red-700'
 };
 
+// Display-only Turkish labels — underlying slug values are unchanged.
+const STATUS_LABEL: Record<string, string> = {
+  all: 'Tümü',
+  new: 'Yeni',
+  reviewing: 'İnceleniyor',
+  scheduled: 'Planlandı',
+  on_attendance: 'Serviste',
+  reporting: 'Raporlanıyor',
+  closed: 'Kapatıldı',
+  cancelled: 'İptal edildi'
+};
+
+const URGENCY_LABEL: Record<string, string> = {
+  all: 'Tümü',
+  aog: 'AOG',
+  urgent: 'Acil',
+  planned: 'Planlı'
+};
+
 export default async function AdminService({
   searchParams
 }: {
@@ -44,8 +63,8 @@ export default async function AdminService({
   return (
     <div>
       <div className="flex justify-between items-center mb-5">
-        <h2>Service requests</h2>
-        <span className="font-mono text-[11.5px] text-ink-subtle">{data?.length ?? 0} rows</span>
+        <h2>Servis Talepleri</h2>
+        <span className="font-mono text-[11.5px] text-ink-subtle">{data?.length ?? 0} kayıt</span>
       </div>
 
       <div className="card !p-3 mb-4 space-y-2.5">
@@ -54,12 +73,12 @@ export default async function AdminService({
             type="search"
             name="q"
             defaultValue={searchParams.q ?? ''}
-            placeholder="Search system, vessel, port, contact name or email…"
+            placeholder="Sistem, gemi, liman, iletişim adı veya e-posta ara…"
             className="field-input !py-1.5 !text-[13px] flex-1"
           />
           {searchParams.status && <input type="hidden" name="status" value={searchParams.status} />}
           {searchParams.urgency && <input type="hidden" name="urgency" value={searchParams.urgency} />}
-          <button type="submit" className="btn-primary btn-sm">Search</button>
+          <button type="submit" className="btn-primary btn-sm">Ara</button>
           {searchParams.q && (
             <Link
               href={{
@@ -71,13 +90,13 @@ export default async function AdminService({
               }}
               className="btn-ghost btn-sm no-underline"
             >
-              Clear
+              Temizle
             </Link>
           )}
         </form>
 
         <div className="flex flex-wrap gap-1 font-mono text-[11px]">
-          <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-subtle pr-2 py-1.5">Status:</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-subtle pr-2 py-1.5">Durum:</span>
           {['all', 'new', 'reviewing', 'scheduled', 'on_attendance', 'reporting', 'closed'].map((s) => {
             const next = { ...searchParams };
             if (s === 'all') delete next.status;
@@ -92,14 +111,14 @@ export default async function AdminService({
                     : 'bg-navy-50 text-ink hover:bg-navy-100'
                 }`}
               >
-                {s}
+                {STATUS_LABEL[s] ?? s}
               </Link>
             );
           })}
         </div>
 
         <div className="flex flex-wrap gap-1 font-mono text-[11px]">
-          <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-subtle pr-2 py-1.5">Urgency:</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-subtle pr-2 py-1.5">Aciliyet:</span>
           {['all', 'aog', 'urgent', 'planned'].map((u) => {
             const next = { ...searchParams };
             if (u === 'all') delete next.urgency;
@@ -118,20 +137,20 @@ export default async function AdminService({
                     : 'bg-navy-50 text-ink hover:bg-navy-100'
                 }`}
               >
-                {u}
+                {URGENCY_LABEL[u] ?? u}
               </Link>
             );
           })}
         </div>
       </div>
 
-      {error && <div className="card text-red-600 text-sm">Error: {error.message}</div>}
+      {error && <div className="card text-red-600 text-sm">Hata: {error.message}</div>}
 
       <div className="overflow-x-auto card !p-0">
         <table className="w-full text-[13px]">
           <thead className="bg-navy-50 text-left">
             <tr>
-              {['When', 'Urg', 'System / vessel', 'Port', 'Contact', 'Status', ''].map((h) => (
+              {['Tarih', 'Acil.', 'Sistem / gemi', 'Liman', 'İletişim', 'Durum', ''].map((h) => (
                 <th key={h} className="px-3 py-2 font-mono text-[10.5px] uppercase tracking-wider text-ink-subtle">{h}</th>
               ))}
             </tr>
@@ -150,7 +169,7 @@ export default async function AdminService({
                     r.urgency === 'urgent' ? 'text-amber-600' :
                     'text-ink-subtle'
                   }`}>
-                    {r.urgency}
+                    {URGENCY_LABEL[r.urgency] ?? r.urgency}
                   </span>
                 </td>
                 <td className="px-3 py-2">
@@ -166,7 +185,7 @@ export default async function AdminService({
                 </td>
                 <td className="px-3 py-2">
                   <span className={`inline-flex items-center px-2 py-0.5 rounded font-mono text-[10.5px] uppercase tracking-wider ${STATUS_TONE[r.status] ?? STATUS_TONE.new}`}>
-                    {r.status}
+                    {STATUS_LABEL[r.status] ?? r.status}
                   </span>
                 </td>
                 <td className="px-3 py-2 text-right">
@@ -174,7 +193,7 @@ export default async function AdminService({
                     href={`/admin/service/${r.id}`}
                     className="font-mono text-[11px] uppercase tracking-[0.12em] text-amber-600 no-underline hover:text-amber"
                   >
-                    Open →
+                    Aç →
                   </Link>
                 </td>
               </tr>
@@ -182,7 +201,7 @@ export default async function AdminService({
             {(data ?? []).length === 0 && (
               <tr>
                 <td colSpan={7} className="px-3 py-10 text-center text-ink-subtle text-[13px]">
-                  No service requests match the current filters.
+                  Geçerli filtrelerle eşleşen servis talebi yok.
                 </td>
               </tr>
             )}

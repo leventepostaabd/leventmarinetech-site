@@ -54,9 +54,9 @@ export default function LeadDetailClient({
         <section className="card">
           <div className="flex items-center justify-between mb-3">
             <div>
-              <div className="kicker">Draft outreach</div>
+              <div className="kicker">Taslak iletişim</div>
               <p className="text-[12px] text-ink-subtle mt-1">
-                Edit and copy — the panel <span className="font-bold">does not send</span>. You send from your own WhatsApp / email.
+                Düzenleyin ve kopyalayın — panel <span className="font-bold">göndermez</span>. Kendi WhatsApp / e-postanızdan gönderirsiniz.
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -65,9 +65,9 @@ export default function LeadDetailClient({
                 onClick={runScore}
                 disabled={scoring}
                 className="btn-ghost btn-sm disabled:opacity-60"
-                title="Ask Claude to score this lead and draft outreach"
+                title="Claude'dan bu adayı puanlamasını ve taslak iletişim hazırlamasını isteyin"
               >
-                {scoring ? 'Scoring…' : '✦ Score with AI'}
+                {scoring ? 'Puanlanıyor…' : '✦ AI ile Puanla'}
               </button>
               <button
                 type="button"
@@ -75,7 +75,7 @@ export default function LeadDetailClient({
                 className="btn-ghost btn-sm"
                 disabled={!draft.trim()}
               >
-                {copied ? '✓ Copied' : 'Copy'}
+                {copied ? '✓ Kopyalandı' : 'Kopyala'}
               </button>
             </div>
           </div>
@@ -90,7 +90,7 @@ export default function LeadDetailClient({
             <div className="mb-4 rounded-md bg-navy-50/50 ring-1 ring-line p-3 space-y-3">
               <div className="flex items-center gap-3">
                 <span className="font-head text-2xl font-extrabold text-ink">{ai.priority_score}</span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-subtle">AI priority</span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-subtle">AI önceliği</span>
               </div>
               <p className="text-[13px] text-ink-muted">{ai.rationale}</p>
               {ai.factors.length > 0 && (
@@ -106,12 +106,12 @@ export default function LeadDetailClient({
                 </ul>
               )}
               <div className="text-[12.5px] text-ink">
-                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-subtle mr-1.5">Next</span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-subtle mr-1.5">Sonraki</span>
                 {ai.recommended_action}
               </div>
               <div className="flex flex-wrap gap-2 pt-1">
                 <button type="button" onClick={() => setDraft(ai.draft_en)} className="btn-accent btn-sm">
-                  Use English draft
+                  İngilizce taslağı kullan
                 </button>
                 <button type="button" onClick={() => setDraft(ai.draft_tr)} className="btn-ghost btn-sm">
                   Türkçe taslağı kullan
@@ -124,7 +124,7 @@ export default function LeadDetailClient({
             onChange={(e) => setDraft(e.target.value)}
             rows={10}
             className="w-full rounded-md bg-white ring-1 ring-line px-3 py-2 text-[14px] leading-relaxed font-sans"
-            placeholder="Initial outreach. Reference vessel name, US port window, system specifics."
+            placeholder="İlk iletişim. Gemi adı, US liman penceresi, sistem detaylarına atıf yapın."
           />
           <div className="flex justify-end mt-2">
             <button
@@ -133,7 +133,7 @@ export default function LeadDetailClient({
               disabled={saving}
               className="btn-accent btn-sm disabled:opacity-60"
             >
-              {saving ? 'Saving…' : 'Save draft'}
+              {saving ? 'Kaydediliyor…' : 'Taslağı Kaydet'}
             </button>
           </div>
         </section>
@@ -141,7 +141,7 @@ export default function LeadDetailClient({
         {/* Context */}
         {Object.keys(ctx).length > 0 && (
           <section className="card">
-            <div className="kicker mb-3">Context</div>
+            <div className="kicker mb-3">Bağlam</div>
             <dl className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-[13px]">
               {Object.entries(ctx).map(([k, v]) => (
                 <div key={k}>
@@ -156,7 +156,7 @@ export default function LeadDetailClient({
         {/* Priority reason */}
         {Object.keys(reason).length > 0 && (
           <section className="card">
-            <div className="kicker mb-3">Priority breakdown</div>
+            <div className="kicker mb-3">Öncelik dökümü</div>
             <pre className="text-[11.5px] leading-relaxed text-ink-muted overflow-x-auto bg-navy-50/40 p-3 rounded-md font-mono">
 {JSON.stringify(reason, null, 2)}
             </pre>
@@ -165,13 +165,13 @@ export default function LeadDetailClient({
 
         {/* Notes */}
         <section className="card">
-          <div className="kicker mb-3">Notes</div>
+          <div className="kicker mb-3">Notlar</div>
           <div className="flex gap-2 mb-4">
             <input
               type="text"
               value={newNote}
               onChange={(e) => setNewNote(e.target.value)}
-              placeholder="Quick note…"
+              placeholder="Hızlı not…"
               className="flex-1 rounded-md bg-white ring-1 ring-line px-3 py-2 text-[13.5px]"
             />
             <button
@@ -183,11 +183,11 @@ export default function LeadDetailClient({
               })}
               className="btn-ghost btn-sm disabled:opacity-60"
             >
-              {noteSaving ? 'Adding…' : 'Add'}
+              {noteSaving ? 'Ekleniyor…' : 'Ekle'}
             </button>
           </div>
           {notes.length === 0 ? (
-            <p className="text-ink-subtle text-[12.5px]">No notes yet.</p>
+            <p className="text-ink-subtle text-[12.5px]">Henüz not yok.</p>
           ) : (
             <ul className="space-y-3">
               {notes.map((n) => (
@@ -207,7 +207,7 @@ export default function LeadDetailClient({
       <aside className="space-y-5">
         {/* Stage */}
         <section className="card">
-          <div className="kicker mb-2">Stage</div>
+          <div className="kicker mb-2">Aşama</div>
           <select
             value={stage}
             onChange={(e) => {
@@ -224,13 +224,13 @@ export default function LeadDetailClient({
               <option key={s} value={s}>{stageLabels[s]}</option>
             ))}
           </select>
-          {stageSaving && <div className="text-[11px] font-mono text-ink-subtle mt-2">Saving…</div>}
+          {stageSaving && <div className="text-[11px] font-mono text-ink-subtle mt-2">Kaydediliyor…</div>}
         </section>
 
         {/* Contact shortcuts */}
         {(ctx.contact_email || ctx.contact_phone || lead.company?.contact_email) && (
           <section className="card">
-            <div className="kicker mb-2">Contact</div>
+            <div className="kicker mb-2">İletişim</div>
             <ul className="space-y-1.5 text-[13px] font-mono">
               {(ctx.contact_email || lead.company?.contact_email) && (
                 <li>
@@ -258,9 +258,9 @@ export default function LeadDetailClient({
 
         {/* Timeline */}
         <section className="card">
-          <div className="kicker mb-3">Timeline</div>
+          <div className="kicker mb-3">Zaman Çizelgesi</div>
           {events.length === 0 ? (
-            <p className="text-ink-subtle text-[12.5px]">No events yet.</p>
+            <p className="text-ink-subtle text-[12.5px]">Henüz olay yok.</p>
           ) : (
             <ul className="space-y-2">
               {events.slice(0, 30).map((e) => (

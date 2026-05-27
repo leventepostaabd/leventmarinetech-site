@@ -87,8 +87,8 @@ function bumpCaches(slug?: string) {
 
 export async function createProduct(input: ProductInput) {
   await requireAdmin();
-  if (!input.name?.trim()) throw new Error('Name is required');
-  if (!input.category?.trim()) throw new Error('Category is required');
+  if (!input.name?.trim()) throw new Error('Ad zorunlu');
+  if (!input.category?.trim()) throw new Error('Kategori zorunlu');
   const supabase = createServiceSupabase();
 
   const baseSlug = (input.slug?.trim() && slugify(input.slug)) || slugify(input.name);
@@ -108,8 +108,8 @@ export async function createProduct(input: ProductInput) {
 
 export async function updateProduct(id: string, input: ProductInput) {
   await requireAdmin();
-  if (!input.name?.trim()) throw new Error('Name is required');
-  if (!input.category?.trim()) throw new Error('Category is required');
+  if (!input.name?.trim()) throw new Error('Ad zorunlu');
+  if (!input.category?.trim()) throw new Error('Kategori zorunlu');
   const supabase = createServiceSupabase();
   const { data: row } = await supabase.from('products').select('slug').eq('id', id).single();
   const { error } = await supabase.from('products').update(toRow(input)).eq('id', id);
@@ -130,8 +130,8 @@ export async function deleteProduct(id: string) {
 export async function uploadProductImage(formData: FormData): Promise<{ url: string }> {
   await requireAdmin();
   const file = formData.get('file');
-  if (!(file instanceof File) || file.size === 0) throw new Error('No file');
-  if (file.size > 8 * 1024 * 1024) throw new Error('Image too large (max 8MB)');
+  if (!(file instanceof File) || file.size === 0) throw new Error('Dosya yok');
+  if (file.size > 8 * 1024 * 1024) throw new Error('Görsel çok büyük (en fazla 8MB)');
   const ext = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '');
   const path = `catalog/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
   const supabase = createServiceSupabase();

@@ -27,6 +27,25 @@ const STATUS_TONE: Record<string, string> = {
   cancelled: 'bg-red-50 text-red-700 border-red-200'
 };
 
+// Display-only Turkish labels — underlying slug values are unchanged.
+const STATUS_LABEL: Record<string, string> = {
+  new: 'Yeni',
+  reviewing: 'İnceleniyor',
+  supplier_checking: 'Tedarikçi kontrolü',
+  quoted: 'Teklif verildi',
+  waiting_approval: 'Onay bekliyor',
+  ordered: 'Sipariş verildi',
+  delivered: 'Teslim edildi',
+  closed: 'Kapatıldı',
+  cancelled: 'İptal edildi'
+};
+
+const URGENCY_LABEL: Record<string, string> = {
+  aog: 'AOG',
+  urgent: 'Acil',
+  planned: 'Planlı'
+};
+
 type Rfq = Record<string, any>;
 type Attachment = { name: string; path: string; url: string | null; size?: number };
 
@@ -104,35 +123,35 @@ export default function RfqDetailClient({ rfq, attachments }: { rfq: Rfq; attach
           <div className="flex items-start justify-between gap-3 mb-2">
             <div>
               <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle mb-1">
-                {rfq.kind} · created {new Date(rfq.created_at).toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short' })}
+                {rfq.kind} · oluşturuldu {new Date(rfq.created_at).toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short' })}
               </div>
               <h2 className="text-[20px] font-bold leading-tight">
-                {rfq.brand ? `${rfq.brand} ` : ''}{rfq.part_number || rfq.description?.slice(0, 60) || 'Untitled RFQ'}
+                {rfq.brand ? `${rfq.brand} ` : ''}{rfq.part_number || rfq.description?.slice(0, 60) || 'Başlıksız teklif talebi'}
               </h2>
             </div>
             <span className={`font-mono text-[10.5px] uppercase tracking-wider px-2 py-1 rounded ${urgencyTone}`}>
-              {rfq.urgency}
+              {URGENCY_LABEL[rfq.urgency] ?? rfq.urgency}
             </span>
           </div>
 
           <div className="grid grid-cols-2 gap-x-6 gap-y-2 mt-4 text-[13px]">
-            <Row label="Brand"      value={rfq.brand} />
-            <Row label="Part #"     value={rfq.part_number} mono />
-            <Row label="Quantity"   value={rfq.quantity} />
-            <Row label="Equipment"  value={rfq.equipment_type} />
-            <Row label="Vessel"     value={rfq.vessel_name} />
+            <Row label="Marka"      value={rfq.brand} />
+            <Row label="Parça No"   value={rfq.part_number} mono />
+            <Row label="Adet"       value={rfq.quantity} />
+            <Row label="Ekipman"    value={rfq.equipment_type} />
+            <Row label="Gemi"       value={rfq.vessel_name} />
             <Row label="IMO"        value={rfq.imo_number} mono />
-            <Row label="Current port" value={rfq.current_port} />
-            <Row label="Next port"    value={rfq.next_port} />
+            <Row label="Mevcut liman" value={rfq.current_port} />
+            <Row label="Sonraki liman" value={rfq.next_port} />
             <Row label="ETA"           value={rfq.eta ? new Date(rfq.eta).toLocaleString('en-US') : null} />
-            <Row label="Required by"   value={rfq.required_by} />
+            <Row label="Son tarih"     value={rfq.required_by} />
           </div>
         </div>
 
         {rfq.description && (
           <div className="card">
             <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle mb-2">
-              Customer description
+              Müşteri açıklaması
             </div>
             <pre className="whitespace-pre-wrap font-sans text-[13.5px] text-ink leading-relaxed">
               {rfq.description}
@@ -143,7 +162,7 @@ export default function RfqDetailClient({ rfq, attachments }: { rfq: Rfq; attach
         {attachments.length > 0 && (
           <div className="card">
             <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle mb-3">
-              Attachments ({attachments.length})
+              Ekler ({attachments.length})
             </div>
             <ul className="space-y-1.5">
               {attachments.map((a, i) => (
@@ -156,11 +175,11 @@ export default function RfqDetailClient({ rfq, attachments }: { rfq: Rfq; attach
                       rel="noopener noreferrer"
                       className="font-mono text-[11px] uppercase tracking-[0.12em] text-amber-600 hover:text-amber no-underline ml-3 shrink-0"
                     >
-                      Download
+                      İndir
                     </a>
                   ) : (
                     <span className="font-mono text-[11px] uppercase text-red-600 ml-3 shrink-0">
-                      File missing
+                      Dosya eksik
                     </span>
                   )}
                 </li>
@@ -172,24 +191,24 @@ export default function RfqDetailClient({ rfq, attachments }: { rfq: Rfq; attach
         {/* Internal block — never sent to customer */}
         <div className="card border-l-4 border-l-amber">
           <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-amber-700 mb-2">
-            Internal · admin only
+            Dahili · yalnızca admin
           </div>
 
-          <label className="field-label">Draft quote / pricing</label>
+          <label className="field-label">Taslak teklif / fiyatlandırma</label>
           <textarea
             value={draftQuote}
             onChange={(e) => setDraftQuote(e.target.value)}
             rows={4}
-            placeholder="Item price · shipping · ETA · compatibility note — paste here, copy to reply"
+            placeholder="Ürün fiyatı · nakliye · ETA · uyumluluk notu — buraya yapıştırın, yanıta kopyalayın"
             className="field-input font-mono text-[12.5px]"
           />
 
-          <label className="field-label mt-3">Internal notes</label>
+          <label className="field-label mt-3">Dahili notlar</label>
           <textarea
             value={internalNotes}
             onChange={(e) => setInternalNotes(e.target.value)}
             rows={3}
-            placeholder="Anything relevant to fulfillment — not shared with the customer"
+            placeholder="Tedarikle ilgili her şey — müşteriyle paylaşılmaz"
             className="field-input text-[13px]"
           />
 
@@ -200,11 +219,11 @@ export default function RfqDetailClient({ rfq, attachments }: { rfq: Rfq; attach
               disabled={pending}
               className="btn-primary btn-md disabled:opacity-60"
             >
-              {pending ? 'Saving…' : 'Save admin fields'}
+              {pending ? 'Kaydediliyor…' : 'Admin alanlarını kaydet'}
             </button>
             {savedTick > 0 && !pending && (
               <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-green-700">
-                ✓ Saved
+                ✓ Kaydedildi
               </span>
             )}
           </div>
@@ -215,7 +234,7 @@ export default function RfqDetailClient({ rfq, attachments }: { rfq: Rfq; attach
       <aside className="space-y-5 lg:sticky lg:top-6 lg:self-start">
         <div className="card">
           <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle mb-2">
-            Customer
+            Müşteri
           </div>
           <div className="text-[15px] font-semibold text-ink">{rfq.contact_name || '—'}</div>
           {rfq.company && <div className="text-[13px] text-ink-muted">{rfq.company}</div>}
@@ -231,7 +250,7 @@ export default function RfqDetailClient({ rfq, attachments }: { rfq: Rfq; attach
           <div className="mt-4 grid grid-cols-2 gap-2">
             {mailUrl && (
               <a href={mailUrl} className="btn-primary btn-sm no-underline text-center">
-                ✉ Email reply
+                ✉ E-posta yanıtı
               </a>
             )}
             {waUrl && (
@@ -249,10 +268,10 @@ export default function RfqDetailClient({ rfq, attachments }: { rfq: Rfq; attach
 
         <div className="card">
           <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle mb-2">
-            Status
+            Durum
           </div>
           <div className={`mb-3 inline-flex items-center px-3 py-1.5 rounded-md border text-[12.5px] font-mono uppercase tracking-wider ${STATUS_TONE[status] ?? STATUS_TONE.new}`}>
-            {status}
+            {STATUS_LABEL[status] ?? status}
           </div>
           <ul className="space-y-1">
             {STATUSES.map((s) => (
@@ -267,7 +286,7 @@ export default function RfqDetailClient({ rfq, attachments }: { rfq: Rfq; attach
                       : 'bg-white text-ink hover:bg-navy-50'
                   }`}
                 >
-                  {s}
+                  {STATUS_LABEL[s] ?? s}
                 </button>
               </li>
             ))}
@@ -276,13 +295,13 @@ export default function RfqDetailClient({ rfq, attachments }: { rfq: Rfq; attach
 
         <div className="card">
           <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-subtle mb-2">
-            Metadata
+            Üst Veri
           </div>
           <div className="text-[12px] font-mono space-y-0.5 text-ink-muted">
             <div>Ref: <span className="text-ink">{(rfq.meta?.reference) || rfq.id.slice(0, 8)}</span></div>
-            <div>Channel: {rfq.meta?.channel || rfq.source || 'web'}</div>
-            <div>Created: {new Date(rfq.created_at).toLocaleString('en-US')}</div>
-            <div>Updated: {new Date(rfq.updated_at ?? rfq.created_at).toLocaleString('en-US')}</div>
+            <div>Kanal: {rfq.meta?.channel || rfq.source || 'web'}</div>
+            <div>Oluşturuldu: {new Date(rfq.created_at).toLocaleString('en-US')}</div>
+            <div>Güncellendi: {new Date(rfq.updated_at ?? rfq.created_at).toLocaleString('en-US')}</div>
           </div>
         </div>
       </aside>

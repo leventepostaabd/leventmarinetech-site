@@ -34,7 +34,7 @@ export default async function AdminServiceDetail({ params }: { params: { id: str
         href={`/admin/service${req.status === 'new' ? '?status=new' : ''}`}
         className="font-mono text-[11.5px] uppercase tracking-[0.12em] text-amber-600 no-underline hover:text-amber"
       >
-        ← Back to service requests
+        ← Servis Taleplerine dön
       </Link>
 
       <ServiceDetailClient req={req} attachments={attachments} />
