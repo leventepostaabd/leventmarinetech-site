@@ -60,14 +60,33 @@ export default function EbayCatalogGrid({
   const [distErr, setDistErr] = useState<string | null>(null);
   const [distRan, setDistRan] = useState(false);
   const distAbort = useRef<AbortController | null>(null);
+  const distDebounce = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);
 
-  // Reset the distributor fallback whenever the query changes.
+  // Auto-run the distributor (Mouser / Digi-Key / Grainger) search, debounced,
+  // whenever the visitor types. Prices are never returned to the card — the
+  // API only exposes `priceRaw` (internal), so the card falls back to
+  // "Get quote". The distributor section streams in below the catalog grid.
   useEffect(() => {
-    setDistItems([]);
-    setDistRan(false);
+    if (distDebounce.current) clearTimeout(distDebounce.current);
+    distAbort.current?.abort();
     setDistErr(null);
+    const query = q.trim();
+    if (query.length < 2) {
+      setDistItems([]);
+      setDistRan(false);
+      setDistLoading(false);
+      return;
+    }
+    setDistLoading(true);
+    distDebounce.current = setTimeout(() => {
+      searchDistributors();
+    }, 350);
+    return () => {
+      if (distDebounce.current) clearTimeout(distDebounce.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [q]);
 
   const filtered = useMemo(() => {
@@ -245,9 +264,6 @@ export default function EbayCatalogGrid({
               {ct(locale, 'supply.noMatchTitle')}
             </p>
             <div className="flex flex-wrap justify-center gap-2">
-              <button type="button" onClick={searchDistributors} className="btn-accent btn-sm">
-                {ct(locale, 'supply.distributorCta')}
-              </button>
               <Link href={`/supply/unlisted-request?q=${encodeURIComponent(q)}`} className="btn-ghost btn-sm no-underline">
                 {ct(locale, 'supply.uploadNameplate')}
               </Link>
@@ -256,19 +272,10 @@ export default function EbayCatalogGrid({
         )}
       </div>
 
-      {/* Distributor-network fallback (live) — only when the customer asks */}
+      {/* Distributor network — auto-runs while the visitor types (debounced).
+          Cards show item identity only; prices are never sent to the UI. */}
       {q.trim().length >= 2 && (
         <div className="border-t border-line pt-4">
-          {!distRan && filtered.length > 0 && (
-            <button
-              type="button"
-              onClick={searchDistributors}
-              className="font-mono text-[11.5px] uppercase tracking-[0.12em] text-amber-700 hover:text-amber"
-            >
-              {ct(locale, 'supply.distributorCta')}
-            </button>
-          )}
-
           {distLoading && (
             <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-subtle">
               {ct(locale, 'supply.searching')}
@@ -281,26 +288,26 @@ export default function EbayCatalogGrid({
             </div>
           )}
 
-          {distRan && !distLoading && !distErr && (
-            distItems.length > 0 ? (
-              <>
-                <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-subtle mb-3">
-                  {ct(locale, 'supply.distributorResults')} · {distItems.length}
-                </div>
-                <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {distItems.map((it) => (
-                    <li key={it.slug}><Card it={it} /></li>
-                  ))}
-                </ul>
-              </>
-            ) : (
-              <div className="flex flex-wrap items-center gap-2 text-[13.5px] text-ink-muted">
-                <span>{ct(locale, 'supply.noMatchTitle')}</span>
-                <Link href={`/supply/unlisted-request?q=${encodeURIComponent(q)}`} className="btn-accent btn-sm no-underline">
-                  {ct(locale, 'supply.uploadNameplate')}
-                </Link>
+          {distRan && !distLoading && !distErr && distItems.length > 0 && (
+            <>
+              <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-subtle mb-3">
+                {ct(locale, 'supply.distributorResults')} · {distItems.length}
               </div>
-            )
+              <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {distItems.map((it) => (
+                  <li key={it.slug}><Card it={it} /></li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          {distRan && !distLoading && !distErr && distItems.length === 0 && filtered.length === 0 && (
+            <div className="flex flex-wrap items-center gap-2 text-[13.5px] text-ink-muted">
+              <span>{ct(locale, 'supply.noMatchTitle')}</span>
+              <Link href={`/supply/unlisted-request?q=${encodeURIComponent(q)}`} className="btn-accent btn-sm no-underline">
+                {ct(locale, 'supply.uploadNameplate')}
+              </Link>
+            </div>
           )}
         </div>
       )}
