@@ -105,3 +105,23 @@ body.lm-no-scroll {
   padding-bottom: calc(env(safe-area-inset-bottom, 0) + 4.5rem);
 }
 
+
+/* Credentials marquee — slow horizontal right-to-left auto-scroll.
+   The track is rendered with the cert list duplicated once, so
+   translateX(-50%) returns to a frame-identical position and loops
+   seamlessly. Hover pauses the animation so the visitor can read. */
+@keyframes lm-marquee-rtl {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.lm-marquee-rtl {
+  animation: lm-marquee-rtl 45s linear infinite;
+  will-change: transform;
+}
+.lm-marquee-rtl:hover,
+.lm-marquee-rtl:focus-within {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lm-marquee-rtl { animation: none; }
+}
