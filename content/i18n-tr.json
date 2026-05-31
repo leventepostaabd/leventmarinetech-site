@@ -267,6 +267,8 @@
   },
   "portsIndex": {
     "kicker": "ABD liman kapsamı",
+    "twicTitle": "TWIC doğrulamalı",
+    "twicSub": "ABD liman erişimi",
     "h1": "Tüm büyük ABD limanlarında marine elektrik servisi.",
     "lead": "Florida merkezli operasyon, Wyoming LLC. Herhangi bir ABD East Coast, Gulf, West Coast veya Pasifik limanında saatler içinde geminize mühendis sevk ederiz. AOG-grade yedek parçalar aynı gün sevk edilir. Limanı seçin — limana özgü intake notları, yerel freight gateway'leri ve olası arıza paternleri içeride.",
     "notListedH2": "Liman listede yok mu?",

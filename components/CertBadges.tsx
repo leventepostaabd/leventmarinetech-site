@@ -11,34 +11,46 @@ export type CertBadge = {
   reg: string;
   /** Issuer + year, surfaced under the title when present. */
   issued?: string;
-  /** Public path to the credential PDF (under /public). When set, the cert
-      card shows a "View certificate" link so the owner can prove issuance. */
-  pdf?: string;
+  /** Public path to the credential scan, e.g. '/credentials/nfpa-70e.jpg'.
+      When the matching JPEG exists in /public, the /about card shows a
+      thumbnail and a "View certificate" link to the full-size image. */
+  image?: string;
+  /** Thumbnail aspect ratio. Defaults to a 4:3 paper-style scan; 'card'
+      uses the ISO ID-1 landscape ratio (85×54 mm) for TWIC etc. */
+  aspect?: 'paper' | 'card';
 };
 
+// Filename convention — drop the JPEG/PNG at the matching path under
+// /public/credentials/ and the card auto-picks it up. (Owner-managed.)
 export const CERTIFICATIONS: CertBadge[] = [
-  { abbr: 'ETO',           full: 'Electro-Technical Officer',                  reg: 'STCW Reg. III/6'  },
-  { abbr: 'HV ≤ 1000V', full: 'High Voltage Operations',                  reg: 'Up to 1000V'      },
+  {
+    abbr: 'CSE',
+    full: 'Control System Technology Engineer',
+    reg: 'Engineering Diploma',
+    image: '/credentials/control-system-engineer.jpg'
+  },
+  { abbr: 'ETO',           full: 'Electro-Technical Officer',                  reg: 'STCW Reg. III/6', image: '/credentials/eto-stcw-iii-6.jpg' },
+  { abbr: 'HV ≤ 1000V', full: 'High Voltage Operations',                  reg: 'Up to 1000V',     image: '/credentials/hv-1000v.jpg'       },
   {
     abbr: 'NFPA 70E',
     full: 'Electrical Safety in the Workplace',
     reg: 'NFPA 70E',
     issued: 'NFPA · 2025',
-    pdf: '/credentials/nfpa-70e.pdf'
+    image: '/credentials/nfpa-70e.jpg'
   },
   {
     abbr: 'OSHA',
     full: 'Occupational Safety & Health — Outreach Training',
     reg: 'US OSHA',
     issued: 'OSHA Outreach · 2025',
-    pdf: '/credentials/osha-outreach-training.pdf'
+    image: '/credentials/osha-outreach-training.jpg'
   },
-  { abbr: 'TWIC',          full: 'Transportation Worker Identification Credential', reg: 'TSA · US'    },
-  { abbr: 'AFF',           full: 'Advanced Fire Fighting',                     reg: 'STCW VI/3'        },
-  { abbr: 'MFA',           full: 'Medical First Aid',                          reg: 'STCW VI/4-1'      },
-  { abbr: 'BST',           full: 'Basic Safety Training',                      reg: 'STCW VI/1'        },
-  { abbr: 'Gas Tanker',    full: 'Gas Tanker Familiarization',                 reg: 'STCW V/1-2'       },
-  { abbr: 'Oil/Chem',      full: 'Oil & Chemical Tanker Familiarization',      reg: 'STCW V/1-1'       }
+  { abbr: 'TWIC',          full: 'Transportation Worker Identification Credential', reg: 'TSA · US', image: '/credentials/twic.jpg', aspect: 'card' },
+  { abbr: 'AFF',           full: 'Advanced Fire Fighting',                     reg: 'STCW VI/3',       image: '/credentials/aff.jpg'            },
+  { abbr: 'MFA',           full: 'Medical First Aid',                          reg: 'STCW VI/4-1',     image: '/credentials/mfa.jpg'            },
+  { abbr: 'BST',           full: 'Basic Safety Training',                      reg: 'STCW VI/1',       image: '/credentials/bst.jpg'            },
+  { abbr: 'Gas Tanker',    full: 'Gas Tanker Familiarization',                 reg: 'STCW V/1-2',      image: '/credentials/gas-tanker.jpg'     },
+  { abbr: 'Oil/Chem',      full: 'Oil & Chemical Tanker Familiarization',      reg: 'STCW V/1-1',      image: '/credentials/oil-chem-tanker.jpg'}
 ];
 
 export default function CertBadges({

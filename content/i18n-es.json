@@ -201,6 +201,8 @@
   },
   "portsIndex": {
     "kicker": "Cobertura de puertos de US",
+    "twicTitle": "TWIC verificado",
+    "twicSub": "Acceso a puertos de EE. UU.",
     "h1": "Servicio eléctrico marino en cada puerto principal de US.",
     "lead": "Operaciones con base en Florida, Wyoming LLC. Enviamos un ingeniero a su buque en cuestión de horas en cualquier puerto de la Costa Este, el Golfo, la Costa Oeste o el Pacífico de US. Los repuestos de calidad AOG se despachan el mismo día. Elija el puerto — dentro le esperan notas de admisión específicas del puerto, accesos logísticos locales y patrones de falla probables.",
     "notListedH2": "¿Puerto no listado?",

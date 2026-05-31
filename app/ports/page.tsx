@@ -4,6 +4,7 @@ import { readRegionsList } from '@/lib/content';
 import { getLocale, getTranslator } from '@/lib/i18n';
 import { SITE } from '@/lib/site';
 import { breadcrumbSchema } from '@/lib/schema-org';
+import TwicBadge from '@/components/TwicBadge';
 
 export const metadata: Metadata = {
   title: 'US Port Coverage — Marine Electrical Service at Every Major Port',
@@ -35,14 +36,21 @@ export default function PortsIndex() {
     <div className="lm-screen bg-white">
       <article className="lm-screen-body">
         <section className="bg-navy-700 text-white py-16 md:py-20">
-          <div className="container-x">
-            <div className="kicker text-white/70 mb-3">{t('portsIndex.kicker')}</div>
-            <h1 className="text-white text-balance max-w-4xl text-[28px] md:text-[40px] leading-[1.1]">
-              {t('portsIndex.h1')}
-            </h1>
-            <p className="mt-5 text-[15.5px] md:text-[17px] text-white/75 max-w-3xl leading-relaxed">
-              {t('portsIndex.lead')}
-            </p>
+          <div className="container-x grid gap-8 md:grid-cols-[1fr_auto] md:items-start">
+            <div>
+              <div className="kicker text-white/70 mb-3">{t('portsIndex.kicker')}</div>
+              <h1 className="text-white text-balance max-w-4xl text-[28px] md:text-[40px] leading-[1.1]">
+                {t('portsIndex.h1')}
+              </h1>
+              <p className="mt-5 text-[15.5px] md:text-[17px] text-white/75 max-w-3xl leading-relaxed">
+                {t('portsIndex.lead')}
+              </p>
+            </div>
+            <TwicBadge
+              title={t('portsIndex.twicTitle')}
+              sub={t('portsIndex.twicSub')}
+              viewLabel={t('about.viewCert')}
+            />
           </div>
         </section>
 
