@@ -9,13 +9,30 @@ export type CertBadge = {
   abbr: string;
   full: string;
   reg: string;
+  /** Issuer + year, surfaced under the title when present. */
+  issued?: string;
+  /** Public path to the credential PDF (under /public). When set, the cert
+      card shows a "View certificate" link so the owner can prove issuance. */
+  pdf?: string;
 };
 
 export const CERTIFICATIONS: CertBadge[] = [
   { abbr: 'ETO',           full: 'Electro-Technical Officer',                  reg: 'STCW Reg. III/6'  },
   { abbr: 'HV ≤ 1000V', full: 'High Voltage Operations',                  reg: 'Up to 1000V'      },
-  { abbr: 'NFPA 70E',      full: 'Electrical Safety in the Workplace',         reg: 'NFPA 70E'         },
-  { abbr: 'OSHA',          full: 'Occupational Safety & Health',               reg: 'US OSHA'          },
+  {
+    abbr: 'NFPA 70E',
+    full: 'Electrical Safety in the Workplace',
+    reg: 'NFPA 70E',
+    issued: 'NFPA · 2025',
+    pdf: '/credentials/nfpa-70e.pdf'
+  },
+  {
+    abbr: 'OSHA',
+    full: 'Occupational Safety & Health — Outreach Training',
+    reg: 'US OSHA',
+    issued: 'OSHA Outreach · 2025',
+    pdf: '/credentials/osha-outreach-training.pdf'
+  },
   { abbr: 'TWIC',          full: 'Transportation Worker Identification Credential', reg: 'TSA · US'    },
   { abbr: 'AFF',           full: 'Advanced Fire Fighting',                     reg: 'STCW VI/3'        },
   { abbr: 'MFA',           full: 'Medical First Aid',                          reg: 'STCW VI/4-1'      },
