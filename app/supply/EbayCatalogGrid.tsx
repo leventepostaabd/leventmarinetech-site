@@ -5,6 +5,8 @@ import Link from 'next/link';
 import ProductQuoteModal, { type ModalProduct } from './ProductQuoteModal';
 import { ct } from '@/lib/i18n-client';
 
+type SourceTag = 'local' | 'mouser' | 'digikey' | 'grainger' | string;
+
 type Item = {
   slug: string;
   name: string;
@@ -13,12 +15,35 @@ type Item = {
   description?: string;
   image?: string;
   in_stock: boolean;
+  /** Where the listing came from — drives the corner badge (M/D/G/L). */
+  source?: SourceTag;
   /** Optional public selling price (USD). Shown when set; otherwise the card
       shows "Get quote" (decision S9). */
   price?: number | null;
   /** Raw distributor price (USD) — internal only, never displayed. */
   priceRaw?: number | null;
 };
+
+const SOURCE_BADGE: Record<string, { letter: string; bg: string; title: string }> = {
+  local:    { letter: 'L', bg: 'bg-navy-700',     title: 'Levent Marine' },
+  mouser:   { letter: 'M', bg: 'bg-[#0066B3]',    title: 'Mouser' },
+  digikey:  { letter: 'D', bg: 'bg-[#CC0000]',    title: 'Digi-Key' },
+  grainger: { letter: 'G', bg: 'bg-emerald-600',  title: 'Grainger' }
+};
+
+function SourceBadge({ source }: { source?: string }) {
+  const m = source ? SOURCE_BADGE[source] : undefined;
+  if (!m) return null;
+  return (
+    <span
+      title={m.title}
+      aria-label={m.title}
+      className={`absolute top-2 right-2 inline-flex items-center justify-center h-6 w-6 rounded-full ${m.bg} text-white font-mono text-[11px] font-bold shadow-sm ring-1 ring-white/40 z-10`}
+    >
+      {m.letter}
+    </span>
+  );
+}
 
 const PRESET_QUERIES = [
   { en: 'Marine electrical', tr: 'Marine elektrik', q: 'marine electrical' },
@@ -89,14 +114,47 @@ export default function EbayCatalogGrid({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [q]);
 
-  const filtered = useMemo(() => {
-    const toks = tokens(q);
-    if (toks.length === 0) return catalog;
-    return catalog.filter((it) => {
+  // Unified, relevance-ranked result list — our catalog + the distributor
+  // network in one grid. Items without a photo are dropped (decision S11).
+  const combined = useMemo(() => {
+    const query = q.trim();
+    const queryLow = query.toLowerCase();
+    const toks = tokens(queryLow);
+
+    const pool: Item[] = [];
+    for (const it of catalog) {
+      if (!it.image) continue;
+      const tagged: Item = { ...it, source: it.source ?? 'local' };
+      if (toks.length === 0) { pool.push(tagged); continue; }
       const hay = `${it.name} ${it.brand} ${it.partNumber} ${it.description ?? ''}`.toLowerCase();
-      return toks.some((tk) => hay.includes(tk));
+      if (toks.some((tk) => hay.includes(tk))) pool.push(tagged);
+    }
+    if (query.length >= 2) {
+      for (const it of distItems) {
+        if (!it.image) continue;
+        pool.push(it);
+      }
+    }
+    if (toks.length === 0) return pool;
+
+    const scored = pool.map((it) => {
+      const name = (it.name ?? '').toLowerCase();
+      const brand = (it.brand ?? '').toLowerCase();
+      const part = (it.partNumber ?? '').toLowerCase();
+      const hay = `${name} ${brand} ${part} ${(it.description ?? '').toLowerCase()}`;
+      let s = 0;
+      if (part && part.includes(queryLow)) s += 12;
+      if (name.includes(queryLow)) s += 6;
+      if (brand && brand.includes(queryLow)) s += 4;
+      for (const tk of toks) if (hay.includes(tk)) s += 1;
+      if (it.in_stock) s += 0.5;
+      // Tiny nudge so our own catalog wins ties against the distributor feed.
+      if ((it.source ?? 'local') === 'local') s += 0.25;
+      return { it, s };
     });
-  }, [catalog, q]);
+    scored.sort((a, b) => b.s - a.s);
+    return scored.map((x) => x.it);
+  }, [catalog, distItems, q]);
 
   async function searchDistributors() {
     const query = q.trim();
@@ -117,7 +175,19 @@ export default function EbayCatalogGrid({
         setDistItems([]);
       } else {
         const data = await res.json();
-        const live = Array.isArray(data?.results) ? data.results.filter((r: any) => r.live) : [];
+        const live: Item[] = Array.isArray(data?.results)
+          ? data.results.filter((r: any) => r.live).map((r: any) => ({
+              slug: r.slug,
+              name: r.name,
+              brand: r.brand ?? '',
+              partNumber: r.partNumber ?? '',
+              description: r.description,
+              image: r.image,
+              in_stock: r.in_stock ?? false,
+              source: r.source as SourceTag,
+              priceRaw: r.priceRaw ?? null
+            }))
+          : [];
         setDistItems(live);
       }
     } catch (e: any) {
@@ -151,22 +221,17 @@ export default function EbayCatalogGrid({
         className="text-left w-full h-full rounded-2xl bg-white ring-1 ring-line/60 hover:ring-amber/60 hover:shadow-md transition group overflow-hidden flex flex-col shadow-sm"
       >
         <div className="aspect-[4/3] bg-navy-50 relative overflow-hidden">
-          {it.image ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={it.image}
-              alt={it.name}
-              loading="lazy"
-              className="h-full w-full object-cover transition-transform group-hover:scale-105"
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = 'none';
-              }}
-            />
-          ) : (
-            <div className="h-full w-full flex items-center justify-center text-ink-subtle font-mono text-[10px] uppercase tracking-[0.16em]">
-              {ct(locale, 'supply.noPhoto')}
-            </div>
-          )}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={it.image}
+            alt={it.name}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform group-hover:scale-105"
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = 'none';
+            }}
+          />
+          <SourceBadge source={it.source} />
         </div>
         <div className="p-3.5 flex flex-col flex-1">
           <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-amber-600 mb-1">
@@ -244,73 +309,45 @@ export default function EbayCatalogGrid({
         ))}
       </div>
 
-      {/* Result counter */}
+      {/* Result counter — total combined results (catalog + distributor) */}
       <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.14em] text-ink-subtle">
-        <span>{ct(locale, 'supply.catalogResults').replace('{n}', String(filtered.length))}</span>
+        <span>
+          {distLoading
+            ? ct(locale, 'supply.searching')
+            : ct(locale, 'supply.catalogResults').replace('{n}', String(combined.length))}
+        </span>
         <span className="text-amber-600">{ct(locale, 'supply.quoteOnly')}</span>
       </div>
 
-      {/* Catalog grid / empty state */}
+      {/* Unified grid — most-relevant first, mixed catalog + distributor.
+          A small corner badge (M / D / G / L) tells the visitor where each
+          listing came from. Items without a photo are dropped (decision S11). */}
       <div className="flex-1 min-h-0">
-        {filtered.length > 0 ? (
+        {distErr && (
+          <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-[13.5px] text-red-700 mb-3">
+            {distErr}
+          </div>
+        )}
+
+        {combined.length > 0 ? (
           <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {filtered.map((it) => (
-              <li key={it.slug}><Card it={it} /></li>
+            {combined.map((it) => (
+              <li key={`${it.source ?? 'local'}-${it.slug}`}><Card it={it} /></li>
             ))}
           </ul>
         ) : (
-          <div className="rounded-xl border border-line bg-white p-10 text-center">
-            <p className="text-[15px] text-ink-muted mb-4">
-              {ct(locale, 'supply.noMatchTitle')}
-            </p>
-            <div className="flex flex-wrap justify-center gap-2">
-              <Link href={`/supply/unlisted-request?q=${encodeURIComponent(q)}`} className="btn-ghost btn-sm no-underline">
-                {ct(locale, 'supply.uploadNameplate')}
-              </Link>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Distributor network — auto-runs while the visitor types (debounced).
-          Cards show item identity only; prices are never sent to the UI. */}
-      {q.trim().length >= 2 && (
-        <div className="border-t border-line pt-4">
-          {distLoading && (
-            <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-subtle">
-              {ct(locale, 'supply.searching')}
-            </div>
-          )}
-
-          {distErr && (
-            <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-[13.5px] text-red-700">
-              {distErr}
-            </div>
-          )}
-
-          {distRan && !distLoading && !distErr && distItems.length > 0 && (
-            <>
-              <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-subtle mb-3">
-                {ct(locale, 'supply.distributorResults')} · {distItems.length}
-              </div>
-              <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {distItems.map((it) => (
-                  <li key={it.slug}><Card it={it} /></li>
-                ))}
-              </ul>
-            </>
-          )}
-
-          {distRan && !distLoading && !distErr && distItems.length === 0 && filtered.length === 0 && (
-            <div className="flex flex-wrap items-center gap-2 text-[13.5px] text-ink-muted">
-              <span>{ct(locale, 'supply.noMatchTitle')}</span>
+          !distLoading && q.trim().length >= 2 && distRan && (
+            <div className="rounded-xl border border-line bg-white p-10 text-center">
+              <p className="text-[15px] text-ink-muted mb-4">
+                {ct(locale, 'supply.noMatchTitle')}
+              </p>
               <Link href={`/supply/unlisted-request?q=${encodeURIComponent(q)}`} className="btn-accent btn-sm no-underline">
                 {ct(locale, 'supply.uploadNameplate')}
               </Link>
             </div>
-          )}
-        </div>
-      )}
+          )
+        )}
+      </div>
 
       {/* Product quote modal */}
       <ProductQuoteModal
