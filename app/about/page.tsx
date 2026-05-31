@@ -120,12 +120,25 @@ export default function AboutPage() {
           </h2>
           <ul className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
             {CERTIFICATIONS.map((c) => (
-              <li key={c.abbr} className="card">
+              <li key={c.abbr} className="card flex flex-col">
                 <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-amber mb-1">
                   {c.reg}
                 </div>
                 <h3 className="text-[17px] mb-0.5">{c.full}</h3>
                 <p className="text-ink-subtle text-[12.5px] font-mono">{c.abbr}</p>
+                {c.issued && (
+                  <p className="mt-1 text-ink-subtle text-[11.5px] font-mono">{c.issued}</p>
+                )}
+                {c.pdf && (
+                  <a
+                    href={c.pdf}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="mt-3 inline-flex items-center gap-1.5 self-start rounded-md bg-navy-50 px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-navy-700 ring-1 ring-line/60 hover:bg-amber/15 hover:text-amber-700 hover:ring-amber/40 transition no-underline"
+                  >
+                    {t('about.viewCert')} ↗
+                  </a>
+                )}
               </li>
             ))}
           </ul>
