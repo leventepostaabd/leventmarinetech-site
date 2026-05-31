@@ -201,6 +201,8 @@
   },
   "portsIndex": {
     "kicker": "US port coverage",
+    "twicTitle": "TWIC verified",
+    "twicSub": "US port access",
     "h1": "Marine electrical service at every major US port.",
     "lead": "Florida-based operations, Wyoming LLC. We dispatch an engineer to your vessel within hours at any US East Coast, Gulf, West Coast or Pacific port. AOG-grade spares ship the same day. Pick the port — port-specific intake notes, local freight gateways and likely fault patterns wait inside.",
     "notListedH2": "Port not listed?",
