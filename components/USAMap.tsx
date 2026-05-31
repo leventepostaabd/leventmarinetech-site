@@ -78,31 +78,36 @@ type Port = {
   lng: number;
   lat: number;
   region: 'gulf' | 'east' | 'west' | 'lakes' | 'noncontig';
+  /** Major hub — gets a permanently visible label with a leader line. */
+  major?: boolean;
+  /** Hand-tuned label offset (in SVG px) so leader lines don't collide. */
+  lx?: number;
+  ly?: number;
 };
 
 const PORTS: Port[] = [
   // East Coast
-  { id: 'nynj',       name: 'New York / NJ',      lng: -74.04, lat: 40.67, region: 'east' },
-  { id: 'boston',     name: 'Boston',             lng: -71.05, lat: 42.36, region: 'east' },
-  { id: 'norfolk',    name: 'Norfolk',            lng: -76.30, lat: 36.92, region: 'east' },
+  { id: 'nynj',       name: 'New York / NJ',      lng: -74.04, lat: 40.67, region: 'east', major: true,  lx:  22, ly:  -4 },
+  { id: 'boston',     name: 'Boston',             lng: -71.05, lat: 42.36, region: 'east', major: true,  lx:  22, ly: -10 },
+  { id: 'norfolk',    name: 'Norfolk',            lng: -76.30, lat: 36.92, region: 'east', major: true,  lx:  22, ly:   6 },
   { id: 'charleston', name: 'Charleston',         lng: -79.93, lat: 32.78, region: 'east' },
-  { id: 'savannah',   name: 'Savannah',           lng: -81.10, lat: 32.08, region: 'east' },
+  { id: 'savannah',   name: 'Savannah',           lng: -81.10, lat: 32.08, region: 'east', major: true,  lx:  22, ly:   6 },
   { id: 'jax',        name: 'Jacksonville',       lng: -81.66, lat: 30.33, region: 'east' },
-  { id: 'miami',      name: 'Miami / Port Everglades', lng: -80.16, lat: 25.95, region: 'east' },
+  { id: 'miami',      name: 'Miami / Port Everglades', lng: -80.16, lat: 25.95, region: 'east', major: true, lx:  22, ly:   6 },
   // Gulf Coast (primary work area)
   { id: 'tampa',      name: 'Tampa',              lng: -82.46, lat: 27.95, region: 'gulf' },
   { id: 'pensacola',  name: 'Pensacola',          lng: -87.21, lat: 30.42, region: 'gulf' },
-  { id: 'mobile',     name: 'Mobile',             lng: -88.04, lat: 30.69, region: 'gulf' },
+  { id: 'mobile',     name: 'Mobile',             lng: -88.04, lat: 30.69, region: 'gulf', major: true,  lx: -130, ly: -20 },
   { id: 'pascagoula', name: 'Pascagoula',         lng: -88.56, lat: 30.36, region: 'gulf' },
-  { id: 'nola',       name: 'New Orleans',        lng: -90.07, lat: 29.95, region: 'gulf' },
-  { id: 'houston',    name: 'Houston',            lng: -95.30, lat: 29.76, region: 'gulf' },
+  { id: 'nola',       name: 'New Orleans',        lng: -90.07, lat: 29.95, region: 'gulf', major: true,  lx: -130, ly:  22 },
+  { id: 'houston',    name: 'Houston',            lng: -95.30, lat: 29.76, region: 'gulf', major: true,  lx: -110, ly:  22 },
   { id: 'galveston',  name: 'Galveston',          lng: -94.80, lat: 29.30, region: 'gulf' },
-  { id: 'corpus',     name: 'Corpus Christi',     lng: -97.40, lat: 27.80, region: 'gulf' },
+  { id: 'corpus',     name: 'Corpus Christi',     lng: -97.40, lat: 27.80, region: 'gulf', major: true,  lx: -150, ly:  18 },
   // West Coast
-  { id: 'longbeach',  name: 'Long Beach',         lng: -118.19, lat: 33.75, region: 'west' },
+  { id: 'longbeach',  name: 'Long Beach / LA',    lng: -118.19, lat: 33.75, region: 'west', major: true, lx: -150, ly:  10 },
   { id: 'la',         name: 'Los Angeles',        lng: -118.27, lat: 33.74, region: 'west' },
-  { id: 'oakland',    name: 'Oakland',            lng: -122.27, lat: 37.80, region: 'west' },
-  { id: 'seattle',    name: 'Seattle',            lng: -122.34, lat: 47.60, region: 'west' },
+  { id: 'oakland',    name: 'Oakland',            lng: -122.27, lat: 37.80, region: 'west', major: true,  lx: -100, ly:   6 },
+  { id: 'seattle',    name: 'Seattle',            lng: -122.34, lat: 47.60, region: 'west', major: true,  lx: -100, ly:  -6 },
   { id: 'tacoma',     name: 'Tacoma',             lng: -122.44, lat: 47.25, region: 'west' },
   { id: 'portland',   name: 'Portland',           lng: -122.68, lat: 45.52, region: 'west' },
   // Great Lakes
@@ -127,7 +132,7 @@ const GULF_HALO_XY = project(-91.0, 27.5);
 export default function USAMap({ className = '' }: { className?: string }) {
   return (
     <figure
-      className={`relative w-full max-h-[62vh] ${className}`}
+      className={`relative w-full aspect-[16/10] ${className}`}
       aria-label="Map of the United States showing Levent Marine's Florida operations base and the major US ports served 24/7, with the Gulf Coast highlighted as the primary work area"
     >
       <style>{`
@@ -239,12 +244,61 @@ export default function USAMap({ className = '' }: { className?: string }) {
         <text x={W - 40} y="92" fill="rgba(11,31,58,0.45)" fontSize="11" fontFamily="ui-monospace, JetBrains Mono, monospace" letterSpacing="2" textAnchor="end">ATLANTIC</text>
         <text x={W / 2 + 40} y={H - 24} fill="rgba(180,120,0,0.85)" fontSize="11" fontFamily="ui-monospace, JetBrains Mono, monospace" letterSpacing="2" textAnchor="middle">GULF OF MEXICO · PRIMARY AREA</text>
 
+        {/* Always-on labels for major hubs — leader line + name chip. Drawn
+            below the port dots so the dots sit on top of the leader. */}
+        <g aria-hidden>
+          {PORT_POINTS.filter((p) => p.major).map((p) => {
+            const lx = p.lx ?? 22;
+            const ly = p.ly ?? -6;
+            const labelW = Math.max(80, p.name.length * 6.4 + 14);
+            const labelH = 18;
+            // Anchor of the label chip
+            const ax = p.x + lx;
+            const ay = p.y + ly;
+            const isGulf = p.region === 'gulf';
+            const chipFill = isGulf ? '#FFF7E6' : '#FFFFFF';
+            const chipStroke = isGulf ? ACCENT : NAVY;
+            return (
+              <g key={`lbl-${p.id}`}>
+                <line
+                  x1={p.x}
+                  y1={p.y}
+                  x2={ax + (lx < 0 ? labelW : 0)}
+                  y2={ay}
+                  stroke={isGulf ? 'rgba(179,101,0,0.8)' : 'rgba(11,31,58,0.55)'}
+                  strokeWidth="0.9"
+                />
+                <rect
+                  x={ax}
+                  y={ay - labelH / 2}
+                  width={labelW}
+                  height={labelH}
+                  rx="3"
+                  fill={chipFill}
+                  stroke={chipStroke}
+                  strokeWidth="0.9"
+                />
+                <text
+                  x={ax + 6}
+                  y={ay + 4}
+                  fill={isGulf ? '#7A4500' : NAVY}
+                  fontSize="10.5"
+                  fontFamily="Inter, system-ui, sans-serif"
+                  fontWeight="600"
+                >
+                  {p.name}
+                </text>
+              </g>
+            );
+          })}
+        </g>
+
         {/* Ports */}
         <g>
           {PORT_POINTS.map((p) => {
             const isGulf = p.region === 'gulf';
-            const r  = isGulf ? 4.2 : 3;
-            const rRing = isGulf ? 4.8 : 3.6;
+            const r  = isGulf ? 4.4 : p.major ? 3.6 : 3;
+            const rRing = isGulf ? 5 : p.major ? 4.2 : 3.6;
             return (
               <g
                 key={p.id}
@@ -254,12 +308,15 @@ export default function USAMap({ className = '' }: { className?: string }) {
                 role="button"
                 aria-label={`${p.name} port marker`}
               >
-                <circle className="lm-port-ring" cx="0" cy="0" r={rRing} fill={ACCENT} opacity={isGulf ? 0.6 : 0.4} />
+                <circle className="lm-port-ring" cx="0" cy="0" r={rRing} fill={ACCENT} opacity={isGulf ? 0.65 : 0.4} />
                 <circle className="lm-port-core" cx="0" cy="0" r={r} fill={ACCENT} stroke={NAVY} strokeWidth="1.2" />
-                <g className="lm-port-label" transform="translate(9, -9)">
-                  <rect x="0" y="-12" width={Math.max(70, p.name.length * 6.2 + 12)} height="18" rx="3" fill="#FFFFFF" stroke={NAVY} strokeWidth="0.8" />
-                  <text x="6" y="0" fill={NAVY} fontSize="10.5" fontFamily="Inter, system-ui, sans-serif" fontWeight="600">{p.name}</text>
-                </g>
+                {/* Hover label — only for non-major ports (majors are already labelled) */}
+                {!p.major && (
+                  <g className="lm-port-label" transform="translate(9, -9)">
+                    <rect x="0" y="-12" width={Math.max(70, p.name.length * 6.2 + 12)} height="18" rx="3" fill="#FFFFFF" stroke={NAVY} strokeWidth="0.8" />
+                    <text x="6" y="0" fill={NAVY} fontSize="10.5" fontFamily="Inter, system-ui, sans-serif" fontWeight="600">{p.name}</text>
+                  </g>
+                )}
               </g>
             );
           })}
