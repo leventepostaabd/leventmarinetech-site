@@ -19,7 +19,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: `${p.name} — ${p.brand} ${p.partNumber}`,
     description: p.shortDescription,
-    alternates: { canonical: `/supply/product/${p.slug}` }
+    alternates: { canonical: `/supply/product/${p.slug}` },
+    openGraph: {
+      title: `${p.name} — ${p.brand} ${p.partNumber}`,
+      description: p.shortDescription,
+      url: `${SITE.url}/supply/product/${p.slug}`,
+      ...(p.image ? { images: [`${SITE.url}${p.image}`] } : {})
+    }
   };
 }
 

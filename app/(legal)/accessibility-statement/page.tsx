@@ -1,5 +1,10 @@
 import type { Metadata } from 'next';
-export const metadata: Metadata = { title: 'Accessibility Statement', alternates: { canonical: '/accessibility-statement' } };
+export const metadata: Metadata = {
+  title: 'Accessibility Statement',
+  description:
+    "Levent Marine's commitment to WCAG 2.1 AA: semantic HTML, keyboard navigation, visible focus, and tested color contrast.",
+  alternates: { canonical: '/accessibility-statement' }
+};
 
 export default function Accessibility() {
   return (

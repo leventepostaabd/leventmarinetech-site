@@ -1,5 +1,10 @@
 import type { Metadata } from 'next';
-export const metadata: Metadata = { title: 'Cookie Policy', alternates: { canonical: '/cookie-policy' } };
+export const metadata: Metadata = {
+  title: 'Cookie Policy',
+  description:
+    'The minimal set of cookies Levent Marine uses to keep the site working. No advertising trackers.',
+  alternates: { canonical: '/cookie-policy' }
+};
 
 export default function Cookies() {
   return (

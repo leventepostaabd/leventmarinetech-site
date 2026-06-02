@@ -7,6 +7,7 @@ import {
 } from '@/lib/content';
 import { getProductsByTopCategory, getProductsBySubcategory } from '@/lib/products-db';
 import { supplyImage } from '@/lib/deck-images';
+import { SITE } from '@/lib/site';
 import { getLocale } from '@/lib/i18n';
 import CategoryListing from './CategoryListing';
 
@@ -21,10 +22,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     ? top.name_en
     : subHit?.sub.name_en
     ?? params.slug.replace(/-/g, ' ');
+  const description = `Marine ${label} for commercial vessels. Request a quote on any item, search for equivalents, or upload a nameplate photo.`;
   return {
     title: `${label} — Marine Technical Supply`,
-    description: `Marine ${label} for commercial vessels. Request a quote on any item, search for equivalents, or upload a nameplate photo.`,
-    alternates: { canonical: `/supply/category/${params.slug}` }
+    description,
+    alternates: { canonical: `/supply/category/${params.slug}` },
+    openGraph: {
+      title: `${label} — Marine Technical Supply`,
+      description,
+      url: `${SITE.url}/supply/category/${params.slug}`
+    }
   };
 }
 

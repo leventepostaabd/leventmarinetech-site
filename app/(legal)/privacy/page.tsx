@@ -1,5 +1,10 @@
 import type { Metadata } from 'next';
-export const metadata: Metadata = { title: 'Privacy Policy', alternates: { canonical: '/privacy' } };
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+  description:
+    'How Levent Marine collects, uses, and protects the data you submit through service and supply requests.',
+  alternates: { canonical: '/privacy' }
+};
 
 export default function Privacy() {
   return (

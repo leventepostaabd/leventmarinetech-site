@@ -4,7 +4,18 @@ import { SITE } from '@/lib/site';
 import { getLocale, getTranslator } from '@/lib/i18n';
 import USAMap from '@/components/USAMap';
 
-export const metadata: Metadata = { title: 'Contact', alternates: { canonical: '/contact' } };
+export const metadata: Metadata = {
+  title: 'Contact',
+  description:
+    'Reach Levent Marine 24/7 for marine electrical service and technical parts supply. US phone, WhatsApp, and email — Florida-based operations serving all US ports and worldwide.',
+  alternates: { canonical: '/contact' },
+  openGraph: {
+    title: 'Contact · Levent Marine',
+    description:
+      'Reach Levent Marine 24/7 for marine electrical service and technical parts supply. US phone, WhatsApp, and email — service at all US ports, worldwide attendance on request.',
+    url: `${SITE.url}/contact`
+  }
+};
 
 export default function Contact() {
   const locale = getLocale();

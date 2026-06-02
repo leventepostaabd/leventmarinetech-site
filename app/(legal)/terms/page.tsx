@@ -1,5 +1,10 @@
 import type { Metadata } from 'next';
-export const metadata: Metadata = { title: 'Terms of Service', alternates: { canonical: '/terms' } };
+export const metadata: Metadata = {
+  title: 'Terms of Service',
+  description:
+    'Terms governing Levent Marine service and supply engagements: quotations, pricing, lead times, and liability.',
+  alternates: { canonical: '/terms' }
+};
 
 export default function Terms() {
   return (
