@@ -92,7 +92,23 @@ export default function TopBar({ locale }: { locale: Locale }) {
           aria-label="Levent Marine — home"
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 no-underline transition hover:scale-[1.02]"
         >
-          <LogoLockup variant="C" tone={isHeroLike ? 'light' : 'dark'} scale={0.82} />
+          <span
+            className={
+              isHeroLike
+                ? 'relative inline-flex items-center rounded-xl border border-white/25 bg-navy-900/30 px-4 py-1.5 shadow-[0_6px_24px_rgba(0,0,0,0.35)] backdrop-blur-md'
+                : 'inline-flex items-center'
+            }
+          >
+            {isHeroLike && (
+              <>
+                <span aria-hidden className="pointer-events-none absolute left-1.5 top-1.5 h-3 w-3 border-l border-t border-amber/70" />
+                <span aria-hidden className="pointer-events-none absolute right-1.5 top-1.5 h-3 w-3 border-r border-t border-amber/70" />
+                <span aria-hidden className="pointer-events-none absolute bottom-1.5 left-1.5 h-3 w-3 border-b border-l border-amber/70" />
+                <span aria-hidden className="pointer-events-none absolute bottom-1.5 right-1.5 h-3 w-3 border-b border-r border-amber/70" />
+              </>
+            )}
+            <LogoLockup variant="C" tone={isHeroLike ? 'light' : 'dark'} scale={0.82} />
+          </span>
         </Link>
 
         {/* Locale toggle — right */}

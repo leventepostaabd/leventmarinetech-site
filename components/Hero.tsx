@@ -59,11 +59,12 @@ export default function Hero({
         />
       </div>
 
-      {/* Soft seam line between doors (full-height vertical) */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-1/2 z-10 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-white/15 to-transparent"
-      />
+      {/* Decorative seam between doors — amber-cored glowing divider that points
+          up toward the framed logo badge in the TopBar. */}
+      <div aria-hidden className="pointer-events-none absolute inset-y-0 left-1/2 z-10 -translate-x-1/2">
+        <div className="h-full w-[3px] bg-gradient-to-b from-white/0 via-white/30 to-white/0 shadow-[0_0_18px_2px_rgba(245,165,36,0.3)]" />
+        <div className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-amber/60 to-transparent" />
+      </div>
 
       {/* Compact pulsing emergency button — lower, smaller, less visual weight */}
       <div className="pointer-events-none absolute inset-x-0 z-20 flex justify-center" style={{ bottom: 'calc(48px + env(safe-area-inset-bottom))' }}>

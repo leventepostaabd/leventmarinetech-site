@@ -48,32 +48,39 @@ export default function HeroDoor({
           loop
           playsInline
           poster={image}
-          className="absolute inset-0 h-full w-full object-cover opacity-95 brightness-110 saturate-[1.12] transition-transform duration-[1200ms] group-hover:scale-[1.03]"
+          className="absolute inset-0 h-full w-full object-cover brightness-[0.92] contrast-[1.06] saturate-[1.12] transition-transform duration-[1200ms] group-hover:scale-[1.03]"
           aria-hidden
         />
       ) : (
         <div
           aria-hidden
-          className="absolute inset-0 bg-cover bg-center opacity-100 brightness-110 contrast-[1.05] saturate-[1.12] transition-transform duration-[1200ms] group-hover:scale-[1.03]"
+          className="absolute inset-0 bg-cover bg-center brightness-[0.92] contrast-[1.06] saturate-[1.12] transition-transform duration-[1200ms] group-hover:scale-[1.03]"
           style={{ backgroundImage: `url(${image})` }}
         />
       )}
 
-      {/* Color wash for legibility — lightened so the artwork stays vivid; a
-          small bottom-anchored darkening keeps the centred white label + CTA
-          readable without dulling the whole image. */}
+      {/* Legibility stack — keeps the artwork visible while stopping the busy
+          photo from competing with the overlaid UI:
+          1) directional wash anchors contrast on the label side,
+          2) top scrim sits under the global TopBar (logo / flags / hamburger),
+          3) bottom scrim carries the trust stats,
+          4) centre radial scrim isolates the white label + CTA. */}
       <div
         aria-hidden
         className={[
           'absolute inset-0',
           side === 'left'
-            ? 'bg-gradient-to-br from-navy-900/55 via-navy-700/25 to-navy-700/5'
-            : 'bg-gradient-to-bl from-navy-900/55 via-navy-700/25 to-navy-700/5'
+            ? 'bg-gradient-to-br from-navy-900/55 via-navy-900/22 to-navy-900/5'
+            : 'bg-gradient-to-bl from-navy-900/55 via-navy-900/22 to-navy-900/5'
         ].join(' ')}
       />
       <div
         aria-hidden
-        className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-navy-900/55 via-navy-900/15 to-transparent"
+        className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-navy-900/80 via-navy-900/35 to-transparent"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-navy-900/70 via-navy-900/20 to-transparent"
       />
 
       {/* Soft amber radial accent */}
@@ -85,14 +92,22 @@ export default function HeroDoor({
         ].join(' ')}
       />
 
-      {/* Foreground */}
+      {/* Foreground — content lifts off the busy photo inside a retro framed
+          glass panel (blur + translucent fill + amber corner brackets). */}
       <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-6 text-center">
+        <div className="relative rounded-2xl border border-white/20 bg-navy-900/30 px-8 py-9 shadow-[0_10px_50px_rgba(0,0,0,0.4)] backdrop-blur-md md:px-14 md:py-12">
+          {/* retro corner brackets */}
+          <span aria-hidden className="pointer-events-none absolute left-2.5 top-2.5 h-5 w-5 border-l-2 border-t-2 border-amber/70" />
+          <span aria-hidden className="pointer-events-none absolute right-2.5 top-2.5 h-5 w-5 border-r-2 border-t-2 border-amber/70" />
+          <span aria-hidden className="pointer-events-none absolute bottom-2.5 left-2.5 h-5 w-5 border-b-2 border-l-2 border-amber/70" />
+          <span aria-hidden className="pointer-events-none absolute bottom-2.5 right-2.5 h-5 w-5 border-b-2 border-r-2 border-amber/70" />
+
         {kicker ? (
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25, duration: 0.5 }}
-            className="mb-4 font-mono text-[11px] uppercase tracking-[0.22em] text-amber"
+            className="mb-4 font-mono text-[11px] uppercase tracking-[0.22em] text-amber drop-shadow-[0_1px_8px_rgba(0,0,0,0.65)]"
           >
             {kicker}
           </motion.div>
@@ -102,7 +117,7 @@ export default function HeroDoor({
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.55 }}
-          className="font-head text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
+          className="font-head text-3xl font-extrabold leading-tight tracking-tight text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.6)] sm:text-4xl md:text-5xl lg:text-6xl"
         >
           {label}
         </motion.h2>
@@ -134,6 +149,7 @@ export default function HeroDoor({
             </svg>
           </Link>
         </motion.div>
+        </div>
       </div>
     </motion.div>
   );
