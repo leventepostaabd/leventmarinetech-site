@@ -48,13 +48,13 @@ export default function HeroDoor({
           loop
           playsInline
           poster={image}
-          className="absolute inset-0 h-full w-full object-cover brightness-[0.92] contrast-[1.06] saturate-[1.12] transition-transform duration-[1200ms] group-hover:scale-[1.03]"
+          className="absolute inset-0 h-full w-full scale-[1.06] object-cover blur-[2px] brightness-[0.9] contrast-[1.06] saturate-[1.1] transition-transform duration-[1200ms] group-hover:scale-[1.09]"
           aria-hidden
         />
       ) : (
         <div
           aria-hidden
-          className="absolute inset-0 bg-cover bg-center brightness-[0.92] contrast-[1.06] saturate-[1.12] transition-transform duration-[1200ms] group-hover:scale-[1.03]"
+          className="absolute inset-0 scale-[1.06] bg-cover bg-center blur-[2px] brightness-[0.9] contrast-[1.06] saturate-[1.1] transition-transform duration-[1200ms] group-hover:scale-[1.09]"
           style={{ backgroundImage: `url(${image})` }}
         />
       )}
@@ -92,15 +92,14 @@ export default function HeroDoor({
         ].join(' ')}
       />
 
-      {/* Foreground — content lifts off the busy photo inside a retro framed
-          glass panel (blur + translucent fill + amber corner brackets). */}
+      {/* Foreground — text floats free over the photo. No box: a frameless,
+          feathered glow lifts it for contrast while the artwork stays sharp. */}
       <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-6 text-center">
-        <div className="relative rounded-2xl border border-white/20 bg-navy-900/30 px-8 py-9 shadow-[0_10px_50px_rgba(0,0,0,0.4)] backdrop-blur-md md:px-14 md:py-12">
-          {/* retro corner brackets */}
-          <span aria-hidden className="pointer-events-none absolute left-2.5 top-2.5 h-5 w-5 border-l-2 border-t-2 border-amber/70" />
-          <span aria-hidden className="pointer-events-none absolute right-2.5 top-2.5 h-5 w-5 border-r-2 border-t-2 border-amber/70" />
-          <span aria-hidden className="pointer-events-none absolute bottom-2.5 left-2.5 h-5 w-5 border-b-2 border-l-2 border-amber/70" />
-          <span aria-hidden className="pointer-events-none absolute bottom-2.5 right-2.5 h-5 w-5 border-b-2 border-r-2 border-amber/70" />
+        <div className="relative flex flex-col items-center px-6 py-6">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -inset-x-12 -inset-y-10 -z-10 bg-[radial-gradient(ellipse_58%_55%_at_50%_50%,rgba(11,31,58,0.58),transparent_75%)]"
+          />
 
         {kicker ? (
           <motion.div
