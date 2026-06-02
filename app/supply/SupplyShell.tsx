@@ -33,6 +33,11 @@ const PRESET_QUERIES = [
   { en: 'PLC modules',        tr: 'PLC modülleri',     q: 'plc module' }
 ];
 
+// Idle demo — typed automatically into the search until the visitor engages,
+// so the grid keeps moving through real results instead of sitting on the
+// full unfiltered catalog. Part terms; identical in both locales.
+const DEMO_WORDS = ['mccb', 'crane', 'receptacle', 'plc', 'encoder', 'voltmeter', 'soft starter'];
+
 // Owner-only origin hint — tiny, low-contrast, bottom-right of the image.
 // The visitor barely registers it; the owner sees at a glance whether a
 // card came from Mouser (M), Digi-Key (D), Grainger (G) or our catalog (L).
@@ -87,7 +92,64 @@ export default function SupplyShell({
   const distAbort = useRef<AbortController | null>(null);
   const distDebounce = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Idle auto-type demo. demoDone (state) drives the effect cleanup; demoDoneRef
+  // lets the in-flight async loop bail synchronously the instant the user engages.
+  const [demoDone, setDemoDone] = useState(false);
+  const demoDoneRef = useRef(false);
+
   const t = (en: string, tr: string) => (locale === 'tr' ? tr : en);
+
+  // Stop the demo the moment the visitor interacts (focus, type, chip, card).
+  function engageSearch() {
+    if (demoDoneRef.current) return;
+    demoDoneRef.current = true;
+    setDemoDone(true);
+  }
+
+  // Demo loop: type a word, hold ~4s so results render, erase, advance. Never
+  // restarts once dismissed; skipped entirely under prefers-reduced-motion.
+  useEffect(() => {
+    if (demoDone) return;
+    if (
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
+    }
+
+    let cancelled = false;
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    const wait = (ms: number) =>
+      new Promise<void>((resolve) => {
+        timers.push(setTimeout(resolve, ms));
+      });
+    const live = () => !cancelled && !demoDoneRef.current;
+
+    (async () => {
+      await wait(900); // let the page settle before the first keystroke
+      let i = 0;
+      while (live()) {
+        const word = DEMO_WORDS[i % DEMO_WORDS.length];
+        for (let c = 1; c <= word.length && live(); c++) {
+          setQ(word.slice(0, c));
+          await wait(110);
+        }
+        await wait(4000); // hold so products load and can be read
+        for (let c = word.length; c >= 0 && live(); c--) {
+          setQ(word.slice(0, c));
+          await wait(40);
+        }
+        await wait(350);
+        i++;
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+      timers.forEach(clearTimeout);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [demoDone]);
 
   useEffect(() => {
     if (distDebounce.current) clearTimeout(distDebounce.current);
@@ -194,6 +256,7 @@ export default function SupplyShell({
   }, [catalog, distItems, q]);
 
   function openCard(it: Item) {
+    engageSearch();
     setPicked({
       id: it.slug,
       slug: it.slug,
@@ -277,7 +340,11 @@ export default function SupplyShell({
           <input
             type="search"
             value={q}
-            onChange={(e) => setQ(e.target.value)}
+            onChange={(e) => {
+              engageSearch();
+              setQ(e.target.value);
+            }}
+            onFocus={engageSearch}
             placeholder={ct(locale, 'supply.searchPlaceholder')}
             aria-label={t('Search marine supply', 'Marine tedarik ara')}
             className="w-full bg-navy-50/70 text-ink placeholder:text-ink-subtle rounded-full pl-13 pr-32 py-3.5 text-[15px] ring-1 ring-line/60 outline-none transition hover:bg-navy-50 focus:bg-white focus:ring-2 focus:ring-amber/50"
@@ -286,7 +353,10 @@ export default function SupplyShell({
           {q && (
             <button
               type="button"
-              onClick={() => setQ('')}
+              onClick={() => {
+                engageSearch();
+                setQ('');
+              }}
               className="absolute right-4 top-1/2 -translate-y-1/2 inline-flex items-center gap-1.5 rounded-full bg-white/70 px-3 py-1 text-[11px] text-ink-subtle ring-1 ring-line transition hover:bg-white hover:text-ink"
             >
               ✕ {ct(locale, 'supply.clear')}
@@ -300,7 +370,10 @@ export default function SupplyShell({
             <button
               key={p.q}
               type="button"
-              onClick={() => setQ(p.q)}
+              onClick={() => {
+                engageSearch();
+                setQ(p.q);
+              }}
               className={`px-3 py-1 rounded-full text-[11px] transition ${
                 q === p.q
                   ? 'bg-navy-700 text-white shadow-sm'
