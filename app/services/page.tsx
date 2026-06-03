@@ -1,12 +1,9 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { readPopularServices, readServices, readServicesFile } from '@/lib/content';
+import { readServices } from '@/lib/content';
 import { getLocale, getTranslator } from '@/lib/i18n';
 import { pick } from '@/lib/i18n-client';
 import { SERVICE_IMAGE } from '@/lib/deck-images';
-import ServicesBrowser from './ServicesBrowser';
-import ServiceImageDeck from '@/components/ServiceImageDeck';
-import InlineHeader from '@/components/InlineHeader';
+import CinematicStage, { type StageGroup } from '@/components/CinematicStage';
 
 export const metadata: Metadata = {
   title: 'Marine Electrical Service — 19 Systems, 24/7 Worldwide | Levent Marine',
@@ -15,73 +12,71 @@ export const metadata: Metadata = {
   alternates: { canonical: '/services' }
 };
 
+/**
+ * System taxonomy for the Cinematic Stage left-index. Bilingual group labels;
+ * every non-"other" service slug appears exactly once.
+ */
+const CATEGORIES: { en: string; tr: string; slugs: string[] }[] = [
+  {
+    en: 'Power & Machinery',
+    tr: 'Güç & Makine',
+    slugs: ['generator', 'main-engine-electrical', 'switchboard', 'transformer', 'ac-dc-motor', 'shaft-earthing', 'battery-ups', 'shore-connection']
+  },
+  {
+    en: 'Navigation & Comms',
+    tr: 'Seyir & Haberleşme',
+    slugs: ['bridge-navigation', 'gmdss-communication', 'cctv-vdr']
+  },
+  {
+    en: 'Safety & Fire',
+    tr: 'Emniyet & Yangın',
+    slugs: ['fire-alarm', 'smoke-detection', 'water-mist-system', 'bilge-level']
+  },
+  {
+    en: 'Automation & HVAC',
+    tr: 'Otomasyon & HVAC',
+    slugs: ['plc-automation', 'engine-room-alarm', 'hvac-automation']
+  },
+  {
+    en: 'Deck, Lighting & BWTS',
+    tr: 'Güverte, Aydınlatma & BWTS',
+    slugs: ['crane-deck-machinery', 'lighting-nav-lights', 'bwts']
+  }
+];
+
 export default function ServicesIndex() {
-  const file = readServicesFile();
   const all = readServices();
-  const popular = readPopularServices();
   const locale = getLocale();
-
   const t = getTranslator(locale);
-  const ui = {
-    search_placeholder: t('services.searchPlaceholder'),
-    popular: t('services.mostRequested'),
-    see_all: t('services.seeAll'),
-    close: t('services.close'),
-    no_matches: t('services.noMatches')
-  };
 
-  const deckItems = all
-    .filter((s) => SERVICE_IMAGE[s.slug])
-    .map((s) => ({
-      slug: s.slug,
-      image: SERVICE_IMAGE[s.slug],
-      name: pick(s, 'name', locale),
-      kicker: pick(s, 'kicker', locale)
-    }));
+  const bySlug = new Map(all.map((s) => [s.slug, s]));
 
-  const heroLine = t('services.heroLine');
-  const heroSub = t('services.heroSub');
+  const groups: StageGroup[] = CATEGORIES.map((c) => ({
+    label: locale === 'tr' ? c.tr : c.en,
+    items: c.slugs
+      .map((slug) => bySlug.get(slug))
+      .filter((s): s is NonNullable<typeof s> => Boolean(s))
+      .map((s) => ({
+        slug: s.slug,
+        name: pick(s, 'name', locale),
+        kicker: pick(s, 'kicker', locale),
+        summary: pick(s, 'summary', locale),
+        href: `/service-wizard?system=${encodeURIComponent(s.slug)}`,
+        // Final stage art (auto-fills when dropped in /public/services/stage/)
+        // with the existing brochure image as a placeholder until then.
+        imageSrcs: [`/services/stage/${s.slug}.webp`, SERVICE_IMAGE[s.slug]].filter(Boolean) as string[]
+      }))
+  }));
 
   return (
-    <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,30%)]">
-      {/* Left — inline header + soft hero (fixed) + scrolling browser. */}
-      <div
-        className="flex h-full flex-col min-w-0 min-h-0"
-        style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}
-      >
-        {/* Fixed top — header + hero copy stay put while the list scrolls. */}
-        <div className="shrink-0 bg-white px-5 pb-3 md:px-10 md:pb-4">
-          <InlineHeader locale={locale} />
-
-          <section className="mt-2 mb-1 max-w-3xl md:mt-3 md:mb-2">
-            <h1 className="font-head text-[26px] md:text-[36px] lg:text-[40px] font-extrabold leading-[1.1] tracking-[-0.01em] text-ink">
-              {heroLine}
-            </h1>
-            <p className="mt-2.5 md:mt-3 text-[14.5px] md:text-[16px] leading-relaxed text-ink-muted max-w-2xl">
-              {heroSub}
-            </p>
-            <p className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-ink-muted">
-              <span>{t('bridge.needParts')}</span>
-              <Link href="/supply" className="font-semibold text-amber-600 no-underline hover:text-amber">
-                {t('bridge.browseSupply')}
-              </Link>
-            </p>
-          </section>
-        </div>
-
-        {/* Browser (scrolls inside). */}
-        <div
-          className="flex-1 overflow-y-auto min-h-0 px-5 pb-5 md:px-10 md:pb-8"
-          style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0) + 2rem)' }}
-        >
-          <ServicesBrowser services={all} popular={popular} ui={ui} locale={locale} />
-        </div>
-      </div>
-
-      {/* Right — full-bleed cycling deck, edge to edge top→bottom. */}
-      <aside className="hidden lg:block h-screen">
-        <ServiceImageDeck items={deckItems} locale={locale} fillParent />
-      </aside>
-    </div>
+    <CinematicStage
+      locale={locale}
+      heading={t('services.heroLine')}
+      sub={t('services.heroSub')}
+      searchPlaceholder={t('services.searchPlaceholder')}
+      ctaLabel={t('services.requestService')}
+      noMatch={t('services.noMatches')}
+      groups={groups}
+    />
   );
 }

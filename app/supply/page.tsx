@@ -3,145 +3,67 @@ import { getLocale, getTranslator } from '@/lib/i18n';
 import { getProducts } from '@/lib/products-db';
 import { SUPPLY_IMAGE } from '@/lib/deck-images';
 import SupplyShell from './SupplyShell';
-import ServiceImageDeck from '@/components/ServiceImageDeck';
+import SupplyCategoryAside, { type CatItem } from './SupplyCategoryAside';
 
 export const metadata: Metadata = {
   title: 'Marine Technical Supply — Live Quote-Only Catalog',
   description:
-    'Find any marine electrical or mechanical part — live supplier-network search. Quote-only, no public prices. Marine Electric, General Electric, General Marine.',
+    'Find any marine electrical or mechanical part — live supplier-network search across our stock plus Mouser and Digi-Key. Quote-only, no public prices.',
   alternates: { canonical: '/supply' }
 };
 
-// Right-column deck: vertical brochure-style category images (user-prepared,
-// captions on the artwork). Each item links into /supply/category/<slug>.
-const SUPPLY_DECK: Array<{
-  slug: string;
-  image: string;
-  name_en: string;
-  name_tr: string;
-  kicker_en: string;
-  kicker_tr: string;
-}> = [
-  {
-    slug: 'cables-glands',
-    image: SUPPLY_IMAGE['cables-glands']!,
-    name_en: 'Cables & Glands',
-    name_tr: 'Kablo & Rakor',
-    kicker_en: 'Lapp Olflex Marine · Hawke ATEX',
-    kicker_tr: 'Lapp Olflex Marine · Hawke ATEX'
-  },
-  {
-    slug: 'deck-mechanical',
-    image: SUPPLY_IMAGE['deck-mechanical']!,
-    name_en: 'Crane & Deck Hardware',
-    name_tr: 'Vinç & Güverte Donanımı',
-    kicker_en: 'MacGregor · NMF · Liebherr deck spares',
-    kicker_tr: 'MacGregor · NMF · Liebherr güverte yedek'
-  },
-  {
-    slug: 'engine-room-consumables',
-    image: SUPPLY_IMAGE['engine-room-consumables']!,
-    name_en: 'Engine Room Consumables',
-    name_tr: 'Makine Dairesi Sarf',
-    kicker_en: 'Level switches · gaskets · sealing kits',
-    kicker_tr: 'Seviye anahtarı · conta · sızdırmazlık'
-  },
-  {
-    slug: 'msb-components',
-    image: SUPPLY_IMAGE['msb-components']!,
-    name_en: 'MSB / ESB Components',
-    name_tr: 'MSB / ESB Bileşenleri',
-    kicker_en: 'AVR · ACB trip units · sync panels',
-    kicker_tr: 'AVR · ACB trip ünitesi · senkron paneli'
-  },
-  {
-    slug: 'motors-drives',
-    image: SUPPLY_IMAGE['motors-drives']!,
-    name_en: 'Motors & Drives (VFD)',
-    name_tr: 'Motor & Sürücüler (VFD)',
-    kicker_en: 'ABB M3BP · Vacon · Danfoss FC marine',
-    kicker_tr: 'ABB M3BP · Vacon · Danfoss FC marine'
-  },
-  {
-    slug: 'radar-navigation',
-    image: SUPPLY_IMAGE['radar-navigation']!,
-    name_en: 'Radar & Bridge Navigation',
-    name_tr: 'Radar & Köprü Üstü Seyir',
-    kicker_en: 'Furuno · JRC · Sperry — magnetrons, ECDIS',
-    kicker_tr: 'Furuno · JRC · Sperry — magnetron, ECDIS'
-  },
-  {
-    slug: 'automation-plc',
-    image: SUPPLY_IMAGE['automation-plc']!,
-    name_en: 'PLC & Automation',
-    name_tr: 'PLC & Otomasyon',
-    kicker_en: 'Siemens S7 · Allen-Bradley · Omron I/O',
-    kicker_tr: 'Siemens S7 · Allen-Bradley · Omron I/O'
-  },
-  {
-    slug: 'marine-sensors',
-    image: SUPPLY_IMAGE['marine-sensors']!,
-    name_en: 'Marine Sensors & Transmitters',
-    name_tr: 'Denizcilik Sensör & Transmitter',
-    kicker_en: 'Pressure · level · temperature · vibration',
-    kicker_tr: 'Basınç · seviye · sıcaklık · titreşim'
-  }
+// Categories shown in the soft rotating aside (deep-link into each listing).
+const SUPPLY_CATS: { slug: string; name_en: string; name_tr: string; makers: string }[] = [
+  { slug: 'cables-glands',            name_en: 'Cables & Glands',              name_tr: 'Kablo & Rakor',                  makers: 'Lapp Ölflex Marine · Hawke ATEX' },
+  { slug: 'msb-components',           name_en: 'MSB / ESB Components',          name_tr: 'MSB / ESB Bileşenleri',           makers: 'AVR · ACB trip units · sync panels' },
+  { slug: 'motors-drives',           name_en: 'Motors & Drives (VFD)',         name_tr: 'Motor & Sürücüler (VFD)',         makers: 'ABB M3BP · Vacon · Danfoss FC' },
+  { slug: 'automation-plc',          name_en: 'PLC & Automation',              name_tr: 'PLC & Otomasyon',                 makers: 'Siemens S7 · Allen-Bradley · Omron' },
+  { slug: 'marine-sensors',          name_en: 'Marine Sensors & Transmitters', name_tr: 'Denizcilik Sensör & Transmitter', makers: 'Pressure · level · temperature' },
+  { slug: 'radar-navigation',        name_en: 'Radar & Bridge Navigation',     name_tr: 'Radar & Köprü Üstü Seyir',        makers: 'Furuno · JRC · Sperry — ECDIS' },
+  { slug: 'deck-mechanical',         name_en: 'Crane & Deck Hardware',         name_tr: 'Vinç & Güverte Donanımı',         makers: 'MacGregor · NMF · Liebherr' },
+  { slug: 'engine-room-consumables', name_en: 'Engine Room Consumables',       name_tr: 'Makine Dairesi Sarf',             makers: 'Level switches · gaskets · seals' }
 ];
 
-/**
- * /supply — live supplier catalog.
- *
- * Layout (2026-05-23):
- *   - Left column: fixed-top heading + 3 sourcing-channel tabs (sticky) over
- *     a scrolling eBay catalog grid.
- *   - Right column (lg+ only): vertical brochure deck mirroring /services —
- *     auto-cycles through 8 supply categories with deep-link to each.
- *   - SourcingChannelTabs registers a window-level drag-drop listener so a
- *     file dropped anywhere on the page opens the Upload-List modal with
- *     the file already attached.
- */
+// Catalog is admin-managed in Supabase — render on demand.
 export const dynamic = 'force-dynamic';
 
 export default async function SupplyIndex() {
   const locale = getLocale();
   const t = getTranslator(locale);
+  const tr = locale === 'tr';
 
   const heroLine = t('supply.heroLine');
 
-  const deckItems = SUPPLY_DECK.map((d) => ({
-    slug: d.slug,
-    image: d.image,
-    name: t(`supply.deck.${d.slug}`),
-    kicker: d.kicker_en
-  }));
-
-  // Our hand-curated marine catalog — the products we choose to sell. Shown
-  // as the default grid and filtered client-side; the distributor live search
-  // (Mouser etc.) is a separate fallback. Sourcing channel stays internal.
   const catalog = (await getProducts()).map((p) => ({
     slug: p.slug,
     name: (locale === 'tr' ? p.name_tr : p.name_en) ?? p.name,
     brand: p.brand ?? '',
     partNumber: p.partNumber ?? '',
-    description:
-      (locale === 'tr' ? p.description_tr : p.description_en) ?? p.shortDescription ?? '',
+    description: (locale === 'tr' ? p.description_tr : p.description_en) ?? p.shortDescription ?? '',
     image: p.image ?? '',
     in_stock: p.in_stock ?? p.availability === 'in-stock',
     price: p.price ?? null
   }));
 
+  const cats: CatItem[] = SUPPLY_CATS.map((c) => ({
+    slug: c.slug,
+    name: tr ? c.name_tr : c.name_en,
+    makers: c.makers,
+    cta: tr ? 'Parçalara bak' : 'Browse parts',
+    href: `/supply/category/${c.slug}`,
+    imageSrcs: [`/supply/stage/${c.slug}.webp`, SUPPLY_IMAGE[c.slug]].filter(Boolean) as string[]
+  }));
+
   return (
-    <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,30%)]">
-      {/* LEFT — header + tight hero + prominent search + scrolling grid. */}
+    <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,34%)]">
+      {/* LEFT (wider) — live search + instant results grid. */}
       <SupplyShell locale={locale} catalog={catalog} heroLine={heroLine} />
 
-      {/* RIGHT — full-bleed cycling deck (lg+ only). */}
-      <aside className="hidden lg:block h-screen">
-        <ServiceImageDeck
-          items={deckItems}
-          locale={locale}
-          fillParent
-          ctaEnabled={false}
+      {/* RIGHT (narrower) — soft rotating category panel, blends into the search. */}
+      <aside className="relative hidden h-full overflow-hidden lg:block">
+        <SupplyCategoryAside
+          items={cats}
+          kicker={tr ? 'Kategoriler' : 'Categories'}
         />
       </aside>
     </div>
