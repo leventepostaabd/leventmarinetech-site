@@ -55,7 +55,7 @@ export default async function SupplyIndex() {
   }));
 
   return (
-    <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,34%)]">
+    <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-2">
       {/* LEFT (wider) — live search + instant results grid. */}
       <SupplyShell locale={locale} catalog={catalog} heroLine={heroLine} />
 
