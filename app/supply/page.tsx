@@ -51,7 +51,12 @@ export default async function SupplyIndex() {
     makers: c.makers,
     cta: tr ? 'Parçalara bak' : 'Browse parts',
     href: `/supply/category/${c.slug}`,
-    imageSrcs: [`/supply/stage/${c.slug}.webp`, SUPPLY_IMAGE[c.slug]].filter(Boolean) as string[]
+    imageSrcs: [
+      `/supply/stage/${c.slug}.webp`,
+      `/supply/stage/${c.slug}.png`,
+      `/supply/stage/${c.slug}.jpg`,
+      SUPPLY_IMAGE[c.slug]
+    ].filter(Boolean) as string[]
   }));
 
   return (

@@ -64,7 +64,12 @@ export default function ServicesIndex() {
         href: `/service-wizard?system=${encodeURIComponent(s.slug)}`,
         // Final stage art (auto-fills when dropped in /public/services/stage/)
         // with the existing brochure image as a placeholder until then.
-        imageSrcs: [`/services/stage/${s.slug}.webp`, SERVICE_IMAGE[s.slug]].filter(Boolean) as string[]
+        imageSrcs: [
+          `/services/stage/${s.slug}.webp`,
+          `/services/stage/${s.slug}.png`,
+          `/services/stage/${s.slug}.jpg`,
+          SERVICE_IMAGE[s.slug]
+        ].filter(Boolean) as string[]
       }))
   }));
 
