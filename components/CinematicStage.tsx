@@ -93,7 +93,7 @@ export default function CinematicStage({
   const activeItem = flat.find((it) => it.slug === active) ?? flat[0];
 
   return (
-    <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-2">
+    <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-[minmax(0,65%)_minmax(0,35%)]">
       {/* LEFT — light index panel */}
       <div
         className="flex h-full min-h-0 flex-col border-r border-line bg-white"
