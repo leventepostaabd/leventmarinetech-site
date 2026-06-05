@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
+import fs from 'node:fs';
+import path from 'node:path';
 import { readServices } from '@/lib/content';
 import { getLocale, getTranslator } from '@/lib/i18n';
 import { pick } from '@/lib/i18n-client';
-import { SERVICE_IMAGE } from '@/lib/deck-images';
 import CinematicStage, { type StageGroup } from '@/components/CinematicStage';
 
 export const metadata: Metadata = {
@@ -12,10 +13,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/services' }
 };
 
-/**
- * System taxonomy for the Cinematic Stage left-index. Bilingual group labels;
- * every non-"other" service slug appears exactly once.
- */
+/** System taxonomy for the Cinematic Stage. Bilingual group labels. */
 const CATEGORIES: { en: string; tr: string; slugs: string[] }[] = [
   {
     en: 'Power & Machinery',
@@ -44,16 +42,34 @@ const CATEGORIES: { en: string; tr: string; slugs: string[] }[] = [
   }
 ];
 
+/** Slugs that actually have a stage photo committed in /public/services/stage. */
+function stageSlugs(): Set<string> {
+  try {
+    const files = fs.readdirSync(path.join(process.cwd(), 'public', 'services', 'stage'));
+    const set = new Set<string>();
+    for (const f of files) {
+      const m = f.match(/^(.+)\.(webp|png|jpe?g)$/i);
+      if (m) set.add(m[1].toLowerCase());
+    }
+    return set;
+  } catch {
+    return new Set();
+  }
+}
+
 export default function ServicesIndex() {
   const all = readServices();
   const locale = getLocale();
   const t = getTranslator(locale);
 
+  const have = stageSlugs();
   const bySlug = new Map(all.map((s) => [s.slug, s]));
 
+  // Only surface systems that have artwork; drop empty groups.
   const groups: StageGroup[] = CATEGORIES.map((c) => ({
     label: locale === 'tr' ? c.tr : c.en,
     items: c.slugs
+      .filter((slug) => have.has(slug))
       .map((slug) => bySlug.get(slug))
       .filter((s): s is NonNullable<typeof s> => Boolean(s))
       .map((s) => ({
@@ -62,16 +78,13 @@ export default function ServicesIndex() {
         kicker: pick(s, 'kicker', locale),
         summary: pick(s, 'summary', locale),
         href: `/service-wizard?system=${encodeURIComponent(s.slug)}`,
-        // Final stage art (auto-fills when dropped in /public/services/stage/)
-        // with the existing brochure image as a placeholder until then.
         imageSrcs: [
           `/services/stage/${s.slug}.webp`,
           `/services/stage/${s.slug}.png`,
-          `/services/stage/${s.slug}.jpg`,
-          SERVICE_IMAGE[s.slug]
-        ].filter(Boolean) as string[]
+          `/services/stage/${s.slug}.jpg`
+        ]
       }))
-  }));
+  })).filter((g) => g.items.length > 0);
 
   return (
     <CinematicStage

@@ -11,24 +11,23 @@ export type StageItem = {
   kicker: string;
   summary: string;
   href: string;
-  /** Ordered fallback list — first that loads wins; else a soft placeholder. */
+  /** Ordered fallback list — first that loads wins, else a soft placeholder. */
   imageSrcs: string[];
 };
 export type StageGroup = { label: string; items: StageItem[] };
 
 /**
- * Cinematic Stage — the /services (and /supply) experience.
+ * Cinematic Stage — the /services experience.
  *
  * One screen, no downward scroll:
- *   - Left: light panel with header, heading, search, and a grouped system index.
- *   - Right: an edge-to-edge cinematic photo stage for the active system, with a
- *     dark glass caption + CTA over the (soft, light) artwork.
+ *   - Left: light panel with header, heading, search, and the systems as
+ *     interactive cards (grouped by category). Only systems with artwork show.
+ *   - Right: an edge-to-edge photo for the active system — clean, no overlay.
  *
- * Self-flowing + interactive: when idle the stage cross-fades through systems
- * every ~5s (subtle Ken-Burns). Hovering/focusing an index row pauses the flow
- * and jumps the stage to that system; leaving the index resumes it. Honoured
- * under prefers-reduced-motion (no autoplay). The index scrolls inside its own
- * panel so the page shell stays fixed (F1).
+ * Self-flowing + interactive: idle cross-fades through systems every ~5s
+ * (subtle Ken-Burns); hovering/focusing a card pauses the flow and switches
+ * the photo. Honoured under prefers-reduced-motion. The card list scrolls
+ * inside its own panel so the shell stays fixed (F1).
  */
 export default function CinematicStage({
   locale,
@@ -73,12 +72,10 @@ export default function CinematicStage({
 
   const flat = useMemo(() => filtered.flatMap((g) => g.items), [filtered]);
 
-  // Keep the active system valid within the filtered set.
   useEffect(() => {
     if (flat.length && !flat.some((it) => it.slug === active)) setActive(flat[0].slug);
   }, [flat, active]);
 
-  // Idle auto-flow.
   useEffect(() => {
     if (paused || reduceMotion.current || flat.length < 2) return;
     const id = setInterval(() => {
@@ -94,7 +91,7 @@ export default function CinematicStage({
 
   return (
     <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-[minmax(0,65%)_minmax(0,35%)]">
-      {/* LEFT — light index panel */}
+      {/* LEFT — header + heading + search + interactive cards */}
       <div
         className="flex h-full min-h-0 flex-col border-r border-line bg-white"
         style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}
@@ -106,7 +103,6 @@ export default function CinematicStage({
           </h1>
           <p className="mt-2 max-w-md text-[13.5px] leading-relaxed text-ink-muted">{sub}</p>
 
-          {/* Search */}
           <div className="relative mt-4">
             <svg
               aria-hidden
@@ -128,9 +124,9 @@ export default function CinematicStage({
           </div>
         </div>
 
-        {/* Grouped index — scrolls inside its own panel */}
+        {/* Cards — scroll inside their own panel */}
         <div
-          className="mt-3 flex-1 overflow-y-auto px-5 pb-6 md:px-8"
+          className="mt-4 flex-1 overflow-y-auto px-5 pb-6 md:px-8"
           onMouseLeave={() => setPaused(false)}
           style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0) + 1.5rem)' }}
         >
@@ -138,43 +134,49 @@ export default function CinematicStage({
             <p className="mt-4 text-[13px] text-ink-muted">{noMatch}</p>
           ) : (
             filtered.map((g) => (
-              <div key={g.label} className="mb-4">
-                <div className="mb-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-amber-600">
+              <div key={g.label} className="mb-5">
+                <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-amber-600">
                   {g.label}
                 </div>
-                <ul className="space-y-0.5">
+                <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                   {g.items.map((it) => {
                     const on = it.slug === active;
                     return (
-                      <li key={it.slug}>
-                        <Link
-                          href={it.href}
-                          onMouseEnter={() => { setActive(it.slug); setPaused(true); }}
-                          onFocus={() => { setActive(it.slug); setPaused(true); }}
-                          className={`group flex items-center justify-between gap-3 rounded-lg px-3 py-2 no-underline transition ${
-                            on ? 'bg-navy-700 text-white shadow-sm' : 'text-ink-muted hover:bg-navy-50 hover:text-ink'
-                          }`}
-                        >
-                          <span className="truncate text-[14px] font-semibold">{it.name}</span>
-                          <svg
-                            width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden
-                            className={`flex-shrink-0 transition ${on ? 'text-amber opacity-100' : 'opacity-0 group-hover:opacity-50'}`}
-                          >
+                      <Link
+                        key={it.slug}
+                        href={it.href}
+                        onMouseEnter={() => { setActive(it.slug); setPaused(true); }}
+                        onFocus={() => { setActive(it.slug); setPaused(true); }}
+                        className={`group block rounded-xl border p-3.5 no-underline transition ${
+                          on
+                            ? 'border-amber bg-amber/5 shadow-sm ring-1 ring-amber'
+                            : 'border-line bg-white hover:border-amber/50 hover:shadow-sm'
+                        }`}
+                      >
+                        <div className="mb-0.5 font-mono text-[9.5px] uppercase tracking-[0.13em] text-amber-600">
+                          {it.kicker}
+                        </div>
+                        <h3 className="text-[15px] font-bold leading-tight text-ink">{it.name}</h3>
+                        <p className="mt-1 line-clamp-2 text-[12px] leading-relaxed text-ink-muted">
+                          {it.summary}
+                        </p>
+                        <span className="mt-2 inline-flex items-center gap-1 font-mono text-[10.5px] uppercase tracking-[0.08em] text-amber-700">
+                          {ctaLabel}
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                             <path d="M5 12h14" /><path d="M13 5l7 7-7 7" />
                           </svg>
-                        </Link>
-                      </li>
+                        </span>
+                      </Link>
                     );
                   })}
-                </ul>
+                </div>
               </div>
             ))
           )}
         </div>
       </div>
 
-      {/* RIGHT — cinematic stage (lg+ only) */}
+      {/* RIGHT — clean cinematic photo (no overlay card) */}
       <aside className="relative hidden h-full overflow-hidden bg-slate-100 lg:block">
         <AnimatePresence initial={false}>
           {activeItem && (
@@ -190,45 +192,19 @@ export default function CinematicStage({
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* Caption — dark glass over the soft, light artwork */}
-        {activeItem && (
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 p-8">
-            <motion.div
-              key={`cap-${activeItem.slug}`}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: [0.2, 0.8, 0.2, 1] }}
-              className="pointer-events-auto max-w-md rounded-2xl bg-navy-900/70 p-5 text-white shadow-[0_10px_40px_rgba(0,0,0,0.3)] ring-1 ring-white/10 backdrop-blur-md"
-            >
-              <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.14em] text-amber">
-                {activeItem.kicker}
-              </div>
-              <h2 className="text-[22px] font-extrabold leading-tight text-white">{activeItem.name}</h2>
-              <p className="mt-1.5 line-clamp-2 text-[13px] text-white/75">{activeItem.summary}</p>
-              <Link href={activeItem.href} className="btn-accent btn-sm mt-3 no-underline">
-                {ctaLabel} →
-              </Link>
-            </motion.div>
-          </div>
-        )}
       </aside>
     </div>
   );
 }
 
 /**
- * Stage image with an ordered fallback chain. Tries each src in turn; if all
- * fail it renders a soft light placeholder so the stage is never broken.
- * Re-mounts per system (keyed by parent), so the index resets automatically.
+ * Probes each candidate src with a detached Image() before rendering, so a
+ * missing stage photo never shows a broken <img>; auto-upgrades when a real
+ * file is dropped in /public/services/stage/.
  */
 function StageImage({ item }: { item: StageItem }) {
-  // null = probing, '' = none loaded (placeholder), string = resolved src.
   const [resolved, setResolved] = useState<string | null>(null);
 
-  // Probe each candidate with a detached Image() so we never render a broken
-  // <img>; listeners are attached before src is set, so there is no hydration
-  // race. Auto-upgrades the moment a real stage photo is dropped in /public.
   useEffect(() => {
     let cancelled = false;
     setResolved(null);
@@ -248,12 +224,10 @@ function StageImage({ item }: { item: StageItem }) {
     // eslint-disable-next-line @next/next/no-img-element
     return <img src={resolved} alt={item.name} className="h-full w-full object-cover" />;
   }
-
-  // Probing or no image yet — soft light placeholder (label only when settled).
   return (
     <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-50 via-slate-100 to-blue-100">
       {resolved === '' && (
-        <span className="px-10 text-center font-head text-[38px] font-extrabold leading-tight text-slate-400/70">
+        <span className="px-10 text-center font-head text-[34px] font-extrabold leading-tight text-slate-400/70">
           {item.name}
         </span>
       )}
