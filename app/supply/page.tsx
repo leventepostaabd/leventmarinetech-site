@@ -60,17 +60,17 @@ export default async function SupplyIndex() {
   }));
 
   return (
-    <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-[minmax(0,65%)_minmax(0,35%)]">
-      {/* LEFT (wider) — live search + instant results grid. */}
-      <SupplyShell locale={locale} catalog={catalog} heroLine={heroLine} />
-
-      {/* RIGHT (narrower) — soft rotating category panel, blends into the search. */}
+    <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-[minmax(0,45%)_minmax(0,55%)]">
+      {/* LEFT — soft rotating category panel, blends into the search on the right. */}
       <aside className="relative hidden h-full overflow-hidden lg:block">
         <SupplyCategoryAside
           items={cats}
           kicker={tr ? 'Kategoriler' : 'Categories'}
         />
       </aside>
+
+      {/* RIGHT — live search + instant results grid. */}
+      <SupplyShell locale={locale} catalog={catalog} heroLine={heroLine} />
     </div>
   );
 }

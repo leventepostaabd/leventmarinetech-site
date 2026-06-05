@@ -61,14 +61,14 @@ export default function SupplyCategoryAside({
         </motion.div>
       </AnimatePresence>
 
-      {/* Soft blend into the white search panel on the left edge */}
+      {/* Soft blend into the white search panel on the right edge */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-0 z-10 w-28 bg-gradient-to-r from-white via-white/45 to-transparent"
+        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-white via-white/45 to-transparent"
       />
 
       {/* Progress dots */}
-      <div className="absolute right-4 top-4 z-10 flex gap-1.5">
+      <div className="absolute left-4 top-4 z-10 flex gap-1.5">
         {items.map((it, k) => (
           <span
             key={it.slug}

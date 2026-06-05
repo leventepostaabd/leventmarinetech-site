@@ -161,7 +161,7 @@ export default function CinematicStage({
                 <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-amber-600">
                   {g.label}
                 </div>
-                <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                <div className="divide-y divide-line/60">
                   {g.items.map((it) => {
                     const on = it.slug === active;
                     return (
@@ -170,25 +170,32 @@ export default function CinematicStage({
                         href={it.href}
                         onMouseEnter={() => { setActive(it.slug); setPaused(true); }}
                         onFocus={() => { setActive(it.slug); setPaused(true); }}
-                        className={`group block rounded-xl border p-3.5 no-underline transition ${
-                          on
-                            ? 'border-amber bg-amber/5 shadow-sm ring-1 ring-amber'
-                            : 'border-line bg-white hover:border-amber/50 hover:shadow-sm'
+                        className={`group relative flex items-center gap-3 rounded-lg py-3 pl-4 pr-3 no-underline transition ${
+                          on ? 'bg-amber/[0.06]' : 'hover:bg-navy-50/50'
                         }`}
                       >
-                        <div className="mb-0.5 font-mono text-[9.5px] uppercase tracking-[0.13em] text-amber-600">
-                          {it.kicker}
-                        </div>
-                        <h3 className="text-[15px] font-bold leading-tight text-ink">{it.name}</h3>
-                        <p className="mt-1 line-clamp-2 text-[12px] leading-relaxed text-ink-muted">
-                          {it.summary}
-                        </p>
-                        <span className="mt-2 inline-flex items-center gap-1 font-mono text-[10.5px] uppercase tracking-[0.08em] text-amber-700">
-                          {ctaLabel}
-                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                            <path d="M5 12h14" /><path d="M13 5l7 7-7 7" />
-                          </svg>
+                        <span
+                          aria-hidden
+                          className={`absolute left-0 top-2.5 bottom-2.5 w-[3px] rounded-full transition ${on ? 'bg-amber' : 'bg-transparent'}`}
+                        />
+                        <span className="min-w-0 flex-1">
+                          <span className="block font-head text-[16.5px] font-bold leading-tight tracking-[-0.01em] text-ink">
+                            {it.name}
+                          </span>
+                          <span className="mt-1 block font-mono text-[9px] uppercase tracking-[0.18em] text-amber-600">
+                            {it.kicker}
+                          </span>
+                          <span className="mt-1 block truncate text-[12px] leading-relaxed text-ink-muted">
+                            {it.summary}
+                          </span>
                         </span>
+                        <svg
+                          width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                          strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden
+                          className={`flex-shrink-0 transition ${on ? 'translate-x-0 text-amber opacity-100' : '-translate-x-1 text-ink-subtle opacity-0 group-hover:translate-x-0 group-hover:opacity-60'}`}
+                        >
+                          <path d="M5 12h14" /><path d="M13 5l7 7-7 7" />
+                        </svg>
                       </Link>
                     );
                   })}

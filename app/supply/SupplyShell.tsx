@@ -321,7 +321,7 @@ export default function SupplyShell({
       style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}
     >
       {/* Top zone — compact: header, tight h1, prominent search, chips, channels. */}
-      <div className="shrink-0 bg-white px-5 pb-3 md:px-10 md:pb-3">
+      <div className="relative z-10 shrink-0 bg-white px-5 pb-3 shadow-[0_14px_26px_-18px_rgba(11,31,58,0.4)] md:px-10 md:pb-3">
         <InlineHeader locale={locale} />
 
         <h1 className="mt-1 md:mt-2 mb-2.5 md:mb-3 font-head text-[20px] md:text-[26px] lg:text-[30px] font-extrabold leading-[1.1] tracking-[-0.01em] text-ink max-w-3xl">
