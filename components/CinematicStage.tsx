@@ -90,13 +90,36 @@ export default function CinematicStage({
   const activeItem = flat.find((it) => it.slug === active) ?? flat[0];
 
   return (
-    <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-[minmax(0,65%)_minmax(0,35%)]">
-      {/* LEFT — header + heading + search + interactive cards */}
+    <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-[minmax(0,45%)_minmax(0,55%)]">
+      {/* LEFT — clean cinematic photo (no overlay card) */}
+      <aside className="relative hidden h-full overflow-hidden bg-slate-100 lg:block">
+        <AnimatePresence initial={false}>
+          {activeItem && (
+            <motion.div
+              key={activeItem.slug}
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ opacity: { duration: 0.8, ease: 'easeInOut' }, scale: { duration: 6, ease: 'linear' } }}
+              className="absolute inset-0"
+            >
+              <StageImage item={activeItem} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+        {/* Soft blend into the content panel on the right edge */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-white via-white/45 to-transparent"
+        />
+      </aside>
+
+      {/* RIGHT — header + heading + search + interactive cards */}
       <div
-        className="flex h-full min-h-0 flex-col border-r border-line bg-white"
+        className="flex h-full min-h-0 flex-col bg-white"
         style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}
       >
-        <div className="shrink-0 px-5 md:px-8">
+        <div className="relative z-10 shrink-0 bg-white px-5 pb-3 shadow-[0_14px_26px_-18px_rgba(11,31,58,0.4)] md:px-8">
           <InlineHeader locale={locale} />
           <h1 className="mt-1 font-head text-[24px] md:text-[30px] lg:text-[34px] font-extrabold leading-[1.08] tracking-[-0.01em] text-ink">
             {heading}
@@ -175,24 +198,6 @@ export default function CinematicStage({
           )}
         </div>
       </div>
-
-      {/* RIGHT — clean cinematic photo (no overlay card) */}
-      <aside className="relative hidden h-full overflow-hidden bg-slate-100 lg:block">
-        <AnimatePresence initial={false}>
-          {activeItem && (
-            <motion.div
-              key={activeItem.slug}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ opacity: { duration: 0.8, ease: 'easeInOut' }, scale: { duration: 6, ease: 'linear' } }}
-              className="absolute inset-0"
-            >
-              <StageImage item={activeItem} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </aside>
     </div>
   );
 }
