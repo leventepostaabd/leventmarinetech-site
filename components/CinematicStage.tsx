@@ -107,19 +107,21 @@ export default function CinematicStage({
             </motion.div>
           )}
         </AnimatePresence>
-        {/* Soft blend into the content panel on the right edge */}
+        {/* Soft, wide blend into the content panel — feathers the photo into
+            the theme-tinted right side. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-white via-white/45 to-transparent"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-56 bg-gradient-to-l from-[#EFF4FB] via-[#EFF4FB]/55 to-transparent"
         />
       </aside>
 
-      {/* RIGHT — header + heading + search + interactive cards */}
+      {/* RIGHT — header + heading + search + interactive cards. Background tinted
+          with the photo theme palette (soft pale blue) for cohesion. */}
       <div
-        className="flex h-full min-h-0 flex-col bg-white"
+        className="flex h-full min-h-0 flex-col bg-[#EFF4FB]"
         style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}
       >
-        <div className="relative z-10 shrink-0 bg-white px-5 pb-3 shadow-[0_14px_26px_-18px_rgba(11,31,58,0.4)] md:px-8">
+        <div className="relative z-10 shrink-0 bg-[#EFF4FB] px-5 pb-3 shadow-[0_14px_26px_-18px_rgba(11,31,58,0.4)] md:px-8">
           <InlineHeader locale={locale} />
           <h1 className="mt-1 font-head text-[24px] md:text-[30px] lg:text-[34px] font-extrabold leading-[1.08] tracking-[-0.01em] text-ink">
             {heading}

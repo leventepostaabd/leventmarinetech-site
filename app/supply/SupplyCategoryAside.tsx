@@ -61,10 +61,10 @@ export default function SupplyCategoryAside({
         </motion.div>
       </AnimatePresence>
 
-      {/* Soft blend into the white search panel on the right edge */}
+      {/* Soft, wide blend into the theme-tinted search panel on the right edge */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-white via-white/45 to-transparent"
+        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-48 bg-gradient-to-l from-[#EFF4FB] via-[#EFF4FB]/55 to-transparent"
       />
 
       {/* Progress dots */}
@@ -77,22 +77,21 @@ export default function SupplyCategoryAside({
         ))}
       </div>
 
-      {/* Caption — dark glass, deep-links the active category */}
-      <Link href={active.href} className="absolute inset-x-0 bottom-0 z-10 block p-6 no-underline">
-        <motion.div
-          key={`cap-${active.slug}`}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}
-          className="rounded-2xl bg-navy-900/70 p-4 text-white shadow-[0_10px_40px_rgba(0,0,0,0.3)] ring-1 ring-white/10 backdrop-blur-md transition hover:bg-navy-900/80"
-        >
-          <div className="mb-1 font-mono text-[9.5px] uppercase tracking-[0.14em] text-amber">{kicker}</div>
-          <h3 className="text-[17px] font-extrabold leading-tight text-white">{active.name}</h3>
-          <p className="mt-1 line-clamp-1 text-[11.5px] text-white/70">{active.makers}</p>
-          <span className="mt-2 inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.08em] text-amber">
-            {active.cta} →
-          </span>
-        </motion.div>
+      {/* No card — the whole panel deep-links the active category, with just a
+          soft bottom scrim + card-less label for legibility. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-1/3 bg-gradient-to-t from-navy-900/55 via-navy-900/15 to-transparent"
+      />
+      <Link href={active.href} aria-label={active.name} className="absolute inset-0 z-20 block no-underline">
+        <div className="absolute bottom-0 left-0 right-24 p-6">
+          <div className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-amber drop-shadow-[0_1px_6px_rgba(0,0,0,0.7)]">
+            {kicker}
+          </div>
+          <div className="mt-1 font-head text-[19px] font-extrabold leading-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.65)]">
+            {active.name}
+          </div>
+        </div>
       </Link>
     </div>
   );

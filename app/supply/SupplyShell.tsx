@@ -126,20 +126,20 @@ export default function SupplyShell({
     const live = () => !cancelled && !demoDoneRef.current;
 
     (async () => {
-      await wait(900); // let the page settle before the first keystroke
+      await wait(1200); // let the page settle before the first keystroke
       let i = 0;
       while (live()) {
         const word = DEMO_WORDS[i % DEMO_WORDS.length];
         for (let c = 1; c <= word.length && live(); c++) {
           setQ(word.slice(0, c));
-          await wait(110);
+          await wait(190); // slower, calmer typing
         }
-        await wait(4000); // hold so products load and can be read
+        await wait(6500); // hold so products load and can be read
         for (let c = word.length; c >= 0 && live(); c--) {
           setQ(word.slice(0, c));
-          await wait(40);
+          await wait(75);
         }
-        await wait(350);
+        await wait(700);
         i++;
       }
     })();
@@ -317,11 +317,11 @@ export default function SupplyShell({
 
   return (
     <div
-      className="flex h-full flex-col min-w-0 min-h-0"
+      className="flex h-full flex-col min-w-0 min-h-0 bg-[#EFF4FB]"
       style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}
     >
       {/* Top zone — compact: header, tight h1, prominent search, chips, channels. */}
-      <div className="relative z-10 shrink-0 bg-white px-5 pb-3 shadow-[0_14px_26px_-18px_rgba(11,31,58,0.4)] md:px-10 md:pb-3">
+      <div className="relative z-10 shrink-0 bg-[#EFF4FB] px-5 pb-3 shadow-[0_14px_26px_-18px_rgba(11,31,58,0.4)] md:px-10 md:pb-3">
         <InlineHeader locale={locale} />
 
         <h1 className="mt-1 md:mt-2 mb-2.5 md:mb-3 font-head text-[20px] md:text-[26px] lg:text-[30px] font-extrabold leading-[1.1] tracking-[-0.01em] text-ink max-w-3xl">
@@ -331,9 +331,9 @@ export default function SupplyShell({
         {/* Search bar — moved up to where the subtitle used to sit. */}
         <div className="relative">
           <svg
-            className="absolute left-5 top-1/2 -translate-y-1/2 text-ink-subtle"
+            className="absolute left-5 top-1/2 z-10 -translate-y-1/2 text-amber-500"
             width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+            stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"
           >
             <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
@@ -347,7 +347,7 @@ export default function SupplyShell({
             onFocus={engageSearch}
             placeholder={ct(locale, 'supply.searchPlaceholder')}
             aria-label={t('Search marine supply', 'Marine tedarik ara')}
-            className="w-full bg-navy-50/70 text-ink placeholder:text-ink-subtle rounded-full pl-13 pr-32 py-3.5 text-[15px] ring-1 ring-line/60 outline-none transition hover:bg-navy-50 focus:bg-white focus:ring-2 focus:ring-amber/50"
+            className="w-full bg-white text-ink placeholder:text-ink-subtle rounded-full pl-13 pr-32 py-3.5 text-[15px] ring-2 ring-amber/35 shadow-[0_3px_18px_rgba(245,165,36,0.12)] outline-none transition hover:ring-amber/55 focus:ring-amber/80 focus:shadow-[0_4px_22px_rgba(245,165,36,0.20)]"
             style={{ paddingLeft: '3.25rem' }}
           />
           {q && (
