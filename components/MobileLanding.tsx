@@ -48,7 +48,7 @@ export default function MobileLanding({ locale }: MobileLandingProps) {
           transition={{ delay: 0.05, duration: 0.45 }}
         >
           <Link
-            href="/service-wizard"
+            href="/services"
             className="flex w-full items-center justify-between rounded-xl bg-amber px-6 py-7 text-navy-700 no-underline shadow-lg transition active:scale-[0.99]"
           >
             <div>

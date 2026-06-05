@@ -45,7 +45,7 @@ export default function Hero({
           image="/hero/servicesmain.png"
           label={ct(locale, 'nav.service')}
           kicker={ct(locale, 'home.doorServiceKicker')}
-          ctaHref="/service-wizard"
+          ctaHref="/services"
           ctaLabel={serviceCta ?? ct(locale, 'home.doorServiceCta')}
         />
         <HeroDoor
