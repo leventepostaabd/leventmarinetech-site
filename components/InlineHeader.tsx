@@ -50,22 +50,19 @@ export default function InlineHeader({ locale, variant = 'inline' }: { locale: L
       {variant === 'stage' ? (
         /* Over-photo header: small hamburger + vertical flags on the left, the
            full "Levent Marine Tech" lockup to the right. */
-        <div className="flex items-start gap-4 py-3">
-          <div className="flex flex-col items-center gap-2">
-            <button
-              type="button"
-              onClick={() => setOpen(true)}
-              aria-label={t('Open menu', 'Menüyü aç')}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-navy-50 text-ink-muted ring-1 ring-line transition hover:bg-navy-100 hover:text-ink"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <line x1="3" y1="12" x2="21" y2="12" />
-                <line x1="3" y1="18" x2="21" y2="18" />
-              </svg>
-            </button>
-            <LocaleToggle current={locale} vertical />
-          </div>
+        <div className="flex items-center gap-3 py-3">
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-label={t('Open menu', 'Menüyü aç')}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-navy-50 text-ink-muted ring-1 ring-line transition hover:bg-navy-100 hover:text-ink"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
 
           <Link
             href="/"

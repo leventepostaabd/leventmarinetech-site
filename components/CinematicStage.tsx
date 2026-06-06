@@ -4,6 +4,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import InlineHeader from '@/components/InlineHeader';
+import LocaleToggle from '@/components/LocaleToggle';
+import ServiceChannelTabs from '@/app/services/ServiceChannelTabs';
 
 export type StageItem = {
   slug: string;
@@ -138,17 +140,23 @@ export default function CinematicStage({
           <div className="lg:hidden">
             <InlineHeader locale={locale} />
           </div>
-          <h1 className="mt-1 font-head text-[24px] font-extrabold leading-[1.08] tracking-[-0.01em] text-ink md:text-[30px] lg:mt-0 lg:text-[34px]">
-            {heading}
-          </h1>
-          <p className="mt-2 max-w-md text-[13.5px] leading-relaxed text-ink-muted">{sub}</p>
+          {/* Heading on one line, language flags pinned top-right (desktop). */}
+          <div className="flex items-start justify-between gap-4">
+            <h1 className="mt-1 min-w-0 flex-1 truncate font-head text-[18px] font-extrabold leading-tight tracking-[-0.01em] text-ink md:text-[20px] lg:mt-0 lg:text-[23px]">
+              {heading}
+            </h1>
+            <div className="mt-1 hidden shrink-0 lg:block">
+              <LocaleToggle current={locale} />
+            </div>
+          </div>
+          <p className="mt-1.5 max-w-md truncate text-[13px] leading-relaxed text-ink-muted">{sub}</p>
 
-          <div className="relative mt-4">
+          <div className="relative mt-3.5">
             <svg
               aria-hidden
               width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              strokeWidth="2" strokeLinecap="round"
-              className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle"
+              strokeWidth="2.2" strokeLinecap="round"
+              className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-amber-500"
             >
               <circle cx="11" cy="11" r="7" />
               <path d="m21 21-4.3-4.3" />
@@ -159,8 +167,13 @@ export default function CinematicStage({
               onChange={(e) => setQuery(e.target.value)}
               placeholder={searchPlaceholder}
               aria-label={searchPlaceholder}
-              className="w-full rounded-full bg-navy-50/70 pl-11 pr-4 py-3 text-[14px] text-ink placeholder:text-ink-subtle outline-none ring-1 ring-line/60 transition hover:bg-navy-50 focus:bg-white focus:ring-2 focus:ring-amber/50"
+              className="w-full rounded-full bg-white pl-11 pr-4 py-3 text-[14px] text-ink placeholder:text-ink-subtle outline-none ring-2 ring-amber/35 shadow-[0_3px_18px_rgba(245,165,36,0.12)] transition hover:ring-amber/55 focus:shadow-[0_4px_22px_rgba(245,165,36,0.20)] focus:ring-amber/80"
             />
+          </div>
+
+          {/* Contact channels — mirrors the /supply layout. */}
+          <div className="mt-3">
+            <ServiceChannelTabs locale={locale} />
           </div>
         </div>
 

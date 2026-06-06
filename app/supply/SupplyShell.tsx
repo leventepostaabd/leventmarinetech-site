@@ -5,6 +5,7 @@ import Link from 'next/link';
 import ProductQuoteModal, { type ModalProduct } from './ProductQuoteModal';
 import SourcingChannelTabs from './SourcingChannelTabs';
 import InlineHeader from '@/components/InlineHeader';
+import LocaleToggle from '@/components/LocaleToggle';
 import { ct } from '@/lib/i18n-client';
 
 type SourceTag = 'local' | 'mouser' | 'digikey' | 'grainger' | string;
@@ -327,9 +328,14 @@ export default function SupplyShell({
           <InlineHeader locale={locale} />
         </div>
 
-        <h1 className="mt-1 md:mt-2 mb-2.5 md:mb-3 font-head text-[20px] md:text-[26px] lg:text-[30px] font-extrabold leading-[1.1] tracking-[-0.01em] text-ink max-w-3xl">
-          {heroLine}
-        </h1>
+        <div className="mb-2.5 mt-1 flex items-start justify-between gap-4 md:mb-3 md:mt-2">
+          <h1 className="min-w-0 flex-1 truncate font-head text-[18px] font-extrabold leading-tight tracking-[-0.01em] text-ink md:text-[20px] lg:text-[23px]">
+            {heroLine}
+          </h1>
+          <div className="hidden shrink-0 lg:block">
+            <LocaleToggle current={locale} />
+          </div>
+        </div>
 
         {/* Search bar — moved up to where the subtitle used to sit. */}
         <div className="relative">
