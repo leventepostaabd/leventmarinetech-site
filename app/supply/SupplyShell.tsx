@@ -21,6 +21,10 @@ type Item = {
   source?: SourceTag;
   price?: number | null;
   priceRaw?: number | null;
+  url?: string | null;
+  datasheetUrl?: string | null;
+  category?: string;
+  specs?: { name: string; value: string }[];
 };
 
 const PRESET_QUERIES = [
@@ -202,7 +206,11 @@ export default function SupplyShell({
               image: r.image,
               in_stock: r.in_stock ?? false,
               source: r.source as SourceTag,
-              priceRaw: r.priceRaw ?? null
+              priceRaw: r.priceRaw ?? null,
+              url: r.url ?? null,
+              datasheetUrl: r.datasheetUrl ?? null,
+              category: r.category ?? '',
+              specs: Array.isArray(r.specs) ? r.specs : []
             }))
           : [];
         setDistItems(live);
@@ -266,7 +274,11 @@ export default function SupplyShell({
       partNumber: it.partNumber,
       description: it.description,
       image: it.image,
-      priceRaw: it.priceRaw ?? null
+      priceRaw: it.priceRaw ?? null,
+      url: it.url ?? undefined,
+      datasheetUrl: it.datasheetUrl ?? undefined,
+      category: it.category,
+      specs: it.specs
     });
   }
 

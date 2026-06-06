@@ -73,6 +73,7 @@ export async function searchMouser(
           AvailabilityInStock?: string;
           PriceBreaks?: Array<{ Quantity?: number; Price?: string; Currency?: string }>;
           UnitWeightKg?: { UnitWeight?: number };
+          ProductAttributes?: Array<{ AttributeName?: string; AttributeValue?: string }>;
         }>;
       };
     };
@@ -105,7 +106,13 @@ export async function searchMouser(
         in_stock: inStock,
         availability_label: inStock ? 'in-stock' : 'on-order',
         live: true,
-        price: Number.isFinite(rawPrice) ? rawPrice : undefined
+        price: Number.isFinite(rawPrice) ? rawPrice : undefined,
+        datasheetUrl: p.DataSheetUrl ? sanitizeExternalUrl(p.DataSheetUrl) : undefined,
+        category: p.Category,
+        specs: (p.ProductAttributes ?? [])
+          .map((a) => ({ name: a.AttributeName ?? '', value: a.AttributeValue ?? '' }))
+          .filter((s) => s.name && s.value)
+          .slice(0, 14)
       };
     });
 

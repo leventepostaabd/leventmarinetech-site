@@ -121,6 +121,9 @@ export async function searchDigiKey(
         PhotoUrl?: string;
         UnitPrice?: number;
         QuantityAvailable?: number;
+        DatasheetUrl?: string;
+        Category?: { Name?: string };
+        Parameters?: Array<{ ParameterText?: string; ValueText?: string }>;
       }>;
     };
 
@@ -138,7 +141,13 @@ export async function searchDigiKey(
       in_stock: (p.QuantityAvailable ?? 0) > 0,
       availability_label: (p.QuantityAvailable ?? 0) > 0 ? 'in-stock' : 'on-order',
       live: true,
-      price: typeof p.UnitPrice === 'number' && Number.isFinite(p.UnitPrice) ? p.UnitPrice : undefined
+      price: typeof p.UnitPrice === 'number' && Number.isFinite(p.UnitPrice) ? p.UnitPrice : undefined,
+      datasheetUrl: p.DatasheetUrl ? sanitizeExternalUrl(p.DatasheetUrl) : undefined,
+      category: p.Category?.Name,
+      specs: (p.Parameters ?? [])
+        .map((a) => ({ name: a.ParameterText ?? '', value: a.ValueText ?? '' }))
+        .filter((s) => s.name && s.value)
+        .slice(0, 14)
     }));
 
     return { source: 'digikey', query, results, fromLocalFallback: false };

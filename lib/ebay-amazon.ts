@@ -61,6 +61,12 @@ export type ExternalProduct = {
       where we apply our own markup before display. Local catalog results
       leave this undefined (quote-only). */
   price?: number;
+  /** Manufacturer datasheet (PDF) URL. */
+  datasheetUrl?: string;
+  /** Distributor category label. */
+  category?: string;
+  /** Technical attributes (name/value) for the spec table. */
+  specs?: { name: string; value: string }[];
 };
 
 export type SupplySearchOptions = {

@@ -15,6 +15,14 @@ export type ModalProduct = {
   image?: string;
   /** Raw supplier (eBay) unit price in USD — used for live estimate calc. */
   priceRaw?: number | null;
+  /** Manufacturer detail / listing URL (distributor). */
+  url?: string;
+  /** Manufacturer datasheet (PDF) URL. */
+  datasheetUrl?: string;
+  /** Distributor category label. */
+  category?: string;
+  /** Technical attributes for the spec table. */
+  specs?: { name: string; value: string }[];
 };
 
 /**
@@ -110,8 +118,8 @@ export default function ProductQuoteModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: 8 }}
             transition={{ duration: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
-            style={{ maxHeight: 'min(580px, 86vh)' }}
-            className="relative w-[min(560px,94vw)] flex flex-col overflow-hidden rounded-2xl bg-white shadow-2xl pointer-events-auto"
+            style={{ maxHeight: 'min(760px, 92vh)' }}
+            className="relative w-[min(640px,94vw)] flex flex-col overflow-hidden rounded-2xl bg-white shadow-2xl pointer-events-auto"
             role="dialog"
             aria-modal="true"
             aria-label={t('Add to RFQ', "RFQ'ye ekle")}
@@ -152,6 +160,84 @@ export default function ProductQuoteModal({
 
             {/* Body */}
             <div className="flex-1 overflow-y-auto p-4">
+              {/* Large product image */}
+              {product.image && (
+                <div className="mb-4 overflow-hidden rounded-xl bg-navy-50 ring-1 ring-line">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="mx-auto h-52 w-full object-contain p-4"
+                    onError={(e) => { (e.target as HTMLImageElement).closest('div')!.style.display = 'none'; }}
+                  />
+                </div>
+              )}
+
+              {/* Category + full description */}
+              {(product.category || product.description) && (
+                <div className="mb-4">
+                  {product.category && (
+                    <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-subtle">
+                      {product.category}
+                    </div>
+                  )}
+                  {product.description && (
+                    <p className="line-clamp-4 text-[13px] leading-relaxed text-ink-muted">
+                      {product.description}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {/* Technical specifications (from Mouser / Digi-Key) */}
+              {product.specs && product.specs.length > 0 && (
+                <div className="mb-4">
+                  <div className="kicker mb-2">{t('Specifications', 'Teknik özellikler')}</div>
+                  <dl className="divide-y divide-line/70 overflow-hidden rounded-lg ring-1 ring-line">
+                    {product.specs.map((s) => (
+                      <div key={s.name} className="grid grid-cols-[42%_58%] gap-2 px-3 py-2 odd:bg-navy-50/40">
+                        <dt className="text-[12px] text-ink-subtle">{s.name}</dt>
+                        <dd className="text-[12px] font-medium text-ink">{s.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              )}
+
+              {/* Datasheet + manufacturer detail */}
+              {(product.datasheetUrl || product.url) && (
+                <div className="mb-4 flex flex-wrap gap-2">
+                  {product.datasheetUrl && (
+                    <a
+                      href={product.datasheetUrl}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="inline-flex items-center gap-2 rounded-md border border-line bg-white px-3 py-2 text-[12.5px] font-semibold text-navy-700 no-underline transition hover:border-amber hover:text-amber-700"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="15" y2="17" />
+                      </svg>
+                      {t('Datasheet', 'Teknik föy')}
+                    </a>
+                  )}
+                  {product.url && (
+                    <a
+                      href={product.url}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="inline-flex items-center gap-2 rounded-md border border-line bg-white px-3 py-2 text-[12.5px] font-semibold text-navy-700 no-underline transition hover:border-amber hover:text-amber-700"
+                    >
+                      {t('Full technical detail', 'Tüm teknik detay')}
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M7 17 17 7" /><path d="M7 7h10v10" />
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              )}
+
               {/* Quote-only banner — no item price, no shipping math.
                   Item + shipping + lead time all travel through the RFQ
                   reply (decision F3 / T3 — no public prices). */}

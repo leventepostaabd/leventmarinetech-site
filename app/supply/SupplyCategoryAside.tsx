@@ -35,7 +35,7 @@ export default function SupplyCategoryAside({ items }: { items: CatItem[] }) {
 
   useEffect(() => {
     if (reduce.current || items.length < 2) return;
-    const id = setInterval(() => setI((x) => (x + 1) % items.length), 6000);
+    const id = setInterval(() => setI((x) => (x + 1) % items.length), 9000);
     return () => clearInterval(id);
   }, [items.length]);
 
@@ -50,7 +50,7 @@ export default function SupplyCategoryAside({ items }: { items: CatItem[] }) {
           initial={{ opacity: 0, scale: 1.04 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ opacity: { duration: 1.2, ease: 'easeInOut' }, scale: { duration: 8, ease: 'linear' } }}
+          transition={{ opacity: { duration: 1.9, ease: 'easeInOut' }, scale: { duration: 11, ease: 'linear' } }}
           className="absolute inset-0"
         >
           <ProbeImg item={active} />
