@@ -122,7 +122,7 @@ export default function CinematicStage({
             className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-white/95 via-white/60 to-transparent backdrop-blur-[2px]"
           />
           <div className="relative px-3 md:px-5">
-            <InlineHeader locale={locale} large />
+            <InlineHeader locale={locale} variant="stage" />
           </div>
         </div>
       </aside>

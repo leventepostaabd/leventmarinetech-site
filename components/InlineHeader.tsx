@@ -32,7 +32,7 @@ const NAV: { href: string; key: string }[] = [
   { href: '/knowledge', key: 'knowledge' }
 ];
 
-export default function InlineHeader({ locale, large = false }: { locale: Locale; large?: boolean }) {
+export default function InlineHeader({ locale, variant = 'inline' }: { locale: Locale; variant?: 'inline' | 'stage' }) {
   const pathname = usePathname() || '/';
   const [open, setOpen] = useState(false);
 
@@ -47,38 +47,77 @@ export default function InlineHeader({ locale, large = false }: { locale: Locale
 
   return (
     <>
-      <div className={`flex items-center ${large ? 'gap-4 py-4 md:py-5' : 'gap-3 py-3 md:py-4'}`}>
-        {/* Hamburger */}
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          aria-label={t('Open menu', 'Menüyü aç')}
-          className={`inline-flex items-center justify-center rounded-full bg-navy-50 text-ink-muted ring-1 ring-line transition hover:bg-navy-100 hover:text-ink ${large ? 'h-14 w-14' : 'h-10 w-10'}`}
-        >
-          <svg width={large ? 22 : 16} height={large ? 22 : 16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-            <line x1="3" y1="6" x2="21" y2="6" />
-            <line x1="3" y1="12" x2="21" y2="12" />
-            <line x1="3" y1="18" x2="21" y2="18" />
-          </svg>
-        </button>
+      {variant === 'stage' ? (
+        /* Over-photo header: small hamburger + vertical flags on the left, the
+           full "Levent Marine Tech" lockup to the right. */
+        <div className="flex items-start gap-4 py-3">
+          <div className="flex flex-col items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-label={t('Open menu', 'Menüyü aç')}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-navy-50 text-ink-muted ring-1 ring-line transition hover:bg-navy-100 hover:text-ink"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            </button>
+            <LocaleToggle current={locale} vertical />
+          </div>
 
-        {/* Brand lockup — left aligned */}
-        <Link
-          href="/"
-          aria-label="Levent Marine — home"
-          className="inline-flex items-center gap-2.5 no-underline transition hover:opacity-80"
-        >
-          <LeventLogo size={large ? 48 : 26} />
-          <span className={`font-head font-extrabold tracking-[0.04em] text-ink ${large ? 'text-[30px]' : 'text-[15px]'}`}>
-            Levent Marine
-          </span>
-        </Link>
-
-        {/* Locale toggle — right */}
-        <div className="ml-auto">
-          <LocaleToggle current={locale} />
+          <Link
+            href="/"
+            aria-label="Levent Marine Tech — home"
+            className="inline-flex items-center gap-3 no-underline transition hover:opacity-90"
+          >
+            <LeventLogo size={34} />
+            <span className="flex flex-col leading-none">
+              <span className="font-head text-[23px] font-extrabold tracking-[-0.01em] text-navy-700">
+                Levent Marine <span className="text-amber-500">Tech</span>
+              </span>
+              <span aria-hidden className="mt-1.5 h-px w-full bg-amber/70" />
+              <span className="mt-1.5 font-mono text-[9.5px] uppercase tracking-[0.26em] text-ink-subtle">
+                Electro-Technical Solutions
+              </span>
+            </span>
+          </Link>
         </div>
-      </div>
+      ) : (
+        <div className="flex items-center gap-3 py-3 md:py-4">
+          {/* Hamburger */}
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-label={t('Open menu', 'Menüyü aç')}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-navy-50 text-ink-muted ring-1 ring-line transition hover:bg-navy-100 hover:text-ink"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+
+          {/* Brand lockup — left aligned */}
+          <Link
+            href="/"
+            aria-label="Levent Marine — home"
+            className="inline-flex items-center gap-2.5 no-underline transition hover:opacity-80"
+          >
+            <LeventLogo size={26} />
+            <span className="font-head text-[15px] font-extrabold tracking-[0.04em] text-ink">
+              Levent Marine
+            </span>
+          </Link>
+
+          {/* Locale toggle — right */}
+          <div className="ml-auto">
+            <LocaleToggle current={locale} />
+          </div>
+        </div>
+      )}
 
       {/* Drawer — mirrors TopBar's drawer markup */}
       <AnimatePresence>

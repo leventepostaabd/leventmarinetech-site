@@ -18,7 +18,7 @@ const LANGS: { code: Locale; title: string; Flag: FlagComp }[] = [
   { code: 'de', title: 'Deutsch',  Flag: DE }
 ];
 
-export default function LocaleToggle({ current }: { current: Locale }) {
+export default function LocaleToggle({ current, vertical = false }: { current: Locale; vertical?: boolean }) {
   const router = useRouter();
   const [pending, setPending] = useState<Locale | null>(null);
 
@@ -40,7 +40,7 @@ export default function LocaleToggle({ current }: { current: Locale }) {
   }
 
   return (
-    <div className="flex items-center gap-1" role="group" aria-label="Language / Dil">
+    <div className={`flex gap-1 ${vertical ? 'flex-col items-center' : 'items-center'}`} role="group" aria-label="Language / Dil">
       {LANGS.map(({ code, title, Flag }) => {
         const active = code === current;
         return (
