@@ -67,16 +67,6 @@ export default function SupplyCategoryAside({
         className="pointer-events-none absolute inset-y-0 right-0 z-10 w-48 bg-gradient-to-l from-[#EFF4FB] via-[#EFF4FB]/55 to-transparent"
       />
 
-      {/* Progress dots */}
-      <div className="absolute left-4 top-4 z-10 flex gap-1.5">
-        {items.map((it, k) => (
-          <span
-            key={it.slug}
-            className={`h-1.5 rounded-full transition-all duration-500 ${k === i ? 'w-5 bg-amber' : 'w-1.5 bg-white/60'}`}
-          />
-        ))}
-      </div>
-
       {/* No card — the whole panel deep-links the active category, with just a
           soft bottom scrim + card-less label for legibility. */}
       <div

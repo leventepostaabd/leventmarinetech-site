@@ -321,8 +321,11 @@ export default function SupplyShell({
       style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}
     >
       {/* Top zone — compact: header, tight h1, prominent search, chips, channels. */}
-      <div className="relative z-10 shrink-0 bg-[#EFF4FB] px-5 pb-3 shadow-[0_14px_26px_-18px_rgba(11,31,58,0.4)] md:px-10 md:pb-3">
-        <InlineHeader locale={locale} />
+      <div className="relative z-10 shrink-0 bg-[#EFF4FB] px-5 pb-3 pt-2 shadow-[0_14px_26px_-18px_rgba(11,31,58,0.4)] md:px-10 md:pb-3 lg:pt-6">
+        {/* Mobile keeps the header here; on desktop it floats over the photo. */}
+        <div className="lg:hidden">
+          <InlineHeader locale={locale} />
+        </div>
 
         <h1 className="mt-1 md:mt-2 mb-2.5 md:mb-3 font-head text-[20px] md:text-[26px] lg:text-[30px] font-extrabold leading-[1.1] tracking-[-0.01em] text-ink max-w-3xl">
           {heroLine}

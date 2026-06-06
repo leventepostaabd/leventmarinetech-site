@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getLocale, getTranslator } from '@/lib/i18n';
 import { getProducts } from '@/lib/products-db';
-import { SUPPLY_IMAGE } from '@/lib/deck-images';
+import InlineHeader from '@/components/InlineHeader';
 import SupplyShell from './SupplyShell';
 import SupplyCategoryAside, { type CatItem } from './SupplyCategoryAside';
 
@@ -12,16 +12,16 @@ export const metadata: Metadata = {
   alternates: { canonical: '/supply' }
 };
 
-// Categories shown in the soft rotating aside (deep-link into each listing).
-const SUPPLY_CATS: { slug: string; name_en: string; name_tr: string; makers: string }[] = [
-  { slug: 'cables-glands',            name_en: 'Cables & Glands',              name_tr: 'Kablo & Rakor',                  makers: 'Lapp Ölflex Marine · Hawke ATEX' },
-  { slug: 'msb-components',           name_en: 'MSB / ESB Components',          name_tr: 'MSB / ESB Bileşenleri',           makers: 'AVR · ACB trip units · sync panels' },
-  { slug: 'motors-drives',           name_en: 'Motors & Drives (VFD)',         name_tr: 'Motor & Sürücüler (VFD)',         makers: 'ABB M3BP · Vacon · Danfoss FC' },
-  { slug: 'automation-plc',          name_en: 'PLC & Automation',              name_tr: 'PLC & Otomasyon',                 makers: 'Siemens S7 · Allen-Bradley · Omron' },
-  { slug: 'marine-sensors',          name_en: 'Marine Sensors & Transmitters', name_tr: 'Denizcilik Sensör & Transmitter', makers: 'Pressure · level · temperature' },
-  { slug: 'radar-navigation',        name_en: 'Radar & Bridge Navigation',     name_tr: 'Radar & Köprü Üstü Seyir',        makers: 'Furuno · JRC · Sperry — ECDIS' },
-  { slug: 'deck-mechanical',         name_en: 'Crane & Deck Hardware',         name_tr: 'Vinç & Güverte Donanımı',         makers: 'MacGregor · NMF · Liebherr' },
-  { slug: 'engine-room-consumables', name_en: 'Engine Room Consumables',       name_tr: 'Makine Dairesi Sarf',             makers: 'Level switches · gaskets · seals' }
+/**
+ * Left showcase — promo slides (ports served, new arrivals, smart marine
+ * products, own brand). Owner-produced artwork drops into
+ * /public/supply/promo/<slug>.{webp,png,jpg}; a soft placeholder shows until then.
+ */
+const PROMO: { slug: string; en: string; tr: string; href: string }[] = [
+  { slug: 'ports-served', en: 'US Ports We Serve',          tr: 'Hizmet Verdiğimiz Limanlar',  href: '/ports' },
+  { slug: 'new-arrivals', en: 'New Marine Arrivals',        tr: 'Yeni Denizcilik Ürünleri',    href: '/supply' },
+  { slug: 'smart-marine', en: 'Smart Products for Vessels', tr: 'Gemiler İçin Akıllı Ürünler', href: '/supply' },
+  { slug: 'own-brand',    en: 'Levent Marine Own Line',     tr: 'Levent Marine Ürünleri',      href: '/supply' }
 ];
 
 // Catalog is admin-managed in Supabase — render on demand.
@@ -45,28 +45,34 @@ export default async function SupplyIndex() {
     price: p.price ?? null
   }));
 
-  const cats: CatItem[] = SUPPLY_CATS.map((c) => ({
-    slug: c.slug,
-    name: tr ? c.name_tr : c.name_en,
-    makers: c.makers,
-    cta: tr ? 'Parçalara bak' : 'Browse parts',
-    href: `/supply/category/${c.slug}`,
+  const promo: CatItem[] = PROMO.map((p) => ({
+    slug: p.slug,
+    name: tr ? p.tr : p.en,
+    makers: '',
+    cta: '',
+    href: p.href,
     imageSrcs: [
-      `/supply/stage/${c.slug}.webp`,
-      `/supply/stage/${c.slug}.png`,
-      `/supply/stage/${c.slug}.jpg`,
-      SUPPLY_IMAGE[c.slug]
-    ].filter(Boolean) as string[]
+      `/supply/promo/${p.slug}.webp`,
+      `/supply/promo/${p.slug}.png`,
+      `/supply/promo/${p.slug}.jpg`
+    ]
   }));
 
   return (
     <div className="h-screen max-h-screen overflow-hidden bg-[#EFF4FB] lg:grid lg:grid-cols-[minmax(0,35%)_minmax(0,65%)]">
-      {/* LEFT — soft rotating category panel, blends into the search on the right. */}
+      {/* LEFT — promo showcase, with the header floating over the photo. */}
       <aside className="relative hidden h-full overflow-hidden lg:block">
-        <SupplyCategoryAside
-          items={cats}
-          kicker={tr ? 'Kategoriler' : 'Categories'}
-        />
+        <SupplyCategoryAside items={promo} kicker={tr ? 'Vitrin' : 'Showcase'} />
+
+        <div className="absolute inset-x-0 top-0 z-30">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-white/95 via-white/60 to-transparent backdrop-blur-[2px]"
+          />
+          <div className="relative px-3 md:px-5">
+            <InlineHeader locale={locale} large />
+          </div>
+        </div>
       </aside>
 
       {/* RIGHT — live search + instant results grid. */}

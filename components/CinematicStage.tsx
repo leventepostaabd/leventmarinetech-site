@@ -90,7 +90,7 @@ export default function CinematicStage({
   const activeItem = flat.find((it) => it.slug === active) ?? flat[0];
 
   return (
-    <div className="h-screen max-h-screen overflow-hidden bg-white lg:grid lg:grid-cols-[minmax(0,45%)_minmax(0,55%)]">
+    <div className="h-screen max-h-screen overflow-hidden bg-[#EFF4FB] lg:grid lg:grid-cols-[minmax(0,35%)_minmax(0,65%)]">
       {/* LEFT — clean cinematic photo (no overlay card) */}
       <aside className="relative hidden h-full overflow-hidden bg-slate-100 lg:block">
         <AnimatePresence initial={false}>
@@ -111,7 +111,7 @@ export default function CinematicStage({
             the theme-tinted right side. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-56 bg-gradient-to-l from-[#EFF4FB] via-[#EFF4FB]/55 to-transparent"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-44 bg-gradient-to-l from-[#EFF4FB] via-[#EFF4FB]/55 to-transparent"
         />
 
         {/* Header floats over the photo (desktop): hamburger, logo, locale — on
@@ -119,10 +119,10 @@ export default function CinematicStage({
         <div className="absolute inset-x-0 top-0 z-30">
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-white/75 via-white/35 to-transparent"
+            className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-white/95 via-white/60 to-transparent backdrop-blur-[2px]"
           />
-          <div className="relative px-2 md:px-3">
-            <InlineHeader locale={locale} />
+          <div className="relative px-3 md:px-5">
+            <InlineHeader locale={locale} large />
           </div>
         </div>
       </aside>

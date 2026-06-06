@@ -32,7 +32,7 @@ const NAV: { href: string; key: string }[] = [
   { href: '/knowledge', key: 'knowledge' }
 ];
 
-export default function InlineHeader({ locale }: { locale: Locale }) {
+export default function InlineHeader({ locale, large = false }: { locale: Locale; large?: boolean }) {
   const pathname = usePathname() || '/';
   const [open, setOpen] = useState(false);
 
@@ -47,15 +47,15 @@ export default function InlineHeader({ locale }: { locale: Locale }) {
 
   return (
     <>
-      <div className="flex items-center gap-3 py-3 md:py-4">
+      <div className={`flex items-center ${large ? 'gap-4 py-4 md:py-5' : 'gap-3 py-3 md:py-4'}`}>
         {/* Hamburger */}
         <button
           type="button"
           onClick={() => setOpen(true)}
           aria-label={t('Open menu', 'Menüyü aç')}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-navy-50 text-ink-muted ring-1 ring-line transition hover:bg-navy-100 hover:text-ink"
+          className={`inline-flex items-center justify-center rounded-full bg-navy-50 text-ink-muted ring-1 ring-line transition hover:bg-navy-100 hover:text-ink ${large ? 'h-14 w-14' : 'h-10 w-10'}`}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <svg width={large ? 22 : 16} height={large ? 22 : 16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
             <line x1="3" y1="6" x2="21" y2="6" />
             <line x1="3" y1="12" x2="21" y2="12" />
             <line x1="3" y1="18" x2="21" y2="18" />
@@ -68,8 +68,8 @@ export default function InlineHeader({ locale }: { locale: Locale }) {
           aria-label="Levent Marine — home"
           className="inline-flex items-center gap-2.5 no-underline transition hover:opacity-80"
         >
-          <LeventLogo size={26} />
-          <span className="font-head text-[15px] font-extrabold tracking-[0.04em] text-ink">
+          <LeventLogo size={large ? 48 : 26} />
+          <span className={`font-head font-extrabold tracking-[0.04em] text-ink ${large ? 'text-[30px]' : 'text-[15px]'}`}>
             Levent Marine
           </span>
         </Link>
