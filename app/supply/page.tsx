@@ -17,11 +17,42 @@ export const metadata: Metadata = {
  * products, own brand). Owner-produced artwork drops into
  * /public/supply/promo/<slug>.{webp,png,jpg}; a soft placeholder shows until then.
  */
-const PROMO: { slug: string; en: string; tr: string; href: string }[] = [
-  { slug: 'ports-served', en: 'US Ports We Serve',          tr: 'Hizmet Verdiğimiz Limanlar',  href: '/ports' },
-  { slug: 'new-arrivals', en: 'New Marine Arrivals',        tr: 'Yeni Denizcilik Ürünleri',    href: '/supply' },
-  { slug: 'smart-marine', en: 'Smart Products for Vessels', tr: 'Gemiler İçin Akıllı Ürünler', href: '/supply' },
-  { slug: 'own-brand',    en: 'Levent Marine Own Line',     tr: 'Levent Marine Ürünleri',      href: '/supply' }
+const PROMO: { slug: string; en: string; tr: string; en_d: string; tr_d: string; href: string }[] = [
+  {
+    slug: 'USPortsWeServe',
+    en: 'Serving U.S. Ports', tr: 'ABD Limanlarına Hizmet',
+    en_d: 'Fast access to major commercial ports and marine facilities.',
+    tr_d: 'Büyük ticari limanlara ve deniz tesislerine hızlı erişim.',
+    href: '/ports'
+  },
+  {
+    slug: 'PortAccessCertified',
+    en: 'Port Access Ready', tr: 'Liman Erişimine Hazır',
+    en_d: 'Authorized access for terminals, shipyards and restricted facilities.',
+    tr_d: 'Terminaller, tersaneler ve kısıtlı tesislere yetkili erişim.',
+    href: '/ports'
+  },
+  {
+    slug: 'SmartProductsforVessels',
+    en: 'Smart Marine Technologies', tr: 'Akıllı Denizcilik Teknolojileri',
+    en_d: 'Automation, networking and control solutions for modern vessels.',
+    tr_d: 'Modern gemiler için otomasyon, ağ ve kontrol çözümleri.',
+    href: '/supply'
+  },
+  {
+    slug: 'QualityAssuredSupply',
+    en: 'Quality Assured Supply', tr: 'Kalite Güvenceli Tedarik',
+    en_d: 'Every component verified before delivery.',
+    tr_d: 'Her bileşen teslimattan önce doğrulanır.',
+    href: '/supply'
+  },
+  {
+    slug: 'ReplacementCrossReference',
+    en: 'Obsolete Part?', tr: 'Obsolet Parça mı?',
+    en_d: 'We identify the right replacement and supply the solution.',
+    tr_d: 'Doğru muadili bulur, çözümü tedarik ederiz.',
+    href: '/supply/equivalent-part-finder'
+  }
 ];
 
 // Catalog is admin-managed in Supabase — render on demand.
@@ -48,13 +79,12 @@ export default async function SupplyIndex() {
   const promo: CatItem[] = PROMO.map((p) => ({
     slug: p.slug,
     name: tr ? p.tr : p.en,
-    makers: '',
-    cta: '',
+    description: tr ? p.tr_d : p.en_d,
     href: p.href,
     imageSrcs: [
-      `/supply/promo/${p.slug}.webp`,
-      `/supply/promo/${p.slug}.png`,
-      `/supply/promo/${p.slug}.jpg`
+      `/supply/stage/${p.slug}.webp`,
+      `/supply/stage/${p.slug}.png`,
+      `/supply/stage/${p.slug}.jpg`
     ]
   }));
 
@@ -62,7 +92,7 @@ export default async function SupplyIndex() {
     <div className="h-screen max-h-screen overflow-hidden bg-[#EFF4FB] lg:grid lg:grid-cols-[minmax(0,35%)_minmax(0,65%)]">
       {/* LEFT — promo showcase, with the header floating over the photo. */}
       <aside className="relative hidden h-full overflow-hidden lg:block">
-        <SupplyCategoryAside items={promo} kicker={tr ? 'Vitrin' : 'Showcase'} />
+        <SupplyCategoryAside items={promo} />
 
         <div className="absolute inset-x-0 top-0 z-30">
           <div

@@ -1,21 +1,19 @@
-# /supply Sinematik Sahne — foto klasörü
+# /supply sol vitrin — promo görselleri
 
-Buraya konan görseller, **/supply** sayfasının SAĞ "sahne"sinde, sol listeden
-seçilen (veya kendiliğinden akan) kategoriye göre gösterilir.
+Buraya konan görseller **/supply** sol panelinde sırayla (yumuşak cross-fade)
+gösterilir. Sloganlar (başlık + açıklama) site içinde, görselin üst alanına
+sol hizalı yazılır — başlıkları/açıklamaları/linkleri `app/supply/page.tsx`
+içindeki `PROMO` dizisinden düzenleyebilirsin.
 
 - **Yer:** `public/supply/stage/`
-- **Dosya adı = kategori slug'ı** (aşağıda). Uzantı: `.webp` (tercih) veya `.jpg`.
-- **Boyut:** 1:1 kare, **1600×1600**, konu ortada + ~%15 kenar payı.
-- Koyduğun an otomatik kullanılır. Yoksa eski görsel → o da yoksa soft gradient + isim.
-- Promptlar için sohbetteki **MASTER (v2 soft & minimalist)** + supply konu satırları.
+- **Dosya adı = slug** (aşağıda), uzantı `.webp` (tercih) / `.png` / `.jpg`.
+  Ham png/jpg yerelde önizlenir ama git'e gitmez; webp'ye çevrilip commit edilir.
+- **Boyut:** 2:3 dikey, ~1200×1800, üst alanı sloganlar için sade/boş bırak.
 
-## Gerekli dosyalar (8)
+## Dosyalar
 
-cables-glands.webp
-msb-components.webp
-motors-drives.webp
-automation-plc.webp
-marine-sensors.webp
-radar-navigation.webp
-deck-mechanical.webp
-engine-room-consumables.webp
+USPortsWeServe            — Serving U.S. Ports
+PortAccessCertified       — Port Access Ready
+SmartProductsforVessels   — Smart Marine Technologies
+QualityAssuredSupply      — Quality Assured Supply
+ReplacementCrossReference — Obsolete Part?

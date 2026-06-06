@@ -1,7 +1,0 @@
-# Serve & commit optimised .webp only. Raw exports (png/jpg) preview locally
-# but are converted to webp before commit, so they stay out of git/deploy.
-*.png
-*.PNG
-*.jpg
-*.JPG
-*.jpeg
