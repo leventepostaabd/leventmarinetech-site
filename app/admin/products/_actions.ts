@@ -39,6 +39,10 @@ export type ProductInput = {
   source?: string;
   source_url?: string;
   tags?: string[];
+  /** Technical attributes (name/value) — stored as a jsonb object. */
+  specs?: { name: string; value: string }[];
+  /** Manufacturer datasheet (PDF) URL — shown to customers. */
+  datasheet_url?: string;
   published?: boolean;
 };
 
@@ -73,6 +77,15 @@ function toRow(input: ProductInput) {
     source: input.source?.trim() || null,
     source_url: input.source_url?.trim() || null,
     tags: input.tags ?? [],
+    specs:
+      input.specs && input.specs.length
+        ? Object.fromEntries(
+            input.specs
+              .filter((s) => s.name.trim())
+              .map((s) => [s.name.trim(), s.value.trim()])
+          )
+        : {},
+    datasheet_url: input.datasheet_url?.trim() || null,
     published: input.published ?? true,
     updated_at: new Date().toISOString()
   };

@@ -34,6 +34,8 @@ export default async function AdminProducts() {
     source: p.source ?? '',
     source_url: p.source_url ?? '',
     tags: p.tags ?? [],
+    specs: Object.entries(p.specs ?? {}).map(([name, value]) => ({ name, value: String(value) })),
+    datasheet_url: p.datasheetUrl ?? '',
     published: p.published
   }));
 

@@ -73,7 +73,11 @@ export default async function SupplyIndex() {
     description: (locale === 'tr' ? p.description_tr : p.description_en) ?? p.shortDescription ?? '',
     image: p.image ?? '',
     in_stock: p.in_stock ?? p.availability === 'in-stock',
-    price: p.price ?? null
+    price: p.price ?? null,
+    datasheetUrl: p.datasheetUrl ?? null,
+    specs: p.specs
+      ? Object.entries(p.specs).map(([name, value]) => ({ name, value: String(value) }))
+      : []
   }));
 
   const promo: CatItem[] = PROMO.map((p) => ({

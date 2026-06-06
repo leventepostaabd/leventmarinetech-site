@@ -36,6 +36,8 @@ export type AdminProduct = {
   source: string;
   source_url: string;
   tags: string[];
+  specs: { name: string; value: string }[];
+  datasheet_url: string;
   published: boolean;
 };
 
@@ -66,6 +68,8 @@ function emptyForm(categories: CategoryOption[]): FormState {
     source: '',
     source_url: '',
     tags: '',
+    specs: [],
+    datasheet_url: '',
     published: true
   };
 }
@@ -127,6 +131,16 @@ export default function ProductAdminClient({
     setForm((f) => ({ ...f, [key]: value }));
   }
 
+  function setSpec(i: number, key: 'name' | 'value', value: string) {
+    setForm((f) => ({ ...f, specs: f.specs.map((s, idx) => (idx === i ? { ...s, [key]: value } : s)) }));
+  }
+  function addSpec() {
+    setForm((f) => ({ ...f, specs: [...f.specs, { name: '', value: '' }] }));
+  }
+  function removeSpec(i: number) {
+    setForm((f) => ({ ...f, specs: f.specs.filter((_, idx) => idx !== i) }));
+  }
+
   async function onPickImage(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -167,6 +181,8 @@ export default function ProductAdminClient({
       source: form.source,
       source_url: form.source_url,
       tags: form.tags.split(',').map((t) => t.trim()).filter(Boolean),
+      specs: form.specs.filter((s) => s.name.trim()),
+      datasheet_url: form.datasheet_url,
       published: form.published
     };
     try {
@@ -318,6 +334,45 @@ export default function ProductAdminClient({
               </Field>
               <Field label="Uzun Açıklama" full>
                 <textarea value={form.long_description} onChange={(e) => set('long_description', e.target.value)} rows={3} className={inputCls} />
+              </Field>
+
+              <Field label="Teknik Özellikler (ürün detayında tablo olarak gösterilir)" full>
+                <div className="space-y-2">
+                  {form.specs.map((s, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <input
+                        value={s.name}
+                        onChange={(e) => setSpec(i, 'name', e.target.value)}
+                        placeholder="Özellik (örn. Anma akımı)"
+                        className={`${inputCls} flex-1`}
+                      />
+                      <input
+                        value={s.value}
+                        onChange={(e) => setSpec(i, 'value', e.target.value)}
+                        placeholder="Değer (örn. 100 A)"
+                        className={`${inputCls} flex-1`}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeSpec(i)}
+                        aria-label="Özelliği kaldır"
+                        className="shrink-0 px-2 text-[18px] leading-none text-red-600 hover:text-red-700"
+                      >×</button>
+                    </div>
+                  ))}
+                  <button type="button" onClick={addSpec} className="btn-ghost btn-sm">
+                    + Özellik ekle
+                  </button>
+                </div>
+              </Field>
+
+              <Field label="Datasheet URL (teknik föy PDF — müşteriye gösterilir)" full>
+                <input
+                  value={form.datasheet_url}
+                  onChange={(e) => set('datasheet_url', e.target.value)}
+                  placeholder="https://…"
+                  className={inputCls}
+                />
               </Field>
 
               <Field label="Fiyat (USD) — girilirse müşteriye gösterilir">
