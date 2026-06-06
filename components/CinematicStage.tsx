@@ -113,6 +113,18 @@ export default function CinematicStage({
           aria-hidden
           className="pointer-events-none absolute inset-y-0 right-0 z-10 w-56 bg-gradient-to-l from-[#EFF4FB] via-[#EFF4FB]/55 to-transparent"
         />
+
+        {/* Header floats over the photo (desktop): hamburger, logo, locale — on
+            a soft whitening scrim, no solid bar. */}
+        <div className="absolute inset-x-0 top-0 z-30">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-white/75 via-white/35 to-transparent"
+          />
+          <div className="relative px-2 md:px-3">
+            <InlineHeader locale={locale} />
+          </div>
+        </div>
       </aside>
 
       {/* RIGHT — header + heading + search + interactive cards. Background tinted
@@ -121,9 +133,12 @@ export default function CinematicStage({
         className="flex h-full min-h-0 flex-col bg-[#EFF4FB]"
         style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}
       >
-        <div className="relative z-10 shrink-0 bg-[#EFF4FB] px-5 pb-3 shadow-[0_14px_26px_-18px_rgba(11,31,58,0.4)] md:px-8">
-          <InlineHeader locale={locale} />
-          <h1 className="mt-1 font-head text-[24px] md:text-[30px] lg:text-[34px] font-extrabold leading-[1.08] tracking-[-0.01em] text-ink">
+        <div className="relative z-10 shrink-0 bg-[#EFF4FB] px-5 pb-3 pt-2 shadow-[0_14px_26px_-18px_rgba(11,31,58,0.4)] md:px-8 lg:pt-6">
+          {/* Mobile keeps the header here; on desktop it floats over the photo. */}
+          <div className="lg:hidden">
+            <InlineHeader locale={locale} />
+          </div>
+          <h1 className="mt-1 font-head text-[24px] font-extrabold leading-[1.08] tracking-[-0.01em] text-ink md:text-[30px] lg:mt-0 lg:text-[34px]">
             {heading}
           </h1>
           <p className="mt-2 max-w-md text-[13.5px] leading-relaxed text-ink-muted">{sub}</p>
