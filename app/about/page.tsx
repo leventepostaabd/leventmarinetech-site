@@ -28,9 +28,21 @@ export const metadata: Metadata = {
   }
 };
 
+const ABOUT_EN = [
+  'Levent Marine Tech is a U.S.-based company providing electro-technical services, engineering support, and technical spare-part supply for commercial vessels.',
+  'Founded in 2025 by a marine electrical and control systems engineer with extensive seagoing and shore-based experience across various vessel types, the company combines practical expertise with a responsive, solution-oriented approach.',
+  'We deliver reliable and timely services in fault diagnosis, maintenance, commissioning, technical support, and spare-part sourcing, helping vessel operators and technical management teams maintain safe and efficient operations.'
+];
+const ABOUT_TR = [
+  'Levent Marine Tech, ticari gemiler için elektro-teknik hizmetler, mühendislik desteği ve teknik yedek parça tedariği sunan ABD merkezli bir şirkettir.',
+  '2025 yılında, farklı gemi tiplerinde kapsamlı deniz ve kara tecrübesine sahip bir gemi elektrik ve kontrol sistemleri mühendisi tarafından kurulmuştur; pratik uzmanlığı hızlı ve çözüm odaklı bir yaklaşımla birleştirir.',
+  'Arıza teşhisi, bakım, devreye alma, teknik destek ve yedek parça tedariğinde güvenilir ve zamanında hizmet sunarak gemi işletmecilerinin ve teknik yönetim ekiplerinin güvenli ve verimli operasyon sürdürmesine yardımcı oluruz.'
+];
+
 export default function AboutPage() {
   const locale = getLocale();
   const t = getTranslator(locale);
+  const about = locale === 'tr' ? ABOUT_TR : ABOUT_EN;
 
   const breadcrumb = breadcrumbSchema([
     { name: 'Home',  url: `${SITE.url}/` },
@@ -53,16 +65,21 @@ export default function AboutPage() {
             credentials marquee tucked underneath. Narrative floats high in the
             cleared interior so it never covers the Gulf ports. */}
         <section className="pt-20">
-          <div className="relative mx-auto h-[70vh] w-full max-w-[1180px] px-4">
+          <div className="relative mx-auto w-full max-w-[1180px] px-4">
             {/* Fill the box, bottom-anchored on the Gulf; only the empty top sky
                 is trimmed — northern ports and bottom labels stay. */}
             <USAMap fit transparent />
 
             <div className="pointer-events-none absolute inset-0 flex items-start justify-center px-4 pt-[3%]">
-              <div className="pointer-events-auto w-full max-w-2xl rounded-[28px] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.96)_62%,rgba(255,255,255,0)_100%)] px-6 py-5 text-center">
-                <p className="text-balance text-[16px] font-medium leading-relaxed text-navy-700 md:text-[19px]">
-                  {t('about.lead')}
-                </p>
+              <div className="pointer-events-auto w-full max-w-2xl space-y-3 rounded-[28px] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.97)_64%,rgba(255,255,255,0)_100%)] px-6 py-5 text-center">
+                {about.map((p, i) => (
+                  <p
+                    key={i}
+                    className={`leading-relaxed text-navy-700 ${i === 0 ? 'text-[15px] font-semibold md:text-[17px]' : 'text-[13px] font-normal text-ink-muted md:text-[14px]'}`}
+                  >
+                    {p}
+                  </p>
+                ))}
               </div>
             </div>
           </div>
