@@ -42,7 +42,7 @@ export default function Hero({
         <HeroDoor
           side="left"
           /* User-provided main artwork for the Service door — Wave 4 swap. */
-          image="/hero/servicesmain.png"
+          image="/hero/servicesmain.webp"
           label={ct(locale, 'nav.service')}
           kicker={ct(locale, 'home.doorServiceKicker')}
           ctaHref="/services"
@@ -51,7 +51,7 @@ export default function Hero({
         <HeroDoor
           side="right"
           /* User-provided main artwork for the Supply door — Wave 4 swap. */
-          image="/hero/supplymain.png"
+          image="/hero/supplymain.webp"
           label={ct(locale, 'nav.supply')}
           kicker={ct(locale, 'home.doorSupplyKicker')}
           ctaHref="/supply"

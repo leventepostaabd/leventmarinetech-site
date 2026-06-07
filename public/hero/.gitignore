@@ -1,0 +1,5 @@
+# Hero served as optimised webp; keep raw png exports local only.
+*.png
+*.PNG
+*.jpg
+*.JPG
