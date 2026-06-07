@@ -8,14 +8,11 @@ import { organizationSchema, breadcrumbSchema } from '@/lib/schema-org';
 import { getLocale, getTranslator } from '@/lib/i18n';
 
 /**
- * /about — long-form profile.
+ * /about — compact profile.
  *
- * Light, corporate palette throughout (white + navy-50 alternating bands,
- * amber accents). Compact section list, no repetition: hero with stats,
- * credentials marquee (RTL, modal on tap), one engineer-background block
- * with class authorities + equipment as inline chip rows, US coverage map
- * with the Gulf coast highlighted as the primary work area, client logo
- * strip, CTA. Server-rendered with full metadata + JSON-LD.
+ * Title + position, then the credentials marquee, then a full-bleed US
+ * coverage map whose empty interior carries the about narrative on a
+ * feathered white panel (Gulf Coast = primary area). Client logos + CTA close.
  */
 export const metadata: Metadata = {
   title: 'About — Marine Electrical Service & Parts Supply',
@@ -32,18 +29,11 @@ export const metadata: Metadata = {
 
 const CLASS_AUTHORITIES = ['DNV', 'BV', 'ABS', "Lloyd's Register", 'TL', 'RINA', 'ClassNK', 'IRS'] as const;
 
-const EQUIPMENT = [
-  { kit: 'Insulation',        tools: 'Megger MIT525 · Fluke 1587 FC' },
-  { kit: 'Power Quality',     tools: 'Hioki PW3198 · Yokogawa CW240' },
-  { kit: 'Thermography',      tools: 'FLIR T540 · FLIR E96' },
-  { kit: 'Protection Relay',  tools: 'OMICRON CMC 356 · SVERKER 900' },
-  { kit: 'Earth Loop',        tools: 'Fluke 1664 FC · Megger DLRO10HD' },
-  { kit: 'Marine Comms',      tools: 'JRC · Furuno · Sailor terminals' }
-];
-
 export default function AboutPage() {
   const locale = getLocale();
   const t = getTranslator(locale);
+  const tr = locale === 'tr';
+
   const breadcrumb = breadcrumbSchema([
     { name: 'Home',  url: `${SITE.url}/` },
     { name: 'About', url: `${SITE.url}/about` }
@@ -57,118 +47,61 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="lm-screen bg-white">
-      <article className="lm-screen-body">
-        {/* HERO — light, with inline stats. */}
-        <section className="bg-white pt-10 pb-10 md:pt-14 md:pb-12 border-b border-line">
-          <div className="container-x">
-            <div className="kicker mb-3 text-amber-700">{t('about.kicker')}</div>
-            <h1 className="text-balance max-w-4xl text-[26px] md:text-[36px] leading-[1.1] text-navy-700">
-              {t('about.h1')}
-            </h1>
-            <p className="mt-3 font-mono text-[11px] md:text-[12px] uppercase tracking-[0.18em] text-amber-700">
-              {t('about.position')}
-            </p>
-            <p className="mt-5 text-[15px] md:text-[17px] text-ink-muted max-w-3xl leading-relaxed">
-              {t('about.lead')}
-            </p>
-
-            <ul className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl">
-              <li className="rounded-xl bg-navy-50/60 ring-1 ring-line/60 px-4 py-3">
-                <div className="font-head font-extrabold text-[28px] text-navy-700 leading-none">19</div>
-                <div className="mt-1 font-mono text-[10.5px] uppercase tracking-[0.12em] text-ink-subtle">{t('about.statsYearsLbl')}</div>
-              </li>
-              <li className="rounded-xl bg-navy-50/60 ring-1 ring-line/60 px-4 py-3">
-                <div className="font-head font-extrabold text-[28px] text-navy-700 leading-none">25</div>
-                <div className="mt-1 font-mono text-[10.5px] uppercase tracking-[0.12em] text-ink-subtle">{t('about.statsPortsLbl')}</div>
-              </li>
-              <li className="rounded-xl bg-navy-50/60 ring-1 ring-line/60 px-4 py-3">
-                <div className="font-head font-extrabold text-[28px] text-navy-700 leading-none">24/7</div>
-                <div className="mt-1 font-mono text-[10.5px] uppercase tracking-[0.12em] text-ink-subtle">{t('about.statsAogLbl')}</div>
-              </li>
-              <li className="rounded-xl bg-navy-50/60 ring-1 ring-line/60 px-4 py-3">
-                <div className="font-head font-extrabold text-[28px] text-navy-700 leading-none">8</div>
-                <div className="mt-1 font-mono text-[10.5px] uppercase tracking-[0.12em] text-ink-subtle">{t('about.statsClassLbl')}</div>
-              </li>
-            </ul>
-          </div>
+    <div className="bg-white">
+      <article>
+        {/* TITLE + position */}
+        <section className="container-x pt-10 md:pt-14">
+          <div className="kicker mb-3 text-amber-700">{t('about.kicker')}</div>
+          <h1 className="text-balance max-w-4xl text-[26px] leading-[1.1] text-navy-700 md:text-[36px]">
+            {t('about.h1')}
+          </h1>
+          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-amber-700 md:text-[12px]">
+            {t('about.position')}
+          </p>
         </section>
 
-        {/* CREDENTIALS — RTL marquee, tap any chip to open the scan + description */}
-        <section className="py-10 md:py-12 bg-white">
-          <div className="container-x">
-            <div className="flex items-end justify-between gap-4 mb-4">
-              <div>
-                <div className="kicker mb-2 text-amber-700">{t('about.certsKicker')}</div>
-                <h2 className="text-[22px] md:text-[24px] text-navy-700 max-w-3xl">
-                  {t('about.certsH2')}
-                </h2>
-              </div>
-              <p className="hidden sm:block text-[12.5px] text-ink-subtle max-w-xs text-right">
-                {t('about.certsTapHint')}
-              </p>
-            </div>
-            <CertMarquee viewLabel={t('about.viewCert')} />
-          </div>
-        </section>
-
-        {/* BACKGROUND — single block, with class authorities + equipment chips */}
-        <section className="py-12 md:py-16 bg-navy-50/40 border-y border-line">
-          <div className="container-x grid gap-10 md:grid-cols-[1.2fr_1fr]">
+        {/* CREDENTIALS — moved up, right under the title */}
+        <section className="container-x pt-7 pb-10 md:pb-12">
+          <div className="mb-4 flex items-end justify-between gap-4">
             <div>
-              <div className="kicker mb-3 text-amber-700">{t('about.backgroundKicker')}</div>
-              <h2 className="mb-4 text-[24px] md:text-[26px] text-navy-700">{t('about.backgroundH2')}</h2>
-              <p className="text-ink-muted leading-relaxed mb-4 text-[14.5px]">
-                {t('about.backgroundP1')}
-              </p>
-              <p className="text-ink-muted leading-relaxed text-[14.5px]">
-                {t('about.backgroundP2')}
-              </p>
+              <div className="kicker mb-2 text-amber-700">{t('about.certsKicker')}</div>
+              <h2 className="max-w-3xl text-[20px] text-navy-700 md:text-[22px]">{t('about.certsH2')}</h2>
             </div>
-            <div className="flex flex-col gap-6">
-              {/* Class authorities */}
-              <div>
+            <p className="hidden max-w-xs text-right text-[12.5px] text-ink-subtle sm:block">
+              {t('about.certsTapHint')}
+            </p>
+          </div>
+          <CertMarquee viewLabel={t('about.viewCert')} />
+        </section>
+
+        {/* COVERAGE — full-bleed map, narrative floated in the empty interior */}
+        <section className="relative w-full border-y border-line bg-white">
+          <USAMap transparent />
+
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-4 md:justify-start md:pl-[7%]">
+            <div className="pointer-events-auto w-full max-w-lg rounded-[28px] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.97)_56%,rgba(255,255,255,0)_100%)] p-7 text-center md:p-10 md:text-left">
+              <div className="kicker mb-2 text-amber-700">{t('about.coverageKicker')}</div>
+              <p className="text-[14.5px] leading-relaxed text-ink-muted md:text-[15.5px]">
+                {t('about.lead')}
+              </p>
+
+              <div className="mt-5">
                 <div className="kicker mb-2 text-amber-700">{t('about.classKicker')}</div>
-                <p className="text-[13px] text-ink-muted mb-3 leading-relaxed">{t('about.classLead')}</p>
-                <ul className="flex flex-wrap gap-1.5">
+                <ul className="flex flex-wrap justify-center gap-1.5 md:justify-start">
                   {CLASS_AUTHORITIES.map((c) => (
                     <li
                       key={c}
-                      className="inline-flex items-center px-3 py-1.5 rounded-md bg-white ring-1 ring-line font-mono text-[11.5px] font-semibold tracking-wide text-navy-700"
+                      className="inline-flex items-center rounded-md bg-white px-2.5 py-1 font-mono text-[11px] font-semibold tracking-wide text-navy-700 ring-1 ring-line"
                     >
                       {c}
                     </li>
                   ))}
                 </ul>
               </div>
-              {/* Equipment */}
-              <div>
-                <div className="kicker mb-2 text-amber-700">{t('about.equipmentKicker')}</div>
-                <ul className="divide-y divide-line/60 rounded-md bg-white ring-1 ring-line">
-                  {EQUIPMENT.map((e) => (
-                    <li key={e.kit} className="flex items-center justify-between gap-4 px-3 py-2">
-                      <span className="font-head font-bold text-ink text-[13.5px]">{e.kit}</span>
-                      <span className="font-mono text-[11.5px] text-ink-subtle text-right">{e.tools}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
 
-        {/* COVERAGE MAP — light, Gulf emphasised */}
-        <section className="py-12 md:py-16 bg-white">
-          <div className="container-x">
-            <div className="max-w-3xl mb-6">
-              <div className="kicker mb-2 text-amber-700">{t('about.coverageKicker')}</div>
-              <h2 className="text-[24px] md:text-[26px] text-navy-700">{t('about.coverageH2')}</h2>
-              <p className="mt-3 text-ink-muted text-[14.5px] leading-relaxed">
-                {t('about.coverageLead')}
+              <p className="mt-4 font-mono text-[10.5px] uppercase tracking-[0.12em] text-ink-subtle">
+                {tr ? 'Kalibreli test ekipmanı' : 'Calibrated test gear'} · Megger · FLIR · OMICRON · Fluke · Hioki
               </p>
-            </div>
-            <div className="rounded-xl overflow-hidden ring-1 ring-line bg-white">
-              <USAMap />
             </div>
           </div>
         </section>
@@ -177,11 +110,11 @@ export default function AboutPage() {
         <LogoStrip />
 
         {/* CTA */}
-        <section className="py-16 md:py-20 bg-white border-t border-line">
+        <section className="border-t border-line bg-white py-16 md:py-20">
           <div className="container-x text-center">
-            <div className="kicker justify-center mb-3 inline-block text-amber-700">{t('about.nextStepKicker')}</div>
-            <h2 className="mb-4 max-w-2xl mx-auto text-navy-700">{t('about.nextStepH2')}</h2>
-            <p className="text-ink-muted max-w-2xl mx-auto mb-7 text-[15px] leading-relaxed">
+            <div className="kicker mb-3 inline-block justify-center text-amber-700">{t('about.nextStepKicker')}</div>
+            <h2 className="mx-auto mb-4 max-w-2xl text-navy-700">{t('about.nextStepH2')}</h2>
+            <p className="mx-auto mb-7 max-w-2xl text-[15px] leading-relaxed text-ink-muted">
               {t('about.nextStepLead')}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
@@ -195,20 +128,14 @@ export default function AboutPage() {
                 {t('about.contact')}
               </Link>
             </div>
-            <p className="mt-8 text-[11px] font-mono uppercase tracking-[0.14em] text-ink-subtle">
+            <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-subtle">
               {SITE.legalName} · {t('about.finePrint')}
             </p>
           </div>
         </section>
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(profile) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(profile) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       </article>
     </div>
   );

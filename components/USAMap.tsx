@@ -129,7 +129,7 @@ const HQ_XY = project(-81.4, 28.1);
 // Soft amber halo for the Gulf primary area — placed under the Gulf coast
 const GULF_HALO_XY = project(-91.0, 27.5);
 
-export default function USAMap({ className = '' }: { className?: string }) {
+export default function USAMap({ className = '', transparent = false }: { className?: string; transparent?: boolean }) {
   return (
     <figure
       className={`relative w-full aspect-[16/10] ${className}`}
@@ -201,8 +201,8 @@ export default function USAMap({ className = '' }: { className?: string }) {
           </radialGradient>
         </defs>
 
-        {/* Ocean background */}
-        <rect x="0" y="0" width={W} height={H} fill="url(#lm-ocean-light)" />
+        {/* Ocean background (omitted when transparent — map sits on the page) */}
+        {!transparent && <rect x="0" y="0" width={W} height={H} fill="url(#lm-ocean-light)" />}
 
         {/* Subtle graticule — barely visible on light bg */}
         <g stroke="rgba(11,31,58,0.05)" strokeWidth="1">
