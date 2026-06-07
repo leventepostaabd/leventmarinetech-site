@@ -53,11 +53,12 @@ export default function AboutPage() {
             credentials marquee tucked underneath. Narrative floats high in the
             cleared interior so it never covers the Gulf ports. */}
         <section className="pt-20">
-          <div className="relative mx-auto w-full max-w-[1180px] px-4">
-            {/* Natural aspect — nothing cropped; just a tick inset from full width. */}
-            <USAMap transparent />
+          <div className="relative mx-auto h-[70vh] w-full max-w-[1180px] px-4">
+            {/* Fill the box, bottom-anchored on the Gulf; only the empty top sky
+                is trimmed — northern ports and bottom labels stay. */}
+            <USAMap fit transparent />
 
-            <div className="pointer-events-none absolute inset-0 flex items-start justify-center px-4 pt-[4%]">
+            <div className="pointer-events-none absolute inset-0 flex items-start justify-center px-4 pt-[3%]">
               <div className="pointer-events-auto w-full max-w-2xl rounded-[28px] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.96)_62%,rgba(255,255,255,0)_100%)] px-6 py-5 text-center">
                 <p className="text-balance text-[16px] font-medium leading-relaxed text-navy-700 md:text-[19px]">
                   {t('about.lead')}
