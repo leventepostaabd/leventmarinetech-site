@@ -111,8 +111,6 @@ const PORTS: Port[] = [
   { id: 'tacoma',     name: 'Tacoma',             lng: -122.44, lat: 47.25, region: 'west' },
   { id: 'portland',   name: 'Portland',           lng: -122.68, lat: 45.52, region: 'west' },
   // Great Lakes
-  { id: 'duluth',     name: 'Duluth',             lng: -92.10, lat: 46.79, region: 'lakes' },
-  { id: 'cleveland',  name: 'Cleveland',          lng: -81.69, lat: 41.50, region: 'lakes' },
   // Alaska / Hawaii (Albers USA insets)
   { id: 'anchorage',  name: 'Anchorage (AK)',     lng: -149.90, lat: 61.22, region: 'noncontig' },
   { id: 'honolulu',   name: 'Honolulu (HI)',      lng: -157.86, lat: 21.31, region: 'noncontig' }
@@ -129,10 +127,10 @@ const HQ_XY = project(-81.4, 28.1);
 // Soft amber halo for the Gulf primary area — placed under the Gulf coast
 const GULF_HALO_XY = project(-91.0, 27.5);
 
-export default function USAMap({ className = '', transparent = false }: { className?: string; transparent?: boolean }) {
+export default function USAMap({ className = '', transparent = false, fit = false }: { className?: string; transparent?: boolean; fit?: boolean }) {
   return (
     <figure
-      className={`relative w-full aspect-[16/10] ${className}`}
+      className={`relative ${fit ? 'h-full w-full' : 'w-full aspect-[16/10]'} ${className}`}
       aria-label="Map of the United States showing Levent Marine's Florida operations base and the major US ports served 24/7, with the Gulf Coast highlighted as the primary work area"
     >
       <style>{`
@@ -169,7 +167,7 @@ export default function USAMap({ className = '', transparent = false }: { classN
         xmlns="http://www.w3.org/2000/svg"
         role="img"
         aria-labelledby="usa-map-title usa-map-desc"
-        className="w-full h-auto"
+        className={fit ? 'h-full w-full' : 'w-full h-auto'}
         preserveAspectRatio="xMidYMid meet"
       >
         <title id="usa-map-title">US Port Coverage Map</title>
@@ -203,16 +201,6 @@ export default function USAMap({ className = '', transparent = false }: { classN
 
         {/* Ocean background (omitted when transparent — map sits on the page) */}
         {!transparent && <rect x="0" y="0" width={W} height={H} fill="url(#lm-ocean-light)" />}
-
-        {/* Subtle graticule — barely visible on light bg */}
-        <g stroke="rgba(11,31,58,0.05)" strokeWidth="1">
-          {[80, 160, 240, 320, 400, 480, 560].map((y) => (
-            <line key={`h${y}`} x1="0" y1={y} x2={W} y2={y} />
-          ))}
-          {[120, 240, 360, 480, 600, 720, 840].map((x) => (
-            <line key={`v${x}`} x1={x} y1="0" x2={x} y2={H} />
-          ))}
-        </g>
 
         {/* Gulf primary-area halo — below states, soft amber radial */}
         {GULF_HALO_XY && (
