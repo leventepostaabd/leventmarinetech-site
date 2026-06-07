@@ -130,7 +130,7 @@ const GULF_HALO_XY = project(-91.0, 27.5);
 export default function USAMap({ className = '', transparent = false, fit = false }: { className?: string; transparent?: boolean; fit?: boolean }) {
   return (
     <figure
-      className={`relative ${fit ? 'w-full aspect-[960/530]' : 'w-full aspect-[16/10]'} ${className}`}
+      className={`relative ${fit ? 'h-full w-full' : 'w-full aspect-[16/10]'} ${className}`}
       aria-label="Map of the United States showing Levent Marine's Florida operations base and the major US ports served 24/7, with the Gulf Coast highlighted as the primary work area"
     >
       <style>{`
@@ -167,7 +167,7 @@ export default function USAMap({ className = '', transparent = false, fit = fals
         xmlns="http://www.w3.org/2000/svg"
         role="img"
         aria-labelledby="usa-map-title usa-map-desc"
-        className="w-full h-auto"
+        className={fit ? 'h-full w-full' : 'w-full h-auto'}
         preserveAspectRatio="xMidYMid meet"
       >
         <title id="usa-map-title">US Port Coverage Map</title>

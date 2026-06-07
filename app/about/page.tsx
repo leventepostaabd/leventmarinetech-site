@@ -64,14 +64,14 @@ export default function AboutPage() {
         {/* FIRST SCREEN — map fills the view (Gulf anchored at the bottom),
             credentials marquee tucked underneath. Narrative floats high in the
             cleared interior so it never covers the Gulf ports. */}
-        <section className="pt-20">
-          <div className="relative mx-auto w-full max-w-[1180px] px-4">
-            {/* Fill the box, bottom-anchored on the Gulf; only the empty top sky
-                is trimmed — northern ports and bottom labels stay. */}
+        {/* FIRST SCREEN — small header gap, the map in a fixed box that leaves
+            room for the credentials marquee right under it (both always in view). */}
+        <section className="pt-16">
+          <div className="relative mx-auto h-[calc(100svh-13rem)] min-h-[360px] w-full px-2">
             <USAMap fit transparent />
 
-            <div className="pointer-events-none absolute inset-0 flex items-start justify-center px-4 pt-[3%]">
-              <div className="pointer-events-auto w-full max-w-2xl space-y-3 rounded-[28px] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.97)_64%,rgba(255,255,255,0)_100%)] px-6 py-5 text-center">
+            <div className="pointer-events-none absolute inset-0 flex items-start justify-center px-4 pt-[2%]">
+              <div className="pointer-events-auto w-full max-w-2xl space-y-3 rounded-[28px] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.97)_64%,rgba(255,255,255,0)_100%)] px-6 py-4 text-center">
                 {about.map((p, i) => (
                   <p
                     key={i}
@@ -85,8 +85,8 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Credentials — peek under the map on the first screen */}
-        <section className="px-4 pb-3 pt-1 md:px-8">
+        {/* Credentials — right under the map, on the first screen */}
+        <section className="px-4 pb-3 md:px-8">
           <CertMarquee viewLabel={t('about.viewCert')} />
         </section>
 
