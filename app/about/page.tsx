@@ -47,30 +47,12 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="bg-white">
-      <article>
-        {/* TITLE + position */}
-        <section className="container-x pt-10 md:pt-14">
-          <div className="kicker mb-3 text-amber-700">{t('about.kicker')}</div>
-          <h1 className="text-balance max-w-4xl text-[26px] leading-[1.1] text-navy-700 md:text-[36px]">
-            {t('about.h1')}
-          </h1>
-          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-amber-700 md:text-[12px]">
-            {t('about.position')}
-          </p>
-        </section>
-
-        {/* CREDENTIALS — moved up, right under the title */}
-        <section className="container-x pt-7 pb-10 md:pb-12">
-          <div className="mb-4 flex items-end justify-between gap-4">
-            <div>
-              <div className="kicker mb-2 text-amber-700">{t('about.certsKicker')}</div>
-              <h2 className="max-w-3xl text-[20px] text-navy-700 md:text-[22px]">{t('about.certsH2')}</h2>
-            </div>
-            <p className="hidden max-w-xs text-right text-[12.5px] text-ink-subtle sm:block">
-              {t('about.certsTapHint')}
-            </p>
-          </div>
+    <div className="lm-screen bg-white">
+      <article className="lm-screen-body">
+        {/* Certifications flow straight in (headings removed per request).
+            sr-only h1 keeps the page titled for SEO / a11y. */}
+        <h1 className="sr-only">{t('about.h1')} — {t('about.position')}</h1>
+        <section className="container-x pt-8 pb-8 md:pt-10 md:pb-10">
           <CertMarquee viewLabel={t('about.viewCert')} />
         </section>
 
@@ -78,8 +60,8 @@ export default function AboutPage() {
         <section className="relative w-full border-y border-line bg-white">
           <USAMap transparent />
 
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-4 md:justify-start md:pl-[7%]">
-            <div className="pointer-events-auto w-full max-w-lg rounded-[28px] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.97)_56%,rgba(255,255,255,0)_100%)] p-7 text-center md:p-10 md:text-left">
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-4">
+            <div className="pointer-events-auto w-full max-w-md rounded-[28px] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.97)_58%,rgba(255,255,255,0)_100%)] p-7 text-center md:p-9">
               <div className="kicker mb-2 text-amber-700">{t('about.coverageKicker')}</div>
               <p className="text-[14.5px] leading-relaxed text-ink-muted md:text-[15.5px]">
                 {t('about.lead')}
@@ -87,7 +69,7 @@ export default function AboutPage() {
 
               <div className="mt-5">
                 <div className="kicker mb-2 text-amber-700">{t('about.classKicker')}</div>
-                <ul className="flex flex-wrap justify-center gap-1.5 md:justify-start">
+                <ul className="flex flex-wrap justify-center gap-1.5">
                   {CLASS_AUTHORITIES.map((c) => (
                     <li
                       key={c}

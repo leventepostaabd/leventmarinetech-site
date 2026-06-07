@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import LocaleToggle from './LocaleToggle';
 import LeventLogo from './LeventLogo';
-import LogoLockup from './LogoLockup';
 import { whatsappUrl } from '@/lib/whatsapp';
 import { ct } from '@/lib/i18n-client';
 
@@ -112,35 +111,24 @@ export default function TopBar({ locale }: { locale: Locale }) {
           `}</style>
         </span>
 
-        {isHeroLike ? (
-          /* Homepage — full "Levent Marine Tech" lockup, left-aligned (matches
-             /services + /supply), a tick larger, dark on the bright artwork. */
-          <Link
-            href="/"
-            aria-label="Levent Marine Tech — home"
-            className="absolute left-1/2 top-1/2 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-3 no-underline transition hover:opacity-90"
-          >
-            <LeventLogo size={38} />
-            <span className="flex flex-col leading-none">
-              <span className="font-head text-[22px] font-extrabold tracking-[-0.01em] text-navy-700 sm:text-[26px]">
-                Levent Marine <span className="text-amber-500">Tech</span>
-              </span>
-              <span aria-hidden className="mt-1.5 h-px w-full bg-amber/70" />
-              <span className="mt-1.5 font-mono text-[9.5px] uppercase tracking-[0.24em] text-ink-subtle sm:text-[10px]">
-                Electro-Technical Solutions
-              </span>
+        {/* Brand lockup — the same "Levent Marine Tech" form on every page,
+            centered (matches /services + /supply). */}
+        <Link
+          href="/"
+          aria-label="Levent Marine Tech — home"
+          className="absolute left-1/2 top-1/2 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-3 no-underline transition hover:opacity-90"
+        >
+          <LeventLogo size={38} />
+          <span className="flex flex-col leading-none">
+            <span className="font-head text-[22px] font-extrabold tracking-[-0.01em] text-navy-700 sm:text-[26px]">
+              Levent Marine <span className="text-amber-500">Tech</span>
             </span>
-          </Link>
-        ) : (
-          /* Other pages — badge lockup, centered. */
-          <Link
-            href="/"
-            aria-label="Levent Marine — home"
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 no-underline transition hover:scale-[1.02]"
-          >
-            <LogoLockup variant="C" tone="dark" scale={0.82} />
-          </Link>
-        )}
+            <span aria-hidden className="mt-1.5 h-px w-full bg-amber/70" />
+            <span className="mt-1.5 font-mono text-[9.5px] uppercase tracking-[0.24em] text-ink-subtle sm:text-[10px]">
+              Electro-Technical Solutions
+            </span>
+          </span>
+        </Link>
 
         {/* Locale toggle — right */}
         <div className="ml-auto">
