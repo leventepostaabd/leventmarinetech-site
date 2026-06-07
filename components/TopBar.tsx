@@ -67,23 +67,50 @@ export default function TopBar({ locale }: { locale: Locale }) {
         style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}
         aria-label="Levent Marine top bar"
       >
-        {/* Menu button — left */}
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          aria-label={t('Open menu', 'Menüyü aç')}
-          className={`inline-flex h-10 w-10 items-center justify-center rounded-full ring-1 transition ${
-            isHeroLike
-              ? 'bg-white/80 text-ink ring-line shadow-sm hover:bg-white'
-              : 'bg-white text-ink-muted ring-line hover:text-ink hover:ring-ink/40'
-          }`}
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-            <line x1="3" y1="6" x2="21" y2="6" />
-            <line x1="3" y1="12" x2="21" y2="12" />
-            <line x1="3" y1="18" x2="21" y2="18" />
-          </svg>
-        </button>
+        {/* Menu button — left. On the hero a rotating amber light-sweep ring
+            draws the eye to it. */}
+        <span className="relative inline-flex">
+          {isHeroLike && (
+            <span aria-hidden className="lm-burger-sweep pointer-events-none absolute -inset-[3px] rounded-full" />
+          )}
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-label={t('Open menu', 'Menüyü aç')}
+            className={`relative inline-flex h-10 w-10 items-center justify-center rounded-full ring-1 transition ${
+              isHeroLike
+                ? 'bg-white/85 text-ink ring-line shadow-[0_0_16px_rgba(245,165,36,0.5)] hover:bg-white'
+                : 'bg-white text-ink-muted ring-line hover:text-ink hover:ring-ink/40'
+            }`}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+
+          <style jsx>{`
+            .lm-burger-sweep {
+              background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                transparent 250deg,
+                rgba(245, 165, 36, 0.95) 322deg,
+                transparent 360deg
+              );
+              -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
+              mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
+              animation: lm-burger-spin 3.2s linear infinite;
+            }
+            @keyframes lm-burger-spin {
+              to { transform: rotate(360deg); }
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .lm-burger-sweep { animation: none; opacity: 0.55; }
+            }
+          `}</style>
+        </span>
 
         {isHeroLike ? (
           /* Homepage — full "Levent Marine Tech" lockup, left-aligned (matches
@@ -91,7 +118,7 @@ export default function TopBar({ locale }: { locale: Locale }) {
           <Link
             href="/"
             aria-label="Levent Marine Tech — home"
-            className="ml-3 inline-flex items-center gap-3 no-underline transition hover:opacity-90"
+            className="absolute left-1/2 top-1/2 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-3 no-underline transition hover:opacity-90"
           >
             <LeventLogo size={38} />
             <span className="flex flex-col leading-none">
