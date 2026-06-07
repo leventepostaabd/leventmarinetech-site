@@ -48,13 +48,13 @@ export default function HeroDoor({
           loop
           playsInline
           poster={image}
-          className="absolute inset-0 h-full w-full scale-[1.06] object-cover blur-[2px] brightness-[0.9] contrast-[1.06] saturate-[1.1] transition-transform duration-[1200ms] group-hover:scale-[1.09]"
+          className="absolute inset-0 h-full w-full object-cover contrast-[1.03] saturate-[1.06] transition-transform duration-[1200ms] group-hover:scale-[1.04]"
           aria-hidden
         />
       ) : (
         <div
           aria-hidden
-          className="absolute inset-0 scale-[1.06] bg-cover bg-center blur-[2px] brightness-[0.9] contrast-[1.06] saturate-[1.1] transition-transform duration-[1200ms] group-hover:scale-[1.09]"
+          className="absolute inset-0 bg-cover bg-center contrast-[1.03] saturate-[1.06] transition-transform duration-[1200ms] group-hover:scale-[1.04]"
           style={{ backgroundImage: `url(${image})` }}
         />
       )}
@@ -70,17 +70,17 @@ export default function HeroDoor({
         className={[
           'absolute inset-0',
           side === 'left'
-            ? 'bg-gradient-to-br from-navy-900/55 via-navy-900/22 to-navy-900/5'
-            : 'bg-gradient-to-bl from-navy-900/55 via-navy-900/22 to-navy-900/5'
+            ? 'bg-gradient-to-br from-navy-900/35 via-navy-900/12 to-transparent'
+            : 'bg-gradient-to-bl from-navy-900/35 via-navy-900/12 to-transparent'
         ].join(' ')}
       />
       <div
         aria-hidden
-        className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-navy-900/80 via-navy-900/35 to-transparent"
+        className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-navy-900/45 via-navy-900/15 to-transparent"
       />
       <div
         aria-hidden
-        className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-navy-900/70 via-navy-900/20 to-transparent"
+        className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-navy-900/55 via-navy-900/15 to-transparent"
       />
 
       {/* Soft amber radial accent */}
@@ -98,7 +98,7 @@ export default function HeroDoor({
         <div className="relative flex flex-col items-center px-6 py-6">
           <div
             aria-hidden
-            className="pointer-events-none absolute -inset-x-12 -inset-y-10 -z-10 bg-[radial-gradient(ellipse_58%_55%_at_50%_50%,rgba(11,31,58,0.58),transparent_75%)]"
+            className="pointer-events-none absolute -inset-x-10 -inset-y-8 -z-10 bg-[radial-gradient(ellipse_52%_48%_at_50%_50%,rgba(11,31,58,0.40),transparent_72%)]"
           />
 
         {kicker ? (
