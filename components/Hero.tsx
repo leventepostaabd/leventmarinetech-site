@@ -67,7 +67,7 @@ export default function Hero({
       </div>
 
       {/* Compact pulsing emergency button — lower, smaller, less visual weight */}
-      <div className="pointer-events-none absolute inset-x-0 z-20 flex justify-center" style={{ bottom: 'calc(48px + env(safe-area-inset-bottom))' }}>
+      <div className="pointer-events-none absolute inset-x-0 z-20 flex justify-center" style={{ bottom: 'calc(18px + env(safe-area-inset-bottom))' }}>
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -103,7 +103,7 @@ export default function Hero({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.7, duration: 0.5 }}
-        className="absolute bottom-3 left-0 right-0 z-30 px-6 flex flex-col items-center gap-2"
+        className="absolute bottom-[5.25rem] left-0 right-0 z-30 px-6 flex flex-col items-center gap-2"
       >
         <TrustStats variant="mono" locale={locale} />
         <div className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-white/55 flex items-center gap-3">

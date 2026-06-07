@@ -59,10 +59,10 @@ export default function TopBar({ locale }: { locale: Locale }) {
   return (
     <>
       <header
-        className={`fixed left-0 right-0 top-0 z-40 flex h-14 items-center px-3 transition-colors md:h-16 md:px-6 ${
+        className={`fixed left-0 right-0 top-0 z-40 flex items-center px-3 transition-colors md:px-6 ${
           isHeroLike
-            ? 'bg-gradient-to-b from-navy-900/85 via-navy-900/55 to-transparent text-white'
-            : 'bg-white/95 text-ink backdrop-blur border-b border-line'
+            ? 'h-20 bg-gradient-to-b from-white/75 via-white/30 to-transparent text-ink'
+            : 'h-14 border-b border-line bg-white/95 text-ink backdrop-blur md:h-16'
         }`}
         style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}
         aria-label="Levent Marine top bar"
@@ -72,9 +72,9 @@ export default function TopBar({ locale }: { locale: Locale }) {
           type="button"
           onClick={() => setOpen(true)}
           aria-label={t('Open menu', 'Menüyü aç')}
-          className={`inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 transition ${
+          className={`inline-flex h-10 w-10 items-center justify-center rounded-full ring-1 transition ${
             isHeroLike
-              ? 'bg-white/10 text-white ring-white/20 hover:bg-white/20'
+              ? 'bg-white/80 text-ink ring-line shadow-sm hover:bg-white'
               : 'bg-white text-ink-muted ring-line hover:text-ink hover:ring-ink/40'
           }`}
         >
@@ -85,23 +85,35 @@ export default function TopBar({ locale }: { locale: Locale }) {
           </svg>
         </button>
 
-        {/* Logo lockup — center. Variant C (badge) pinned per user pick.
-            Visit /brand-preview to compare A / B / C side-by-side. */}
-        <Link
-          href="/"
-          aria-label="Levent Marine — home"
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 no-underline transition hover:scale-[1.02]"
-        >
-          <span
-            className={
-              isHeroLike
-                ? 'inline-flex items-center drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]'
-                : 'inline-flex items-center'
-            }
+        {isHeroLike ? (
+          /* Homepage — full "Levent Marine Tech" lockup, left-aligned (matches
+             /services + /supply), a tick larger, dark on the bright artwork. */
+          <Link
+            href="/"
+            aria-label="Levent Marine Tech — home"
+            className="ml-3 inline-flex items-center gap-3 no-underline transition hover:opacity-90"
           >
-            <LogoLockup variant="C" tone={isHeroLike ? 'light' : 'dark'} scale={0.82} />
-          </span>
-        </Link>
+            <LeventLogo size={38} />
+            <span className="flex flex-col leading-none">
+              <span className="font-head text-[22px] font-extrabold tracking-[-0.01em] text-navy-700 sm:text-[26px]">
+                Levent Marine <span className="text-amber-500">Tech</span>
+              </span>
+              <span aria-hidden className="mt-1.5 h-px w-full bg-amber/70" />
+              <span className="mt-1.5 font-mono text-[9.5px] uppercase tracking-[0.24em] text-ink-subtle sm:text-[10px]">
+                Electro-Technical Solutions
+              </span>
+            </span>
+          </Link>
+        ) : (
+          /* Other pages — badge lockup, centered. */
+          <Link
+            href="/"
+            aria-label="Levent Marine — home"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 no-underline transition hover:scale-[1.02]"
+          >
+            <LogoLockup variant="C" tone="dark" scale={0.82} />
+          </Link>
+        )}
 
         {/* Locale toggle — right */}
         <div className="ml-auto">

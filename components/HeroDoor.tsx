@@ -67,20 +67,7 @@ export default function HeroDoor({
           4) centre radial scrim isolates the white label + CTA. */}
       <div
         aria-hidden
-        className={[
-          'absolute inset-0',
-          side === 'left'
-            ? 'bg-gradient-to-br from-navy-900/35 via-navy-900/12 to-transparent'
-            : 'bg-gradient-to-bl from-navy-900/35 via-navy-900/12 to-transparent'
-        ].join(' ')}
-      />
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-navy-900/45 via-navy-900/15 to-transparent"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-navy-900/55 via-navy-900/15 to-transparent"
+        className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy-900/55 via-navy-900/12 to-transparent"
       />
 
       {/* Soft amber radial accent */}
@@ -92,13 +79,13 @@ export default function HeroDoor({
         ].join(' ')}
       />
 
-      {/* Foreground — text floats free over the photo. No box: a frameless,
-          feathered glow lifts it for contrast while the artwork stays sharp. */}
-      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-6 text-center">
-        <div className="relative flex flex-col items-center px-6 py-6">
+      {/* Foreground — content sits high in the bright upper area; dark labels
+          read on the light artwork, lifted by a soft white halo (no dark scrim). */}
+      <div className="relative z-10 flex h-full w-full flex-col items-center px-6 pt-[16vh] text-center">
+        <div className="relative flex flex-col items-center px-6 py-4">
           <div
             aria-hidden
-            className="pointer-events-none absolute -inset-x-10 -inset-y-8 -z-10 bg-[radial-gradient(ellipse_52%_48%_at_50%_50%,rgba(11,31,58,0.40),transparent_72%)]"
+            className="pointer-events-none absolute -inset-x-14 -inset-y-12 -z-10 bg-[radial-gradient(ellipse_55%_55%_at_50%_45%,rgba(255,255,255,0.45),transparent_72%)]"
           />
 
         {kicker ? (
@@ -106,7 +93,7 @@ export default function HeroDoor({
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25, duration: 0.5 }}
-            className="mb-4 font-mono text-[11px] uppercase tracking-[0.22em] text-amber drop-shadow-[0_1px_8px_rgba(0,0,0,0.65)]"
+            className="mb-3 font-mono text-[11px] uppercase tracking-[0.22em] text-amber-700 drop-shadow-[0_1px_2px_rgba(255,255,255,0.7)]"
           >
             {kicker}
           </motion.div>
@@ -116,7 +103,7 @@ export default function HeroDoor({
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.55 }}
-          className="font-head text-3xl font-extrabold leading-tight tracking-tight text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.6)] sm:text-4xl md:text-5xl lg:text-6xl"
+          className="font-head text-4xl font-extrabold leading-tight tracking-tight text-navy-900 drop-shadow-[0_1px_3px_rgba(255,255,255,0.6)] sm:text-5xl md:text-6xl"
         >
           {label}
         </motion.h2>
