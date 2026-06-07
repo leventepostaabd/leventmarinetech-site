@@ -28,8 +28,6 @@ export const metadata: Metadata = {
   }
 };
 
-const CLASS_AUTHORITIES = ['DNV', 'BV', 'ABS', "Lloyd's Register", 'TL', 'RINA', 'ClassNK', 'IRS'] as const;
-
 export default function AboutPage() {
   const locale = getLocale();
   const t = getTranslator(locale);
@@ -51,36 +49,26 @@ export default function AboutPage() {
       <article className="lm-screen-body">
         <h1 className="sr-only">{t('about.h1')} — {t('about.position')}</h1>
 
-        {/* COVERAGE — full-bleed map sized to one screen; narrative floats in
-            the cleared interior (no grid, no interior dots, no overlap). */}
-        <section className="relative h-screen w-full">
-          <div className="absolute inset-0 pt-20">
-            <div className="relative h-full w-full">
-              <USAMap fit transparent />
+        {/* FIRST SCREEN — map fills the view (Gulf anchored at the bottom),
+            credentials marquee tucked underneath. Narrative floats high in the
+            cleared interior so it never covers the Gulf ports. */}
+        <section className="pt-20">
+          <div className="relative mx-auto w-full max-w-[1180px] px-4">
+            {/* Natural aspect — nothing cropped; just a tick inset from full width. */}
+            <USAMap transparent />
 
-              <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-4">
-                <div className="pointer-events-auto w-full max-w-lg rounded-[28px] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.97)_60%,rgba(255,255,255,0)_100%)] p-7 text-center md:p-10">
-                  <p className="text-[14.5px] leading-relaxed text-ink-muted md:text-[16px]">
-                    {t('about.lead')}
-                  </p>
-                  <ul className="mt-5 flex flex-wrap justify-center gap-1.5">
-                    {CLASS_AUTHORITIES.map((c) => (
-                      <li
-                        key={c}
-                        className="inline-flex items-center rounded-md bg-white px-2.5 py-1 font-mono text-[11px] font-semibold tracking-wide text-navy-700 ring-1 ring-line"
-                      >
-                        {c}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+            <div className="pointer-events-none absolute inset-0 flex items-start justify-center px-4 pt-[4%]">
+              <div className="pointer-events-auto w-full max-w-2xl rounded-[28px] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.96)_62%,rgba(255,255,255,0)_100%)] px-6 py-5 text-center">
+                <p className="text-balance text-[16px] font-medium leading-relaxed text-navy-700 md:text-[19px]">
+                  {t('about.lead')}
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* CREDENTIALS — below the map */}
-        <section className="container-x py-10 md:py-12">
+        {/* Credentials — peek under the map on the first screen */}
+        <section className="px-4 pb-3 pt-1 md:px-8">
           <CertMarquee viewLabel={t('about.viewCert')} />
         </section>
 

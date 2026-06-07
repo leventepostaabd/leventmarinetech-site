@@ -168,7 +168,7 @@ export default function USAMap({ className = '', transparent = false, fit = fals
         role="img"
         aria-labelledby="usa-map-title usa-map-desc"
         className={fit ? 'h-full w-full' : 'w-full h-auto'}
-        preserveAspectRatio="xMidYMid meet"
+        preserveAspectRatio={fit ? 'xMidYMax slice' : 'xMidYMid meet'}
       >
         <title id="usa-map-title">US Port Coverage Map</title>
         <desc id="usa-map-desc">
@@ -227,9 +227,7 @@ export default function USAMap({ className = '', transparent = false, fit = fals
           })}
         </g>
 
-        {/* Coast labels — dark on light */}
-        <text x="40" y="92" fill="rgba(11,31,58,0.45)" fontSize="11" fontFamily="ui-monospace, JetBrains Mono, monospace" letterSpacing="2">PACIFIC</text>
-        <text x={W - 40} y="92" fill="rgba(11,31,58,0.45)" fontSize="11" fontFamily="ui-monospace, JetBrains Mono, monospace" letterSpacing="2" textAnchor="end">ATLANTIC</text>
+        {/* Gulf primary-area label (kept — marks our main work area). */}
         <text x={W / 2 + 40} y={H - 24} fill="rgba(180,120,0,0.85)" fontSize="11" fontFamily="ui-monospace, JetBrains Mono, monospace" letterSpacing="2" textAnchor="middle">GULF OF MEXICO · PRIMARY AREA</text>
 
         {/* Always-on labels for major hubs — leader line + name chip. Drawn
@@ -329,15 +327,6 @@ export default function USAMap({ className = '', transparent = false, fit = fals
           </g>
         )}
 
-        {/* Legend */}
-        <g transform="translate(24, 36)">
-          <path d="M0,-4 L1.4,-1.1 L4.6,-1 L2.1,0.9 L3,4 L0,2.1 L-3,4 L-2.1,0.9 L-4.6,-1 L-1.4,-1.1 Z" fill={ACCENT} />
-          <text x="12" y="0" fill={NAVY} fontSize="10.5" fontFamily="ui-monospace, JetBrains Mono, monospace" letterSpacing="1">FLORIDA BASE</text>
-          <circle cx="3.2" cy="16" r="3.2" fill={ACCENT} stroke={NAVY} strokeWidth="1" />
-          <text x="12" y="20" fill={NAVY} fontSize="10.5" fontFamily="ui-monospace, JetBrains Mono, monospace" letterSpacing="1" opacity="0.85">25 PORTS · 24/7 RESPONSE</text>
-          <circle cx="3.2" cy="32" r="3.8" fill={ACCENT} stroke={NAVY} strokeWidth="1" />
-          <text x="12" y="36" fill="#B36500" fontSize="10.5" fontFamily="ui-monospace, JetBrains Mono, monospace" letterSpacing="1" fontWeight="700">GULF — PRIMARY AREA</text>
-        </g>
       </svg>
 
       <figcaption className="sr-only">
