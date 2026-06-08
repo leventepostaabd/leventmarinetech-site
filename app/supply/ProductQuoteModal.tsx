@@ -204,39 +204,9 @@ export default function ProductQuoteModal({
                 </div>
               )}
 
-              {/* Datasheet + manufacturer detail */}
-              {(product.datasheetUrl || product.url) && (
-                <div className="mb-4 flex flex-wrap gap-2">
-                  {product.datasheetUrl && (
-                    <a
-                      href={product.datasheetUrl}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="inline-flex items-center gap-2 rounded-md border border-line bg-white px-3 py-2 text-[12.5px] font-semibold text-navy-700 no-underline transition hover:border-amber hover:text-amber-700"
-                    >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                        <polyline points="14 2 14 8 20 8" />
-                        <line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="15" y2="17" />
-                      </svg>
-                      {t('Datasheet', 'Teknik föy')}
-                    </a>
-                  )}
-                  {product.url && (
-                    <a
-                      href={product.url}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="inline-flex items-center gap-2 rounded-md border border-line bg-white px-3 py-2 text-[12.5px] font-semibold text-navy-700 no-underline transition hover:border-amber hover:text-amber-700"
-                    >
-                      {t('Full technical detail', 'Tüm teknik detay')}
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M7 17 17 7" /><path d="M7 7h10v10" />
-                      </svg>
-                    </a>
-                  )}
-                </div>
-              )}
+              {/* Datasheet / distributor links intentionally omitted — we never
+                  send the visitor off to Mouser / Digi-Key. Specs stay above;
+                  full datasheet travels with the quote reply. */}
 
               {/* Quote-only banner — no item price, no shipping math.
                   Item + shipping + lead time all travel through the RFQ

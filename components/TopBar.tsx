@@ -116,22 +116,22 @@ export default function TopBar({ locale }: { locale: Locale }) {
         <Link
           href="/"
           aria-label="Levent Marine Tech — home"
-          className="ml-1.5 inline-flex items-center gap-2 no-underline transition hover:opacity-90 md:absolute md:left-1/2 md:top-1/2 md:ml-0 md:-translate-x-1/2 md:-translate-y-1/2 md:gap-3"
+          className="ml-2 inline-flex items-center gap-2.5 no-underline transition hover:opacity-90 md:absolute md:left-1/2 md:top-1/2 md:ml-0 md:-translate-x-1/2 md:-translate-y-1/2 md:gap-3"
         >
-          <LeventLogo size={30} />
+          <LeventLogo size={32} />
           <span className="flex flex-col leading-none">
-            <span className="whitespace-nowrap font-head text-[13px] font-extrabold tracking-[-0.01em] text-navy-700 sm:text-[20px] md:text-[26px]">
+            <span className="whitespace-nowrap font-head text-[16px] font-extrabold tracking-[-0.01em] text-navy-700 sm:text-[20px] md:text-[26px]">
               Levent Marine <span className="text-amber-500">Tech</span>
             </span>
-            <span aria-hidden className="mt-1.5 hidden h-px w-full bg-amber/70 sm:block" />
-            <span className="mt-1.5 hidden whitespace-nowrap font-mono text-[9.5px] uppercase tracking-[0.24em] text-ink-subtle sm:block sm:text-[10px]">
+            <span aria-hidden className="mt-1 h-px w-full bg-amber/70 sm:mt-1.5" />
+            <span lang="en" className="mt-1 whitespace-nowrap font-mono text-[8px] uppercase tracking-[0.18em] text-ink-subtle sm:mt-1.5 sm:text-[10px] sm:tracking-[0.24em]">
               Electro-Technical Solutions
             </span>
           </span>
         </Link>
 
-        {/* Locale toggle — right */}
-        <div className="ml-auto">
+        {/* Locale toggle — right (desktop; on mobile it lives in the drawer) */}
+        <div className="ml-auto hidden md:block">
           <LocaleToggle current={locale} />
         </div>
       </header>
@@ -178,6 +178,13 @@ export default function TopBar({ locale }: { locale: Locale }) {
                     <line x1="6" y1="6" x2="18" y2="18" />
                   </svg>
                 </button>
+              </div>
+
+              <div className="border-b border-white/10 px-6 py-4">
+                <div className="mb-2 font-mono text-[10.5px] uppercase tracking-[0.16em] text-white/45">
+                  {t('Language', 'Dil')}
+                </div>
+                <LocaleToggle current={locale} />
               </div>
 
               <nav className="flex-1 px-6 py-6 overflow-y-auto">

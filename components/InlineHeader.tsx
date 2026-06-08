@@ -62,7 +62,7 @@ export default function InlineHeader({ locale, variant = 'inline' }: { locale: L
                 Levent Marine <span className="text-amber-500">Tech</span>
               </span>
               <span aria-hidden className="mt-1.5 h-px w-full bg-amber/70" />
-              <span className="mt-1.5 font-mono text-[9.5px] uppercase tracking-[0.26em] text-ink-subtle">
+              <span lang="en" className="mt-1.5 font-mono text-[9.5px] uppercase tracking-[0.26em] text-ink-subtle">
                 Electro-Technical Solutions
               </span>
             </span>
@@ -97,22 +97,23 @@ export default function InlineHeader({ locale, variant = 'inline' }: { locale: L
             </svg>
           </button>
 
-          {/* Brand lockup — left aligned */}
+          {/* Brand lockup — full web set (language lives in the drawer on mobile) */}
           <Link
             href="/"
-            aria-label="Levent Marine — home"
-            className="inline-flex items-center gap-2.5 no-underline transition hover:opacity-80"
+            aria-label="Levent Marine Tech — home"
+            className="ml-1 inline-flex items-center gap-2.5 no-underline transition hover:opacity-80"
           >
-            <LeventLogo size={26} />
-            <span className="whitespace-nowrap font-head text-[15px] font-extrabold tracking-[0.04em] text-ink">
-              Levent Marine
+            <LeventLogo size={32} />
+            <span className="flex flex-col leading-none">
+              <span className="whitespace-nowrap font-head text-[16px] font-extrabold tracking-[-0.01em] text-navy-700">
+                Levent Marine <span className="text-amber-500">Tech</span>
+              </span>
+              <span aria-hidden className="mt-1 h-px w-full bg-amber/70" />
+              <span lang="en" className="mt-1 whitespace-nowrap font-mono text-[8px] uppercase tracking-[0.18em] text-ink-subtle">
+                Electro-Technical Solutions
+              </span>
             </span>
           </Link>
-
-          {/* Locale toggle — right */}
-          <div className="ml-auto">
-            <LocaleToggle current={locale} />
-          </div>
         </div>
       )}
 
@@ -158,6 +159,13 @@ export default function InlineHeader({ locale, variant = 'inline' }: { locale: L
                     <line x1="6" y1="6" x2="18" y2="18" />
                   </svg>
                 </button>
+              </div>
+
+              <div className="border-b border-white/10 px-6 py-4">
+                <div className="mb-2 font-mono text-[10.5px] uppercase tracking-[0.16em] text-white/45">
+                  {t('Language', 'Dil')}
+                </div>
+                <LocaleToggle current={locale} />
               </div>
 
               <nav className="flex-1 px-6 py-6 overflow-y-auto">
