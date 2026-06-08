@@ -15,7 +15,8 @@ export const metadata: Metadata = {
 
 export default function PortsIndex() {
   const regions = readRegionsList();
-  const t = getTranslator(getLocale());
+  const locale = getLocale();
+  const t = getTranslator(locale);
   const breadcrumb = breadcrumbSchema([
     { name: 'Home', url: `${SITE.url}/` },
     { name: 'US Ports', url: `${SITE.url}/ports` }
@@ -49,7 +50,7 @@ export default function PortsIndex() {
             <TwicBadge
               title={t('portsIndex.twicTitle')}
               sub={t('portsIndex.twicSub')}
-              viewLabel={t('about.viewCert')}
+              locale={locale}
             />
           </div>
         </section>
