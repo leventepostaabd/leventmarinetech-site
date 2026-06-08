@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import InlineHeader from '@/components/InlineHeader';
 import LocaleToggle from '@/components/LocaleToggle';
 import ServiceChannelTabs from '@/app/services/ServiceChannelTabs';
+import ServiceRequestModal from '@/components/ServiceRequestModal';
 
 export type StageItem = {
   slug: string;
@@ -51,6 +51,7 @@ export default function CinematicStage({
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(groups[0]?.items[0]?.slug ?? '');
   const [paused, setPaused] = useState(false);
+  const [requested, setRequested] = useState<StageItem | null>(null);
   const reduceMotion = useRef(false);
 
   useEffect(() => {
@@ -195,12 +196,13 @@ export default function CinematicStage({
                   {g.items.map((it) => {
                     const on = it.slug === active;
                     return (
-                      <Link
+                      <button
                         key={it.slug}
-                        href={it.href}
+                        type="button"
+                        onClick={() => setRequested(it)}
                         onMouseEnter={() => { setActive(it.slug); setPaused(true); }}
                         onFocus={() => { setActive(it.slug); setPaused(true); }}
-                        className={`group relative flex items-center gap-3 rounded-lg py-3 pl-4 pr-3 no-underline transition ${
+                        className={`group relative flex w-full items-center gap-3 rounded-lg py-3 pl-4 pr-3 text-left transition ${
                           on ? 'bg-amber/[0.06]' : 'hover:bg-navy-50/50'
                         }`}
                       >
@@ -226,7 +228,7 @@ export default function CinematicStage({
                         >
                           <path d="M5 12h14" /><path d="M13 5l7 7-7 7" />
                         </svg>
-                      </Link>
+                      </button>
                     );
                   })}
                 </div>
@@ -235,6 +237,13 @@ export default function CinematicStage({
           )}
         </div>
       </div>
+
+      <ServiceRequestModal
+        item={requested}
+        open={!!requested}
+        onClose={() => setRequested(null)}
+        locale={locale}
+      />
     </div>
   );
 }
