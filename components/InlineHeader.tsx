@@ -104,7 +104,7 @@ export default function InlineHeader({ locale, variant = 'inline' }: { locale: L
             className="inline-flex items-center gap-2.5 no-underline transition hover:opacity-80"
           >
             <LeventLogo size={26} />
-            <span className="font-head text-[15px] font-extrabold tracking-[0.04em] text-ink">
+            <span className="whitespace-nowrap font-head text-[15px] font-extrabold tracking-[0.04em] text-ink">
               Levent Marine
             </span>
           </Link>

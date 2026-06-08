@@ -116,15 +116,15 @@ export default function TopBar({ locale }: { locale: Locale }) {
         <Link
           href="/"
           aria-label="Levent Marine Tech — home"
-          className="absolute left-1/2 top-1/2 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-3 no-underline transition hover:opacity-90"
+          className="ml-1.5 inline-flex items-center gap-2 no-underline transition hover:opacity-90 md:absolute md:left-1/2 md:top-1/2 md:ml-0 md:-translate-x-1/2 md:-translate-y-1/2 md:gap-3"
         >
-          <LeventLogo size={38} />
+          <LeventLogo size={30} />
           <span className="flex flex-col leading-none">
-            <span className="font-head text-[22px] font-extrabold tracking-[-0.01em] text-navy-700 sm:text-[26px]">
+            <span className="whitespace-nowrap font-head text-[13px] font-extrabold tracking-[-0.01em] text-navy-700 sm:text-[20px] md:text-[26px]">
               Levent Marine <span className="text-amber-500">Tech</span>
             </span>
-            <span aria-hidden className="mt-1.5 h-px w-full bg-amber/70" />
-            <span className="mt-1.5 font-mono text-[9.5px] uppercase tracking-[0.24em] text-ink-subtle sm:text-[10px]">
+            <span aria-hidden className="mt-1.5 hidden h-px w-full bg-amber/70 sm:block" />
+            <span className="mt-1.5 hidden whitespace-nowrap font-mono text-[9.5px] uppercase tracking-[0.24em] text-ink-subtle sm:block sm:text-[10px]">
               Electro-Technical Solutions
             </span>
           </span>

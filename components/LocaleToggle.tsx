@@ -40,7 +40,7 @@ export default function LocaleToggle({ current, vertical = false }: { current: L
   }
 
   return (
-    <div className={`flex gap-1 ${vertical ? 'flex-col items-center' : 'items-center'}`} role="group" aria-label="Language / Dil">
+    <div className={`flex gap-0.5 sm:gap-1 ${vertical ? 'flex-col items-center' : 'items-center'}`} role="group" aria-label="Language / Dil">
       {LANGS.map(({ code, title, Flag }) => {
         const active = code === current;
         return (
@@ -52,12 +52,11 @@ export default function LocaleToggle({ current, vertical = false }: { current: L
             aria-label={title}
             aria-pressed={active}
             title={title}
-            className={`inline-flex items-center justify-center overflow-hidden rounded-[3px] transition disabled:opacity-50 ${
+            className={`inline-flex h-[15px] w-[22px] items-center justify-center overflow-hidden rounded-[3px] transition disabled:opacity-50 sm:h-[18px] sm:w-[26px] ${
               active
                 ? 'ring-2 ring-amber'
                 : 'opacity-55 ring-1 ring-black/10 hover:opacity-100'
             } ${pending === code ? 'animate-pulse' : ''}`}
-            style={{ width: 26, height: 18 }}
           >
             <Flag title={title} className="h-full w-full object-cover" />
           </button>
