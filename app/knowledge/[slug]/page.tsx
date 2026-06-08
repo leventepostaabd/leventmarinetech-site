@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { readKnowledgePost, knowledgeSlugs } from '../_lib';
+import { readKnowledgePost, knowledgeSlugs, localizeKnowledgePost } from '../_lib';
+import { getLocale } from '@/lib/i18n';
 import { SITE } from '@/lib/site';
 import {
   blogPostingSchema,
@@ -39,8 +40,49 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 }
 
 export default function KnowledgePost({ params }: Params) {
-  const post = readKnowledgePost(params.slug);
-  if (!post) notFound();
+  const raw = readKnowledgePost(params.slug);
+  if (!raw) notFound();
+
+  const locale = getLocale();
+  const post = localizeKnowledgePost(raw, locale);
+  const isTr = locale === 'tr';
+  const dateLocale = isTr ? 'tr-TR' : 'en-US';
+  const minRead = isTr ? 'dk okuma' : 'min read';
+  const inLanguage = isTr ? 'tr-TR' : 'en-US';
+
+  const ui = isTr
+    ? {
+        knowledge: 'Bilgi',
+        faq: 'SSS',
+        relatedService: 'İlgili servis',
+        relatedSupply: 'İlgili tedarik',
+        relatedServices: 'İlgili servisler',
+        topics: 'Konular',
+        browseSupply: 'Tedariğe göz at →',
+        needFixed: 'Çözüm gerekiyor',
+        sidebarP:
+          'Bir mühendis müdahalesi veya RFQ talep edin. E-posta ve WhatsApp ile dakikalar içinde onay.',
+        requestService: 'Servis talep et',
+        requestQuote: 'Teklif iste',
+        publishedBy:
+          'Levent Marine tarafından yayınlandı — Florida merkezli, Wyoming LLC — 7/24 dünya çapında'
+      }
+    : {
+        knowledge: 'Knowledge',
+        faq: 'FAQ',
+        relatedService: 'Related service',
+        relatedSupply: 'Related supply',
+        relatedServices: 'Related services',
+        topics: 'Topics',
+        browseSupply: 'Browse supply →',
+        needFixed: 'Need this fixed',
+        sidebarP:
+          'Request an engineer attendance or RFQ. Email and WhatsApp acknowledgement within minutes.',
+        requestService: 'Request service',
+        requestQuote: 'Request a quote',
+        publishedBy:
+          'Published by Levent Marine — Florida-based, Wyoming LLC — 24/7 worldwide'
+      };
 
   const breadcrumb = breadcrumbSchema([
     { name: 'Home',      url: `${SITE.url}/` },
@@ -54,11 +96,12 @@ export default function KnowledgePost({ params }: Params) {
     datePublished: post.datePublished,
     dateModified: post.dateModified,
     wordCount:    post.wordCount,
-    keywords:     post.keywords
+    keywords:     post.keywords,
+    inLanguage
   });
   const faqs = post.faq && post.faq.length > 0 ? faqSchema(post.faq) : null;
 
-  const dateLabel = new Date(post.datePublished).toLocaleDateString('en-US', {
+  const dateLabel = new Date(post.datePublished).toLocaleDateString(dateLocale, {
     year: 'numeric', month: 'long', day: 'numeric'
   });
 
@@ -69,7 +112,7 @@ export default function KnowledgePost({ params }: Params) {
       <section className="bg-navy-700 text-white pt-16 pb-12">
         <div className="container-x">
           <nav aria-label="Breadcrumb" className="font-mono text-[11px] uppercase tracking-[0.14em] text-white/55 mb-4">
-            <Link href="/knowledge" className="hover:text-amber no-underline">Knowledge</Link>
+            <Link href="/knowledge" className="hover:text-amber no-underline">{ui.knowledge}</Link>
             <span aria-hidden="true" className="mx-2">/</span>
             <span className="text-white/80">{post.category}</span>
           </nav>
@@ -78,7 +121,7 @@ export default function KnowledgePost({ params }: Params) {
           <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-[12.5px] font-mono text-white/65">
             <time dateTime={post.datePublished}>{dateLabel}</time>
             <span aria-hidden="true">·</span>
-            <span>{post.readingTimeMin} min read</span>
+            <span>{post.readingTimeMin} {minRead}</span>
             <span aria-hidden="true">·</span>
             <span>{post.category}</span>
           </div>
@@ -130,7 +173,7 @@ export default function KnowledgePost({ params }: Params) {
             {post.faq && post.faq.length > 0 && (
               <section className="mt-16 border-t border-line pt-10">
                 <h2 className="text-[24px] font-head font-bold tracking-tight mb-6">
-                  FAQ
+                  {ui.faq}
                 </h2>
                 <dl className="space-y-6">
                   {post.faq.map((q, i) => (
@@ -154,7 +197,7 @@ export default function KnowledgePost({ params }: Params) {
                 className="card no-underline group hover:border-amber"
               >
                 <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-amber mb-1">
-                  Related service
+                  {ui.relatedService}
                 </div>
                 <h3 className="text-[17px] mb-1 group-hover:text-amber-600">
                   {post.cta.service.label}
@@ -168,7 +211,7 @@ export default function KnowledgePost({ params }: Params) {
                 className="card no-underline group hover:border-amber"
               >
                 <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-amber mb-1">
-                  Related supply
+                  {ui.relatedSupply}
                 </div>
                 <h3 className="text-[17px] mb-1 group-hover:text-amber-600">
                   {post.cta.supply.label}
@@ -180,31 +223,30 @@ export default function KnowledgePost({ params }: Params) {
             </section>
 
             <p className="mt-12 pt-6 border-t border-line text-[12px] font-mono uppercase tracking-[0.12em] text-ink-subtle">
-              Published by Levent Marine &mdash; Florida-based, Wyoming LLC &mdash; 24/7 worldwide
+              {ui.publishedBy}
             </p>
           </div>
 
           {/* Sidebar */}
           <aside className="lg:sticky lg:top-[calc(var(--header-h)+24px)] lg:self-start space-y-6">
             <div className="card">
-              <div className="kicker mb-3">Need this fixed</div>
+              <div className="kicker mb-3">{ui.needFixed}</div>
               <p className="text-ink-muted text-[13.5px] leading-relaxed mb-4">
-                Request an engineer attendance or RFQ. Email and WhatsApp acknowledgement
-                within minutes.
+                {ui.sidebarP}
               </p>
               <div className="flex flex-col gap-2">
                 <Link href="/service-wizard" className="btn-primary btn-sm no-underline">
-                  Request service
+                  {ui.requestService}
                 </Link>
                 <Link href="/supply-wizard" className="btn-accent btn-sm no-underline">
-                  Request a quote
+                  {ui.requestQuote}
                 </Link>
               </div>
             </div>
 
             {post.relatedServices.length > 0 && (
               <div className="card">
-                <div className="kicker mb-3">Related services</div>
+                <div className="kicker mb-3">{ui.relatedServices}</div>
                 <ul className="space-y-2 text-[13px]">
                   {post.relatedServices.map((s) => (
                     <li key={s}>
@@ -219,7 +261,7 @@ export default function KnowledgePost({ params }: Params) {
 
             {post.relatedSupply.length > 0 && (
               <div className="card">
-                <div className="kicker mb-3">Related supply</div>
+                <div className="kicker mb-3">{ui.relatedSupply}</div>
                 <ul className="space-y-2 text-[13px]">
                   {post.relatedSupply.map((s) => (
                     <li key={s} className="capitalize text-ink-muted">
@@ -228,14 +270,14 @@ export default function KnowledgePost({ params }: Params) {
                   ))}
                 </ul>
                 <Link href="/supply" className="mt-3 inline-flex items-center gap-1.5 text-[12px] font-mono uppercase tracking-[0.12em] text-amber hover:text-amber-600 no-underline">
-                  Browse supply →
+                  {ui.browseSupply}
                 </Link>
               </div>
             )}
 
             {post.keywords.length > 0 && (
               <div className="card">
-                <div className="kicker mb-3">Topics</div>
+                <div className="kicker mb-3">{ui.topics}</div>
                 <ul className="flex flex-wrap gap-1.5">
                   {post.keywords.map((k) => (
                     <li key={k} className="chip text-[10.5px]">{k}</li>

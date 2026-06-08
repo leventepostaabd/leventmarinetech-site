@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { readKnowledgePosts } from './_lib';
+import { readKnowledgePosts, localizeKnowledgePost } from './_lib';
+import { getLocale } from '@/lib/i18n';
 import { SITE } from '@/lib/site';
 import { breadcrumbSchema } from '@/lib/schema-org';
 
@@ -24,7 +25,25 @@ export const metadata: Metadata = {
 };
 
 export default function KnowledgeIndex() {
-  const posts = readKnowledgePosts();
+  const locale = getLocale();
+  const dateLocale = locale === 'tr' ? 'tr-TR' : 'en-US';
+  const minRead = locale === 'tr' ? 'dk okuma' : 'min read';
+  const kickerLabel = locale === 'tr' ? 'Bilgi merkezi' : 'Knowledge base';
+  const h1 = locale === 'tr' ? 'Saha mühendisinin notları.' : 'Working-ETO field notes.';
+  const intro =
+    locale === 'tr'
+      ? 'Pazarlama masasından değil, gemi güvertesinden yazılmış uzun teknik makaleler. Arıza teşhisi, klas survey hazırlığı, acil müdahale rehberleri, muadil parça araştırması. Yaklaşık ayda bir yeni makale — yer imine ekleyin ve ihtiyacı olan mühendislere iletin.'
+      : 'Long-form technical articles written from the deckplate, not from a marketing desk. Diagnostics, class survey preparation, emergency dispatch playbooks, equivalent-part hunting. New article roughly once a month — bookmark and circulate to the engineers who need it.';
+  const ctaH = locale === 'tr' ? 'Sadece açıklama değil, çözüm mü gerekiyor?' : 'Need this fixed, not just explained?';
+  const ctaP =
+    locale === 'tr'
+      ? 'Yukarıdaki her makale gerçek bir saha müdahalesine dayanır. Makaledeki belirti geminizdeki belirtiyle örtüşüyorsa, sihirbaz bir sonraki vardiya değişiminden önce bir mühendisi göreve atar.'
+      : 'Every article above is grounded in a real attendance. If the symptom on the article matches the symptom on your vessel, the wizard puts an engineer on it before the next watch change.';
+  const reqService = locale === 'tr' ? 'Servis talep et' : 'Request service';
+  const reqQuote = locale === 'tr' ? 'Teklif iste' : 'Request a quote';
+  const emptyLabel = locale === 'tr' ? 'Henüz yayınlanmış makale yok.' : 'No articles published yet.';
+
+  const posts = readKnowledgePosts().map((p) => localizeKnowledgePost(p, locale));
   const breadcrumb = breadcrumbSchema([
     { name: 'Home',      url: `${SITE.url}/` },
     { name: 'Knowledge', url: `${SITE.url}/knowledge` }
@@ -46,15 +65,12 @@ export default function KnowledgeIndex() {
       <article className="lm-screen-body">
       <section className="bg-navy-700 text-white py-20">
         <div className="container-x">
-          <div className="kicker text-white/70 mb-3">Knowledge base</div>
+          <div className="kicker text-white/70 mb-3">{kickerLabel}</div>
           <h1 className="text-white text-balance max-w-4xl">
-            Working-ETO field notes.
+            {h1}
           </h1>
           <p className="mt-5 text-[17px] text-white/75 max-w-3xl leading-relaxed">
-            Long-form technical articles written from the deckplate, not from
-            a marketing desk. Diagnostics, class survey preparation, emergency
-            dispatch playbooks, equivalent-part hunting. New article roughly
-            once a month — bookmark and circulate to the engineers who need it.
+            {intro}
           </p>
         </div>
       </section>
@@ -62,7 +78,7 @@ export default function KnowledgeIndex() {
       <section className="py-16 bg-white">
         <div className="container-x">
           {posts.length === 0 ? (
-            <p className="text-ink-muted">No articles published yet.</p>
+            <p className="text-ink-muted">{emptyLabel}</p>
           ) : (
             <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {posts.map((p, i) => (
@@ -86,13 +102,13 @@ export default function KnowledgeIndex() {
                     </p>
                     <div className="mt-4 pt-3 border-t border-line flex items-center justify-between text-[11.5px] font-mono text-ink-subtle">
                       <span>
-                        {new Date(p.datePublished).toLocaleDateString('en-US', {
+                        {new Date(p.datePublished).toLocaleDateString(dateLocale, {
                           year: 'numeric',
                           month: 'short',
                           day: 'numeric'
                         })}
                       </span>
-                      <span>{p.readingTimeMin} min read</span>
+                      <span>{p.readingTimeMin} {minRead}</span>
                     </div>
                   </Link>
                 </li>
@@ -104,18 +120,16 @@ export default function KnowledgeIndex() {
 
       <section className="py-16 bg-navy-50 border-y border-line">
         <div className="container-x text-center">
-          <h2 className="text-[24px] mb-3">Need this fixed, not just explained?</h2>
+          <h2 className="text-[24px] mb-3">{ctaH}</h2>
           <p className="text-ink-muted max-w-2xl mx-auto mb-6 text-[15px] leading-relaxed">
-            Every article above is grounded in a real attendance. If the symptom
-            on the article matches the symptom on your vessel, the wizard puts
-            an engineer on it before the next watch change.
+            {ctaP}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link href="/service-wizard" className="btn-primary btn-md no-underline">
-              Request service
+              {reqService}
             </Link>
             <Link href="/supply-wizard" className="btn-accent btn-md no-underline">
-              Request a quote
+              {reqQuote}
             </Link>
           </div>
         </div>

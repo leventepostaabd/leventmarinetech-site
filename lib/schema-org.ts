@@ -202,6 +202,7 @@ export function blogPostingSchema(opts: {
   image?: string;
   wordCount?: number;
   keywords?: string[];
+  inLanguage?: string;
 }) {
   const url = `${SITE.url}/knowledge/${opts.slug}`;
   return {
@@ -220,7 +221,7 @@ export function blogPostingSchema(opts: {
       url: SITE.url
     },
     publisher: { '@id': `${SITE.url}#organization` },
-    inLanguage: 'en-US',
+    inLanguage: opts.inLanguage ?? 'en-US',
     wordCount: opts.wordCount,
     keywords: opts.keywords?.join(', ')
   };
