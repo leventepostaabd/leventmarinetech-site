@@ -171,3 +171,25 @@ gelen RFQ'ları birleştiren CRM admin paneli kararları. Wave 6 başlangıcı.
 | S9 | **F3/T3 GÜNCELLENDİ:** fiyat artık opsiyonel olarak müşteriye gösterilebilir. Bir üründe `price_usd` doluysa müşteri o fiyatı görür; boşsa otomatik "Teklif al" çıkar. **`cost_usd` (maliyet) asla gösterilmez** — sadece admin görür. | Sahip isteği (2026-05-27): bazı ürünlerde sabit fiyat vermek istiyor, bazılarında teklif. Maliyet gizli kalmalı |
 | S10 | Ürün kataloğu **Supabase `products` tablosuna taşındı** (tek doğru kaynak). 48 ürün seed edildi; site (`/supply`, kategori, ürün sayfaları) ve admin oradan okur. `products.json` artık yalnızca seed-of-record. Admin panelde **ekle/düzenle/sil + resim yükleme** (`product-images` bucket) modalı var; supply sayfaları `force-dynamic` → yeniden build gerekmeden güncellenir | Sahip eski+yeni tüm ürünleri admin'den yönetmek + kategori seçip sitede filtrelemek istiyor |
 
+
+---
+
+## Oturum — Admin "Evrak & Finans" (Billing) modülü (2026-06-08)
+
+3 paralel araştırma ajanı (sektör belge/akış · US-LLC muhasebe/vergi/KPI · tasarım+ürün+teknik) → sentez `ADMIN-BILLING-SPEC.md`.
+
+| # | Karar | Sebep |
+|---|---|---|
+| B1 | **Hibrit muhasebe:** belgeyi panel üretir, resmi vergi muhasebesi QuickBooks/CPA'ya **CSV** ile aktarılır. Panel defter tutmaz. | Küçük US LLC için vergi-uyumlu defteri sıfırdan kodlamak riskli; CSV export yeterli (kullanıcı onayı) |
+| B2 | İstatistik **yönetim düzeyi** (operasyonel K/Z, win/loss, pipeline, AR/DSO) — GAAP/denetim değil | Karar almak için; beyan muhasebeciye kalır |
+| B3 | **USD ana + uluslararası hazır** (EIN/SWIFT, HS/menşe/Incoterms, çok dilli belge); çoklu para birimi sonraya | Worldwide gemi müşterisi ama FX karmaşıklığını v1'de almıyoruz |
+| B4 | **PDF = `@react-pdf/renderer`** (Puppeteer değil) | Vercel 50MB limiti + 3-6sn cold start; react-pdf ~2MB <0.5sn, TR karakter OK |
+| B5 | Numaralandırma **Postgres'te gapless** (`document_sequences` + `next_doc_number()`), 1001'den; gönderilen PDF **immutable** | Eşzamanlılık güvenli, audit/yasal |
+| B6 | **Tek satır-kalemi motoru → çok belge** (quote/proforma/job/service-report/invoice), tek kök referans `-YYYY-####` | Bir kez gir, doğru belgeyi bas |
+| B7 | Her kalem **Labour/Parts/Freight/Consumable** etiketli | Satış vergisi + COGS/marj + QBO eşlemesi aynı anda çözülür |
+| B8 | Mevcut `companies`(müşteri)+`vessels`(IMO) yeniden kullanılır; billing alanları **ALTER** ile eklenir (`0004_billing.sql`) | 0002_crm CRM'iyle tek müşteri/gemi kaynağı |
+| B9 | **Service raporu = asıl fark** (foto + Chief Eng. çift imza + kalibrasyonlu ölçüm + class format) | Jenerik fatura araçları yapamıyor; class/PSC/sigorta bekler |
+| B10 | ⚠️ **FL deniz aracı muafiyeti (Rule 12A-1.0641)** affidavit+mileage panelde yakalanır ama pozisyon **bir FL CPA'ya onaylatılmalı** | Tek yüksek-ceza alanı; kod değil iş kararı |
+| B11 | Müşteri login yok; modül tamamen `/admin` altında (Supabase Auth, profiles.role='admin') | Mevcut Y5 kuralı |
+
+**Faz 1 çekirdek:** migration ✅ + react-pdf ✅ → company/vessel/price-book → quote builder+PDF → quote→invoice → payment → service report → pano → QBO CSV. Detay: `ADMIN-BILLING-SPEC.md`.
