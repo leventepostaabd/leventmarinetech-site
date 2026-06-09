@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { renderToBuffer } from '@react-pdf/renderer';
 import { createServerSupabase, createServiceSupabase } from '@/lib/supabase/server';
 import QuoteDocument, { type QuotePdfData } from '@/components/pdf/QuoteDocument';
-import type { LineKind } from '@/lib/billing';
+import type { LineKind, CompanySettings } from '@/lib/billing';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -57,7 +57,8 @@ export async function GET(_req: Request, { params }: { params: { id: string } })
     }))
   };
 
-  const buffer = await renderToBuffer(<QuoteDocument data={data} />);
+  const { data: settings } = await s.from('company_settings').select('*').eq('id', 1).single();
+  const buffer = await renderToBuffer(<QuoteDocument data={data} seller={(settings as CompanySettings) ?? undefined} />);
   return new NextResponse(buffer as unknown as BodyInit, {
     headers: {
       'Content-Type': 'application/pdf',

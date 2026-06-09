@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { createServerSupabase, createServiceSupabase } from '@/lib/supabase/server';
-import { computeTotals, docNumber, type LineKind, type QuoteLine } from '@/lib/billing';
+import { computeTotals, docNumber, type LineKind, type QuoteLine, type CompanySettings } from '@/lib/billing';
 
 async function requireAdmin() {
   const supabase = createServerSupabase();
@@ -27,6 +27,53 @@ const num = (v: unknown) => {
   const n = Number(v);
   return Number.isFinite(n) ? n : 0;
 };
+
+// ── Company / billing settings ───────────────────────────────────────────────
+export async function saveSettings(input: Partial<CompanySettings>) {
+  await requireAdmin();
+  const service = createServiceSupabase();
+  const clean: Record<string, unknown> = { id: 1, updated_at: new Date().toISOString() };
+  (Object.keys(input) as (keyof CompanySettings)[]).forEach((k) => {
+    const v = input[k];
+    clean[k] = typeof v === 'string' ? (v.trim() || null) : v ?? null;
+  });
+  const { error } = await service.from('company_settings').upsert(clean, { onConflict: 'id' });
+  if (error) throw new Error(error.message);
+  revalidatePath('/admin/billing/settings');
+}
+
+// ── New customer / vessel (manual entry from the builders) ────────────────────
+export async function createCompany(input: { name: string; billing_address?: string; tax_id?: string }): Promise<{ id: string; name: string }> {
+  await requireAdmin();
+  if (!input.name?.trim()) throw new Error('Firma adı zorunlu');
+  const service = createServiceSupabase();
+  const { data, error } = await service
+    .from('companies')
+    .insert({ name: input.name.trim(), billing_address: input.billing_address?.trim() || null, tax_id: input.tax_id?.trim() || null })
+    .select('id, name')
+    .single();
+  if (error) throw new Error(error.message);
+  return { id: data.id as string, name: data.name as string };
+}
+
+export async function createVessel(input: { name: string; imo_no?: string; company_id?: string | null; flag?: string; class_society?: string }): Promise<{ id: string; name: string; imo_no: string | null; company_id: string | null }> {
+  await requireAdmin();
+  if (!input.name?.trim()) throw new Error('Gemi adı zorunlu');
+  const service = createServiceSupabase();
+  const { data, error } = await service
+    .from('vessels')
+    .insert({
+      name: input.name.trim(),
+      imo_no: input.imo_no?.trim() || null,
+      company_id: input.company_id || null,
+      flag: input.flag?.trim() || null,
+      class_society: input.class_society?.trim() || null
+    })
+    .select('id, name, imo_no, company_id')
+    .single();
+  if (error) throw new Error(error.message);
+  return { id: data.id as string, name: data.name as string, imo_no: data.imo_no as string | null, company_id: data.company_id as string | null };
+}
 
 // ── Price book ──────────────────────────────────────────────────────────────
 export type PriceBookInput = {

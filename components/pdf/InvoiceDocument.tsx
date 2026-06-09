@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
-import { money, LINE_KIND_LABEL, type LineKind } from '@/lib/billing';
+import { money, LINE_KIND_LABEL, DEFAULT_SETTINGS, type LineKind, type CompanySettings } from '@/lib/billing';
 
 export type InvoicePdfData = {
   number: string;
@@ -19,24 +19,6 @@ export type InvoicePdfData = {
   company?: { name: string; billing_address?: string | null } | null;
   vessel?: { name: string; imo_no?: string | null } | null;
   lines: { kind: LineKind; description: string; qty: number; unit_price_usd: number; line_total: number }[];
-};
-
-// USA-only seller details (project rule P3). Bank/EIN: fill once when known.
-const SELLER = {
-  name: 'Levent Marine Electro Technical Services LLC',
-  address: '32 N Gould St, Sheridan, WY 82801, USA',
-  email: 'info@leventmarinetech.com',
-  phone: '+1 619 384 04 03',
-  site: 'www.leventmarinetech.com',
-  ein: '' // e.g. 'EIN 99-1234567' — leave blank until provided
-};
-// Remittance — international wires need SWIFT (US banks have no IBAN). Fill once.
-const REMIT = {
-  beneficiary: 'Levent Marine Electro Technical Services LLC',
-  bank: '',          // e.g. 'JPMorgan Chase Bank, N.A.'
-  account: '',       // account number
-  routing: '',       // 9-digit ABA routing
-  swift: ''          // SWIFT/BIC for international wires
 };
 
 const NAVY = '#0B1F3A', AMBER = '#F5A524', MUTED = '#5B6B82', LINE = '#E2E8F0';
@@ -70,20 +52,21 @@ function fmtDate(d: string | null): string {
   try { return new Date(d).toISOString().slice(0, 10); } catch { return d; }
 }
 
-export default function InvoiceDocument({ data }: { data: InvoicePdfData }) {
+export default function InvoiceDocument({ data, seller }: { data: InvoicePdfData; seller?: CompanySettings }) {
   const cur = data.currency || 'USD';
+  const S = seller ?? DEFAULT_SETTINGS;
   const balance = data.total - data.amount_paid;
-  const hasBank = REMIT.account || REMIT.swift;
+  const hasBank = !!(S.bank_account || S.bank_swift);
   return (
     <Document title={`Invoice ${data.number}`}>
       <Page size="A4" style={s.page}>
         <View style={s.rowBetween}>
           <View style={{ width: '55%' }}>
             <Text style={s.brand}>Levent Marine <Text style={s.brandAmber}>Tech</Text></Text>
-            <Text style={[s.muted, s.small, { marginTop: 4 }]}>{SELLER.name}</Text>
-            <Text style={[s.muted, s.small]}>{SELLER.address}</Text>
-            <Text style={[s.muted, s.small]}>{SELLER.email} · {SELLER.phone}</Text>
-            {SELLER.ein ? <Text style={[s.muted, s.small]}>{SELLER.ein}</Text> : null}
+            <Text style={[s.muted, s.small, { marginTop: 4 }]}>{S.legal_name}</Text>
+            {S.address ? <Text style={[s.muted, s.small]}>{S.address}</Text> : null}
+            <Text style={[s.muted, s.small]}>{[S.email, S.phone].filter(Boolean).join('  ·  ')}</Text>
+            {S.ein ? <Text style={[s.muted, s.small]}>{S.ein}</Text> : null}
           </View>
           <View style={{ width: '40%' }}>
             <Text style={s.docTitle}>INVOICE</Text>
@@ -141,10 +124,10 @@ export default function InvoiceDocument({ data }: { data: InvoicePdfData }) {
           <Text style={s.sectionLabel}>REMITTANCE</Text>
           {hasBank ? (
             <>
-              <Text style={s.small}>Beneficiary: {REMIT.beneficiary}</Text>
-              {REMIT.bank ? <Text style={s.small}>Bank: {REMIT.bank}</Text> : null}
-              {REMIT.account ? <Text style={s.small}>Account: {REMIT.account}   Routing (ABA): {REMIT.routing}</Text> : null}
-              {REMIT.swift ? <Text style={s.small}>SWIFT/BIC (international): {REMIT.swift}</Text> : null}
+              <Text style={s.small}>Beneficiary: {S.bank_beneficiary || S.legal_name}</Text>
+              {S.bank_name ? <Text style={s.small}>Bank: {S.bank_name}{S.bank_address ? ` — ${S.bank_address}` : ''}</Text> : null}
+              {S.bank_account ? <Text style={s.small}>Account: {S.bank_account}{S.bank_routing ? `   Routing (ABA): ${S.bank_routing}` : ''}</Text> : null}
+              {S.bank_swift ? <Text style={s.small}>SWIFT/BIC (international): {S.bank_swift}</Text> : null}
               <Text style={[s.muted, s.small, { marginTop: 3 }]}>Payable in {cur} by bank wire. Please quote invoice {data.number} on the transfer.</Text>
             </>
           ) : (
@@ -152,16 +135,23 @@ export default function InvoiceDocument({ data }: { data: InvoicePdfData }) {
           )}
         </View>
 
-        {data.notes ? (
+        {S.invoice_terms ? (
           <View style={{ marginTop: 12 }}>
+            <Text style={s.sectionLabel}>TERMS</Text>
+            <Text style={[s.muted, { fontSize: 8, lineHeight: 1.4 }]}>{S.invoice_terms}</Text>
+          </View>
+        ) : null}
+
+        {data.notes ? (
+          <View style={{ marginTop: 10 }}>
             <Text style={s.sectionLabel}>NOTES</Text>
             <Text style={[s.muted, { fontSize: 8.5, lineHeight: 1.4 }]}>{data.notes}</Text>
           </View>
         ) : null}
 
         <View style={s.footer} fixed>
-          <Text>{SELLER.name}</Text>
-          <Text>{SELLER.site}</Text>
+          <Text>{S.legal_name}</Text>
+          <Text>{S.website}</Text>
         </View>
       </Page>
     </Document>

@@ -70,6 +70,37 @@ export type QuoteRow = {
   vessels?: { name: string; imo_no: string | null } | null;
 };
 
+export type CompanySettings = {
+  legal_name: string | null;
+  address: string | null;
+  ein: string | null;
+  email: string | null;
+  phone: string | null;
+  website: string | null;
+  bank_beneficiary: string | null;
+  bank_name: string | null;
+  bank_account: string | null;
+  bank_routing: string | null;
+  bank_swift: string | null;
+  bank_address: string | null;
+  default_payment_terms: string | null;
+  default_incoterm: string | null;
+  quote_terms: string | null;
+  invoice_terms: string | null;
+};
+
+export const DEFAULT_SETTINGS: CompanySettings = {
+  legal_name: 'Levent Marine Electro Technical Services LLC',
+  address: '32 N Gould St, Sheridan, WY 82801, USA',
+  ein: null,
+  email: 'info@leventmarinetech.com',
+  phone: '+1 619 384 04 03',
+  website: 'www.leventmarinetech.com',
+  bank_beneficiary: null, bank_name: null, bank_account: null, bank_routing: null, bank_swift: null, bank_address: null,
+  default_payment_terms: 'Net 30', default_incoterm: null,
+  quote_terms: null, invoice_terms: null
+};
+
 /** USD-primary money formatter (shows the currency code explicitly — '$' is
     ambiguous internationally). */
 export function money(n: number | null | undefined, currency = 'USD'): string {

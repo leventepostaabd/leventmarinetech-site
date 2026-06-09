@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { renderToBuffer } from '@react-pdf/renderer';
 import { createServerSupabase, createServiceSupabase } from '@/lib/supabase/server';
 import InvoiceDocument, { type InvoicePdfData } from '@/components/pdf/InvoiceDocument';
-import type { LineKind } from '@/lib/billing';
+import type { LineKind, CompanySettings } from '@/lib/billing';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';

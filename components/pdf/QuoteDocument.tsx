@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
-import { money, LINE_KIND_LABEL, type LineKind } from '@/lib/billing';
+import { money, LINE_KIND_LABEL, DEFAULT_SETTINGS, type LineKind, type CompanySettings } from '@/lib/billing';
 
 export type QuotePdfData = {
   number: string;
@@ -19,19 +19,7 @@ export type QuotePdfData = {
   lines: { kind: LineKind; description: string; qty: number; unit_price_usd: number; line_total: number; is_optional?: boolean }[];
 };
 
-// USA-only company details (project rule P3 — no TR address/phone).
-const SELLER = {
-  name: 'Levent Marine Electro Technical Services LLC',
-  address: '32 N Gould St, Sheridan, WY 82801, USA',
-  email: 'info@leventmarinetech.com',
-  phone: '+1 619 384 04 03',
-  site: 'www.leventmarinetech.com'
-};
-
-const NAVY = '#0B1F3A';
-const AMBER = '#F5A524';
-const MUTED = '#5B6B82';
-const LINE = '#E2E8F0';
+const NAVY = '#0B1F3A', AMBER = '#F5A524', MUTED = '#5B6B82', LINE = '#E2E8F0';
 
 const s = StyleSheet.create({
   page: { padding: 36, fontSize: 9.5, color: NAVY, fontFamily: 'Helvetica' },
@@ -46,11 +34,8 @@ const s = StyleSheet.create({
   block: { width: '48%' },
   th: { backgroundColor: '#F1F5FB', flexDirection: 'row', paddingVertical: 5, paddingHorizontal: 6, marginTop: 16 },
   tr: { flexDirection: 'row', paddingVertical: 5, paddingHorizontal: 6, borderBottomWidth: 0.5, borderBottomColor: LINE },
-  cKind: { width: '14%' },
-  cDesc: { width: '46%' },
-  cQty: { width: '12%', textAlign: 'right' },
-  cPrice: { width: '14%', textAlign: 'right' },
-  cTotal: { width: '14%', textAlign: 'right' },
+  cKind: { width: '14%' }, cDesc: { width: '46%' }, cQty: { width: '12%', textAlign: 'right' },
+  cPrice: { width: '14%', textAlign: 'right' }, cTotal: { width: '14%', textAlign: 'right' },
   bold: { fontFamily: 'Helvetica-Bold' },
   totalsBox: { marginTop: 12, marginLeft: 'auto', width: '45%' },
   totalRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 2 },
@@ -64,18 +49,19 @@ function fmtDate(d: string | null): string {
   try { return new Date(d).toISOString().slice(0, 10); } catch { return d; }
 }
 
-export default function QuoteDocument({ data }: { data: QuotePdfData }) {
+export default function QuoteDocument({ data, seller }: { data: QuotePdfData; seller?: CompanySettings }) {
   const cur = data.currency || 'USD';
+  const S = seller ?? DEFAULT_SETTINGS;
   return (
     <Document title={`Quote ${data.number}`}>
       <Page size="A4" style={s.page}>
-        {/* Header */}
         <View style={s.rowBetween}>
           <View style={{ width: '55%' }}>
             <Text style={s.brand}>Levent Marine <Text style={s.brandAmber}>Tech</Text></Text>
-            <Text style={[s.muted, s.small, { marginTop: 4 }]}>{SELLER.name}</Text>
-            <Text style={[s.muted, s.small]}>{SELLER.address}</Text>
-            <Text style={[s.muted, s.small]}>{SELLER.email} · {SELLER.phone}</Text>
+            <Text style={[s.muted, s.small, { marginTop: 4 }]}>{S.legal_name}</Text>
+            {S.address ? <Text style={[s.muted, s.small]}>{S.address}</Text> : null}
+            <Text style={[s.muted, s.small]}>{[S.email, S.phone].filter(Boolean).join('  ·  ')}</Text>
+            {S.ein ? <Text style={[s.muted, s.small]}>{S.ein}</Text> : null}
           </View>
           <View style={{ width: '40%' }}>
             <Text style={s.docTitle}>QUOTATION</Text>
@@ -83,12 +69,11 @@ export default function QuoteDocument({ data }: { data: QuotePdfData }) {
               {data.number}{data.revision > 1 ? ` · R${data.revision}` : ''}
             </Text>
             <Text style={[s.muted, s.small, { textAlign: 'right' }]}>Date: {fmtDate(data.created_at)}</Text>
-            {data.valid_until && <Text style={[s.muted, s.small, { textAlign: 'right' }]}>Valid until: {fmtDate(data.valid_until)}</Text>}
+            {data.valid_until ? <Text style={[s.muted, s.small, { textAlign: 'right' }]}>Valid until: {fmtDate(data.valid_until)}</Text> : null}
           </View>
         </View>
         <View style={s.rule} />
 
-        {/* Bill-to + vessel */}
         <View style={s.rowBetween}>
           <View style={s.block}>
             <Text style={s.sectionLabel}>BILL TO</Text>
@@ -103,7 +88,6 @@ export default function QuoteDocument({ data }: { data: QuotePdfData }) {
           </View>
         </View>
 
-        {/* Lines */}
         <View style={s.th}>
           <Text style={[s.cKind, s.bold]}>TYPE</Text>
           <Text style={[s.cDesc, s.bold]}>DESCRIPTION</Text>
@@ -121,7 +105,6 @@ export default function QuoteDocument({ data }: { data: QuotePdfData }) {
           </View>
         ))}
 
-        {/* Totals */}
         <View style={s.totalsBox}>
           <View style={s.totalRow}><Text style={s.muted}>Subtotal</Text><Text>{money(data.subtotal, cur)}</Text></View>
           <View style={s.totalRow}><Text style={s.muted}>Tax</Text><Text>{money(data.tax, cur)}</Text></View>
@@ -135,16 +118,16 @@ export default function QuoteDocument({ data }: { data: QuotePdfData }) {
           </View>
         ) : null}
 
-        <View style={{ marginTop: 14 }}>
-          <Text style={[s.muted, s.small]}>
-            This quotation is valid until the date shown above. Prices in {cur}. Payment terms and bank details provided on the
-            commercial invoice. Goods/services subject to availability at time of order.
-          </Text>
-        </View>
+        {S.quote_terms ? (
+          <View style={{ marginTop: 14 }}>
+            <Text style={s.sectionLabel}>TERMS</Text>
+            <Text style={[s.muted, { fontSize: 8, lineHeight: 1.4 }]}>{S.quote_terms}</Text>
+          </View>
+        ) : null}
 
         <View style={s.footer} fixed>
-          <Text>{SELLER.name}</Text>
-          <Text>{SELLER.site}</Text>
+          <Text>{S.legal_name}</Text>
+          <Text>{S.website}</Text>
         </View>
       </Page>
     </Document>

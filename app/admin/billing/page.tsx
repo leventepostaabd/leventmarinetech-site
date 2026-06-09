@@ -29,7 +29,8 @@ const SECTIONS = [
   { href: '/admin/billing/quotes', title: 'Teklifler', sub: 'Quote → PDF, kabul/ret takibi', icon: '📝' },
   { href: '/admin/billing/invoices', title: 'Faturalar', sub: 'Invoice, ödeme, AR yaşlandırma', icon: '🧾' },
   { href: '/admin/billing/service-reports', title: 'Servis Raporları', sub: 'Foto + çift imza, class formatı', icon: '🔧' },
-  { href: '/admin/billing/price-book', title: 'Fiyat Kitabı', sub: 'Tekrar kullanılan hizmet/parça', icon: '📚' }
+  { href: '/admin/billing/price-book', title: 'Fiyat Kitabı', sub: 'Tekrar kullanılan hizmet/parça', icon: '📚' },
+  { href: '/admin/billing/settings', title: 'Ayarlar', sub: 'Firma · banka · EIN · şartname', icon: '⚙️' }
 ];
 
 export default async function BillingHome() {

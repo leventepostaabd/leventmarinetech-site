@@ -6,7 +6,7 @@ import {
   LINE_KINDS, LINE_KIND_LABEL, computeTotals, money,
   type LineKind, type PriceBookItem, type QuoteLine
 } from '@/lib/billing';
-import { saveQuote, type QuoteInput } from '../_actions';
+import { saveQuote, createCompany, createVessel, type QuoteInput } from '../_actions';
 
 type Company = { id: string; name: string };
 type Vessel = { id: string; name: string; imo_no: string | null; company_id: string | null };
@@ -39,10 +39,37 @@ export default function QuoteBuilderClient({
   const [err, setErr] = useState('');
   const [done, setDone] = useState<{ number: string } | null>(null);
 
+  // Manual entry — not every customer came through the website.
+  const [companyList, setCompanyList] = useState<Company[]>(companies);
+  const [vesselList, setVesselList] = useState<Vessel[]>(vessels);
+  const [newCo, setNewCo] = useState<{ name: string; billing_address: string } | null>(null);
+  const [newVe, setNewVe] = useState<{ name: string; imo_no: string } | null>(null);
+
   const vesselOptions = useMemo(
-    () => (head.company_id ? vessels.filter((v) => v.company_id === head.company_id) : vessels),
-    [vessels, head.company_id]
+    () => (head.company_id ? vesselList.filter((v) => v.company_id === head.company_id || !v.company_id) : vesselList),
+    [vesselList, head.company_id]
   );
+
+  async function addCompany() {
+    if (!newCo?.name.trim()) return;
+    setErr('');
+    try {
+      const c = await createCompany({ name: newCo.name, billing_address: newCo.billing_address });
+      setCompanyList((l) => [...l, c]);
+      setHead((h) => ({ ...h, company_id: c.id, vessel_id: '' }));
+      setNewCo(null);
+    } catch (e) { setErr(e instanceof Error ? e.message : 'Hata'); }
+  }
+  async function addVessel() {
+    if (!newVe?.name.trim()) return;
+    setErr('');
+    try {
+      const v = await createVessel({ name: newVe.name, imo_no: newVe.imo_no, company_id: head.company_id || null });
+      setVesselList((l) => [...l, v]);
+      setHead((h) => ({ ...h, vessel_id: v.id }));
+      setNewVe(null);
+    } catch (e) { setErr(e instanceof Error ? e.message : 'Hata'); }
+  }
 
   const totals = useMemo(() => computeTotals(lines, Number(head.tax_rate_pct) || 0), [lines, head.tax_rate_pct]);
 
@@ -107,20 +134,44 @@ export default function QuoteBuilderClient({
       </div>
 
       <div className="grid gap-3 sm:grid-cols-3 mb-5">
-        <label className="block">
+        <div className="block">
           <span className="field-label">Müşteri</span>
-          <select className="lm-input" value={head.company_id} onChange={(e) => setHead({ ...head, company_id: e.target.value, vessel_id: '' })}>
+          <select className="lm-input" aria-label="Müşteri" value={head.company_id} onChange={(e) => setHead({ ...head, company_id: e.target.value, vessel_id: '' })}>
             <option value="">—</option>
-            {companies.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+            {companyList.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
-        </label>
-        <label className="block">
+          {newCo ? (
+            <div className="mt-2 rounded-md bg-navy-50/50 p-2 ring-1 ring-line">
+              <input className="lm-input !mt-0 mb-1" placeholder="Firma adı *" value={newCo.name} onChange={(e) => setNewCo({ ...newCo, name: e.target.value })} />
+              <input className="lm-input !mt-0 mb-1.5" placeholder="Fatura adresi (opsiyonel)" value={newCo.billing_address} onChange={(e) => setNewCo({ ...newCo, billing_address: e.target.value })} />
+              <div className="flex gap-1.5">
+                <button type="button" className="btn-accent btn-sm" onClick={addCompany}>Ekle</button>
+                <button type="button" className="btn-ghost btn-sm" onClick={() => setNewCo(null)}>İptal</button>
+              </div>
+            </div>
+          ) : (
+            <button type="button" className="mt-1 font-mono text-[11px] uppercase tracking-wide text-amber-700 hover:text-amber-600" onClick={() => setNewCo({ name: '', billing_address: '' })}>+ Yeni müşteri</button>
+          )}
+        </div>
+        <div className="block">
           <span className="field-label">Gemi</span>
-          <select className="lm-input" value={head.vessel_id} onChange={(e) => setHead({ ...head, vessel_id: e.target.value })}>
+          <select className="lm-input" aria-label="Gemi" value={head.vessel_id} onChange={(e) => setHead({ ...head, vessel_id: e.target.value })}>
             <option value="">—</option>
             {vesselOptions.map((v) => <option key={v.id} value={v.id}>{v.name}{v.imo_no ? ` · IMO ${v.imo_no}` : ''}</option>)}
           </select>
-        </label>
+          {newVe ? (
+            <div className="mt-2 rounded-md bg-navy-50/50 p-2 ring-1 ring-line">
+              <input className="lm-input !mt-0 mb-1" placeholder="Gemi adı *" value={newVe.name} onChange={(e) => setNewVe({ ...newVe, name: e.target.value })} />
+              <input className="lm-input !mt-0 mb-1.5" placeholder="IMO no (opsiyonel)" value={newVe.imo_no} onChange={(e) => setNewVe({ ...newVe, imo_no: e.target.value })} />
+              <div className="flex gap-1.5">
+                <button type="button" className="btn-accent btn-sm" onClick={addVessel}>Ekle</button>
+                <button type="button" className="btn-ghost btn-sm" onClick={() => setNewVe(null)}>İptal</button>
+              </div>
+            </div>
+          ) : (
+            <button type="button" className="mt-1 font-mono text-[11px] uppercase tracking-wide text-amber-700 hover:text-amber-600" onClick={() => setNewVe({ name: '', imo_no: '' })}>+ Yeni gemi</button>
+          )}
+        </div>
         <label className="block">
           <span className="field-label">PO referansı</span>
           <input className="lm-input" value={head.po_reference} onChange={(e) => setHead({ ...head, po_reference: e.target.value })} />
