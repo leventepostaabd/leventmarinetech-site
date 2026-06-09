@@ -41,6 +41,7 @@ export default async function InvoicesPage() {
                 <th className="px-3 py-2">Vade</th>
                 <th className="px-3 py-2 text-right">Tutar</th>
                 <th className="px-3 py-2 text-right">Ödenen</th>
+                <th className="px-3 py-2 text-right">PDF</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-line/70">
@@ -55,6 +56,9 @@ export default async function InvoicesPage() {
                   <td className="px-3 py-2 font-mono text-[12px]">{i.due_date ?? '—'}</td>
                   <td className="px-3 py-2 text-right font-mono">{money(Number(i.total ?? 0), i.currency)}</td>
                   <td className="px-3 py-2 text-right font-mono text-ink-subtle">{money(Number(i.amount_paid ?? 0), i.currency)}</td>
+                  <td className="px-3 py-2 text-right">
+                    <a href={`/api/admin/billing/invoices/${i.id}/pdf`} target="_blank" rel="noreferrer" className="text-navy-700 no-underline hover:text-amber-700">PDF</a>
+                  </td>
                 </tr>
               ))}
             </tbody>
