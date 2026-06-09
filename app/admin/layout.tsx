@@ -60,6 +60,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <NavLink href="/admin/rfqs">Teklif Talepleri</NavLink>
           <NavLink href="/admin/service">Servis</NavLink>
           <NavLink href="/admin/products">Ürünler</NavLink>
+          <NavLink href="/admin/billing">Evrak & Finans</NavLink>
           <Link
             href="/admin/logout"
             className="px-3 py-1.5 rounded-md text-ink-subtle hover:bg-navy-50 no-underline"
