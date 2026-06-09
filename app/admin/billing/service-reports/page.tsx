@@ -1,19 +1,59 @@
+import Link from 'next/link';
+import { createServiceSupabase } from '@/lib/supabase/server';
+
 export const dynamic = 'force-dynamic';
 
-export default function ServiceReportsPage() {
+export default async function ServiceReportsPage() {
+  const s = createServiceSupabase();
+  let rows: any[] = [];
+  try {
+    const { data } = await s
+      .from('service_reports')
+      .select('id, number, attended_on, port, created_at, companies(name), vessels(name, imo_no)')
+      .order('created_at', { ascending: false })
+      .limit(100);
+    rows = data ?? [];
+  } catch {
+    /* not migrated */
+  }
+
   return (
     <div>
-      <div className="mb-4">
-        <div className="kicker">Evrak & Finans</div>
-        <h2 className="text-[20px] mt-0.5">Servis Raporları</h2>
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <div className="kicker">Evrak & Finans</div>
+          <h2 className="text-[20px] mt-0.5">Servis / Attendance Raporları</h2>
+          <p className="text-[12.5px] text-ink-muted mt-0.5">Gemide CE/Master imzalı + kaşeli rapor — faturanın dayanağı.</p>
+        </div>
+        <Link href="/admin/billing/service-reports/new" className="btn-accent btn-sm no-underline">+ Yeni rapor</Link>
       </div>
-      <div className="card max-w-xl border-l-4 border-l-amber">
-        <p className="text-[13.5px] text-ink-muted">
-          Servis/attendance raporu (fotoğraf + gemide Chief Engineer çift imzası + kalibrasyonlu ölçüm tablosu +
-          class formatı) Faz 1&apos;in sonraki diliminde gelecek. Şema hazır (<span className="font-mono">service_reports</span>,
-          <span className="font-mono"> service_report_photos</span>); bu, jenerik fatura araçlarının yapamadığı asıl rekabet farkımız.
-        </p>
-      </div>
+      {rows.length === 0 ? (
+        <p className="text-[13px] text-ink-muted">Henüz rapor yok.</p>
+      ) : (
+        <div className="overflow-x-auto rounded-lg ring-1 ring-line">
+          <table className="w-full min-w-[680px] text-[13px]">
+            <thead className="bg-navy-50/60 text-left font-mono text-[10.5px] uppercase tracking-wide text-ink-subtle">
+              <tr><th className="px-3 py-2">No</th><th className="px-3 py-2">Gemi / Müşteri</th><th className="px-3 py-2">Liman</th><th className="px-3 py-2">Tarih</th><th className="px-3 py-2 text-right">PDF</th></tr>
+            </thead>
+            <tbody className="divide-y divide-line/70">
+              {rows.map((r) => (
+                <tr key={r.id} className="hover:bg-navy-50/40">
+                  <td className="px-3 py-2 font-mono">{r.number}</td>
+                  <td className="px-3 py-2">
+                    <div className="text-ink">{r.vessels?.name ?? '—'}{r.vessels?.imo_no ? ` · IMO ${r.vessels.imo_no}` : ''}</div>
+                    <div className="text-[11.5px] text-ink-subtle">{r.companies?.name ?? '—'}</div>
+                  </td>
+                  <td className="px-3 py-2">{r.port ?? '—'}</td>
+                  <td className="px-3 py-2 font-mono text-[12px]">{r.attended_on ?? new Date(r.created_at).toISOString().slice(0, 10)}</td>
+                  <td className="px-3 py-2 text-right">
+                    <a href={`/api/admin/billing/service-reports/${r.id}/pdf`} target="_blank" rel="noreferrer" className="text-navy-700 no-underline hover:text-amber-700">PDF</a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }

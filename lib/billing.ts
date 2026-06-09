@@ -101,6 +101,36 @@ export const DEFAULT_SETTINGS: CompanySettings = {
   quote_terms: null, invoice_terms: null
 };
 
+/** A row in a service report's test & measurement table — each value traceable
+    to the instrument + its calibration so a surveyor/insurer can't dismiss it. */
+export type TestRow = {
+  point: string;
+  value: string;
+  unit: string;
+  threshold: string;
+  instrument: string;
+  cal_due: string;
+};
+
+export type ServiceReportData = {
+  number: string;
+  attended_on: string | null;
+  created_at: string;
+  port: string | null;
+  po_reference: string | null;
+  class_format: string | null;
+  findings: string | null;
+  work_performed: string | null;
+  parts_used: string | null;
+  outstanding: string | null;
+  engineer_name: string | null;
+  ce_name: string | null;
+  ce_rank: string | null;
+  test_results: TestRow[];
+  company?: { name: string } | null;
+  vessel?: { name: string; imo_no?: string | null; flag?: string | null } | null;
+};
+
 /** USD-primary money formatter (shows the currency code explicitly — '$' is
     ambiguous internationally). */
 export function money(n: number | null | undefined, currency = 'USD'): string {

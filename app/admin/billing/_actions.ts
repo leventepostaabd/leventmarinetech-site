@@ -235,6 +235,66 @@ export async function setQuoteStatus(id: string, status: string, lostReason?: st
   revalidatePath(`/admin/billing/quotes/${id}`);
 }
 
+// ── Service / attendance reports ─────────────────────────────────────────────
+import type { TestRow } from '@/lib/billing';
+
+export type ServiceReportInput = {
+  id?: string;
+  company_id?: string | null;
+  vessel_id?: string | null;
+  job_id?: string | null;
+  po_reference?: string;
+  port?: string;
+  attended_on?: string | null;
+  class_format?: string;
+  findings?: string;
+  work_performed?: string;
+  parts_used?: string;
+  outstanding?: string;
+  engineer_name?: string;
+  ce_name?: string;
+  ce_rank?: string;
+  test_results?: TestRow[];
+};
+
+export async function saveServiceReport(input: ServiceReportInput): Promise<{ id: string; number: string }> {
+  await requireAdmin();
+  const service = createServiceSupabase();
+
+  const tests = (input.test_results ?? []).filter((t) => t.point?.trim() || t.value?.trim());
+  const row = {
+    company_id: input.company_id || null,
+    vessel_id: input.vessel_id || null,
+    job_id: input.job_id || null,
+    po_reference: input.po_reference?.trim() || null,
+    port: input.port?.trim() || null,
+    attended_on: input.attended_on || null,
+    class_format: input.class_format?.trim() || null,
+    findings: input.findings?.trim() || null,
+    work_performed: input.work_performed?.trim() || null,
+    parts_used: input.parts_used?.trim() || null,
+    outstanding: input.outstanding?.trim() || 'NIL',
+    engineer_name: input.engineer_name?.trim() || null,
+    ce_name: input.ce_name?.trim() || null,
+    ce_rank: input.ce_rank?.trim() || null,
+    test_results: tests,
+    updated_at: new Date().toISOString()
+  };
+
+  if (input.id) {
+    const { data: ex } = await service.from('service_reports').select('number').eq('id', input.id).single();
+    const { error } = await service.from('service_reports').update(row).eq('id', input.id);
+    if (error) throw new Error(error.message);
+    revalidatePath('/admin/billing/service-reports');
+    return { id: input.id, number: ex?.number ?? '' };
+  }
+  const number = await nextNumber('SR');
+  const { data, error } = await service.from('service_reports').insert({ ...row, number }).select('id').single();
+  if (error) throw new Error(error.message);
+  revalidatePath('/admin/billing/service-reports');
+  return { id: data.id as string, number };
+}
+
 /** Convert an accepted quote into a draft invoice (linked, copies lines). */
 export async function convertQuoteToInvoice(quoteId: string): Promise<{ id: string; number: string }> {
   await requireAdmin();
