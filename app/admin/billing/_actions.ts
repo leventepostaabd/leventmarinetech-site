@@ -128,6 +128,81 @@ export async function deletePriceItem(id: string) {
   revalidatePath('/admin/billing/price-book');
 }
 
+// ── Expenses (run the books from our own panel) ──────────────────────────────
+export type ExpenseInput = {
+  id?: string;
+  spent_on?: string;
+  vendor?: string;
+  category: string;
+  description?: string;
+  amount_usd: number;
+  payment_method?: string;
+  rebillable?: boolean;
+  receipt_path?: string | null;
+  notes?: string;
+};
+
+export async function saveExpense(input: ExpenseInput) {
+  await requireAdmin();
+  const service = createServiceSupabase();
+  const row = {
+    spent_on: input.spent_on || new Date().toISOString().slice(0, 10),
+    vendor: input.vendor?.trim() || null,
+    category: input.category || 'other',
+    description: input.description?.trim() || null,
+    amount_usd: num(input.amount_usd),
+    payment_method: input.payment_method?.trim() || null,
+    rebillable: !!input.rebillable,
+    receipt_path: input.receipt_path ?? null,
+    notes: input.notes?.trim() || null,
+    updated_at: new Date().toISOString()
+  };
+  if (input.id) {
+    const { error } = await service.from('expenses').update(row).eq('id', input.id);
+    if (error) throw new Error(error.message);
+  } else {
+    const { error } = await service.from('expenses').insert(row);
+    if (error) throw new Error(error.message);
+  }
+  revalidatePath('/admin/billing/expenses');
+  revalidatePath('/admin/billing');
+}
+
+export async function deleteExpense(id: string) {
+  await requireAdmin();
+  const service = createServiceSupabase();
+  const { data: ex } = await service.from('expenses').select('receipt_path').eq('id', id).single();
+  if (ex?.receipt_path) { await service.storage.from('billing-docs').remove([ex.receipt_path]); }
+  const { error } = await service.from('expenses').delete().eq('id', id);
+  if (error) throw new Error(error.message);
+  revalidatePath('/admin/billing/expenses');
+  revalidatePath('/admin/billing');
+}
+
+/** Upload a receipt scan/photo to the private billing-docs bucket. */
+export async function uploadReceipt(formData: FormData): Promise<{ path: string }> {
+  await requireAdmin();
+  const file = formData.get('file');
+  if (!(file instanceof File) || file.size === 0) throw new Error('Dosya yok');
+  if (file.size > 15 * 1024 * 1024) throw new Error('Dosya çok büyük (en fazla 15MB)');
+  const ext = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const path = `receipts/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+  const service = createServiceSupabase();
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  const { error } = await service.storage.from('billing-docs').upload(path, bytes, { contentType: file.type || 'image/jpeg', upsert: false });
+  if (error) throw new Error(error.message);
+  return { path };
+}
+
+/** Short-lived signed URL to view a private billing-docs file (receipt/signed report). */
+export async function signedDocUrl(path: string): Promise<{ url: string }> {
+  await requireAdmin();
+  const service = createServiceSupabase();
+  const { data, error } = await service.storage.from('billing-docs').createSignedUrl(path, 3600);
+  if (error || !data) throw new Error(error?.message || 'Bağlantı oluşturulamadı');
+  return { url: data.signedUrl };
+}
+
 // ── Deletes (with detailed confirmation on the client) ───────────────────────
 export async function deleteQuote(id: string) {
   await requireAdmin();

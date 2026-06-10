@@ -135,6 +135,38 @@ export type ServiceReportData = {
   vessel?: { name: string; imo_no?: string | null; flag?: string | null } | null;
 };
 
+export const EXPENSE_CATEGORIES: { v: string; tr: string }[] = [
+  { v: 'parts_cogs', tr: 'Parça maliyeti (COGS)' },
+  { v: 'subcontract', tr: 'Taşeron işçilik' },
+  { v: 'travel', tr: 'Seyahat / uçak' },
+  { v: 'lodging', tr: 'Konaklama' },
+  { v: 'per_diem', tr: 'Harcırah' },
+  { v: 'tools', tr: 'Alet / sarf' },
+  { v: 'shipping', tr: 'Kargo / navlun' },
+  { v: 'software', tr: 'Yazılım / abonelik' },
+  { v: 'insurance', tr: 'Sigorta' },
+  { v: 'bank_fees', tr: 'Banka / havale ücreti' },
+  { v: 'vehicle', tr: 'Araç / yakıt' },
+  { v: 'office', tr: 'Ofis / genel' },
+  { v: 'other', tr: 'Diğer' }
+];
+export function expenseCatLabel(v: string): string {
+  return EXPENSE_CATEGORIES.find((c) => c.v === v)?.tr ?? v;
+}
+
+export type ExpenseRow = {
+  id: string;
+  spent_on: string;
+  vendor: string | null;
+  category: string;
+  description: string | null;
+  amount_usd: number;
+  payment_method: string | null;
+  rebillable: boolean;
+  receipt_path: string | null;
+  notes: string | null;
+};
+
 /** USD-primary money formatter (shows the currency code explicitly — '$' is
     ambiguous internationally). */
 export function money(n: number | null | undefined, currency = 'USD'): string {
