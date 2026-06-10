@@ -59,7 +59,8 @@ export async function GET(_req: Request, { params }: { params: { id: string } })
     }))
   };
 
-  const buffer = await renderToBuffer(<InvoiceDocument data={data} />);
+  const { data: settings } = await s.from('company_settings').select('*').eq('id', 1).single();
+  const buffer = await renderToBuffer(<InvoiceDocument data={data} seller={(settings as CompanySettings) ?? undefined} />);
   return new NextResponse(buffer as unknown as BodyInit, {
     headers: {
       'Content-Type': 'application/pdf',
