@@ -51,6 +51,8 @@ export default function TopBar({ locale }: { locale: Locale }) {
   // inside the left column so the right artwork can run full bleed. Hide the
   // global TopBar entirely on those routes.
   if (pathname === '/services' || pathname === '/supply' || pathname === '/service-wizard') return null;
+  // Admin has its own shell (AdminShell) — no public top bar there.
+  if (pathname === '/admin' || pathname.startsWith('/admin/')) return null;
   // Pages where the right side carries a full-bleed dark photo deck and the
   // TopBar should float transparently over it (no white bar on top).
   const isHeroLike = pathname === '/';

@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
-import Link from 'next/link';
 import type { Metadata } from 'next';
 import { createServerSupabase, createServiceSupabase } from '@/lib/supabase/server';
+import AdminShell from './AdminShell';
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
@@ -41,44 +41,5 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     );
   }
 
-  return (
-    <div
-      className="container-x"
-      style={{
-        paddingTop: 'calc(var(--lm-topbar-h, 56px) + 1.5rem)',
-        paddingBottom: 'calc(env(safe-area-inset-bottom, 0) + 3rem)'
-      }}
-    >
-      <div className="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-line">
-        <div>
-          <div className="kicker">Admin · {user.email}</div>
-          <h1 className="text-2xl mt-1">Operasyon Paneli</h1>
-        </div>
-        <nav className="flex flex-wrap gap-1 text-[12.5px] font-mono">
-          <NavLink href="/admin">Genel Bakış</NavLink>
-          <NavLink href="/admin/leads">Müşteri Adayları</NavLink>
-          <NavLink href="/admin/rfqs">Teklif Talepleri</NavLink>
-          <NavLink href="/admin/service">Servis</NavLink>
-          <NavLink href="/admin/products">Ürünler</NavLink>
-          <NavLink href="/admin/billing">Evrak & Finans</NavLink>
-          <NavLink href="/admin/account">Hesap</NavLink>
-          <Link
-            href="/admin/logout"
-            className="px-3 py-1.5 rounded-md text-ink-subtle hover:bg-navy-50 no-underline"
-          >
-            Çıkış Yap
-          </Link>
-        </nav>
-      </div>
-      {children}
-    </div>
-  );
-}
-
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <Link href={href} className="px-3 py-1.5 rounded-md text-ink hover:bg-navy-50 no-underline">
-      {children}
-    </Link>
-  );
+  return <AdminShell email={user.email ?? ''}>{children}</AdminShell>;
 }
