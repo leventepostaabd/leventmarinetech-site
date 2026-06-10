@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { LINE_KINDS, LINE_KIND_LABEL, money, type LineKind, type PriceBookItem } from '@/lib/billing';
 import { savePriceItem, deletePriceItem, type PriceBookInput } from '../_actions';
+import ConfirmDeleteButton from '../ConfirmDeleteButton';
 
 const blank: PriceBookInput = { kind: 'service', name_en: '', taxable: true, active: true, unit: 'ea' };
 
@@ -26,12 +27,6 @@ export default function PriceBookClient({ initial }: { initial: PriceBookItem[] 
     } finally {
       setBusy(false);
     }
-  }
-
-  async function remove(id: string) {
-    if (!confirm('Bu kalemi silmek istediğinize emin misiniz?')) return;
-    await deletePriceItem(id);
-    router.refresh();
   }
 
   return (
@@ -77,7 +72,16 @@ export default function PriceBookClient({ initial }: { initial: PriceBookItem[] 
                       default_price_usd: it.default_price_usd, default_cost_usd: it.default_cost_usd,
                       unit: it.unit ?? 'ea', taxable: it.taxable, active: it.active
                     })}>Düzenle</button>
-                    <button className="btn-ghost btn-sm text-red-600" onClick={() => remove(it.id)}>Sil</button>
+                    <ConfirmDeleteButton
+                      id={it.id}
+                      action={deletePriceItem}
+                      heading="Fiyat kalemini sil"
+                      details={[
+                        { k: 'Ad', v: it.name_en },
+                        { k: 'Tür', v: LINE_KIND_LABEL[it.kind].tr },
+                        { k: 'Fiyat', v: it.default_price_usd != null ? money(it.default_price_usd) : '—' }
+                      ]}
+                    />
                   </td>
                 </tr>
               ))}

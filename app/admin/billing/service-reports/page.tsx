@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { createServiceSupabase } from '@/lib/supabase/server';
 import SignedReportUpload from './SignedReportUpload';
+import ConfirmDeleteButton from '../ConfirmDeleteButton';
+import { deleteServiceReport } from '../_actions';
 
 export const dynamic = 'force-dynamic';
 
@@ -56,6 +58,16 @@ export default async function ServiceReportsPage() {
                     <div className="flex flex-wrap justify-end gap-1">
                       <a href={`/api/admin/billing/service-reports/${r.id}/pdf`} target="_blank" rel="noreferrer" className="btn-ghost btn-sm no-underline">PDF (yazdır)</a>
                       <SignedReportUpload id={r.id} signed={!!r.signed_pdf_path} />
+                      <ConfirmDeleteButton
+                        id={r.id}
+                        action={deleteServiceReport}
+                        heading="Servis raporunu sil"
+                        details={[
+                          { k: 'No', v: r.number },
+                          { k: 'Gemi', v: r.vessels?.name ?? '—' },
+                          { k: 'Müşteri', v: r.companies?.name ?? '—' }
+                        ]}
+                      />
                     </div>
                   </td>
                 </tr>

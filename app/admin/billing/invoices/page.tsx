@@ -62,7 +62,14 @@ export default async function InvoicesPage() {
                   <td className="px-3 py-2 text-right font-mono">{money(Number(i.total ?? 0), i.currency)}</td>
                   <td className="px-3 py-2 text-right font-mono text-ink-subtle">{money(Number(i.amount_paid ?? 0), i.currency)}</td>
                   <td className="px-3 py-2">
-                    <InvoiceActions id={i.id} email={i.companies?.contact_email ?? null} emailedTo={i.emailed_to ?? null} />
+                    <InvoiceActions
+                      id={i.id}
+                      email={i.companies?.contact_email ?? null}
+                      emailedTo={i.emailed_to ?? null}
+                      number={i.number}
+                      company={i.companies?.name ?? '—'}
+                      amount={money(Number(i.total ?? 0), i.currency)}
+                    />
                   </td>
                 </tr>
               ))}

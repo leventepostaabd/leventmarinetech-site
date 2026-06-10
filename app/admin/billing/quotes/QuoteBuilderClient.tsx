@@ -150,7 +150,7 @@ export default function QuoteBuilderClient({
               </div>
             </div>
           ) : (
-            <button type="button" className="mt-1 font-mono text-[11px] uppercase tracking-wide text-amber-700 hover:text-amber-600" onClick={() => setNewCo({ name: '', billing_address: '' })}>+ Yeni müşteri</button>
+            <button type="button" className="mt-1.5 inline-flex items-center gap-1 rounded-md border border-amber-400/50 bg-amber/10 px-2.5 py-1 text-[12px] font-semibold text-amber-700 transition hover:bg-amber/20" onClick={() => setNewCo({ name: '', billing_address: '' })}>+ Yeni müşteri</button>
           )}
         </div>
         <div className="block">
@@ -169,7 +169,7 @@ export default function QuoteBuilderClient({
               </div>
             </div>
           ) : (
-            <button type="button" className="mt-1 font-mono text-[11px] uppercase tracking-wide text-amber-700 hover:text-amber-600" onClick={() => setNewVe({ name: '', imo_no: '' })}>+ Yeni gemi</button>
+            <button type="button" className="mt-1.5 inline-flex items-center gap-1 rounded-md border border-amber-400/50 bg-amber/10 px-2.5 py-1 text-[12px] font-semibold text-amber-700 transition hover:bg-amber/20" onClick={() => setNewVe({ name: '', imo_no: '' })}>+ Yeni gemi</button>
           )}
         </div>
         <label className="block">

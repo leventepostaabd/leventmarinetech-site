@@ -128,6 +128,35 @@ export async function deletePriceItem(id: string) {
   revalidatePath('/admin/billing/price-book');
 }
 
+// ── Deletes (with detailed confirmation on the client) ───────────────────────
+export async function deleteQuote(id: string) {
+  await requireAdmin();
+  const service = createServiceSupabase();
+  const { error } = await service.from('quotes').delete().eq('id', id); // quote_lines cascade
+  if (error) throw new Error(error.message);
+  revalidatePath('/admin/billing/quotes');
+  revalidatePath('/admin/billing');
+}
+
+export async function deleteInvoice(id: string) {
+  await requireAdmin();
+  const service = createServiceSupabase();
+  const { error } = await service.from('invoices').delete().eq('id', id); // invoice_lines + payments cascade
+  if (error) throw new Error(error.message);
+  revalidatePath('/admin/billing/invoices');
+  revalidatePath('/admin/billing');
+}
+
+export async function deleteServiceReport(id: string) {
+  await requireAdmin();
+  const service = createServiceSupabase();
+  const { data: rep } = await service.from('service_reports').select('signed_pdf_path').eq('id', id).single();
+  if (rep?.signed_pdf_path) { await service.storage.from('billing-docs').remove([rep.signed_pdf_path]); }
+  const { error } = await service.from('service_reports').delete().eq('id', id); // photos cascade; invoice ref set null
+  if (error) throw new Error(error.message);
+  revalidatePath('/admin/billing/service-reports');
+}
+
 // ── Quotes ──────────────────────────────────────────────────────────────────
 export type QuoteInput = {
   id?: string;

@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { money, QUOTE_STATUS_LABEL, type QuoteRow, type QuoteStatus } from '@/lib/billing';
-import { setQuoteStatus, convertQuoteToInvoice } from '../_actions';
+import { setQuoteStatus, convertQuoteToInvoice, deleteQuote } from '../_actions';
+import ConfirmDeleteButton from '../ConfirmDeleteButton';
 
 const STATUS_STYLE: Record<QuoteStatus, string> = {
   draft: 'bg-navy-50 text-ink-muted',
@@ -84,6 +85,17 @@ export default function QuotesListClient({ rows }: { rows: QuoteRow[] }) {
                   {q.status === 'accepted' && (
                     <button className="btn-accent btn-sm" disabled={busy === q.id} onClick={() => toInvoice(q.id)}>Faturaya çevir →</button>
                   )}
+                  <ConfirmDeleteButton
+                    id={q.id}
+                    action={deleteQuote}
+                    heading="Teklifi sil"
+                    details={[
+                      { k: 'No', v: `${q.number}${q.revision > 1 ? ` · R${q.revision}` : ''}` },
+                      { k: 'Müşteri', v: q.companies?.name ?? '—' },
+                      { k: 'Gemi', v: q.vessels?.name ?? '—' },
+                      { k: 'Tutar', v: money(Number(q.total ?? 0), q.currency) }
+                    ]}
+                  />
                 </div>
               </td>
             </tr>
