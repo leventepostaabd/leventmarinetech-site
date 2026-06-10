@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { createServiceSupabase } from '@/lib/supabase/server';
+import SignedReportUpload from './SignedReportUpload';
 
 export const dynamic = 'force-dynamic';
 
@@ -9,7 +10,7 @@ export default async function ServiceReportsPage() {
   try {
     const { data } = await s
       .from('service_reports')
-      .select('id, number, attended_on, port, created_at, companies(name), vessels(name, imo_no)')
+      .select('id, number, attended_on, port, created_at, status, signed_pdf_path, companies(name), vessels(name, imo_no)')
       .order('created_at', { ascending: false })
       .limit(100);
     rows = data ?? [];
@@ -33,7 +34,7 @@ export default async function ServiceReportsPage() {
         <div className="overflow-x-auto rounded-lg ring-1 ring-line">
           <table className="w-full min-w-[680px] text-[13px]">
             <thead className="bg-navy-50/60 text-left font-mono text-[10.5px] uppercase tracking-wide text-ink-subtle">
-              <tr><th className="px-3 py-2">No</th><th className="px-3 py-2">Gemi / Müşteri</th><th className="px-3 py-2">Liman</th><th className="px-3 py-2">Tarih</th><th className="px-3 py-2 text-right">PDF</th></tr>
+              <tr><th className="px-3 py-2">No</th><th className="px-3 py-2">Gemi / Müşteri</th><th className="px-3 py-2">Liman</th><th className="px-3 py-2">Durum</th><th className="px-3 py-2 text-right">İşlemler</th></tr>
             </thead>
             <tbody className="divide-y divide-line/70">
               {rows.map((r) => (
@@ -44,9 +45,18 @@ export default async function ServiceReportsPage() {
                     <div className="text-[11.5px] text-ink-subtle">{r.companies?.name ?? '—'}</div>
                   </td>
                   <td className="px-3 py-2">{r.port ?? '—'}</td>
-                  <td className="px-3 py-2 font-mono text-[12px]">{r.attended_on ?? new Date(r.created_at).toISOString().slice(0, 10)}</td>
-                  <td className="px-3 py-2 text-right">
-                    <a href={`/api/admin/billing/service-reports/${r.id}/pdf`} target="_blank" rel="noreferrer" className="text-navy-700 no-underline hover:text-amber-700">PDF</a>
+                  <td className="px-3 py-2">
+                    {r.signed_pdf_path ? (
+                      <span className="inline-flex rounded-full bg-green-50 px-2 py-0.5 font-mono text-[10.5px] uppercase text-green-700">İmzalı ✓</span>
+                    ) : (
+                      <span className="inline-flex rounded-full bg-amber-50 px-2 py-0.5 font-mono text-[10.5px] uppercase text-amber-700">İmza bekliyor</span>
+                    )}
+                  </td>
+                  <td className="px-3 py-2">
+                    <div className="flex flex-wrap justify-end gap-1">
+                      <a href={`/api/admin/billing/service-reports/${r.id}/pdf`} target="_blank" rel="noreferrer" className="btn-ghost btn-sm no-underline">PDF (yazdır)</a>
+                      <SignedReportUpload id={r.id} signed={!!r.signed_pdf_path} />
+                    </div>
                   </td>
                 </tr>
               ))}

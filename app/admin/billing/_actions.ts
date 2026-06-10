@@ -3,6 +3,8 @@
 import { revalidatePath } from 'next/cache';
 import { createServerSupabase, createServiceSupabase } from '@/lib/supabase/server';
 import { computeTotals, docNumber, type LineKind, type QuoteLine, type CompanySettings } from '@/lib/billing';
+import { sendDocumentEmail } from '@/lib/notify';
+import { renderInvoicePdf, renderQuotePdf, renderServiceReportPdf } from '@/lib/pdf-render';
 
 async function requireAdmin() {
   const supabase = createServerSupabase();
@@ -240,6 +242,7 @@ export type InvoiceInput = {
   id?: string;
   company_id?: string | null;
   vessel_id?: string | null;
+  service_report_id?: string | null;
   po_reference?: string;
   currency?: string;
   incoterm?: string;
@@ -273,6 +276,7 @@ export async function saveInvoice(input: InvoiceInput): Promise<{ id: string; nu
   const head = {
     company_id: input.company_id || null,
     vessel_id: input.vessel_id || null,
+    service_report_id: input.service_report_id || null,
     po_reference: input.po_reference?.trim() || null,
     currency: input.currency?.trim() || 'USD',
     incoterm: input.incoterm?.trim() || null,
@@ -310,6 +314,68 @@ export async function saveInvoice(input: InvoiceInput): Promise<{ id: string; nu
 
   revalidatePath('/admin/billing/invoices');
   return { id: invoiceId!, number };
+}
+
+// ── Email an invoice with its evidence attached ──────────────────────────────
+export async function emailInvoice(invoiceId: string, overrideEmail?: string): Promise<{ ok: boolean; to: string; warning?: string }> {
+  await requireAdmin();
+  const service = createServiceSupabase();
+  const inv = await renderInvoicePdf(invoiceId);
+  if (!inv) throw new Error('Fatura bulunamadı');
+  const to = overrideEmail?.trim() || inv.companyEmail || '';
+  if (!to) throw new Error('Müşteri e-postası yok — müşteri kaydına e-posta ekleyin veya elle girin.');
+
+  const attachments: { filename: string; content: string }[] = [
+    { filename: `${inv.number}.pdf`, content: inv.buffer.toString('base64') }
+  ];
+  let warning: string | undefined;
+
+  if (inv.quoteId) {
+    const q = await renderQuotePdf(inv.quoteId);
+    if (q) attachments.push({ filename: `${q.number}.pdf`, content: q.buffer.toString('base64') });
+  }
+  if (inv.serviceReportId) {
+    const { data: rep } = await service.from('service_reports').select('number, signed_pdf_path').eq('id', inv.serviceReportId).single();
+    if (rep?.signed_pdf_path) {
+      const { data: file } = await service.storage.from('billing-docs').download(rep.signed_pdf_path);
+      if (file) {
+        const buf = Buffer.from(await file.arrayBuffer());
+        const ext = rep.signed_pdf_path.split('.').pop() || 'pdf';
+        attachments.push({ filename: `${rep.number}-signed.${ext}`, content: buf.toString('base64') });
+      }
+    } else {
+      const r = await renderServiceReportPdf(inv.serviceReportId);
+      if (r) attachments.push({ filename: `${r.number}-unsigned.pdf`, content: r.buffer.toString('base64') });
+      warning = 'Servis raporunun imzalı kopyası henüz yüklenmemiş — imzasız şablon eklendi. Gemide imzalatıp yükledikten sonra tekrar gönderebilirsiniz.';
+    }
+  }
+
+  const subject = `Invoice ${inv.number} · Levent Marine Tech`;
+  const text = `Please find attached invoice ${inv.number}. Payment details and terms are on the invoice. Please quote the invoice number on your transfer.`;
+  const html = `<p>Dear Sir/Madam,</p><p>Please find attached our invoice <strong>${inv.number}</strong>${inv.quoteId ? ', together with the referenced quotation' : ''}${inv.serviceReportId ? ' and the service report' : ''}.</p><p>Payment details (bank wire) and terms are stated on the invoice. Kindly quote the invoice number on your transfer.</p><p>Best regards,<br>Levent Marine Electro Technical Services LLC</p>`;
+  const res = await sendDocumentEmail({ to, subject, html, text, replyTo: 'info@leventmarinetech.com', attachments });
+  if (!res.ok && !res.skipped) throw new Error(res.error || 'E-posta gönderilemedi');
+
+  await service.from('invoices').update({ emailed_at: new Date().toISOString(), emailed_to: to, status: 'sent', sent_at: new Date().toISOString() }).eq('id', invoiceId);
+  revalidatePath('/admin/billing/invoices');
+  return { ok: true, to, warning: res.skipped ? 'E-posta servisi henüz yapılandırılmamış (RESEND_API_KEY) — gönderim atlandı, fatura "gönderildi" işaretlenmedi.' : warning };
+}
+
+// ── Re-upload the wet-signed service report (scan/photo from onboard) ─────────
+export async function uploadSignedReport(reportId: string, formData: FormData): Promise<void> {
+  await requireAdmin();
+  const file = formData.get('file');
+  if (!(file instanceof File) || file.size === 0) throw new Error('Dosya yok');
+  if (file.size > 15 * 1024 * 1024) throw new Error('Dosya çok büyük (en fazla 15MB)');
+  const ext = (file.name.split('.').pop() || 'pdf').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const path = `signed-reports/${reportId}.${ext}`;
+  const service = createServiceSupabase();
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  const { error } = await service.storage.from('billing-docs').upload(path, bytes, { contentType: file.type || 'application/pdf', upsert: true });
+  if (error) throw new Error(error.message);
+  const { error: e2 } = await service.from('service_reports').update({ signed_pdf_path: path, status: 'signed' }).eq('id', reportId);
+  if (e2) throw new Error(e2.message);
+  revalidatePath('/admin/billing/service-reports');
 }
 
 // ── Service / attendance reports ─────────────────────────────────────────────

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { createServiceSupabase } from '@/lib/supabase/server';
 import { money } from '@/lib/billing';
+import InvoiceActions from './InvoiceActions';
 
 export const dynamic = 'force-dynamic';
 
@@ -14,7 +15,7 @@ export default async function InvoicesPage() {
   try {
     const { data } = await s
       .from('invoices')
-      .select('*, companies(name), vessels(name, imo_no)')
+      .select('*, companies(name, contact_email), vessels(name, imo_no)')
       .order('created_at', { ascending: false })
       .limit(100);
     rows = data ?? [];
@@ -45,7 +46,7 @@ export default async function InvoicesPage() {
                 <th className="px-3 py-2">Vade</th>
                 <th className="px-3 py-2 text-right">Tutar</th>
                 <th className="px-3 py-2 text-right">Ödenen</th>
-                <th className="px-3 py-2 text-right">PDF</th>
+                <th className="px-3 py-2 text-right">İşlemler</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-line/70">
@@ -60,8 +61,8 @@ export default async function InvoicesPage() {
                   <td className="px-3 py-2 font-mono text-[12px]">{i.due_date ?? '—'}</td>
                   <td className="px-3 py-2 text-right font-mono">{money(Number(i.total ?? 0), i.currency)}</td>
                   <td className="px-3 py-2 text-right font-mono text-ink-subtle">{money(Number(i.amount_paid ?? 0), i.currency)}</td>
-                  <td className="px-3 py-2 text-right">
-                    <a href={`/api/admin/billing/invoices/${i.id}/pdf`} target="_blank" rel="noreferrer" className="text-navy-700 no-underline hover:text-amber-700">PDF</a>
+                  <td className="px-3 py-2">
+                    <InvoiceActions id={i.id} email={i.companies?.contact_email ?? null} emailedTo={i.emailed_to ?? null} />
                   </td>
                 </tr>
               ))}

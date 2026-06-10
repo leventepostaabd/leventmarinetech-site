@@ -12,6 +12,8 @@ export type InvoicePdfData = {
   incoterm: string | null;
   po_reference: string | null;
   payment_scope?: string | null;
+  ref_quote_number?: string | null;
+  ref_report_number?: string | null;
   notes: string | null;
   subtotal: number;
   tax: number;
@@ -93,6 +95,11 @@ export default function InvoiceDocument({ data, seller }: { data: InvoicePdfData
             <Text style={s.bold}>{data.vessel?.name ?? '—'}{data.vessel?.imo_no ? `  ·  IMO ${data.vessel.imo_no}` : ''}</Text>
             {data.po_reference ? <Text style={[s.muted, s.small]}>PO: {data.po_reference}</Text> : null}
             {data.incoterm ? <Text style={[s.muted, s.small]}>Incoterm: {data.incoterm}</Text> : null}
+            {(data.ref_quote_number || data.ref_report_number) ? (
+              <Text style={[s.muted, s.small]}>
+                Ref: {[data.ref_quote_number ? `Quote ${data.ref_quote_number}` : null, data.ref_report_number ? `Service report ${data.ref_report_number}` : null].filter(Boolean).join('  ·  ')}
+              </Text>
+            ) : null}
           </View>
         </View>
 

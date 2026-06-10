@@ -17,10 +17,12 @@ const SCOPES: { v: Scope; label: string; hint: string }[] = [
   { v: 'international', label: 'Sadece Uluslararası', hint: 'SWIFT/BIC' }
 ];
 
-export default function InvoiceBuilderClient({ companies, vessels, priceBook }: { companies: Company[]; vessels: Vessel[]; priceBook: PriceBookItem[] }) {
+type Report = { id: string; number: string; company_id: string | null; signed: boolean };
+
+export default function InvoiceBuilderClient({ companies, vessels, priceBook, reports = [] }: { companies: Company[]; vessels: Vessel[]; priceBook: PriceBookItem[]; reports?: Report[] }) {
   const router = useRouter();
   const [head, setHead] = useState({
-    company_id: '', vessel_id: '', po_reference: '', currency: 'USD', incoterm: '', due_date: '', tax_rate_pct: 0,
+    company_id: '', vessel_id: '', service_report_id: '', po_reference: '', currency: 'USD', incoterm: '', due_date: '', tax_rate_pct: 0,
     payment_scope: 'both' as Scope, notes: ''
   });
   const [lines, setLines] = useState<QuoteLine[]>([emptyLine()]);
@@ -56,7 +58,7 @@ export default function InvoiceBuilderClient({ companies, vessels, priceBook }: 
     setBusy(true); setErr('');
     try {
       const input: InvoiceInput = {
-        company_id: head.company_id || null, vessel_id: head.vessel_id || null, po_reference: head.po_reference,
+        company_id: head.company_id || null, vessel_id: head.vessel_id || null, service_report_id: head.service_report_id || null, po_reference: head.po_reference,
         currency: head.currency, incoterm: head.incoterm, due_date: head.due_date || null,
         tax_rate_pct: Number(head.tax_rate_pct) || 0, payment_scope: head.payment_scope, notes: head.notes,
         lines: lines.filter((l) => l.description.trim()).map((l) => ({ item_id: l.item_id ?? null, kind: l.kind, description: l.description, qty: l.qty, unit_price_usd: l.unit_price_usd, cost_usd: l.cost_usd ?? null }))
@@ -114,6 +116,20 @@ export default function InvoiceBuilderClient({ companies, vessels, priceBook }: 
         <label className="block"><span className="field-label">Incoterm</span><input className="lm-input" placeholder="DAP / FOB…" value={head.incoterm} onChange={(e) => setHead({ ...head, incoterm: e.target.value })} /></label>
         <label className="block"><span className="field-label">Vade tarihi</span><input className="lm-input" type="date" value={head.due_date} onChange={(e) => setHead({ ...head, due_date: e.target.value })} /></label>
       </div>
+
+      {/* Linked service report — the signed evidence behind this invoice */}
+      {reports.length > 0 && (
+        <div className="mb-4 max-w-md">
+          <span className="field-label">Bağlı servis raporu (atıf)</span>
+          <select className="lm-input" aria-label="Servis raporu" value={head.service_report_id} onChange={(e) => setHead({ ...head, service_report_id: e.target.value })}>
+            <option value="">— Yok —</option>
+            {reports.filter((r) => !head.company_id || r.company_id === head.company_id || !r.company_id).map((r) => (
+              <option key={r.id} value={r.id}>{r.number}{r.signed ? ' · imzalı' : ' · imza bekliyor'}</option>
+            ))}
+          </select>
+          <p className="mt-1 text-[12px] text-ink-subtle">Seçilirse faturada &quot;Ref: SR-…&quot; çıkar ve mail&apos;e imzalı rapor eklenir.</p>
+        </div>
+      )}
 
       {/* Payment scope toggle */}
       <div className="mb-4">

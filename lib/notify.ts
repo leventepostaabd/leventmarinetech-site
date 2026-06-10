@@ -42,6 +42,41 @@ async function send({ to, subject, text, html, replyTo }: SendOpts) {
   return { ok: true };
 }
 
+/**
+ * sendDocumentEmail — send a document (invoice/quote/report) to a customer
+ * with PDF attachments via Resend. Attachments: base64-encoded content.
+ */
+export async function sendDocumentEmail(opts: {
+  to: string;
+  subject: string;
+  html: string;
+  text: string;
+  replyTo?: string;
+  attachments: { filename: string; content: string }[];
+}): Promise<{ ok: boolean; skipped?: boolean; error?: string }> {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.log('[notify] RESEND_API_KEY unset — skipping document email.', '\nTO:', opts.to);
+    return { ok: false, skipped: true };
+  }
+  const from = process.env.NOTIFY_FROM_EMAIL ?? 'Levent Marine <noreply@leventmarinetech.com>';
+  const res = await fetch(RESEND, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from, to: [opts.to], subject: opts.subject, html: opts.html, text: opts.text,
+      ...(opts.replyTo && { reply_to: opts.replyTo }),
+      attachments: opts.attachments
+    })
+  });
+  if (!res.ok) {
+    const err = await res.text().catch(() => 'unknown');
+    console.error('[notify] resend document email error', res.status, err);
+    return { ok: false, error: err };
+  }
+  return { ok: true };
+}
+
 // ============================================================================
 //  ADMIN ALERTS — sent to NOTIFY_TO_EMAIL
 // ============================================================================
