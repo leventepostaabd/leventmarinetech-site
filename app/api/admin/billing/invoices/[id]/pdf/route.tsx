@@ -42,6 +42,7 @@ export async function GET(_req: Request, { params }: { params: { id: string } })
     currency: inv.currency ?? 'USD',
     incoterm: inv.incoterm,
     po_reference: inv.po_reference,
+    payment_scope: inv.payment_scope,
     notes: inv.notes,
     subtotal: Number(inv.subtotal ?? 0),
     tax: Number(inv.tax ?? 0),

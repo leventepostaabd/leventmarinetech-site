@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { createServiceSupabase } from '@/lib/supabase/server';
 import { money } from '@/lib/billing';
 
@@ -23,10 +24,13 @@ export default async function InvoicesPage() {
 
   return (
     <div>
-      <div className="mb-4">
-        <div className="kicker">Evrak & Finans</div>
-        <h2 className="text-[20px] mt-0.5">Faturalar</h2>
-        <p className="text-[12.5px] text-ink-muted mt-0.5">Kabul edilen teklifi &quot;Faturaya çevir&quot; ile fatura oluşur. Ödeme ve PDF: bir sonraki dilimde.</p>
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <div className="kicker">Evrak & Finans</div>
+          <h2 className="text-[20px] mt-0.5">Faturalar</h2>
+          <p className="text-[12.5px] text-ink-muted mt-0.5">Doğrudan fatura kes veya kabul edilen teklifi &quot;Faturaya çevir&quot;.</p>
+        </div>
+        <Link href="/admin/billing/invoices/new" className="btn-accent btn-sm no-underline">+ Yeni fatura</Link>
       </div>
       {rows.length === 0 ? (
         <p className="text-[13px] text-ink-muted">Henüz fatura yok.</p>

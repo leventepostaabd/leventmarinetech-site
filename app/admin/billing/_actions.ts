@@ -235,6 +235,83 @@ export async function setQuoteStatus(id: string, status: string, lostReason?: st
   revalidatePath(`/admin/billing/quotes/${id}`);
 }
 
+// ── Direct invoice (without a quote) ─────────────────────────────────────────
+export type InvoiceInput = {
+  id?: string;
+  company_id?: string | null;
+  vessel_id?: string | null;
+  po_reference?: string;
+  currency?: string;
+  incoterm?: string;
+  due_date?: string | null;
+  tax_rate_pct?: number;
+  payment_scope?: 'both' | 'domestic' | 'international';
+  notes?: string;
+  lines: {
+    item_id?: string | null;
+    kind: LineKind;
+    description: string;
+    qty: number;
+    unit_price_usd: number;
+    cost_usd?: number | null;
+  }[];
+};
+
+export async function saveInvoice(input: InvoiceInput): Promise<{ id: string; number: string }> {
+  await requireAdmin();
+  const service = createServiceSupabase();
+
+  const rawLines: QuoteLine[] = (input.lines ?? [])
+    .filter((l) => l.description?.trim())
+    .map((l, i) => ({
+      item_id: l.item_id ?? null, kind: l.kind, description: l.description.trim(),
+      qty: num(l.qty), unit_price_usd: num(l.unit_price_usd), cost_usd: l.cost_usd ?? null,
+      line_total: 0, sort_order: i
+    }));
+  const { lines, subtotal, tax, total } = computeTotals(rawLines, num(input.tax_rate_pct));
+
+  const head = {
+    company_id: input.company_id || null,
+    vessel_id: input.vessel_id || null,
+    po_reference: input.po_reference?.trim() || null,
+    currency: input.currency?.trim() || 'USD',
+    incoterm: input.incoterm?.trim() || null,
+    due_date: input.due_date || null,
+    payment_scope: input.payment_scope || 'both',
+    notes: input.notes?.trim() || null,
+    subtotal, tax, total,
+    updated_at: new Date().toISOString()
+  };
+
+  let invoiceId = input.id;
+  let number: string;
+  if (invoiceId) {
+    const { data: ex } = await service.from('invoices').select('number').eq('id', invoiceId).single();
+    number = ex?.number ?? '';
+    const { error } = await service.from('invoices').update(head).eq('id', invoiceId);
+    if (error) throw new Error(error.message);
+    await service.from('invoice_lines').delete().eq('invoice_id', invoiceId);
+  } else {
+    number = await nextNumber('INV');
+    const { data, error } = await service.from('invoices').insert({ ...head, number, type: 'full', status: 'draft' }).select('id').single();
+    if (error) throw new Error(error.message);
+    invoiceId = data.id as string;
+  }
+
+  if (lines.length) {
+    const { error } = await service.from('invoice_lines').insert(
+      lines.map((l) => ({
+        invoice_id: invoiceId, item_id: l.item_id ?? null, kind: l.kind, description: l.description,
+        qty: l.qty, unit_price_usd: l.unit_price_usd, cost_usd: l.cost_usd ?? null, line_total: l.line_total, sort_order: l.sort_order ?? 0
+      }))
+    );
+    if (error) throw new Error(error.message);
+  }
+
+  revalidatePath('/admin/billing/invoices');
+  return { id: invoiceId!, number };
+}
+
 // ── Service / attendance reports ─────────────────────────────────────────────
 import type { TestRow } from '@/lib/billing';
 

@@ -42,12 +42,14 @@ export default function SettingsClient({ initial }: { initial: CompanySettings }
       </Section>
 
       <Section title="Banka / Havale (faturada görünür)">
-        <Field label="Lehdar (beneficiary)" v={f.bank_beneficiary} on={set('bank_beneficiary')} />
-        <Field label="Banka adı" v={f.bank_name} on={set('bank_name')} />
+        <Field label="Lehdar (beneficiary) — hesap ünvanıyla aynı" v={f.bank_beneficiary} on={set('bank_beneficiary')} />
+        <Field label="Banka adı" v={f.bank_name} on={set('bank_name')} placeholder="JPMorgan Chase Bank, N.A." />
         <Field label="Banka adresi" v={f.bank_address} on={set('bank_address')} />
         <Field label="Hesap no" v={f.bank_account} on={set('bank_account')} />
-        <Field label="Routing (ABA, 9 hane)" v={f.bank_routing} on={set('bank_routing')} />
-        <Field label="SWIFT / BIC (uluslararası)" v={f.bank_swift} on={set('bank_swift')} />
+        <Field label="ACH routing (yurtiçi ACH)" v={f.bank_routing_ach} on={set('bank_routing_ach')} placeholder="varsa" />
+        <Field label="Wire routing (yurtiçi wire / Fedwire)" v={f.bank_routing_wire} on={set('bank_routing_wire')} placeholder="ör. 021000021" />
+        <Field label="SWIFT / BIC (uluslararası)" v={f.bank_swift} on={set('bank_swift')} placeholder="ör. CHASUS33" />
+        <Field label="Aracı banka (intermediary, varsa)" v={f.bank_intermediary} on={set('bank_intermediary')} />
       </Section>
 
       <Section title="Varsayılanlar">

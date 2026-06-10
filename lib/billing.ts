@@ -80,8 +80,11 @@ export type CompanySettings = {
   bank_beneficiary: string | null;
   bank_name: string | null;
   bank_account: string | null;
-  bank_routing: string | null;
-  bank_swift: string | null;
+  bank_routing: string | null;        // legacy single routing (kept for compat)
+  bank_routing_ach: string | null;    // ACH routing
+  bank_routing_wire: string | null;   // wire / Fedwire routing
+  bank_swift: string | null;          // SWIFT/BIC for international wires
+  bank_intermediary: string | null;   // intermediary bank + SWIFT (optional)
   bank_address: string | null;
   default_payment_terms: string | null;
   default_incoterm: string | null;
@@ -96,7 +99,8 @@ export const DEFAULT_SETTINGS: CompanySettings = {
   email: 'info@leventmarinetech.com',
   phone: '+1 619 384 04 03',
   website: 'www.leventmarinetech.com',
-  bank_beneficiary: null, bank_name: null, bank_account: null, bank_routing: null, bank_swift: null, bank_address: null,
+  bank_beneficiary: null, bank_name: null, bank_account: null, bank_routing: null,
+  bank_routing_ach: null, bank_routing_wire: null, bank_swift: null, bank_intermediary: null, bank_address: null,
   default_payment_terms: 'Net 30', default_incoterm: null,
   quote_terms: null, invoice_terms: null
 };

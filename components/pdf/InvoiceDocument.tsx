@@ -11,6 +11,7 @@ export type InvoicePdfData = {
   currency: string;
   incoterm: string | null;
   po_reference: string | null;
+  payment_scope?: string | null;
   notes: string | null;
   subtotal: number;
   tax: number;
@@ -56,7 +57,11 @@ export default function InvoiceDocument({ data, seller }: { data: InvoicePdfData
   const cur = data.currency || 'USD';
   const S = seller ?? DEFAULT_SETTINGS;
   const balance = data.total - data.amount_paid;
-  const hasBank = !!(S.bank_account || S.bank_swift);
+  const wireRouting = S.bank_routing_wire || S.bank_routing;
+  const hasBank = !!(S.bank_account || S.bank_swift || wireRouting || S.bank_routing_ach);
+  const scope = data.payment_scope || 'both';
+  const showDom = scope === 'both' || scope === 'domestic';
+  const showIntl = scope === 'both' || scope === 'international';
   return (
     <Document title={`Invoice ${data.number}`}>
       <Page size="A4" style={s.page}>
@@ -126,9 +131,22 @@ export default function InvoiceDocument({ data, seller }: { data: InvoicePdfData
             <>
               <Text style={s.small}>Beneficiary: {S.bank_beneficiary || S.legal_name}</Text>
               {S.bank_name ? <Text style={s.small}>Bank: {S.bank_name}{S.bank_address ? ` — ${S.bank_address}` : ''}</Text> : null}
-              {S.bank_account ? <Text style={s.small}>Account: {S.bank_account}{S.bank_routing ? `   Routing (ABA): ${S.bank_routing}` : ''}</Text> : null}
-              {S.bank_swift ? <Text style={s.small}>SWIFT/BIC (international): {S.bank_swift}</Text> : null}
-              <Text style={[s.muted, s.small, { marginTop: 3 }]}>Payable in {cur} by bank wire. Please quote invoice {data.number} on the transfer.</Text>
+              {S.bank_account ? <Text style={s.small}>Account no: {S.bank_account}</Text> : null}
+              {showDom && (S.bank_routing_ach || wireRouting) ? (
+                <View style={{ marginTop: 4 }}>
+                  <Text style={[s.small, s.bold]}>For US (domestic) payment</Text>
+                  {S.bank_routing_ach ? <Text style={s.small}>ACH routing: {S.bank_routing_ach}</Text> : null}
+                  {wireRouting ? <Text style={s.small}>Wire / ABA routing: {wireRouting}</Text> : null}
+                </View>
+              ) : null}
+              {showIntl && (S.bank_swift || S.bank_intermediary) ? (
+                <View style={{ marginTop: 4 }}>
+                  <Text style={[s.small, s.bold]}>For international payment</Text>
+                  {S.bank_swift ? <Text style={s.small}>SWIFT/BIC: {S.bank_swift}</Text> : null}
+                  {S.bank_intermediary ? <Text style={s.small}>Intermediary: {S.bank_intermediary}</Text> : null}
+                </View>
+              ) : null}
+              <Text style={[s.muted, s.small, { marginTop: 4 }]}>Payable in {cur}. Please quote invoice {data.number} on the transfer.</Text>
             </>
           ) : (
             <Text style={[s.muted, s.small]}>Payable in {cur} by bank wire — remittance details provided on request. Please quote invoice {data.number}.</Text>
